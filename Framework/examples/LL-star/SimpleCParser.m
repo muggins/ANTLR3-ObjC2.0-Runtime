@@ -644,12 +644,9 @@ const unsigned long long FOLLOW_10_in_atom578_data[] = { 0x0000000000000002LL};
  * $ANTLR start functionHeader
  * SimpleC.g:36:1: functionHeader returns [NSString* name] : type ID '(' ( formalParameter ( ',' formalParameter )* )? ')' ;
  */
-- (NSString*) functionHeader
+- (NSString *) functionHeader
 {
-    NSString* name = nil;
-
-    // This is not in the Java.stg
-    NSString* name = nil;
+    NSString *name = nil;
 
         name =nil; // for now you must init here rather than in 'returns'
 

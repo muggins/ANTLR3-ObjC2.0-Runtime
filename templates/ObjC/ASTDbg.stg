@@ -30,12 +30,16 @@ group ASTDbg;
 
 /*
 parserMembers() ::= <<
-protected TreeAdaptor adaptor =
-    new DebugTreeAdaptor(dbg,new CommonTreeAdaptor());
-public void setTreeAdaptor(TreeAdaptor adaptor) {
-    this.adaptor = new DebugTreeAdaptor(dbg,adaptor);
+ANTLRCommonTreeAdaptor *adaptor = [ANTLRDebugTreeAdaptor newANTLRDebugTreeAdaptor:(id)dbg Adaptor:[ANTLRCommonTreeAdaptor newANTLRCommonTreeAdaptor]];
+
+// fix this
+- (void) setTreeAdaptor:(ANTLRCommonTreeAdaptor *)anAdaptor
+{
+    adaptor = [ANTLRDebugTreeAdaptor newANTLRDebugTreeAdaptor:dbg Adaptor:anAdaptor];
 }
-public TreeAdaptor getTreeAdaptor() {
+
+- (ANTLRCommonTreeAdaptor *)getTreeAdaptor
+{
     return adaptor;
 }<\n>
 >>

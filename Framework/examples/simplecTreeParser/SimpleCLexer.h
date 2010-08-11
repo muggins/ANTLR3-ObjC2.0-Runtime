@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 07, 2010 22:08:38 SimpleC.g 2010-08-09 12:05:14
+// $ANTLR 3.2 Aug 11, 2010 15:16:47 /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g 2010-08-11 15:38:21
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions

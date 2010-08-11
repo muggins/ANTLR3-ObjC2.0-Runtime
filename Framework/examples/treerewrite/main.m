@@ -1,11 +1,11 @@
 #import <Cocoa/Cocoa.h>
-#import <ANTLR/ANTLR.h>
+#import "antlr3.h"
 #import "TreeRewriteLexer.h"
 #import "TreeRewriteParser.h"
-#import "stdio.h"
-#include <unistd.h>
+//#import "stdio.h"
+//#include <unistd.h>
 
-int main(int argc, const char * argv[]) {
+int main() {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
 	ANTLRStringStream *stream = [[ANTLRStringStream alloc] initWithStringNoCopy:@"23 42"];
@@ -18,7 +18,7 @@ int main(int argc, const char * argv[]) {
 	
 	ANTLRCommonTokenStream *tokenStream = [[ANTLRCommonTokenStream alloc] initWithTokenSource:lexer];
 	TreeRewriteParser *parser = [[TreeRewriteParser alloc] initWithTokenStream:tokenStream];
-	ANTLRCommonTree *rule_tree = [[parser rule] tree];
+	ANTLRCommonTree *rule_tree = [[parser rule] getTree];
 	NSLog(@"tree: %@", [rule_tree treeDescription]);
 //	ANTLRCommonTreeNodeStream *treeStream = [[ANTLRCommonTreeNodeStream alloc] initWithTree:program_tree];
 //	SimpleCTP *walker = [[SimpleCTP alloc] initWithTreeNodeStream:treeStream];

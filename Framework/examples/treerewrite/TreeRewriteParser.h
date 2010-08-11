@@ -1,48 +1,68 @@
-// $ANTLR 3.1b1 TreeRewrite.g 2007-11-04 03:34:43
+// $ANTLR 3.2 Aug 11, 2010 15:04:17 TreeRewrite.g 2010-08-11 15:08:03
 
+/* =============================================================================
+ * Standard antlr3 OBJC runtime definitions
+ */
 #import <Cocoa/Cocoa.h>
-#import "ANTLR.h"
-
-
+#import "antlr3.h"
+/* End of standard antlr3 runtime definitions
+ * =============================================================================
+ */
 
 #pragma mark Tokens
-#define TreeRewriteParser_INT	4
-#define TreeRewriteParser_WS	5
-#define TreeRewriteParser_EOF	-1
-
+#define WS 5
+#define INT 4
+#define EOF -1
 #pragma mark Dynamic Global Scopes
-
 #pragma mark Dynamic Rule Scopes
-
-#pragma mark Rule Return Scopes
+#pragma mark Rule Return Scopes start
 @interface TreeRewriteParser_rule_return : ANTLRParserRuleReturnScope {
-    id tree;
+    // start of ivars()
+    id *tree;
+    // end of ivars()
+ 
+
 }
-- (id) tree;
-- (void) setTree:(id)aTree;
+
+@property (retain, getter=getTree, setter=setTree:) id *tree;
+
+// this is start of methodsDecl()
+- (id *) getTree;
+- (void) setTree:(id *)aTree;
+
+// this is end of methodsDecl()
 @end
 @interface TreeRewriteParser_subrule_return : ANTLRParserRuleReturnScope {
-    id tree;
+    // start of ivars()
+    id *tree;
+    // end of ivars()
+ 
+
 }
-- (id) tree;
-- (void) setTree:(id)aTree;
+
+@property (retain, getter=getTree, setter=setTree:) id *tree;
+
+// this is start of methodsDecl()
+- (id *) getTree;
+- (void) setTree:(id *)aTree;
+
+// this is end of methodsDecl()
 @end
 
-
-
+#pragma mark Rule return scopes end
 @interface TreeRewriteParser : ANTLRParser {
 
-			
-	id<ANTLRTreeAdaptor> treeAdaptor;
+            
+    id<ANTLRTreeAdaptor> treeAdaptor;
 
  }
-
-
-- (TreeRewriteParser_rule_return *) rule;
-- (TreeRewriteParser_subrule_return *) subrule;
 
 
 - (id<ANTLRTreeAdaptor>) getTreeAdaptor;
 - (void) setTreeAdaptor:(id<ANTLRTreeAdaptor>)theTreeAdaptor;
 
-@end
+- (TreeRewriteParser_rule_return *) rule; 
+- (TreeRewriteParser_subrule_return *) subrule; 
+
+
+@end // end of TreeRewriteParser

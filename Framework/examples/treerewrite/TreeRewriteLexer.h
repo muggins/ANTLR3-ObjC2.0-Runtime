@@ -1,26 +1,24 @@
-// $ANTLR 3.1b1 TreeRewrite.g 2007-11-04 03:34:43
+// $ANTLR 3.2 Aug 11, 2010 15:04:17 TreeRewrite.g 2010-08-11 15:08:03
 
+/* =============================================================================
+ * Standard antlr3 OBJC runtime definitions
+ */
 #import <Cocoa/Cocoa.h>
-#import "ANTLR.h"
+#import "antlr3.h"
+/* End of standard antlr3 runtime definitions
+ * =============================================================================
+ */
 
 
 #pragma mark Rule return scopes start
 #pragma mark Rule return scopes end
-
 #pragma mark Tokens
-#define TreeRewriteLexer_Tokens	6
-#define TreeRewriteLexer_INT	4
-#define TreeRewriteLexer_WS	5
-#define TreeRewriteLexer_EOF	-1
-
+#define INT 4
+#define WS 5
+#define EOF -1
 @interface TreeRewriteLexer : ANTLRLexer {
 }
-
-
-- (void) mINT;
-- (void) mWS;
-- (void) mTokens;
-
-
-
-@end
+- (void) mINT; 
+- (void) mWS; 
+- (void) mTokens; 
+@end // end of TreeRewriteLexer interface

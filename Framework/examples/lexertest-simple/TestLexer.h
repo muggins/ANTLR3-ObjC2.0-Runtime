@@ -1,29 +1,26 @@
-// $ANTLR 3.0 Test.gl 2007-08-04 15:59:43
+// $ANTLR 3.2 Aug 07, 2010 22:08:38 /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/lexertest-simple/Test.g 2010-08-11 13:24:39
 
+/* =============================================================================
+ * Standard antlr3 OBJC runtime definitions
+ */
 #import <Cocoa/Cocoa.h>
-#import <ANTLR/ANTLR.h>
+#import "antlr3.h"
+/* End of standard antlr3 runtime definitions
+ * =============================================================================
+ */
 
 
 #pragma mark Rule return scopes start
 #pragma mark Rule return scopes end
-
 #pragma mark Tokens
-#define TestLexer_LETTER	4
-#define TestLexer_EOF	-1
-#define TestLexer_Tokens	7
-#define TestLexer_DIGIT	5
-#define TestLexer_ID	6
-
+#define DIGIT 5
+#define ID 6
+#define EOF -1
+#define LETTER 4
 @interface TestLexer : ANTLRLexer {
-    NSInteger _tokenType;
 }
-
-
-- (void) mID;
-- (void) mDIGIT;
-- (void) mLETTER;
-- (void) mTokens;
-
-
-
-@end
+- (void) mID; 
+- (void) mDIGIT; 
+- (void) mLETTER; 
+- (void) mTokens; 
+@end // end of Test interface

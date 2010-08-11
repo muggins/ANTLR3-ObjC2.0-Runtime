@@ -1,5 +1,5 @@
 #import <Cocoa/Cocoa.h>
-#import <ANTLR/ANTLR.h>
+#import "antlr3.h"
 #import "SimpleCLexer.h"
 #import "SimpleCParser.h"
 #import "SimpleCTP.h"
@@ -7,6 +7,7 @@
 #include <unistd.h>
 
 int main(int argc, const char * argv[]) {
+    (NSError *) anError;
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
     if (argc < 2) {
@@ -15,7 +16,7 @@ int main(int argc, const char * argv[]) {
     }
 	
 	// simply read in the input file in one gulp
-	NSString *string = [NSString stringWithContentsOfFile:[NSString stringWithCString:argv[1]]];
+	NSString *string = [NSString stringWithContentsOfFile:[NSString stringWithCString:argv[1] encoding:NSASCIIStringEncoding] encoding:NSASCIIStringEncoding error:&anError];
 	NSLog(@"input is : %@", string);
 
 	// create a stream over the input, so the lexer can seek back and forth, but don't copy the string,
@@ -48,13 +49,13 @@ int main(int argc, const char * argv[]) {
 	// initialized when you call a specific parser rule).
 	// This is a simple example, so we just call the top-mose rule 'program'.
 	// Since we want to parse the AST the parser builds, we just ask the returned object for that.
-	ANTLRCommonTree *program_tree = [[parser program] tree];
+	ANTLRCommonTree *program_tree = [[parser program] getTree];
 
 	// Print the matched tree as a Lisp-style string
 	NSLog(@"tree: %@", [program_tree treeDescription]);
 	
 	// Create a new tree node stream that's feeding off of the root node (thus seeing the whole tree)
-	ANTLRUnbufferedCommonTreeNodeStream *treeStream = [[ANTLRUnbufferedCommonTreeNodeStream alloc] initWithTree:program_tree];
+	ANTLRCommonTreeNodeStream *treeStream = [[ANTLRCommonTreeNodeStream alloc] initWithTree:program_tree];
 	// tell the TreeNodeStream where the tokens originally came from, so we can retrieve arbitrary tokens and their text.
 	[treeStream setTokenStream:tokenStream];
 	

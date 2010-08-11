@@ -1,76 +1,79 @@
-// $ANTLR 3.0 FuzzyJava.gl 2007-07-25 20:12:38
+// $ANTLR 3.2 Aug 11, 2010 15:16:47 /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/fuzzy/FuzzyJava.g 2010-08-11 15:18:36
 
+/* =============================================================================
+ * Standard antlr3 OBJC runtime definitions
+ */
 #import <Cocoa/Cocoa.h>
-#import <ANTLR/ANTLR.h>
+#import "antlr3.h"
+/* End of standard antlr3 runtime definitions
+ * =============================================================================
+ */
 
+#pragma mark Cyclic DFA interface start DFA38
+@interface DFA38 : ANTLRDFA {} @end
+
+#pragma mark Cyclic DFA interface end DFA38
 
 #pragma mark Rule return scopes start
 #pragma mark Rule return scopes end
-
 #pragma mark Tokens
-#define FuzzyJavaLexer_QIDStar	5
-#define FuzzyJavaLexer_TYPE	11
-#define FuzzyJavaLexer_STAT	15
-#define FuzzyJavaLexer_WS	4
-#define FuzzyJavaLexer_CHAR	21
-#define FuzzyJavaLexer_QID	9
-#define FuzzyJavaLexer_STRING	20
-#define FuzzyJavaLexer_METHOD	13
-#define FuzzyJavaLexer_COMMENT	17
-#define FuzzyJavaLexer_ESC	19
-#define FuzzyJavaLexer_IMPORT	6
-#define FuzzyJavaLexer_FIELD	14
-#define FuzzyJavaLexer_CLASS	10
-#define FuzzyJavaLexer_RETURN	7
-#define FuzzyJavaLexer_ARG	12
-#define FuzzyJavaLexer_EOF	-1
-#define FuzzyJavaLexer_CALL	16
-#define FuzzyJavaLexer_Tokens	22
-#define FuzzyJavaLexer_SL_COMMENT	18
-#define FuzzyJavaLexer_ID	8
-
-@interface FuzzyJavaLexer : ANTLRLexer {
-	SEL synpred4SyntacticPredicate;
-	SEL synpred9SyntacticPredicate;
-	SEL synpred2SyntacticPredicate;
-	SEL synpred7SyntacticPredicate;
-	SEL synpred3SyntacticPredicate;
-	SEL synpred1SyntacticPredicate;
-	SEL synpred5SyntacticPredicate;
-	SEL synpred6SyntacticPredicate;
-	SEL synpred8SyntacticPredicate;
+#define STAT 15
+#define CLASS 10
+#define ESC 19
+#define CHAR 21
+#define ID 8
+#define EOF -1
+#define QID 9
+#define TYPE 11
+#define IMPORT 6
+#define WS 4
+#define ARG 12
+#define QIDStar 5
+#define SL_COMMENT 18
+#define RETURN 7
+#define FIELD 14
+#define CALL 16
+#define COMMENT 17
+#define METHOD 13
+#define STRING 20
+@interface FuzzyJava : ANTLRLexer {
+    DFA38 *dfa38;
+    SEL synpred5_FuzzyJavaSelector;
+    SEL synpred8_FuzzyJavaSelector;
+    SEL synpred9_FuzzyJavaSelector;
+    SEL synpred2_FuzzyJavaSelector;
+    SEL synpred1_FuzzyJavaSelector;
+    SEL synpred3_FuzzyJavaSelector;
+    SEL synpred7_FuzzyJavaSelector;
+    SEL synpred6_FuzzyJavaSelector;
+    SEL synpred4_FuzzyJavaSelector;
 }
-
-
-- (void) mIMPORT;
-- (void) mRETURN;
-- (void) mCLASS;
-- (void) mMETHOD;
-- (void) mFIELD;
-- (void) mSTAT;
-- (void) mCALL;
-- (void) mCOMMENT;
-- (void) mSL_COMMENT;
-- (void) mSTRING;
-- (void) mCHAR;
-- (void) mWS;
-- (void) mQID;
-- (void) mQIDStar;
-- (void) mTYPE;
-- (void) mARG;
-- (void) mID;
-- (void) mESC;
-- (void) mTokens;
-- (void) synpred1;
-- (void) synpred2;
-- (void) synpred3;
-- (void) synpred4;
-- (void) synpred5;
-- (void) synpred6;
-- (void) synpred7;
-- (void) synpred8;
-- (void) synpred9;
-
-
-
-@end
+- (void) mIMPORT; 
+- (void) mRETURN; 
+- (void) mCLASS; 
+- (void) mMETHOD; 
+- (void) mFIELD; 
+- (void) mSTAT; 
+- (void) mCALL; 
+- (void) mCOMMENT; 
+- (void) mSL_COMMENT; 
+- (void) mSTRING; 
+- (void) mCHAR; 
+- (void) mWS; 
+- (void) mQID; 
+- (void) mQIDStar; 
+- (void) mTYPE; 
+- (void) mARG; 
+- (void) mID; 
+- (void) mESC; 
+- (void) mTokens; 
+- (BOOL) synpred1_FuzzyJava; 
+- (BOOL) synpred2_FuzzyJava; 
+- (BOOL) synpred3_FuzzyJava; 
+- (BOOL) synpred4_FuzzyJava; 
+- (BOOL) synpred5_FuzzyJava; 
+- (BOOL) synpred6_FuzzyJava; 
+- (BOOL) synpred7_FuzzyJava; 
+- (BOOL) synpred8_FuzzyJava; 
+- (BOOL) synpred9_FuzzyJava; 
+@end // end of FuzzyJava interface
