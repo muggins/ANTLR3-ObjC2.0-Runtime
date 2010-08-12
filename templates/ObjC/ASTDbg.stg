@@ -28,7 +28,6 @@
 
 group ASTDbg;
 
-/*
 parserMembers() ::= <<
 ANTLRCommonTreeAdaptor *adaptor = [ANTLRDebugTreeAdaptor newANTLRDebugTreeAdaptor:(id)dbg Adaptor:[ANTLRCommonTreeAdaptor newANTLRCommonTreeAdaptor]];
 
@@ -43,7 +42,6 @@ ANTLRCommonTreeAdaptor *adaptor = [ANTLRDebugTreeAdaptor newANTLRDebugTreeAdapto
     return adaptor;
 }<\n>
 >>
-*/
 
 @treeParserHeaderFile.superClassName ::= "ANTLRDebugTreeParser"
 

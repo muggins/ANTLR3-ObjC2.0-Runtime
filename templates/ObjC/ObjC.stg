@@ -426,12 +426,12 @@ filteringNextToken() ::= <<
     }
 }
 
-- (void)memoize:(id<ANTLRIntStream>)input RuleIndex:(NSInteger)ruleIndex StartIndex:(NSInteger)ruleStartIndex)
+- (void)memoize:(id\<ANTLRIntStream\>)input RuleIndex:(NSInteger)ruleIndex StartIndex:(NSInteger)ruleStartIndex)
 {
     if ( state.backtracking > 1 ) [super memoize:input RuleIndex:ruleIndex StartIndex:ruleStartIndex];
 }
 
-- (BOOL)alreadyParsedRule:(id<ANTLRIntStream>)input RuleIndex:(NSInteger)ruleIndex
+- (BOOL)alreadyParsedRule:(id\<ANTLRIntStream\>)input RuleIndex:(NSInteger)ruleIndex
 {
     if ( state.backtracking > 1 ) return [super alreadyParsedRule:input RuleIndex:ruleIndex];
     return NO;
@@ -601,9 +601,9 @@ genericParser(  grammar,
 {
     if ((self = [super initWithTokenStream:aStream State:[[ANTLRRecognizerSharedState newANTLRRecognizerSharedStateWithRuleLen:<numRules>+1] retain]]) != nil) {
 <else><! TREE_PARSER !>
-- (id) initWithTreeNodeStream:(<inputStreamType>)aStream
+- (id) initWithStream:(<inputStreamType>)aStream
 {
-    if ((self = [super initWithTreeNodeStream:aStream State:[[ANTLRRuleStack newANTLRRuleStack:<numRules>+1] retain]]) != nil) {
+    if ((self = [super initWithStream:aStream State:[[ANTLRRecognizerSharedState newANTLRRecognizerSharedStateWithRuleLen:<numRules>+1] retain]]) != nil) {
 <endif><\n>
 <if(memoize)>
         <! state.ruleMemo = [[ANTLRRuleStack newANTLRRuleStack:<numRules>+1] retain];<\n> !> <! index from 1..n !>
@@ -1921,7 +1921,7 @@ lexerRulePropertyRef_type(scope,attr) ::= "[state getType]"
 lexerRulePropertyRef_line(scope,attr) ::= "[state getTokenStartLine]"
 lexerRulePropertyRef_pos(scope,attr) ::= "[state getCharPositionInLine]"
 lexerRulePropertyRef_index(scope,attr) ::= "-1" // undefined token index in lexer
-lexerRulePropertyRef_channel(scope,attr) ::= "[state getChannel]"
+lexerRulePropertyRef_channel(scope,attr) ::= "state.channel"
 lexerRulePropertyRef_start(scope,attr) ::= "[state getTokenStartCharIndex]"
 lexerRulePropertyRef_stop(scope,attr) ::= "([self getCharIndex]-1)"
 
