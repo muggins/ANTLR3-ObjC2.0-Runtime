@@ -7,7 +7,7 @@
 #include <unistd.h>
 
 int main(int argc, const char * argv[]) {
-    (NSError *) anError;
+    NSError *anError;
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
     if (argc < 2) {

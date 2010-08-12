@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 11, 2010 15:16:47 /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleCTP.g 2010-08-11 15:43:59
+// $ANTLR 3.2 Aug 11, 2010 15:16:47 SimpleCTP.g 2010-08-11 17:06:37
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
