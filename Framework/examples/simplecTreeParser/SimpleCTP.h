@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 11, 2010 15:16:47 SimpleCTP.g 2010-08-11 17:06:37
+// $ANTLR 3.2 Aug 13, 2010 19:41:25 /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleCTP.g 2010-08-13 19:44:39
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -37,21 +37,22 @@
 #pragma mark Dynamic Global Scopes
 #pragma mark Dynamic Rule Scopes
 #pragma mark Rule Return Scopes start
-@interface SimpleCTP_expr_return : ANTLRTreeRuleReturnScope {
-    // start of ivars()
-    // end of ivars()
- 
-
+@interface SimpleCTP_expr_return : ANTLRTreeRuleReturnScope { // line 1672
+ // start of ivars()
+    ANTLRCommonTree *tree;
 }
 
 @property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
 
-// this is start of methodsDecl()
-// this is end of methodsDecl()
+// this is start of set and get methods
+  // methodsDecl
+- (ANTLRCommonTree *)getTree;
+- (void)setTree:(ANTLRCommonTree *)aTree;
+// this is end of set and get methods
 @end
 
 #pragma mark Rule return scopes end
-@interface SimpleCTP : ANTLRTreeParser {
+@interface SimpleCTP : ANTLRTreeParser { // line 529
 
                                                     
 

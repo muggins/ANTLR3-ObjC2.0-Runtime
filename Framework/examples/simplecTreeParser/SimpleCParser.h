@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 11, 2010 15:16:47 SimpleC.g 2010-08-11 17:06:36
+// $ANTLR 3.2 Aug 13, 2010 19:41:25 /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g 2010-08-13 19:44:46
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -41,249 +41,189 @@
 #pragma mark Dynamic Global Scopes
 #pragma mark Dynamic Rule Scopes
 #pragma mark Rule Return Scopes start
-@interface SimpleCParser_program_return : ANTLRParserRuleReturnScope {
-    // start of ivars()
-    id *tree;
-    // end of ivars()
- 
-
+@interface SimpleCParser_program_return : ANTLRParserRuleReturnScope { // line 1672
+    ANTLRCommonTree *tree; // start of ivars()
 }
 
-@property (retain, getter=getTree, setter=setTree:) id *tree;
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
 
-// this is start of methodsDecl()
-- (id *) getTree;
-- (void) setTree:(id *)aTree;
-
-// this is end of methodsDecl()
+// this is start of set and get methods
+    - (ANTLRCommonTree *)getTree;
+    - (void) setTree:(ANTLRCommonTree *)aTree;
+  // methodsDecl
+// this is end of set and get methods
 @end
-@interface SimpleCParser_declaration_return : ANTLRParserRuleReturnScope {
-    // start of ivars()
-    id *tree;
-    // end of ivars()
- 
-
+@interface SimpleCParser_declaration_return : ANTLRParserRuleReturnScope { // line 1672
+    ANTLRCommonTree *tree; // start of ivars()
 }
 
-@property (retain, getter=getTree, setter=setTree:) id *tree;
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
 
-// this is start of methodsDecl()
-- (id *) getTree;
-- (void) setTree:(id *)aTree;
-
-// this is end of methodsDecl()
+// this is start of set and get methods
+    - (ANTLRCommonTree *)getTree;
+    - (void) setTree:(ANTLRCommonTree *)aTree;
+  // methodsDecl
+// this is end of set and get methods
 @end
-@interface SimpleCParser_variable_return : ANTLRParserRuleReturnScope {
-    // start of ivars()
-    id *tree;
-    // end of ivars()
- 
-
+@interface SimpleCParser_variable_return : ANTLRParserRuleReturnScope { // line 1672
+    ANTLRCommonTree *tree; // start of ivars()
 }
 
-@property (retain, getter=getTree, setter=setTree:) id *tree;
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
 
-// this is start of methodsDecl()
-- (id *) getTree;
-- (void) setTree:(id *)aTree;
-
-// this is end of methodsDecl()
+// this is start of set and get methods
+    - (ANTLRCommonTree *)getTree;
+    - (void) setTree:(ANTLRCommonTree *)aTree;
+  // methodsDecl
+// this is end of set and get methods
 @end
-@interface SimpleCParser_declarator_return : ANTLRParserRuleReturnScope {
-    // start of ivars()
-    id *tree;
-    // end of ivars()
- 
-
+@interface SimpleCParser_declarator_return : ANTLRParserRuleReturnScope { // line 1672
+    ANTLRCommonTree *tree; // start of ivars()
 }
 
-@property (retain, getter=getTree, setter=setTree:) id *tree;
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
 
-// this is start of methodsDecl()
-- (id *) getTree;
-- (void) setTree:(id *)aTree;
-
-// this is end of methodsDecl()
+// this is start of set and get methods
+    - (ANTLRCommonTree *)getTree;
+    - (void) setTree:(ANTLRCommonTree *)aTree;
+  // methodsDecl
+// this is end of set and get methods
 @end
-@interface SimpleCParser_functionHeader_return : ANTLRParserRuleReturnScope {
-    // start of ivars()
-    id *tree;
-    // end of ivars()
- 
-
+@interface SimpleCParser_functionHeader_return : ANTLRParserRuleReturnScope { // line 1672
+    ANTLRCommonTree *tree; // start of ivars()
 }
 
-@property (retain, getter=getTree, setter=setTree:) id *tree;
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
 
-// this is start of methodsDecl()
-- (id *) getTree;
-- (void) setTree:(id *)aTree;
-
-// this is end of methodsDecl()
+// this is start of set and get methods
+    - (ANTLRCommonTree *)getTree;
+    - (void) setTree:(ANTLRCommonTree *)aTree;
+  // methodsDecl
+// this is end of set and get methods
 @end
-@interface SimpleCParser_formalParameter_return : ANTLRParserRuleReturnScope {
-    // start of ivars()
-    id *tree;
-    // end of ivars()
- 
-
+@interface SimpleCParser_formalParameter_return : ANTLRParserRuleReturnScope { // line 1672
+    ANTLRCommonTree *tree; // start of ivars()
 }
 
-@property (retain, getter=getTree, setter=setTree:) id *tree;
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
 
-// this is start of methodsDecl()
-- (id *) getTree;
-- (void) setTree:(id *)aTree;
-
-// this is end of methodsDecl()
+// this is start of set and get methods
+    - (ANTLRCommonTree *)getTree;
+    - (void) setTree:(ANTLRCommonTree *)aTree;
+  // methodsDecl
+// this is end of set and get methods
 @end
-@interface SimpleCParser_type_return : ANTLRParserRuleReturnScope {
-    // start of ivars()
-    id *tree;
-    // end of ivars()
- 
-
+@interface SimpleCParser_type_return : ANTLRParserRuleReturnScope { // line 1672
+    ANTLRCommonTree *tree; // start of ivars()
 }
 
-@property (retain, getter=getTree, setter=setTree:) id *tree;
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
 
-// this is start of methodsDecl()
-- (id *) getTree;
-- (void) setTree:(id *)aTree;
-
-// this is end of methodsDecl()
+// this is start of set and get methods
+    - (ANTLRCommonTree *)getTree;
+    - (void) setTree:(ANTLRCommonTree *)aTree;
+  // methodsDecl
+// this is end of set and get methods
 @end
-@interface SimpleCParser_block_return : ANTLRParserRuleReturnScope {
-    // start of ivars()
-    id *tree;
-    // end of ivars()
- 
-
+@interface SimpleCParser_block_return : ANTLRParserRuleReturnScope { // line 1672
+    ANTLRCommonTree *tree; // start of ivars()
 }
 
-@property (retain, getter=getTree, setter=setTree:) id *tree;
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
 
-// this is start of methodsDecl()
-- (id *) getTree;
-- (void) setTree:(id *)aTree;
-
-// this is end of methodsDecl()
+// this is start of set and get methods
+    - (ANTLRCommonTree *)getTree;
+    - (void) setTree:(ANTLRCommonTree *)aTree;
+  // methodsDecl
+// this is end of set and get methods
 @end
-@interface SimpleCParser_stat_return : ANTLRParserRuleReturnScope {
-    // start of ivars()
-    id *tree;
-    // end of ivars()
- 
-
+@interface SimpleCParser_stat_return : ANTLRParserRuleReturnScope { // line 1672
+    ANTLRCommonTree *tree; // start of ivars()
 }
 
-@property (retain, getter=getTree, setter=setTree:) id *tree;
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
 
-// this is start of methodsDecl()
-- (id *) getTree;
-- (void) setTree:(id *)aTree;
-
-// this is end of methodsDecl()
+// this is start of set and get methods
+    - (ANTLRCommonTree *)getTree;
+    - (void) setTree:(ANTLRCommonTree *)aTree;
+  // methodsDecl
+// this is end of set and get methods
 @end
-@interface SimpleCParser_forStat_return : ANTLRParserRuleReturnScope {
-    // start of ivars()
-    id *tree;
-    // end of ivars()
- 
-
+@interface SimpleCParser_forStat_return : ANTLRParserRuleReturnScope { // line 1672
+    ANTLRCommonTree *tree; // start of ivars()
 }
 
-@property (retain, getter=getTree, setter=setTree:) id *tree;
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
 
-// this is start of methodsDecl()
-- (id *) getTree;
-- (void) setTree:(id *)aTree;
-
-// this is end of methodsDecl()
+// this is start of set and get methods
+    - (ANTLRCommonTree *)getTree;
+    - (void) setTree:(ANTLRCommonTree *)aTree;
+  // methodsDecl
+// this is end of set and get methods
 @end
-@interface SimpleCParser_assignStat_return : ANTLRParserRuleReturnScope {
-    // start of ivars()
-    id *tree;
-    // end of ivars()
- 
-
+@interface SimpleCParser_assignStat_return : ANTLRParserRuleReturnScope { // line 1672
+    ANTLRCommonTree *tree; // start of ivars()
 }
 
-@property (retain, getter=getTree, setter=setTree:) id *tree;
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
 
-// this is start of methodsDecl()
-- (id *) getTree;
-- (void) setTree:(id *)aTree;
-
-// this is end of methodsDecl()
+// this is start of set and get methods
+    - (ANTLRCommonTree *)getTree;
+    - (void) setTree:(ANTLRCommonTree *)aTree;
+  // methodsDecl
+// this is end of set and get methods
 @end
-@interface SimpleCParser_expr_return : ANTLRParserRuleReturnScope {
-    // start of ivars()
-    id *tree;
-    // end of ivars()
- 
-
+@interface SimpleCParser_expr_return : ANTLRParserRuleReturnScope { // line 1672
+    ANTLRCommonTree *tree; // start of ivars()
 }
 
-@property (retain, getter=getTree, setter=setTree:) id *tree;
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
 
-// this is start of methodsDecl()
-- (id *) getTree;
-- (void) setTree:(id *)aTree;
-
-// this is end of methodsDecl()
+// this is start of set and get methods
+    - (ANTLRCommonTree *)getTree;
+    - (void) setTree:(ANTLRCommonTree *)aTree;
+  // methodsDecl
+// this is end of set and get methods
 @end
-@interface SimpleCParser_condExpr_return : ANTLRParserRuleReturnScope {
-    // start of ivars()
-    id *tree;
-    // end of ivars()
- 
-
+@interface SimpleCParser_condExpr_return : ANTLRParserRuleReturnScope { // line 1672
+    ANTLRCommonTree *tree; // start of ivars()
 }
 
-@property (retain, getter=getTree, setter=setTree:) id *tree;
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
 
-// this is start of methodsDecl()
-- (id *) getTree;
-- (void) setTree:(id *)aTree;
-
-// this is end of methodsDecl()
+// this is start of set and get methods
+    - (ANTLRCommonTree *)getTree;
+    - (void) setTree:(ANTLRCommonTree *)aTree;
+  // methodsDecl
+// this is end of set and get methods
 @end
-@interface SimpleCParser_aexpr_return : ANTLRParserRuleReturnScope {
-    // start of ivars()
-    id *tree;
-    // end of ivars()
- 
-
+@interface SimpleCParser_aexpr_return : ANTLRParserRuleReturnScope { // line 1672
+    ANTLRCommonTree *tree; // start of ivars()
 }
 
-@property (retain, getter=getTree, setter=setTree:) id *tree;
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
 
-// this is start of methodsDecl()
-- (id *) getTree;
-- (void) setTree:(id *)aTree;
-
-// this is end of methodsDecl()
+// this is start of set and get methods
+    - (ANTLRCommonTree *)getTree;
+    - (void) setTree:(ANTLRCommonTree *)aTree;
+  // methodsDecl
+// this is end of set and get methods
 @end
-@interface SimpleCParser_atom_return : ANTLRParserRuleReturnScope {
-    // start of ivars()
-    id *tree;
-    // end of ivars()
- 
-
+@interface SimpleCParser_atom_return : ANTLRParserRuleReturnScope { // line 1672
+    ANTLRCommonTree *tree; // start of ivars()
 }
 
-@property (retain, getter=getTree, setter=setTree:) id *tree;
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
 
-// this is start of methodsDecl()
-- (id *) getTree;
-- (void) setTree:(id *)aTree;
-
-// this is end of methodsDecl()
+// this is start of set and get methods
+    - (ANTLRCommonTree *)getTree;
+    - (void) setTree:(ANTLRCommonTree *)aTree;
+  // methodsDecl
+// this is end of set and get methods
 @end
 
 #pragma mark Rule return scopes end
-@interface SimpleCParser : ANTLRParser {
+@interface SimpleCParser : ANTLRParser { // line 529
 
     DFA2 *dfa2;
                                                                 

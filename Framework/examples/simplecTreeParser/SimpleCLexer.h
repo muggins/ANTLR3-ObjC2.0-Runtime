@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 11, 2010 15:16:47 SimpleC.g 2010-08-11 17:06:37
+// $ANTLR 3.2 Aug 13, 2010 19:41:25 /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g 2010-08-13 19:44:47
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -41,7 +41,7 @@
 #define EQ 11
 #define VAR_DEF 4
 #define EQEQ 17
-@interface SimpleCLexer : ANTLRLexer {
+@interface SimpleCLexer : ANTLRLexer { // line 283
     DFA4 *dfa4;
 }
 - (void) mT__21; 
