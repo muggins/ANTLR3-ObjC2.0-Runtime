@@ -51,7 +51,7 @@ tokenRef(token, label, hetero, elementIndex) ::= <<
 <super.tokenRef(...)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
 <label>_tree = <createNodeFromToken(...)>;
-[treeAdaptor addChild:[treeAdaptor createTree:<label>] toTree:root_0];
+[treeAdaptor addChild:[[treeAdaptor createTree:<label>] retain] toTree:root_0];
 <if(backtracking)>}<endif>
 >>
 
@@ -170,7 +170,7 @@ ruleRefRuleRootAndListLabel(rule,label,elementIndex,args,scope) ::= <<
 wildcard(label,elementIndex) ::= <<
 <super.wildcard(...)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
-[treeAdaptor addChild:[treeAdaptor createTree:<label>] toTree:root_0];
+[treeAdaptor addChild:[[treeAdaptor createTree:<label>] retain] toTree:root_0];
 <if(backtracking)>}<endif>
 >>
 
@@ -179,7 +179,7 @@ wildcardBang(label,elementIndex) ::= "<super.wildcard(...)>"
 wildcardRuleRoot(label,elementIndex) ::= <<
 <super.wildcard(...)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
-<label>_tree = [treeAdaptor createTree:<label>]
+<label>_tree = [[treeAdaptor createTree:<label>] retain]
 root_0 = (<ASTLabelType>)[treeAdaptor becomeRoot:<label>_tree old:root_0];
 <if(backtracking)>}<endif>
 >>
@@ -189,7 +189,7 @@ createNodeFromToken(label,hetero) ::= <<
 <if(hetero)>
 [ANTLR<hetero> newANTLR<hetero>:<label>] <! new MethodNode(IDLabel) !>
 <else>
-(<ASTLabelType> *)[treeAdaptor createTree:<label>];
+(<ASTLabelType> *)[[treeAdaptor createTree:<label>] retain];
 <endif>
 >>
 

@@ -279,8 +279,8 @@ lexerHeaderFile( LEXER,
 #pragma mark Rule return scopes end
 #pragma mark Tokens
 <tokens:{#define <it.name> <it.type>}; separator="\n">
-<! @interface <grammar.recognizerName> : <@superClassName><superClass><@end> { !>
-@interface <className()> : <@superClassName><superClass><@end> {
+<! @interface <grammar.recognizerName> <@superClassName>: <superClass><@end> { !>
+@interface <className()> <@superClassName>: <superClass><@end> { // line 283
     <cyclicDFAs:{dfa | DFA<dfa.decisionNumber> *dfa<dfa.decisionNumber>;}; separator="\n">
     <synpreds:{pred | SEL <pred>Selector;}; separator="\n">
     <actions.lexer.ivars>
@@ -523,8 +523,8 @@ parserHeaderFile( LEXER,
 }>}>
 #pragma mark Rule return scopes end
 !>
-<! @interface <grammar.recognizerName> : <@superClassName><superClass><@end> { !>
-@interface <className()> <@superClassName>: <superClass><@end> {
+<! @interface <grammar.recognizerName> <@superClassName>: <superClass><@end> { !>
+@interface <className()> <@superClassName>: <superClass><@end> { // line 529
 
     <cyclicDFAs:{dfa | DFA<dfa.decisionNumber> *dfa<dfa.decisionNumber>;}; separator="\n">
     <synpreds:{pred | SEL <pred>Selector;}; separator="\n">
@@ -562,9 +562,9 @@ genericParser(  grammar,
                 cyclicDFAs,          // ???? why is this here
                 bitsets,
                 inputStreamType,
-                ASTLabelType="id",
+                ASTLabelType="ANTLRCommonTree",
                 superClass="ANTLRParser",
-                labelType="Token",
+                labelType="id<ANTLRToken>",
                 members,
                 rewriteElementType, filterMode
               ) ::= <<
@@ -645,7 +645,7 @@ parser( grammar,
         rules,
         numRules,
         bitsets,
-        ASTLabelType,
+        ASTLabelType="ANTLRCommonTree",
         superClass="ANTLRParser",
         labelType="id<ANTLRToken>",
         members={<actions.parser.members>}
@@ -654,19 +654,19 @@ parser( grammar,
 >>
 
 treeParser( grammar,
-            name,
-            scopes,
-            tokens,
-            tokenNames,
-            globalAction,
-            rules,
-            numRules,
-            bitsets,
-            labelType={<ASTLabelType>},
-            ASTLabelType="id",
-            superClass="ANTLRTreeParser",
-            members={<actions.treeparser.members>}, filterMode
-            ) ::= <<
+        name,
+        scopes,
+        tokens,
+        tokenNames,
+        globalAction,
+        rules,
+        numRules,
+        bitsets,
+        ASTLabelType="ANTLRCommonTree",
+        superClass="ANTLRTreeParser",
+        labelType="id<ANTLRToken>",
+        members={<actions.treeparser.members>}, filterMode
+        ) ::= <<
 <genericParser(inputStreamType="id\<ANTLRTreeNodeStream>", ...)>
 >>
 
@@ -839,7 +839,7 @@ ruleLabelDefs() ::= <<
     :{NSMutableArray *list_<it.label.text> = nil;}; separator="\n"
 >
 <ruleDescriptor.ruleLabels:ruleLabelDef(label=it); separator="\n">
-<ruleDescriptor.ruleListLabels:{ll|ANTLRRuleReturnScope <ll.label.text> = nil;}; separator="\n">
+<ruleDescriptor.ruleListLabels:{ll|ANTLRParserRuleReturnScope <ll.label.text> = nil;}; separator="\n">
 >>
 
 lexerRuleLabelDefs() ::= <<
@@ -850,9 +850,7 @@ lexerRuleLabelDefs() ::= <<
 >
 <ruleDescriptor.charLabels:{NSInteger <it.label.text>;}; separator="\n">
 <[ruleDescriptor.tokenListLabels,
-  ruleDescriptor.ruleListLabels]
-    :{List list_<it.label.text>=nil;}; separator="\n"
->
+  ruleDescriptor.ruleListLabels]:{NSMutableArray *list_<it.label.text>=nil; }; separator="\n">
 >>
 
 ruleReturnValue() ::= <<
@@ -1099,7 +1097,7 @@ tokenRefAndListLabel(token,label,elementIndex,hetero) ::= <<
 
 listLabel(label,elem) ::= <<
 if (list_<label> == nil) {
-    list_<label> = [[[NSMutableArray alloc] init] retain];
+    list_<label> = [[NSMutableArray arrayWithCapacity:5] retain];
 }
 [list_<label> addObject:<elem>];
 >>
@@ -1593,7 +1591,6 @@ ruleAttributeScopeDecl(scope) ::= <<
 @interface <scope.name>_Scope : ANTLRSymbolStack {
     <scope.attributes:{<it.decl>;}; separator="\n">
 }
-// use KVC to access attributes!
 @end
 <endif>
 >>
@@ -1672,44 +1669,28 @@ ruleLabelDef(label) ::= <<
 returnScopeInterface(scope) ::= <<
 <if(!ruleDescriptor.isSynPred)>
 <if(ruleDescriptor.hasMultipleReturnValues)>
-@interface <returnTypeName()> : ANTLR<if(TREE_PARSER)>Tree<endif>ParserRuleReturnScope {
-    // start of ivars()
-    <@ivars()>
-    // end of ivars()
-    <scope.attributes:{<it.decl>; /* this should only appear when it.decl is not nil */}; separator="\n"> 
-    <! <scope.attributes:{<it.a.type> <it.a.name>;}; separator="\n"> !>
+@interface <returnTypeName()> : ANTLR<if(TREE_PARSER)>Tree<else>Parser<endif>RuleReturnScope { // line 1672
+    <@ivars()> // start of ivars()
+<if(scope.attributes)>
+    <scope.attributes:{a|<a.type> <a.name>;}; separator="\n"><\n>
+<endif>
 }
 
-@property (retain, getter=getTree, setter=setTree:) <recognizer.ASTLabelType; null="id"> *tree;
+@property (retain, getter=getTree, setter=setTree:) <recognizer.ASTLabelType; null="ANTLRCommonTree"> *tree;
 
-<!
-<if(scope.attributes:{<it.decl>;})>  // this is start of scope.attributes:{it.name;}
-<scope.attributes:{<it.type> <it.name>;}; separator="\n">
-<endif>  // this is end of scope.attributes:{it.name;}
-!>
-<if(scope.attributes:{<it.decl>;})>
-// start properties()
-<@properties()>
-// end properties()
+<if(scope.attributes)>
+// start properties
+<scope.attributes:{a|@property (getter=get<a.name>, setter=set<a.name>:) <a.type> <a.name>;  // this is "<a.name>"}; separator="\n">
+// end properties
 <endif>
-<!
-<if(scope.attributes:{<it.decl>;})>  // this is it.name "<scope.attributes:{<it.name>;}>"
-// start properties with iterator
-<scope.attributes:{\@property (getter=get<it.name>, setter=set<it.name>\:) <it.type> <it.name>;}; separator="\n">
-// end properties with iterator
+// this is start of set and get methods
+    <@methodsDecl()>  // methodsDecl
+<if(scope.attributes)>
+// start of iterated get and set functions
+<scope.attributes:{a|<\n>- (<a.type>)get<a.name>;<\n>- (void)set<a.name>:(<a.type>)aVal;}; separator="\n"><\n>
+// End of iterated get and set functions
 <endif>
-!>
-
-<if(scope.attributes:{<it.decl>;})>
-// start hard-coded getter and setter declarations
-- (double)getValue;
-- (void)setValue:(double)aVal;
-// end hard-coded getter and setter declarations
-<endif>
-
-// this is start of methodsDecl()
-<@methodsDecl()>
-// this is end of methodsDecl()
+// this is end of set and get methods
 @end
 <endif>
 <endif>
@@ -1718,34 +1699,19 @@ returnScopeInterface(scope) ::= <<
 returnScope(scope) ::= <<
 <if(!ruleDescriptor.isSynPred)>
 <if(ruleDescriptor.hasMultipleReturnValues)>
-
 @implementation <returnTypeName()>
 @synthesize tree;
-<!
-<if(scope.attributes:{<it.decl>;}); separator="\n">  // here is "<scope.attributes:{<it.decl>;}>"
+<if(scope.attributes)>
 // start of synthesize
-<scope.attributes:{\@synthesize <it.a.name>;}; separator="\n">
-// end of synthesize
+<scope.attributes:{a|@synthesize <a.name>;}; separator="\n"><\n>
+<endif>
+    <@methods()>
+<if(scope.attributes)>
 // start of iterate get and set functions
-<scope.attributes.decl:{<\n>- (<it.type>)get<it.name><\n>{<\n>    return( <it.name> );<\n>}<\n\n>
-- (void)set<it.name>:(<it.type>)aVal<\n>{<\n>    <it.name> = aVal;<\n>}<\n\n>}; separator="\n">
+<scope.attributes:{a|<\n>- (<a.type>)get<a.name> \{ return( <a.name> ); \}<\n>
+- (void)set<a.name>:(<a.type>)aVal \{ <a.name> = aVal; \}<\n\n>}; separator="\n"><\n>
 // End of iterate get and set functions
 <endif>
-!>
-<if(scope.attributes:{<it.decl>;})>   // here is "<scope.attributes:{<it.decl>;}>"
-@synthesize value;
-- (double)getValue
-{
-    return( value );
-}
-
-- (void)setValue:(double)aVal
-{
-    value = aVal;
-}
-
-<endif>
-<@methods()>
 <actions.(actionScope).ruleReturnMethods>
 @end
 <endif>

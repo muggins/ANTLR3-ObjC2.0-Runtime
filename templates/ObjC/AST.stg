@@ -81,23 +81,18 @@ parserMethods() ::= <<
 
 /** addition ivars for returnscopes */
 @returnScopeInterface.ivars() ::= <<
-<recognizer.ASTLabelType; null="id"> *tree;
->>
-
-/** addition ivars for returnscopes */
-@returnScopeInterface.properties(scope) ::= <<
-@property (assign, getter=getValue, setter=setValue:) double value;
+<recognizer.ASTLabelType; null="ANTLRCommonTree"> *tree;
 >>
 
 /** the interface of returnScope methodsDecl */
 @returnScopeInterface.methodsDecl() ::= <<
-- (<recognizer.ASTLabelType; null="id"> *) getTree;
-- (void) setTree:(<recognizer.ASTLabelType; null="id"> *)aTree;<\n>
+- (<recognizer.ASTLabelType; null="ANTLRCommonTree"> *)getTree;
+- (void) setTree:(<recognizer.ASTLabelType; null="ANTLRCommonTree"> *)aTree;<\n>
 >>
 
 /** the implementation of returnScope methods */
 @returnScope.methods() ::= <<
-- (<ASTLabelType> *) getTree
+- (<ASTLabelType> *)getTree
 {
     return tree;
 }
