@@ -32,8 +32,8 @@
 	id<ANTLRToken> startToken;
 	id<ANTLRToken> stopToken;
 }
-@property (retain, getter=getStart, setter=setStart) id<ANTLRToken> startToken;
-@property (retain, getter=getStop, setter=setStop)   id<ANTLRToken> stopToken;
+@property (retain, getter=getStart, setter=setStart:) id<ANTLRToken> startToken;
+@property (retain, getter=getStop, setter=setStop:)   id<ANTLRToken> stopToken;
 
 - (id<ANTLRToken>) getStart;
 - (void) setStart: (id<ANTLRToken>) aStart;

@@ -36,7 +36,7 @@
     id<ANTLRToken> startToken;
 }
 
-@property (retain, getter=getStart, setter=setStart) id<ANTLRToken> startToken;
+@property (retain, getter=getStart, setter=setStart:) id<ANTLRToken> startToken;
 
 /** First node or root node of tree matched for this rule. */
 
