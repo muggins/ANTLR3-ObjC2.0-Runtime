@@ -44,8 +44,49 @@ NSArray *ruleNames;
 -(BOOL) evalPredicate:(NSString *)predicate matched:(BOOL)result;<\n>
 >>
 
+@genericParser.members() ::= <<
+<if(grammar.grammarIsRoot)>
+NSMutableArray *ruleNames = [NSMutableArray arrayWithArray:{
+    @"invalidRule", <grammar.allImportedRules:{rST | @"<rST.name>"}; wrap=@"\n    ", separator=", ">
+};<\n>
+<endif>
+<if(grammar.grammarIsRoot)> <! grammar imports other grammar(s) !>
+    NSInteger ruleLevel = 0;
+    NSInteger getRuleLevel() { return ruleLevel; }
+    void incRuleLevel() { ruleLevel++; }
+    void decRuleLevel() { ruleLevel--; }
+<if(profile)>
+    <ctorForProfilingRootGrammar()>
+<else>
+    <ctorForRootGrammar()>
+<endif>
+<ctorForPredefinedListener()>
+<else> <! imported grammar !>
+- (NSInteger) getRuleLevel { return <grammar.delegators:{g| <g:delegateName()>}>.getRuleLevel(); }
+- (void) incRuleLevel() { <grammar.delegators:{g| <g:delegateName()>}>.incRuleLevel(); }
+- (void) decRuleLevel() { <grammar.delegators:{g| <g:delegateName()>}>.decRuleLevel(); }
+    <ctorForDelegateGrammar()>
+<endif>
+<if(profile)>
+- (BOOL) alreadyParsedRule(IntStream input, int ruleIndex) {
+    [(Profiler)dbg examineRuleMemoization:input, ruleIndex, <grammar.composite.rootGrammar.recognizerName>.ruleNames objectAtIndex:ruleIndex];
+    return super.alreadyParsedRule(input, ruleIndex);
+}<\n>
+- (void) memoize:(id<ANTLRIntStream>)input RuleIndex:(NSInteger)ruleIndex StartIndex:(NSInteger)ruleStartIndex
+{
+    [((Profiler)dbg) memoize:input RuleIndex:ruleIndex StartIndex:ruleStartIndex [<grammar.composite.rootGrammar.recognizerName> ruleNames[ruleIndex]];
+    [super memoize:input RuleIndex:ruleIndex StartIndex:ruleStartIndex];
+}<\n>
+<endif>
+- (BOOL) evalPredicate:(BOOL)result Pred:(NSString *)predicate
+{
+    [dbg semanticPredicate:result Pred:predicate];
+    return result;
+}<\n>
+>>
+
 @genericParser.init() ::= <<
-ruleNames = [[NSArray alloc] initWithObjects:<rules:{rST | @"<rST.ruleName>"}; separator=", ", wrap="\n	">, nil];<\n>
+ruleNames = [NSArray arrayWithObjects:<rules:{rST | @"<rST.ruleName>"}; separator=", ", wrap="\n	">, nil];<\n>
 >>
 
 @genericParser.dealloc() ::= <<

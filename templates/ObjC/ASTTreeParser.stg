@@ -68,29 +68,35 @@ _last = (<ASTLabelType> *) [input LT:1];
 {
 <ASTLabelType> *_save_last_<treeLevel> = _last;
 <ASTLabelType> *_first_<treeLevel> = nil;
+<if(!rewriteMode)>
 <ASTLabelType> *root_<treeLevel> = [[[treeAdapator class] newEmptyTree] retain];
+<endif>
 <root:element()>
+<if(rewriteMode)>
+<if(backtracking)>if ( <actions.(actionScope).synpredgate> )<endif>
+<if(root.el.rule)>
+if ( _first_<enclosingTreeLevel>==nil ) _first_<enclosingTreeLevel> = <root.el.label>.tree;
+<else>
+if ( _first_<enclosingTreeLevel>==nil ) _first_<enclosingTreeLevel> = <root.el.label>;
+<endif>
+<endif>
 <actionsAfterRoot:element()>
 <if(nullableChildList)>
 if ( [input LA:1] == ANTLRTokenTypeDOWN ) {
-    [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil];
-    <checkRuleBacktrackFailure()>
+    [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; <checkRuleBacktrackFailure()>
     <children:element()>
-    [self match:input TokenType:ANTLRTokenTypeUP Follow:nil];
-    <checkRuleBacktrackFailure()>
+    [self match:input TokenType:ANTLRTokenTypeUP Follow:nil]; <checkRuleBacktrackFailure()>
 }
 <else>
-[self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil];
-<checkRuleBacktrackFailure()>
+[self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; <checkRuleBacktrackFailure()>
 <children:element()>
-[self match:input TokenType:ANTLRTokenTypeUP Follow:nil];
-<checkRuleBacktrackFailure()>
+[self match:input TokenType:ANTLRTokenTypeUP Follow:nil]; <checkRuleBacktrackFailure()>
 <endif>
 <if(!rewriteMode)>
 [treeAdaptor addChild:root_<treeLevel> toTree:root_<enclosingTreeLevel>];
 <endif>
 _last = _save_last_<treeLevel>;
-[root_<treeLevel> release]; 
+// [root_<treeLevel> release]; 
 }<\n>
 >>
 
@@ -112,9 +118,10 @@ _last = (<ASTLabelType>)[input LT:1];
 >>
 
 /** ID auto construct */
-tokenRef(token,label,elementIndex) ::= <<
+tokenRef(token,label,elementIndex,hetero) ::= <<
 _last = (<ASTLabelType>)[input LT:1];
 <super.tokenRef(...)>
+<if(!rewriteMode)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
 <if(hetero)>
 <label>_tree = [ANTLR<hetero> newANTLR<hetero>:<label>];
@@ -123,13 +130,14 @@ _last = (<ASTLabelType>)[input LT:1];
 <endif><\n>
 [treeAdaptor addChild:<label>_tree toTree:root_<treeLevel>];
 <if(backtracking)>}<endif>
+<else> <! rewrite mode !>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> )<endif>
 if ( _first_<treeLevel>==nil ) _first_<treeLevel> = <label>;
 <endif>
 >>
 
 /** label+=TOKEN auto construct */
-tokenRefAndListLabel(token,label,elementIndex) ::= <<
+tokenRefAndListLabel(token,label,elementIndex,hetero) ::= <<
 <tokenRef(...)>
 <listLabel(elem=label,...)>
 >>
@@ -145,14 +153,75 @@ _last = (<ASTLabelType>)[input LT:1];
 <else>
 <label>_tree = (<ASTLabelType>)[treeAdaptor dupNode:(<label>)];
 <endif><\n>
-root_<treeLevel> = (<ASTLabelType>)[treeAdaptor becomeRoot:<label>_tree old:root_<treeLevel>];
+root_<treeLevel> = (<ASTLabelType> *)[treeAdaptor becomeRoot:<label>_tree old:root_<treeLevel>];
 <if(backtracking)>}<endif>
+<endif>
 >>
 
 /** Match ^(label+=TOKEN ...) auto construct */
-tokenRefRuleRootAndListLabel(token,label,elementIndex) ::= <<
+tokenRefRuleRootAndListLabel(token,label,elementIndex,hetero) ::= <<
 <tokenRefRuleRoot(...)>
 <listLabel(elem=label,...)>
+>>
+
+/** Match . wildcard and auto dup the node/subtree */
+wildcard(token,label,elementIndex,hetero) ::= <<
+_last = (<ASTLabelType>)[input LT:1];
+<super.wildcard(...)>
+<if(!rewriteMode)>
+<if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
+<label>_tree = (<ASTLabelType>)adaptor.dupTree(<label>);
+[adaptor addChild:<label>_tree toTree:root_<treeLevel>];
+<if(backtracking)>}<endif>
+<else> <! rewrite mode !>
+<if(backtracking)>if ( <actions.(actionScope).synpredgate> )<endif>
+if ( _first_<treeLevel>==null ) _first_<treeLevel> = <label>;
+<endif>
+>>
+
+// SET AST
+
+matchSet(s,label,hetero,elementIndex,postmatchCode) ::= <<
+_last = (<ASTLabelType>)[input LT:1];
+<super.matchSet(..., postmatchCode={
+<if(!rewriteMode)>
+<if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
+<if(hetero)>
+<label>_tree = [ANTLR<hetero> newANTLR<hetero>:<label>];
+<else>
+<label>_tree = (<ASTLabelType>)[adaptor dupNode:<label>];
+<endif><\n>
+[adaptor addChild:<label>_tree toTree:root_<treeLevel>];
+<if(backtracking)>}<endif>
+<endif>
+}
+)>
+>>
+
+matchRuleBlockSet(s,label,hetero,elementIndex,postmatchCode,treeLevel="0") ::= <<
+<matchSet(...)>
+<noRewrite()> <! set return tree !>
+>>
+
+matchSetBang(s,label,elementIndex,postmatchCode) ::= <<
+_last = (<ASTLabelType>)input.LT(1);
+<super.matchSet(...)>
+>>
+
+matchSetRuleRoot(s,label,hetero,elementIndex,debug) ::= <<
+<super.matchSet(..., postmatchCode={
+<if(!rewriteMode)>
+<if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
+<if(hetero)>
+<label>_tree = [ANTLR<hetero> newANTLR<hetero>:<label>];
+<else>
+<label>_tree = (<ASTLabelType>)[adaptor dupNode:<label>];
+<endif><\n>
+root_<treeLevel> = (<ASTLabelType>)[adaptor becomeRoot:<label>_tree old:root_<treeLevel>];
+<if(backtracking)>}<endif>
+<endif>
+}
+)>
 >>
 
 // RULE REF AST
@@ -181,7 +250,7 @@ _last = (<ASTLabelType>)[input LT:1];
 <super.ruleRef(...)>
 <if(!rewriteMode)>
 <if(backtracking)>if ( state.backtracking == 0 ) <endif>
-root_<treeLevel> = (<ASTLabelType>)[treeAdaptor becomeRoot:[<label> getTree] old:root_<treeLevel>];
+root_<treeLevel> = (<ASTLabelType> *)[treeAdaptor becomeRoot:[<label> getTree] old:root_<treeLevel>];
 <endif>
 >>
 
@@ -222,10 +291,10 @@ createRewriteNodeFromElement(token,hetero,scope) ::= <<
 #error Heterogeneous tree support not implemented.
 <if(hetero)>
 <! new <hetero>(stream_<token>.nextNode()) !>
-[[[<hetero>(stream_<token> alloc] init] nextNode];
+[[[ANTLR<hetero>(stream_<token> alloc] init] nextNode];
 <else>
 <! stream_<token>.nextNode() !>
-[<token> nextNode]
+[stream_<token> nextNode]
 <endif>
 >>
 

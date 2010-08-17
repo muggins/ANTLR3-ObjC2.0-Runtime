@@ -26,21 +26,68 @@
  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+/** Template overrides to add debugging to AST stuff.  Dynamic inheritance
+ *  hierarchy is set up as ASTDbg : AST : Dbg : Java by code generator.
+ */
 group ASTDbg;
 
 parserMembers() ::= <<
-ANTLRCommonTreeAdaptor *adaptor = [ANTLRDebugTreeAdaptor newANTLRDebugTreeAdaptor:(id)dbg Adaptor:[ANTLRCommonTreeAdaptor newANTLRCommonTreeAdaptor]];
+ANTLRDebugTreeAdaptor *adaptor = [ANTLRDebugTreeAdaptor newANTLRDebugTreeAdaptor:(id)dbg Adaptor:[ANTLRCommonTreeAdaptor newANTLRCommonTreeAdaptor]];
 
 // fix this
-- (void) setTreeAdaptor:(ANTLRCommonTreeAdaptor *)anAdaptor
+- (void) setTreeAdaptor:(id<ANTLRTreeAdaptor>)anAdaptor
 {
     adaptor = [ANTLRDebugTreeAdaptor newANTLRDebugTreeAdaptor:dbg Adaptor:anAdaptor];
+<if(grammar.grammarIsRoot)>
+    adaptor = [ANTLRDebugTreeAdaptor newANTLRDebugTreeAdaptor:adaptor withDBG:dbg];
+<else>
+    adaptor = (ANTLRDebugTreeAdaptor *)adaptor; // delegator sends dbg adaptor 
+<endif><\n>
+    <grammar.directDelegates:{g|[<g:delegateName()> setTreeAdaptor:adaptor];}>
 }
 
-- (ANTLRCommonTreeAdaptor *)getTreeAdaptor
+- (id<ANTLRTreeAdaptor>)getTreeAdaptor
 {
     return adaptor;
 }<\n>
+>>
+
+parserCtorBody() ::= <<
+<super.parserCtorBody()>
+>>
+
+createListenerAndHandshake() ::= <<
+ANTLRDebugEventSocketProxy proxy =
+    [ANTLRDebugEventSocketProxy newANTLRDebugEventSocketProxy:self, port, <if(TREE_PARSER)>[input getTreeAdaptor]<else>adaptor<endif>];
+[self setDebugListener:proxy];
+[self set<inputStreamType>:[ANTLRANTLRDebug<inputStreamType> newANTLRDebug<inputStreamType>:input with:proxy]];
+try {
+    [proxy handshake];
+}
+@catch (IOException *ioe) {
+    [self reportError:ioe];
+}
+>>
+
+@ctorForRootGrammar.finally() ::= <<
+ANTLRCommonTreeAdaptor *adap = [ANTLRCommonTreeAdaptor newANTLRCommonTreeAdaptor];
+[self setTreeAdaptor:adap];
+[proxy setTreeAdaptor:adap];
+>>
+
+@ctorForProfilingRootGrammar.finally() ::=<<
+ANTLRCommonTreeAdaptor *adap = [ANTLRCommonTreeAdaptor newANTLRCommonTreeAdaptor];
+[self setTreeAdaptor:adap];
+[proxy setTreeAdaptor:adap];
+>>
+
+@ctorForPredefinedListener.superClassRef() ::= @"super(input, dbg);"
+
+@ctorForPredefinedListener.finally() ::=<<
+<if(grammar.grammarIsRoot)> <! don't create new adaptor for delegates !>
+ANTLRCommonTreeAdaptor *adap = [ANTLRCommonTreeAdaptor newANTLRCommonTreeAdaptor];
+[self setTreeAdaptor:adap];<\n>
+<endif>
 >>
 
 @treeParserHeaderFile.superClassName ::= "ANTLRDebugTreeParser"

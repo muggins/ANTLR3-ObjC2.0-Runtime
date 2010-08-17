@@ -47,11 +47,11 @@ retval.tree = (<ASTLabelType> *)[treeAdaptor errorNode:input From:retval.startTo
 // TOKEN AST STUFF
 
 /** ID and output=AST */
-tokenRef(token, label, hetero, elementIndex) ::= <<
+tokenRef(token, label, elementIndex, hetero) ::= <<
 <super.tokenRef(...)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
 <label>_tree = <createNodeFromToken(...)>;
-[treeAdaptor addChild:[[treeAdaptor createTree:<label>] retain] toTree:root_0];
+[treeAdaptor addChild:<label>_tree  toTree:root_0];
 <if(backtracking)>}<endif>
 >>
 
@@ -63,12 +63,12 @@ tokenRefRuleRoot(token,label,elementIndex,hetero) ::= <<
 <super.tokenRef(...)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
 <label>_tree = <createNodeFromToken(...)>;
-root_0 = (<ASTLabelType>)[treeAdaptor becomeRoot:<label>_tree old:root_0];
+root_0 = (<ASTLabelType> *)[treeAdaptor becomeRoot:<label>_tree old:root_0];
 <if(backtracking)>}<endif>
 >>
 
 /** ids+=ID! and output=AST */
-tokenRefBangAndListLabel(token,label,elementIndex) ::= <<
+tokenRefBangAndListLabel(token,label,elementIndex,hetero) ::= <<
 <tokenRefBang(...)>
 <listLabel(elem=label,...)>
 >>
@@ -98,15 +98,9 @@ tokenRefRuleRootAndListLabel(token,label,hetero,elementIndex) ::= <<
 // rather than just added on code.  Investigate that refactoring when
 // I have more time.
 
-// TODO: add support for heterogeneous trees
-
 matchSet(s,label,hetero,elementIndex,postmatchCode) ::= <<
-<super.matchSet(..., postmatchCode={
-<if(backtracking)>
-if ( <actions.(actionScope).synpredgate> ) {<endif>
-    [treeAdaptor addChild:<createNodeFromToken(...)> toTree:root_0 ]];
-<if(backtracking)>}<endif>
-})>
+<super.matchSet(..., postmatchCode={<if(backtracking)>if ( <actions.(actionScope).synpredgate> )<endif>
+    [treeAdaptor addChild:<createNodeFromToken(...)> toTree:root_0 ];})>
 >>
 
 matchRuleBlockSet(s,label,hetero,elementIndex,postmatchCode,treeLevel="0") ::= <<
@@ -122,10 +116,8 @@ matchSetRuleRoot(s,label,hetero,elementIndex,debug) ::= <<
 <if(label)>
 <label>=(<labelType>)[input LT:1];<\n>
 <endif>
-<super.matchSet(..., postmatchCode={
-<if(backtracking)>
-if ( <actions.(actionScope).synpredgate> ) <endif>
-root_0 = (<ASTLabelType>)[treeAdaptor becomeRoot:<createNodeFromToken(...)> old:root_0];})>
+<super.matchSet(..., postmatchCode={<if(backtracking)>if ( <actions.(actionScope).synpredgate> )<endif>
+root_0 = (<ASTLabelType> *)[treeAdaptor becomeRoot:<createNodeFromToken(...)> old:root_0];})>
 >>
 
 // RULE REF AST
@@ -133,7 +125,7 @@ root_0 = (<ASTLabelType>)[treeAdaptor becomeRoot:<createNodeFromToken(...)> old:
 /** rule when output=AST */
 ruleRef(rule,label,elementIndex,args,scope) ::= <<
 <super.ruleRef(...)>
-<if(backtracking)>if ( <actions.(actionScope).synpredgate> ) <endif>
+<if(backtracking)>if ( <actions.(actionScope).synpredgate> )<endif>
 [treeAdaptor addChild:[<label> getTree] toTree:root_0];
 >>
 
@@ -143,8 +135,8 @@ ruleRefBang(rule,label,elementIndex,args,scope) ::= "<super.ruleRef(...)>"
 /** rule^ */
 ruleRefRuleRoot(rule,label,elementIndex,args,scope) ::= <<
 <super.ruleRef(...)>
-<if(backtracking)>if ( <actions.(actionScope).synpredgate> ) <endif>
-root_0 = (<ASTLabelType>)[treeAdaptor becomeRoot:[<label> getTree] old:root_0];
+<if(backtracking)>if ( <actions.(actionScope).synpredgate> )<endif>
+root_0 = (<ASTLabelType> *)[treeAdaptor becomeRoot:[<label> getTree] old:root_0];
 >>
 
 /** x+=rule when output=AST */
@@ -180,16 +172,15 @@ wildcardRuleRoot(label,elementIndex) ::= <<
 <super.wildcard(...)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
 <label>_tree = [[treeAdaptor createTree:<label>] retain]
-root_0 = (<ASTLabelType>)[treeAdaptor becomeRoot:<label>_tree old:root_0];
+root_0 = (<ASTLabelType> *)[treeAdaptor becomeRoot:<label>_tree old:root_0];
 <if(backtracking)>}<endif>
 >>
-
 
 createNodeFromToken(label,hetero) ::= <<
 <if(hetero)>
 [ANTLR<hetero> newANTLR<hetero>:<label>] <! new MethodNode(IDLabel) !>
 <else>
-(<ASTLabelType> *)[[treeAdaptor createTree:<label>] retain];
+(<ASTLabelType> *)[[treeAdaptor createTree:<label>] retain]
 <endif>
 >>
 
