@@ -31,6 +31,9 @@
 static BOOL debug = NO;
 
 @implementation ANTLRDFA
+@synthesize recognizer;
+@synthesize decisionNumber;
+@synthesize len;
 
 - (id) initWithRecognizer:(ANTLRBaseRecognizer *) theRecognizer
 {
@@ -122,7 +125,7 @@ static BOOL debug = NO;
                 NSLog(@"max[%d] = $d\n", s, min[s]);
                 NSLog(@"eot[%d] = $d\n", s, min[s]);
                 NSLog(@"eof[%d] = $d\n", s, min[s]);
-                for (NSInteger p = 0; p < [transition[s] length]; p++) {
+                for (NSInteger p = 0; p < self.len; p++) {
                     NSLog(@"%d ", transition[s][p]);
                 }
                 NSLog(@"\n");
@@ -245,6 +248,11 @@ static BOOL debug = NO;
         [aRecognizer retain];
     }
     recognizer = aRecognizer;
+}
+
+- (NSInteger)length
+{
+    return len;
 }
 
 @end

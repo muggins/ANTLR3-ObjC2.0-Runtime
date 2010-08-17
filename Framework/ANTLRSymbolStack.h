@@ -38,12 +38,12 @@
 #define HASHSIZE         101
 #define HBUFSIZE      0x2000
 
-@interface ANTLRSymbolScope : NSObject
+@interface ANTLRSymbolsScope : NSObject
 {
     
 }
 
-+ (ANTLRSymbolScope *)newANTLRSymbolScope;
++ (ANTLRSymbolsScope *)newANTLRSymbolsScope;
 
 - (id)init;
 
@@ -64,13 +64,13 @@
 - (id) copyWithZone:(NSZone *)aZone;
 /* clear -- reinitialize the maplist array */
 
--(ANTLRSymbolScope *)getHashMapEntry:(NSInteger)idx;
+-(ANTLRSymbolsScope *)getHashMapEntry:(NSInteger)idx;
 
--(ANTLRSymbolScope **)getHashMap;
+-(ANTLRSymbolsScope **)getHashMap;
 
--(ANTLRSymbolScope *) pop;
+-(ANTLRSymbolsScope *) pop;
 
-- (void) insertObject:(ANTLRSymbolScope *)aScope atIndex:(NSInteger)idx;
-- (ANTLRSymbolScope *)objectAtIndex:(NSInteger)idx;
+- (void) insertObject:(ANTLRSymbolsScope *)aScope atIndex:(NSInteger)idx;
+- (ANTLRSymbolsScope *)objectAtIndex:(NSInteger)idx;
 
 @end

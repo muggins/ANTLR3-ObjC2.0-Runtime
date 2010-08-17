@@ -78,6 +78,7 @@
 
 - (void) push:(id) v;
 - (id) pop;
+- (id) peek;
 
 - (void) addObject:(id) v;
 - (void) addObjectsFromArray:(ANTLRPtrBuffer *)anArray;

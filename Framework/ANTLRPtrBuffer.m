@@ -208,6 +208,15 @@
 	return v;
 }
 
+- (id) peek
+{
+	id v = nil;
+    if ( ptr > 0 ) {
+        v = ptrBuffer[ptr-1];
+    }
+	return v;
+}
+
 - (NSInteger)count
 {
     int cnt = 0;

@@ -39,12 +39,14 @@
 	const int *special;
 	const int **transition;
 	
-	NSInteger decisionNumber;
 	ANTLRBaseRecognizer *recognizer;
+	NSInteger decisionNumber;
+    NSInteger len;
 }
 
-@property (assign, getter=getDecision,setter=setDecision:) NSInteger decisionNumber;
 @property (retain, getter=getRecognizer,setter=setRecognizer:) ANTLRBaseRecognizer *recognizer;
+@property (assign, getter=getDecision,setter=setDecision:) NSInteger decisionNumber;
+@property (assign, getter=getLen,setter=setLen:) NSInteger len;
 
 - (id) initWithRecognizer:(id) theRecognizer;
 // simulate the DFA using the static tables and predict an alternative
@@ -68,5 +70,6 @@
 
 - (ANTLRBaseRecognizer *)getRecognizer;
 - (void)setRecognizer:(ANTLRBaseRecognizer *)aRecognizer;
+- (NSInteger)length;
 
 @end

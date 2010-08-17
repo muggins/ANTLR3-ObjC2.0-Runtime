@@ -36,11 +36,11 @@
 #import "ANTLRTree.h"
 
 
-@implementation ANTLRSymbolScope
+@implementation ANTLRSymbolsScope
 
-+ (ANTLRSymbolScope *)newANTLRSymbolScope
++ (ANTLRSymbolsScope *)newANTLRSymbolsScope
 {
-    return( [[ANTLRSymbolScope alloc] init] );
+    return( [[ANTLRSymbolsScope alloc] init] );
 }
 
 - (id)init
@@ -93,22 +93,22 @@
     return [super copyWithZone:aZone];
 }
 
--(ANTLRSymbolScope *)getHashMapEntry:(NSInteger)idx
+-(ANTLRSymbolsScope *)getHashMapEntry:(NSInteger)idx
 {
-	return( (ANTLRSymbolScope *)[super objectAtIndex:idx] );
+	return( (ANTLRSymbolsScope *)[super objectAtIndex:idx] );
 }
 
--(ANTLRSymbolScope **)getHashMap
+-(ANTLRSymbolsScope **)getHashMap
 {
-	return( (ANTLRSymbolScope **)ptrBuffer );
+	return( (ANTLRSymbolsScope **)ptrBuffer );
 }
 
--(ANTLRSymbolScope *) pop
+-(ANTLRSymbolsScope *) pop
 {
-    return (ANTLRSymbolScope *)[super pop];
+    return (ANTLRSymbolsScope *)[super pop];
 }
 
-- (void) insertObject:(ANTLRSymbolScope *)aRule atIndex:(NSInteger)idx
+- (void) insertObject:(ANTLRSymbolsScope *)aRule atIndex:(NSInteger)idx
 {
     if (aRule != ptrBuffer[idx]) {
         if (ptrBuffer[idx] != nil) [ptrBuffer[idx] release];
@@ -117,9 +117,9 @@
     ptrBuffer[idx] = aRule;
 }
 
-- (ANTLRSymbolScope *)objectAtIndex:(NSInteger)idx
+- (ANTLRSymbolsScope *)objectAtIndex:(NSInteger)idx
 {
-    return (ANTLRSymbolScope *)[super objectAtIndex:idx];
+    return (ANTLRSymbolsScope *)[super objectAtIndex:idx];
 }
 
 @end
