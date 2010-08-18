@@ -31,16 +31,17 @@
 
 #import <Cocoa/Cocoa.h>
 #import "ANTLRRuleReturnScope.h"
+#import "ANTLRCommonTree.h"
 
 @interface ANTLRTreeRuleReturnScope : ANTLRRuleReturnScope {
-    id<ANTLRToken> startToken;
+    ANTLRCommonTree *startNode;
 }
 
-@property (retain, getter=getStart, setter=setStart:) id<ANTLRToken> startToken;
+@property (retain, getter=getStart) ANTLRCommonTree *startNode;
 
 /** First node or root node of tree matched for this rule. */
 
-- (id<ANTLRToken>)getStart;
+- (ANTLRCommonTree *)getStart;
 
 - (id) copyWithZone:(NSZone *)theZone;
 

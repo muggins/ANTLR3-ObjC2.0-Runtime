@@ -33,11 +33,11 @@
 
 
 @implementation ANTLRTreeRuleReturnScope
-@synthesize startToken;
+@synthesize startNode;
 
-- (id<ANTLRToken>)getStart
+- (ANTLRCommonTree *)getStart
 {
-    return startToken;
+    return startNode;
 }	
 
 // create a copy, including the text if available
@@ -45,7 +45,7 @@
 - (id) copyWithZone:(NSZone *)theZone
 {
     ANTLRTreeRuleReturnScope *copy = [super copyWithZone:theZone];
-    copy.startToken = startToken;
+    copy.startNode = startNode;
     return copy;
 }
 
