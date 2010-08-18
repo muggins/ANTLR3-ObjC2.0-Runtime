@@ -126,7 +126,7 @@ static NSString *NEXT_TOKEN_RULE_NAME;
 
 - (id) initWithState:(ANTLRRecognizerSharedState *)aState
 {
-	if (nil != (self = [super init])) {
+	if ((self = [super init]) != nil) {
 		state = aState;
         if (state == nil) {
             state = [ANTLRRecognizerSharedState newANTLRRecognizerSharedState];
