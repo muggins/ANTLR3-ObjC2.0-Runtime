@@ -112,7 +112,10 @@
 - (ANTLRBitSet *) initWithType:(ANTLRTokenType)type
 {
 	if ((self = [super init]) != nil) {
-		bitVector = (CFMutableBitVectorRef)type;
+		bitVector = CFBitVectorCreateMutable(kCFAllocatorDefault,0);
+        if ((CFIndex)type >= CFBitVectorGetCount(bitVector))
+            CFBitVectorSetCount(bitVector, type+1);
+        CFBitVectorSetBitAtIndex(bitVector, type, 1);
 	}
 	return self;
 }
@@ -128,7 +131,7 @@
 
 - (ANTLRBitSet *) initWithBitVector:(CFMutableBitVectorRef)theBitVector
 {
-	if (nil != (self = [super init])) {
+	if ((self = [super init]) != nil) {
 		bitVector = theBitVector;
 	}
 	return self;
@@ -138,10 +141,11 @@
 // Converts to big endian, because the underlying CFBitVector works like that.
 - (ANTLRBitSet *) initWithBits:(const unsigned long long *)theBits Count:(NSUInteger)longCount
 {
-	if (nil != (self = [self init])) {
+	if ((self = [super init]) != nil) {
 		unsigned int longNo;
 		CFIndex bitIdx;
-		CFBitVectorSetCount(bitVector,sizeof(unsigned long long)*8*longCount);
+        bitVector = CFBitVectorCreateMutable ( kCFAllocatorDefault, 0 );
+		CFBitVectorSetCount( bitVector, sizeof(unsigned long long)*8*longCount );
 
 		for (longNo = 0; longNo < longCount; longNo++) {
 			for (bitIdx = 0; bitIdx < (CFIndex)sizeof(unsigned long long)*8; bitIdx++) {
@@ -159,7 +163,7 @@
 // Note: This is big-endian!
 - (ANTLRBitSet *) initWithArrayOfBits:(NSArray *)theArray
 {
-	if (nil != (self = [self init])) {
+	if ((self = [super init]) != nil) {
 		NSEnumerator *enumerator = [theArray objectEnumerator];
 		id value;
 		int bit = 0;
