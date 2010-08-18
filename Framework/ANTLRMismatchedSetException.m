@@ -38,7 +38,7 @@
 
 - (id) initWithSet:(NSSet *) theExpectedSet stream:(id<ANTLRIntStream>) theStream
 {
-	if (nil != (self = [super initWithStream:theStream])) {
+	if ((self = [super initWithStream:theStream]) != nil) {
 		[self setExpecting:theExpectedSet];
 	}
 	return self;

@@ -39,7 +39,7 @@
 
 - (ANTLRNoViableAltException *) initWithDecision:(NSInteger)theDecisionNumber state:(NSInteger)theStateNumber stream:(id<ANTLRIntStream>)theStream
 {
-	if (nil!=(self = [super initWithStream:theStream])) {
+	if ((self = [super initWithStream:theStream]) != nil) {
 		decisionNumber = theDecisionNumber;
 		stateNumber = theStateNumber;
 	}

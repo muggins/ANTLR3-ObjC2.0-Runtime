@@ -37,7 +37,7 @@
 
 - (id) initWithRange:(NSRange) aRange stream:(id<ANTLRIntStream>) theInput
 {
-	if (nil != (self = [super initWithStream:theInput])) {
+	if ((self = [super initWithStream:theInput]) != nil) {
 		range = aRange;
 	}
 	return self;

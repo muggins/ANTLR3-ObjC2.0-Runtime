@@ -60,7 +60,7 @@
 
 - (id) initWithStream:(id<ANTLRIntStream>)anInputStream reason:(NSString *)aReason
 {
-	if (nil != (self = [super initWithName:NSStringFromClass([self class]) reason:aReason userInfo:nil])) {
+	if ((self = [super initWithName:NSStringFromClass([self class]) reason:aReason userInfo:nil]) != nil) {
 		[self setStream:anInputStream];
 		index = [anInputStream getIndex];
 		
@@ -86,7 +86,7 @@
 
 - (id) initWithStream:(id<ANTLRIntStream>)anInputStream
 {
-	if (nil != (self = [super initWithName:NSStringFromClass([self class]) reason:@"Runtime Exception" userInfo:nil])) {
+	if ((self = [super initWithName:NSStringFromClass([self class]) reason:@"Runtime Exception" userInfo:nil]) != nil) {
 	}
 	return self;
 }

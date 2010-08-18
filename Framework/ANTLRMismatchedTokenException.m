@@ -58,7 +58,7 @@
 
 -(id) initWithTokenType:(NSInteger)expectedTokenType Stream:(id<ANTLRIntStream>)anInput
 {
-	if (nil != (self = [super initWithStream:anInput])) {
+	if ((self = [super initWithStream:anInput]) != nil) {
 		expecting = expectedTokenType;
 		isTokenType = YES;
 	}
@@ -69,7 +69,7 @@
                  Stream:(id<ANTLRIntStream>)anInput
                   Token:(id<ANTLRToken>)inserted
 {
-	if (nil != (self = [super initWithStream:anInput])) {
+	if ((self = [super initWithStream:anInput]) != nil) {
 		expecting = expectedTokenType;
 		isTokenType = YES;
 	}
@@ -78,7 +78,7 @@
 
 - (id) initWithCharacter:(unichar) expectedCharacter Stream:(id<ANTLRIntStream>)anInput
 {
-	if (nil != (self = [super initWithStream:anInput])) {
+	if ((self = [super initWithStream:anInput]) != nil) {
 		expectingChar = expectedCharacter;
 		isTokenType = NO;
 	}
