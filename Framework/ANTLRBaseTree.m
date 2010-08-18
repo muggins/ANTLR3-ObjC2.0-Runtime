@@ -29,6 +29,7 @@
 #import "ANTLRToken.h"
 // TODO: this shouldn't be here...but needed for invalidNode
 #import "ANTLRCommonTree.h"
+#import "ANTLRError.h"
 
 #pragma mark - Navigation Nodes
 ANTLRTreeNavigationNodeDown *navigationNodeDown = nil;
@@ -137,7 +138,7 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
     ANTLRBaseTree *childTree = (ANTLRBaseTree *) t;
     if ( [childTree isNil] ) { // t is an empty node possibly with children
         if ( children != nil && children == childTree.children ) {
-            [NSException raise:@"ANTLRBaseTree add child to itself" format:(NSString *)@"attempt to add child list to itself"];
+            [NSException raise:ANTLRIllegalArgumentException format:(NSString *)@"ANTLRBaseTree add child list to itself"];
         }
         // just add all of childTree's children to this
         if ( childTree.children != nil ) {
