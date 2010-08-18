@@ -557,7 +557,7 @@ parserHeaderFile( LEXER,
 
 <rules:{rule |
 <if(!rule.ruleDescriptor.isSynPred)>
-- (<rule.ruleDescriptor:{ruleDescriptor|<returnType()>}>) <rule.ruleName><if(rule.ruleDescriptor.parameterScope)><rule.ruleDescriptor.parameterScope:parameterScope(scope=it)><endif>; <endif>}; separator="\n">
+- (<rule.ruleDescriptor:{ruleDescriptor|<returnType()>}>)<rule.ruleName><if(rule.ruleDescriptor.parameterScope)><rule.ruleDescriptor.parameterScope:parameterScope(scope=it)><endif>; <endif>}; separator="\n">
 
 <synpreds:{pred |
 - (void)<pred>_fragment;}; separator="\n">
@@ -1722,29 +1722,29 @@ ruleLabelDef(label) ::= <<
  */
 returnScopeInterface(scope) ::= <<
 <if(ruleDescriptor.hasMultipleReturnValues)>
-@interface <ruleDescriptor:returnStructName()> : ANTLR<if(TREE_PARSER)>Tree<else>Parser<endif>RuleReturnScope { // line 1672
-    <@ivars()> // start of ivars()
+@interface <ruleDescriptor:returnStructName()> :ANTLR<if(TREE_PARSER)>Tree<else>Parser<endif>RuleReturnScope { // line 1672
+<@ivars()> // start of ivars()
 <if(scope.attributes)>
-    <scope.attributes:{a|<a.type> <a.name>;}; separator="\n"><\n>
+<scope.attributes:{a|<a.type> <a.name>;}; separator="\n"><\n>
 <endif>
 }
 
-@property (retain, getter=getTree, setter=setTree:) <recognizer.ASTLabelType; null="ANTLRCommonTree"> *tree;
-
-<if(scope.attributes)>
 // start properties
-<scope.attributes:{a|@property (getter=get<a.name>, setter=set<a.name>:) <a.type> <a.name>;  // this is "<a.name>"}; separator="\n">
-// end properties
-<endif>
-+ ()new<ruleDescriptor:returnStructName()>;
-// this is start of set and get methods
-    <@methodsDecl()>  // methodsDecl
+@property (retain, getter=getTree, setter=setTree:) <recognizer.ASTLabelType; null="ANTLRCommonTree"> *tree;
 <if(scope.attributes)>
-// start of iterated get and set functions
-<scope.attributes:{a|<\n>- (<a.type>)get<a.name>;<\n>- (void)set<a.name>:(<a.type>)aVal;}; separator="\n"><\n>
-// End of iterated get and set functions
+<scope.attributes:{a|@property (getter=get<a.name>, setter=set<a.name>:) <a.type> <a.name>;}; separator="\n"><\n>
+// end properties<\n>
 <endif>
-// this is end of set and get methods
++ (<ruleDescriptor:returnStructName()> *)new<ruleDescriptor:returnStructName()>;
+// this is start of set and get methods
+<@methodsDecl()>  // methodsDecl
+<if(scope.attributes)>
+// start of iterated get and set functions<\n>
+<scope.attributes:{a|<\n>
+- (<a.type>)get<a.name>;<\n>
+- (void)set<a.name>:(<a.type>)aVal;}; separator="\n"><\n>
+// End of iterated get and set functions<\n>
+<endif>
 @end
 <endif>
 >>
@@ -1757,20 +1757,21 @@ returnScope(scope) ::= <<
 // start of synthesize -- OBJC-Line 1750
 <scope.attributes:{a|@synthesize <a.name>;}; separator="\n"><\n>
 <endif>
-+ ()new<ruleDescriptor:returnStructName()>
++ (<ruleDescriptor:returnStructName()> *)new<ruleDescriptor:returnStructName()>
 {
     return [[[<ruleDescriptor:returnStructName()> alloc] init] retain];
 }
 
-    <@methods()>
+<@methods()>
 <if(scope.attributes)>
-// start of iterate get and set functions
-<scope.attributes:{a|<\n>- (<a.type>)get<a.name> \{ return( <a.name> ); \}<\n>
+// start of iterate get and set functions<\n>
+<scope.attributes:{a|<\n>
+- (<a.type>)get<a.name> \{ return( <a.name> ); \}<\n>
 - (void)set<a.name>:(<a.type>)aVal \{ <a.name> = aVal; \}<\n\n>}; separator="\n"><\n>
-// End of iterate get and set functions
+// End of iterate get and set functions<\n>
 <endif>
 <actions.(actionScope).ruleReturnMethods>
-<@ruleReturnMembers()>
+<@ruleReturnMembers()><\n>
 @end
 <endif>
 >>
@@ -1848,7 +1849,7 @@ returnSetAttributeRef(ruleDescriptor,attr,expr) ::= <<
 <if(ruleDescriptor.hasMultipleReturnValues)>
  retval.<attr.name> =<expr>; /* added to returnSetAttributeRef */
 <else>
-<attr.name> =<expr>;
+<attr.name> = <expr>;
 <endif>
 >>
 
@@ -1876,10 +1877,10 @@ ruleLabelPropertyRef_stop(scope,attr) ::= "(<scope>!=nil?((<ASTLabelType> *)<sco
 ruleLabelPropertyRef_tree(scope,attr) ::= "(<scope>!=nil?((<ASTLabelType> *)<scope>.tree):nil)"
 ruleLabelPropertyRef_text(scope,attr) ::= <<
 <if(TREE_PARSER)>
-(<scope>!=nil?[[input getTokenStream] toString:[[input getTreeAdaptor] getTokenStartIndex:[<scope> getStart]]
-         To:[[input getTreeAdaptor] getTokenStopIndex:[<scope> getStart]]]:nil)
+(<scope>!=nil?[[input getTokenStream] toStringFromStart:[[input getTreeAdaptor] getTokenStartIndex:[<scope> getStart]]
+         ToEnd:[[input getTreeAdaptor] getTokenStopIndex:[<scope> getStart]]]:nil)
 <else>
-(<scope>!=nil?([input toString:[<scope> getStart] To:[<scope> getStop]]:nil)
+(<scope>!=nil?([input toStringFromStart:[<scope> getStart] ToEnd:[<scope> getStop]]:nil)
 <endif>
 >>
 ruleLabelPropertyRef_st(scope,attr) ::= "(<scope>!=nil?[<scope> st]:nil)"
@@ -1901,8 +1902,8 @@ rulePropertyRef_stop(scope,attr) ::= "((<labelType>)retval.stopToken)"
 rulePropertyRef_tree(scope,attr) ::= "((<ASTLabelType> *)retval.tree)"
 rulePropertyRef_text(scope,attr) ::= <<
 <if(TREE_PARSER)>
-[[input getTokenStream] toString:[[input getTreeAdaptor] getTokenStartIndex:retval.start]
-                              To:[[input getTreeAdaptor] getTokenStopIndex:retval.start]]
+[[input getTokenStream] toStringFromStart:[[input getTreeAdaptor] getTokenStartIndex:retval.start]
+                                    ToEnd:[[input getTreeAdaptor] getTokenStopIndex:retval.start]]
 <else>
 [input toStringFromToken:retval.start ToToken:[input LT:-1]]
 <endif>

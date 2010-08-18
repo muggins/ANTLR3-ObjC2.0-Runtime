@@ -100,6 +100,8 @@ parserMethods() ::= <<
 - (void) setTree:(<ASTLabelType> *)aTree
 {
     if (tree != aTree) {
+        if (tree != nil) [tree release];
+        if (aTree != nil) [aTree retain];
         tree = aTree;
     }
 }
