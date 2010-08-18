@@ -171,7 +171,7 @@
 	@throw [NSException exceptionWithName:@"ANTLRTreeException" reason:@"-toString: unsupported for unbuffered streams" userInfo:nil];
 }
 
-- (NSString *) toStringFromNode:(id)startNode toNode:(id)stopNode;
+- (NSString *) toStringFromNode:(id)startNode ToNode:(id)stopNode;
 {
 	@throw [NSException exceptionWithName:@"ANTLRTreeException" reason:@"-toStringFromNode:toNode: unsupported for unbuffered streams" userInfo:nil];
 }

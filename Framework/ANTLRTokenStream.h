@@ -48,7 +48,7 @@
  *  return "" or null;  Users should not access $ruleLabel.text in
  *  an action of course in that case.
  */
-- (NSString *) toStringFrom:(NSInteger)startIdx To:(NSInteger)stopIdx;
+- (NSString *)toStringFromStart:(NSInteger)startIdx ToEnd:(NSInteger)stopIdx;
 
 /** Because the user is not required to use a token with an index stored
  *  in it, we must provide a means for two token objects themselves to

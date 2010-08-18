@@ -45,6 +45,6 @@
 
 - (id) getNode:(NSInteger) idx;
 
-- (NSString *) toStringFromNode:(id)startNode To:(id)stopNode;
+- (NSString *) toStringFromNode:(id)startNode ToNode:(id)stopNode;
 
 @end

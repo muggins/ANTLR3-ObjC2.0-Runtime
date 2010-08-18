@@ -158,13 +158,13 @@ ANTLRHashMap *lastRewriteTokenIndexes;
 - (NSString *)toOriginalString:(NSInteger)start End:(NSInteger)end;
 - (NSString *)toString;
 - (NSString *)toString:(NSString *)programName;
-- (NSString *)toString:(NSInteger)start End:(NSInteger)end;
-- (NSString *)toString:(NSString *)programName Start:(NSInteger)start End:(NSInteger)end;
+- (NSString *)toStringFromStart:(NSInteger)start ToEnd:(NSInteger)end;
+- (NSString *)toString:(NSString *)programName FromStart:(NSInteger)start ToEnd:(NSInteger)end;
 - (ANTLRHashMap *)reduceToSingleOperationPerIndex:(ANTLRHashMap *)rewrites;
 - (ANTLRHashMap *)getKindOfOps:(ANTLRHashMap *)rewrites KindOfClass:(Class)kind;
 - (ANTLRHashMap *)getKindOfOps:(ANTLRHashMap *)rewrites KindOfClass:(Class)kind Index:(NSInteger)before;
 - (NSString *)catOpText:(id)a PrevText:(id)b;
 - (NSMutableString *)toDebugString;
-- (NSMutableString *)toDebugString:(NSInteger)start ToEnd:(NSInteger)end;
+- (NSMutableString *)toDebugStringFromStart:(NSInteger)start ToEnd:(NSInteger)end;
                     
 @end

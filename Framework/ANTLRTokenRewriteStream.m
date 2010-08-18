@@ -438,21 +438,21 @@ static NSInteger MIN_TOKEN_INDEX = 0;
 - (NSString *)toString
 {
     [super fill];
-    return [self toString:MIN_TOKEN_INDEX End:[tokens count]-1];
+    return [self toStringFromStart:MIN_TOKEN_INDEX ToEnd:[tokens count]-1];
 }
 
 - (NSString *)toString:(NSString *)programName
 {
     [super fill];
-    return [self toString:programName Start:MIN_TOKEN_INDEX End:[[programs objectAtIndex:MIN_TOKEN_INDEX] count]-1];
+    return [self toString:programName FromStart:MIN_TOKEN_INDEX ToEnd:[[programs objectAtIndex:MIN_TOKEN_INDEX] count]-1];
 }
 
-- (NSString *)toString:(NSInteger)start End:(NSInteger)end
+- (NSString *)toStringFromStart:(NSInteger)start ToEnd:(NSInteger)end
 {
-    return [self toString:DEFAULT_PROGRAM_NAME Start:start End:end];
+    return [self toString:DEFAULT_PROGRAM_NAME FromStart:start ToEnd:end];
 }
 
-- (NSString *)toString:(NSString *)programName Start:(NSInteger)start End:(NSInteger)end
+- (NSString *)toString:(NSString *)programName FromStart:(NSInteger)start ToEnd:(NSInteger)end
 {
     ANTLRHashMap *rewrites = (ANTLRHashMap *)[programs getName:programName];
     
@@ -673,7 +673,7 @@ static NSInteger MIN_TOKEN_INDEX = 0;
 
 - (NSMutableString *)toDebugString
 {
-    return [self toDebugString:MIN_TOKEN_INDEX ToEnd:[tokens count]-1];
+    return [self toDebugStringFromStart:MIN_TOKEN_INDEX ToEnd:[tokens count]-1];
 }
 
 - (NSMutableString *)toDebugString:(NSInteger)start ToEnd:(NSInteger)end
