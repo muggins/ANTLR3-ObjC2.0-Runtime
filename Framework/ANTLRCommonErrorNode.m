@@ -95,10 +95,10 @@
         if ( [(id<ANTLRToken>)stopToken getType] == ANTLRTokenTypeEOF ) {
             j = [(id<ANTLRTokenStream>)input size];
         }
-        badText = [(id<ANTLRTokenStream>)input toStringFrom:i To:j];
+        badText = [(id<ANTLRTokenStream>)input toStringFromStart:i ToEnd:j];
     }
     else if ( [startToken isKindOfClass:[self class]] ) {
-        badText = [(id<ANTLRTreeNodeStream>)input toStringFromNode:startToken To:stopToken];
+        badText = [(id<ANTLRTreeNodeStream>)input toStringFromNode:startToken ToNode:stopToken];
     }
     else {
         // people should subclass if they alter the tree type so this

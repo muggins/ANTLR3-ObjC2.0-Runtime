@@ -91,7 +91,7 @@ NSInteger range; // how deep have we gone?
 - (NSMutableArray *)getTokensFrom:(NSInteger)startIndex To:(NSInteger)stopIndex With:(ANTLRBitSet *)types;
 - (NSMutableArray *)getTokensFrom:(NSInteger)startIndex To:(NSInteger)stopIndex WithList:(NSMutableArray *)types;
 - (NSMutableArray *)getTokensFrom:(NSInteger)startIndex To:(NSInteger)stopIndex WithType:(NSInteger)ttype;
-- (NSString *) toStringFrom:(NSInteger)startIndex To:(NSInteger)stopIndex;
+- (NSString *) toStringFromStart:(NSInteger)startIndex ToEnd:(NSInteger)stopIndex;
 - (NSString *) toStringFromToken:(id<ANTLRToken>)startIndex ToToken:(id<ANTLRToken>)stopIndex;
 - (void) fill;
 

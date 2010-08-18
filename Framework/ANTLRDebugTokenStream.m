@@ -186,14 +186,14 @@
     return [input toString];
 }
 
-- (NSString *) toStringFrom:(NSInteger)startIndex To:(NSInteger)stopIndex
+- (NSString *) toStringFromStart:(NSInteger)startIndex ToEnd:(NSInteger)stopIndex
 {
-    return [input toStringFrom:startIndex To:stopIndex];
+    return [input toStringFromStart:startIndex ToEnd:stopIndex];
 }
 
 - (NSString *) toStringFromToken:(id<ANTLRToken>)startToken ToToken:(id<ANTLRToken>)stopToken
 {
-    return [input toStringFrom:[startToken getStartIndex] To:[stopToken getStopIndex]];
+    return [input toStringFromStart:[startToken getStartIndex] ToEnd:[stopToken getStopIndex]];
 }
 
 @end

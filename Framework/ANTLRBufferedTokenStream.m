@@ -335,10 +335,10 @@
         [self setup];
         [self fill];
     }
-    return [self toStringFrom:0 To:[tokens count]-1];
+    return [self toStringFromStart:0 ToEnd:[tokens count]-1];
 }
 
-- (NSString *) toStringFrom:(NSInteger)startIdx To:(NSInteger)stopIdx
+- (NSString *) toStringFromStart:(NSInteger)startIdx ToEnd:(NSInteger)stopIdx
 {
     if ( startIdx < 0 || stopIdx < 0 )
         return nil;
@@ -360,7 +360,7 @@
 - (NSString *) toStringFromToken:(id<ANTLRToken>)startToken ToToken:(id<ANTLRToken>)stopToken
 {
     if ( startToken != nil && stopToken != nil ) {
-        return [self toStringFrom:[startToken getTokenIndex] To:[stopToken getTokenIndex]];
+        return [self toStringFromStart:[startToken getTokenIndex] ToEnd:[stopToken getTokenIndex]];
     }
     return nil;
 }

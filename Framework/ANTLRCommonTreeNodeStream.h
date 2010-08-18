@@ -108,7 +108,7 @@ NSInteger level;
     
 - (void) replaceChildren:(id)parent From:(NSInteger)startChildIndex To:(NSInteger)stopChildIndex With:(id) t;
     
-- (NSString *) toStringFromNode:(id<ANTLRTree>)startNode To:(id<ANTLRTree>)stopNode;
+- (NSString *) toStringFromNode:(id<ANTLRTree>)startNode ToNode:(id<ANTLRTree>)stopNode;
 
 /** For debugging; destructive: moves tree iterator to end. */
 - (NSString *) toTokenTypeString;

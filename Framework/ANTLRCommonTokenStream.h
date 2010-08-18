@@ -76,7 +76,7 @@
 - (void) seek:(NSInteger)index;
 
 - (NSString *) toString;
-- (NSString *) toStringFrom:(NSInteger)startIndex To:(NSInteger) stopIndex;
+- (NSString *) toStringFromStart:(NSInteger)startIndex ToEnd:(NSInteger)stopIndex;
 - (NSString *) toStringFromToken:(id<ANTLRToken>)startToken ToToken:(id<ANTLRToken>)stopToken;
 
 - (id) copyWithZone:(NSZone *)aZone;

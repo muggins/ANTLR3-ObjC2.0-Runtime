@@ -437,7 +437,7 @@
 	return buf;
 }
 
--(NSString *) toTokenString:(NSInteger)aStart To:(NSInteger)aStop
+-(NSString *) toTokenString:(NSInteger)aStart ToEnd:(NSInteger)aStop
 {
 	if (p == -1)
 	{
@@ -452,7 +452,7 @@
 	return buf;
 }
 
--(NSString *) toStringFromNode:(id)aStart To:(id)aStop
+-(NSString *) toStringFromNode:(id)aStart ToNode:(id)aStop
 {
 	if (aStart == nil || aStop == nil) {
 		return nil;
@@ -472,7 +472,7 @@
 		else if ([adaptor getType:aStop] == ANTLRTokenTypeEOF) {
 			endTokenIndex = [self size] - 2; //don't use EOF
 		}
-        [tokens toStringFrom:beginTokenIndex To:endTokenIndex];
+        [tokens toStringFromStart:beginTokenIndex ToEnd:endTokenIndex];
 	}
 	// walk nodes looking for aStart
 	id<ANTLRTree> aTree = nil;

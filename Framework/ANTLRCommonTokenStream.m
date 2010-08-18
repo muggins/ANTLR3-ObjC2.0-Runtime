@@ -280,10 +280,10 @@
 	if ( p == -1 ) {
 		[self setup];
 	}
-	return [self toStringFrom:0 To:[tokens count]];
+	return [self toStringFromStart:0 ToEnd:[tokens count]];
 }
 
-- (NSString *) toStringFrom:(NSInteger)startIdx To:(NSInteger) stopIdx
+- (NSString *) toStringFromStart:(NSInteger)startIdx ToEnd:(NSInteger) stopIdx
 {
     NSString *stringBuffer;
     id<ANTLRToken> t;
@@ -310,7 +310,7 @@
 	if (startToken && stopToken) {
 		int startIdx = [startToken getTokenIndex];
 		int stopIdx = [stopToken getTokenIndex];
-		return [self toStringFrom:startIdx To:stopIdx];
+		return [self toStringFromStart:startIdx ToEnd:stopIdx];
 	}
 	return nil;
 }

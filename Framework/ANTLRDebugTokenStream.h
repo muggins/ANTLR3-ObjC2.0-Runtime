@@ -56,7 +56,7 @@
 - (id<ANTLRTokenSource>) getTokenSource;
 - (NSString *) getSourceName;
 - (NSString *) toString;
-- (NSString *) toStringFrom:(NSInteger)aStart To:(NSInteger)aStop;
+- (NSString *) toStringFromStart:(NSInteger)aStart ToEnd:(NSInteger)aStop;
 - (NSString *) toStringFromToken:(id<ANTLRToken>)startToken ToToken:(id<ANTLRToken>)stopToken;
 
 @end

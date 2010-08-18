@@ -98,8 +98,8 @@
 -(NSInteger) pop;
 
 -(NSString *) toTokenTypeString;
--(NSString *) toTokenString:(NSInteger)aStart To:(NSInteger)aStop;
--(NSString *) toStringFromNode:(id)aStart To:(id)aStop;
+-(NSString *) toTokenString:(NSInteger)aStart ToEnd:(NSInteger)aStop;
+-(NSString *) toStringFromNode:(id)aStart ToNode:(id)aStop;
 
 // protected methods. DO NOT USE
 #pragma mark Protected Methods

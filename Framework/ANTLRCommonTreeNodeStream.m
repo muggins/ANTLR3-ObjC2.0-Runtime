@@ -186,7 +186,7 @@ NSInteger level = 0;
     }
 }
 
-- (NSString *) toStringFromNode:(id<ANTLRTree>)startNode To:(id<ANTLRTree>)stopNode
+- (NSString *) toStringFromNode:(id<ANTLRTree>)startNode ToNode:(id<ANTLRTree>)stopNode
 {
     // we'll have to walk from start to stop in tree; we're not keeping
     // a complete node stream buffer
