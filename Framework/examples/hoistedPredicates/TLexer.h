@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 07, 2010 22:08:38 T.g 2010-08-09 12:05:10
+// $ANTLR 3.2 Aug 17, 2010 17:18:07 T.g 2010-08-18 08:13:02
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -18,8 +18,10 @@
 #define ID 4
 #define EOF -1
 #define T__7 7
-@interface TLexer : ANTLRLexer {
+@interface TLexer : ANTLRLexer { // line 283
 }
++ (TLexer *)newTLexer:(id<ANTLRCharStream>)anInput;
+
 - (void) mT__7; 
 - (void) mID; 
 - (void) mINT; 

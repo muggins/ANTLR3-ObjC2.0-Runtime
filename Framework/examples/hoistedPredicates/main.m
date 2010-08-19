@@ -6,7 +6,7 @@
 int main() {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
-	NSString *string = [NSString stringWithContentsOfFile:@"examples/hoistedPredicates/input"];
+	NSString *string = [NSString stringWithContentsOfFile:@"../../examples/hoistedPredicates/input"];
 	NSLog(@"input is : %@", string);
 	ANTLRStringStream *stream = [[ANTLRStringStream alloc] initWithStringNoCopy:string];
 	TLexer *lexer = [[TLexer alloc] initWithCharStream:stream];

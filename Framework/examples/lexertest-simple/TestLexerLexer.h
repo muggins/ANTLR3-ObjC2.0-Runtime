@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 17, 2010 17:18:07 Combined.g 2010-08-18 08:12:59
+// $ANTLR 3.2 Aug 17, 2010 17:18:07 TestLexer.g 2010-08-18 08:12:57
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -13,16 +13,16 @@
 #pragma mark Rule return scopes start
 #pragma mark Rule return scopes end
 #pragma mark Tokens
-#define INT 5
-#define WS 6
-#define ID 4
+#define DIGIT 5
+#define ID 6
 #define EOF -1
-@interface CombinedLexer : ANTLRLexer { // line 283
+#define LETTER 4
+@interface TestLexer : ANTLRLexer { // line 283
 }
-+ (CombinedLexer *)newCombinedLexer:(id<ANTLRCharStream>)anInput;
++ (TestLexer *)newTestLexer:(id<ANTLRCharStream>)anInput;
 
 - (void) mID; 
-- (void) mINT; 
-- (void) mWS; 
+- (void) mDIGIT; 
+- (void) mLETTER; 
 - (void) mTokens; 
-@end // end of CombinedLexer interface
+@end // end of TestLexer interface

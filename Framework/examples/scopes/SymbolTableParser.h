@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 07, 2010 22:08:38 SymbolTable.g 2010-08-09 12:05:11
+// $ANTLR 3.2 Aug 17, 2010 17:18:07 SymbolTable.g 2010-08-18 08:13:03
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -23,18 +23,19 @@
 #define T__8 8
 #define T__7 7
 #pragma mark Dynamic Global Scopes
-@interface Symbols_Scope : ANTLRSymbolStack {
-    NSMutableArray *names;
+@interface Symbols_Scope : ANTLRSymbolsScope {
+NSMutableArray *names;
 }
-// use KVC to access attributes!
++ (Symbols_Scope *)newSymbols_Scope;
 @end
 #pragma mark Dynamic Rule Scopes
 #pragma mark Rule Return Scopes start
 #pragma mark Rule return scopes end
-@interface SymbolTableParser : ANTLRParser {
+@interface SymbolTableParser : ANTLRParser { // line 529
 
-    Symbols_Scope *Symbols_Stack;
+    Symbols_Scope *Symbols_scope;
                             
+
 
 
     int level;
@@ -43,12 +44,12 @@
 
 
 
-- (void) prog; 
-- (void) globals; 
-- (void) method; 
-- (void) block; 
-- (void) stat; 
-- (void) decl; 
+- (void)prog; 
+- (void)globals; 
+- (void)method; 
+- (void)block; 
+- (void)stat; 
+- (void)decl; 
 
 
 @end // end of SymbolTableParser

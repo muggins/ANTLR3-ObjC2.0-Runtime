@@ -27,7 +27,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		1A000879121343BD00EB1478 /* antlr3.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A000878121343BD00EB1478 /* antlr3.h */; };
 		1A10050611B8796D0022B434 /* ANTLRBufferedTokenStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A18EF5511B8028D0006186A /* ANTLRBufferedTokenStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A10050711B8796E0022B434 /* ANTLRBitSet.h in Headers */ = {isa = PBXBuildFile; fileRef = F7F218EE097AFB1A000472E9 /* ANTLRBitSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A10050811B879A40022B434 /* ANTLRFastQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A1CCC9011B6FD39002E5F53 /* ANTLRFastQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -505,7 +504,7 @@
 		1A3A08E511E213C500D5EE26 /* ANTLRBaseStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANTLRBaseStack.m; sourceTree = "<group>"; };
 		1A3A08E811E213E100D5EE26 /* ANTLRSymbolStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANTLRSymbolStack.h; sourceTree = "<group>"; };
 		1A3A08E911E213E100D5EE26 /* ANTLRSymbolStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANTLRSymbolStack.m; sourceTree = "<group>"; };
-		1A3A09BD11E235BD00D5EE26 /* antlr3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = antlr3.h; path = ../../../../../GCCnv/LatheBranch/trunk/Parser/output1/antlr3.h; sourceTree = SOURCE_ROOT; };
+		1A3A09BD11E235BD00D5EE26 /* antlr3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = antlr3.h; sourceTree = "<group>"; };
 		1A45657511C922BE0082F421 /* ANTLRRuleMemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANTLRRuleMemo.h; sourceTree = "<group>"; };
 		1A45657611C922BE0082F421 /* ANTLRRuleMemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANTLRRuleMemo.m; sourceTree = "<group>"; };
 		1A45658711C9270D0082F421 /* ANTLRBaseMapElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANTLRBaseMapElement.h; sourceTree = "<group>"; };
@@ -646,7 +645,7 @@
 		F76AA98E0CEA515A00AF044C /* ANTLRCommonTreeNodeStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANTLRCommonTreeNodeStream.h; sourceTree = "<group>"; };
 		F76AA98F0CEA515A00AF044C /* ANTLRCommonTreeNodeStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANTLRCommonTreeNodeStream.m; sourceTree = "<group>"; };
 		F7715D1A0AC9DCE400ED984D /* SimpleC.g */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleC.g; sourceTree = "<group>"; };
-		F7715D1B0AC9DCE500ED984D /* SimpleCTP.gtp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleCTP.gtp; sourceTree = "<group>"; };
+		F7715D1B0AC9DCE500ED984D /* SimpleCTP.g */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleCTP.g; sourceTree = "<group>"; };
 		F7715D1C0AC9DDD800ED984D /* SimpleC.tokens */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleC.tokens; sourceTree = "<group>"; };
 		F7715D1D0AC9DDD800ED984D /* SimpleCTP.tokens */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleCTP.tokens; sourceTree = "<group>"; };
 		F7715D2E0AC9DE9E00ED984D /* SimpleCLexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleCLexer.h; sourceTree = "<group>"; };
@@ -914,13 +913,13 @@
 				F762879C0B71578D006AA7EF /* README.rtf */,
 				F7EFFC8B0D164E2C008EE57E /* CHANGES.txt */,
 				F7037EBB0A05B06B0070435D /* examples */,
-				1A348B1411D2BE4F000C72FC /* test */,
-				F70BB396098E5BE90054FEF8 /* Tests */,
 				08FB77AEFE84172EC02AAC07 /* Classes */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				089C1665FE841158C02AAC07 /* Resources */,
 				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
 				034768DFFF38A50411DB9C8B /* Products */,
+				1A348B1411D2BE4F000C72FC /* test */,
+				F70BB396098E5BE90054FEF8 /* Tests */,
 				F70BB381098E5B000054FEF8 /* Tests-Info.plist */,
 				1A348B4F11D2BEE8000C72FC /* Test-Info.plist */,
 				1A348BB511D2C711000C72FC /* Cocoa.framework */,
@@ -1115,14 +1114,14 @@
 		F7037EBB0A05B06B0070435D /* examples */ = {
 			isa = PBXGroup;
 			children = (
-				F7CD45FB0C64BA4B00FF933A /* treerewrite */,
-				F72C5E2D0AB7529C00282574 /* simplecTreeParser */,
-				F7DD073B0A7B660A006A006C /* scopes */,
-				F7DD05E10A7B14BE006A006C /* hoistedPredicates */,
-				F700ECCE0A5FE176005D0757 /* LL-star */,
 				F700E85D0A5FA2C0005D0757 /* combined */,
 				F79D56590A0E238100EA3CEE /* fuzzy */,
+				F7DD05E10A7B14BE006A006C /* hoistedPredicates */,
 				F7037EBC0A05B06B0070435D /* lexertest-simple */,
+				F700ECCE0A5FE176005D0757 /* LL-star */,
+				F7DD073B0A7B660A006A006C /* scopes */,
+				F72C5E2D0AB7529C00282574 /* simplecTreeParser */,
+				F7CD45FB0C64BA4B00FF933A /* treerewrite */,
 			);
 			path = examples;
 			sourceTree = "<group>";
@@ -1214,7 +1213,7 @@
 				F7715D1C0AC9DDD800ED984D /* SimpleC.tokens */,
 				F7715D1D0AC9DDD800ED984D /* SimpleCTP.tokens */,
 				F7715D1A0AC9DCE400ED984D /* SimpleC.g */,
-				F7715D1B0AC9DCE500ED984D /* SimpleCTP.gtp */,
+				F7715D1B0AC9DCE500ED984D /* SimpleCTP.g */,
 				F72C5E560AB7E41000282574 /* main.m */,
 			);
 			path = simplecTreeParser;
@@ -1550,7 +1549,6 @@
 				1AEECE1511E7EB3C00554AAF /* ANTLRTokenRewriteStream.h in Headers */,
 				1A86B91B11EB9F6300C67A03 /* ANTLRParseTree.h in Headers */,
 				1A86BACF11EC1CD000C67A03 /* ANTLRUnbufferedTokenStream.h in Headers */,
-				1A000879121343BD00EB1478 /* antlr3.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1643,7 +1641,7 @@
 		};
 		F762878E0B7155AF006AA7EF /* Regenerate simplec tree */ = {
 			isa = PBXLegacyTarget;
-			buildArgumentsString = "-cp $ANTLR_EXTRA_JAVA_ARGS org.antlr.Tool $ANTLR_EXTRA_ARGS SimpleC.g SimpleCTP.gtp";
+			buildArgumentsString = "-cp $ANTLR_EXTRA_JAVA_ARGS org.antlr.Tool $ANTLR_EXTRA_ARGS SimpleC.g SimpleCTP.g";
 			buildConfigurationList = F762878F0B7155AF006AA7EF /* Build configuration list for PBXLegacyTarget "Regenerate simplec tree" */;
 			buildPhases = (
 			);
@@ -1981,16 +1979,16 @@
 				1A1212DB11D3F53600F27B38 /* ANTLRIntArrayTest */,
 				1A1211D011D3BF4600F27B38 /* ANTLRStringStreamTest */,
 				F762873F0B71519B006AA7EF /* Regenerate all examples */,
-				F7037E9F0A05AFB60070435D /* lexertest-simple */,
-				F76287780B71557E006AA7EF /* Regenerate lexertest-simple */,
-				F79D565F0A0E23A400EA3CEE /* fuzzy */,
-				F76287450B7151E3006AA7EF /* Regenerate fuzzy */,
 				F700E8630A5FA31D005D0757 /* combined */,
 				F762877E0B71559C006AA7EF /* Regenerate combined */,
-				F700ECD60A5FE186005D0757 /* LL-star */,
-				F76287820B71559F006AA7EF /* Regenerate LL-star */,
+				F79D565F0A0E23A400EA3CEE /* fuzzy */,
+				F76287450B7151E3006AA7EF /* Regenerate fuzzy */,
 				F7DD05ED0A7B15E1006A006C /* hoistedPredicates */,
 				F76287860B7155A2006AA7EF /* Regenerate hoistedPredicates */,
+				F7037E9F0A05AFB60070435D /* lexertest-simple */,
+				F76287780B71557E006AA7EF /* Regenerate lexertest-simple */,
+				F700ECD60A5FE186005D0757 /* LL-star */,
+				F76287820B71559F006AA7EF /* Regenerate LL-star */,
 				F7DD07430A7B6618006A006C /* scopes */,
 				F762878A0B7155AB006AA7EF /* Regenerate scopes */,
 				F72C5E5A0AB7E4C900282574 /* simplec tree */,

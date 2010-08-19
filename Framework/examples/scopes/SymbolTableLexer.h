@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 07, 2010 22:08:38 SymbolTable.g 2010-08-09 12:05:11
+// $ANTLR 3.2 Aug 17, 2010 17:18:07 SymbolTable.g 2010-08-18 08:13:03
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -10,7 +10,11 @@
  */
 
 #pragma mark Cyclic DFA interface start DFA4
-@interface DFA4 : ANTLRDFA {} @end
+@interface DFA4 : ANTLRDFA {
+}
++ newDFA4WithRecognizer:(ANTLRBaseRecognizer *)theRecognizer;
+- initWithRecognizer:(ANTLRBaseRecognizer *)recognizer;
+@end
 
 #pragma mark Cyclic DFA interface end DFA4
 
@@ -29,9 +33,11 @@
 #define T__9 9
 #define T__8 8
 #define T__7 7
-@interface SymbolTableLexer : ANTLRLexer {
+@interface SymbolTableLexer : ANTLRLexer { // line 283
     DFA4 *dfa4;
 }
++ (SymbolTableLexer *)newSymbolTableLexer:(id<ANTLRCharStream>)anInput;
+
 - (void) mT__7; 
 - (void) mT__8; 
 - (void) mT__9; 

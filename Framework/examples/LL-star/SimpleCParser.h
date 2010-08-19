@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 07, 2010 22:08:38 SimpleC.g 2010-08-09 12:05:08
+// $ANTLR 3.2 Aug 17, 2010 17:18:07 SimpleC.g 2010-08-18 08:13:00
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -10,7 +10,11 @@
  */
 
 #pragma mark Cyclic DFA interface start DFA2
-@interface DFA2 : ANTLRDFA {} @end
+@interface DFA2 : ANTLRDFA {
+}
++ newDFA2WithRecognizer:(ANTLRBaseRecognizer *)theRecognizer;
+- initWithRecognizer:(ANTLRBaseRecognizer *)recognizer;
+@end
 
 #pragma mark Cyclic DFA interface end DFA2
 #pragma mark Tokens
@@ -36,30 +40,31 @@
 #pragma mark Dynamic Rule Scopes
 #pragma mark Rule Return Scopes start
 #pragma mark Rule return scopes end
-@interface SimpleCParser : ANTLRParser {
+@interface SimpleCParser : ANTLRParser { // line 529
 
     DFA2 *dfa2;
                                                                 
+
 
  }
 
 
 
-- (void) program; 
-- (void) declaration; 
-- (void) variable; 
-- (void) declarator; 
-- (NSString*) functionHeader; 
-- (void) formalParameter; 
-- (void) type; 
-- (void) block; 
-- (void) stat; 
-- (void) forStat; 
-- (void) assignStat; 
-- (void) expr; 
-- (void) condExpr; 
-- (void) aexpr; 
-- (void) atom; 
+- (void)program; 
+- (void)declaration; 
+- (void)variable; 
+- (void)declarator; 
+- (NSString*)functionHeader; 
+- (void)formalParameter; 
+- (void)type; 
+- (void)block; 
+- (void)stat; 
+- (void)forStat; 
+- (void)assignStat; 
+- (void)expr; 
+- (void)condExpr; 
+- (void)aexpr; 
+- (void)atom; 
 
 
 @end // end of SimpleCParser

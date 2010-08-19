@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 07, 2010 22:08:38 T.g 2010-08-09 12:05:10
+// $ANTLR 3.2 Aug 17, 2010 17:18:07 T.g 2010-08-18 08:13:02
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -19,9 +19,10 @@
 #pragma mark Dynamic Rule Scopes
 #pragma mark Rule Return Scopes start
 #pragma mark Rule return scopes end
-@interface TParser : ANTLRParser {
+@interface TParser : ANTLRParser { // line 529
 
                     
+
 
 
     /** With this true, enum is seen as a keyword.  False, it's an identifier */
@@ -31,10 +32,10 @@
 
 
 
-- (void) stat; 
-- (void) identifier; 
-- (void) enumAsKeyword; 
-- (void) enumAsID; 
+- (void)stat; 
+- (void)identifier; 
+- (void)enumAsKeyword; 
+- (void)enumAsID; 
 
 
 @end // end of TParser/** Demonstrates how semantic predicates get hoisted out of the rule in 

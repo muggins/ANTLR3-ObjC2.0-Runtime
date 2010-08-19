@@ -1,12 +1,12 @@
 #import <Cocoa/Cocoa.h>
-#import <ANTLR/ANTLR.h>
+#import <antlr3.h>
 #import "SymbolTableLexer.h"
 #import "SymbolTableParser.h"
 
 int main() {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
-	NSString *string = [NSString stringWithContentsOfFile:@"examples/scopes/input"];
+	NSString *string = [NSString stringWithContentsOfFile:@"../../examples/scopes/input"];
 	NSLog(@"input is : %@", string);
 	ANTLRStringStream *stream = [[ANTLRStringStream alloc] initWithStringNoCopy:string];
 	SymbolTableLexer *lexer = [[SymbolTableLexer alloc] initWithCharStream:stream];

@@ -28,12 +28,12 @@ variable
     ;
 
 declarator
-    :   ID 
+    :   K_ID 
     ;
 
 functionHeader
-    :   type ID '(' ( formalParameter ( ',' formalParameter )* )? ')'
-        -> ^(FUNC_HDR type ID formalParameter+)
+    :   type K_ID '(' ( formalParameter ( ',' formalParameter )* )? ')'
+        -> ^(FUNC_HDR type K_ID formalParameter+)
     ;
 
 formalParameter
@@ -41,10 +41,10 @@ formalParameter
     ;
 
 type
-    :   'int'   
-    |   'char'  
-    |   'void'
-    |   ID        
+    :   K_INT   
+    |   K_CHAR  
+    |   K_VOID
+    |   K_ID        
     ;
 
 block
@@ -63,46 +63,46 @@ stat: forStat
     ;
 
 forStat
-    :   'for' '(' start=assignStat ';' expr ';' next=assignStat ')' block
-        -> ^('for' $start expr $next block)
+    :   K_FOR '(' start=assignStat ';' expr ';' next=assignStat ')' block
+        -> ^(K_FOR $start expr $next block)
     ;
 
 assignStat
-    :   ID EQ expr -> ^(EQ ID expr)
+    :   K_ID K_EQ expr -> ^(K_EQ K_ID expr)
     ;
 
 expr:   condExpr
     ;
 
 condExpr
-    :   aexpr ( ('=='^ | '<'^) aexpr )?
+    :   aexpr ( (K_EQEQ^ | K_LT^) aexpr )?
     ;
 
 aexpr
-    :   atom ( '+'^ atom )*
+    :   atom ( K_PLUS^ atom )*
     ;
 
 atom
-    : ID      
-    | INT      
+    : K_ID      
+    | K_INT      
     | '(' expr ')' -> expr
     ; 
 
-FOR : 'for' ;
-INT_TYPE : 'int' ;
-CHAR: 'char';
-VOID: 'void';
+K_FOR : 'for' ;
+K_INT_TYPE : 'int' ;
+K_CHAR: 'char';
+K_VOID: 'void';
 
-ID  :   ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
+K_ID  :   ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
     ;
 
-INT :	int+=('0'..'9')+ {NSLog(@"\%@", $int);}
+K_INT :	int+=('0'..'9')+ {NSLog(@"\%@", $int);}
     ;
 
-EQ   : '=' ;
-EQEQ : '==' ;
-LT   : '<' ;
-PLUS : '+' ;
+K_EQ   : '=' ;
+K_EQEQ : '==' ;
+K_LT   : '<' ;
+K_PLUS : '+' ;
 
 WS  :   (   ' '
         |   '\t'

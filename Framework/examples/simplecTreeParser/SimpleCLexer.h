@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 13, 2010 19:41:25 /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g 2010-08-13 19:44:47
+// $ANTLR 3.2 Aug 17, 2010 17:18:07 SimpleC.g 2010-08-18 08:13:05
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -10,56 +10,62 @@
  */
 
 #pragma mark Cyclic DFA interface start DFA4
-@interface DFA4 : ANTLRDFA {} @end
+@interface DFA4 : ANTLRDFA {
+}
++ newDFA4WithRecognizer:(ANTLRBaseRecognizer *)theRecognizer;
+- initWithRecognizer:(ANTLRBaseRecognizer *)recognizer;
+@end
 
 #pragma mark Cyclic DFA interface end DFA4
 
 #pragma mark Rule return scopes start
 #pragma mark Rule return scopes end
 #pragma mark Tokens
-#define LT 18
+#define K_ID 10
 #define T__26 26
 #define T__25 25
 #define T__24 24
 #define T__23 23
+#define K_EQEQ 16
 #define T__22 22
+#define K_INT 11
 #define T__21 21
-#define CHAR 15
-#define FOR 13
+#define K_FOR 14
 #define FUNC_HDR 6
-#define INT 12
 #define FUNC_DEF 8
-#define INT_TYPE 14
-#define ID 10
 #define EOF -1
+#define K_INT_TYPE 19
 #define FUNC_DECL 7
 #define ARG_DEF 5
 #define WS 20
+#define K_EQ 15
 #define BLOCK 9
-#define PLUS 19
-#define VOID 16
-#define EQ 11
+#define K_LT 17
+#define K_CHAR 12
+#define K_VOID 13
 #define VAR_DEF 4
-#define EQEQ 17
+#define K_PLUS 18
 @interface SimpleCLexer : ANTLRLexer { // line 283
     DFA4 *dfa4;
 }
++ (SimpleCLexer *)newSimpleCLexer:(id<ANTLRCharStream>)anInput;
+
 - (void) mT__21; 
 - (void) mT__22; 
 - (void) mT__23; 
 - (void) mT__24; 
 - (void) mT__25; 
 - (void) mT__26; 
-- (void) mFOR; 
-- (void) mINT_TYPE; 
-- (void) mCHAR; 
-- (void) mVOID; 
-- (void) mID; 
-- (void) mINT; 
-- (void) mEQ; 
-- (void) mEQEQ; 
-- (void) mLT; 
-- (void) mPLUS; 
+- (void) mK_FOR; 
+- (void) mK_INT_TYPE; 
+- (void) mK_CHAR; 
+- (void) mK_VOID; 
+- (void) mK_ID; 
+- (void) mK_INT; 
+- (void) mK_EQ; 
+- (void) mK_EQEQ; 
+- (void) mK_LT; 
+- (void) mK_PLUS; 
 - (void) mWS; 
 - (void) mTokens; 
 @end // end of SimpleCLexer interface
