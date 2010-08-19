@@ -35,7 +35,7 @@ group Dbg;
 #import \<ANTLR/ANTLRDebug.h>
 >>
 
-@parserHeaderFile.ivars() ::= <<
+@parserHeaderFile.memVars() ::= <<
 int ruleLevel;
 NSArray *ruleNames;
 >>

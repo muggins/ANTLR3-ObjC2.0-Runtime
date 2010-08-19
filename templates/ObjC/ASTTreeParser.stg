@@ -39,6 +39,41 @@
  */
 group ASTTreeParser;
 
+/** addition memVars for returnscopes */
+@returnScopeInterface.memVars() ::= <<
+<recognizer.ASTLabelType; null="ANTLRCommonTree"> *tree;
+>>
+
+/** the interface of returnScope methodsDecl */
+@returnScopeInterface.methodsDecl() ::= <<
+- (<recognizer.ASTLabelType; null="ANTLRCommonTree"> *)getTree;
+- (void) setTree:(<recognizer.ASTLabelType; null="ANTLRCommonTree"> *)aTree;<\n>
+>>
+
+/** the implementation of returnScope methods */
+@returnScope.methods() ::= <<
+- (<ASTLabelType> *)getTree
+{
+    return tree;
+}
+
+- (void) setTree:(<ASTLabelType> *)aTree
+{
+    if (tree != aTree) {
+        if (tree != nil) [tree release];
+        if (aTree != nil) [aTree retain];
+        tree = aTree;
+    }
+}
+
+- (void) dealloc
+{
+    [self setTree:nil];
+    [super dealloc];
+}
+
+>>
+
 /** Add a variable to track last element matched */
 ruleDeclarations() ::= <<
 <super.ruleDeclarations()>

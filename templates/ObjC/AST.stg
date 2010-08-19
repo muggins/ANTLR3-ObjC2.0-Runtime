@@ -27,23 +27,27 @@
 */
 group AST;
 
-@parserHeaderFile.ivars() ::= <<
-<@super.ivars()>
-<parserIVars()>
+@parserHeaderFile.memVars() ::= <<
+// parserHeaderFile.memVars
+<@super.memVars()>
+<parsermemVars()>
 >>
 
 @parserHeaderFile.methodsdecl() ::= <<
+// parserHeaderFile.methodsdecl
 <@super.methodsdecl()>
 <parserMethodsDecl()>
 >>
 
 @genericParser.methods() ::= <<
+// genericParser.methods
 <@super.methods()>
 <parserMethods()>
 >>
 
 /** additional init code for tree support */
 @genericParser.init() ::= <<
+// genericParser.init
 <@super.init()>
 [self setTreeAdaptor:[[ANTLRCommonTreeAdaptor newANTLRCommonTreeAdaptor] retain]];
 >>
@@ -54,18 +58,21 @@ group AST;
 >>
 
 /** Add an adaptor property that knows how to build trees */
-parserIVars() ::= <<
+parsermemVars() ::= <<
+// parsermemVars
 id\<ANTLRTreeAdaptor> treeAdaptor;
 >>
 
 /** Declaration of additional tree support methods - go in interface of parserHeaderFile() */
 parserMethodsDecl() ::= <<
+// parserMethodsDecl
 - (id\<ANTLRTreeAdaptor>) getTreeAdaptor;
 - (void) setTreeAdaptor:(id\<ANTLRTreeAdaptor>)theTreeAdaptor;
 >>
 
 /** Definition of addition tree support methods - go in implementation of genericParser() */
 parserMethods() ::= <<
+// parserMethods
 - (id\<ANTLRTreeAdaptor>) getTreeAdaptor
 {
 	return treeAdaptor;
@@ -79,19 +86,22 @@ parserMethods() ::= <<
 }
 >>
 
-/** addition ivars for returnscopes */
-@returnScopeInterface.ivars() ::= <<
+/** addition memVars for returnscopes */
+@returnScopeInterface.memVars() ::= <<
+// returnScopeInterface.memVars
 <recognizer.ASTLabelType; null="ANTLRCommonTree"> *tree;
 >>
 
 /** the interface of returnScope methodsDecl */
 @returnScopeInterface.methodsDecl() ::= <<
+// returnScopeInterface.methodsdecl
 - (<recognizer.ASTLabelType; null="ANTLRCommonTree"> *)getTree;
 - (void) setTree:(<recognizer.ASTLabelType; null="ANTLRCommonTree"> *)aTree;<\n>
 >>
 
 /** the implementation of returnScope methods */
 @returnScope.methods() ::= <<
+// returnScope.methods
 - (<ASTLabelType> *)getTree
 {
     return tree;
@@ -116,11 +126,13 @@ parserMethods() ::= <<
 
 /** Add a variable to track rule's return AST */
 ruleDeclarations() ::= <<
+// ruleDeclarations
 <super.ruleDeclarations()>
 <ASTLabelType> *root_0 = nil;<\n>
 >>
 
 ruleLabelDefs() ::= <<
+// ruleLabelDefs
 <super.ruleLabelDefs()>
 <[ruleDescriptor.tokenLabels,ruleDescriptor.wildcardTreeLabels,
   ruleDescriptor.wildcardTreeListLabels]:{<ASTLabelType> *<it.label.text>_tree=nil;}; separator="\n">

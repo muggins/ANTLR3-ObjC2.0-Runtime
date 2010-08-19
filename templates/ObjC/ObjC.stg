@@ -283,7 +283,7 @@ lexerHeaderFile( LEXER,
 @interface <className()> <@superClassName>: <superClass><@end> { // line 283
     <cyclicDFAs:{dfa | DFA<dfa.decisionNumber> *dfa<dfa.decisionNumber>;}; separator="\n">
     <synpreds:{pred | SEL <pred>Selector;}; separator="\n">
-    <actions.lexer.ivars>
+    <actions.lexer.memVars>
 }
 + (<className()> *)new<className()>:(id\<ANTLRCharStream>)anInput;
 
@@ -345,7 +345,7 @@ lexer(  grammar,
 - (id) initWithCharStream:(id\<ANTLRCharStream>)anInput
 {
     if ((self = [super initWithCharStream:anInput State:[ANTLRRecognizerSharedState newANTLRRecognizerSharedStateWithRuleLen:<numRules>+1]]) != nil) {
-    <if(memoize)>
+<if(memoize)>
         if ( state.ruleMemo == nil ) {
             state.ruleMemo = [[ANTLRRuleStack newANTLRRuleStackWithSize:<numRules>+1] retain];
         }
@@ -356,7 +356,7 @@ lexer(  grammar,
                 [state.ruleMemo addObject:[ANTLRHashRule newANTLRHashRuleWithLen:17]];
             }
         }
-        <endif>
+<endif>
         <synpreds:{pred | <lexerSynpred(name=pred)>};separator="\n">
         <cyclicDFAs:{dfa | dfa<dfa.decisionNumber> = [DFA<dfa.decisionNumber> newDFA<dfa.decisionNumber>WithRecognizer:self];}; separator="\n">
         <actions.lexer.init>
@@ -538,20 +538,19 @@ parserHeaderFile( LEXER,
 !>
 <! @interface <grammar.recognizerName> <@superClassName>: <superClass><@end> { !>
 @interface <className()> <@superClassName>: <superClass><@end> { // line 529
+// start of action-actionScope-memVars
+<actions.(actionScope).memVars>
+// Start of memVars
+<@memVars()>
 
-    <cyclicDFAs:{dfa | DFA<dfa.decisionNumber> *dfa<dfa.decisionNumber>;}; separator="\n">
-    <synpreds:{pred | SEL <pred>Selector;}; separator="\n">
-    <scopes:{<if(it.isDynamicGlobalScope)><globalAttributeScopeIVar(scope=it)><endif>}>
-    <rules:{rule |
-    <rule.ruleDescriptor.ruleScope:ruleAttributeScopeIVar(scope=it)>
-    }>
-    <! <members> !>
-    <@ivars()>
-
-    <actions.(actionScope).ivars>
+<cyclicDFAs:{dfa | DFA<dfa.decisionNumber> *dfa<dfa.decisionNumber>;}; separator="\n">
+<synpreds:{pred | SEL <pred>Selector;}; separator="\n">
+<scopes:{<if(it.isDynamicGlobalScope)><globalAttributeScopeMemVar(scope=it)><endif>}><\n>
+<rules:{rule | <rule.ruleDescriptor.ruleScope:ruleAttributeScopeMemVar(scope=it)>}><\n>
  }
 
-<actions.(actionScope).methodsdecl>
+// start of action-actionScope-methodsDecl
+<actions.(actionScope).methodsDecl>
 
 <@methodsdecl()>
 
@@ -629,15 +628,15 @@ genericParser(  grammar,
 {
     if ((self = [super initWithStream:aStream State:[[ANTLRRecognizerSharedState newANTLRRecognizerSharedStateWithRuleLen:<numRules>+1] retain]]) != nil) {
 <endif><\n>
-<if(memoize)>
-        <! state.ruleMemo = [[ANTLRRuleStack newANTLRRuleStack:<numRules>+1] retain];<\n> !> <! index from 1..n !>
-<endif>
+        <! <parserCtorBody()> !>
         <cyclicDFAs:{dfa | dfa<dfa.decisionNumber> = [DFA<dfa.decisionNumber> newDFA<dfa.decisionNumber>WithRecognizer:self];}; separator="\n">
         <scopes:{<if(it.isDynamicGlobalScope)><globalAttributeScopeInit(scope=it)><endif>}>
         <rules:{rule |
         <rule.ruleDescriptor.ruleScope:ruleAttributeScopeInit(scope=it)>
         }>
+        // start of actions-actionScope-init
         <actions.(actionScope).init>
+        // start of init
         <@init()>
     }
     return self;
@@ -664,7 +663,7 @@ genericParser(  grammar,
 parserCtorBody() ::= <<
 <if(memoize)>
 <if(grammar.grammarIsRoot)>
-[state ruleMemo = [NSMutableArray arrayWithCapacity:<length(grammar.allImportedRules)>+1];<\n> <! index from 1..n !>
+state.ruleMemo = [[ANTLRRuleStack newANTLRRuleStack:<numRules>+1] retain];<\n> <! index from 1..n !>
 <endif>
 <endif>
 <grammar.delegators:
@@ -699,7 +698,8 @@ treeParser( grammar,
         ASTLabelType="ANTLRCommonTree",
         superClass="ANTLRTreeParser",
         labelType="ANTLRCommonTree *",
-        members={<actions.treeparser.members>}, filterMode
+        members={<actions.treeparser.members>},
+        filterMode
         ) ::= <<
 <genericParser(inputStreamType="id\<ANTLRTreeNodeStream>", rewriteElementType="Node", ...)>
 >>
@@ -855,10 +855,10 @@ NSInteger <ruleDescriptor.name>_StartIndex = [input getIndex];
 >>
 
 ruleScopeSetUp() ::= <<
-<ruleDescriptor.useScopes:{ANTLRSymbolStack *stack<i0> = [ANTLRSymbolStack newANTLRSymbolStack:15];
-[stack<i0> push:[[<it>_Scope new<it>_Scope] retain]];}; separator="\n">
-<ruleDescriptor.ruleScope:{ANTLRSymbolStack *ruleStack<i0> = [ANTLRSymbolStack newANTLRSymbolStack:15];
-[ruleStack<i0> push:[[<it.name>_Scope new<it.name>_Scope] retain]];}; separator="\n">
+<ruleDescriptor.useScopes:{ANTLRSymbolStack *stack<i0> = [ANTLRSymbolStack newANTLRSymbolStackWithLen:15];
+[stack<i0> push:[[<it>_Scope new<it>_Scope] retain]];}>
+<ruleDescriptor.ruleScope:{ANTLRSymbolStack *ruleStack<i0> = [ANTLRSymbolStack newANTLRSymbolStackWithLen:15];
+[ruleStack<i0> push:[[<it.name>_Scope new<it.name>_Scope] retain]];}>
 >>
 
 ruleScopeCleanUp() ::= <<
@@ -1609,7 +1609,7 @@ globalAttributeScopeDecl(scope) ::= <<
 @end
 >>
 
-globalAttributeScopeIVar(scope) ::= <<
+globalAttributeScopeMemVar(scope) ::= <<
 <scope.name>_Scope *<scope.name>_scope;
 >>
 
@@ -1632,7 +1632,7 @@ globalAttributeScopeDealloc(scope) ::= <<
 
 globalAttributeScope(scope) ::= <<
 <if(scope.attributes)>
-ANTLRSymbolStack *<scope.name>Stack = [ANTLRSymbolStack newANTLRSymbolStack:15];<\n>
+ANTLRSymbolStack *gStack = [ANTLRSymbolStack newANTLRSymbolStackWithLen:30];<\n>
 <endif>
 >>
 
@@ -1646,7 +1646,7 @@ ruleAttributeScopeDecl(scope) ::= <<
 <endif>
 >>
 
-ruleAttributeScopeIVar(scope) ::= <<
+ruleAttributeScopeMemVar(scope) ::= <<
 <scope.name>_Scope *<scope.name>_scope;
 >>
 
@@ -1671,7 +1671,7 @@ ruleAttributeScopeDealloc(scope) ::= <<
 
 ruleAttributeScope(scope) ::= <<
 <if(scope.attributes)>
-ANTLRSymbolStack *<scope.name>Stack = [ANTLRSymbolStack newANTLRSymbolStack:15];<\n>
+ANTLRSymbolStack *<scope.name>Stack = [ANTLRSymbolStack newANTLRSymbolStackWithLen:30];<\n>
 <endif>
 >>
 
@@ -1723,7 +1723,7 @@ ruleLabelDef(label) ::= <<
 returnScopeInterface(scope) ::= <<
 <if(ruleDescriptor.hasMultipleReturnValues)>
 @interface <ruleDescriptor:returnStructName()> :ANTLR<if(TREE_PARSER)>Tree<else>Parser<endif>RuleReturnScope { // line 1672
-<@ivars()> // start of ivars()
+<@memVars()> // start of memVars()
 <if(scope.attributes)>
 <scope.attributes:{a|<a.type> <a.name>;}; separator="\n"><\n>
 <endif>
