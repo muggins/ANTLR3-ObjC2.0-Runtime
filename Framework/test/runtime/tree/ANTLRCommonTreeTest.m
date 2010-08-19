@@ -300,16 +300,16 @@
 	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:6];
 	ANTLRCommonTree *tree = [ANTLRCommonTree newANTLRCommonTreeWithToken:token];
 	
-	[parent addChild:tree];
 	
 	tree = [ANTLRCommonTree newANTLRCommonTreeWithTokenType:ANTLRTokenTypeUP];
 	tree.token.text = @"<UP>";
+	[parent addChild:tree];
 	
-	STAssertTrue(tree != [parent getChild:0], @"Trees match");
+	STAssertTrue((tree != [parent getChild:0]), @"Trees match");
 	[parent setChild:0 With:tree];
 	
 	ANTLRCommonTree *child = [parent getChild:0];
-	STAssertEquals((NSInteger)[parent getChildCount], (NSInteger)1, @"There were either no children or more than 1: %d", [parent getChildCount]);
+	STAssertTrue(([parent getChildCount] == 1), @"There were either no children or more than 1: %d", [parent getChildCount]);
 	STAssertNotNil(child, @"Child at index 0 should not be nil");
 	STAssertEquals(child, tree, @"Child and Original tree were not the same");
 	//[parent release];
