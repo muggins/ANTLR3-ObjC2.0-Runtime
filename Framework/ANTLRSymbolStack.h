@@ -46,7 +46,6 @@
 + (ANTLRSymbolsScope *)newANTLRSymbolsScope;
 
 - (id)init;
-
 @end
 
 
@@ -55,7 +54,7 @@
 
 // Contruction/Destruction
 +(ANTLRSymbolStack *)newANTLRSymbolStack;
-+(ANTLRSymbolStack *)newANTLRSymbolStack:(NSInteger)cnt;
++(ANTLRSymbolStack *)newANTLRSymbolStackWithLen:(NSInteger)cnt;
 -(id)init;
 -(id)initWithLen:(NSInteger)cnt;
 -(void)dealloc;
