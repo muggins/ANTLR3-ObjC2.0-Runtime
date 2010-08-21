@@ -270,6 +270,7 @@ lexerHeaderFile( LEXER,
             superClass="ANTLRLexer"
             ) ::=
 <<
+/* Start cyclicDFAInterface */
 <cyclicDFAs:cyclicDFAInterface()>
 
 #pragma mark Rule return scopes start
@@ -281,16 +282,20 @@ lexerHeaderFile( LEXER,
 <tokens:{#define <it.name> <it.type>}; separator="\n">
 <! @interface <grammar.recognizerName> <@superClassName>: <superClass><@end> { !>
 @interface <className()> <@superClassName>: <superClass><@end> { // line 283
-    <cyclicDFAs:{dfa | DFA<dfa.decisionNumber> *dfa<dfa.decisionNumber>;}; separator="\n">
-    <synpreds:{pred | SEL <pred>Selector;}; separator="\n">
-    <actions.lexer.memVars>
+<cyclicDFAs:{dfa | DFA<dfa.decisionNumber> *dfa<dfa.decisionNumber>;}; separator="\n">
+<synpreds:{pred | SEL <pred>Selector;}; separator="\n">
+// start of actions.lexer.memVars
+<actions.lexer.memVars>
+// start of action-actionScope-memVars
+<actions.(actionScope).memVars>
 }
 + (<className()> *)new<className()>:(id\<ANTLRCharStream>)anInput;
 
 <actions.lexer.methodsdecl>
 <rules:{rule |
-- (<rule.ruleDescriptor:{ruleDescriptor|<returnType()>}>) <if(!rule.ruleDescriptor.isSynPred)>m<endif><rule.ruleName><if(rule.ruleDescriptor.parameterScope)><rule.ruleDescriptor.parameterScope:parameterScope(scope=it)><endif>; }; separator="\n">
-@end // end of <className()> interface
+- (<rule.ruleDescriptor:{ruleDescriptor|<returnType()>}>)<if(!rule.ruleDescriptor.isSynPred)>m<rule.ruleName><else><rule.ruleName>_fragment<endif><if(rule.ruleDescriptor.parameterScope)><rule.ruleDescriptor.parameterScope:parameterScope(scope=it)><endif>; }; separator="\n"><\n>
+<! <synpreds:{pred|- (void)<pred>_fragment;}; separator="\n"><\n> !>
+@end /* end of <className()> interface */<\n>
 >>
 
 headerReturnScope(ruleDescriptor) ::= "<returnScope(...)>"
@@ -405,7 +410,7 @@ filteringNextToken() ::= <<
 {
     while (YES) {
         if ( [input LA:1] == ANTLRCharStreamEOF ) {
-            return [token eofToken]; // should really be a +eofToken call here -> go figure
+            return [ANTLRCommonToken eofToken]; /* should really be a +eofToken call here -> go figure */
         }
         state.token = nil;
         state.channel = ANTLRTokenChannelDefault;
@@ -437,16 +442,16 @@ filteringNextToken() ::= <<
     }
 }
 
-- (void)memoize:(id\<ANTLRIntStream\>)input
+- (void)memoize:(id\<ANTLRIntStream\>)anInput
       RuleIndex:(NSInteger)ruleIndex
      StartIndex:(NSInteger)ruleStartIndex
 {
-    if ( state.backtracking > 1 ) [super memoize:input RuleIndex:ruleIndex StartIndex:ruleStartIndex];
+    if ( state.backtracking > 1 ) [super memoize:anInput RuleIndex:ruleIndex StartIndex:ruleStartIndex];
 }
 
-- (BOOL)alreadyParsedRule:(id\<ANTLRIntStream\>)input RuleIndex:(NSInteger)ruleIndex
+- (BOOL)alreadyParsedRule:(id\<ANTLRIntStream\>)anInput RuleIndex:(NSInteger)ruleIndex
 {
-    if ( state.backtracking > 1 ) return [super alreadyParsedRule:input RuleIndex:ruleIndex];
+    if ( state.backtracking > 1 ) return [super alreadyParsedRule:anInput RuleIndex:ruleIndex];
     return NO;
 }
 >>
@@ -522,18 +527,11 @@ parserHeaderFile( LEXER,
 <rule.ruleDescriptor:{ ruleDescriptor | <ruleAttributeScopeDecl(scope=ruleDescriptor.ruleScope)>}>
 }>
 #pragma mark Rule Return Scopes start
-<rules:{rule |
-<rule.ruleDescriptor:{ ruleDescriptor |
-<returnScopeInterface(scope=ruleDescriptor.returnScope)>}>
-}>
+<rules:{rule |<rule.ruleDescriptor:{ ruleDescriptor |<returnScopeInterface(scope=ruleDescriptor.returnScope)>}>}>
 #pragma mark Rule return scopes end
 <!
 #pragma mark Rule Return Scopes start
-<rules:{rule |
-<rule.ruleDescriptor:{ ruleDescriptor |
-<returnScopeInterface:{ returnScopeInterface |
-<methodsDecl(scope=ruleDescriptor.returnScope)>}>
-}>}>
+<rules:{rule |<rule.ruleDescriptor:{ ruleDescriptor |<returnScopeInterface:{ returnScopeInterface |<methodsDecl(scope=ruleDescriptor.returnScope)>}>}>}>
 #pragma mark Rule return scopes end
 !>
 <! @interface <grammar.recognizerName> <@superClassName>: <superClass><@end> { !>
@@ -557,13 +555,10 @@ parserHeaderFile( LEXER,
 <@methodsdecl()>
 
 <rules:{rule |
-<if(!rule.ruleDescriptor.isSynPred)>
-- (<rule.ruleDescriptor:{ruleDescriptor|<returnType()>}>)<rule.ruleName><if(rule.ruleDescriptor.parameterScope)><rule.ruleDescriptor.parameterScope:parameterScope(scope=it)><endif>; <endif>}; separator="\n">
+- (<rule.ruleDescriptor:{ruleDescriptor|<returnType()>}>)<if(!rule.ruleDescriptor.isSynPred)><rule.ruleName><else><rule.ruleName>_fragment<endif><if(rule.ruleDescriptor.parameterScope)><rule.ruleDescriptor.parameterScope:parameterScope(scope=it)><endif>; }; separator="\n"><\n>
+<! <synpreds:{pred|- (void)<pred>_fragment;}; separator="\n"><\n> !>
 
-<synpreds:{pred |
-- (void)<pred>_fragment;}; separator="\n">
-
-@end // end of <className()>
+@end /* end of <className()> interface */<\n>
 >>
 
 /** How to generate a parser */
@@ -659,7 +654,7 @@ genericParser(  grammar,
 // start rules
 <rules; separator="\n">
 
-@end // end of <grammar.recognizerName> implementation line 669
+@end /* end of <grammar.recognizerName> implementation line 669 */<\n>
 >>
 
 parserCtorBody() ::= <<
@@ -757,7 +752,7 @@ SEL <name>Selector = @selector(<name>_fragment);
 >>
 
 lexerSynpred(name) ::= <<
-<synpred(name)>_fragment
+<synpred(name)>
 >>
 
 ruleMemoization(name) ::= <<
@@ -1495,6 +1490,7 @@ const static NSInteger dfa<dfa.decisionNumber>_transition<i0>[] = {<table; separ
 }
 
 <if(dfa.specialStateSTs)>
+/* start dfa.specialStateSTs */
 - (NSInteger) specialStateTransition:(NSInteger)s Stream:(id\<ANTLRIntStream\>)anInput
 {
 <if(LEXER)>
@@ -1507,9 +1503,9 @@ const static NSInteger dfa<dfa.decisionNumber>_transition<i0>[] = {<table; separ
     id\<ANTLRTreeNodeStream\> input = (id\<ANTLRTreeNodeStream\>)anInput;<\n>
 <endif>
     switch (s) {
-    <dfa.specialStateSTs:{state | 
-    case <i0>: ;<! compressed special state numbers 0..n-1 !>
-        <state>}; separator="\n">
+        <dfa.specialStateSTs:{state |
+        case <i0> : ;<! compressed special state numbers 0..n-1 !>
+            <state>}; separator="\n">
     }
 <if(backtracking)>
     if ( [recognizer getBacktrackingLevel] > 0 ) { [recognizer setFailed:YES]; return -1; }<\n>
@@ -1518,6 +1514,7 @@ const static NSInteger dfa<dfa.decisionNumber>_transition<i0>[] = {<table; separ
     /* [self error:nvae]; */ <! for debugger - do later !>
     @throw nvae;
 }<\n>
+/* end dfa.specialStateSTs */
 <endif>
 
 - (void) dealloc
@@ -1533,12 +1530,15 @@ const static NSInteger dfa<dfa.decisionNumber>_transition<i0>[] = {<table; separ
 
 <@errorMethod()>
 
-@end
+@end /* end DFA<dfa.decisionNumber> implementation */<\n>
 #pragma mark Cyclic DFA implementation end DFA<dfa.decisionNumber>
 <\n>
 >>
-
+/** A state in a cyclic DFA; it's a special state and part of a big switch on
+ *  state.
+ */
 cyclicDFAState(decisionNumber, stateNumber, edges, needErrorClause, semPredState) ::= <<
+/* cyclicDFAState */
 NSInteger LA<decisionNumber>_<stateNumber> = [input LA:1];<\n>
 <if(semPredState)> <! get next lookahead symbol to test edges, then rewind !>
 NSInteger index<decisionNumber>_<stateNumber> = [input getIndex];
@@ -1549,21 +1549,24 @@ s = -1;
 <if(semPredState)> <! return input cursor to state before we rewound !>
 [input seek:index<decisionNumber>_<stateNumber>];<\n>
 <endif>
-if ( s >= 0 ) return s;
-// break;
+if ( s >= 0 )
+    return s;
+ break;
 >>
 
 /** Just like a fixed DFA edge, test the lookahead and indicate what
  *  state to jump to next if successful.
  */
 cyclicDFAEdge(labelExpr, targetStateNumber, edgeNumber, predicates) ::= <<
-if ( (<labelExpr>) <if(predicates)>&& (<predicates>)<endif>) { s = <targetStateNumber>;}<\n>
+/* cyclicDFAEdge */
+if (<labelExpr><if(predicates)> && (<predicates>)<endif>) { s = <targetStateNumber>;}<\n>
 >>
 
 /** An edge pointing at end-of-token; essentially matches any char;
  *  always jump to the target.
  */
 eotDFAEdge(targetStateNumber,edgeNumber, predicates) ::= <<
+/* eotDFAEdge */
 s = <targetStateNumber>;<\n>
 >>
 
@@ -1571,7 +1574,7 @@ s = <targetStateNumber>;<\n>
 
 andPredicates(left,right) ::= "(<left>&&<right>)"
 
-orPredicates(operands) ::= "(first(operands)<rest(operands):{o | ||<o.name>}>)"
+orPredicates(operands) ::= "(first(operands)<rest(operands):{o | ||<o>}>)"
 
 notPredicate(pred) ::= "!(<evalPredicate(...)>)"
 
@@ -1586,7 +1589,7 @@ evalPredicate(pred,description) ::= "(<pred>)"
  */
 /* evalSynPredicate(pred,description) ::= "[self evaluateSyntacticPredicate:<pred>Selector stream:input]" */
 evalSynPredicate(pred,description) ::= "[self evaluateSyntacticPredicate:@selector(<pred>_fragment)]"
-// evalSynPredicate(pred,description) ::= "[recognizer <pred>]"
+/* evalSynPredicate(pred,description) ::= "[recognizer <pred>]" */
 
 lookaheadTest(atom,k,atomAsInt) ::= "LA<decisionNumber>_<stateNumber>==<atom>"
 
@@ -1599,7 +1602,7 @@ lookaheadRangeTest(lower,upper,k,rangeNumber,lowerAsInt,upperAsInt) ::= <<
 (LA<decisionNumber>_<stateNumber>\>=<lower> && LA<decisionNumber>_<stateNumber>\<=<upper>)
 >>
 
-isolatedLookaheadRangeTest(lower,upper,k,rangeNumber,lowerAsInt,upperAsInt) ::= "([input LA:<k>] \>= <lower> && [input LA:<k>] \<= <upper>)"
+isolatedLookaheadRangeTest(lower,upper,k,rangeNumber,lowerAsInt,upperAsInt) ::= "(([input LA:<k>] \>= <lower>) && ([input LA:<k>] \<= <upper>))"
 
 setTest(ranges) ::= "<ranges; separator=\"||\">"
 
@@ -1618,7 +1621,7 @@ globalAttributeScopeDecl(scope) ::= <<
 <if(scope.attributes)>/* start of iterated get and set functions */<\n>
 <scope.attributes:{a|- (<a.type>)get<a.name>;<\n>- (void)set<a.name>:(<a.type>)aVal;}; separator="\n"><\n>
 /* End of iterated get and set functions */<endif><\n>
-@end
+@end /* end of <scope.name>_Scope interface */<\n>
 >>
 
 globalAttributeScopeMemVar(scope) ::= <<
@@ -1640,7 +1643,7 @@ globalAttributeScopeImpl(scope) ::= <<
 <scope.attributes:{a|- (<a.type>)get<a.name> \{ return( <a.name> ); \}<\n>
 - (void)set<a.name>:(<a.type>)aVal \{ <a.name> = aVal; \}<\n\n>}; separator="\n"><\n>
 /* End of iterate get and set functions */<endif><\n>
-@end
+@end /* end of <scope.name>_Scope implementation */<\n>
 >>
 
 globalAttributeScopeInit(scope) ::= <<
@@ -1659,7 +1662,7 @@ ANTLRSymbolStack *gStack = [ANTLRSymbolStack newANTLRSymbolStackWithLen:30];<\n>
 
 ruleAttributeScopeDecl(scope) ::= <<
 <if(scope.attributes)>
-@interface <scope.name>_Scope : ANTLRSymbolsScope {
+@interface <scope.name>_Scope : ANTLRSymbolsScope {<\n>
 <scope.attributes:{<it.decl>;}; separator="\n">
 <scope.attributes:{a|<a.name> <a.type>;}; separator="\n"><\n>
 }
@@ -1669,17 +1672,18 @@ ruleAttributeScopeDecl(scope) ::= <<
 <endif>
 + (<scope.name>_Scope *)new<scope.name>_Scope;
 - (get<a.name>
-@end
+@end /* end of <scope.name>_Scope interface */<\n>
 <endif>
 >>
 
 ruleAttributeScopeMemVar(scope) ::= <<
+/* ruleAttributeScopeMemVar */<\n>
 <scope.name>_Scope *<scope.name>_scope;
 >>
 
 ruleAttributeScopeImpl(scope) ::= <<
 <if(scope.attributes)>
-@implementation <scope.name>_Scope
+@implementation <scope.name>_Scope<\n>
 <scope.attributes:{a|@synthesize <a.name>;}; separator="\n"><\n>
 + (<scope.name>_Scope *)new<scope.name>_Scope
 {
@@ -1692,7 +1696,7 @@ ruleAttributeScopeImpl(scope) ::= <<
 - (void)set<a.name>:(<a.type>)aVal \{ <a.name> = aVal; \}<\n\n>}; separator="\n"><\n>
 // End of iterate get and set functions<\n>
 <endif>
-@end
+@end /* end of <scope.name>_Scope implemtation */<\n>
 <endif>
 >>
 
@@ -1713,14 +1717,18 @@ ANTLRSymbolStack *<scope.name>Stack = [ANTLRSymbolStack newANTLRSymbolStackWithL
 returnStructName() ::= "<className()>_<it.name>_return"
 
 returnType() ::= <<
+<if(!ruleDescriptor.isSynPred)>
 <if(ruleDescriptor.hasMultipleReturnValues)>
-<ruleDescriptor:returnStructName()><if(!ruleDescriptor.isSynPred)> *<endif>
+<ruleDescriptor:returnStructName()> *
 <else>
 <if(ruleDescriptor.hasSingleReturnValue)>
 <ruleDescriptor.singleValueReturnType>
 <else>
 void
 <endif>
+<endif>
+<else>
+void
 <endif>
 >>
 
@@ -1780,7 +1788,7 @@ returnScopeInterface(scope) ::= <<
 - (void)set<a.name>:(<a.type>)aVal;}; separator="\n"><\n>
 // End of iterated get and set functions<\n>
 <endif>
-@end
+@end <\n>
 <endif>
 >>
 
@@ -1807,7 +1815,7 @@ returnScope(scope) ::= <<
 <endif>
 <actions.(actionScope).ruleReturnMethods>
 <@ruleReturnMembers()><\n>
-@end
+@end <\n>
 <endif>
 >>
 
@@ -1822,35 +1830,38 @@ parameterSetAttributeRef(attr,expr) ::= "<attr.name>=<expr>;"
  * grammar name directly
  */
 scopeAttributeRef(scope,attr,index,negIndex) ::= <<
+/* scopeAttributeRef */
 <if(negIndex)>
-([((<scope>_Scope)[<scope>Stack objectAtIndex:[<scope>Stack size]-<negIndex>-1)]).<attr.name>
+([((<scope>_Scope *)[gStack objectAtIndex:[gStack size]-<negIndex>-1)]).<attr.name>
 <else>
 <if(index)>
-((<scope>_Scope)<scope>Stack objectAtIndex(<index>)).<attr.name>
+((<scope>_Scope *)[gStack objectAtIndex:<index>]).<attr.name>
 <else>
-([(<scope>_Scope)[<scope>Stack peek]) <attr.name>]
+((<scope>_Scope *)[gStack peek]).<attr.name>
 <endif>
 <endif>
 >>
 
 scopeSetAttributeRef(scope,attr,expr,index,negIndex) ::= <<
+/* scopeSetAttributeRef */
 <if(negIndex)>
-((<scope>_Scope)[<scope>Stack objectAtIndex:([<scope>Stack size]-<negIndex>-1)]).<attr.name> =<expr>;
+((<scope>_Scope *)[gStack objectAtIndex:([gStack size]-<negIndex>-1)]).<attr.name> =<expr>;
 <else>
 <if(index)>
-((<scope>_Scope)[<scope>Stack objectAtIndex:<index>]).<attr.name> = <expr>;
+((<scope>_Scope *)[gStack objectAtIndex:<index>]).<attr.name> = <expr>;
 <else>
-((<scope>_Scope)[<scope>Stack peek]).<attr.name> = <expr>;
+((<scope>_Scope *)[gStack peek]).<attr.name> = <expr>;
 <endif>
 <endif>
 >>
 
 scopeAttributeRefStack() ::= <<
+/* scopeAttributeRefStack */
 <if(negIndex)>
-((<scope>_scope)[<scope>Stack objectAtIndex:[<scope>Stack count]-<negIndex>-1]).<attr.name> = <expr>;
+((<scope>_scope *)[<scope>Stack objectAtIndex:[<scope>Stack count]-<negIndex>-1]).<attr.name> = <expr>;
 <else>
 <if(index)>
-((<scope>_scope)[<scope>Stack objectAtIndex:<index>]).<attr.name> = <expr>;
+((<scope>_scope *)[<scope>Stack objectAtIndex:<index>]).<attr.name> = <expr>;
 <else>
 [<scope>Stack peek].<attr.name> = <expr>;
 <endif>
