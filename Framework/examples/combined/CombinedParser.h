@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 17, 2010 17:18:07 Combined.g 2010-08-18 08:12:59
+// $ANTLR 3.2 Aug 20, 2010 18:07:53 Combined.g 2010-08-20 18:13:25
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -19,16 +19,22 @@
 #pragma mark Rule Return Scopes start
 #pragma mark Rule return scopes end
 @interface CombinedParser : ANTLRParser { // line 529
+// start of globalAttributeScopeMemVar
 
-            
 
+// start of action-actionScope-memVars
+// start of ruleAttributeScopeMemVar
+
+
+// Start of memVars
 
  }
 
+// start of action-actionScope-methodsDecl
 
 
 - (void)stat; 
 - (void)identifier; 
 
 
-@end // end of CombinedParser
+@end /* end of CombinedParser interface */

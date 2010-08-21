@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 17, 2010 17:18:07 T.g 2010-08-18 08:13:02
+// $ANTLR 3.2 Aug 20, 2010 18:07:53 T.g 2010-08-20 18:13:28
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -20,16 +20,22 @@
 #pragma mark Rule Return Scopes start
 #pragma mark Rule return scopes end
 @interface TParser : ANTLRParser { // line 529
-
-                    
-
+// start of globalAttributeScopeMemVar
 
 
-    /** With this true, enum is seen as a keyword.  False, it's an identifier */
-    BOOL enableEnum;
+// start of action-actionScope-memVars
+
+/* With this true, enum is seen as a keyword.  False, it's an identifier */
+BOOL enableEnum;
+
+// start of ruleAttributeScopeMemVar
+
+
+// Start of memVars
 
  }
 
+// start of action-actionScope-methodsDecl
 
 
 - (void)stat; 
@@ -38,7 +44,8 @@
 - (void)enumAsID; 
 
 
-@end // end of TParser/** Demonstrates how semantic predicates get hoisted out of the rule in 
+@end /* end of TParser interface */
+/** Demonstrates how semantic predicates get hoisted out of the rule in 
  *  which they are found and used in other decisions.  This grammar illustrates
  *  how predicates can be used to distinguish between enum as a keyword and
  *  an ID *dynamically*. :)

@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 17, 2010 17:18:07 SymbolTable.g 2010-08-18 08:13:03
+// $ANTLR 3.2 Aug 20, 2010 18:07:53 SymbolTable.g 2010-08-20 18:13:30
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -9,6 +9,7 @@
  * =============================================================================
  */
 
+/* Start cyclicDFAInterface */
 #pragma mark Cyclic DFA interface start DFA4
 @interface DFA4 : ANTLRDFA {
 }
@@ -34,20 +35,23 @@
 #define T__8 8
 #define T__7 7
 @interface SymbolTableLexer : ANTLRLexer { // line 283
-    DFA4 *dfa4;
+DFA4 *dfa4;
+// start of actions.lexer.memVars
+// start of action-actionScope-memVars
 }
 + (SymbolTableLexer *)newSymbolTableLexer:(id<ANTLRCharStream>)anInput;
 
-- (void) mT__7; 
-- (void) mT__8; 
-- (void) mT__9; 
-- (void) mT__10; 
-- (void) mT__11; 
-- (void) mT__12; 
-- (void) mT__13; 
-- (void) mT__14; 
-- (void) mID; 
-- (void) mINT; 
-- (void) mWS; 
-- (void) mTokens; 
-@end // end of SymbolTableLexer interface
+- (void)mT__7; 
+- (void)mT__8; 
+- (void)mT__9; 
+- (void)mT__10; 
+- (void)mT__11; 
+- (void)mT__12; 
+- (void)mT__13; 
+- (void)mT__14; 
+- (void)mID; 
+- (void)mINT; 
+- (void)mWS; 
+- (void)mTokens; 
+
+@end /* end of SymbolTableLexer interface */

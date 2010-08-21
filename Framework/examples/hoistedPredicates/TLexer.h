@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 17, 2010 17:18:07 T.g 2010-08-18 08:13:02
+// $ANTLR 3.2 Aug 20, 2010 18:07:53 T.g 2010-08-20 18:13:28
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -9,6 +9,7 @@
  * =============================================================================
  */
 
+/* Start cyclicDFAInterface */
 
 #pragma mark Rule return scopes start
 #pragma mark Rule return scopes end
@@ -19,12 +20,15 @@
 #define EOF -1
 #define T__7 7
 @interface TLexer : ANTLRLexer { // line 283
+// start of actions.lexer.memVars
+// start of action-actionScope-memVars
 }
 + (TLexer *)newTLexer:(id<ANTLRCharStream>)anInput;
 
-- (void) mT__7; 
-- (void) mID; 
-- (void) mINT; 
-- (void) mWS; 
-- (void) mTokens; 
-@end // end of TLexer interface
+- (void)mT__7; 
+- (void)mID; 
+- (void)mINT; 
+- (void)mWS; 
+- (void)mTokens; 
+
+@end /* end of TLexer interface */

@@ -11,10 +11,10 @@ options {
 }
 
 scope Symbols {
-  NSMutableArray *names;
+  ANTLRHashMap *names;
 }
 
-@ivars {
+@memVars {
 int level;
 }
 
@@ -29,7 +29,7 @@ globals
 scope Symbols;
 @init {
     level++;
-    $Symbols::names = [[NSMutableArray alloc] init];
+    $Symbols::names = [ANTLRHashMap newANTLRHashMapWithLen:101];
 }
     :   (decl)*
         {
@@ -46,7 +46,7 @@ block
 scope Symbols;
 @init {
     level++;
-    $Symbols::names = [[NSMutableArray alloc] init];
+    $Symbols::names = [ANTLRHashMap newANTLRHashMapWithLen:101];
 }
     :   '{' (decl)* (stat)* '}'
         {

@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 11, 2010 15:04:17 /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g 2010-08-11 15:10:39
+// $ANTLR 3.2 Aug 19, 2010 17:16:04 /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g 2010-08-19 17:16:47
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -23,32 +23,53 @@
 #define T__8 8
 #define T__7 7
 #pragma mark Dynamic Global Scopes
-@interface Symbols_Scope : ANTLRSymbolStack {
-    NSMutableArray *names;
+@interface Symbols_Scope : ANTLRSymbolsScope {  /* globalAttributeScopeDecl */
+ANTLRHashMap * names;
 }
-// use KVC to access attributes!
+/* start of properties */
+
+@property (retain, getter=getnames, setter=setnames:) ANTLRHashMap * names;
+
+/* end properties */
+
++ (Symbols_Scope *)newSymbols_Scope;
+/* start of iterated get and set functions */
+
+- (ANTLRHashMap *)getnames;
+- (void)setnames:(ANTLRHashMap *)aVal;
+
+/* End of iterated get and set functions */
+
 @end
 #pragma mark Dynamic Rule Scopes
 #pragma mark Rule Return Scopes start
 #pragma mark Rule return scopes end
-@interface SymbolTableParser : ANTLRParser {
+@interface SymbolTableParser : ANTLRParser { // line 529
+// start of globalAttributeScopeMemVar
+/* globalAttributeScopeMemVar */
+ANTLRSymbolStack *gStack;
+Symbols_Scope *Symbols_scope;
 
-    Symbols_Scope *Symbols_Stack;
-                            
+// start of action-actionScope-memVars
+
+int level;
+
+// start of ruleAttributeScopeMemVar
 
 
-    int level;
+// Start of memVars
 
  }
 
+// start of action-actionScope-methodsDecl
 
 
-- (void) prog; 
-- (void) globals; 
-- (void) method; 
-- (void) block; 
-- (void) stat; 
-- (void) decl; 
+- (void)prog; 
+- (void)globals; 
+- (void)method; 
+- (void)block; 
+- (void)stat; 
+- (void)decl; 
 
 
 @end // end of SymbolTableParser

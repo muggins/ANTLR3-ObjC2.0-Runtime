@@ -12,8 +12,8 @@ options {
 	language=ObjC;
 }
 
-@ivars {
-/** With this true, enum is seen as a keyword.  False, it's an identifier */
+@memVars {
+/* With this true, enum is seen as a keyword.  False, it's an identifier */
 BOOL enableEnum;
 }
 

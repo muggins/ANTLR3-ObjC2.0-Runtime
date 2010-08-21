@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 17, 2010 17:18:07 SimpleC.g 2010-08-18 08:13:00
+// $ANTLR 3.2 Aug 20, 2010 18:07:53 SimpleC.g 2010-08-20 18:13:27
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -41,13 +41,19 @@
 #pragma mark Rule Return Scopes start
 #pragma mark Rule return scopes end
 @interface SimpleCParser : ANTLRParser { // line 529
-
-    DFA2 *dfa2;
-                                                                
+// start of globalAttributeScopeMemVar
 
 
+// start of action-actionScope-memVars
+// start of ruleAttributeScopeMemVar
+
+
+// Start of memVars
+
+DFA2 *dfa2;
  }
 
+// start of action-actionScope-methodsDecl
 
 
 - (void)program; 
@@ -67,4 +73,4 @@
 - (void)atom; 
 
 
-@end // end of SimpleCParser
+@end /* end of SimpleCParser interface */

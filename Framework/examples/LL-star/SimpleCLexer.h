@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 17, 2010 17:18:07 SimpleC.g 2010-08-18 08:13:01
+// $ANTLR 3.2 Aug 20, 2010 18:07:53 SimpleC.g 2010-08-20 18:13:27
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -9,6 +9,7 @@
  * =============================================================================
  */
 
+/* Start cyclicDFAInterface */
 #pragma mark Cyclic DFA interface start DFA4
 @interface DFA4 : ANTLRDFA {
 }
@@ -40,26 +41,29 @@
 #define T__13 13
 #define T__10 10
 @interface SimpleCLexer : ANTLRLexer { // line 283
-    DFA4 *dfa4;
+DFA4 *dfa4;
+// start of actions.lexer.memVars
+// start of action-actionScope-memVars
 }
 + (SimpleCLexer *)newSimpleCLexer:(id<ANTLRCharStream>)anInput;
 
-- (void) mT__7; 
-- (void) mT__8; 
-- (void) mT__9; 
-- (void) mT__10; 
-- (void) mT__11; 
-- (void) mT__12; 
-- (void) mT__13; 
-- (void) mT__14; 
-- (void) mT__15; 
-- (void) mT__16; 
-- (void) mT__17; 
-- (void) mT__18; 
-- (void) mT__19; 
-- (void) mT__20; 
-- (void) mID; 
-- (void) mINT; 
-- (void) mWS; 
-- (void) mTokens; 
-@end // end of SimpleCLexer interface
+- (void)mT__7; 
+- (void)mT__8; 
+- (void)mT__9; 
+- (void)mT__10; 
+- (void)mT__11; 
+- (void)mT__12; 
+- (void)mT__13; 
+- (void)mT__14; 
+- (void)mT__15; 
+- (void)mT__16; 
+- (void)mT__17; 
+- (void)mT__18; 
+- (void)mT__19; 
+- (void)mT__20; 
+- (void)mID; 
+- (void)mINT; 
+- (void)mWS; 
+- (void)mTokens; 
+
+@end /* end of SimpleCLexer interface */

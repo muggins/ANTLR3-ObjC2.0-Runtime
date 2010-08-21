@@ -305,11 +305,11 @@
 	tree.token.text = @"<UP>";
 	[parent addChild:tree];
 	
-	STAssertTrue((tree != [parent getChild:0]), @"Trees match");
+	STAssertTrue([parent getChild:0] == tree, @"Trees don't match");
 	[parent setChild:0 With:tree];
 	
 	ANTLRCommonTree *child = [parent getChild:0];
-	STAssertTrue(([parent getChildCount] == 1), @"There were either no children or more than 1: %d", [parent getChildCount]);
+	STAssertTrue([parent getChildCount] == 1, @"There were either no children or more than 1: %d", [parent getChildCount]);
 	STAssertNotNil(child, @"Child at index 0 should not be nil");
 	STAssertEquals(child, tree, @"Child and Original tree were not the same");
 	//[parent release];
@@ -442,13 +442,13 @@
 	// Description for tree
 	NSString *treeDesc = [tree treeDescription];
     STAssertNotNil(treeDesc, @"Tree description should not be nil");
-    STAssertTrue([treeDesc isEqualToString:@"(^||)"], @"Tree description was not (^||) but rather %@", treeDesc);
+    STAssertTrue([treeDesc isEqualToString:@"||"], @"Tree description was not || but rather %@", treeDesc);
 	
 	ANTLRCommonTree *parent = [ANTLRCommonTree newANTLRCommonTree];
-	STAssertTrue([[parent treeDescription] isEqualToString:@"(^nil)"], @"Tree description was not (^nil) was %@", [parent treeDescription]);
+	STAssertTrue([[parent treeDescription] isEqualToString:@"nil"], @"Tree description was not nil was %@", [parent treeDescription]);
 	[parent addChild:tree];
 	treeDesc = [parent treeDescription];
-	STAssertTrue([treeDesc isEqualToString:@"(^nil(^||))"], @"Tree description was not (^nil(^||)) but was: %@", treeDesc);
+	STAssertTrue([treeDesc isEqualToString:@"(^nil||)"], @"Tree description was not (^nil||) but was: %@", treeDesc);
 	
 	// Test non empty parent
 	ANTLRCommonTree *down = [ANTLRCommonTree newANTLRCommonTreeWithTokenType:ANTLRTokenTypeDOWN];
@@ -456,7 +456,7 @@
 	
 	[tree addChild:down];
 	treeDesc = [parent treeDescription];
-	STAssertTrue([treeDesc isEqualToString:@"(^nil(^||(^<DOWN>)))"], @"Tree description was wrong expected (^nil(^||(^<DOWN>))) but got: %@", treeDesc);
+	STAssertTrue([treeDesc isEqualToString:@"(^nil(^||<DOWN>))"], @"Tree description was wrong expected (^nil(^||<DOWN>)) but got: %@", treeDesc);
     return;
 }
 
@@ -507,7 +507,7 @@
 	
 	[parent replaceChildrenFrom:0 To:0 With:replacement];
 	
-	STAssertEquals([parent getChild:0], replacement, @"Children do not match");
+	STAssertTrue([parent getChild:0] == replacement, @"Children do not match");
     return;
 }
 

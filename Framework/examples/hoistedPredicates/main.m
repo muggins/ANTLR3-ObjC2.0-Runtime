@@ -1,12 +1,13 @@
 #import <Cocoa/Cocoa.h>
-#import <ANTLR/ANTLR.h>
+#import <antlr3.h>
 #import "TLexer.h"
 #import "TParser.h"
 
 int main() {
+    NSError *error;
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
-	NSString *string = [NSString stringWithContentsOfFile:@"../../examples/hoistedPredicates/input"];
+	NSString *string = [NSString stringWithContentsOfFile:@"../../examples/hoistedPredicates/input" encoding:NSASCIIStringEncoding error:&error];
 	NSLog(@"input is : %@", string);
 	ANTLRStringStream *stream = [[ANTLRStringStream alloc] initWithStringNoCopy:string];
 	TLexer *lexer = [[TLexer alloc] initWithCharStream:stream];

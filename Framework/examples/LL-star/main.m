@@ -1,5 +1,5 @@
 #import <Cocoa/Cocoa.h>
-#import <ANTLR/ANTLR.h>
+#import <antlr3.h>
 #import "SimpleCLexer.h"
 #import "SimpleCParser.h"
 

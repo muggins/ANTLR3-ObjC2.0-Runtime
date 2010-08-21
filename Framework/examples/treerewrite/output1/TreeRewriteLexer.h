@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 07, 2010 22:08:38 /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/treerewrite/TreeRewrite.g 2010-08-11 13:48:49
+// $ANTLR 3.2 Aug 20, 2010 15:00:19 /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/treerewrite/TreeRewrite.g 2010-08-20 15:03:14
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -9,6 +9,7 @@
  * =============================================================================
  */
 
+/* Start cyclicDFAInterface */
 
 #pragma mark Rule return scopes start
 #pragma mark Rule return scopes end
@@ -16,9 +17,14 @@
 #define INT 4
 #define WS 5
 #define EOF -1
-@interface TreeRewriteLexer : ANTLRLexer {
+@interface TreeRewriteLexer : ANTLRLexer { // line 283
+// start of actions.lexer.memVars
+// start of action-actionScope-memVars
 }
-- (void) mINT; 
-- (void) mWS; 
-- (void) mTokens; 
-@end // end of TreeRewriteLexer interface
++ (TreeRewriteLexer *)newTreeRewriteLexer:(id<ANTLRCharStream>)anInput;
+
+- (void)mINT; 
+- (void)mWS; 
+- (void)mTokens; 
+
+@end /* end of TreeRewriteLexer interface */

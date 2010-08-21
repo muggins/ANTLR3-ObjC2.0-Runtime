@@ -538,15 +538,17 @@ parserHeaderFile( LEXER,
 !>
 <! @interface <grammar.recognizerName> <@superClassName>: <superClass><@end> { !>
 @interface <className()> <@superClassName>: <superClass><@end> { // line 529
+// start of globalAttributeScopeMemVar
+<scopes:{<if(it.isDynamicGlobalScope)><globalAttributeScopeMemVar(scope=it)><endif>}><\n>
 // start of action-actionScope-memVars
 <actions.(actionScope).memVars>
+// start of ruleAttributeScopeMemVar
+<rules:{rule | <rule.ruleDescriptor.ruleScope:ruleAttributeScopeMemVar(scope=it)>}><\n>
 // Start of memVars
 <@memVars()>
 
 <cyclicDFAs:{dfa | DFA<dfa.decisionNumber> *dfa<dfa.decisionNumber>;}; separator="\n">
 <synpreds:{pred | SEL <pred>Selector;}; separator="\n">
-<scopes:{<if(it.isDynamicGlobalScope)><globalAttributeScopeMemVar(scope=it)><endif>}><\n>
-<rules:{rule | <rule.ruleDescriptor.ruleScope:ruleAttributeScopeMemVar(scope=it)>}><\n>
  }
 
 // start of action-actionScope-methodsDecl
@@ -855,14 +857,16 @@ NSInteger <ruleDescriptor.name>_StartIndex = [input getIndex];
 >>
 
 ruleScopeSetUp() ::= <<
-<ruleDescriptor.useScopes:{ANTLRSymbolStack *stack<i0> = [ANTLRSymbolStack newANTLRSymbolStackWithLen:15];
-[stack<i0> push:[[<it>_Scope new<it>_Scope] retain]];}>
-<ruleDescriptor.ruleScope:{ANTLRSymbolStack *ruleStack<i0> = [ANTLRSymbolStack newANTLRSymbolStackWithLen:15];
+// ruleScopeSetUp
+<ruleDescriptor.useScopes:{gStack = [ANTLRSymbolStack newANTLRSymbolStackWithLen:30];
+<it>_scope = [[<it>_Scope new<it>_Scope] retain];
+[gStack push:<it>_scope];}>
+<ruleDescriptor.ruleScope:{ANTLRSymbolStack *ruleStack<i0> = [ANTLRSymbolStack newANTLRSymbolStackWithLen:30];
 [ruleStack<i0> push:[[<it.name>_Scope new<it.name>_Scope] retain]];}>
 >>
 
 ruleScopeCleanUp() ::= <<
-<ruleDescriptor.useScopes:{[stack<i0> pop];}; separator="\n">
+<ruleDescriptor.useScopes:{[gStack pop];}; separator="\n">
 <ruleDescriptor.ruleScope:{[ruleStack<i0> pop];}; separator="\n">
 >>
 
@@ -1602,23 +1606,40 @@ setTest(ranges) ::= "<ranges; separator=\"||\">"
 // A T T R I B U T E S
 
 globalAttributeScopeDecl(scope) ::= <<
-@interface <scope.name>_Scope : ANTLRSymbolsScope {
-<scope.attributes:{<it.decl>;}; separator="\n">
+@interface <scope.name>_Scope : ANTLRSymbolsScope {  /* globalAttributeScopeDecl */
+<if(scope.attributes)>
+<scope.attributes:{a|<a.type> <a.name>;}; separator="\n"><\n>
+<endif>
 }
+<if(scope.attributes)>/* start of properties */<\n>
+<scope.attributes:{a|@property (retain, getter=get<a.name>, setter=set<a.name>:) <a.type> <a.name>;}; separator="\n"><\n>
+/* end properties */<endif><\n>
 + (<scope.name>_Scope *)new<scope.name>_Scope;
+<if(scope.attributes)>/* start of iterated get and set functions */<\n>
+<scope.attributes:{a|- (<a.type>)get<a.name>;<\n>- (void)set<a.name>:(<a.type>)aVal;}; separator="\n"><\n>
+/* End of iterated get and set functions */<endif><\n>
 @end
 >>
 
 globalAttributeScopeMemVar(scope) ::= <<
+/* globalAttributeScopeMemVar */
+ANTLRSymbolStack *gStack;
 <scope.name>_Scope *<scope.name>_scope;
 >>
 
 globalAttributeScopeImpl(scope) ::= <<
-@implementation <scope.name>_Scope
+@implementation <scope.name>_Scope  /* globalAttributeScopeImpl */
+<if(scope.attributes)>/* start of synthesize -- OBJC-Line 1750 */<\n>
+<scope.attributes:{a|@synthesize <a.name>;}; separator="\n"><\n>
+<endif>
 + (<scope.name>_Scope *)new<scope.name>_Scope
 {
     return [[[<scope.name>_Scope alloc] init] retain];
 }
+<if(scope.attributes)>/* start of iterate get and set functions */<\n>
+<scope.attributes:{a|- (<a.type>)get<a.name> \{ return( <a.name> ); \}<\n>
+- (void)set<a.name>:(<a.type>)aVal \{ <a.name> = aVal; \}<\n\n>}; separator="\n"><\n>
+/* End of iterate get and set functions */<endif><\n>
 @end
 >>
 
@@ -1639,9 +1660,15 @@ ANTLRSymbolStack *gStack = [ANTLRSymbolStack newANTLRSymbolStackWithLen:30];<\n>
 ruleAttributeScopeDecl(scope) ::= <<
 <if(scope.attributes)>
 @interface <scope.name>_Scope : ANTLRSymbolsScope {
-    <scope.attributes:{<it.decl>;}; separator="\n">
+<scope.attributes:{<it.decl>;}; separator="\n">
+<scope.attributes:{a|<a.name> <a.type>;}; separator="\n"><\n>
 }
+<if(scope.attributes)>
+<scope.attributes:{a|@property (getter=get<a.name>, setter=set<a.name>:) <a.type> <a.name>;}; separator="\n"><\n>
+// end properties<\n>
+<endif>
 + (<scope.name>_Scope *)new<scope.name>_Scope;
+- (get<a.name>
 @end
 <endif>
 >>
@@ -1653,10 +1680,18 @@ ruleAttributeScopeMemVar(scope) ::= <<
 ruleAttributeScopeImpl(scope) ::= <<
 <if(scope.attributes)>
 @implementation <scope.name>_Scope
+<scope.attributes:{a|@synthesize <a.name>;}; separator="\n"><\n>
 + (<scope.name>_Scope *)new<scope.name>_Scope
 {
     return [[[<scope.name>_Scope alloc] init] retain];
 }
+<if(scope.attributes)>
+// start of iterate get and set functions<\n>
+<scope.attributes:{a|<\n>
+- (<a.type>)get<a.name> \{ return( <a.name> ); \}<\n>
+- (void)set<a.name>:(<a.type>)aVal \{ <a.name> = aVal; \}<\n\n>}; separator="\n"><\n>
+// End of iterate get and set functions<\n>
+<endif>
 @end
 <endif>
 >>

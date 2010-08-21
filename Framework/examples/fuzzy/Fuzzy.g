@@ -1,4 +1,4 @@
-lexer grammar FuzzyJavaLexer;
+lexer grammar Fuzzy;
 options {filter=true; language=ObjC;}
 
 IMPORT
@@ -36,12 +36,12 @@ CALL
 
 COMMENT
     :   '/*' (options {greedy=false;} : . )* '*/'
-        {NSLog(@"found comment \%@", [self text]);}
+        {NSLog(@"found comment \%@", [self getText]);}
     ;
 
 SL_COMMENT
     :   '//' (options {greedy=false;} : . )* '\n'
-        {NSLog(@"found // comment \%@", [self text]);}
+        {NSLog(@"found // comment \%@", [self getText]);}
     ;
 	
 STRING

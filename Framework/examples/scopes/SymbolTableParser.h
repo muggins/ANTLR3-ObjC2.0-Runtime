@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 17, 2010 17:18:07 SymbolTable.g 2010-08-18 08:13:03
+// $ANTLR 3.2 Aug 20, 2010 18:07:53 SymbolTable.g 2010-08-20 18:13:29
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -23,25 +23,46 @@
 #define T__8 8
 #define T__7 7
 #pragma mark Dynamic Global Scopes
-@interface Symbols_Scope : ANTLRSymbolsScope {
-NSMutableArray *names;
+@interface Symbols_Scope : ANTLRSymbolsScope {  /* globalAttributeScopeDecl */
+ANTLRHashMap * names;
 }
+/* start of properties */
+
+@property (retain, getter=getnames, setter=setnames:) ANTLRHashMap * names;
+
+/* end properties */
+
 + (Symbols_Scope *)newSymbols_Scope;
-@end
+/* start of iterated get and set functions */
+
+- (ANTLRHashMap *)getnames;
+- (void)setnames:(ANTLRHashMap *)aVal;
+
+/* End of iterated get and set functions */
+
+@end 
+
 #pragma mark Dynamic Rule Scopes
 #pragma mark Rule Return Scopes start
 #pragma mark Rule return scopes end
 @interface SymbolTableParser : ANTLRParser { // line 529
+// start of globalAttributeScopeMemVar
+/* globalAttributeScopeMemVar */
+ANTLRSymbolStack *gStack;
+Symbols_Scope *Symbols_scope;
 
-    Symbols_Scope *Symbols_scope;
-                            
+// start of action-actionScope-memVars
+
+int level;
+
+// start of ruleAttributeScopeMemVar
 
 
-
-    int level;
+// Start of memVars
 
  }
 
+// start of action-actionScope-methodsDecl
 
 
 - (void)prog; 
@@ -52,4 +73,4 @@ NSMutableArray *names;
 - (void)decl; 
 
 
-@end // end of SymbolTableParser
+@end /* end of SymbolTableParser interface */
