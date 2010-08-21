@@ -164,6 +164,7 @@
 - (ANTLRBitSet *) initWithArrayOfBits:(NSArray *)theArray
 {
 	if ((self = [super init]) != nil) {
+        bitVector = CFBitVectorCreateMutable ( kCFAllocatorDefault, 0 );
 		NSEnumerator *enumerator = [theArray objectEnumerator];
 		id value;
 		int bit = 0;

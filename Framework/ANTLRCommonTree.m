@@ -84,7 +84,7 @@
 - (id)initWithTreeNode:(ANTLRCommonTree *)aNode
 {
 	if ((self = [super init]) != nil) {
-		token = [aNode getToken];
+		token = aNode.token;
 		startIndex = token.startIndex;
 		stopIndex = token.stopIndex;
         parent = nil;

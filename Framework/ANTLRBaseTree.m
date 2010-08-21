@@ -29,6 +29,7 @@
 #import "ANTLRToken.h"
 // TODO: this shouldn't be here...but needed for invalidNode
 #import "ANTLRCommonTree.h"
+#import "ANTLRRuntimeException.h"
 #import "ANTLRError.h"
 
 #pragma mark - Navigation Nodes
@@ -59,7 +60,7 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
 - (ANTLRBaseTree *) init
 {
     if (( self = [super init]) != nil) {
-        children = [NSMutableArray arrayWithCapacity:5];
+        children = nil;
         return self;
     }
     return nil;
@@ -68,7 +69,7 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
 - (ANTLRBaseTree *) initWith:(id<ANTLRTree>)node
 {
     if (( self = [super init]) != nil) {
-        children = [NSMutableArray arrayWithCapacity:5];
+        children = nil;
         [children addObject:node];
         return self;
     }
@@ -135,10 +136,12 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
     if ( t == nil ) {
         return; // do nothing upon addChild(nil)
     }
+    if ( self == t )
+        [NSException raise:ANTLRIllegalArgumentException format:(NSString *)@"ANTLRBaseTree Can't add self to self as child"];        
     ANTLRBaseTree *childTree = (ANTLRBaseTree *) t;
     if ( [childTree isNil] ) { // t is an empty node possibly with children
         if ( children != nil && children == childTree.children ) {
-            [NSException raise:ANTLRIllegalArgumentException format:(NSString *)@"ANTLRBaseTree add child list to itself"];
+            @throw [ANTLRRuntimeException newANTLRRuntimeException:@"ANTLRBaseTree add child list to itself"];
         }
         // just add all of childTree's children to this
         if ( childTree.children != nil ) {
@@ -186,12 +189,17 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
         return;
     }
     if ( [t isNil] ) {
-        [NSException raise:@"ANTLRBaseTree set child to itself" format:(NSString *)@"Can't set single child to a list"];        
+        [NSException raise:ANTLRIllegalArgumentException format:(NSString *)@"ANTLRBaseTree Can't set single child to a list"];        
     }
     if ( children == nil ) {
         children = [NSMutableArray arrayWithCapacity:5];
     }
-    [children insertObject:t atIndex:i];
+    if ([children count] > i ) {
+        [children replaceObjectAtIndex:i withObject:t];
+    }
+    else {
+        [children insertObject:t atIndex:i];
+    }
     [t setParent:self];
     [t setChildIndex:i];
 }
@@ -221,7 +229,7 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
      System.out.println("in="+toStringTree());
      */
     if ( children == nil ) {
-        [NSException raise:@"ANTLRBaseTree Invalid Indexes" format:(NSString *)@"indexes invalid; no children in list"];        
+        [NSException raise:ANTLRIllegalArgumentException format:(NSString *)@"ANTLRBaseTree Invalid Indexes; no children in list"];        
     }
     int replacingHowMany = stopChildIndex - startChildIndex + 1;
     int replacingWithHowMany;
@@ -233,7 +241,7 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
     }
     else {
         newChildren = [NSMutableArray arrayWithCapacity:5];
-        [newChildren addObjectsFromArray:newTree.children];
+        [newChildren addObject:newTree];
     }
     replacingWithHowMany = [newChildren count];
     int numNewChildren = [newChildren count];
