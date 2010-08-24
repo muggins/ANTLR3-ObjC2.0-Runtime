@@ -506,7 +506,7 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
      
 - (NSString *) treeDescription
 {
-    return nil;
+    return [self toStringTree];
 }
 
 - (NSString *) description

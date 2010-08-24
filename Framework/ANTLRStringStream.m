@@ -45,9 +45,9 @@
     return [[ANTLRStringStream alloc] init];
 }
 
-+ newANTLRStringStream:(NSString *)input;
++ newANTLRStringStream:(NSString *)aString;
 {
-    return [[ANTLRStringStream alloc] initWithString:input];
+    return [[ANTLRStringStream alloc] initWithString:aString];
 }
 
 

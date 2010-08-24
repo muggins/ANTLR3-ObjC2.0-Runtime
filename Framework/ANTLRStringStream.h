@@ -56,7 +56,7 @@
 
 + newANTLRStringStream;
 
-+ newANTLRStringStream:(NSString *)input;
++ newANTLRStringStream:(NSString *)aString;
 
 + newANTLRStringStream:(char *)myData Count:(NSInteger)numBytes;
 

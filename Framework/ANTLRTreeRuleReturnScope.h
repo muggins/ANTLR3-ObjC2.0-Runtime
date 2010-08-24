@@ -37,11 +37,12 @@
     ANTLRCommonTree *startNode;
 }
 
-@property (retain, getter=getStart) ANTLRCommonTree *startNode;
+@property (retain, getter=getStart, setter=setStart:) ANTLRCommonTree *startNode;
 
 /** First node or root node of tree matched for this rule. */
 
 - (ANTLRCommonTree *)getStart;
+- (void)setStart:(ANTLRCommonTree *)aStartNode;
 
 - (id) copyWithZone:(NSZone *)theZone;
 

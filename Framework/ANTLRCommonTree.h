@@ -75,7 +75,9 @@
 - (ANTLRCommonTree *) getParent;
 - (void) setParent:(ANTLRCommonTree *) t;
 
+#ifdef DONTUSENOMO
 - (NSString *) treeDescription;
+#endif
 - (NSString *) description;
 - (void) setUnknownTokenBoundaries;
 - (NSInteger) getTokenStartIndex;

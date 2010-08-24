@@ -47,10 +47,14 @@
 
 - (id) init
 {
-	self = [super init];
-	if (self) {
+	if ((self = [super init]) != nil) {
 		firstTime = YES;
 		nodes = [ANTLRFastQueue newANTLRFastQueue];
+		down = [adaptor createTree:ANTLRTokenTypeDOWN Text:@"DOWN"];
+		up = [adaptor createTree:ANTLRTokenTypeUP Text:@"UP"];
+		eof = [adaptor createTree:ANTLRTokenTypeEOF Text:@"EOF"];
+		tree = eof;
+		root = eof;
 	}
 	return self;
 }
@@ -63,6 +67,7 @@
 -(id) initWithTreeAdaptor:(id<ANTLRTreeAdaptor>)a andTree:(id<ANTLRTree>)t
 {
 	if ((self = [super init]) != nil) {
+		firstTime = YES;
 		adaptor = a;
 		tree = t;
 		root = t;
@@ -83,63 +88,53 @@
 
 -(BOOL) hasNext
 {
-	if (firstTime)
-	{
-		return root != nil;
-	}
-	if ([nodes size] > 0)
-	{
-		return YES;
-	}
-	if (tree == nil)
-	{
-		return NO;
-	}
-	if ([adaptor getChildCount:tree] > 0)
-	{
-		return YES;
-	}
+	if (firstTime) {
+        return root != nil;
+    }
+	if ( nodes && [nodes size] > 0) {
+        return YES;
+    }
+	if (tree == nil) {
+        return NO;
+    }
+	if ([adaptor getChildCount:tree] > 0) {
+        return YES;
+    }
 	return [adaptor getParent:tree] != nil;
 }
 
 -(id) nextObject
 {
 	// is this the first time we are using this method?
-	if (firstTime)
-	{
+	if (firstTime) {
 		firstTime = NO;
-		if ([adaptor getChildCount:tree] == 0)
-		{
+		if ([adaptor getChildCount:tree] == 0) {
 			[nodes addObject:eof];
 			return tree;
 		}
 		return tree;
 	}
 	// do we have any objects queued up?
-	if ([nodes size] > 0)
-	{
+	if ( nodes && [nodes size] > 0) {
 		return [nodes remove];
 	}
 	// no nodes left?
 	if (tree == nil) {
-		return self.eof;
+		return eof;
 	}
-	if ([adaptor getChildCount:tree] > 0)
-	{
+	if ([adaptor getChildCount:tree] > 0) {
 		tree = [adaptor getChild:tree At:0];
 		[nodes addObject:tree]; // real node is next after down
 		return self.down;
 	}
 	// if no children, look for next sibling of ancestor
 	id<ANTLRTree> parent = [adaptor getParent:tree];
-	while (parent != nil && ([adaptor getChildIndex:tree] + 1) >= [adaptor getChildCount:parent])
-	{
+	while (parent != nil && ([adaptor getChildIndex:tree] + 1) >= [adaptor getChildCount:parent]) {
 		[nodes addObject:up];
 		tree = parent;
 		parent = [adaptor getParent:tree];
 	}
-	if (parent == nil)
-	{
+	if (parent == nil) {
 		tree = nil;
 		[nodes addObject:self.eof];
 		return [nodes remove];
@@ -155,13 +150,16 @@
 -(NSArray *) allObjects
 {
 	NSMutableArray *array = [NSMutableArray arrayWithCapacity:10];
-	while ([self hasNext])
-	{
+	while ([self hasNext]) {
 		[array addObject:[self nextObject]];
 	}
 	return array;
 }
 
+- (void)remove
+{
+    @throw [ANTLRRuntimeException newANTLRRuntimeException:@"UnsupportedOperationException"];
+}
 @synthesize up;
 @synthesize down;
 @synthesize eof;

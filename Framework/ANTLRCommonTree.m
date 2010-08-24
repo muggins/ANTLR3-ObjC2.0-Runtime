@@ -228,6 +228,7 @@
     stopIndex = aStopIndex;
 }
 
+#ifdef DONTUSENOMO
 - (NSString *) treeDescription
 {
 	if (children) {
@@ -243,6 +244,7 @@
 		return [self description];
 	}
 }
+#endif
 
 /** For every node in this subtree, make sure it's start/stop token's
  *  are set.  Walk depth first, visit bottom up.  Only updates nodes

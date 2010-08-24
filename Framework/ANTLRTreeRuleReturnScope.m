@@ -40,6 +40,11 @@
     return startNode;
 }	
 
+- (void)setStart:(ANTLRCommonTree *)aStartNode
+{
+    startNode = aStartNode;
+}	
+
 // create a copy, including the text if available
 // the input stream is *not* copied!
 - (id) copyWithZone:(NSZone *)theZone
