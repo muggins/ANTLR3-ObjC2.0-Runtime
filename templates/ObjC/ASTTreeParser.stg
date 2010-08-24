@@ -39,19 +39,22 @@
  */
 group ASTTreeParser;
 
-/** addition memVars for returnscopes */
+/* addition memVars for returnscopes */
 @returnScopeInterface.memVars() ::= <<
+/* ASTTreeParser returnScopeInterface.memVars */
 <recognizer.ASTLabelType; null="ANTLRCommonTree"> *tree;
 >>
 
 /** the interface of returnScope methodsDecl */
 @returnScopeInterface.methodsDecl() ::= <<
+/* ASTTreeParser returnScopeInterface.methodsDecl */
 - (<recognizer.ASTLabelType; null="ANTLRCommonTree"> *)getTree;
 - (void) setTree:(<recognizer.ASTLabelType; null="ANTLRCommonTree"> *)aTree;<\n>
 >>
 
 /** the implementation of returnScope methods */
 @returnScope.methods() ::= <<
+/* ASTTreeParser returnScope.methods */
 - (<ASTLabelType> *)getTree
 {
     return tree;
@@ -76,6 +79,7 @@ group ASTTreeParser;
 
 /** Add a variable to track last element matched */
 ruleDeclarations() ::= <<
+/* ASTTreeParser ruleDeclarations */
 <super.ruleDeclarations()>
 <ASTLabelType> *_first_0 = nil;
 <ASTLabelType> *_last = nil;<\n>
@@ -85,6 +89,7 @@ ruleDeclarations() ::= <<
  *  mode, does nothing.
  */
 noRewrite(rewriteBlockLevel, treeLevel) ::= <<
+/* ASTTreeParser noRewrite */
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
 <if(rewriteMode)>
 retval.tree = (<ASTLabelType> *)_first_0;
@@ -99,7 +104,8 @@ if ( [treeAdaptor getParent:retval.tree] != nil && [treeAdaptor isNil:[treeAdapt
  */
 tree(root, actionsAfterRoot, children, nullableChildList,
      enclosingTreeLevel, treeLevel) ::= <<
-_last = (<ASTLabelType> *) [input LT:1];
+/* ASTTreeParser tree */
+_last = (<ASTLabelType> *)[input LT:1];
 {
 <ASTLabelType> *_save_last_<treeLevel> = _last;
 <ASTLabelType> *_first_<treeLevel> = nil;
@@ -131,7 +137,6 @@ if ( [input LA:1] == ANTLRTokenTypeDOWN ) {
 [treeAdaptor addChild:root_<treeLevel> toTree:root_<enclosingTreeLevel>];
 <endif>
 _last = _save_last_<treeLevel>;
-// [root_<treeLevel> release]; 
 }<\n>
 >>
 
@@ -139,7 +144,8 @@ _last = _save_last_<treeLevel>;
  *  mode, does nothing.
  */
 noRewrite(rewriteBlockLevel, treeLevel) ::= <<
-<if(rewriteMode)>_retval.tree = (<ASTLabelType>)_retval.startToken;<endif>
+/* ASTTreeParser noRewrite */
+<if(rewriteMode)>_retval.tree = (<ASTLabelType> *)_retval.startToken;<endif>
 >>
 
 // TOKEN AST STUFF
@@ -148,22 +154,24 @@ noRewrite(rewriteBlockLevel, treeLevel) ::= <<
  *  setting of _last
  */
 tokenRefBang(token,label,elementIndex) ::= <<
-_last = (<ASTLabelType>)[input LT:1];
+/* ASTTreeParser tokenRefBang */
+_last = (<ASTLabelType> *)[input LT:1];
 <super.tokenRef(...)>
 >>
 
 /** ID auto construct */
 tokenRef(token,label,elementIndex,hetero) ::= <<
-_last = (<ASTLabelType>)[input LT:1];
+/* ASTTreeParser tokenRef */
+_last = (<ASTLabelType> *)[input LT:1];
 <super.tokenRef(...)>
 <if(!rewriteMode)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
 <if(hetero)>
-<label>_tree = [ANTLR<hetero> newANTLR<hetero>:<label>];
+    <label>_tree = [ANTLR<hetero> newANTLR<hetero>:<label>];
 <else>
-<label>_tree = (<ASTLabelType>)[adaptor dupNode:<label>]];
+    <label>_tree = (<ASTLabelType> *)[adaptor dupNode:<label>]];
 <endif><\n>
-[treeAdaptor addChild:<label>_tree toTree:root_<treeLevel>];
+    [treeAdaptor addChild:<label>_tree toTree:root_<treeLevel>];
 <if(backtracking)>}<endif>
 <else> <! rewrite mode !>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> )<endif>
@@ -173,20 +181,22 @@ if ( _first_<treeLevel>==nil ) _first_<treeLevel> = <label>;
 
 /** label+=TOKEN auto construct */
 tokenRefAndListLabel(token,label,elementIndex,hetero) ::= <<
+/* ASTTreeParser tokenRefAndListLabel */
 <tokenRef(...)>
 <listLabel(elem=label,...)>
 >>
 
 /** ^(ID ...) auto construct */
 tokenRefRuleRoot(token,label,elementIndex) ::= <<
-_last = (<ASTLabelType>)[input LT:1];
+/* ASTTreeParser tokenRefRuleRoot */
+_last = (<ASTLabelType> *)[input LT:1];
 <super.tokenRef(...)>
 <if(!rewriteMode)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
 <if(hetero)>
 <label>_tree = [ANTLR<hetero> newANTLR<hetero>:<label>];
 <else>
-<label>_tree = (<ASTLabelType>)[treeAdaptor dupNode:(<label>)];
+<label>_tree = (<ASTLabelType> *)[treeAdaptor dupNode:<label>];
 <endif><\n>
 root_<treeLevel> = (<ASTLabelType> *)[treeAdaptor becomeRoot:<label>_tree old:root_<treeLevel>];
 <if(backtracking)>}<endif>
@@ -195,36 +205,39 @@ root_<treeLevel> = (<ASTLabelType> *)[treeAdaptor becomeRoot:<label>_tree old:ro
 
 /** Match ^(label+=TOKEN ...) auto construct */
 tokenRefRuleRootAndListLabel(token,label,elementIndex,hetero) ::= <<
+/* ASTTreeParser tokenRefRuleRootAndListLabel */
 <tokenRefRuleRoot(...)>
 <listLabel(elem=label,...)>
 >>
 
 /** Match . wildcard and auto dup the node/subtree */
 wildcard(token,label,elementIndex,hetero) ::= <<
-_last = (<ASTLabelType>)[input LT:1];
+/* ASTTreeParser wildcard */
+_last = (<ASTLabelType> *)[input LT:1];
 <super.wildcard(...)>
 <if(!rewriteMode)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
-<label>_tree = (<ASTLabelType>)adaptor.dupTree(<label>);
+<label>_tree = (<ASTLabelType> *)[adaptor dupTree:<label>];
 [adaptor addChild:<label>_tree toTree:root_<treeLevel>];
 <if(backtracking)>}<endif>
 <else> <! rewrite mode !>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> )<endif>
-if ( _first_<treeLevel>==null ) _first_<treeLevel> = <label>;
+if ( _first_<treeLevel> == nil ) _first_<treeLevel> = <label>;
 <endif>
 >>
 
 // SET AST
 
 matchSet(s,label,hetero,elementIndex,postmatchCode) ::= <<
-_last = (<ASTLabelType>)[input LT:1];
+/* ASTTreeParser matchSet */
+_last = (<ASTLabelType> *)[input LT:1];
 <super.matchSet(..., postmatchCode={
 <if(!rewriteMode)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
 <if(hetero)>
 <label>_tree = [ANTLR<hetero> newANTLR<hetero>:<label>];
 <else>
-<label>_tree = (<ASTLabelType>)[adaptor dupNode:<label>];
+<label>_tree = (<ASTLabelType> *)[adaptor dupNode:<label>];
 <endif><\n>
 [adaptor addChild:<label>_tree toTree:root_<treeLevel>];
 <if(backtracking)>}<endif>
@@ -234,25 +247,28 @@ _last = (<ASTLabelType>)[input LT:1];
 >>
 
 matchRuleBlockSet(s,label,hetero,elementIndex,postmatchCode,treeLevel="0") ::= <<
+/* ASTTreeParser matchRuleBlockSet */
 <matchSet(...)>
 <noRewrite()> <! set return tree !>
 >>
 
 matchSetBang(s,label,elementIndex,postmatchCode) ::= <<
-_last = (<ASTLabelType>)input.LT(1);
+/* ASTTreeParser matchSetBang */
+_last = (<ASTLabelType> *)[input LT:1];
 <super.matchSet(...)>
 >>
 
 matchSetRuleRoot(s,label,hetero,elementIndex,debug) ::= <<
+/* ASTTreeParser matchSetRuleRoot */
 <super.matchSet(..., postmatchCode={
 <if(!rewriteMode)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
 <if(hetero)>
 <label>_tree = [ANTLR<hetero> newANTLR<hetero>:<label>];
 <else>
-<label>_tree = (<ASTLabelType>)[adaptor dupNode:<label>];
+<label>_tree = (<ASTLabelType> *)[adaptor dupNode:<label>];
 <endif><\n>
-root_<treeLevel> = (<ASTLabelType>)[adaptor becomeRoot:<label>_tree old:root_<treeLevel>];
+root_<treeLevel> = (<ASTLabelType> *)[adaptor becomeRoot:<label>_tree old:root_<treeLevel>];
 <if(backtracking)>}<endif>
 <endif>
 }
@@ -263,25 +279,28 @@ root_<treeLevel> = (<ASTLabelType>)[adaptor becomeRoot:<label>_tree old:root_<tr
 
 /** rule auto construct */
 ruleRef(rule,label,elementIndex,args,scope) ::= <<
-_last = (<ASTLabelType>)[input LT:1];
+/* ASTTreeParser ruleRef */
+_last = (<ASTLabelType> *)[input LT:1];
 <super.ruleRef(...)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) <endif>
 <if(!rewriteMode)>
     [treeAdaptor addChild:[<label> getTree] toTree:root_<treeLevel>];
 <else> <! rewrite mode !>
-if ( _first_<treeLevel>==nil ) _first_<treeLevel> = <label>.tree;
+if ( _first_<treeLevel> == nil ) _first_<treeLevel> = <label>.tree;
 <endif>
 >>
 
 /** x+=rule auto construct */
 ruleRefAndListLabel(rule,label,elementIndex,args,scope) ::= <<
+/* ASTTreeParser ruleRefAndListLabel */
 <ruleRef(...)>
-<listLabel(elem="["+label+" getTree]",...)>
+<listLabel(elem = "["+label+" getTree]",...)>
 >>
 
 /** ^(rule ...) auto construct */
 ruleRefRuleRoot(rule,label,elementIndex,args,scope) ::= <<
-_last = (<ASTLabelType>)[input LT:1];
+/* ASTTreeParser ruleRefRuleRoot */
+_last = (<ASTLabelType> *)[input LT:1];
 <super.ruleRef(...)>
 <if(!rewriteMode)>
 <if(backtracking)>if ( state.backtracking == 0 ) <endif>
@@ -291,31 +310,36 @@ root_<treeLevel> = (<ASTLabelType> *)[treeAdaptor becomeRoot:[<label> getTree] o
 
 /** ^(x+=rule ...) auto construct */
 ruleRefRuleRootAndListLabel(rule,label,elementIndex,args,scope) ::= <<
+/* ASTTreeParser ruleRefRuleRootAndListLabel */
 <ruleRefRuleRoot(...)>
 <listLabel(elem="["+label+" getTree]",...)>
 >>
 
 /** rule when output=AST and tracking for rewrite */
 ruleRefTrack(rule,label,elementIndex,args,scope) ::= <<
-_last = (<ASTLabelType>)[input LT:1];
+/* ASTTreeParser ruleRefTrack */
+_last = (<ASTLabelType> *)[input LT:1];
 <super.ruleRefTrack(...)>
 >>
 
 /** x+=rule when output=AST and tracking for rewrite */
 ruleRefTrackAndListLabel(rule,label,elementIndex,args,scope) ::= <<
-_last = (<ASTLabelType>)[input LT:1];
+/* ASTTreeParser ruleRefTrackAndListLabel */
+_last = (<ASTLabelType> *)[input LT:1];
 <super.ruleRefTrackAndListLabel(...)>
 >>
 
 /** ^(rule ...) rewrite */
 ruleRefRuleRootTrack(rule,label,elementIndex,args,scope) ::= <<
-_last = (<ASTLabelType>)[input LT:1];
+/* ASTTreeParser ruleRefRuleRootTrack */
+_last = (<ASTLabelType> *)[input LT:1];
 <super.ruleRefRootTrack(...)>
 >>
 
 /** ^(x+=rule ...) rewrite */
 ruleRefRuleRootTrackAndListLabel(rule,label,elementIndex,args,scope) ::= <<
-_last = (<ASTLabelType>)[input LT:1];
+/* ASTTreeParser ruleRefRuleRootTrackAndListLabel */
+_last = (<ASTLabelType> *)[input LT:1];
 <super.ruleRefRuleRootTrackAndListLabel(...)>
 >>
 
@@ -323,6 +347,7 @@ _last = (<ASTLabelType>)[input LT:1];
  *  change nextToken to nextNode.
  */
 createRewriteNodeFromElement(token,hetero,scope) ::= <<
+/* ASTTreeParser createRewriteNodeFromElement */
 #error Heterogeneous tree support not implemented.
 <if(hetero)>
 <! new <hetero>(stream_<token>.nextNode()) !>
@@ -334,10 +359,11 @@ createRewriteNodeFromElement(token,hetero,scope) ::= <<
 >>
 
 ruleCleanUp() ::= <<
+/* ASTTreeParser ruleCleanUp */
 <super.ruleCleanUp()>
 <if(!rewriteMode)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<\n><endif>
-retval.tree = (<ASTLabelType>)[treeAdaptor rulePostProcessing:root_0];
+retval.tree = (<ASTLabelType> *)[treeAdaptor rulePostProcessing:root_0];
 <if(backtracking)>}<endif>
 <endif>
 >>

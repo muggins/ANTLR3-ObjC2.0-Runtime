@@ -40,6 +40,7 @@
 group ASTParser;
 
 @rule.setErrorReturnValue() ::= <<
+/* ASTParser rule.setErrorReturnValue */
 retval.tree = (<ASTLabelType> *)[treeAdaptor errorNode:input From:retval.startToken To:[input LT:-1] Exception:re];
 <! System.out.println("<ruleName> returns "+((CommonTree)retval.tree).toStringTree()); !>
 >>
@@ -48,6 +49,7 @@ retval.tree = (<ASTLabelType> *)[treeAdaptor errorNode:input From:retval.startTo
 
 /** ID and output=AST */
 tokenRef(token, label, elementIndex, hetero) ::= <<
+/* ASTParser tokenRef */
 <super.tokenRef(...)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
 <label>_tree = <createNodeFromToken(...)>;
@@ -55,7 +57,8 @@ tokenRef(token, label, elementIndex, hetero) ::= <<
 <if(backtracking)>}<endif>
 >>
 
-/** ID! and output=AST (same as plain tokenRef) */
+/* ID! and output=AST (same as plain tokenRef) */
+/* ASTParser tokenRefBang */
 tokenRefBang(token,label,elementIndex) ::= "<super.tokenRef(...)>"
 
 /** ID^ and output=AST */
@@ -69,18 +72,21 @@ root_0 = (<ASTLabelType> *)[treeAdaptor becomeRoot:<label>_tree old:root_0];
 
 /** ids+=ID! and output=AST */
 tokenRefBangAndListLabel(token,label,elementIndex,hetero) ::= <<
+/* ASTParser tokenRefBangAndListLabel */
 <tokenRefBang(...)>
 <listLabel(elem=label,...)>
 >>
 
 /** label+=TOKEN when output=AST but not rewrite alt */
 tokenRefAndListLabel(token,label,elementIndex,hetero) ::= <<
+/* ASTParser tokenRefAndListLabel */
 <tokenRef(...)>
 <listLabel(elem=label,...)>
 >>
 
 /** Match label+=TOKEN^ when output=AST but not rewrite alt */
 tokenRefRuleRootAndListLabel(token,label,hetero,elementIndex) ::= <<
+/* ASTParser tokenRefRuleRootAndListLabel */
 <tokenRefRuleRoot(...)>
 <listLabel(elem=label,...)>
 >>
@@ -99,11 +105,13 @@ tokenRefRuleRootAndListLabel(token,label,hetero,elementIndex) ::= <<
 // I have more time.
 
 matchSet(s,label,hetero,elementIndex,postmatchCode) ::= <<
+/* ASTParser matchSet */
 <super.matchSet(..., postmatchCode={<if(backtracking)>if ( <actions.(actionScope).synpredgate> )<endif>
     [treeAdaptor addChild:<createNodeFromToken(...)> toTree:root_0 ];})>
 >>
 
 matchRuleBlockSet(s,label,hetero,elementIndex,postmatchCode,treeLevel="0") ::= <<
+/* ASTParser matchRuleBlockSet */
 <matchSet(...)>
 >>
 
@@ -113,6 +121,7 @@ matchSetBang(s,label,elementIndex,postmatchCode) ::= "<super.matchSet(...)>"
 // plain old blocks of alts: (A|B|...|C)
 
 matchSetRuleRoot(s,label,hetero,elementIndex,debug) ::= <<
+/* ASTParser matchSetRuleRoot */
 <if(label)>
 <label>=(<labelType>)[input LT:1];<\n>
 <endif>
@@ -124,6 +133,7 @@ root_0 = (<ASTLabelType> *)[treeAdaptor becomeRoot:<createNodeFromToken(...)> ol
 
 /** rule when output=AST */
 ruleRef(rule,label,elementIndex,args,scope) ::= <<
+/* ASTParser ruleRef */
 <super.ruleRef(...)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> )<endif>
 [treeAdaptor addChild:[<label> getTree] toTree:root_0];
@@ -134,6 +144,7 @@ ruleRefBang(rule,label,elementIndex,args,scope) ::= "<super.ruleRef(...)>"
 
 /** rule^ */
 ruleRefRuleRoot(rule,label,elementIndex,args,scope) ::= <<
+/* ASTParser ruleRefRuleRoot */
 <super.ruleRef(...)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> )<endif>
 root_0 = (<ASTLabelType> *)[treeAdaptor becomeRoot:[<label> getTree] old:root_0];
@@ -141,42 +152,48 @@ root_0 = (<ASTLabelType> *)[treeAdaptor becomeRoot:[<label> getTree] old:root_0]
 
 /** x+=rule when output=AST */
 ruleRefAndListLabel(rule,label,elementIndex,args,scope) ::= <<
+/* ASTParser ruleRefAndListLabel */
 <ruleRef(...)>
-<listLabel(elem="["+label+" getTree]",...)>
+<listLabel(elem = "["+label+"getTree]",...)>
 >>
 
 /** x+=rule! when output=AST is a rule ref with list addition */
 ruleRefBangAndListLabel(rule,label,elementIndex,args,scope) ::= <<
+/* ASTParser ruleRefBangAndListLabel */
 <ruleRefBang(...)>
-<listLabel(elem="["+label+" getTree]",...)>
+<listLabel(elem = "["+label+"getTree]",...)>
 >>
 
 /** x+=rule^ */
 ruleRefRuleRootAndListLabel(rule,label,elementIndex,args,scope) ::= <<
+/* ASTParser ruleRefRuleRootAndListLabel */
 <ruleRefRuleRoot(...)>
-<listLabel(elem="["+label+" getTree]",...)>
+<listLabel(elem = "["+label+"getTree]",...)>
 >>
 
 // WILDCARD AST
 
 wildcard(label,elementIndex) ::= <<
+/* ASTParser wildcard */
 <super.wildcard(...)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
-[treeAdaptor addChild:[[treeAdaptor createTree:<label>] retain] toTree:root_0];
+    [treeAdaptor addChild:[[treeAdaptor createTree:<label>] retain] toTree:root_0];
 <if(backtracking)>}<endif>
 >>
 
 wildcardBang(label,elementIndex) ::= "<super.wildcard(...)>"
 
 wildcardRuleRoot(label,elementIndex) ::= <<
+/* ASTParser wildcardRuleRoot */
 <super.wildcard(...)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
-<label>_tree = [[treeAdaptor createTree:<label>] retain]
-root_0 = (<ASTLabelType> *)[treeAdaptor becomeRoot:<label>_tree old:root_0];
+    <label>_tree = [[treeAdaptor createTree:<label>] retain]
+    root_0 = (<ASTLabelType> *)[treeAdaptor becomeRoot:<label>_tree old:root_0];
 <if(backtracking)>}<endif>
 >>
 
 createNodeFromToken(label,hetero) ::= <<
+/* ASTParser createNodeFromToken */
 <if(hetero)>
 [ANTLR<hetero> newANTLR<hetero>:<label>] <! new MethodNode(IDLabel) !>
 <else>
@@ -186,9 +203,10 @@ createNodeFromToken(label,hetero) ::= <<
 
 // straight from java cleanup ///
 ruleCleanUp() ::= <<
+/* ASTParser ruleCleanUp */
 <super.ruleCleanUp()>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<\n><endif>
-retval.tree = (<ASTLabelType> *)[treeAdaptor rulePostProcessing:root_0];
-[treeAdaptor setTokenBoundaries:retval.tree From:retval.startToken To:retval.stopToken];
+    retval.tree = (<ASTLabelType> *)[treeAdaptor rulePostProcessing:root_0];
+    [treeAdaptor setTokenBoundaries:retval.tree From:retval.startToken To:retval.stopToken];
 <if(backtracking)>}<endif>
 >>

@@ -27,52 +27,53 @@
 */
 group AST;
 
-@parserHeaderFile.memVars() ::= <<
-// parserHeaderFile.memVars
+@genericParserHeaderFile.memVars() ::= <<
+/* AST parserHeaderFile.memVars */
 <@super.memVars()>
 <parsermemVars()>
 >>
 
-@parserHeaderFile.methodsdecl() ::= <<
-// parserHeaderFile.methodsdecl
+@genericParserHeaderFile.methodsdecl() ::= <<
+/* AST parserHeaderFile.methodsdecl */
 <@super.methodsdecl()>
 <parserMethodsDecl()>
 >>
 
 @genericParser.methods() ::= <<
-// genericParser.methods
+/* AST genericParser.methods */
 <@super.methods()>
 <parserMethods()>
 >>
 
-/** additional init code for tree support */
+/* additional init code for tree support */
 @genericParser.init() ::= <<
-// genericParser.init
+/* AST genericParser.init */
 <@super.init()>
 [self setTreeAdaptor:[[ANTLRCommonTreeAdaptor newANTLRCommonTreeAdaptor] retain]];
 >>
 
 @genericParser.dealloc() ::= <<
+/* AST genericParser.dealloc */
 [self setTreeAdaptor:nil];
 <@super.dealloc()>
 >>
 
-/** Add an adaptor property that knows how to build trees */
+/* Add an adaptor property that knows how to build trees */
 parsermemVars() ::= <<
-// parsermemVars
+/* AST parsermemVars */
 id\<ANTLRTreeAdaptor> treeAdaptor;
 >>
 
 /** Declaration of additional tree support methods - go in interface of parserHeaderFile() */
 parserMethodsDecl() ::= <<
-// parserMethodsDecl
+/* AST parserMethodsDecl */
 - (id\<ANTLRTreeAdaptor>) getTreeAdaptor;
 - (void) setTreeAdaptor:(id\<ANTLRTreeAdaptor>)theTreeAdaptor;
 >>
 
 /** Definition of addition tree support methods - go in implementation of genericParser() */
 parserMethods() ::= <<
-// parserMethods
+/* AST parserMethods */
 - (id\<ANTLRTreeAdaptor>) getTreeAdaptor
 {
 	return treeAdaptor;
@@ -88,20 +89,32 @@ parserMethods() ::= <<
 
 /** addition memVars for returnscopes */
 @returnScopeInterface.memVars() ::= <<
-// returnScopeInterface.memVars
+/* AST returnScopeInterface.memVars */
 <recognizer.ASTLabelType; null="ANTLRCommonTree"> *tree;
+>>
+
+/** the interface of returnScope properties */
+@returnScopeInterface.properties() ::= <<
+/* AST returnScopeInterface.properties */
+@property (retain, getter=getTree, setter=setTree:) <recognizer.ASTLabelType; null="ANTLRCommonTree"> *tree;
 >>
 
 /** the interface of returnScope methodsDecl */
 @returnScopeInterface.methodsDecl() ::= <<
-// returnScopeInterface.methodsdecl
+/* AST returnScopeInterface.methodsdecl */
 - (<recognizer.ASTLabelType; null="ANTLRCommonTree"> *)getTree;
 - (void) setTree:(<recognizer.ASTLabelType; null="ANTLRCommonTree"> *)aTree;<\n>
 >>
 
+/** the implementation of returnScope synthesize */
+@returnScope.synthesize() ::= <<
+/* AST returnScope.synthesize */
+@synthesize tree;
+>>
+
 /** the implementation of returnScope methods */
 @returnScope.methods() ::= <<
-// returnScope.methods
+/* AST returnScope.methods */
 - (<ASTLabelType> *)getTree
 {
     return tree;
@@ -126,13 +139,13 @@ parserMethods() ::= <<
 
 /** Add a variable to track rule's return AST */
 ruleDeclarations() ::= <<
-// ruleDeclarations
+/* AST ruleDeclarations */
 <super.ruleDeclarations()>
 <ASTLabelType> *root_0 = nil;<\n>
 >>
 
 ruleLabelDefs() ::= <<
-// ruleLabelDefs
+/* AST ruleLabelDefs */
 <super.ruleLabelDefs()>
 <[ruleDescriptor.tokenLabels,ruleDescriptor.wildcardTreeLabels,
   ruleDescriptor.wildcardTreeListLabels]:{<ASTLabelType> *<it.label.text>_tree=nil;}; separator="\n">
@@ -146,19 +159,18 @@ ruleLabelDefs() ::= <<
 >>
 
 ruleCleanUp() ::= <<
+/* AST ruleCleanUp */
 <super.ruleCleanUp()>
 <[ruleDescriptor.allTokenRefsInAltsWithRewrites,ruleDescriptor.allRuleRefsInAltsWithRewrites]:{[stream_<it> release];}; separator="\n">
 <!
 <if(ruleDescriptor.hasMultipleReturnValues)>
-<if(backtracking)>
-if ( state.backtracking == 0 ) {<\n>
+<if(backtracking)>if ( state.backtracking == 0 ) {<\n>
 <endif>
     [<prevRuleRootRef()> setTree:(<ASTLabelType> *)[treeAdaptor rulePostProcessing:root_0]];<\n>
     [treeAdaptor setTokenBoundaries:[<prevRuleRootRef()> getTree]
                                From:[<prevRuleRootRef()> getStart]
                                  To:[<prevRuleRootRef()> getStop]];<\n>
-<if(backtracking)>
- }<\n>
+<if(backtracking)>}<\n>
 <endif>
 <endif>
 [root_0 release];
@@ -166,6 +178,7 @@ if ( state.backtracking == 0 ) {<\n>
 >>
 
 rewriteCodeLabelsCleanUp() ::= <<
+/* AST rewriteCodeLabelsCleanUp */
  <referencedTokenLabels:{[stream_<it> release];}; separator="\n">
  <referencedTokenListLabels:{[stream_<it> release];}; separator="\n">
  <referencedRuleLabels:{[stream_<it> release];}; separator="\n">
