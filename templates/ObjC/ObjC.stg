@@ -1986,7 +1986,7 @@ rulePropertyRef_text(scope,attr) ::= <<
 [input toStringFromToken:retval.start ToToken:[input LT:-1]]
 <endif>
 >>
-rulePropertyRef_st(scope,attr) ::= "[retval st]"
+rulePropertyRef_st(scope,attr) ::= "retval.st"
 
 /* hideous: find a way to cut down on the number of templates to support read/write access */
 /* TODO: also, which ones are valid to write to? ask Ter */
@@ -2005,7 +2005,7 @@ lexerRulePropertyRef_type(scope,attr) ::= "[state getType]"
 lexerRulePropertyRef_line(scope,attr) ::= "state.tokenStartLine"
 lexerRulePropertyRef_pos(scope,attr) ::= "state.tokenStartCharPositionInLine"
 lexerRulePropertyRef_index(scope,attr) ::= "-1" // undefined token index in lexer
-lexerRulePropertyRef_channel(scope,attr) ::= "state.channel"
+lexerRulePropertyRef_channel(scope,attr) ::= "_channel"
 lexerRulePropertyRef_start(scope,attr) ::= "state.tokenStartCharIndex"
 lexerRulePropertyRef_stop(scope,attr) ::= "([self getIndex]-1)"
 lexerRulePropertyRef_int(scope,attr) ::= "[[<scope> getText] integerValue]"
