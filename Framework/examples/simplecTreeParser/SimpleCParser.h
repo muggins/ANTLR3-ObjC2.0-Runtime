@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 20, 2010 18:07:53 SimpleC.g 2010-08-20 18:13:31
+// $ANTLR 3.2 Aug 23, 2010 21:05:19 SimpleC.g 2010-08-23 21:07:18
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -9,255 +9,256 @@
  * =============================================================================
  */
 
+/* parserHeaderFile */
 #pragma mark Cyclic DFA interface start DFA2
 @interface DFA2 : ANTLRDFA {
 }
 + newDFA2WithRecognizer:(ANTLRBaseRecognizer *)theRecognizer;
 - initWithRecognizer:(ANTLRBaseRecognizer *)recognizer;
-@end
+@end /* end of DFA2 interface  */
 
 #pragma mark Cyclic DFA interface end DFA2
 #pragma mark Tokens
-#define K_ID 10
-#define T__26 26
-#define T__25 25
-#define T__24 24
-#define T__23 23
-#define K_EQEQ 16
-#define T__22 22
-#define K_INT 11
-#define T__21 21
-#define K_FOR 14
+#define K_ID 11
+#define K_RCURLY 19
+#define K_RCURVE 14
+#define K_EQEQ 22
+#define K_INT 15
+#define K_SemiColon 10
+#define K_FOR 20
 #define FUNC_HDR 6
 #define FUNC_DEF 8
 #define EOF -1
-#define K_INT_TYPE 19
+#define K_INT_TYPE 25
 #define FUNC_DECL 7
+#define K_COMMA 13
 #define ARG_DEF 5
-#define WS 20
-#define K_EQ 15
+#define K_LCURLY 18
+#define WS 26
+#define K_EQ 21
 #define BLOCK 9
-#define K_LT 17
-#define K_CHAR 12
-#define K_VOID 13
+#define K_LT 23
+#define K_LCURVE 12
+#define K_CHAR 16
+#define K_VOID 17
 #define VAR_DEF 4
-#define K_PLUS 18
+#define K_PLUS 24
 #pragma mark Dynamic Global Scopes
 #pragma mark Dynamic Rule Scopes
 #pragma mark Rule Return Scopes start
-@interface SimpleCParser_program_return :ANTLRParserRuleReturnScope { // line 1672
-// returnScopeInterface.memVars
-ANTLRCommonTree *tree; // start of memVars()
+/* returnScopeInterface */
+@interface SimpleCParser_program_return :ANTLRParserRuleReturnScope { /* returnScopeInterface line 1806 */
+/* AST returnScopeInterface.memVars */
+ANTLRCommonTree *tree; /* start of memVars() */
 }
-
-// start properties
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+/* AST returnScopeInterface.properties */
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree; /* start properties */
 + (SimpleCParser_program_return *)newSimpleCParser_program_return;
-// this is start of set and get methods
-// returnScopeInterface.methodsdecl
+/* this is start of set and get methods */
+/* AST returnScopeInterface.methodsdecl */
 - (ANTLRCommonTree *)getTree;
 - (void) setTree:(ANTLRCommonTree *)aTree;
-  // methodsDecl
-@end 
-@interface SimpleCParser_declaration_return :ANTLRParserRuleReturnScope { // line 1672
-// returnScopeInterface.memVars
-ANTLRCommonTree *tree; // start of memVars()
+  /* methodsDecl */
+@end /* end of returnScopeInterface interface */
+/* returnScopeInterface */
+@interface SimpleCParser_declaration_return :ANTLRParserRuleReturnScope { /* returnScopeInterface line 1806 */
+/* AST returnScopeInterface.memVars */
+ANTLRCommonTree *tree; /* start of memVars() */
 }
-
-// start properties
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+/* AST returnScopeInterface.properties */
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree; /* start properties */
 + (SimpleCParser_declaration_return *)newSimpleCParser_declaration_return;
-// this is start of set and get methods
-// returnScopeInterface.methodsdecl
+/* this is start of set and get methods */
+/* AST returnScopeInterface.methodsdecl */
 - (ANTLRCommonTree *)getTree;
 - (void) setTree:(ANTLRCommonTree *)aTree;
-  // methodsDecl
-@end 
-@interface SimpleCParser_variable_return :ANTLRParserRuleReturnScope { // line 1672
-// returnScopeInterface.memVars
-ANTLRCommonTree *tree; // start of memVars()
+  /* methodsDecl */
+@end /* end of returnScopeInterface interface */
+/* returnScopeInterface */
+@interface SimpleCParser_variable_return :ANTLRParserRuleReturnScope { /* returnScopeInterface line 1806 */
+/* AST returnScopeInterface.memVars */
+ANTLRCommonTree *tree; /* start of memVars() */
 }
-
-// start properties
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+/* AST returnScopeInterface.properties */
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree; /* start properties */
 + (SimpleCParser_variable_return *)newSimpleCParser_variable_return;
-// this is start of set and get methods
-// returnScopeInterface.methodsdecl
+/* this is start of set and get methods */
+/* AST returnScopeInterface.methodsdecl */
 - (ANTLRCommonTree *)getTree;
 - (void) setTree:(ANTLRCommonTree *)aTree;
-  // methodsDecl
-@end 
-@interface SimpleCParser_declarator_return :ANTLRParserRuleReturnScope { // line 1672
-// returnScopeInterface.memVars
-ANTLRCommonTree *tree; // start of memVars()
+  /* methodsDecl */
+@end /* end of returnScopeInterface interface */
+/* returnScopeInterface */
+@interface SimpleCParser_declarator_return :ANTLRParserRuleReturnScope { /* returnScopeInterface line 1806 */
+/* AST returnScopeInterface.memVars */
+ANTLRCommonTree *tree; /* start of memVars() */
 }
-
-// start properties
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+/* AST returnScopeInterface.properties */
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree; /* start properties */
 + (SimpleCParser_declarator_return *)newSimpleCParser_declarator_return;
-// this is start of set and get methods
-// returnScopeInterface.methodsdecl
+/* this is start of set and get methods */
+/* AST returnScopeInterface.methodsdecl */
 - (ANTLRCommonTree *)getTree;
 - (void) setTree:(ANTLRCommonTree *)aTree;
-  // methodsDecl
-@end 
-@interface SimpleCParser_functionHeader_return :ANTLRParserRuleReturnScope { // line 1672
-// returnScopeInterface.memVars
-ANTLRCommonTree *tree; // start of memVars()
+  /* methodsDecl */
+@end /* end of returnScopeInterface interface */
+/* returnScopeInterface */
+@interface SimpleCParser_functionHeader_return :ANTLRParserRuleReturnScope { /* returnScopeInterface line 1806 */
+/* AST returnScopeInterface.memVars */
+ANTLRCommonTree *tree; /* start of memVars() */
 }
-
-// start properties
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+/* AST returnScopeInterface.properties */
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree; /* start properties */
 + (SimpleCParser_functionHeader_return *)newSimpleCParser_functionHeader_return;
-// this is start of set and get methods
-// returnScopeInterface.methodsdecl
+/* this is start of set and get methods */
+/* AST returnScopeInterface.methodsdecl */
 - (ANTLRCommonTree *)getTree;
 - (void) setTree:(ANTLRCommonTree *)aTree;
-  // methodsDecl
-@end 
-@interface SimpleCParser_formalParameter_return :ANTLRParserRuleReturnScope { // line 1672
-// returnScopeInterface.memVars
-ANTLRCommonTree *tree; // start of memVars()
+  /* methodsDecl */
+@end /* end of returnScopeInterface interface */
+/* returnScopeInterface */
+@interface SimpleCParser_formalParameter_return :ANTLRParserRuleReturnScope { /* returnScopeInterface line 1806 */
+/* AST returnScopeInterface.memVars */
+ANTLRCommonTree *tree; /* start of memVars() */
 }
-
-// start properties
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+/* AST returnScopeInterface.properties */
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree; /* start properties */
 + (SimpleCParser_formalParameter_return *)newSimpleCParser_formalParameter_return;
-// this is start of set and get methods
-// returnScopeInterface.methodsdecl
+/* this is start of set and get methods */
+/* AST returnScopeInterface.methodsdecl */
 - (ANTLRCommonTree *)getTree;
 - (void) setTree:(ANTLRCommonTree *)aTree;
-  // methodsDecl
-@end 
-@interface SimpleCParser_type_return :ANTLRParserRuleReturnScope { // line 1672
-// returnScopeInterface.memVars
-ANTLRCommonTree *tree; // start of memVars()
+  /* methodsDecl */
+@end /* end of returnScopeInterface interface */
+/* returnScopeInterface */
+@interface SimpleCParser_type_return :ANTLRParserRuleReturnScope { /* returnScopeInterface line 1806 */
+/* AST returnScopeInterface.memVars */
+ANTLRCommonTree *tree; /* start of memVars() */
 }
-
-// start properties
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+/* AST returnScopeInterface.properties */
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree; /* start properties */
 + (SimpleCParser_type_return *)newSimpleCParser_type_return;
-// this is start of set and get methods
-// returnScopeInterface.methodsdecl
+/* this is start of set and get methods */
+/* AST returnScopeInterface.methodsdecl */
 - (ANTLRCommonTree *)getTree;
 - (void) setTree:(ANTLRCommonTree *)aTree;
-  // methodsDecl
-@end 
-@interface SimpleCParser_block_return :ANTLRParserRuleReturnScope { // line 1672
-// returnScopeInterface.memVars
-ANTLRCommonTree *tree; // start of memVars()
+  /* methodsDecl */
+@end /* end of returnScopeInterface interface */
+/* returnScopeInterface */
+@interface SimpleCParser_block_return :ANTLRParserRuleReturnScope { /* returnScopeInterface line 1806 */
+/* AST returnScopeInterface.memVars */
+ANTLRCommonTree *tree; /* start of memVars() */
 }
-
-// start properties
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+/* AST returnScopeInterface.properties */
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree; /* start properties */
 + (SimpleCParser_block_return *)newSimpleCParser_block_return;
-// this is start of set and get methods
-// returnScopeInterface.methodsdecl
+/* this is start of set and get methods */
+/* AST returnScopeInterface.methodsdecl */
 - (ANTLRCommonTree *)getTree;
 - (void) setTree:(ANTLRCommonTree *)aTree;
-  // methodsDecl
-@end 
-@interface SimpleCParser_stat_return :ANTLRParserRuleReturnScope { // line 1672
-// returnScopeInterface.memVars
-ANTLRCommonTree *tree; // start of memVars()
+  /* methodsDecl */
+@end /* end of returnScopeInterface interface */
+/* returnScopeInterface */
+@interface SimpleCParser_stat_return :ANTLRParserRuleReturnScope { /* returnScopeInterface line 1806 */
+/* AST returnScopeInterface.memVars */
+ANTLRCommonTree *tree; /* start of memVars() */
 }
-
-// start properties
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+/* AST returnScopeInterface.properties */
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree; /* start properties */
 + (SimpleCParser_stat_return *)newSimpleCParser_stat_return;
-// this is start of set and get methods
-// returnScopeInterface.methodsdecl
+/* this is start of set and get methods */
+/* AST returnScopeInterface.methodsdecl */
 - (ANTLRCommonTree *)getTree;
 - (void) setTree:(ANTLRCommonTree *)aTree;
-  // methodsDecl
-@end 
-@interface SimpleCParser_forStat_return :ANTLRParserRuleReturnScope { // line 1672
-// returnScopeInterface.memVars
-ANTLRCommonTree *tree; // start of memVars()
+  /* methodsDecl */
+@end /* end of returnScopeInterface interface */
+/* returnScopeInterface */
+@interface SimpleCParser_forStat_return :ANTLRParserRuleReturnScope { /* returnScopeInterface line 1806 */
+/* AST returnScopeInterface.memVars */
+ANTLRCommonTree *tree; /* start of memVars() */
 }
-
-// start properties
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+/* AST returnScopeInterface.properties */
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree; /* start properties */
 + (SimpleCParser_forStat_return *)newSimpleCParser_forStat_return;
-// this is start of set and get methods
-// returnScopeInterface.methodsdecl
+/* this is start of set and get methods */
+/* AST returnScopeInterface.methodsdecl */
 - (ANTLRCommonTree *)getTree;
 - (void) setTree:(ANTLRCommonTree *)aTree;
-  // methodsDecl
-@end 
-@interface SimpleCParser_assignStat_return :ANTLRParserRuleReturnScope { // line 1672
-// returnScopeInterface.memVars
-ANTLRCommonTree *tree; // start of memVars()
+  /* methodsDecl */
+@end /* end of returnScopeInterface interface */
+/* returnScopeInterface */
+@interface SimpleCParser_assignStat_return :ANTLRParserRuleReturnScope { /* returnScopeInterface line 1806 */
+/* AST returnScopeInterface.memVars */
+ANTLRCommonTree *tree; /* start of memVars() */
 }
-
-// start properties
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+/* AST returnScopeInterface.properties */
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree; /* start properties */
 + (SimpleCParser_assignStat_return *)newSimpleCParser_assignStat_return;
-// this is start of set and get methods
-// returnScopeInterface.methodsdecl
+/* this is start of set and get methods */
+/* AST returnScopeInterface.methodsdecl */
 - (ANTLRCommonTree *)getTree;
 - (void) setTree:(ANTLRCommonTree *)aTree;
-  // methodsDecl
-@end 
-@interface SimpleCParser_expr_return :ANTLRParserRuleReturnScope { // line 1672
-// returnScopeInterface.memVars
-ANTLRCommonTree *tree; // start of memVars()
+  /* methodsDecl */
+@end /* end of returnScopeInterface interface */
+/* returnScopeInterface */
+@interface SimpleCParser_expr_return :ANTLRParserRuleReturnScope { /* returnScopeInterface line 1806 */
+/* AST returnScopeInterface.memVars */
+ANTLRCommonTree *tree; /* start of memVars() */
 }
-
-// start properties
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+/* AST returnScopeInterface.properties */
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree; /* start properties */
 + (SimpleCParser_expr_return *)newSimpleCParser_expr_return;
-// this is start of set and get methods
-// returnScopeInterface.methodsdecl
+/* this is start of set and get methods */
+/* AST returnScopeInterface.methodsdecl */
 - (ANTLRCommonTree *)getTree;
 - (void) setTree:(ANTLRCommonTree *)aTree;
-  // methodsDecl
-@end 
-@interface SimpleCParser_condExpr_return :ANTLRParserRuleReturnScope { // line 1672
-// returnScopeInterface.memVars
-ANTLRCommonTree *tree; // start of memVars()
+  /* methodsDecl */
+@end /* end of returnScopeInterface interface */
+/* returnScopeInterface */
+@interface SimpleCParser_condExpr_return :ANTLRParserRuleReturnScope { /* returnScopeInterface line 1806 */
+/* AST returnScopeInterface.memVars */
+ANTLRCommonTree *tree; /* start of memVars() */
 }
-
-// start properties
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+/* AST returnScopeInterface.properties */
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree; /* start properties */
 + (SimpleCParser_condExpr_return *)newSimpleCParser_condExpr_return;
-// this is start of set and get methods
-// returnScopeInterface.methodsdecl
+/* this is start of set and get methods */
+/* AST returnScopeInterface.methodsdecl */
 - (ANTLRCommonTree *)getTree;
 - (void) setTree:(ANTLRCommonTree *)aTree;
-  // methodsDecl
-@end 
-@interface SimpleCParser_aexpr_return :ANTLRParserRuleReturnScope { // line 1672
-// returnScopeInterface.memVars
-ANTLRCommonTree *tree; // start of memVars()
+  /* methodsDecl */
+@end /* end of returnScopeInterface interface */
+/* returnScopeInterface */
+@interface SimpleCParser_aexpr_return :ANTLRParserRuleReturnScope { /* returnScopeInterface line 1806 */
+/* AST returnScopeInterface.memVars */
+ANTLRCommonTree *tree; /* start of memVars() */
 }
-
-// start properties
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+/* AST returnScopeInterface.properties */
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree; /* start properties */
 + (SimpleCParser_aexpr_return *)newSimpleCParser_aexpr_return;
-// this is start of set and get methods
-// returnScopeInterface.methodsdecl
+/* this is start of set and get methods */
+/* AST returnScopeInterface.methodsdecl */
 - (ANTLRCommonTree *)getTree;
 - (void) setTree:(ANTLRCommonTree *)aTree;
-  // methodsDecl
-@end 
-@interface SimpleCParser_atom_return :ANTLRParserRuleReturnScope { // line 1672
-// returnScopeInterface.memVars
-ANTLRCommonTree *tree; // start of memVars()
+  /* methodsDecl */
+@end /* end of returnScopeInterface interface */
+/* returnScopeInterface */
+@interface SimpleCParser_atom_return :ANTLRParserRuleReturnScope { /* returnScopeInterface line 1806 */
+/* AST returnScopeInterface.memVars */
+ANTLRCommonTree *tree; /* start of memVars() */
 }
-
-// start properties
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+/* AST returnScopeInterface.properties */
+@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree; /* start properties */
 + (SimpleCParser_atom_return *)newSimpleCParser_atom_return;
-// this is start of set and get methods
-// returnScopeInterface.methodsdecl
+/* this is start of set and get methods */
+/* AST returnScopeInterface.methodsdecl */
 - (ANTLRCommonTree *)getTree;
 - (void) setTree:(ANTLRCommonTree *)aTree;
-  // methodsDecl
-@end 
+  /* methodsDecl */
+@end /* end of returnScopeInterface interface */
 
 #pragma mark Rule return scopes end
-@interface SimpleCParser : ANTLRParser { // line 529
+@interface SimpleCParser : ANTLRParser { /* line 572 */
 // start of globalAttributeScopeMemVar
 
 
@@ -266,8 +267,8 @@ ANTLRCommonTree *tree; // start of memVars()
 
 
 // Start of memVars
-// parserHeaderFile.memVars
-// parsermemVars
+/* AST parserHeaderFile.memVars */
+/* AST parsermemVars */
 id<ANTLRTreeAdaptor> treeAdaptor;
 
 DFA2 *dfa2;
@@ -275,8 +276,8 @@ DFA2 *dfa2;
 
 // start of action-actionScope-methodsDecl
 
-// parserHeaderFile.methodsdecl
-// parserMethodsDecl
+/* AST parserHeaderFile.methodsdecl */
+/* AST parserMethodsDecl */
 - (id<ANTLRTreeAdaptor>) getTreeAdaptor;
 - (void) setTreeAdaptor:(id<ANTLRTreeAdaptor>)theTreeAdaptor;
 

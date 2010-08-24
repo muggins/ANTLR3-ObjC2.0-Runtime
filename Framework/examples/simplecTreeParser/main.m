@@ -9,14 +9,17 @@
 int main(int argc, const char * argv[]) {
     NSError *anError;
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-
+    char *inp = "../../examples/simplecTreeParser/input";
+    
+/*
     if (argc < 2) {
         NSLog(@"provide the input file, please");
         return 1;
     }
+ */
 	
 	// simply read in the input file in one gulp
-	NSString *string = [NSString stringWithContentsOfFile:[NSString stringWithCString:argv[1] encoding:NSASCIIStringEncoding] encoding:NSASCIIStringEncoding error:&anError];
+	NSString *string = [NSString stringWithContentsOfFile:[NSString stringWithCString:inp encoding:NSASCIIStringEncoding] encoding:NSASCIIStringEncoding error:&anError];
 	NSLog(@"input is : %@", string);
 
 	// create a stream over the input, so the lexer can seek back and forth, but don't copy the string,
@@ -24,10 +27,10 @@ int main(int argc, const char * argv[]) {
 	// If the string would be coming from a volatile source, say a text field, we could opt to copy the string.
 	// That way we could do the parsing in a different thread, and still let the user edit the original string.
 	// But here we do it the simple way.
-	ANTLRStringStream *stream = [[ANTLRStringStream alloc] initWithStringNoCopy:string];
+	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:string];
 	
 	// Actually create the lexer feeding of the character stream.
-	SimpleCLexer *lexer = [[SimpleCLexer alloc] initWithCharStream:stream];
+	SimpleCLexer *lexer = [SimpleCLexer newSimpleCLexerWithCharStream:stream];
 	
 	// For fun, you could print all tokens the lexer recognized, but we can only do it once. After that
 	// we would need to reset the lexer, and lex again.
@@ -55,12 +58,12 @@ int main(int argc, const char * argv[]) {
 	NSLog(@"tree: %@", [program_tree treeDescription]);
 	
 	// Create a new tree node stream that's feeding off of the root node (thus seeing the whole tree)
-	ANTLRCommonTreeNodeStream *treeStream = [[ANTLRCommonTreeNodeStream alloc] initWithTree:program_tree];
+	ANTLRCommonTreeNodeStream *treeStream = [ANTLRCommonTreeNodeStream newANTLRCommonTreeNodeStream:program_tree];
 	// tell the TreeNodeStream where the tokens originally came from, so we can retrieve arbitrary tokens and their text.
 	[treeStream setTokenStream:tokenStream];
 	
 	// Create the treeparser instance, passing it the stream of nodes
-	SimpleCTP *walker = [[SimpleCTP alloc] initWithTreeNodeStream:treeStream];
+	SimpleCTP *walker = [[SimpleCTP alloc] initWithStream:treeStream];
 	// As with parsers, you can invoke any treeparser rule here.
 	[walker program];
 

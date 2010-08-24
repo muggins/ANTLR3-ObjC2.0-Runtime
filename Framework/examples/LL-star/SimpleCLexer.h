@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 20, 2010 18:07:53 SimpleC.g 2010-08-20 18:13:27
+// $ANTLR 3.2 Aug 21, 2010 19:57:13 SimpleC.g 2010-08-21 20:43:09
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -15,7 +15,7 @@
 }
 + newDFA4WithRecognizer:(ANTLRBaseRecognizer *)theRecognizer;
 - initWithRecognizer:(ANTLRBaseRecognizer *)recognizer;
-@end
+@end /* end of DFA4 interface  */
 
 #pragma mark Cyclic DFA interface end DFA4
 

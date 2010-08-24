@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 20, 2010 18:07:53 SymbolTable.g 2010-08-20 18:13:29
+// $ANTLR 3.2 Aug 21, 2010 19:57:13 SymbolTable.g 2010-08-21 20:43:12
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -40,7 +40,7 @@ ANTLRHashMap * names;
 
 /* End of iterated get and set functions */
 
-@end 
+@end /* end of Symbols_Scope interface */
 
 #pragma mark Dynamic Rule Scopes
 #pragma mark Rule Return Scopes start

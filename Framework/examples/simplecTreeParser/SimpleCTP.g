@@ -5,6 +5,11 @@ options {
 	ASTLabelType = ANTLRCommonTree;
 }
 
+scope Symbols
+{
+ANTLRCommonTree *tree;
+}
+
 program
     :   declaration+
     ;

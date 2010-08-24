@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 20, 2010 18:07:53 Fuzzy.g 2010-08-20 18:13:24
+// $ANTLR 3.2 Aug 21, 2010 19:57:13 Fuzzy.g 2010-08-21 20:43:06
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -15,7 +15,7 @@
 }
 + newDFA38WithRecognizer:(ANTLRBaseRecognizer *)theRecognizer;
 - initWithRecognizer:(ANTLRBaseRecognizer *)recognizer;
-@end
+@end /* end of DFA38 interface  */
 
 #pragma mark Cyclic DFA interface end DFA38
 
@@ -44,8 +44,8 @@
 @interface Fuzzy : ANTLRLexer { // line 283
 DFA38 *dfa38;
 SEL synpred9_FuzzySelector;
-SEL synpred2_FuzzySelector;
 SEL synpred7_FuzzySelector;
+SEL synpred2_FuzzySelector;
 SEL synpred4_FuzzySelector;
 SEL synpred8_FuzzySelector;
 SEL synpred6_FuzzySelector;

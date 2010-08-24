@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 20, 2010 18:07:53 SimpleC.g 2010-08-20 18:13:32
+// $ANTLR 3.2 Aug 23, 2010 21:05:19 SimpleC.g 2010-08-23 21:07:18
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -15,60 +15,97 @@
 }
 + newDFA4WithRecognizer:(ANTLRBaseRecognizer *)theRecognizer;
 - initWithRecognizer:(ANTLRBaseRecognizer *)recognizer;
-@end
+@end /* end of DFA4 interface  */
 
 #pragma mark Cyclic DFA interface end DFA4
 
 #pragma mark Rule return scopes start
+/* returnScopeInterface */
+
+/* returnScopeInterface */
+
+/* returnScopeInterface */
+
+/* returnScopeInterface */
+
+/* returnScopeInterface */
+
+/* returnScopeInterface */
+
+/* returnScopeInterface */
+
+/* returnScopeInterface */
+
+/* returnScopeInterface */
+
+/* returnScopeInterface */
+
+/* returnScopeInterface */
+
+/* returnScopeInterface */
+
+/* returnScopeInterface */
+
+/* returnScopeInterface */
+
+/* returnScopeInterface */
+
+/* returnScopeInterface */
+
+/* returnScopeInterface */
+
+/* returnScopeInterface */
+
+
 #pragma mark Rule return scopes end
 #pragma mark Tokens
-#define K_ID 10
-#define T__26 26
-#define T__25 25
-#define T__24 24
-#define T__23 23
-#define K_EQEQ 16
-#define T__22 22
-#define K_INT 11
-#define T__21 21
-#define K_FOR 14
+#define K_ID 11
+#define K_RCURLY 19
+#define K_RCURVE 14
+#define K_EQEQ 22
+#define K_INT 15
+#define K_SemiColon 10
+#define K_FOR 20
 #define FUNC_HDR 6
 #define FUNC_DEF 8
 #define EOF -1
-#define K_INT_TYPE 19
+#define K_INT_TYPE 25
 #define FUNC_DECL 7
+#define K_COMMA 13
 #define ARG_DEF 5
-#define WS 20
-#define K_EQ 15
+#define K_LCURLY 18
+#define WS 26
+#define K_EQ 21
 #define BLOCK 9
-#define K_LT 17
-#define K_CHAR 12
-#define K_VOID 13
+#define K_LCURVE 12
+#define K_LT 23
+#define K_CHAR 16
+#define K_VOID 17
 #define VAR_DEF 4
-#define K_PLUS 18
+#define K_PLUS 24
 @interface SimpleCLexer : ANTLRLexer { // line 283
 DFA4 *dfa4;
 // start of actions.lexer.memVars
 // start of action-actionScope-memVars
 }
-+ (SimpleCLexer *)newSimpleCLexer:(id<ANTLRCharStream>)anInput;
++ (SimpleCLexer *)newSimpleCLexerWithCharStream:(id<ANTLRCharStream>)anInput;
 
-- (void)mT__21; 
-- (void)mT__22; 
-- (void)mT__23; 
-- (void)mT__24; 
-- (void)mT__25; 
-- (void)mT__26; 
 - (void)mK_FOR; 
-- (void)mK_INT_TYPE; 
 - (void)mK_CHAR; 
+- (void)mK_INT_TYPE; 
 - (void)mK_VOID; 
 - (void)mK_ID; 
 - (void)mK_INT; 
+- (void)mK_LCURVE; 
+- (void)mK_RCURVE; 
+- (void)mK_PLUS; 
+- (void)mK_COMMA; 
+- (void)mK_SemiColon; 
+- (void)mK_LT; 
 - (void)mK_EQ; 
 - (void)mK_EQEQ; 
-- (void)mK_LT; 
-- (void)mK_PLUS; 
+- (void)mK_LCURLY; 
+- (void)mK_RCURLY; 
 - (void)mWS; 
 - (void)mTokens; 
 

@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 17, 2010 17:18:07 /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g 2010-08-17 17:19:19
+// $ANTLR 3.2 Aug 23, 2010 07:48:06 /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g 2010-08-23 07:54:47
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -9,12 +9,13 @@
  * =============================================================================
  */
 
+/* Start cyclicDFAInterface */
 #pragma mark Cyclic DFA interface start DFA4
 @interface DFA4 : ANTLRDFA {
 }
 + newDFA4WithRecognizer:(ANTLRBaseRecognizer *)theRecognizer;
 - initWithRecognizer:(ANTLRBaseRecognizer *)recognizer;
-@end
+@end /* end of DFA4 interface  */
 
 #pragma mark Cyclic DFA interface end DFA4
 
@@ -46,26 +47,29 @@
 #define VAR_DEF 4
 #define K_PLUS 18
 @interface SimpleCLexer : ANTLRLexer { // line 283
-    DFA4 *dfa4;
+DFA4 *dfa4;
+// start of actions.lexer.memVars
+// start of action-actionScope-memVars
 }
 + (SimpleCLexer *)newSimpleCLexer:(id<ANTLRCharStream>)anInput;
 
-- (void) mT__21; 
-- (void) mT__22; 
-- (void) mT__23; 
-- (void) mT__24; 
-- (void) mT__25; 
-- (void) mT__26; 
-- (void) mK_FOR; 
-- (void) mK_INT_TYPE; 
-- (void) mK_CHAR; 
-- (void) mK_VOID; 
-- (void) mK_ID; 
-- (void) mK_INT; 
-- (void) mK_EQ; 
-- (void) mK_EQEQ; 
-- (void) mK_LT; 
-- (void) mK_PLUS; 
-- (void) mWS; 
-- (void) mTokens; 
-@end // end of SimpleCLexer interface
+- (void)mT__21; 
+- (void)mT__22; 
+- (void)mT__23; 
+- (void)mT__24; 
+- (void)mT__25; 
+- (void)mT__26; 
+- (void)mK_FOR; 
+- (void)mK_INT_TYPE; 
+- (void)mK_CHAR; 
+- (void)mK_VOID; 
+- (void)mK_ID; 
+- (void)mK_INT; 
+- (void)mK_EQ; 
+- (void)mK_EQEQ; 
+- (void)mK_LT; 
+- (void)mK_PLUS; 
+- (void)mWS; 
+- (void)mTokens; 
+
+@end /* end of SimpleCLexer interface */
