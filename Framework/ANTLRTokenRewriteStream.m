@@ -676,7 +676,7 @@ static NSInteger MIN_TOKEN_INDEX = 0;
     return [self toDebugStringFromStart:MIN_TOKEN_INDEX ToEnd:[tokens count]-1];
 }
 
-- (NSMutableString *)toDebugString:(NSInteger)start ToEnd:(NSInteger)end
+- (NSMutableString *)toDebugStringFromStart:(NSInteger)start ToEnd:(NSInteger)end
 {
     NSMutableString *buf = [NSMutableString stringWithCapacity:100];
     for (int i = start; i >= MIN_TOKEN_INDEX && i <= end && i < [tokens count]; i++) {
