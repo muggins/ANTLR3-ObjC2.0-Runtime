@@ -448,7 +448,7 @@
 	STAssertTrue([[parent treeDescription] isEqualToString:@"nil"], @"Tree description was not nil was %@", [parent treeDescription]);
 	[parent addChild:tree];
 	treeDesc = [parent treeDescription];
-	STAssertTrue([treeDesc isEqualToString:@"(^nil||)"], @"Tree description was not (^nil||) but was: %@", treeDesc);
+	STAssertTrue([treeDesc isEqualToString:@"||"], @"Tree description was not || but was: %@", treeDesc);
 	
 	// Test non empty parent
 	ANTLRCommonTree *down = [ANTLRCommonTree newANTLRCommonTreeWithTokenType:ANTLRTokenTypeDOWN];
@@ -456,7 +456,7 @@
 	
 	[tree addChild:down];
 	treeDesc = [parent treeDescription];
-	STAssertTrue([treeDesc isEqualToString:@"(^nil(^||<DOWN>))"], @"Tree description was wrong expected (^nil(^||<DOWN>)) but got: %@", treeDesc);
+	STAssertTrue([treeDesc isEqualToString:@"(|| <DOWN>)"], @"Tree description was wrong expected (|| <DOWN>) but got: %@", treeDesc);
     return;
 }
 
