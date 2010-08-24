@@ -9,15 +9,15 @@ int main() {
 	
 	NSString *string = [NSString stringWithContentsOfFile:@"../../examples/hoistedPredicates/input" encoding:NSASCIIStringEncoding error:&error];
 	NSLog(@"input is : %@", string);
-	ANTLRStringStream *stream = [[ANTLRStringStream alloc] initWithStringNoCopy:string];
-	TLexer *lexer = [[TLexer alloc] initWithCharStream:stream];
+	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:string];
+	TLexer *lexer = [TLexer newTLexerWithCharStream:stream];
 	
 	//	ANTLRToken *currentToken;
 	//	while ((currentToken = [lexer nextToken]) && [currentToken type] != ANTLRTokenTypeEOF) {
 	//		NSLog(@"%@", currentToken);
 	//	}
 	
-	ANTLRCommonTokenStream *tokenStream = [[ANTLRCommonTokenStream alloc] initWithTokenSource:lexer];
+	ANTLRCommonTokenStream *tokenStream = [ANTLRCommonTokenStream newANTLRCommonTokenStreamWithTokenSource:lexer];
 	TParser *parser = [[TParser alloc] initWithTokenStream:tokenStream];
 	[parser stat];
 	[lexer release];

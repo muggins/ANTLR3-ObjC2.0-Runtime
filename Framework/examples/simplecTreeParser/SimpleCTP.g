@@ -37,7 +37,7 @@ formalParameter
     ;
 
 type
-    :   K_INT   
+    :   K_INT_TYPE
     |   K_CHAR  
     |   K_VOID
     |   K_ID        

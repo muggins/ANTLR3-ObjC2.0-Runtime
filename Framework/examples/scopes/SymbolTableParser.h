@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 21, 2010 19:57:13 SymbolTable.g 2010-08-21 20:43:12
+// $ANTLR 3.2 Aug 24, 2010 10:45:57 SymbolTable.g 2010-08-24 13:53:46
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -9,6 +9,7 @@
  * =============================================================================
  */
 
+/* parserHeaderFile */
 #pragma mark Tokens
 #define WS 6
 #define T__12 12
@@ -45,7 +46,7 @@ ANTLRHashMap * names;
 #pragma mark Dynamic Rule Scopes
 #pragma mark Rule Return Scopes start
 #pragma mark Rule return scopes end
-@interface SymbolTableParser : ANTLRParser { // line 529
+@interface SymbolTableParser : ANTLRParser { /* line 572 */
 // start of globalAttributeScopeMemVar
 /* globalAttributeScopeMemVar */
 ANTLRSymbolStack *gStack;

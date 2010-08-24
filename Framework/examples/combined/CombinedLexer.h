@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 21, 2010 19:57:13 Combined.g 2010-08-21 20:43:08
+// $ANTLR 3.2 Aug 24, 2010 10:45:57 Combined.g 2010-08-24 13:53:42
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -22,7 +22,7 @@
 // start of actions.lexer.memVars
 // start of action-actionScope-memVars
 }
-+ (CombinedLexer *)newCombinedLexer:(id<ANTLRCharStream>)anInput;
++ (CombinedLexer *)newCombinedLexerWithCharStream:(id<ANTLRCharStream>)anInput;
 
 - (void)mID; 
 - (void)mINT; 

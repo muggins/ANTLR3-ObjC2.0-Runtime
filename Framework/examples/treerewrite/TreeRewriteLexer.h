@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 20, 2010 15:06:02 TreeRewrite.g 2010-08-20 15:06:55
+// $ANTLR 3.2 Aug 24, 2010 10:45:57 TreeRewrite.g 2010-08-24 14:18:09
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -21,7 +21,7 @@
 // start of actions.lexer.memVars
 // start of action-actionScope-memVars
 }
-+ (TreeRewriteLexer *)newTreeRewriteLexer:(id<ANTLRCharStream>)anInput;
++ (TreeRewriteLexer *)newTreeRewriteLexerWithCharStream:(id<ANTLRCharStream>)anInput;
 
 - (void)mINT; 
 - (void)mWS; 

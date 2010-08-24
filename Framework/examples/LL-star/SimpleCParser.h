@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 21, 2010 19:57:13 SimpleC.g 2010-08-21 20:43:09
+// $ANTLR 3.2 Aug 24, 2010 10:45:57 SimpleC.g 2010-08-24 13:53:43
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -9,6 +9,7 @@
  * =============================================================================
  */
 
+/* parserHeaderFile */
 #pragma mark Cyclic DFA interface start DFA2
 @interface DFA2 : ANTLRDFA {
 }
@@ -40,7 +41,7 @@
 #pragma mark Dynamic Rule Scopes
 #pragma mark Rule Return Scopes start
 #pragma mark Rule return scopes end
-@interface SimpleCParser : ANTLRParser { // line 529
+@interface SimpleCParser : ANTLRParser { /* line 572 */
 // start of globalAttributeScopeMemVar
 
 

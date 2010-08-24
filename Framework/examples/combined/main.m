@@ -8,8 +8,8 @@ int main(int argc, const char * argv[])
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	NSString *string = @"xyyyyaxyyyyb";
 	NSLog(@"%@", string);
-	ANTLRStringStream *stream = [[ANTLRStringStream alloc] initWithStringNoCopy:string];
-	CombinedLexer *lexer = [[CombinedLexer alloc] initWithCharStream:stream];
+	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:string];
+	CombinedLexer *lexer = [CombinedLexer newCombinedLexerWithCharStream:stream];
 	id<ANTLRToken> currentToken;
 	while ((currentToken = [lexer nextToken]) && [currentToken getType] != ANTLRTokenTypeEOF) {
 		NSLog(@"%@", currentToken);

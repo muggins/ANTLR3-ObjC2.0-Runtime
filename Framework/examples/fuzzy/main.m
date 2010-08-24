@@ -8,8 +8,8 @@ int main(int argc, const char * argv[])
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	NSString *string = [NSString stringWithContentsOfFile:@"../../examples/fuzzy/input"  encoding:NSASCIIStringEncoding error:&error];
 	NSLog(@"%@", string);
-	ANTLRStringStream *stream = [[ANTLRStringStream alloc] initWithStringNoCopy:string];
-	Fuzzy *lexer = [Fuzzy newFuzzy:stream];
+	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:string];
+	Fuzzy *lexer = [Fuzzy newFuzzyWithCharStream:stream];
 	id<ANTLRToken> currentToken;
 	while ((currentToken = [lexer nextToken]) && [currentToken getType] != ANTLRTokenTypeEOF) {
 		NSLog(@"%@", currentToken);

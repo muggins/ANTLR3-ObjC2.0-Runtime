@@ -41,7 +41,7 @@ int main(int argc, const char * argv[]) {
 //	  [lexer reset];
 	
 	// Since the parser needs to scan back and forth over the tokens, we put them into a stream, too.
-	ANTLRCommonTokenStream *tokenStream = [[ANTLRCommonTokenStream alloc] initWithTokenSource:lexer];
+	ANTLRCommonTokenStream *tokenStream = [ANTLRCommonTokenStream newANTLRCommonTokenStreamWithTokenSource:lexer];
 
 	// Construct a parser and feed it the token stream.
 	SimpleCParser *parser = [[SimpleCParser alloc] initWithTokenStream:tokenStream];
@@ -50,10 +50,11 @@ int main(int argc, const char * argv[]) {
 	// but it obviously has to match the input token stream. Otherwise parsing would fail.
 	// Also watch out for internal dependencies in your grammar (e.g. you use a symbol table that's only
 	// initialized when you call a specific parser rule).
-	// This is a simple example, so we just call the top-mose rule 'program'.
+	// This is a simple example, so we just call the top-most rule 'program'.
 	// Since we want to parse the AST the parser builds, we just ask the returned object for that.
 	ANTLRCommonTree *program_tree = [[parser program] getTree];
 
+    NSLog(@"Reached end of first parse\n");
 	// Print the matched tree as a Lisp-style string
 	NSLog(@"tree: %@", [program_tree treeDescription]);
 	

@@ -8,15 +8,15 @@
 int main() {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
-	ANTLRStringStream *stream = [[ANTLRStringStream alloc] initWithStringNoCopy:@"23 42"];
-	TreeRewriteLexer *lexer = [[TreeRewriteLexer alloc] initWithCharStream:stream];
+	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"23 42"];
+	TreeRewriteLexer *lexer = [TreeRewriteLexer newTreeRewriteLexerWithCharStream:stream];
 	
 //    id<ANTLRToken> currentToken;
 //    while ((currentToken = [lexer nextToken]) && [currentToken type] != ANTLRTokenTypeEOF) {
 //        NSLog(@"%@", currentToken);
 //    }
 	
-	ANTLRCommonTokenStream *tokenStream = [[ANTLRCommonTokenStream alloc] initWithTokenSource:lexer];
+	ANTLRCommonTokenStream *tokenStream = [ANTLRCommonTokenStream newANTLRCommonTokenStreamWithTokenSource:lexer];
 	TreeRewriteParser *parser = [[TreeRewriteParser alloc] initWithTokenStream:tokenStream];
 	ANTLRCommonTree *rule_tree = [[parser rule] getTree];
 	NSLog(@"tree: %@", [rule_tree treeDescription]);
@@ -33,6 +33,6 @@ int main() {
 
 	[pool release];
     // sleep for objectalloc
-    while(1) sleep(60);
+    // while(1) sleep(60);
 	return 0;
 }

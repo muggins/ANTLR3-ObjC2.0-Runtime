@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 21, 2010 19:57:13 Fuzzy.g 2010-08-21 20:43:06
+// $ANTLR 3.2 Aug 24, 2010 10:45:57 Fuzzy.g 2010-08-24 13:53:40
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -55,7 +55,7 @@ SEL synpred1_FuzzySelector;
 // start of actions.lexer.memVars
 // start of action-actionScope-memVars
 }
-+ (Fuzzy *)newFuzzy:(id<ANTLRCharStream>)anInput;
++ (Fuzzy *)newFuzzyWithCharStream:(id<ANTLRCharStream>)anInput;
 
 - (void)mIMPORT; 
 - (void)mRETURN; 

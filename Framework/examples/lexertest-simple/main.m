@@ -18,6 +18,6 @@ int main(int argc, const char * argv[])
 	
 	[pool release];
     // sleep for objectalloc
-    while (1) sleep(60);
+    // while (1) sleep(60);
 	return 0;
 }

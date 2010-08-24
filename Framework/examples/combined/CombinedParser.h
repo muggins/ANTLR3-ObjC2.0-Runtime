@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 21, 2010 19:57:13 Combined.g 2010-08-21 20:43:07
+// $ANTLR 3.2 Aug 24, 2010 10:45:57 Combined.g 2010-08-24 13:53:42
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -9,6 +9,7 @@
  * =============================================================================
  */
 
+/* parserHeaderFile */
 #pragma mark Tokens
 #define WS 6
 #define INT 5
@@ -18,7 +19,7 @@
 #pragma mark Dynamic Rule Scopes
 #pragma mark Rule Return Scopes start
 #pragma mark Rule return scopes end
-@interface CombinedParser : ANTLRParser { // line 529
+@interface CombinedParser : ANTLRParser { /* line 572 */
 // start of globalAttributeScopeMemVar
 
 

@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 21, 2010 19:57:13 SymbolTable.g 2010-08-21 20:43:12
+// $ANTLR 3.2 Aug 24, 2010 10:45:57 SymbolTable.g 2010-08-24 13:53:46
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -39,7 +39,7 @@ DFA4 *dfa4;
 // start of actions.lexer.memVars
 // start of action-actionScope-memVars
 }
-+ (SymbolTableLexer *)newSymbolTableLexer:(id<ANTLRCharStream>)anInput;
++ (SymbolTableLexer *)newSymbolTableLexerWithCharStream:(id<ANTLRCharStream>)anInput;
 
 - (void)mT__7; 
 - (void)mT__8; 
