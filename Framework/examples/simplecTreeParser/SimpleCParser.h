@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 24, 2010 10:45:57 SimpleC.g 2010-08-24 13:53:47
+// $ANTLR 3.2 Aug 24, 2010 10:45:57 SimpleC.g 2010-08-25 11:11:22
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -24,11 +24,11 @@
 #define K_RCURVE 14
 #define K_INT 25
 #define K_EQEQ 22
-#define K_SemiColon 10
 #define K_FOR 20
 #define FUNC_HDR 6
 #define FUNC_DEF 8
 #define EOF -1
+#define K_SEMICOLON 10
 #define K_INT_TYPE 15
 #define FUNC_DECL 7
 #define K_COMMA 13

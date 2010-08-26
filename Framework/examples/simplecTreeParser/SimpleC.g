@@ -19,12 +19,12 @@ program
 
 declaration
     :   variable
-    |   functionHeader K_SemiColon -> ^(FUNC_DECL functionHeader)
+    |   functionHeader K_SEMICOLON -> ^(FUNC_DECL functionHeader)
     |   functionHeader block -> ^(FUNC_DEF functionHeader block)
     ;
 
 variable
-    :   type declarator K_SemiColon -> ^(VAR_DEF type declarator)
+    :   type declarator K_SEMICOLON -> ^(VAR_DEF type declarator)
     ;
 
 declarator
@@ -56,14 +56,14 @@ block
     ;
 
 stat: forStat
-    | expr K_SemiColon!
+    | expr K_SEMICOLON!
     | block
-    | assignStat K_SemiColon!
-    | K_SemiColon!
+    | assignStat K_SEMICOLON!
+    | K_SEMICOLON!
     ;
 
 forStat
-    :   K_FOR K_LCURVE start=assignStat K_SemiColon expr K_SemiColon next=assignStat K_RCURVE block
+    :   K_FOR K_LCURVE start=assignStat K_SEMICOLON expr K_SEMICOLON next=assignStat K_RCURVE block
         -> ^(K_FOR $start expr $next block)
     ;
 
@@ -103,7 +103,7 @@ K_LCURVE : '(';
 K_RCURVE : ')';
 K_PLUS : '+' ;
 K_COMMA : ',';
-K_SemiColon : ';';
+K_SEMICOLON : ';';
 K_LT   : '<' ;
 K_EQ   : '=' ;
 K_EQEQ : '==' ;
