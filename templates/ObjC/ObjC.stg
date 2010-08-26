@@ -270,6 +270,7 @@ lexerHeaderFile( LEXER,
             superClass="ANTLRLexer"
             ) ::=
 <<
+
 /* Start cyclicDFAInterface */
 <cyclicDFAs:cyclicDFAInterface()>
 
@@ -549,6 +550,16 @@ genericParserHeaderFile( LEXER,
             superClass
             ) ::=
 <<
+
+typedef enum {
+    ANTLR_EOF = -1,
+    INVALID,
+    EOR,
+    DOWN,
+    UP,
+    MIN
+} ANTLR3TokenType;
+
 <cyclicDFAs:cyclicDFAInterface()>
 #pragma mark Tokens
 <tokens:{#define <it.name> <it.type>}; separator="\n">
@@ -1317,15 +1328,15 @@ tree(root, actionsAfterRoot, children, nullableChildList, enclosingTreeLevel, tr
 <root:element()>
 <actionsAfterRoot:element()>
 <if(nullableChildList)>
-if ( [input LA:1] == ANTLRTokenTypeDOWN ) {
-    [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; <checkRuleBacktrackFailure()>
+if ( [input LA:1] == DOWN ) {
+    [self match:input TokenType:DOWN Follow:nil]; <checkRuleBacktrackFailure()>
     <children:element()>
-    [self match:input TokenType:ANTLRTokenTypeUP Follow:nil]; <checkRuleBacktrackFailure()>
+    [self match:input TokenType:UP Follow:nil]; <checkRuleBacktrackFailure()>
 }
 <else>
-    [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; <checkRuleBacktrackFailure()>
+    [self match:input TokenType:DOWN Follow:nil]; <checkRuleBacktrackFailure()>
     <children:element()>
-    [self match:input TokenType:ANTLRTokenTypeUP Follow:nil]; <checkRuleBacktrackFailure()>
+    [self match:input TokenType:UP Follow:nil]; <checkRuleBacktrackFailure()>
 <endif>
 >>
 
@@ -1699,7 +1710,7 @@ ruleAttributeScopeDecl(scope) ::= <<
 }
 <if(scope.attributes)>
 <scope.attributes:{a|@property (getter=get<a.name>, setter=set<a.name>:) <a.type> <a.name>;}; separator="\n"><\n>
-// end properties<\n>
+/* end properties */<\n>
 <endif>
 + (<scope.name>_Scope *)new<scope.name>_Scope;
 - (get<a.name>
