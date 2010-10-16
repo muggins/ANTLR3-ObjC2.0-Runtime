@@ -235,6 +235,16 @@
     }
 }
 
+- (NSInteger)getLastHash
+{
+    return LastHash;
+}
+
+- (void)setLastHash:(NSInteger)aHash
+{
+    LastHash = aHash;
+}
+
 - (NSInteger)getMode
 {
     return mode;

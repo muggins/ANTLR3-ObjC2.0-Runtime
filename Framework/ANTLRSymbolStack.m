@@ -57,8 +57,6 @@
  */
 @implementation ANTLRSymbolStack
 
-@synthesize LastHash;
-
 +(ANTLRSymbolStack *)newANTLRSymbolStack
 {
     return [[ANTLRSymbolStack alloc] init];

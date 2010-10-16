@@ -48,8 +48,8 @@
 
 //@property (copy) ANTLRHashMap *fNext;
 //@property (copy) TStringPool *fPool;
-@property (getter=getScope, setter=setScope) NSInteger Scope;
-@property (getter=getLastHash, setter=setLastHash) NSInteger LastHash;
+@property (getter=getScope, setter=setScope:) NSInteger Scope;
+@property (getter=getLastHash, setter=setLastHash:) NSInteger LastHash;
 
 // Contruction/Destruction
 + (id)newANTLRHashMap;
@@ -65,7 +65,7 @@
 
 // Instance Methods
 /*    form hash value for string s */
-- (int)hash:(NSString *)s;
+- (NSInteger)hash:(NSString *)s;
 /*   look for s in ptrBuffer  */
 - (ANTLRHashMap *)findscope:(int)level;
 /*   look for s in ptrBuffer  */
@@ -82,8 +82,8 @@
 - (ANTLRMapElement **)getptrBuffer;
 - (ANTLRMapElement *)getptrBufferEntry:(int)idx;
 - (void)setptrBuffer:(ANTLRMapElement *)np Index:(int)idx;
-- (int)getScope;
-- (void)setScope:(int)i;
+- (NSInteger)getScope;
+- (void)setScope:(NSInteger)i;
 - (ANTLRMapElement *)getTType:(NSString *)name;
 - (ANTLRMapElement *)getNameInList:(NSInteger)ttype;
 - (void)putNode:(NSString *)name TokenType:(NSInteger)ttype;

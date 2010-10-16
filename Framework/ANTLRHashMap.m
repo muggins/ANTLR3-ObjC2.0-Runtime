@@ -60,7 +60,7 @@ static NSInteger itIndex;
 
 -(id)init
 {
-    int idx;
+    NSInteger idx;
     
 	if ((self = [super init]) != nil) {
 		fNext = nil;
@@ -79,7 +79,7 @@ static NSInteger itIndex;
 
 -(id)initWithLen:(NSInteger)aBuffSize
 {
-    int idx;
+    NSInteger idx;
     
 	if ((self = [super init]) != nil) {
 		fNext = nil;
@@ -99,7 +99,7 @@ static NSInteger itIndex;
 -(void)dealloc
 {
     ANTLRMapElement *tmp, *rtmp;
-    int idx;
+    NSInteger idx;
 	
     if ( self.fNext != nil ) {
         for( idx = 0; idx < BuffSize; idx++ ) {
@@ -120,7 +120,7 @@ static NSInteger itIndex;
     id anElement;
     NSInteger aCnt = 0;
     
-    for (int i = 0; i < BuffSize; i++) {
+    for (NSInteger i = 0; i < BuffSize; i++) {
         if ((anElement = ptrBuffer[i]) != nil) {
             aCnt++;
         }
@@ -133,7 +133,7 @@ static NSInteger itIndex;
     id anElement;
     NSInteger aSize = 0;
     
-    for (int i = 0; i < BuffSize; i++) {
+    for (NSInteger i = 0; i < BuffSize; i++) {
         if ((anElement = ptrBuffer[i]) != nil) {
             aSize += sizeof(id);
         }
@@ -145,7 +145,7 @@ static NSInteger itIndex;
 -(void)deleteANTLRHashMap:(ANTLRMapElement *)np
 {
     ANTLRMapElement *tmp, *rtmp;
-    int idx;
+    NSInteger idx;
     
     if ( self.fNext != nil ) {
         for( idx = 0; idx < BuffSize; idx++ ) {
@@ -161,7 +161,7 @@ static NSInteger itIndex;
 
 -(ANTLRHashMap *)PushScope:(ANTLRHashMap **)map
 {
-    int idx;
+    NSInteger idx;
     ANTLRHashMap *htmp;
     
     htmp = [ANTLRHashMap newANTLRHashMap];
@@ -179,7 +179,7 @@ static NSInteger itIndex;
 
 -(ANTLRHashMap *)PopScope:(ANTLRHashMap **)map
 {
-    int idx;
+    NSInteger idx;
     ANTLRMapElement *tmp;
 	ANTLRHashMap *htmp;
     
@@ -208,18 +208,18 @@ static NSInteger itIndex;
 #ifdef USERDOC
 /*
  *  HASH        hash entry to get index to table
- *  int hash( ANTLRHashMap *self, char *s );
+ *  NSInteger hash( ANTLRHashMap *self, char *s );
  *
  *     Inputs:  char *s             string to find
  *
- *     Returns: int                 hashed value
+ *     Returns: NSInteger                 hashed value
  *
  *  Last Revision 9/03/90
  */
 #endif
--(int)hash:(NSString *)s       /*    form hash value for string s */
+-(NSInteger)hash:(NSString *)s       /*    form hash value for string s */
 {
-	int hashval;
+	NSInteger hashval;
 	const char *tmp;
     
 	tmp = [s cStringUsingEncoding:NSASCIIStringEncoding];
@@ -232,9 +232,9 @@ static NSInteger itIndex;
 #ifdef USERDOC
 /*
  *  FINDSCOPE  search hashed list for entry
- *  ANTLRHashMap *findscope( ANTLRHashMap *self, int scope );
+ *  ANTLRHashMap *findscope( ANTLRHashMap *self, NSInteger scope );
  *
- *     Inputs:  int       scope -- scope level to find
+ *     Inputs:  NSInteger       scope -- scope level to find
  *
  *     Returns: ANTLRHashMap   pointer to ptrBuffer of proper scope level
  *
@@ -255,7 +255,7 @@ static NSInteger itIndex;
 #ifdef USERDOC
 /*
  *  LOOKUP  search hashed list for entry
- *  ANTLRMapElement *lookup( ANTLRHashMap *self, char *s, int scope );
+ *  ANTLRMapElement *lookup( ANTLRHashMap *self, char *s, NSInteger scope );
  *
  *     Inputs:  char     *s          string to find
  *
@@ -264,7 +264,7 @@ static NSInteger itIndex;
  *  Last Revision 9/03/90
  */
 #endif
--(id)lookup:(NSString *)s Scope:(int)scope
+-(id)lookup:(NSString *)s Scope:(NSInteger)scope
 {
     ANTLRMapElement *np;
     
@@ -279,10 +279,10 @@ static NSInteger itIndex;
 #ifdef USERDOC
 /*
  *  INSTALL search hashed list for entry
- *  int install( ANTLRHashMap *self, ANTLRMapElement *sym, int scope );
+ *  NSInteger install( ANTLRHashMap *self, ANTLRMapElement *sym, NSInteger scope );
  *
  *     Inputs:  ANTLRMapElement    *sym   -- symbol ptr to install
- *              int         scope -- level to find
+ *              NSInteger         scope -- level to find
  *
  *     Returns: Boolean     TRUE   if installed
  *                          FALSE  if already in table
@@ -290,7 +290,7 @@ static NSInteger itIndex;
  *  Last Revision 9/03/90
  */
 #endif
--(ANTLRMapElement *)install:(ANTLRMapElement *)sym Scope:(int)scope
+-(ANTLRMapElement *)install:(ANTLRMapElement *)sym Scope:(NSInteger)scope
 {
     ANTLRMapElement *np;
     
@@ -307,19 +307,19 @@ static NSInteger itIndex;
 #ifdef USERDOC
 /*
  *  RemoveSym  search hashed list for entry
- *  int RemoveSym( ANTLRHashMap *self, char *s );
+ *  NSInteger RemoveSym( ANTLRHashMap *self, char *s );
  *
  *     Inputs:  char     *s          string to find
  *
- *     Returns: int      indicator of SUCCESS OR FAILURE
+ *     Returns: NSInteger      indicator of SUCCESS OR FAILURE
  *
  *  Last Revision 9/03/90
  */
 #endif
--(int)RemoveSym:(NSString *)s
+-(NSInteger)RemoveSym:(NSString *)s
 {
     ANTLRMapElement *np, *tmp;
-    int idx;
+    NSInteger idx;
     
     idx = [self hash:s];
     for ( tmp = self->ptrBuffer[idx], np = self->ptrBuffer[idx]; np != nil; np = [np getfNext] ) {
@@ -341,9 +341,9 @@ static NSInteger itIndex;
 }
 
 #ifdef DONTUSEYET
--(int)bld_symtab:(KW_TABLE *)toknams
+-(NSInteger)bld_symtab:(KW_TABLE *)toknams
 {
-    int i;
+    NSInteger i;
     ANTLRMapElement *np;
     
     for( i = 0; *(toknams[i].name) != '\0'; i++ ) {
@@ -356,7 +356,7 @@ static NSInteger itIndex;
 }
 #endif
 
--(ANTLRMapElement *)getptrBufferEntry:(int)idx
+-(ANTLRMapElement *)getptrBufferEntry:(NSInteger)idx
 {
 	return( ptrBuffer[idx] );
 }
@@ -366,7 +366,7 @@ static NSInteger itIndex;
 	return( ptrBuffer );
 }
 
--(void)setptrBuffer:(ANTLRMapElement *)np Index:(int)idx
+-(void)setptrBuffer:(ANTLRMapElement *)np Index:(NSInteger)idx
 {
 	if ( idx < BuffSize ) {
         [np retain];
@@ -374,12 +374,12 @@ static NSInteger itIndex;
     }
 }
 
--(int)getScope
+-(NSInteger)getScope
 {
 	return( Scope );
 }
 
--(void)setScopeScope:(int)i
+-(void)setScopeScope:(NSInteger)i
 {
 	Scope = i;
 }

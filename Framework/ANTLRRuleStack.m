@@ -40,8 +40,6 @@
  */
 @implementation ANTLRRuleStack
 
-@synthesize LastHash;
-
 + (ANTLRRuleStack *)newANTLRRuleStack
 {
     return [[ANTLRRuleStack alloc] init];
