@@ -44,7 +44,7 @@
 }
 
 //@property (copy) ANTLRHashRule *fNext;
-@property (getter=getLastHash, setter=setLastHash) NSInteger LastHash;
+@property (getter=getLastHash, setter=setLastHash:) NSInteger LastHash;
 
 // Contruction/Destruction
 + (id)newANTLRHashRule;
