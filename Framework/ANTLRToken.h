@@ -41,6 +41,7 @@ typedef enum {
     ANTLRTokenChannelHidden = 99
 } ANTLRTokenChannel;
 
+#define HIDDEN 99
 
 @protocol ANTLRToken < NSObject, NSCopying >
 
