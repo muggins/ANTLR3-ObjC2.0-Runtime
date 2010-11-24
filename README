@@ -18,3 +18,6 @@ the proper location. However, for now you need to create an ObjC
 directory in antlr-3.2/tool/src/main/resources/org/antlr/codegen/templates
 and then copy the ObjC ".stg" files to 
 antlr-3.2/tool/src/main/resources/org/antlr/codegen/templates/ObjC/*.
+
+There is also a java file ObjCTarget.java that goes in <
+antlr-3.2/tool/src/main/java/org/antlr/codegen/ObjCTarget/Java>.
