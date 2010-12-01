@@ -21,3 +21,6 @@ antlr-3.2/tool/src/main/resources/org/antlr/codegen/templates/ObjC/*.
 
 There is also a java file ObjCTarget.java that goes in <
 antlr-3.2/tool/src/main/java/org/antlr/codegen/ObjCTarget/Java>.
+
+If you are using Antlr3.3 the code from here is included with the Antlr tarball. You just need
+to copy the ANTLR.framework to /Library/Frameworks.
