@@ -1231,11 +1231,15 @@ matchSetAndListLabel(s,label,elementIndex,postmatchCode) ::= <<
 >>
 
 /** Match a string literal */
-lexerStringRef(string,label) ::= <<
+lexerStringRef(string,label,elementIndex="0") ::= <<
 <if(label)>
 NSInteger <label>Start = [self getIndex];
 [self matchString:<string>]; <checkRuleBacktrackFailure()>
+NSInteger StartLine<elementIndex> = [self getLine];
+NSInteger <label>StartCharPos<elementIndex> = [self getCharPositionInLine];
 <label> = [[ANTLRCommonToken newANTLRCommonToken:input Type:ANTLRTokenTypeInvalid Channel:ANTLRTokenChannelDefault Start:<label>Start Stop:[self getIndex]] retain];
+[self setLine:<label>StartLine<elementIndex>];
+[self setCharPositionInLine:<label>StartCharPos<elementIndex>];
 <else>
 [self matchString:<string>]; <checkRuleBacktrackFailure()><\n>
 <endif>
