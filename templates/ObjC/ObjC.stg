@@ -551,6 +551,8 @@ genericParserHeaderFile( LEXER,
             ) ::=
 <<
 
+#ifndef ANTLR3TokenTypeAlreadyDefined
+#define ANTLR3TokenTypeAlreadyDefined
 typedef enum {
     ANTLR_EOF = -1,
     INVALID,
@@ -559,6 +561,7 @@ typedef enum {
     UP,
     MIN
 } ANTLR3TokenType;
+#endif
 
 <cyclicDFAs:cyclicDFAInterface()>
 #pragma mark Tokens
