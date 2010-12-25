@@ -1480,7 +1480,7 @@ cyclicDFAInterface(dfa) ::= <<
 + newDFA<dfa.decisionNumber>WithRecognizer:(ANTLRBaseRecognizer *)theRecognizer;
 - initWithRecognizer:(ANTLRBaseRecognizer *)recognizer;
 @end /* end of DFA<dfa.decisionNumber> interface  */<\n>
-#pragma mark Cyclic DFA interface end DFA<dfa.decisionNumber>
+#pragma mark Cyclic DFA interface end DFA<dfa.decisionNumber><\n>
 >>
 
 /** Used in lexer/parser implementation files */
