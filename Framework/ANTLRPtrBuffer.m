@@ -107,6 +107,7 @@
             }
         }
     }
+    [buffer release];
 	[super dealloc];
 }
 
