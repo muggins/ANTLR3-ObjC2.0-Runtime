@@ -35,7 +35,7 @@
 }
 
 + (id<ANTLRTree>) newEmptyTree;
-+ (ANTLRCommonTreeAdaptor *)newANTLRCommonTreeAdaptor;
++ (ANTLRCommonTreeAdaptor *)newTreeAdaptor;
 - (id) init;
 - (id<ANTLRTree>)dupNode:(id<ANTLRTree>)t;    
 - (ANTLRCommonTree *)createTree:(ANTLRCommonToken *)aToken;

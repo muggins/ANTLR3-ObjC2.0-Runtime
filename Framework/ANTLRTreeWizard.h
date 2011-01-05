@@ -83,9 +83,9 @@
 /** This adaptor creates TreePattern objects for use during scan() */
 @interface ANTLRTreePatternTreeAdaptor : ANTLRCommonTreeAdaptor {
 }
-+ (ANTLRTreePatternTreeAdaptor *)newANTLRTreePatternTreeAdaptor;
++ (ANTLRTreePatternTreeAdaptor *)newTreeAdaptor;
 #ifdef DONTUSENOMO
-+ (ANTLRTreePatternTreeAdaptor *)newANTLRTreePatternTreeAdaptor:(id<ANTLRToken>)payload;
++ (ANTLRTreePatternTreeAdaptor *)newTreeAdaptor:(id<ANTLRToken>)payload;
 #endif
 - (id) init;
 #ifdef DONTUSENOMO

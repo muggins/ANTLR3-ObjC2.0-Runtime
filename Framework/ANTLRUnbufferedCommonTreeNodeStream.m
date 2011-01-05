@@ -58,7 +58,7 @@
 	if ((self = [super init]) != nil) {
 		[self setRoot:theTree];
 		if ( theAdaptor == nil ) 
-			[self setTreeAdaptor:[ANTLRCommonTreeAdaptor newANTLRCommonTreeAdaptor]];
+			[self setTreeAdaptor:[ANTLRCommonTreeAdaptor newTreeAdaptor]];
 		else
 			[self setTreeAdaptor:theAdaptor];
 		nodeStack = [[NSMutableArray arrayWithCapacity:5] retain];

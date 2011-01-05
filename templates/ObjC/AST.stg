@@ -49,7 +49,7 @@ group AST;
 @genericParser.init() ::= <<
 /* AST genericParser.init */
 <@super.init()>
-[self setTreeAdaptor:[[ANTLRCommonTreeAdaptor newANTLRCommonTreeAdaptor] retain]];
+[self setTreeAdaptor:[[ANTLRCommonTreeAdaptor newTreeAdaptor] retain]];
 >>
 
 @genericParser.dealloc() ::= <<
@@ -316,27 +316,35 @@ root_0 = (<ASTLabelType> *)[[[treeAdaptor class] newEmptyTree] retain];<\n>
 
 rewriteCodeLabels() ::= <<
 <referencedTokenLabels
-    :{ANTLRRewriteRule<rewriteElementType>Stream *stream_<it>=[[ANTLRRewriteRule<rewriteElementType>Stream newANTLRRewriteRule<rewriteElementType>Stream:treeAdaptor Description:@"token <it>" Element:<it>] retain];}; separator="\n">
+    :{ANTLRRewriteRuleTokenStream *stream_<it> = 
+    [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor description:@"token <it>" element:<it>] retain];};
+    separator="\n"
+>
 <referencedTokenListLabels:{ANTLRRewriteRule<rewriteElementType>Stream *stream_<it> =
     [[ANTLRRewriteRule<rewriteElementType>Stream newANTLRRewriteRule<rewriteElementType>Stream:treeAdaptor
-                                                    description:@"token <it>"
-                                                       elements:<it>_list] retain];}; separator="\n">
+        description:@"token <it>" elements:<it>_list] retain];};
+    separator="\n"
+>
 <referencedWildcardLabels:{RewriteRuleSubtreeStream stream_<it> =
     [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
-                                                        description:"wildcard <it>"
-                                                            element:<it>] retain];}; separator="\n">
+        description:"wildcard <it>" element:<it>] retain];};
+    separator="\n"
+>
 <referencedWildcardListLabels:{RewriteRuleSubtreeStream stream_<it> =
     [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
-                                                         descriptor:"wildcard <it>"
-                                                            element:list_<it>] retain];}; separator="\n">
+        descriptor:"wildcard <it>" element:list_<it>] retain];};
+    separator="\n"
+>
 <referencedRuleLabels:{ANTLRRewriteRuleSubtreeStream *stream_<it> =
     [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
-                                                        description:@"token <it>"
-                                                            element:<it>!=nil?[<it> getTree]:nil] retain];}; separator="\n">
+        description:@"token <it>" element:<it>!=nil?[<it> getTree]:nil] retain];};
+    separator="\n"
+>
 <referencedRuleListLabels:{ANTLRRewriteRuleSubtreeStream *stream_<it> =
     [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
-                                                        description:@"token <it>"
-                                                           elements:list_<it>] retain];}; separator="\n">
+        description:@"token <it>" elements:list_<it>] retain];};
+    separator="\n"
+>
 >>
 
 /** Generate code for an optional rewrite block; note it uses the deep ref'd element

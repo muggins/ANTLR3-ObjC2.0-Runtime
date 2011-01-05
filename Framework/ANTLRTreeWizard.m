@@ -130,13 +130,13 @@
 /** This adaptor creates TreePattern objects for use during scan() */
 @implementation ANTLRTreePatternTreeAdaptor
 
-+ (ANTLRTreePatternTreeAdaptor *)newANTLRTreePatternTreeAdaptor
++ (ANTLRTreePatternTreeAdaptor *)newTreeAdaptor
 {
     return [[ANTLRTreePatternTreeAdaptor alloc] init];
 }
 
 #ifdef DONTUSENOMO
-+ (ANTLRTreePatternTreeAdaptor *)newANTLRTreePatternTreeAdaptor:(id<ANTLRToken>)payload
++ (ANTLRTreePatternTreeAdaptor *)newTreeAdaptor:(id<ANTLRToken>)payload
 {
     return (ANTLRTreePatternTreeAdaptor *)[[ANTLRTreePatternTreeAdaptor alloc] initWithToken:payload];
 }
@@ -342,7 +342,7 @@
     ANTLRTreePatternLexer *tokenizer = [ANTLRTreePatternLexer newANTLRTreePatternLexer:pattern];
     ANTLRTreePatternParser *parser = [ANTLRTreePatternParser newANTLRTreePatternParser:tokenizer
                                                                                      Wizard:self
-                                                                                    Adaptor:[ANTLRTreePatternTreeAdaptor newANTLRTreePatternTreeAdaptor]];
+                                                                                    Adaptor:[ANTLRTreePatternTreeAdaptor newTreeAdaptor]];
     id<ANTLRTree>tpattern = [parser pattern];
     // don't allow invalid patterns
     if ( tpattern == nil ||
@@ -416,7 +416,7 @@
     // Create a TreePattern from the pattern
     ANTLRTreePatternLexer *tokenizer = [ANTLRTreePatternLexer newANTLRTreePatternLexer:pattern];
     ANTLRTreePatternParser *parser =
-    [ANTLRTreePatternParser newANTLRTreePatternParser:tokenizer Wizard:self Adaptor:[ANTLRTreePatternTreeAdaptor newANTLRTreePatternTreeAdaptor]];
+    [ANTLRTreePatternParser newANTLRTreePatternParser:tokenizer Wizard:self Adaptor:[ANTLRTreePatternTreeAdaptor newTreeAdaptor]];
     id<ANTLRTree> tpattern = [parser pattern];
     // don't allow invalid patterns
     if ( tpattern == nil ||
@@ -471,7 +471,7 @@
     ANTLRTreePatternLexer *tokenizer = [ANTLRTreePatternLexer newANTLRTreePatternLexer:pattern];
     ANTLRTreePatternParser *parser = [ANTLRTreePatternParser newANTLRTreePatternParser:tokenizer
                                                                                 Wizard:self
-                                                                               Adaptor:[ANTLRTreePatternTreeAdaptor newANTLRTreePatternTreeAdaptor]];
+                                                                               Adaptor:[ANTLRTreePatternTreeAdaptor newTreeAdaptor]];
     id<ANTLRTree> tpattern = [parser pattern];
     /*
      System.out.println("t="+((Tree)t).toStringTree());

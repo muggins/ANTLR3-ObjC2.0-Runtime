@@ -178,7 +178,7 @@ public Object downup(Object t, boolean showTransformations) {
 - (ANTLRTreeRewriter *) downup:(id<ANTLRTree>)t XForm:(BOOL)aShowTransformations
 {
     showTransformations = aShowTransformations;
-    ANTLRTreeVisitor *v = [ANTLRTreeVisitor newANTLRTreeVisitor:[ANTLRCommonTreeAdaptor newANTLRCommonTreeAdaptor]];
+    ANTLRTreeVisitor *v = [ANTLRTreeVisitor newANTLRTreeVisitor:[[originalAdaptor class] newTreeAdaptor]];
     ANTLRTreeVisitorAction *actions = [ANTLRTreeVisitorAction newANTLRTreeVisitorAction];
     {
         //public Object pre(Object t)  { return applyOnce(t, topdown_fptr); }

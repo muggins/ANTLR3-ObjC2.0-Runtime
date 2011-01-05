@@ -48,7 +48,7 @@
 - (id)init
 {
     if ((self = [super init]) != nil) {
-        adaptor = [ANTLRCommonTreeAdaptor newANTLRCommonTreeAdaptor];
+        adaptor = [ANTLRCommonTreeAdaptor newTreeAdaptor];
     }
     return self;
 }

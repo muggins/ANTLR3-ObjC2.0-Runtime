@@ -55,7 +55,7 @@ NSInteger level = 0;
 {
     if ((self = [super init]) != nil ) {
         root = theTree;
-        adaptor = [ANTLRCommonTreeAdaptor newANTLRCommonTreeAdaptor];
+        adaptor = [ANTLRCommonTreeAdaptor newTreeAdaptor];
         it = [ANTLRTreeIterator newANTRLTreeIteratorWithAdaptor:adaptor andTree:root];
         calls = [ANTLRIntArray newANTLRIntArray];
     }

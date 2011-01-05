@@ -33,7 +33,7 @@
     return [ANTLRCommonTree newANTLRCommonTree];
 }
 
-+ (ANTLRCommonTreeAdaptor *)newANTLRCommonTreeAdaptor
++ (ANTLRCommonTreeAdaptor *)newTreeAdaptor
 {
     return[[ANTLRCommonTreeAdaptor alloc] init];
 }

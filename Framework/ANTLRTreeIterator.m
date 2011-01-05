@@ -61,7 +61,7 @@
 
 -(id) initWithTree:(id<ANTLRTree>) t
 {
-	return [self initWithTreeAdaptor:[ANTLRCommonTreeAdaptor newANTLRCommonTreeAdaptor] andTree:t];
+	return [self initWithTreeAdaptor:[ANTLRCommonTreeAdaptor newTreeAdaptor] andTree:t];
 }
 
 -(id) initWithTreeAdaptor:(id<ANTLRTreeAdaptor>)a andTree:(id<ANTLRTree>)t
