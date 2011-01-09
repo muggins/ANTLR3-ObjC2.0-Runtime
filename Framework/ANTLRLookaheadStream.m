@@ -47,6 +47,7 @@
         eof = [ANTLRCommonToken eofToken];
 		eofElementIndex = UNITIALIZED_EOF_ELEMENT_INDEX;
 		markDepth = 0;
+        currentElementIndex = 0;
 	}
 	return self;
 }
@@ -61,8 +62,10 @@
 
 - (void) reset
 {
-	eofElementIndex = UNITIALIZED_EOF_ELEMENT_INDEX;
 	[super reset];
+    currentElementIndex = 0;
+    p = 0;
+	eofElementIndex = UNITIALIZED_EOF_ELEMENT_INDEX;
 }
 
 -(id) nextElement
@@ -75,6 +78,7 @@
 {
 	[self sync:1];
 	[self remove];
+    currentElementIndex++;
 }
 
 -(void) sync:(NSInteger) need
@@ -140,7 +144,7 @@
 
 -(NSInteger) getIndex
 {
-	return p;
+	return currentElementIndex;
 }
 
 -(NSInteger) mark
@@ -159,11 +163,13 @@
 {
 	markDepth--;
 	[self seek:marker];
+    if (marker == 0) [self reset];
 }
 
 -(void) rewind
 {
 	[self seek:lastMarker];
+    if (lastMarker == 0) [self reset];
 }
 
 -(void) seek:(NSInteger) i
