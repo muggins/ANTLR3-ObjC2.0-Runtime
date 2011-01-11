@@ -38,6 +38,7 @@
 @synthesize pool;
 @synthesize data;
 @synthesize p;
+@synthesize range;
 
 + (id) newANTLRFastQueue
 {
@@ -50,6 +51,7 @@
 		pool = [NSAutoreleasePool new];
 		data = [[NSMutableArray arrayWithCapacity:10] autorelease];
 		p = 0;
+		range = -1;
 	}
 	return self;
 }
@@ -77,6 +79,12 @@
 	[self clear];
 }
 
+-(void) clear
+{
+	p = 0;
+	[data removeAllObjects];
+}
+
 -(id) remove
 {
 	id o = [self objectAtIndex:0];
@@ -100,6 +108,11 @@
 	return [data count] - p;
 }
 
+- (NSInteger) range
+{
+    return range;
+}
+
 -(NSInteger) count
 {
 	return [data count];
@@ -110,29 +123,28 @@
 	return [self objectAtIndex:0];
 }
 
--(id) objectAtIndex:(NSInteger) i
+-(id) objectAtIndex:(NSInteger) k
 {
-	if (p + i >= [data count]) {
-		@throw [ANTLRRuntimeException newANTLRNoSuchElementException:[NSString stringWithFormat:@"queue index (%d+%d) > size %d", p, i, [data count]]];
-	}
-	return [data objectAtIndex:(p + i)];
-}
+    NSInteger absIndex;
 
--(void) clear
-{
-	p = 0;
-	[data removeAllObjects];
+    absIndex = p + k;
+	if (absIndex >= [data count]) {
+		@throw [ANTLRRuntimeException newANTLRNoSuchElementException:[NSString stringWithFormat:@"queue index %d > last index %d", absIndex, [data count]-1]];
+	}
+	if (absIndex < 0) {
+	    @throw [ANTLRRuntimeException newANTLRNoSuchElementException:[NSString stringWithFormat:@"queue index %d < 0", absIndex]];
+	}
+	if ( absIndex > range ) range = absIndex;
+	return [data objectAtIndex:absIndex];
 }
 
 -(NSString *) description
 {
-	NSMutableString *buf = [NSMutableString stringWithCapacity:10];
+	NSMutableString *buf = [NSMutableString stringWithCapacity:30];
 	NSInteger n = [self size];
-	for (NSInteger i = 0; i < n; i++)
-	{
-		[buf appendString:[[self objectAtIndex:i] description]];
-		if ((i + 1) < n)
-		{
+	for (NSInteger k = 0; k < n; k++) {
+		[buf appendString:[[self objectAtIndex:k] description]];
+		if ((k + 1) < n) {
 			[buf appendString:@" "];
 		}
 	}
@@ -172,13 +184,7 @@
 
 - (NSString *) toString
 {
-    NSMutableString *buf = [NSMutableString stringWithCapacity:25];
-    int n = [self size];
-    for (int i=0; i < n; i++) {
-        [buf appendString:[NSString stringWithFormat:@"%d", data[i]]];
-        if ( (i+1)<n ) [buf appendString:@" "];
-    }
-    return buf;
+    return [self description];
 }
 
 @end

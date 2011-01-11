@@ -65,34 +65,46 @@
 	[super reset];
     currentElementIndex = 0;
     p = 0;
+    prevElement = nil;
 	eofElementIndex = UNITIALIZED_EOF_ELEMENT_INDEX;
 }
 
 -(id) nextElement
 {
-	[self doesNotRecognizeSelector:_cmd];
+//	[self doesNotRecognizeSelector:_cmd];
 	return nil;
+}
+
+- (id) remove
+{
+    id o = [self objectAtIndex:0];
+    p++;
+    // have we hit end of buffer and not backtracking?
+    if ( p == [data count] && markDepth==0 ) {
+        // if so, it's an opportunity to start filling at index 0 again
+        [self clear]; // size goes to 0, but retains memory
+    }
+    return o;
 }
 
 -(void) consume
 {
 	[self sync:1];
-	[self remove];
+	prevElement = [self remove];
     currentElementIndex++;
 }
 
 -(void) sync:(NSInteger) need
 {
 	NSInteger n = (p + need - 1) - [data count] + 1;
-	if (n > 0)
-	{
+	if (n > 0) {
 		[self fill:n];
 	}
 }
 
 -(void) fill:(NSInteger) n
 {
-	for (NSInteger i = 0; i <= n; i++) {
+	for (NSInteger i = 1; i <= n; i++) {
 		id o = [self nextElement];
 		if (o == eof) {
 			[data addObject:self.eof];
@@ -109,32 +121,27 @@
 	@throw [NSException exceptionWithName:@"ANTLRUnsupportedOperationException" reason:@"Streams have no defined size" userInfo:nil];
 }
 
--(id) LT:(NSInteger) i
+-(id) LT:(NSInteger) k
 {
-	if (i == 0) {
+	if (k == 0) {
 		return nil;
 	}
-	if (i < 0) {
-		return [self LB:-i];
+	if (k < 0) {
+		return [self LB:-k];
 	}
-	if ((p + i - 1) >= eofElementIndex) {
+	if ((p + k - 1) >= eofElementIndex) {
 		return self.eof;
 	}
-	[self sync:i];
-	return [self objectAtIndex:(i - 1)];
+	[self sync:k];
+	return [self objectAtIndex:(k - 1)];
 }
 
--(id) LB:(NSInteger) i
+-(id) LB:(NSInteger) k
 {
-	if (i == 0)
-	{
-		return nil;
+	if (k == 1) {
+		return prevElement;
 	}
-	if ((p - i) < 0)
-	{
-		return nil;
-	}
-	return [self objectAtIndex:-i];
+	@throw [ANTLRRuntimeException newANTLRNoSuchElementException:[NSString stringWithString:@"can't look backwards more than one token in this stream"]];
 }
 
 -(id) currentSymbol
@@ -150,7 +157,7 @@
 -(NSInteger) mark
 {
 	markDepth++;
-	lastMarker = [self getIndex];
+	lastMarker = p;
 	return lastMarker;
 }
 
@@ -163,18 +170,18 @@
 {
 	markDepth--;
 	[self seek:marker];
-    if (marker == 0) [self reset];
+//    if (marker == 0) [self reset];
 }
 
 -(void) rewind
 {
 	[self seek:lastMarker];
-    if (lastMarker == 0) [self reset];
+//    if (lastMarker == 0) [self reset];
 }
 
--(void) seek:(NSInteger) i
+-(void) seek:(NSInteger) index
 {
-	p = i;
+	p = index;
 }
 
 - (id) getEof

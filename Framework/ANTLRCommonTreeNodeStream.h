@@ -60,6 +60,7 @@ NSInteger level;
 @property (retain, getter=getRoot, setter=setRoot:) ANTLRCommonTree *root;
 @property (retain, getter=getTokens,setter=setTokens:) id<ANTLRTokenStream> tokens;
 @property (retain, getter=getTreeAdaptor, setter=setTreeAdaptor:) ANTLRCommonTreeAdaptor *adaptor;
+@property (assign, getter=getLevel, setter=setLevel:) NSInteger level;
 
 + (ANTLRCommonTreeNodeStream *) newANTLRCommonTreeNodeStream:(ANTLRCommonTree *)theTree;
 + (ANTLRCommonTreeNodeStream *) newANTLRCommonTreeNodeStream:(id<ANTLRTreeAdaptor>)anAdaptor Tree:(ANTLRCommonTree *)theTree;

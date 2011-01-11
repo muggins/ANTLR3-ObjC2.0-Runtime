@@ -34,12 +34,7 @@
 @synthesize root;
 @synthesize tokens;
 @synthesize adaptor;
-
-/** Tree (nil A B C) trees like flat A B C streams */
-BOOL hasNilRoot = NO;
-
-/** Tracks tree depth.  Level=0 means we're at root node level. */
-NSInteger level = 0;
+@synthesize level;
 
 + (ANTLRCommonTreeNodeStream *) newANTLRCommonTreeNodeStream:(ANTLRCommonTree *)theTree
 {
@@ -58,18 +53,26 @@ NSInteger level = 0;
         adaptor = [ANTLRCommonTreeAdaptor newTreeAdaptor];
         it = [ANTLRTreeIterator newANTRLTreeIteratorWithAdaptor:adaptor andTree:root];
         calls = [ANTLRIntArray newANTLRIntArray];
+        /** Tree (nil A B C) trees like flat A B C streams */
+        hasNilRoot = NO;
+        level = 0;
     }
     return self;
 }
 
 - (id) initWithTreeAdaptor:(id<ANTLRTreeAdaptor>)anAdaptor Tree:(ANTLRCommonTree *)theTree
 {
-    [adaptor createTree:ANTLRTokenTypeEOF Text:@"EOF"]; // set EOF
-    root = theTree;
-    adaptor = anAdaptor;
-    //    it = [root objectEnumerator];
-    it = [ANTLRTreeIterator newANTRLTreeIteratorWithAdaptor:adaptor andTree:root];
-    calls = [ANTLRIntArray newANTLRIntArray];
+    if ((self = [super init]) != nil ) {
+        [adaptor createTree:ANTLRTokenTypeEOF Text:@"EOF"]; // set EOF
+        root = theTree;
+        adaptor = anAdaptor;
+        //    it = [root objectEnumerator];
+        it = [ANTLRTreeIterator newANTRLTreeIteratorWithAdaptor:adaptor andTree:root];
+        calls = [ANTLRIntArray newANTLRIntArray];
+        /** Tree (nil A B C) trees like flat A B C streams */
+        hasNilRoot = NO;
+        level = 0;
+    }
     //    eof = [self isEOF]; // make sure tree iterator returns the EOF we want
     return self;
 }
