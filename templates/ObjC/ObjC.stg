@@ -808,7 +808,7 @@ if ( state.backtracking && [self alreadyParsedRule:input RuleIndex:<ruleDescript
 
 /** How to test for failure and return from rule */
 checkRuleBacktrackFailure() ::= <<
-<if (backtracking)>if ( state.failed == YES ) return <ruleReturnValue()>;<endif>
+<if (backtracking)>if ( state.failed ) return <ruleReturnValue()>;<endif>
 >>
 
 /** This rule has failed, exit indicating failure during backtrack */
@@ -850,13 +850,12 @@ rule(ruleName,ruleDescriptor,block,emptyRule,description,exceptions,finally,memo
         [self reportError:re];
         [self recover:input Exception:re];
         <@setErrorReturnValue()>
-    }
+    }<\n>
 <endif>
 <endif>
 <endif>
     @finally {
-    <if(trace)>traceOut("<ruleName>", <ruleDescriptor.index>);
-    NSLog(@"exit <ruleName> %@ failed=%@ backtracking=%d", [input LT:1], state.failed ? @"YES" : @"NO", state.backtracking);<endif>
+        <if(trace)>[self traceOut:traceOut:[NSString stringWithFormat:@"<ruleName> %d\n", <ruleDescriptor.index>]];<endif>
         <memoize()>
         <ruleScopeCleanUp()>
         <finally>
@@ -876,7 +875,7 @@ finalCode(finalBlock) ::= <<
 catch(decl,action) ::= <<
 @catch (<e.decl>) {
     <e.action>
-}
+}<\n>
 >>
 
 ruleDeclarations() ::= <<
@@ -1084,10 +1083,9 @@ do {
         default :
             if ( cnt<decisionNumber> >= 1 )
                 goto loop<decisionNumber>;
-<if(backtracking)>
             <ruleBacktrackFailure()>
-<endif>
-            ANTLREarlyExitException *eee = [ANTLREarlyExitException exceptionWithStream:input decisionNumber:<decisionNumber>];
+            ANTLREarlyExitException *eee = 
+                [ANTLREarlyExitException exceptionWithStream:input decisionNumber:<decisionNumber>];
             <@earlyExitException()>
             @throw eee;
     }
@@ -1143,7 +1141,7 @@ alt(elements,altNum,description,autoAST,outerAlt,treeLevel,rew) ::= <<
 // <fileName>:<description> // alt
 {
 <@declarations()>
-<elements:element()> /* elements */
+<elements:element()>
 <rew>
 <@cleanup()>
 }
@@ -1159,7 +1157,7 @@ noRewrite(rewriteBlockLevel, treeLevel) ::= ""
 /** Dump the elements one per line */
 element() ::= <<
 <@prematch()>
-<it.el>  /* element() */<\n>
+<it.el><\n>
 >>
 
 /** match a token optionally with a label in front */
@@ -1280,11 +1278,13 @@ wildcardCharListLabel(label, elementIndex) ::= <<
  *  descriptor stuff.
  */
 ruleRef(rule,label,elementIndex,args,scope) ::= <<
+/* ruleRef */
 [self pushFollow:FOLLOW_<rule.name>_in_<ruleName><elementIndex>];
-<if(label)><label> = [self <rule.name><if(args)>:<args; separator=" :"><endif>];<\n>
+<if(label)><label> = <endif>[self <if(scope)><scope:delegateName()>.<endif><rule.name><if(args)>:<args; separator=" :"><endif>];<\n>
+<! <if(label)><label> = [self <rule.name><if(args)>:<args; separator=" :"><endif>];<\n>
 <else>
 [self <rule.name><if(args)>:<args; separator=" :"><endif>];<\n>
-<endif>
+<endif> !>
 [self popFollow];
 <checkRuleBacktrackFailure()><\n>
 >>
@@ -1308,7 +1308,7 @@ NSInteger <label>Start<elementIndex> = [self getIndex];
 <label> = [[ANTLRCommonToken newANTLRCommonToken:input Type:ANTLRTokenTypeInvalid Channel:ANTLRTokenChannelDefault Start:<label>Start<elementIndex> Stop:[self getIndex]-1] retain];
 [<label> setLine:[self getLine]];
 <else>
-    [self m<rule.name><if(args)>:<args; separator=" :"><endif>]; <checkRuleBacktrackFailure()><\n>
+[self <if(scope)><scope:delegateName()>.<endif>m<rule.name><if(args)>:<args; separator=" :"><endif>]; <checkRuleBacktrackFailure()><\n>
 <endif>
 >>
 

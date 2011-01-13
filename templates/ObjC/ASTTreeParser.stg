@@ -140,14 +140,6 @@ _last = _save_last_<treeLevel>;
 }<\n>
 >>
 
-/** What to emit when there is no rewrite.  For auto build
- *  mode, does nothing.
- */
-noRewrite(rewriteBlockLevel, treeLevel) ::= <<
-/* ASTTreeParser noRewrite */
-<if(rewriteMode)>_retval.tree = (<ASTLabelType> *)_retval.startToken;<endif>
->>
-
 // TOKEN AST STUFF
 
 /** ID! and output=AST (same as plain tokenRef) 'cept add
