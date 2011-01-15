@@ -32,6 +32,45 @@
 #import "ANTLRStreamEnumerator.h"
 #import "ANTLRCommonTreeAdaptor.h"
 
+#ifdef DONTUSENOMO
+@implementation ANTLRTreeStreamIterator
++ newANTLRTreeStreamIteratorWithNodes:(ANTLRBufferedTreeNodeStream *)theStream
+{
+    return[[ANTLRTreeStreamIterator alloc] initWithStream:theStream];
+}
+
+- (id) initWithStream:(ANTLRBufferedTreeNodeStream *)theStream
+{
+    if ((self = [super init]) != nil) {
+        idx = 0;
+        input = theStream;
+        nodes = [theStream getNodes];
+    }
+    return self;
+}
+
+- (BOOL) hasNext
+{
+    return idx < [nodes count];
+}
+
+- (id) next
+{
+    NSInteger current = idx;
+    idx++;
+    if (current < [nodes count]) {
+    }
+    return [nodes getEof];
+}
+
+- (void) remove
+{
+	@throw [ANTLRRuntimeException newANTLRRuntimeException:@"cannot remove nodes from stream"];
+}
+
+@end
+#endif
+
 @implementation ANTLRBufferedTreeNodeStream
 
 @synthesize up;
@@ -71,7 +110,7 @@
         root = [[ANTLRCommonTree alloc] init];
         //		tokens = tree;
         adaptor = [[ANTLRCommonTreeAdaptor alloc] init];
-        nodes = [NSMutableArray arrayWithCapacity:ANTLR_BUFFERED_TREE_NODE_STREAM_BUFFER_SIZE];
+        nodes = [NSMutableArray arrayWithCapacity:DEFAULT_INITIAL_BUFFER_SIZE];
         down = [adaptor createTree:ANTLRTokenTypeDOWN Text:@"DOWN"];
         up = [adaptor createTree:ANTLRTokenTypeUP Text:@"UP"];
         eof = [adaptor createTree:ANTLRTokenTypeEOF Text:@"EOF"];
@@ -88,7 +127,7 @@
         root = aTree;
         //		tokens = aTree;
         adaptor = [[ANTLRCommonTreeAdaptor alloc] init];
-        nodes = [NSMutableArray arrayWithCapacity:ANTLR_BUFFERED_TREE_NODE_STREAM_BUFFER_SIZE];
+        nodes = [NSMutableArray arrayWithCapacity:DEFAULT_INITIAL_BUFFER_SIZE];
         down = [adaptor createTree:ANTLRTokenTypeDOWN Text:@"DOWN"];
         up = [adaptor createTree:ANTLRTokenTypeUP Text:@"UP"];
         eof = [adaptor createTree:ANTLRTokenTypeEOF Text:@"EOF"];
@@ -105,7 +144,7 @@
         root = aTree;
         //		tokens = aTree;
         adaptor = anAdaptor;
-        nodes = [NSMutableArray arrayWithCapacity:ANTLR_BUFFERED_TREE_NODE_STREAM_BUFFER_SIZE];
+        nodes = [NSMutableArray arrayWithCapacity:DEFAULT_INITIAL_BUFFER_SIZE];
         down = [adaptor createTree:ANTLRTokenTypeDOWN Text:@"DOWN"];
         up = [adaptor createTree:ANTLRTokenTypeUP Text:@"UP"];
         eof = [adaptor createTree:ANTLRTokenTypeEOF Text:@"EOF"];
@@ -162,13 +201,14 @@
 
 // protected methods. DO NOT USE
 #pragma mark Protected Methods
--(void) _fillBuffer
+-(void) fillBuffer
 {
-	[self _fillBufferWithTree:root];
-	p = 0;
+	[self fillBufferWithTree:root];
+	// NSLog("revIndex="+tokenTypeToStreamIndexesMap);
+	p = 0; // buffer of nodes intialized now
 }
 
--(void) _fillBufferWithTree:(id<ANTLRTree>) aTree
+-(void) fillBufferWithTree:(id<ANTLRTree>) aTree
 {
 	BOOL empty = [adaptor isNil:aTree];
 	if (!empty) {
@@ -176,57 +216,48 @@
 	}
 	NSInteger n = [adaptor getChildCount:aTree];
 	if (!empty && n > 0) {
-		[self _addNavigationNode:ANTLRTokenTypeDOWN];
+		[self addNavigationNode:ANTLRTokenTypeDOWN];
 	}
-	for (NSInteger i = 0; i < n; i++) {
-		id child = [adaptor getChild:aTree At:i];
-		[self _fillBufferWithTree:child];
+	for (NSInteger c = 0; c < n; c++) {
+		id child = [adaptor getChild:aTree At:c];
+		[self fillBufferWithTree:child];
 	}
 	if (!empty && n > 0) {
-		[self _addNavigationNode:ANTLRTokenTypeUP];
+		[self addNavigationNode:ANTLRTokenTypeUP];
 	}
 }
 
 -(NSInteger) getNodeIndex:(id<ANTLRTree>) node
 {
-	if (p == -1)
-	{
-		[self _fillBuffer];
+	if (p == -1) {
+		[self fillBuffer];
 	}
-	for (NSInteger i = 0; i < [nodes count]; i++)
-	{
+	for (NSInteger i = 0; i < [nodes count]; i++) {
 		id t = [nodes objectAtIndex:i];
-		if (t == node)
-		{
+		if (t == node) {
 			return i;
 		}
 	}
 	return -1;
 }
 
--(void) _addNavigationNode:(NSInteger) type
+-(void) addNavigationNode:(NSInteger) type
 {
 	id navNode = nil;
-	if (type == ANTLRTokenTypeDOWN)
-	{
-		if (self.uniqueNavigationNodes)
-		{
+	if (type == ANTLRTokenTypeDOWN) {
+		if (self.uniqueNavigationNodes) {
 			navNode = [adaptor createToken:ANTLRTokenTypeDOWN Text:@"DOWN"];
 		}
-		else 
-		{
+		else {
 			navNode = down;
 		}
 
 	}
-	else 
-	{
-		if (self.uniqueNavigationNodes)
-		{
+	else {
+		if (self.uniqueNavigationNodes) {
 			navNode = [adaptor createToken:ANTLRTokenTypeUP Text:@"UP"];
 		}
-		else 
-		{
+		else {
 			navNode = up;
 		}
 	}
@@ -235,51 +266,43 @@
 
 -(id) getNode:(NSInteger) i
 {
-	if (p == -1)
-	{
-		[self _fillBuffer];
+	if (p == -1) {
+		[self fillBuffer];
 	}
 	return [nodes objectAtIndex:i];
 }
 
--(id) LT:(NSInteger) i
+-(id) LT:(NSInteger) k
 {
-	if (p == -1)
-	{
-		[self _fillBuffer];
+	if (p == -1) {
+		[self fillBuffer];
 	}
-	if (i == 0)
-	{
+	if (k == 0) {
 		return nil;
 	}
-	if (i < 0)
-	{
-		return [self LB:i];
+	if (k < 0) {
+		return [self LB:-k];
 	}
-	if ((p + i - 1) >= [nodes count])
-	{
+	if ((p + k - 1) >= [nodes count]) {
 		return eof;
 	}
-	return [nodes objectAtIndex:(p + i - 1)];
+	return [nodes objectAtIndex:(p + k - 1)];
 }
 
-@dynamic currentSymbol;
--(id) currentSymbol
+-(id) getCurrentSymbol
 {
 	return [self LT:1];
 }
 
--(id) LB:(NSInteger) i
+-(id) LB:(NSInteger) k
 {
-	if (i == 0)
-	{
+	if (k == 0) {
 		return nil;
 	}
-	if ((p - i) < 0)
-	{
+	if ((p - k) < 0) {
 		return nil;
 	}
-	return [nodes objectAtIndex:(p - i)];
+	return [nodes objectAtIndex:(p - k)];
 }
 
 - (id<ANTLRTree>)getTreeSource
@@ -325,7 +348,7 @@
 -(void) consume
 {
 	if (p == -1) {
-		[self _fillBuffer];
+		[self fillBuffer];
 	}
 	p++;
 }
@@ -338,7 +361,7 @@
 -(NSInteger) mark
 {
 	if (p == -1) {
-		[self _fillBuffer];
+		[self fillBuffer];
 	}
 	lastMarker = [self getIndex];
 	return lastMarker;
@@ -367,7 +390,7 @@
 -(void) seek:(NSInteger) i
 {
 	if (p == -1) {
-		[self _fillBuffer];
+		[self fillBuffer];
 	}
 	p = i;
 }
@@ -375,7 +398,7 @@
 -(void) push:(NSInteger) i
 {
 	if (calls == nil) {
-		calls = [ANTLRIntArray newANTLRIntArrayWithLen:ANTLR_BUFFERED_TREE_NODE_STREAM_CALL_STACK_SIZE];
+		calls = [ANTLRIntArray newANTLRIntArrayWithLen:INITIAL_CALL_STACK_SIZE];
 	}
 	[calls push:p];
 	[self seek:i];
@@ -397,18 +420,17 @@
 	}
 }
 
--(NSUInteger) size
+-(NSUInteger) count
 {
 	if (p == -1) {
-		[self _fillBuffer];
+		[self fillBuffer];
 	}
 	return [nodes count];
 }
 
 -(NSEnumerator *) objectEnumerator
 {
-	if (e == nil)
-	{
+	if (e == nil) {
 		e = [[ANTLRStreamEnumerator alloc] initWithNodes:nodes andEOF:eof];
 	}
 	return e;
@@ -416,8 +438,7 @@
 
 -(void) replaceChildren:(id<ANTLRTree>) parent From:(NSInteger)startIdx To:(NSInteger)stopIdx With:(id<ANTLRTree>)aTree
 {
-	if (parent != nil)
-	{
+	if (parent != nil) {
 		[adaptor replaceChildren:parent From:startIdx To:stopIdx With:aTree];
 	}
 }
@@ -426,12 +447,11 @@
 {
 	if (p == -1)
 	{
-		[self _fillBuffer];
+		[self fillBuffer];
 	}
 	NSMutableString *buf = [NSMutableString stringWithCapacity:10];
-	for (NSInteger i= 0; i < [nodes count]; i++)
-	{
-		id<ANTLRTree> aTree = (id<ANTLRTree>)[nodes objectAtIndex:i];
+	for (NSInteger i= 0; i < [nodes count]; i++) {
+		id<ANTLRTree> aTree = (id<ANTLRTree>)[self getNode:i];
 		[buf appendFormat:@" %d", [adaptor getType:aTree]];
 	}
 	return buf;
@@ -439,14 +459,12 @@
 
 -(NSString *) toTokenString:(NSInteger)aStart ToEnd:(NSInteger)aStop
 {
-	if (p == -1)
-	{
-		[self _fillBuffer];
+	if (p == -1) {
+		[self fillBuffer];
 	}
 	NSMutableString *buf = [NSMutableString stringWithCapacity:10];
-	for (NSInteger i = aStart; i < [nodes count] && i <= aStop; i++)
-	{
-		id<ANTLRTree> t = (id<ANTLRTree>)[nodes objectAtIndex:i];
+	for (NSInteger i = aStart; i < [nodes count] && i <= aStop; i++) {
+		id<ANTLRTree> t = (id<ANTLRTree>)[self getNode:i];
 		[buf appendFormat:@" %d", [adaptor getType:t]];
 	}
 	return buf;
@@ -458,7 +476,7 @@
 		return nil;
 	}
 	if (p == -1) {
-		[self _fillBuffer];
+		[self fillBuffer];
 	}
 	
 	// if we have a token stream, use that to dump text in order
@@ -470,7 +488,7 @@
 			endTokenIndex = [adaptor getTokenStopIndex:aStart];
 		}
 		else if ([adaptor getType:aStop] == ANTLRTokenTypeEOF) {
-			endTokenIndex = [self size] - 2; //don't use EOF
+			endTokenIndex = [self count] - 2; //don't use EOF
 		}
         [tokens toStringFromStart:beginTokenIndex ToEnd:endTokenIndex];
 	}
@@ -502,4 +520,14 @@
 	return buf;
 }
 
+// getters and setters
+- (NSMutableArray *) getNodes
+{
+    return nodes;
+}
+
+- (id<ANTLRTree>) getEof
+{
+    return eof;
+}
 @end

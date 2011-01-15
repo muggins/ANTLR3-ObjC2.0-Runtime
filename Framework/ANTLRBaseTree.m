@@ -479,7 +479,7 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
      // the children themselves are not copied here!
 - (id) copyWithZone:(NSZone *)aZone
 {
-    id<ANTLRTree> theCopy = [[[self class] alloc] init];
+    id<ANTLRTree> theCopy = [[[self class] allocWithZone:aZone] init];
     [theCopy addChildren:self.children];
     return theCopy;
 }

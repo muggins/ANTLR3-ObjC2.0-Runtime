@@ -33,7 +33,7 @@
 #include <arpa/inet.h>
 
 // default port for ANTLRWorks
-#define DEFAULT_DEBUGGER_PORT 0xC001
+#define DEFAULT_DEBUGGER_PORT 49001
 
 @interface ANTLRDebugEventProxy : NSObject <ANTLRDebugEventListener> {
 	int serverSocket;

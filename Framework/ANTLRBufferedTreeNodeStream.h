@@ -37,8 +37,26 @@
 #import "ANTLRTreeIterator.h"
 #import "ANTLRIntArray.h"
 
-#define ANTLR_BUFFERED_TREE_NODE_STREAM_BUFFER_SIZE 100
-#define ANTLR_BUFFERED_TREE_NODE_STREAM_CALL_STACK_SIZE 10
+#define DEFAULT_INITIAL_BUFFER_SIZE 100
+#define INITIAL_CALL_STACK_SIZE 10
+
+#ifdef DONTUSENOMO
+@interface ANTLRStreamIterator : ANTLRTreeIterator
+{
+    NSInteger idx;
+    ANTLRBufferedTreeNodeStream input;
+    NSMutableArray *nodes;
+}
+
++ (id) newANTLRStreamIterator:(ANTLRBufferedTreeNodeStream *) theStream;
+
+- (id) initWithStream:(ANTLRBufferedTreeNodeStream *) theStream;
+
+- (BOOL) hasNext;
+- (id) next;
+- (void) remove;
+@end
+#endif
 
 @interface ANTLRBufferedTreeNodeStream : NSObject <ANTLRTreeNodeStream> 
 {
@@ -82,33 +100,57 @@
 + (ANTLRBufferedTreeNodeStream *) newANTLRBufferedTreeNodeStream:(id<ANTLRTreeAdaptor>)adaptor Tree:(id<ANTLRTree>)tree withBufferSize:(NSInteger)initialBufferSize;
 
 #pragma mark Constructor
--(id) initWithTree:(id<ANTLRTree>)tree;
--(id) initWithTreeAdaptor:(ANTLRCommonTreeAdaptor *)anAdaptor Tree:(id<ANTLRTree>)tree;
--(id) initWithTreeAdaptor:(ANTLRCommonTreeAdaptor *)anAdaptor Tree:(id<ANTLRTree>)tree WithBufferSize:(NSInteger)bufferSize;
+- (id) initWithTree:(id<ANTLRTree>)tree;
+- (id) initWithTreeAdaptor:(ANTLRCommonTreeAdaptor *)anAdaptor Tree:(id<ANTLRTree>)tree;
+- (id) initWithTreeAdaptor:(ANTLRCommonTreeAdaptor *)anAdaptor Tree:(id<ANTLRTree>)tree WithBufferSize:(NSInteger)bufferSize;
 
 - (id) copyWithZone:(NSZone *)aZone;
 
-#pragma mark General Methods
--(id) currentSymbol;
--(id) LB:(NSInteger) i;
--(NSString *) getSourceName;
--(NSEnumerator *) objectEnumerator;
-
--(void) push:(NSInteger) i;
--(NSInteger) pop;
-
--(NSString *) toTokenTypeString;
--(NSString *) toTokenString:(NSInteger)aStart ToEnd:(NSInteger)aStop;
--(NSString *) toStringFromNode:(id)aStart ToNode:(id)aStop;
-
 // protected methods. DO NOT USE
 #pragma mark Protected Methods
--(void) _fillBuffer;
--(void) _fillBufferWithTree:(id<ANTLRTree>) tree;
--(NSInteger) getNodeIndex:(id<ANTLRTree>) node;
--(void) _addNavigationNode:(NSInteger) type;
+- (void) fillBuffer;
+- (void) fillBufferWithTree:(id<ANTLRTree>) tree;
+- (NSInteger) getNodeIndex:(id<ANTLRTree>) node;
+- (void) addNavigationNode:(NSInteger) type;
+- (id) getNode:(NSInteger) i;
+- (id) LT:(NSInteger) k;
+- (id) getCurrentSymbol;
+- (id) LB:(NSInteger) i;
+#pragma mark General Methods
+- (NSString *) getSourceName;
+
+- (id<ANTLRTokenStream>) getTokenStream;
+- (void) setTokenStream:(id<ANTLRTokenStream>) tokens;
+- (id<ANTLRTreeAdaptor>) getTreeAdaptor;
+- (void) setTreeAdaptor:(id<ANTLRTreeAdaptor>) anAdaptor;
 
 - (BOOL)getUniqueNavigationNodes;
 - (void) setUniqueNavigationNodes:(BOOL)aVal;
+
+- (void) consume;
+- (NSInteger) LA:(NSInteger) i;
+- (NSInteger) mark;
+- (void) release:(NSInteger) marker;
+- (NSInteger) getIndex;
+- (void) setIndex:(NSInteger) idx;
+- (void) rewind:(NSInteger) marker;
+- (void) rewind;
+- (void) seek:(NSInteger) idx;
+
+- (void) push:(NSInteger) i;
+- (NSInteger) pop;
+
+- (void) reset;
+- (NSUInteger) count;
+- (NSEnumerator *) objectEnumerator;
+- (void) replaceChildren:(id)parent From:(NSInteger)startChildIndex To:(NSInteger)stopChildIndex With:(id) t;
+
+- (NSString *) toTokenTypeString;
+- (NSString *) toTokenString:(NSInteger)aStart ToEnd:(NSInteger)aStop;
+- (NSString *) toStringFromNode:(id)aStart ToNode:(id)aStop;
+
+// getters and setters
+- (NSMutableArray *) getNodes;
+- (id<ANTLRTree>) getEof;
 
 @end

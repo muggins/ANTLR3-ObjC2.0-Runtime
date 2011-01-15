@@ -37,14 +37,17 @@
 - (id) initWithTree:(ANTLRCommonTree *)theTree;
 - (id) initWithTreeAdaptor:(id<ANTLRTreeAdaptor>)theAdaptor Tree:(ANTLRCommonTree *)theTree;
 
+- (id) getNode:(NSInteger) idx;
 - (id) LT:(NSInteger)k;
 - (id) getTreeSource;
-- (id<ANTLRTreeAdaptor>) getTreeAdaptor;
 - (id<ANTLRTokenStream>) getTokenStream; 
+- (id<ANTLRTreeAdaptor>) getTreeAdaptor;
 - (void) setUniqueNavigationNodes:(BOOL)flag;
-
-- (id) getNode:(NSInteger) idx;
+- (void) reset;
 
 - (NSString *) toStringFromNode:(id)startNode ToNode:(id)stopNode;
+
+- (void) replaceChildren:(id)parent From:(NSInteger)startChildIndex To:(NSInteger)stopChildIndex With:(id) t;
+    
 
 @end

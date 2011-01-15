@@ -190,7 +190,7 @@ static BOOL debug = NO;
         size += [encodedString characterAtIndex:i];
     }
     NSMutableData *dp = [NSMutableData dataWithLength:size];
-    short *data = [[dp mutableBytes] retain];
+    short *data = (short *)[[dp mutableBytes] retain];
     int di = 0;
     for (int i=0; i < [encodedString length]; i+=2) {
         char n = [encodedString characterAtIndex:i];

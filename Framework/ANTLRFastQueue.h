@@ -34,13 +34,13 @@
 
 @interface ANTLRFastQueue : NSObject <NSCopying>
 {
-	NSAutoreleasePool *pool;
+//	NSAutoreleasePool *pool;
 	NSMutableArray *data;
 	NSInteger p;
     NSInteger range;
 }
 
-@property (retain, getter=getPool, setter=setPool:) NSAutoreleasePool *pool;
+//@property (retain, getter=getPool, setter=setPool:) NSAutoreleasePool *pool;
 @property (retain, getter=getData, setter=setData:) NSMutableArray *data;
 @property (assign, getter=getP, setter=setP:) NSInteger p;
 @property (assign, getter=getRange, setter=setRange:) NSInteger range;
@@ -61,8 +61,8 @@
 - (id) objectAtIndex:(NSInteger) i;
 - (void) clear;
 - (NSString *) toString;
-- (NSAutoreleasePool *)getPool;
-- (void)setPool:(NSAutoreleasePool *)aPool;
+//- (NSAutoreleasePool *)getPool;
+//- (void)setPool:(NSAutoreleasePool *)aPool;
 - (NSMutableArray *)getData;
 - (void)setData:(NSMutableArray *)myData;
 - (NSInteger) getP;

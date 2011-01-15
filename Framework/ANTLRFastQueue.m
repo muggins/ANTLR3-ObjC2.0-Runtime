@@ -35,7 +35,7 @@
 
 @implementation ANTLRFastQueue
 
-@synthesize pool;
+//@synthesize pool;
 @synthesize data;
 @synthesize p;
 @synthesize range;
@@ -48,8 +48,8 @@
 - (id) init
 {
 	if ((self = [super init]) != nil ) {
-		pool = [NSAutoreleasePool new];
-		data = [[NSMutableArray arrayWithCapacity:10] autorelease];
+//		pool = [NSAutoreleasePool new];
+		data = [[NSMutableArray arrayWithCapacity:100] autorelease];
 		p = 0;
 		range = -1;
 	}
@@ -58,7 +58,7 @@
 
 -(void) dealloc
 {
-	[pool drain];
+//	[pool drain];
 	[super dealloc];
 }
 
@@ -67,7 +67,7 @@
     ANTLRFastQueue *copy;
     
     copy = [[[self class] allocWithZone:aZone] init];
-    copy.pool = pool;
+//    copy.pool = pool;
     copy.data = [data copyWithZone:nil];
     copy.p = p;
     return copy;
@@ -151,6 +151,7 @@
 	return buf;
 }
 
+#ifdef DONTUSENOMO
 - (NSAutoreleasePool *)getPool
 {
     return pool;
@@ -160,6 +161,7 @@
 {
     pool = aPool;
 }
+#endif
 
 - (NSMutableArray *)getData
 {

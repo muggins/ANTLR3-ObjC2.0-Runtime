@@ -36,11 +36,12 @@
 
 @interface ANTLRLookaheadStream : ANTLRFastQueue
 {
-	id eof;
     NSInteger currentElementIndex;
 	NSInteger eofElementIndex;
 	NSInteger lastMarker;
 	NSInteger markDepth;
+	id prevElement;
+	id eof;
 }
 
 @property (readwrite, retain, getter=getEof, setter=setEof:) id eof;
@@ -48,15 +49,17 @@
 @property (assign, getter=getEofElementIndex, setter=setEofElementIndex:) NSInteger eofElementIndex;
 @property (assign, getter=getLastMarker, setter=setLastMarker:) NSInteger lastMarker;
 @property (assign, getter=getMarkDepth, setter=setMarkDepth:) NSInteger markDepth;
+@property (assign, getter=getPrevElement, setter=setPrevElement:) id prevElement;
 
 - (id) initWithEOF:(id) o;
 - (id) nextElement;
+- (id) remove;
 - (void) consume;
 - (void) sync:(NSInteger) need;
 - (void) fill:(NSInteger) n;
 - (id) LT:(NSInteger) i;
 - (id) LB:(NSInteger) i;
-- (id) currentSymbol;
+- (id) getCurrentSymbol;
 - (NSInteger) getIndex;
 - (void) setIndex:(NSInteger)i;
 - (NSInteger) mark;

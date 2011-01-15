@@ -116,7 +116,7 @@
 	}
 }
 
--(NSInteger) size
+-(NSInteger) count
 {
 	@throw [NSException exceptionWithName:@"ANTLRUnsupportedOperationException" reason:@"Streams have no defined size" userInfo:nil];
 }
@@ -144,7 +144,7 @@
 	@throw [ANTLRRuntimeException newANTLRNoSuchElementException:[NSString stringWithString:@"can't look backwards more than one token in this stream"]];
 }
 
--(id) currentSymbol
+-(id) getCurrentSymbol
 {
 	return [self LT:1];
 }
@@ -152,6 +152,11 @@
 -(NSInteger) getIndex
 {
 	return currentElementIndex;
+}
+
+- (void) setIndex:(NSInteger)i
+{
+    currentElementIndex = i;
 }
 
 -(NSInteger) mark
