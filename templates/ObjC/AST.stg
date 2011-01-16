@@ -285,7 +285,6 @@ rewriteCode(
 <if(backtracking)>
 if ( <actions.(actionScope).synpredgate> ) {<\n>
 <endif>
- [<prevRuleRootRef()> setTree:root_0];<\n>
 <prevRuleRootRef()>.tree = root_0;<\n>
 <rewriteCodeLabels()>
 root_0 = (<ASTLabelType> *)[[[treeAdaptor class] newEmptyTree] retain];<\n>
@@ -308,7 +307,6 @@ root_0 = (<ASTLabelType> *)[[[treeAdaptor class] newEmptyTree] retain];<\n>
 <prevRuleRootRef()>.tree = root_0;<\n>
 <endif>
 <endif>
-<! <rewriteCodeLabelsCleanUp()> !>
 <if(backtracking)>
 }
 <endif>

@@ -427,7 +427,7 @@ filteringNextToken() ::= <<
             state.backtracking = 0;
             /* mTokens backtracks with synpred at backtracking==2
                and we set the synpredgate to allow actions at level 1. */
-            if ( state.failed == YES ) {
+            if ( state.failed ) {
                 [input rewind:m];
                 [input consume]; /* advance one char and try again */
             } else {
@@ -703,7 +703,7 @@ genericParser(  grammar,
 >>
 
 parserCtorBody() ::= <<
-<if(memoize)>
+<if(memoize)> /* parserCtorBody */
 <if(grammar.grammarIsRoot)>
 state.ruleMemo = [[ANTLRRuleStack newANTLRRuleStack:<numRules>+1] retain];<\n> <! index from 1..n !>
 <endif>
@@ -739,7 +739,7 @@ treeParser( grammar,
         bitsets,
         ASTLabelType="ANTLRCommonTree",
         superClass={<if(filterMode)><if(buildAST)>ANTLRTreeRewriter<else>ANTLRTreeFilter<endif><else>ANTLRTreeParser<endif>},
-        labelType="ANTLRCommonTree",
+        labelType={<ASTLabelType>},
         members={<actions.treeparser.members>},
         filterMode
         ) ::= <<
@@ -760,12 +760,12 @@ synpredRule(ruleName, ruleDescriptor, block, description, nakedBlock) ::=
 {
     <ruleLabelDefs()>
     <if(trace)>
-        [self traceIn:\@"<ruleName>_fragment" Index:<ruleDescriptor.index>];
+        [self traceIn:\@"<ruleName>_fragment %d" Index:<ruleDescriptor.index>];
     @try {
         <block>
     }
     @finally {
-        [self traceOut:\@"<ruleName>_fragment" Index:<ruleDescriptor.index>];
+        [self traceOut:\@"<ruleName>_fragment %d" Index:<ruleDescriptor.index>];
     }
 <else>
     <block>
@@ -802,7 +802,7 @@ lexerSynpred(name) ::= <<
 
 ruleMemoization(name) ::= <<
 <if(memoize)>
-if ( state.backtracking && [self alreadyParsedRule:input RuleIndex:<ruleDescriptor.index>] ) return <ruleReturnValue()>;
+if ( state.backtracking > 0 && [self alreadyParsedRule:input RuleIndex:<ruleDescriptor.index>] ) { return <ruleReturnValue()>; }
 <endif>
 >>
 
@@ -813,7 +813,7 @@ checkRuleBacktrackFailure() ::= <<
 
 /** This rule has failed, exit indicating failure during backtrack */
 ruleBacktrackFailure() ::= <<
-<if(backtracking)>if ( state.backtracking > 0 ) { state.failed = YES; return <ruleReturnValue()>; }<endif>
+<if(backtracking)>if ( state.backtracking > 0 ) { state.failed = YES; return <ruleReturnValue()>; }<\n><endif>
 >>
 
 /** How to generate code for a rule.
@@ -826,7 +826,7 @@ rule(ruleName,ruleDescriptor,block,emptyRule,description,exceptions,finally,memo
  */
 - (<returnType()>) <ruleName><ruleDescriptor.parameterScope:parameterScope(scope=it)>
 {
-    <if(trace)>traceIn("<ruleName>", <ruleDescriptor.index>);<endif>
+    <if(trace)>[self traceIn:\@"<ruleName> %d\n" Index:<ruleDescriptor.index>];<endif>
     <if(trace)>NSLog(@"enter <ruleName> %@ failed=%@ backtracking=%d", [input LT:1], (state.failed==YES)?@"YES":@"NO", state.backtracking);<endif>
     <ruleScopeSetUp()>
     <ruleDeclarations()>
@@ -855,7 +855,7 @@ rule(ruleName,ruleDescriptor,block,emptyRule,description,exceptions,finally,memo
 <endif>
 <endif>
     @finally {
-        <if(trace)>[self traceOut:traceOut:[NSString stringWithFormat:@"<ruleName> %d\n", <ruleDescriptor.index>]];<endif>
+        <if(trace)>[self traceOut:@"<ruleName>" Index:<ruleDescriptor.index>];<endif>
         <memoize()>
         <ruleScopeCleanUp()>
         <finally>
@@ -875,7 +875,7 @@ finalCode(finalBlock) ::= <<
 catch(decl,action) ::= <<
 @catch (<e.decl>) {
     <e.action>
-}<\n>
+}
 >>
 
 ruleDeclarations() ::= <<
@@ -886,9 +886,6 @@ ruleDeclarations() ::= <<
 <ruleDescriptor.returnScope.attributes:{ a |
 <a.type> <a.name> = <if(a.initValue)><a.initValue><else><initValue(a.type)><endif>;
 }>
-<! <if(ruleDescriptor.hasSingleReturnValue)> // This is not in the Java.stg
-<returnType()> <ruleDescriptor.singleValueReturnName> = <initValue(typeName=returnType())>;
-<endif> !>
 <endif>
 <if(memoize)>
 NSInteger <ruleDescriptor.name>_StartIndex = [input getIndex];
@@ -968,7 +965,7 @@ lexerRule(ruleName, nakedBlock, ruleDescriptor, block, memoize) ::= <<
 // $ANTLR start "<ruleName>"
 - (void) m<ruleName><if(ruleDescriptor.parameterScope)><ruleDescriptor.parameterScope:parameterScope(scope=it)><endif>
 {
-    //<if(trace)>[self traceIn:[NSString stringWithFormat:@"<ruleName> %d\n", <ruleDescriptor.index>]];<endif>
+    //<if(trace)>[self traceIn:\@"<ruleName>\n" Index:<ruleDescriptor.index>];<endif>
     <if(trace)>NSLog(@"enter <ruleName> %C line=%d:%d failed=%@ backtracking=%d",
         [input LA:1],
         [self getLine],
@@ -1070,11 +1067,11 @@ blockSingleAlt(alts,decls,decision,enclosingBlockLevel,blockLevel,decisionNumber
 /** A (..)+ block with 1 or more alternatives */
 positiveClosureBlock(alts,decls,decision,enclosingBlockLevel,blockLevel,decisionNumber,maxK,maxAlt,description) ::= <<
 // <fileName>:<description> // positiveClosureBlock
-NSInteger cnt<decisionNumber>=0;
+NSInteger cnt<decisionNumber> = 0;
 <decls>
 <@preloop()>
 do {
-    NSInteger alt<decisionNumber>=<maxAlt>;
+    NSInteger alt<decisionNumber> = <maxAlt>;
     <@predecision()>
     <decision>
     <@postdecision()>
@@ -1438,17 +1435,17 @@ default: ;
 >>
 
 dfaOptionalBlockStateSwitch(k,edges,eotPredictsAlt,description,stateNumber,semPredState) ::= <<
-switch ([input LA:<k>]) {
+switch ([input LA:<k>]) { // dfaOptionalBlockStateSwitch
     <edges; separator="\n"><\n>
 }<\n>
 >>
 
 dfaLoopbackStateSwitch(k, edges,eotPredictsAlt,description,stateNumber,semPredState) ::= <<
-switch ([input LA:<k>]) {
+switch ([input LA:<k>]) { // dfaLoopbackStateSwitch
     <edges; separator="\n"><\n>
 <if(eotPredictsAlt)>
-default: ;
-    alt<decisionNumber> = <eotPredictsAlt>
+default:
+    alt<decisionNumber> = <eotPredictsAlt>;
     break;<\n>
 <endif>
 }<\n>
@@ -1512,7 +1509,7 @@ const static NSInteger dfa<dfa.decisionNumber>_transition[] = {};
 const static NSInteger dfa<dfa.decisionNumber>_transition<i0>[] = {<table; separator=", ", wrap="\n ", null="-1">};
 }; null="">
 
-+ () newDFA<dfa.decisionNumber>WithRecognizer:(ANTLRBaseRecognizer *)aRecognizer
++ (id) newDFA<dfa.decisionNumber>WithRecognizer:(ANTLRBaseRecognizer *)aRecognizer
 {
     return [[[DFA<dfa.decisionNumber> alloc] initWithRecognizer:aRecognizer] retain];
 }
@@ -1614,8 +1611,7 @@ if (<labelExpr><if(predicates)> && (<predicates>)<endif>) { s = <targetStateNumb
  *  always jump to the target.
  */
 eotDFAEdge(targetStateNumber,edgeNumber, predicates) ::= <<
-/* eotDFAEdge */
-s = <targetStateNumber>;<\n>
+s = <targetStateNumber>;<\n> /* eotDFAEdge */
 >>
 
 // D F A  E X P R E S S I O N S
@@ -1843,7 +1839,6 @@ returnScopeInterface(scope) ::= <<
 >>
 
 returnScope(scope) ::= <<
-/* returnScope */
 <if(ruleDescriptor.hasMultipleReturnValues)>
 @implementation <ruleDescriptor:returnStructName()> /* returnScope */
 <@synthesize()> /* start of synthesize -- OBJC-Line 1837 */
@@ -1874,7 +1869,7 @@ parameterScope(scope) ::= <<
 >>
 
 parameterAttributeRef(attr) ::= "<attr.name>"
-parameterSetAttributeRef(attr,expr) ::= "<attr.name>=<expr>;"
+parameterSetAttributeRef(attr,expr) ::= "<attr.name> = <expr>;"
 
 /** Note that the scopeAttributeRef does not have access to the
  * grammar name directly
@@ -1968,8 +1963,8 @@ tokenLabelPropertyRef_index(scope,attr) ::= "(<scope>!=nil?[<scope> getTokenInde
 tokenLabelPropertyRef_tree(scope,attr) ::= "<scope>_tree"
 tokenLabelPropertyRef_int(scope,attr) ::= "(<scope>!=nil?[[<scope> getText] integerValue]:0]"
 
-ruleLabelPropertyRef_start(scope,attr) ::= "(<scope>!=nil?((<ASTLabelType> *)<scope>.startToken):nil)"
-ruleLabelPropertyRef_stop(scope,attr) ::= "(<scope>!=nil?((<ASTLabelType> *)<scope>.stopToken):nil)"
+ruleLabelPropertyRef_start(scope,attr) ::= "(<scope>!=nil?((<labelType> *)<scope>.startToken):nil)"
+ruleLabelPropertyRef_stop(scope,attr) ::= "(<scope>!=nil?((<labelType> *)<scope>.stopToken):nil)"
 ruleLabelPropertyRef_tree(scope,attr) ::= "(<scope>!=nil?((<ASTLabelType> *)<scope>.tree):nil)"
 ruleLabelPropertyRef_text(scope,attr) ::= <<
 <if(TREE_PARSER)>
