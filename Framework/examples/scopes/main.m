@@ -11,17 +11,18 @@ int main() {
 	ANTLRStringStream *stream = [[ANTLRStringStream alloc] initWithStringNoCopy:string];
 	SymbolTableLexer *lexer = [[SymbolTableLexer alloc] initWithCharStream:stream];
 	
-	//	ANTLRToken *currentToken;
-	//	while ((currentToken = [lexer nextToken]) && [currentToken type] != ANTLRTokenTypeEOF) {
-	//		NSLog(@"%@", currentToken);
-	//	}
+//	ANTLRCommonToken *currentToken;
+//	while ((currentToken = [lexer nextToken]) && [currentToken getType] != ANTLRTokenTypeEOF) {
+//		NSLog(@"%@", currentToken);
+//	}
 	
-	ANTLRCommonTokenStream *tokenStream = [[ANTLRCommonTokenStream alloc] initWithTokenSource:lexer];
-	SymbolTableParser *parser = [[SymbolTableParser alloc] initWithTokenStream:tokenStream];
+	ANTLRCommonTokenStream *tokens = [[ANTLRCommonTokenStream alloc] initWithTokenSource:lexer];
+	SymbolTableParser *parser = [[SymbolTableParser alloc] initWithTokenStream:tokens];
 	[parser prog];
+
 	[lexer release];
 	[stream release];
-	[tokenStream release];
+	[tokens release];
 	[parser release];
 	
 	[pool release];

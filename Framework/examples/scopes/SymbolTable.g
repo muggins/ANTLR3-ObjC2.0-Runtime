@@ -11,7 +11,7 @@ options {
 }
 
 scope Symbols {
-  ANTLRHashMap *names;
+  ANTLRPtrBuffer *names;
 }
 
 @memVars {
@@ -22,19 +22,21 @@ int level;
 level = 0;
 }
 
-prog:   globals (method)*
+prog
+// scope Symbols;
+    :   globals (method)*
     ;
 
 globals
 scope Symbols;
 @init {
     level++;
-    $Symbols::names = [ANTLRHashMap newANTLRHashMapWithLen:101];
+    $Symbols::names = [ANTLRPtrBuffer newANTLRPtrBufferWithLen:10];
 }
     :   (decl)*
         {
-        NSLog(@"globals: \%@", $Symbols::names);
-        level--;
+            NSLog( @"globals: \%@", [$Symbols::names toString] );
+            level--;
         }
     ;
 
@@ -46,12 +48,12 @@ block
 scope Symbols;
 @init {
     level++;
-    $Symbols::names = [ANTLRHashMap newANTLRHashMapWithLen:101];
+    $Symbols::names = [ANTLRPtrBuffer newANTLRPtrBufferWithLen:10];
 }
     :   '{' (decl)* (stat)* '}'
         {
-        NSLog(@"level \%d symbols: \%@", level, $Symbols::names);
-        level--;
+            NSLog( @"level \%d symbols: \%@", level, [$Symbols::names toString] );
+            level--;
         }
     ;
 
@@ -69,5 +71,5 @@ ID  :   ('a'..'z')+
 INT :   ('0'..'9')+
     ;
 
-WS  :   (' '|'\n'|'\r')+ {$channel=99;}
+WS  :   (' '|'\n'|'\r')+ {$channel=HIDDEN;}
     ;

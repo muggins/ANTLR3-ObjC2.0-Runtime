@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 24, 2010 10:45:57 SymbolTable.g 2010-08-24 13:53:46
+// $ANTLR 3.3.1-SNAPSHOT Jan 18, 2011 15:10:00 SymbolTable.g 2011-01-18 15:28:42
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -10,34 +10,47 @@
  */
 
 /* parserHeaderFile */
+
+#ifndef ANTLR3TokenTypeAlreadyDefined
+#define ANTLR3TokenTypeAlreadyDefined
+typedef enum {
+    ANTLR_EOF = -1,
+    INVALID,
+    EOR,
+    DOWN,
+    UP,
+    MIN
+} ANTLR3TokenType;
+#endif
+
 #pragma mark Tokens
-#define WS 6
-#define T__12 12
-#define T__11 11
-#define T__14 14
-#define T__13 13
-#define T__10 10
-#define INT 5
-#define ID 4
 #define EOF -1
-#define T__9 9
-#define T__8 8
 #define T__7 7
+#define T__8 8
+#define T__9 9
+#define T__10 10
+#define T__11 11
+#define T__12 12
+#define T__13 13
+#define T__14 14
+#define ID 4
+#define INT 5
+#define WS 6
 #pragma mark Dynamic Global Scopes
 @interface Symbols_Scope : ANTLRSymbolsScope {  /* globalAttributeScopeDecl */
-ANTLRHashMap * names;
+ANTLRPtrBuffer * names;
 }
 /* start of properties */
 
-@property (retain, getter=getnames, setter=setnames:) ANTLRHashMap * names;
+@property (retain, getter=getnames, setter=setnames:) ANTLRPtrBuffer * names;
 
 /* end properties */
 
 + (Symbols_Scope *)newSymbols_Scope;
 /* start of iterated get and set functions */
 
-- (ANTLRHashMap *)getnames;
-- (void)setnames:(ANTLRHashMap *)aVal;
+- (ANTLRPtrBuffer *)getnames;
+- (void)setnames:(ANTLRPtrBuffer *)aVal;
 
 /* End of iterated get and set functions */
 
@@ -49,7 +62,8 @@ ANTLRHashMap * names;
 @interface SymbolTableParser : ANTLRParser { /* line 572 */
 // start of globalAttributeScopeMemVar
 /* globalAttributeScopeMemVar */
-ANTLRSymbolStack *gStack;
+//ANTLRSymbolStack *gStack;
+ANTLRSymbolStack *Symbols_stack;
 Symbols_Scope *Symbols_scope;
 
 // start of action-actionScope-memVars

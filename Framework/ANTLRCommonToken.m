@@ -213,7 +213,7 @@ static ANTLRCommonToken *INVALID_TOKEN;
 	if (input == nil) {
 		return nil;
 	}
-	return [input substringWithRange:NSMakeRange(startIndex, stopIndex-startIndex)];
+	return [input substringWithRange:NSMakeRange(startIndex, (stopIndex-startIndex)+1)];
 }
 
 - (void) setText: (NSString *) aText
@@ -345,24 +345,22 @@ static ANTLRCommonToken *INVALID_TOKEN;
 
 - (NSString *)toString
 {
-    NSMutableString *channelString;
+    NSString *channelStr;
     NSMutableString *txtString;
 
+    channelStr = @"";
     if ( channel > 0 ) {
-        channelString = [NSString stringWithFormat:@", channel=%d\n", channel];
-    }
-    else {
-        channelString = [NSMutableString stringWithCapacity:25];
+        channelStr = [NSString stringWithFormat:@",channel=%d\n", channel];
     }
 	if ([self getText] != nil) {
 		txtString = [NSMutableString stringWithString:[self getText]];
-		[txtString replaceOccurrencesOfString:@"\n" withString:@"\\\n" options:NSAnchoredSearch range:NSMakeRange(0, [txtString length])];
-		[txtString replaceOccurrencesOfString:@"\r" withString:@"\\\r" options:NSAnchoredSearch range:NSMakeRange(0, [txtString length])];
-		[txtString replaceOccurrencesOfString:@"\t" withString:@"\\\t" options:NSAnchoredSearch range:NSMakeRange(0, [txtString length])];
+		[txtString replaceOccurrencesOfString:@"\n" withString:@"\\\\n" options:NSAnchoredSearch range:NSMakeRange(0, [txtString length])];
+		[txtString replaceOccurrencesOfString:@"\r" withString:@"\\\\r" options:NSAnchoredSearch range:NSMakeRange(0, [txtString length])];
+		[txtString replaceOccurrencesOfString:@"\t" withString:@"\\\\t" options:NSAnchoredSearch range:NSMakeRange(0, [txtString length])];
 	} else {
 		txtString = [NSMutableString stringWithString:@"<no text>"];
     }
-	return [NSString stringWithFormat:@"[@%d, %d, %d=%@,<%d>,channel=%d,%d:%d]", index, startIndex, stopIndex, txtString, type, channel, line, charPositionInLine];
+	return [NSString stringWithFormat:@"[@%d, %d:%d='%@',<%d>%@,%d:%d]", index, startIndex, stopIndex, txtString, type, channelStr, line, charPositionInLine];
 }
 
 @end

@@ -11,17 +11,18 @@ int main() {
 	ANTLRStringStream *stream = [[ANTLRStringStream alloc] initWithStringNoCopy:string];
 	SimpleCLexer *lexer = [[SimpleCLexer alloc] initWithCharStream:stream];
 
-//	ANTLRToken *currentToken;
-//	while ((currentToken = [lexer nextToken]) && [currentToken type] != ANTLRTokenTypeEOF) {
-//		NSLog(@"%@", currentToken);
+//	ANTLRCommonToken *currentToken;
+//	while ((currentToken = [lexer nextToken]) && [currentToken getType] != ANTLRTokenTypeEOF) {
+//		NSLog(@"%@", [currentToken toString]);
 //	}
 	
-	ANTLRCommonTokenStream *tokenStream = [[ANTLRCommonTokenStream alloc] initWithTokenSource:lexer];
-	SimpleCParser *parser = [[SimpleCParser alloc] initWithTokenStream:tokenStream];
+	ANTLRCommonTokenStream *tokens = [[ANTLRCommonTokenStream alloc] initWithTokenSource:lexer];
+	SimpleCParser *parser = [[SimpleCParser alloc] initWithTokenStream:tokens];
 	[parser program];
+
 	[lexer release];
 	[stream release];
-	[tokenStream release];
+	[tokens release];
 	[parser release];
 
 	[pool release];

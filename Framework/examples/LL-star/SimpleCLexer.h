@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 24, 2010 10:45:57 SimpleC.g 2010-08-24 13:53:43
+// $ANTLR 3.3.1-SNAPSHOT Jan 18, 2011 15:10:00 SimpleC.g 2011-01-18 15:28:39
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -8,6 +8,7 @@
 /* End of standard antlr3 runtime definitions
  * =============================================================================
  */
+
 
 /* Start cyclicDFAInterface */
 #pragma mark Cyclic DFA interface start DFA4
@@ -19,27 +20,28 @@
 
 #pragma mark Cyclic DFA interface end DFA4
 
+
 #pragma mark Rule return scopes start
 #pragma mark Rule return scopes end
 #pragma mark Tokens
-#define T__20 20
-#define INT 5
-#define ID 4
 #define EOF -1
-#define T__9 9
-#define T__8 8
 #define T__7 7
-#define T__19 19
-#define WS 6
-#define T__16 16
-#define T__15 15
-#define T__18 18
-#define T__17 17
-#define T__12 12
-#define T__11 11
-#define T__14 14
-#define T__13 13
+#define T__8 8
+#define T__9 9
 #define T__10 10
+#define T__11 11
+#define T__12 12
+#define T__13 13
+#define T__14 14
+#define T__15 15
+#define T__16 16
+#define T__17 17
+#define T__18 18
+#define T__19 19
+#define T__20 20
+#define ID 4
+#define INT 5
+#define WS 6
 @interface SimpleCLexer : ANTLRLexer { // line 283
 DFA4 *dfa4;
 // start of actions.lexer.memVars

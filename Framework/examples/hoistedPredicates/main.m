@@ -12,17 +12,17 @@ int main() {
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:string];
 	TLexer *lexer = [TLexer newTLexerWithCharStream:stream];
 	
-	//	ANTLRToken *currentToken;
-	//	while ((currentToken = [lexer nextToken]) && [currentToken type] != ANTLRTokenTypeEOF) {
-	//		NSLog(@"%@", currentToken);
-	//	}
+//	ANTLRCommonToken *currentToken;
+//	while ((currentToken = [lexer nextToken]) && [currentToken getType] != ANTLRTokenTypeEOF) {
+//		NSLog(@"%@", [currentToken toString]);
+//	}
 	
-	ANTLRCommonTokenStream *tokenStream = [ANTLRCommonTokenStream newANTLRCommonTokenStreamWithTokenSource:lexer];
-	TParser *parser = [[TParser alloc] initWithTokenStream:tokenStream];
+	ANTLRCommonTokenStream *tokens = [ANTLRCommonTokenStream newANTLRCommonTokenStreamWithTokenSource:lexer];
+	TParser *parser = [[TParser alloc] initWithTokenStream:tokens];
 	[parser stat];
 	[lexer release];
 	[stream release];
-	[tokenStream release];
+	[tokens release];
 	[parser release];
 	
 	[pool release];

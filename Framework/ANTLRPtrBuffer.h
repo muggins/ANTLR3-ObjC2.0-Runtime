@@ -87,5 +87,6 @@
 - (void) removeAllObjects;
 
 - (void) ensureCapacity:(NSInteger) index;
+- (NSString *) toString;
 
 @end

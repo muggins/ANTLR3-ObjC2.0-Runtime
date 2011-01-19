@@ -183,10 +183,8 @@
 
 - (id<ANTLRTree>) nextTree
 {
-    NSInteger n;
-
-    n = [self size];
-    if ( dirty && (cursor>=0 && n == 1)) {
+    NSInteger n = [self size];
+    if ( dirty && (cursor >= 0 && n == 1)) {
         // if out of elements and size is 1, dup
         id element = [self _next];
         return [self copyElement:element];
@@ -198,11 +196,12 @@
 
 - (id) _next       // internal: TODO: redesign if necessary. maybe delegate
 {
-    if ([self size] == 0) {
+    NSInteger n = [self size];
+    if (n == 0) {
         @throw [NSException exceptionWithName:@"RewriteEmptyStreamException" reason:nil userInfo:nil];// TODO: fill in real exception
     }
-    if ( cursor >= [self size] ) {
-        if ( [self size] == 1 ) {
+    if ( cursor >= n ) {
+        if ( n == 1 ) {
             return [self toTree:elements.single]; // will be dup'ed in -next
         }
         @throw [NSException exceptionWithName:@"RewriteCardinalityException" reason:nil userInfo:nil];// TODO: fill in real exception

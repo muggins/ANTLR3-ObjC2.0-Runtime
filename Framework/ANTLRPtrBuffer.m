@@ -305,4 +305,18 @@
 	}
 }
 
+- (NSString *) toString
+{
+    NSMutableString *str;
+    NSInteger idx, cnt;
+    cnt = [self count];
+    str = [NSMutableString stringWithCapacity:30];
+    [str appendString:@"["];
+    for (idx = 0; idx < cnt; idx++ ) {
+        [str appendString:[[self objectAtIndex:idx] toString]];
+    }
+    [str appendString:@"]"];
+    return str;
+}
+
 @end

@@ -3,7 +3,7 @@
 //  ANTLR
 //
 //  Created by Ian Michell on 25/05/2010.
-//  Copyright 2010 Ian Michell. All rights reserved.
+//  Copyright 2010 Ian Michell and Alan Condit. All rights reserved.
 //
 
 #import "ANTLRCommonTokenTest.h"
@@ -51,7 +51,7 @@
 -(void) testInitWithCharStream
 {
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:6];
+	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	STAssertNotNil(token, @"Token was nil");
 	STAssertEquals(token.type, (NSInteger)555, @"Token was not of type 555"); // Nice random type number
 	STAssertNotNil(token.text, @"Token text was nil, was expecting ||");
@@ -62,7 +62,7 @@
 -(void) testInitWithToken
 {
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:6];
+	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	STAssertNotNil(token, @"Token was nil");
 	STAssertEquals(token.type, (NSInteger)555, @"Token was not of type 555"); // Nice random type number
 	STAssertNotNil(token.text, @"Token text was nil, was expecting ||");
@@ -86,9 +86,9 @@
 {
     NSString *aDescription;
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:6];
+	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
     aDescription = [token description];
-	STAssertTrue([aDescription isEqualToString:@"[@0, 4, 6=||,<555>,channel=0,0:0]"], @"String description for token is not correct! got %@", aDescription);
+	STAssertTrue([aDescription isEqualToString:@"[@0, 4:5='||',<555>,0:0]"], @"String description for token is not correct! got %@", aDescription);
 }
 
 @end

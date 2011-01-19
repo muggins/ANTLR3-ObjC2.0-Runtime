@@ -1,7 +1,7 @@
 grammar SimpleC;
-
 options {
-	language=ObjC;
+  language=ObjC;
+
 }
 
 program
@@ -20,9 +20,9 @@ program
 declaration
     :   variable
     |   functionHeader ';'
-	{NSLog(@"\%@ is a declaration", $functionHeader.name);}
+	{ NSLog(@"\%@ is a declaration\n", $functionHeader.name); }
     |   functionHeader block
-	{NSLog(@"\%@ is a definition", $functionHeader.name);}
+	{ NSLog(@"\%@ is a definition\n", $functionHeader.name); }
     ;
 
 variable
@@ -33,12 +33,12 @@ declarator
     :   ID 
     ;
 
-functionHeader returns [NSString* name]
+functionHeader returns [NSString *name]
 @init {
-    $name=nil; // for now you must init here rather than in 'returns'
+    name=nil; // for now you must init here rather than in 'returns'
 }
     :   type ID '(' ( formalParameter ( ',' formalParameter )* )? ')'
-	{$name = $ID.text; }
+	{$name = $ID.text;}
     ;
 
 formalParameter
@@ -102,5 +102,5 @@ WS  :   (   ' '
         |   '\r'
         |   '\n'
         )+
-        { $channel=99; }
+        { $channel=HIDDEN; }
     ;    

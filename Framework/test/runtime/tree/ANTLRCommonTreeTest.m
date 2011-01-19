@@ -33,11 +33,10 @@
     return;
 }
 
-#ifdef DONTUSENOMO
--(void) testWithToken
+-(void) test03WithToken
 {
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:6];
+	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	token.line = 1;
 	token.charPositionInLine = 4;
 	ANTLRCommonTree *tree = [ANTLRCommonTree newANTLRCommonTreeWithToken:token];
@@ -45,8 +44,8 @@
     if (tree != nil)
         STAssertNotNil(tree.token, @"Tree with token was nil");
     if (tree != nil && tree.token != nil) {
-        STAssertEquals(tree.token.line, (NSInteger)1, @"Tree should be at line 1");
-        STAssertEquals(tree.token.charPositionInLine, (NSInteger)1, @"Char position should be 1");
+        STAssertEquals((NSInteger) tree.token.line, (NSInteger)1, [NSString stringWithFormat:@"Tree should be at line 1, but was at %d", tree.token.line] );
+        STAssertEquals((NSInteger) tree.token.charPositionInLine, (NSInteger)4, [NSString stringWithFormat:@"Char position should be 1, but was at %d", tree.token.charPositionInLine]);
         STAssertNotNil(tree.token.text, @"Tree with token with text was nil");
     }
     if (tree != nil && tree.token != nil && tree.token.text != nil)
@@ -54,9 +53,8 @@
 	//[tree release];
     return;
 }
-#endif
 
--(void) test03InvalidTreeNode
+-(void) test04InvalidTreeNode
 {
 	ANTLRCommonTree *tree = [ANTLRCommonTree newANTLRCommonTreeWithToken:[ANTLRCommonToken invalidToken]];
 	STAssertNotNil(tree, @"Tree was nil");
@@ -65,10 +63,10 @@
     return;
 }
 
--(void) test04InitWithCommonTreeNode
+-(void) test05InitWithCommonTreeNode
 {
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:6];
+	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	ANTLRCommonTree *tree = [ANTLRCommonTree newANTLRCommonTreeWithToken:token];
 	STAssertNotNil(tree, @"Tree was nil");
 	STAssertNotNil(tree.token, @"Tree token was nil");
@@ -85,10 +83,10 @@
     return;
 }
 
--(void) test05CopyTree
+-(void) test06CopyTree
 {
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:6];
+	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	ANTLRCommonTree *tree = [ANTLRCommonTree newANTLRCommonTreeWithToken:token];
 	STAssertNotNil(tree, @"Tree was nil");
 	ANTLRCommonTree *newTree = [tree copyWithZone:nil];
@@ -104,7 +102,7 @@
     return;
 }
 
--(void) test06Description
+-(void) test07Description
 {
     NSString *aString;
 	ANTLRCommonTree *errorTree = [ANTLRCommonTree invalidNode];
@@ -134,7 +132,7 @@
 	//[tree release];
 	
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:6];
+	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	tree = [ANTLRCommonTree newANTLRCommonTreeWithToken:token];
 	STAssertNotNil(tree, @"Tree node is nil");
     aString = [tree description];
@@ -145,10 +143,10 @@
     return;
 }
 
--(void) test07Text
+-(void) test08Text
 {
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:6];
+	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	ANTLRCommonTree *tree = [ANTLRCommonTree newANTLRCommonTreeWithToken:token];
 	STAssertNotNil(tree, @"Tree was nil");
 	STAssertTrue([tree.token.text isEqualToString:@"||"], @"Tree text was not valid, should have been || was %@", tree.token.text);
@@ -161,7 +159,7 @@
     return;
 }
 
--(void) test08AddChild
+-(void) test09AddChild
 {
 	// Create a new tree
 	ANTLRCommonTree *parent = [ANTLRCommonTree newANTLRCommonTreeWithTokenType:555];
@@ -170,7 +168,7 @@
 	
 	// Child tree
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:6];
+	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	token.line = 1;
 	token.charPositionInLine = 4;
 	ANTLRCommonTree *tree = [ANTLRCommonTree newANTLRCommonTreeWithToken:token];
@@ -193,14 +191,14 @@
     return;
 }
 
--(void) test09AddChildren
+-(void) test10AddChildren
 {
 	// Create a new tree
 	ANTLRCommonTree *parent = [ANTLRCommonTree newANTLRCommonTree];
 	
 	// Child tree
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:6];
+	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	token.line = 1;
 	token.charPositionInLine = 4;
 	ANTLRCommonTree *tree = [ANTLRCommonTree newANTLRCommonTreeWithToken:token];
@@ -215,7 +213,7 @@
     return;
 }
 
--(void) test10AddSelfAsChild
+-(void) test11AddSelfAsChild
 {
 	ANTLRCommonTree *parent = [ANTLRCommonTree newANTLRCommonTree];
 	@try 
@@ -232,7 +230,7 @@
     return;
 }
 
--(void) test11AddEmptyChildWithNoChildren
+-(void) test12AddEmptyChildWithNoChildren
 {
 	ANTLRCommonTree *emptyChild = [ANTLRCommonTree newANTLRCommonTree];
 	ANTLRCommonTree *parent = [ANTLRCommonTree newANTLRCommonTree];
@@ -243,14 +241,14 @@
     return;
 }
 
--(void) test12AddEmptyChildWithChildren
+-(void) test13AddEmptyChildWithChildren
 {
 	// Create a new tree
 	ANTLRCommonTree *parent = [ANTLRCommonTree newANTLRCommonTree];
 	
 	// Child tree
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:6];
+	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	token.line = 1;
 	token.charPositionInLine = 4;
 	ANTLRCommonTree *tree = [ANTLRCommonTree newANTLRCommonTreeWithToken:token];
@@ -269,14 +267,14 @@
     return;
 }
 
--(void) test13ChildAtIndex
+-(void) test14ChildAtIndex
 {
 	// Create a new tree
 	ANTLRCommonTree *parent = [ANTLRCommonTree newANTLRCommonTree];
 	
 	// Child tree
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:6];
+	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	ANTLRCommonTree *tree = [ANTLRCommonTree newANTLRCommonTreeWithToken:token];
 	
 	// Add a child to the parent tree
@@ -291,13 +289,13 @@
     return;
 }
 
--(void) test14SetChildAtIndex
+-(void) test15SetChildAtIndex
 {
 	ANTLRCommonTree *parent = [ANTLRCommonTree newANTLRCommonTree];
 	
 	// Child tree
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:6];
+	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	ANTLRCommonTree *tree = [ANTLRCommonTree newANTLRCommonTreeWithToken:token];
 	
 	
@@ -316,7 +314,7 @@
     return;
 }
 
--(void) test15GetAncestor
+-(void) test16GetAncestor
 {
 	ANTLRCommonTree *parent = [ANTLRCommonTree newANTLRCommonTreeWithTokenType:ANTLRTokenTypeUP];
 	parent.token.text = @"<UP>";
@@ -328,7 +326,7 @@
 	
 	// Child tree
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:6];
+	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	ANTLRCommonTree *tree = [ANTLRCommonTree newANTLRCommonTreeWithToken:token];
 	
 	[down addChild:tree];
@@ -341,7 +339,7 @@
     return;
 }
 
--(void) test16FirstChildWithType
+-(void) test17FirstChildWithType
 {
 	// Create a new tree
 	ANTLRCommonTree *parent = [ANTLRCommonTree newANTLRCommonTree];
@@ -370,11 +368,11 @@
     return;
 }
 
--(void) test17SanityCheckParentAndChildIndexesForParentTree
+-(void) test18SanityCheckParentAndChildIndexesForParentTree
 {
 	// Child tree
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:6];
+	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	ANTLRCommonTree *tree = [ANTLRCommonTree newANTLRCommonTreeWithToken:token];
 	
 	ANTLRCommonTree *parent = [ANTLRCommonTree newANTLRCommonTreeWithTokenType:555];
@@ -416,11 +414,11 @@
     return;
 }
 
--(void) test18DeleteChild
+-(void) test19DeleteChild
 {
 	// Child tree
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:6];
+	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	ANTLRCommonTree *tree = [ANTLRCommonTree newANTLRCommonTreeWithToken:token];
 	
 	ANTLRCommonTree *parent = [ANTLRCommonTree newANTLRCommonTree];
@@ -432,11 +430,11 @@
     return;
 }
 
--(void) test19TreeDescriptions
+-(void) test20TreeDescriptions
 {
 	// Child tree
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:6];
+	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	ANTLRCommonTree *tree = [ANTLRCommonTree newANTLRCommonTreeWithToken:token];
 	
 	// Description for tree
@@ -460,7 +458,7 @@
     return;
 }
 
--(void) test20ReplaceChildrenAtIndexWithNoChildren
+-(void) test21ReplaceChildrenAtIndexWithNoChildren
 {
 	ANTLRCommonTree *parent = [ANTLRCommonTree newANTLRCommonTree];
 	ANTLRCommonTree *parent2 = [ANTLRCommonTree newANTLRCommonTree];
@@ -480,7 +478,7 @@
     return;
 }
 
--(void) test21ReplaceChildrenAtIndex
+-(void) test22ReplaceChildrenAtIndex
 {
 	ANTLRCommonTree *parent1 = [ANTLRCommonTree newANTLRCommonTree];
 	ANTLRCommonTree *child1 = [ANTLRCommonTree newANTLRCommonTreeWithTokenType:ANTLRTokenTypeUP];
@@ -496,7 +494,7 @@
     return;
 }
 
--(void) test22ReplaceChildrenAtIndexWithChild
+-(void) test23ReplaceChildrenAtIndexWithChild
 {
 	ANTLRCommonTree *replacement = [ANTLRCommonTree newANTLRCommonTreeWithTokenType:ANTLRTokenTypeUP];
 	replacement.token.text = @"<UP>";
@@ -511,7 +509,7 @@
     return;
 }
 
--(void) test23ReplacechildrenAtIndexWithLessChildren
+-(void) test24ReplacechildrenAtIndexWithLessChildren
 {
 	ANTLRCommonTree *parent1 = [ANTLRCommonTree newANTLRCommonTree];
 	ANTLRCommonTree *child1 = [ANTLRCommonTree newANTLRCommonTreeWithTokenType:ANTLRTokenTypeUP];
@@ -532,7 +530,7 @@
     return;
 }
 
--(void) test24ReplacechildrenAtIndexWithMoreChildren
+-(void) test25ReplacechildrenAtIndexWithMoreChildren
 {
 	ANTLRCommonTree *parent1 = [ANTLRCommonTree newANTLRCommonTree];
 	ANTLRCommonTree *child1 = [ANTLRCommonTree newANTLRCommonTreeWithTokenType:ANTLRTokenTypeUP];

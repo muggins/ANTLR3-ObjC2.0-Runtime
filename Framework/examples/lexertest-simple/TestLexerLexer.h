@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 24, 2010 10:45:57 TestLexer.g 2010-08-24 13:53:39
+// $ANTLR 3.3.1-SNAPSHOT Jan 18, 2011 15:10:00 TestLexer.g 2011-01-18 15:28:34
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -9,15 +9,16 @@
  * =============================================================================
  */
 
+
 /* Start cyclicDFAInterface */
 
 #pragma mark Rule return scopes start
 #pragma mark Rule return scopes end
 #pragma mark Tokens
-#define DIGIT 5
-#define ID 6
 #define EOF -1
 #define LETTER 4
+#define DIGIT 5
+#define ID 6
 @interface TestLexer : ANTLRLexer { // line 283
 // start of actions.lexer.memVars
 // start of action-actionScope-memVars

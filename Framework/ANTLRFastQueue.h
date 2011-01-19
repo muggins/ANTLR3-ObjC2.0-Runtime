@@ -61,10 +61,11 @@
 - (id) objectAtIndex:(NSInteger) i;
 - (void) clear;
 - (NSString *) toString;
-//- (NSAutoreleasePool *)getPool;
-//- (void)setPool:(NSAutoreleasePool *)aPool;
-- (NSMutableArray *)getData;
-- (void)setData:(NSMutableArray *)myData;
+- (NSString *) description;
+//- (NSAutoreleasePool *) getPool;
+//- (void) setPool:(NSAutoreleasePool *)aPool;
+- (NSMutableArray *) getData;
+- (void) setData:(NSMutableArray *)myData;
 - (NSInteger) getP;
 - (void) setP:(NSInteger)anInt;
 

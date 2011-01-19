@@ -56,7 +56,7 @@
 	return self;
 }
 
--(void) dealloc
+- (void) dealloc
 {
 //	[pool drain];
 	[super dealloc];
@@ -74,18 +74,18 @@
 }
 
 // FIXME: Java code has this, it doesn't seem like it needs to be there... Then again a lot of the code in the java runtime is not great...
--(void) reset
+- (void) reset
 {
 	[self clear];
 }
 
--(void) clear
+- (void) clear
 {
 	p = 0;
 	[data removeAllObjects];
 }
 
--(id) remove
+- (id) remove
 {
 	id o = [self objectAtIndex:0];
 	p++;
@@ -98,12 +98,17 @@
 	return o;
 }
 
--(void) addObject:(id) o
+- (void) addObject:(id) o
 {
 	[data addObject:o];
 }
 
--(NSInteger) size
+- (NSInteger) count
+{
+	return [data count];
+}
+
+- (NSInteger) size
 {
 	return [data count] - p;
 }
@@ -113,21 +118,16 @@
     return range;
 }
 
--(NSInteger) count
-{
-	return [data count];
-}
-
--(id) head
+- (id) head
 {
 	return [self objectAtIndex:0];
 }
 
--(id) objectAtIndex:(NSInteger) k
+- (id) objectAtIndex:(NSInteger) i
 {
     NSInteger absIndex;
 
-    absIndex = p + k;
+    absIndex = p + i;
 	if (absIndex >= [data count]) {
 		@throw [ANTLRRuntimeException newANTLRNoSuchElementException:[NSString stringWithFormat:@"queue index %d > last index %d", absIndex, [data count]-1]];
 	}
@@ -138,17 +138,22 @@
 	return [data objectAtIndex:absIndex];
 }
 
--(NSString *) description
+- (NSString *) toString
 {
 	NSMutableString *buf = [NSMutableString stringWithCapacity:30];
 	NSInteger n = [self size];
-	for (NSInteger k = 0; k < n; k++) {
-		[buf appendString:[[self objectAtIndex:k] description]];
-		if ((k + 1) < n) {
+	for (NSInteger i = 0; i < n; i++) {
+		[buf appendString:[[self objectAtIndex:i] description]];
+		if ((i + 1) < n) {
 			[buf appendString:@" "];
 		}
 	}
 	return buf;
+}
+
+- (NSString *) description
+{
+    return [self toString];
 }
 
 #ifdef DONTUSENOMO
@@ -182,11 +187,6 @@
 - (void) setP:(NSInteger) anInt
 {
     p = anInt;
-}
-
-- (NSString *) toString
-{
-    return [self description];
 }
 
 @end

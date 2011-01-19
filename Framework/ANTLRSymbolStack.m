@@ -59,7 +59,7 @@
 
 +(ANTLRSymbolStack *)newANTLRSymbolStack
 {
-    return [[ANTLRSymbolStack alloc] init];
+    return [[ANTLRSymbolStack alloc] initWithLen:30];
 }
 
 +(ANTLRSymbolStack *)newANTLRSymbolStackWithLen:(NSInteger)cnt

@@ -3,7 +3,7 @@
 //  ANTLR
 //
 //  Created by Ian Michell on 13/05/2010.
-//  Copyright 2010 Ian Michell. All rights reserved.
+//  Copyright 2010 Ian Michell and Alan Condit. All rights reserved.
 //
 
 #import "ANTLRBitSetTest.h"

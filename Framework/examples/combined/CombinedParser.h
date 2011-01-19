@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 24, 2010 10:45:57 Combined.g 2010-08-24 13:53:42
+// $ANTLR 3.3.1-SNAPSHOT Jan 18, 2011 15:10:00 Combined.g 2011-01-18 15:28:37
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -10,11 +10,24 @@
  */
 
 /* parserHeaderFile */
+
+#ifndef ANTLR3TokenTypeAlreadyDefined
+#define ANTLR3TokenTypeAlreadyDefined
+typedef enum {
+    ANTLR_EOF = -1,
+    INVALID,
+    EOR,
+    DOWN,
+    UP,
+    MIN
+} ANTLR3TokenType;
+#endif
+
 #pragma mark Tokens
-#define WS 6
-#define INT 5
-#define ID 4
 #define EOF -1
+#define ID 4
+#define INT 5
+#define WS 6
 #pragma mark Dynamic Global Scopes
 #pragma mark Dynamic Rule Scopes
 #pragma mark Rule Return Scopes start
