@@ -66,7 +66,7 @@
                                       Stop:(NSInteger)aStop;
 + (ANTLRCommonToken *) newANTLRCommonToken:(ANTLRTokenType)aType;
 + (id<ANTLRToken>) newANTLRCommonToken:(NSInteger)tokenType Text:(NSString *)tokenText;
-+ (id<ANTLRToken>) newANTLRCommonTokenWithToken:(id<ANTLRToken>)fromToken;
++ (id<ANTLRToken>) newANTLRCommonTokenWithToken:(ANTLRCommonToken *)fromToken;
 + (id<ANTLRToken>) eofToken;
 + (id<ANTLRToken>) skipToken;
 + (id<ANTLRToken>) invalidToken;
@@ -83,6 +83,39 @@
 - (ANTLRCommonToken *) initWithType:(ANTLRTokenType)aType;
 - (ANTLRCommonToken *) initWithType:(ANTLRTokenType)aTType Text:(NSString *)tokenText;
 
+//---------------------------------------------------------- 
+//  text 
+//---------------------------------------------------------- 
+- (NSString *) getText;
+- (void) setText: (NSString *) aText;
+
+//---------------------------------------------------------- 
+//  type 
+//---------------------------------------------------------- 
+- (NSInteger) getType;
+- (void) setType: (NSInteger) aType;
+
+//---------------------------------------------------------- 
+//  line 
+//---------------------------------------------------------- 
+- (NSUInteger) getLine;
+- (void) setLine: (NSUInteger) aLine;
+
+//---------------------------------------------------------- 
+//  charPositionInLine 
+//---------------------------------------------------------- 
+- (NSUInteger) getCharPositionInLine;
+- (void) setCharPositionInLine: (NSUInteger) aCharPositionInLine;
+
+//---------------------------------------------------------- 
+//  channel 
+//---------------------------------------------------------- 
+- (NSUInteger) getChannel;
+- (void) setChannel: (NSUInteger) aChannel;
+
+//---------------------------------------------------------- 
+//  input 
+//---------------------------------------------------------- 
 - (id<ANTLRCharStream>) getInput;
 - (void) setInput: (id<ANTLRCharStream>) anInput;
 

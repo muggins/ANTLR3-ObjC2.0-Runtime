@@ -85,8 +85,8 @@
 {
 	if ((self = [super init]) != nil) {
 		token = aNode.token;
-		startIndex = token.startIndex;
-		stopIndex = token.stopIndex;
+		startIndex = aNode.startIndex;
+		stopIndex = aNode.stopIndex;
         parent = nil;
         childIndex = -1;
 	}
@@ -97,8 +97,8 @@
 {
 	if ((self = [super init]) != nil ) {
 		token = aToken;
-		startIndex = token.startIndex;
-		stopIndex = token.stopIndex;
+		startIndex = -1;
+		stopIndex = -1;
         parent = nil;
         childIndex = -1;
 	}
@@ -109,8 +109,10 @@
 {
 	if ((self = [super init]) != nil ) {
 		token = [ANTLRCommonToken newANTLRCommonToken:aTokenType];
-		startIndex = token.startIndex;
-		stopIndex = token.stopIndex;
+//		startIndex = token.startIndex;
+		startIndex = -1;
+//		stopIndex = token.stopIndex;
+		stopIndex = -1;
         parent = nil;
         childIndex = -1;
 	}
@@ -121,8 +123,10 @@
 {
 	if ((self = [super init]) != nil ) {
 		token = [ANTLRCommonToken newANTLRCommonToken:aTokenType Text:theText];
-		startIndex = token.startIndex;
-		stopIndex = token.stopIndex;
+//		startIndex = token.startIndex;
+		startIndex = -1;
+//		stopIndex = token.stopIndex;
+		stopIndex = -1;
         parent = nil;
         childIndex = -1;
 	}
@@ -210,6 +214,9 @@
 
 - (NSInteger) getTokenStartIndex
 {
+	if ( startIndex == -1 && token != nil ) {
+		return [token getTokenIndex];
+	}
     return startIndex;
 }
 
@@ -220,6 +227,9 @@
 
 - (NSInteger) getTokenStopIndex
 {
+	if ( stopIndex == -1 && token != nil ) {
+		return [token getTokenIndex];
+	}
     return stopIndex;
 }
 

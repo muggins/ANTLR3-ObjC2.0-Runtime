@@ -96,20 +96,6 @@
 	[super dealloc];
 }
 
-#pragma mark Accessors
-
-- (id<ANTLRTokenSource>) getTokenSource
-{
-    return tokenSource; 
-}
-
-/** Reset this token stream by setting its token source. */
-- (void) setTokenSource:(id<ANTLRTokenSource>)aTokenSource
-{
-    [super setTokenSource:aTokenSource];
-    channel = ANTLRTokenChannelDefault;
-}
-
 /** Always leave p on an on-channel token. */
 - (void) consume
 {
@@ -153,9 +139,9 @@
 		i = [self skipOffChannelTokens:i+1];
 		n++;
 	}
-	if ( i >= (NSInteger)[tokens count] ) {
-		return [ANTLRCommonToken eofToken];
-	}
+//	if ( i >= (NSInteger)[tokens count] ) {
+//		return [ANTLRCommonToken eofToken];
+//	}
     if (i > range) range = i;
 	return [tokens objectAtIndex:i];
 }
@@ -184,20 +170,81 @@
 {
     p = 0;
     [self sync:0];
-    int index = 0;
-    while ( [((id<ANTLRToken>)[tokens objectAtIndex:index]) getChannel] != channel ) {
-        index++;
-        [self sync:index];
+    int i = 0;
+    while ( [((id<ANTLRToken>)[tokens objectAtIndex:i]) getChannel] != channel ) {
+        i++;
+        [self sync:i];
     }
 	// leave p pointing at first token on channel
-    p = index;
+    p = i;
 }
 
+- (NSInteger) getNumberOfOnChannelTokens
+{
+    NSInteger n = 0;
+    [self fill];
+    for( int i = 0; i < [tokens count]; i++ ) {
+        id<ANTLRToken> t = [tokens objectAtIndex:i];
+        if ( [t getChannel] == channel )
+            n++;
+        if ( [t getType] == ANTLRTokenTypeEOF )
+            break;
+    }
+    return n;
+}
+
+/** Reset this token stream by setting its token source. */
+- (void) setTokenSource:(id<ANTLRTokenSource>)aTokenSource
+{
+    [super setTokenSource:aTokenSource];
+    channel = ANTLRTokenChannelDefault;
+}
+
+- (id) copyWithZone:(NSZone *)aZone
+{
+    ANTLRCommonTokenStream *copy;
+	
+    //    copy = [[[self class] allocWithZone:aZone] init];
+    copy = [super copyWithZone:aZone]; // allocation occurs in ANTLRBaseTree
+    if ( self.channelOverride )
+        copy.channelOverride = [channelOverride copyWithZone:aZone];
+    copy.channel = channel;
+    return copy;
+}
+
+- (NSInteger)getChannel
+{
+    return channel;
+}
+
+- (void)setChannel:(NSInteger)aChannel
+{
+    channel = aChannel;
+}
+
+- (NSMutableDictionary *)getChannelOverride
+{
+    return channelOverride;
+}
+
+- (void)setChannelOverride:(NSMutableDictionary *)anOverride
+{
+    channelOverride = anOverride;
+}
+
+#ifdef DONTUSENOMO
 #pragma mark Token access
 
 - (NSArray *) tokensInRange:(NSRange)aRange
 {
 	return [tokens subarrayWithRange:aRange];
+}
+
+#pragma mark Accessors
+
+- (id<ANTLRTokenSource>) getTokenSource
+{
+    return tokenSource; 
 }
 
 - (NSArray *) tokensInRange:(NSRange)aRange inBitSet:(ANTLRBitSet *)aBitSet
@@ -285,7 +332,7 @@
 
 - (NSString *) toStringFromStart:(NSInteger)startIdx ToEnd:(NSInteger) stopIdx
 {
-    NSString *stringBuffer;
+    NSMutableString *stringBuffer;
     id<ANTLRToken> t;
 
     if ( startIdx < 0 || stopIdx < 0 ) {
@@ -297,10 +344,10 @@
     if ( stopIdx >= [tokens count] ) {
         stopIdx = [tokens count]-1;
     }
-    stringBuffer = [NSString string];
+    stringBuffer = [NSMutableString stringWithCapacity:30];
     for (int i = startIdx; i <= stopIdx; i++) {
         t = (id<ANTLRToken>)[tokens objectAtIndex:i];
-        [stringBuffer stringByAppendingString:[t getText]];
+        [stringBuffer appendString:[t getText]];
     }
     return stringBuffer;
 }
@@ -314,37 +361,6 @@
 	}
 	return nil;
 }
-
-- (id) copyWithZone:(NSZone *)aZone
-{
-    ANTLRCommonTokenStream *copy;
-	
-    //    copy = [[[self class] allocWithZone:aZone] init];
-    copy = [super copyWithZone:aZone]; // allocation occurs in ANTLRBaseTree
-    if ( self.channelOverride )
-        copy.channelOverride = [channelOverride copyWithZone:aZone];
-    copy.channel = channel;
-    return copy;
-}
-
-- (NSInteger)getChannel
-{
-    return channel;
-}
-
-- (void)setChannel:(NSInteger)aChannel
-{
-    channel = aChannel;
-}
-
-- (NSMutableDictionary *)getChannelOverride
-{
-    return channelOverride;
-}
-
-- (void)setChannelOverride:(NSMutableDictionary *)anOverride
-{
-    channelOverride = anOverride;
-}
+#endif
 
 @end

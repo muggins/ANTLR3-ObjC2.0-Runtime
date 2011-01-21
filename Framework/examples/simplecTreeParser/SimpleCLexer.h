@@ -1,4 +1,4 @@
-// $ANTLR 3.3.1-SNAPSHOT Jan 18, 2011 15:10:00 SimpleC.g 2011-01-18 15:28:45
+// $ANTLR 3.3.1-SNAPSHOT Jan 20, 2011 10:02:28 SimpleC.g 2011-01-20 10:06:18
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -24,6 +24,9 @@
 #pragma mark Rule return scopes start
 #pragma mark Rule return scopes end
 #pragma mark Tokens
+#ifdef EOF
+#undef EOF
+#endif
 #define EOF -1
 #define VAR_DEF 4
 #define ARG_DEF 5

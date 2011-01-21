@@ -79,9 +79,9 @@ NSInteger range; // how deep have we gone?
 - (void) fetch:(NSInteger) n;
 - (id<ANTLRToken>) getToken:(NSInteger) i;
 - (NSMutableArray *)getFrom:(NSInteger)startIndex To:(NSInteger) stopIndex;
-- (NSInteger) LA:(NSInteger)k;
-- (id<ANTLRToken>) LT:(NSInteger) k;
+- (NSInteger) LA:(NSInteger)i;
 - (id<ANTLRToken>) LB:(NSInteger) k;
+- (id<ANTLRToken>) LT:(NSInteger) k;
 - (void) setup;
 - (id<ANTLRTokenSource>) getTokenSource;
 - (void) setTokenSource:(id<ANTLRTokenSource>) aTokenSource;
@@ -91,6 +91,7 @@ NSInteger range; // how deep have we gone?
 - (NSMutableArray *)getTokensFrom:(NSInteger)startIndex To:(NSInteger)stopIndex With:(ANTLRBitSet *)types;
 - (NSMutableArray *)getTokensFrom:(NSInteger)startIndex To:(NSInteger)stopIndex WithList:(NSMutableArray *)types;
 - (NSMutableArray *)getTokensFrom:(NSInteger)startIndex To:(NSInteger)stopIndex WithType:(NSInteger)ttype;
+- (NSString *) toString;
 - (NSString *) toStringFromStart:(NSInteger)startIndex ToEnd:(NSInteger)stopIndex;
 - (NSString *) toStringFromToken:(id<ANTLRToken>)startIndex ToToken:(id<ANTLRToken>)stopIndex;
 - (void) fill;

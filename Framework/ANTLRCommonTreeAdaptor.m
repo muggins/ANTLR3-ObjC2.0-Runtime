@@ -97,6 +97,11 @@
     return fromToken;
 }
 
+- (id<ANTLRToken>)createToken:(ANTLRCommonToken *)fromToken
+{
+    return fromToken = [ANTLRCommonToken newANTLRCommonTokenWithToken:(ANTLRCommonToken *)fromToken];
+}
+
 /** Track start/stop token for subtree root created for a rule.
  *  Only works with Tree nodes.  For rules that match nothing,
  *  seems like this will yield start=i and stop=i-1 in a nil node.
@@ -118,14 +123,14 @@
 
 - (NSInteger)getTokenStartIndex:(id<ANTLRTree>) t
 {
-    if ( t==nil )
+    if ( t == nil )
         return -1;
     return [(id<ANTLRTree>)t getTokenStartIndex];
 }
 
 - (NSInteger)getTokenStopIndex:(id<ANTLRTree>) t
 {
-    if ( t==nil )
+    if ( t == nil )
         return -1;
     return [(id<ANTLRTree>)t getTokenStopIndex];
 }
@@ -141,7 +146,6 @@
 {
     if ( t == nil )
         return;
-
 }
 
 - (NSInteger)getType:(id<ANTLRTree>)t

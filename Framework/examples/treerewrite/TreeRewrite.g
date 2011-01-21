@@ -15,5 +15,5 @@ subrule
 INT	:	('0'..'9')+
 	;
 
-WS  :   ' ' {$channel=99;}
+WS  :   ' ' {$channel=HIDDEN;}
     ;

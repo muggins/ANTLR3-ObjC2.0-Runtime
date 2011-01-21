@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 24, 2010 10:45:57 TreeRewrite.g 2010-08-24 14:18:09
+// $ANTLR 3.3.1-SNAPSHOT Jan 18, 2011 15:10:00 TreeRewrite.g 2011-01-19 07:53:03
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -9,14 +9,15 @@
  * =============================================================================
  */
 
+
 /* Start cyclicDFAInterface */
 
 #pragma mark Rule return scopes start
 #pragma mark Rule return scopes end
 #pragma mark Tokens
+#define EOF -1
 #define INT 4
 #define WS 5
-#define EOF -1
 @interface TreeRewriteLexer : ANTLRLexer { // line 283
 // start of actions.lexer.memVars
 // start of action-actionScope-memVars

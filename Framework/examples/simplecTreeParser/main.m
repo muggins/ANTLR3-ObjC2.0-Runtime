@@ -2,7 +2,7 @@
 #import "antlr3.h"
 #import "SimpleCLexer.h"
 #import "SimpleCParser.h"
-#import "SimpleCTP.h"
+#import "SimpleCWalker.h"
 #import "stdio.h"
 #include <unistd.h>
 
@@ -64,7 +64,7 @@ int main(int argc, const char * argv[]) {
 	[treeStream setTokenStream:tokenStream];
 	
 	// Create the treeparser instance, passing it the stream of nodes
-	SimpleCTP *walker = [[SimpleCTP alloc] initWithStream:treeStream];
+	SimpleCWalker *walker = [[SimpleCWalker alloc] initWithStream:treeStream];
 	// As with parsers, you can invoke any treeparser rule here.
 	[walker program];
 

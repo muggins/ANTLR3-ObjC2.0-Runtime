@@ -30,8 +30,8 @@
 
 @property (retain, getter=getChildren, setter=setChildren) NSMutableArray *children;
 
-+ (id<ANTLRBaseTree>) newANTLRBaseTree;
-+ (id<ANTLRBaseTree>) newANTLRBaseTree:(id<ANTLRBaseTree>)node;
++ (id<ANTLRBaseTree>) newTree;
++ (id<ANTLRBaseTree>) newTree:(id<ANTLRBaseTree>)node;
 
 - (id<ANTLRBaseTree>) init;
 - (id<ANTLRBaseTree>) initWith:(id<ANTLRTree>)node;
@@ -103,8 +103,8 @@
 
 @property (retain, getter=getChildren, setter=setChildren) NSMutableArray *children;
 
-+ (id<ANTLRBaseTree>) newANTLRBaseTree;
-+ (id<ANTLRBaseTree>) newANTLRBaseTree:(id<ANTLRBaseTree>)node;
++ (id<ANTLRBaseTree>) newTree;
++ (id<ANTLRBaseTree>) newTree:(id<ANTLRBaseTree>)node;
          
 - (id<ANTLRTree>) init;
 - (id<ANTLRBaseTree>) initWith:(id<ANTLRTree>)node;

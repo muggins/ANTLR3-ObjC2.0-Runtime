@@ -43,7 +43,7 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
 
 #pragma mark ANTLRTree protocol conformance
 
-+ newANTLRBaseTree
++ newTree
 {
     return [[ANTLRBaseTree alloc] init];
 }
@@ -52,7 +52,7 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
  *  as there are no fields other than the children list, which cannot
  *  be copied as the children are not considered part of this node. 
  */
-+ newANTLRBaseTree:(id<ANTLRBaseTree>) node
++ newTree:(id<ANTLRBaseTree>) node
 {
     return [[ANTLRBaseTree alloc] initWith:(id<ANTLRTree>) node];
 }

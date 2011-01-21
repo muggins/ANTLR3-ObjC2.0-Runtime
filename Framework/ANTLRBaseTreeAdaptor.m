@@ -33,13 +33,13 @@
 
 + (ANTLRBaseTreeAdaptor *) newEmptyTree
 {
-    return nil;
+    return [[ANTLRCommonTree alloc] init];
+//    return nil;
 }
 
 - (id) init
 {
-    self = [super init];
-    if (self) {
+    if ((self = [super init]) != nil) {
         
     }
     return self;
@@ -60,26 +60,6 @@
 - (id) emptyNode
 {
     return [[ANTLRBaseTreeAdaptor alloc] init];
-}
-
-- (ANTLRUniqueIDMap *)getTreeToUniqueIDMap
-{
-    return treeToUniqueIDMap;
-}
-
-- (void) setTreeToUniqueIDMap:(ANTLRUniqueIDMap *)aMapListNode
-{
-    treeToUniqueIDMap = aMapListNode;
-}
-
-- (NSInteger)getUniqueID
-{
-    return uniqueNodeID;
-}
-
-- (void) setUniqueNodeID:(NSInteger)aUniqueNodeID
-{
-    uniqueNodeID = aUniqueNodeID;
 }
 
 /** create tree node that holds the start and stop tokens associated
@@ -137,6 +117,10 @@
     return newTree;
 }
 
+- (id<ANTLRTree>)dupNode:(id<ANTLRTree>)aNode
+{
+    return aNode; // override for better results :>)
+}
 /** Add a child to the tree t.  If child is a flat tree (a list), make all
  *  in list children of t.  Warning: if t has no children, but child does
  *  and child isNil then you can decide it is ok to move children to t via
@@ -241,7 +225,7 @@
     fromToken = [self createToken:fromToken];
     [fromToken setType:tokenType];
     [fromToken setText:text];
-    id<ANTLRTree>t = [self createTree:fromToken];
+    id<ANTLRTree>t = [[self class] createTree:fromToken];
     return t;
 }
 
@@ -310,10 +294,6 @@
     // return System.identityHashCode(node);
 }
 
-- (id<ANTLRTree>)dupNode:(id<ANTLRTree>)aNode
-{
-    return aNode; // override for better results :>)
-}
 /** Tell me how to create a token for use with imaginary token nodes.
  *  For example, there is probably no input symbol associated with imaginary
  *  token DECL, but you need to create it as a payload or whatever for
@@ -345,5 +325,28 @@
 {
     return nil;
 }
+
+- (void) setUniqueNodeID:(NSInteger)aUniqueNodeID
+{
+    uniqueNodeID = aUniqueNodeID;
+}
+
+#ifdef DONTUSENOMO
+- (ANTLRUniqueIDMap *)getTreeToUniqueIDMap
+{
+    return treeToUniqueIDMap;
+}
+
+- (void) setTreeToUniqueIDMap:(ANTLRUniqueIDMap *)aMapListNode
+{
+    treeToUniqueIDMap = aMapListNode;
+}
+
+- (NSInteger)getUniqueID
+{
+    return uniqueNodeID;
+}
+
+#endif
 
 @end

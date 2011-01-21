@@ -45,12 +45,6 @@
 
 - (id) emptyNode;
 
-- (ANTLRUniqueIDMap *)getTreeToUniqueIDMap;
-- (void) setTreeToUniqueIDMap:(ANTLRUniqueIDMap *)aMapNode;
-
-- (NSInteger)getUniqueID;
-- (void) setUniqueNodeID:(NSInteger)aUniqueNodeID;
-
 /** create tree node that holds the start and stop tokens associated
  *  with an error.
  *
@@ -70,6 +64,7 @@
 - (BOOL) isNil:(id<ANTLRTree>) aTree;
 
 - (id<ANTLRTree>)dupTree:(id<ANTLRTree>)aTree;
+
 /** This is generic in the sense that it will work with any kind of
  *  tree (not just Tree interface).  It invokes the adaptor routines
  *  not the tree node routines to do the construction.  
@@ -141,6 +136,16 @@
 - (NSInteger) getChildCount:(id<ANTLRTree>)aTree;
 
 - (NSInteger) getUniqueID:(id<ANTLRTree>)node;
+
+- (void) setUniqueNodeID:(NSInteger)aUniqueNodeID;
+
+#ifdef DONTUSENOMO
+- (ANTLRUniqueIDMap *)getTreeToUniqueIDMap;
+
+- (void) setTreeToUniqueIDMap:(ANTLRUniqueIDMap *)aMapNode;
+
+- (NSInteger)getUniqueID;
+#endif
 
 /** Tell me how to create a token for use with imaginary token nodes.
  *  For example, there is probably no input symbol associated with imaginary

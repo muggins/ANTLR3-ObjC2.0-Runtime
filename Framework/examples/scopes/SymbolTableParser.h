@@ -1,4 +1,4 @@
-// $ANTLR 3.3.1-SNAPSHOT Jan 18, 2011 15:10:00 SymbolTable.g 2011-01-18 15:28:42
+// $ANTLR 3.3.1-SNAPSHOT Jan 20, 2011 10:02:28 SymbolTable.g 2011-01-20 10:06:16
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -78,6 +78,8 @@ int level;
  }
 
 // start of action-actionScope-methodsDecl
++ (id) newSymbolTableParser:(id<ANTLRTreeNodeStream>)aStream;
+
 
 
 - (void)prog; 

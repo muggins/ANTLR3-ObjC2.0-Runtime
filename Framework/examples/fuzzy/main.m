@@ -1,5 +1,5 @@
 #import <Cocoa/Cocoa.h>
-#import "Fuzzy.h"
+#import "FuzzyLexer.h"
 #import "antlr3.h"
 
 int main(int argc, const char * argv[])
@@ -10,14 +10,14 @@ int main(int argc, const char * argv[])
 	NSLog(@"%@", input);
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:input];
 	Fuzzy *lex = [Fuzzy newFuzzyWithCharStream:stream];
-//	ANTLRCommonTokenStream *tokens = [ANTLRCommonTokenStream newANTLRCommonTokenStreamWithTokenSource:lex];
+	ANTLRCommonTokenStream *tokens = [ANTLRCommonTokenStream newANTLRCommonTokenStreamWithTokenSource:lex];
 //	NSLog( [tokens toString] );
-//#ifdef DONTUSENOMO
+
 	id<ANTLRToken> currentToken;
 	while ((currentToken = [lex nextToken]) && [currentToken getType] != ANTLRTokenTypeEOF) {
-		NSLog(@"%@", [currentToken toString]);
+//		NSLog(@"### %@", [currentToken toString]);
 	}
-//#endif
+
 	[lex release];
 	[stream release];
 	

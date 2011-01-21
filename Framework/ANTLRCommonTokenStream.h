@@ -50,18 +50,29 @@
 - (id) initWithTokenSource:(id<ANTLRTokenSource>)theTokenSource;
 - (id) initWithTokenSource:(id<ANTLRTokenSource>)theTokenSource Channel:(NSInteger)aChannel;
 
-- (id<ANTLRTokenSource>) getTokenSource;
-- (void) setTokenSource: (id<ANTLRTokenSource>) aTokenSource;
-
 - (void) consume;
-- (id<ANTLRToken>) LT:(NSInteger)k;
 - (id<ANTLRToken>) LB:(NSInteger)k;
+- (id<ANTLRToken>) LT:(NSInteger)k;
 
 - (NSInteger) skipOffChannelTokens:(NSInteger) i;
 - (NSInteger) skipOffChannelTokensReverse:(NSInteger) i;
 
 - (void)setup;
 
+- (NSInteger) getNumberOfOnChannelTokens;
+
+// - (id<ANTLRTokenSource>) getTokenSource;
+- (void) setTokenSource: (id<ANTLRTokenSource>) aTokenSource;
+
+- (NSInteger)getChannel;
+- (void)setChannel:(NSInteger)aChannel;
+
+- (NSMutableDictionary *)getChannelOverride;
+- (void)setChannelOverride:(NSMutableDictionary *)anOverride;
+
+- (id) copyWithZone:(NSZone *)aZone;
+
+#ifdef DONTUSENOMO
 - (NSArray *) tokensInRange:(NSRange)aRange;
 - (NSArray *) tokensInRange:(NSRange)aRange inBitSet:(ANTLRBitSet *)aBitSet;
 - (NSArray *) tokensInRange:(NSRange)aRange withTypes:(NSArray *)tokenTypes;
@@ -79,12 +90,6 @@
 - (NSString *) toStringFromStart:(NSInteger)startIndex ToEnd:(NSInteger)stopIndex;
 - (NSString *) toStringFromToken:(id<ANTLRToken>)startToken ToToken:(id<ANTLRToken>)stopToken;
 
-- (id) copyWithZone:(NSZone *)aZone;
-
-- (NSInteger)getChannel;
-- (void)setChannel:(NSInteger)aChannel;
-
-- (NSMutableDictionary *)getChannelOverride;
-- (void)setChannelOverride:(NSMutableDictionary *)anOverride;
+#endif
 
 @end

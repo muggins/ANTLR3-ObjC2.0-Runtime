@@ -1,4 +1,4 @@
-// $ANTLR 3.3.1-SNAPSHOT Jan 18, 2011 15:10:00 T.g 2011-01-18 15:28:41
+// $ANTLR 3.3.1-SNAPSHOT Jan 20, 2011 10:02:28 T.g 2011-01-20 10:06:14
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -50,6 +50,8 @@ BOOL enableEnum;
  }
 
 // start of action-actionScope-methodsDecl
++ (id) newTParser:(id<ANTLRTreeNodeStream>)aStream;
+
 
 
 - (void)stat; 

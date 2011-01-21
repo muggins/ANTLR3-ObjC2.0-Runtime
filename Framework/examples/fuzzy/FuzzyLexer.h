@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Aug 24, 2010 10:45:57 Fuzzy.g 2010-08-24 13:53:40
+// $ANTLR 3.3.1-SNAPSHOT Jan 20, 2011 10:02:28 Fuzzy.g 2011-01-20 10:06:09
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -8,6 +8,7 @@
 /* End of standard antlr3 runtime definitions
  * =============================================================================
  */
+
 
 /* Start cyclicDFAInterface */
 #pragma mark Cyclic DFA interface start DFA38
@@ -19,33 +20,37 @@
 
 #pragma mark Cyclic DFA interface end DFA38
 
+
 #pragma mark Rule return scopes start
 #pragma mark Rule return scopes end
 #pragma mark Tokens
-#define STAT 15
-#define CLASS 10
-#define ESC 19
-#define CHAR 21
-#define ID 8
+#ifdef EOF
+#undef EOF
+#endif
 #define EOF -1
-#define QID 9
-#define TYPE 11
-#define IMPORT 6
 #define WS 4
-#define ARG 12
 #define QIDStar 5
-#define SL_COMMENT 18
+#define IMPORT 6
 #define RETURN 7
+#define ID 8
+#define QID 9
+#define CLASS 10
+#define TYPE 11
+#define ARG 12
+#define METHOD 13
 #define FIELD 14
+#define STAT 15
 #define CALL 16
 #define COMMENT 17
-#define METHOD 13
+#define SL_COMMENT 18
+#define ESC 19
 #define STRING 20
+#define CHAR 21
 @interface Fuzzy : ANTLRLexer { // line 283
 DFA38 *dfa38;
 SEL synpred9_FuzzySelector;
-SEL synpred7_FuzzySelector;
 SEL synpred2_FuzzySelector;
+SEL synpred7_FuzzySelector;
 SEL synpred4_FuzzySelector;
 SEL synpred8_FuzzySelector;
 SEL synpred6_FuzzySelector;

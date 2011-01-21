@@ -41,6 +41,7 @@
 - (ANTLRCommonTree *)createTree:(ANTLRCommonToken *)aToken;
 - (ANTLRCommonTree *)createTree:(NSInteger)tokenType Text:(NSString *)text;
 - (id<ANTLRToken>)createToken:(NSInteger)tokenType Text:(NSString *)text;
+- (id<ANTLRToken>)createToken:(id<ANTLRToken>)fromToken;
 - (void) setTokenBoundaries:(id<ANTLRTree>)t From:(id<ANTLRToken>)startToken To:(id<ANTLRToken>)stopToken;
 - (NSInteger)getTokenStartIndex:(id<ANTLRTree>)t;
 - (NSInteger)getTokenStopIndex:(id<ANTLRTree>)t;

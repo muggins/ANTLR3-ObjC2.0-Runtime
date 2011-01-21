@@ -1,4 +1,4 @@
-// $ANTLR 3.3.1-SNAPSHOT Jan 18, 2011 15:10:00 SimpleC.g 2011-01-18 15:28:39
+// $ANTLR 3.3.1-SNAPSHOT Jan 20, 2011 10:02:28 SimpleC.g 2011-01-20 10:06:12
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -69,6 +69,8 @@ DFA2 *dfa2;
  }
 
 // start of action-actionScope-methodsDecl
++ (id) newSimpleCParser:(id<ANTLRTreeNodeStream>)aStream;
+
 
 
 - (void)program; 

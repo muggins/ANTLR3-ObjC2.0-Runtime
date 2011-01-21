@@ -48,8 +48,7 @@
 
 - (ANTLRBufferedTokenStream *) init
 {
-	self = [super init];
-	if (self)
+	if ((self = [super init]) != nil)
 	{
         tokenSource = nil;
         tokens = [[NSMutableArray arrayWithCapacity:1000] retain];
@@ -61,8 +60,7 @@
 
 -(id) initWithSource:(id<ANTLRTokenSource>)aSource
 {
-	self = [super init];
-	if (self)
+	if ((self = [super init]) != nil)
 	{
         tokenSource = aSource;
         tokens = [[NSMutableArray arrayWithCapacity:1000] retain];
@@ -115,7 +113,7 @@
 {
     if ( p == -1 ) {
         [self setup];
-        [self fill];
+//        [self fill];
     }
     lastMarker = [self getIndex];
     return lastMarker;
@@ -163,7 +161,7 @@
 {
     if ( p == -1 ) {
         [self setup];
-        [self fill];
+//        [self fill];
     }
     p++;
     [self sync:p];
@@ -185,7 +183,6 @@
     for (NSInteger i=1; i <= n; i++) {
         id<ANTLRToken> t = [tokenSource nextToken];
         [t setTokenIndex:[tokens count]];
-        //System.out.println("adding "+t+" at index "+[tokens count]);
         // NSLog(@"adding %@ at index %d\n", [t getText], [tokens count]);
         [tokens addObject:t];
         [t retain];
@@ -209,14 +206,14 @@
         return nil;
     if ( p == -1 ) {
         [self setup];
-        [self fill];
+//        [self fill];
     }
     NSMutableArray *subset = [NSMutableArray arrayWithCapacity:5];
     if ( stopIndex >= [tokens count] )
         stopIndex = [tokens count]-1;
     for (NSInteger i = startIndex; i <= stopIndex; i++) {
         id<ANTLRToken>t = [tokens objectAtIndex:i];
-        if ( [t getType] == ANTLRTokenTypeInvalid )
+        if ( [t getType] == ANTLRTokenTypeEOF )
             break;
         [subset addObject:t];
     }
@@ -239,7 +236,7 @@
 {
     if ( p == -1 ) {
         [self setup];
-        [self fill];
+//        [self fill];
     }
     if ( k == 0 )
         return nil;
@@ -252,7 +249,7 @@
                                 // EOF must be last token
         return [tokens objectAtIndex:([tokens count]-1)];
     }
-    if ( i>range )
+    if ( i > range )
         range = i; 		
     return [tokens objectAtIndex:i];
 }
@@ -276,11 +273,6 @@
     return tokens;
 }
 
-- (NSString *)getSourceName
-{
-    return [tokenSource getSourceName];
-}
-
 - (NSMutableArray *)getTokensFrom:(NSInteger) startIndex To:(NSInteger) stopIndex
 {
     return [self getTokensFrom:startIndex To:stopIndex With:(ANTLRBitSet *)nil];
@@ -294,12 +286,12 @@
 {
     if ( p == -1 ) {
         [self setup];
-        [self fill];
+//        [self fill];
     }
-    if ( stopIndex>=[tokens count] )
-        stopIndex=[tokens count]-1;
-    if ( startIndex<0 )
-        startIndex=0;
+    if ( stopIndex >= [tokens count] )
+        stopIndex = [tokens count]-1;
+    if ( startIndex < 0 )
+        startIndex = 0;
     if ( startIndex > stopIndex )
         return nil;
     
@@ -328,13 +320,18 @@
     return [self getTokensFrom:startIndex To:stopIndex With:[ANTLRBitSet newANTLRBitSetWithArray:types]];
 }
             
+- (NSString *)getSourceName
+{
+    return [tokenSource getSourceName];
+}
+
 /** Grab *all* tokens from stream and return string */
 - (NSString *) toString
 {
     if ( p == -1 ) {
         [self setup];
-        [self fill];
     }
+    [self fill];
     return [self toStringFromStart:0 ToEnd:[tokens count]-1];
 }
 
@@ -350,7 +347,7 @@
     NSMutableString *buf = [NSMutableString stringWithCapacity:5];
     for (NSInteger i = startIdx; i <= stopIdx; i++) {
         id<ANTLRToken>t = [tokens objectAtIndex:i];
-        if ( [t getType] == ANTLRTokenTypeInvalid )
+        if ( [t getType] == ANTLRTokenTypeEOF )
             break;
         [buf appendString:[t getText]];
     }
@@ -368,7 +365,7 @@
 /** Get all tokens from lexer until EOF */
 - (void) fill
 {
-    // if ( p == -1 ) [self setup];
+    if ( p == -1 ) [self setup];
     if ( [[tokens objectAtIndex:p] getType] == ANTLRTokenTypeEOF )
         return;
     
@@ -380,6 +377,7 @@
     }
 }
 
+#ifdef DONTUSENOMO
 - (NSUInteger) getCharPositionInLine
 {
     return -1;
@@ -388,5 +386,6 @@
 - (void) setCharPositionInLine:(NSUInteger)thePos
 {
 }
+#endif
 
 @end

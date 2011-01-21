@@ -1,4 +1,4 @@
-// $ANTLR 3.3.1-SNAPSHOT Jan 18, 2011 15:10:00 Combined.g 2011-01-18 15:28:37
+// $ANTLR 3.3.1-SNAPSHOT Jan 20, 2011 10:02:28 Combined.g 2011-01-20 10:06:11
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -45,6 +45,8 @@ typedef enum {
  }
 
 // start of action-actionScope-methodsDecl
++ (id) newCombinedParser:(id<ANTLRTreeNodeStream>)aStream;
+
 
 
 - (void)stat; 

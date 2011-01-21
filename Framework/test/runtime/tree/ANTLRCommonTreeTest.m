@@ -44,8 +44,8 @@
     if (tree != nil)
         STAssertNotNil(tree.token, @"Tree with token was nil");
     if (tree != nil && tree.token != nil) {
-        STAssertEquals((NSInteger) tree.token.line, (NSInteger)1, [NSString stringWithFormat:@"Tree should be at line 1, but was at %d", tree.token.line] );
-        STAssertEquals((NSInteger) tree.token.charPositionInLine, (NSInteger)4, [NSString stringWithFormat:@"Char position should be 1, but was at %d", tree.token.charPositionInLine]);
+        STAssertEquals((NSUInteger) tree.token.line, (NSUInteger)1, [NSString stringWithFormat:@"Tree should be at line 1, but was at %d", tree.token.line] );
+        STAssertEquals((NSUInteger) tree.token.charPositionInLine, (NSUInteger)4, [NSString stringWithFormat:@"Char position should be 1, but was at %d", tree.token.charPositionInLine]);
         STAssertNotNil(tree.token.text, @"Tree with token with text was nil");
     }
     if (tree != nil && tree.token != nil && tree.token.text != nil)
@@ -74,8 +74,8 @@
 	STAssertNotNil(newTree, @"New tree was nil");
 	STAssertNotNil(newTree.token, @"New tree token was nil");
 	STAssertEquals(newTree.token, tree.token, @"Tokens did not match");
-	STAssertEquals(newTree.stopIndex, tree.stopIndex, @"Token stop index did not match");
-	STAssertEquals(newTree.startIndex, tree.startIndex, @"Token start index did not match");
+	STAssertEquals(newTree.startIndex, tree.startIndex, @"Token start index did not match %d:%d", newTree.startIndex, tree.startIndex);
+	STAssertEquals(newTree.stopIndex, tree.stopIndex, @"Token stop index did not match %d:%d", newTree.stopIndex, tree.stopIndex);
 	//[stream release];
 	//[tree release];
 	//[newTree release];

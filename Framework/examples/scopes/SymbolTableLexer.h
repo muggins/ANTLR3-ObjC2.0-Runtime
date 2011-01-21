@@ -1,4 +1,4 @@
-// $ANTLR 3.3.1-SNAPSHOT Jan 18, 2011 15:10:00 SymbolTable.g 2011-01-18 15:28:43
+// $ANTLR 3.3.1-SNAPSHOT Jan 20, 2011 10:02:28 SymbolTable.g 2011-01-20 10:06:16
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
@@ -24,6 +24,9 @@
 #pragma mark Rule return scopes start
 #pragma mark Rule return scopes end
 #pragma mark Tokens
+#ifdef EOF
+#undef EOF
+#endif
 #define EOF -1
 #define T__7 7
 #define T__8 8
