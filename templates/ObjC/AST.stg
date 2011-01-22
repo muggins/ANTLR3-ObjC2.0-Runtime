@@ -29,14 +29,16 @@ group AST;
 
 @genericParserHeaderFile.memVars() ::= <<
 /* AST parserHeaderFile.memVars */
-<@super.memVars()>
-<parsermemVars()>
+NSInteger ruleLevel;
+NSArray *ruleNames;
+<@super.memVars()>  /* super.memVars */
+<parsermemVars()>   /* parsermemVars */
 >>
 
 @genericParserHeaderFile.methodsdecl() ::= <<
 /* AST parserHeaderFile.methodsdecl */
-<@super.methodsdecl()>
-<parserMethodsDecl()>
+<@super.methodsdecl()>  /* super.methodsdecl */
+<parserMethodsDecl()>   /* parserMethodsDecl */
 >>
 
 @genericParser.methods() ::= <<
@@ -455,40 +457,10 @@ root_<treeLevel> = (<ASTLabelType> *)[treeAdaptor becomeRoot:<createRewriteNodeF
 >>
 
 rewriteImaginaryTokenRef(args,token,hetero,elementIndex) ::= <<
-<!
-<if(first(rest(args)))>/* got two arguments - means create from token with custom text */
-// rewriteImaginaryTokenRef - 2 args
-[treeAdaptor addChild:[[treeAdaptor createTree:<first(args)> Text:@<first(rest(args))>] retain] toTree:root_<treeLevel>];
-<else>/* at most one argument */
-<if(first(args))>
-// rewriteImaginaryTokenRef - 1 arg
-[treeAdaptor addChild:[[treeAdaptor createTree:<first(args)> Text:@<first(rest(args))>] retain] toTree:root_<treeLevel>];
-<else>/* no argument at all */
-// rewriteImaginaryTokenRef - no args
-[treeAdaptor addChild:[[treeAdaptor createTree:<token>.type Text:[state.tokenNames objectAtIndex:<token>.type] retain] toTree:root_<treeLevel>];
-<endif>/* one arg */
-<endif>/* two args */
-!>
 [treeAdaptor addChild:<createImaginaryNode(tokenType=token, ...)> toTree:root_<treeLevel>];<\n>
 >>
 
 rewriteImaginaryTokenRefRoot(args,token,hetero,elementIndex) ::= <<
-<!
-<if(first(rest(args)))>/* got two arguments - means create from token with custom text*/
-// rewriteImaginaryTokenRef - 2 args
-id\<ANTLRTree> <token>_tree = [[ANTLRCommonTree newANTLRCommonTreeWithTokenType:<first(args)> Text:@<first(rest(args))>] retain];
-root_<treeLevel> = (<ASTLabelType> *)[treeAdaptor becomeRoot:<token>_tree old:root_<treeLevel>];
-<else>/* at most one argument */
-<if(first(args))>
-id\<ANTLRTree> <token>_tree = [[ANTLRCommonTree newANTLRCommonTreeWithToken:<first(args)>] retain];
-root_<treeLevel> = (<ASTLabelType> *)[treeAdaptor becomeRoot:<token>_tree old:root_<treeLevel>];
-<else>/* no argument at all */
-id\<ANTLRTree> <token>_tree = [[ANTLRCommonTree newANTLRCommonTreeWithTokenType:<token>.type
-                                                                           Text:[tokenNames objectAtIndex:<token>.type]] retain];
-root_<treeLevel> = (<ASTLabelType> *)[treeAdaptor becomeRoot:<token>_tree old:root_<treeLevel>];
-<endif>/* one arg */
-<endif>/* two args */
-!>
 root_<treeLevel> = (<ASTLabelType> *)[treeAdaptor becomeRoot:<createImaginaryNode(tokenType=token, ...)>
                                                        old:root_<treeLevel>];<\n>
 >>
@@ -551,8 +523,7 @@ createImaginaryNode(tokenType,hetero,args) ::= <<
 <! new MethodNode(IDLabel, args) !>
 new <hetero>(<tokenType><if(args)>, <args; separator=", "><endif>)
 <else>
-<! [treeAdaptor createTree:<if(args)>@<first(args)><else><tokenType><endif> <if(args)>Text:@<first(rest(args))><endif>] !>
-[[treeAdaptor createTree:(NSInteger)<tokenType> Text:[[ANTLRBaseRecognizer getTokenNames] objectAtIndex:(NSUInteger)<tokenType>]] retain]
+[treeAdaptor createTree:<tokenType>  Text:<args; separator=", "><if(!args)>@"<tokenType>"<endif>]
 <endif>
 >>
 

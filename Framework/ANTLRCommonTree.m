@@ -41,29 +41,29 @@
 	return [((ANTLRCommonTree *)[ANTLRCommonTree alloc]) initWithToken:[ANTLRCommonToken invalidToken]];
 }
 
-+ (ANTLRCommonTree *)newANTLRCommonTree
++ (ANTLRCommonTree *)newTree
 {
     return [[ANTLRCommonTree alloc] init];
 }
 
-+ (ANTLRCommonTree *)newANTLRCommonTreeWithTree:(ANTLRCommonTree *)aTree
++ (ANTLRCommonTree *)newTreeWithTree:(ANTLRCommonTree *)aTree
 {
     return [[ANTLRCommonTree alloc] initWithTreeNode:aTree];
 }
 
-+ (ANTLRCommonTree *)newANTLRCommonTreeWithToken:(ANTLRCommonToken *)aToken
++ (ANTLRCommonTree *)newTreeWithToken:(ANTLRCommonToken *)aToken
 {
     // Had to cast to id<ANTLRTree> here, because GCC is dumb.
 	return [((ANTLRCommonTree *)[ANTLRCommonTree alloc]) initWithToken:aToken];
 }
 
-+ (ANTLRCommonTree *)newANTLRCommonTreeWithTokenType:(NSInteger)aTType
++ (ANTLRCommonTree *)newTreeWithTokenType:(NSInteger)aTType
 {
     // Had to cast to id<ANTLRTree> here, because GCC is dumb.
 	return [[ANTLRCommonTree alloc] initWithTokenType:(NSInteger)aTType];
 }
 
-+ (ANTLRCommonTree *)newANTLRCommonTreeWithTokenType:(NSInteger)aTType Text:(NSString *)theText
++ (ANTLRCommonTree *)newTreeWithTokenType:(NSInteger)aTType Text:(NSString *)theText
 {
     // Had to cast to id<ANTLRTree> here, because GCC is dumb.
 	return [[ANTLRCommonTree alloc] initWithTokenType:(NSInteger)aTType Text:theText];
@@ -175,7 +175,7 @@
 
 - (id<ANTLRTree>) dupNode
 {
-    return [ANTLRCommonTree newANTLRCommonTreeWithTree:self ];
+    return [ANTLRCommonTree newTreeWithTree:self ];
 }
 
 - (NSInteger) getType

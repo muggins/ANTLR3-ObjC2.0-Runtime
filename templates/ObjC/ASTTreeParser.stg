@@ -110,7 +110,7 @@ _last = (<ASTLabelType> *)[input LT:1];
 <ASTLabelType> *_save_last_<treeLevel> = _last;
 <ASTLabelType> *_first_<treeLevel> = nil;
 <if(!rewriteMode)>
-<ASTLabelType> *root_<treeLevel> = [[[treeAdapator class] newEmptyTree] retain];
+<ASTLabelType> *root_<treeLevel> = [[[treeAdaptor class] newEmptyTree] retain];
 <endif>
 <root:element()>
 <if(rewriteMode)>
@@ -161,7 +161,7 @@ _last = (<ASTLabelType> *)[input LT:1];
 <if(hetero)>
     <label>_tree = [ANTLR<hetero> newANTLR<hetero>:<label>];
 <else>
-    <label>_tree = (<ASTLabelType> *)[adaptor dupNode:<label>]];
+    <label>_tree = (<ASTLabelType> *)[treeAdaptor dupNode:<label>];
 <endif><\n>
     [treeAdaptor addChild:<label>_tree toTree:root_<treeLevel>];
 <if(backtracking)>}<endif>
@@ -340,7 +340,6 @@ _last = (<ASTLabelType> *)[input LT:1];
  */
 createRewriteNodeFromElement(token,hetero,scope) ::= <<
 /* ASTTreeParser createRewriteNodeFromElement */
-#error Heterogeneous tree support not implemented.
 <if(hetero)>
 <! new <hetero>(stream_<token>.nextNode()) !>
 [[[ANTLR<hetero>(stream_<token> alloc] init] nextNode];

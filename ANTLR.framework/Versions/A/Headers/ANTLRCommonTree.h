@@ -43,16 +43,16 @@
 @property (assign, getter=getChildIndex, setter=setChildIndex) NSInteger childIndex;
 
 + (ANTLRCommonTree *) invalidNode;
-+ (ANTLRCommonTree *) newANTLRCommonTree;
-+ (ANTLRCommonTree *) newANTLRCommonTreeWithTree:(ANTLRCommonTree *)aTree;
-+ (ANTLRCommonTree *) newANTLRCommonTreeWithToken:(ANTLRCommonToken *)aToken;
-+ (ANTLRCommonTree *) newANTLRCommonTreeWithTokenType:(NSInteger)tokenType;
-+ (ANTLRCommonTree *) newANTLRCommonTreeWithTokenType:(NSInteger)aTType Text:(NSString *)theText;
++ (ANTLRCommonTree *) newTree;
++ (ANTLRCommonTree *) newTreeWithTree:(ANTLRCommonTree *)aTree;
++ (ANTLRCommonTree *) newTreeWithToken:(ANTLRCommonToken *)aToken;
++ (ANTLRCommonTree *) newTreeWithTokenType:(NSInteger)tokenType;
++ (ANTLRCommonTree *) newTreeWithTokenType:(NSInteger)aTType Text:(NSString *)theText;
 #ifdef DONTUSEYET
-+ (id<ANTLRTree>) newANTLRCommonTreeWithTokenType:(NSInteger)tokenType;
-+ (id<ANTLRTree>) newANTLRCommonTreeWithToken:(id<ANTLRToken>)fromToken TokenType:(NSInteger)tokenType;
-+ (id<ANTLRTree>) newANTLRCommonTreeWithToken:(id<ANTLRToken>)fromToken TokenType:(NSInteger)tokenType Text:(NSString *)tokenText;
-+ (id<ANTLRTree>) newANTLRCommonTreeWithToken:(id<ANTLRToken>)fromToken Text:(NSString *)tokenText;
++ (id<ANTLRTree>) newTreeWithTokenType:(NSInteger)tokenType;
++ (id<ANTLRTree>) newTreeWithToken:(id<ANTLRToken>)fromToken TokenType:(NSInteger)tokenType;
++ (id<ANTLRTree>) newTreeWithToken:(id<ANTLRToken>)fromToken TokenType:(NSInteger)tokenType Text:(NSString *)tokenText;
++ (id<ANTLRTree>) newTreeWithToken:(id<ANTLRToken>)fromToken Text:(NSString *)tokenText;
 #endif
 
 - (id) init;

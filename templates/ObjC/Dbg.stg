@@ -36,7 +36,7 @@ group Dbg;
 >>
 
 @parserHeaderFile.memVars() ::= <<
-int ruleLevel;
+NSInteger ruleLevel;
 NSArray *ruleNames;
 >>
 
@@ -51,10 +51,10 @@ NSMutableArray *ruleNames = [NSMutableArray arrayWithArray:{
 };<\n>
 <endif>
 <if(grammar.grammarIsRoot)> <! grammar imports other grammar(s) !>
-    NSInteger ruleLevel = 0;
-    NSInteger getRuleLevel() { return ruleLevel; }
-    void incRuleLevel() { ruleLevel++; }
-    void decRuleLevel() { ruleLevel--; }
+    ruleLevel = 0;
+- (NSInteger) getRuleLevel { return ruleLevel; }
+- (void) incRuleLevel { ruleLevel++; }
+- (void) decRuleLevel { ruleLevel--; }
 <if(profile)>
     <ctorForProfilingRootGrammar()>
 <else>
@@ -62,13 +62,24 @@ NSMutableArray *ruleNames = [NSMutableArray arrayWithArray:{
 <endif>
 <ctorForPredefinedListener()>
 <else> <! imported grammar !>
-- (NSInteger) getRuleLevel { return <grammar.delegators:{g| <g:delegateName()>}>.getRuleLevel(); }
-- (void) incRuleLevel() { <grammar.delegators:{g| <g:delegateName()>}>.incRuleLevel(); }
-- (void) decRuleLevel() { <grammar.delegators:{g| <g:delegateName()>}>.decRuleLevel(); }
+- (NSInteger) getRuleLevel
+{
+    return <grammar.delegators:{g| <g:delegateName()>}>.getRuleLevel();
+}<\n>
+
+- (void) incRuleLevel
+{
+    <grammar.delegators:{g| <g:delegateName()>}>.incRuleLevel();
+}<\n>
+- (void) decRuleLevel
+{
+    <grammar.delegators:{g| <g:delegateName()>}>.decRuleLevel();
+}<\n>
     <ctorForDelegateGrammar()>
 <endif>
 <if(profile)>
-- (BOOL) alreadyParsedRule(IntStream input, int ruleIndex) {
+- (BOOL) alreadyParsedRule:(id<IntStream>) input Index:(NSInteger) ruleIndex
+{
     [(Profiler)dbg examineRuleMemoization:input, ruleIndex, <grammar.composite.rootGrammar.recognizerName>.ruleNames objectAtIndex:ruleIndex];
     return super.alreadyParsedRule(input, ruleIndex);
 }<\n>

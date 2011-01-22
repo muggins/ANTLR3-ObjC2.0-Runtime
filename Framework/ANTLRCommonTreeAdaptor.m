@@ -30,7 +30,7 @@
 
 + (ANTLRCommonTree *) newEmptyTree;
 {
-    return [ANTLRCommonTree newANTLRCommonTree];
+    return [ANTLRCommonTree newTree];
 }
 
 + (ANTLRCommonTreeAdaptor *)newTreeAdaptor
@@ -75,7 +75,7 @@
  */
 - (ANTLRCommonTree *) createTree:(ANTLRCommonToken *)aToken
 {
-    return [ANTLRCommonTree newANTLRCommonTreeWithToken:aToken];
+    return [ANTLRCommonTree newTreeWithToken:aToken];
 }
 
 /** Tell me how to create a token for use with imaginary token nodes.
@@ -88,7 +88,7 @@
  */
 - (ANTLRCommonTree *)createTree:(NSInteger)tokenType Text:(NSString *)text
 {
-    return [ANTLRCommonTree newANTLRCommonTreeWithTokenType:tokenType Text:text];
+    return [ANTLRCommonTree newTreeWithTokenType:tokenType Text:text];
 }
 
 - (id<ANTLRToken>)createToken:(NSInteger)tokenType Text:(NSString *)text

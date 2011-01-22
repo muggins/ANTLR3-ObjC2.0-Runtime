@@ -10,6 +10,7 @@ int main(int argc, const char * argv[])
 	NSLog(@"%@", string);
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:string];
 	CombinedLexer *lexer = [CombinedLexer newCombinedLexerWithCharStream:stream];
+//    NSLog( @"Grammar File = %@", [lexer getGrammarFileName] );
 	id<ANTLRToken> currentToken;
 	while ((currentToken = [lexer nextToken]) && [currentToken getType] != ANTLRTokenTypeEOF) {
 		NSLog(@"%@", currentToken);
