@@ -49,6 +49,7 @@
 #import <ANTLR/ANTLRDebugTreeAdaptor.h>
 #import <ANTLR/ANTLRDebugTreeNodeStream.h>
 #import <ANTLR/ANTLRDebugTreeParser.h>
+#import <ANTLR/ANTLRDoubleKeyMap.h>
 #import <ANTLR/ANTLREarlyExitException.h>
 #import <ANTLR/ANTLRError.h>
 #import <ANTLR/ANTLRFailedPredicateException.h>

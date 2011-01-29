@@ -12,21 +12,21 @@ int main() {
 	TreeRewriteLexer *lexer = [TreeRewriteLexer newTreeRewriteLexerWithCharStream:stream];
 	
 //    id<ANTLRToken> currentToken;
-//    while ((currentToken = [lexer nextToken]) && [currentToken type] != ANTLRTokenTypeEOF) {
-//        NSLog(@"%@", currentToken);
+//    while ((currentToken = [lexer nextToken]) && [currentToken getType] != ANTLRTokenTypeEOF) {
+//        NSLog(@"%@", [currentToken toString]);
 //    }
 	
-	ANTLRCommonTokenStream *tokenStream = [ANTLRCommonTokenStream newANTLRCommonTokenStreamWithTokenSource:lexer];
-	TreeRewriteParser *parser = [[TreeRewriteParser alloc] initWithTokenStream:tokenStream];
+	ANTLRCommonTokenStream *tokens = [ANTLRCommonTokenStream newANTLRCommonTokenStreamWithTokenSource:lexer];
+	TreeRewriteParser *parser = [[TreeRewriteParser alloc] initWithTokenStream:tokens];
 	ANTLRCommonTree *rule_tree = [[parser rule] getTree];
 	NSLog(@"tree: %@", [rule_tree treeDescription]);
-//	ANTLRCommonTreeNodeStream *treeStream = [[ANTLRCommonTreeNodeStream alloc] initWithTree:program_tree];
+//	ANTLRCommonTreeNodeStream *treeStream = [[ANTLRCommonTreeNodeStream alloc] initWithTree:rule_tree];
 //	SimpleCTP *walker = [[SimpleCTP alloc] initWithTreeNodeStream:treeStream];
 //	[walker program];
 
 	[lexer release];
 	[stream release];
-	[tokenStream release];
+	[tokens release];
 	[parser release];
 //	[treeStream release];
 //	[walker release];

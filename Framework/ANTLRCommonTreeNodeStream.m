@@ -52,7 +52,7 @@
         root = theTree;
         adaptor = [ANTLRCommonTreeAdaptor newTreeAdaptor];
         it = [ANTLRTreeIterator newANTRLTreeIteratorWithAdaptor:adaptor andTree:root];
-        calls = [ANTLRIntArray newANTLRIntArrayWithLen:INITIAL_CALL_STACK_SIZE];
+        calls = [ANTLRIntArray newArrayWithLen:INITIAL_CALL_STACK_SIZE];
         /** Tree (nil A B C) trees like flat A B C streams */
         hasNilRoot = NO;
         level = 0;
@@ -68,7 +68,7 @@
         adaptor = anAdaptor;
         //    it = [root objectEnumerator];
         it = [ANTLRTreeIterator newANTRLTreeIteratorWithAdaptor:adaptor andTree:root];
-        calls = [ANTLRIntArray newANTLRIntArrayWithLen:INITIAL_CALL_STACK_SIZE];
+        calls = [ANTLRIntArray newArrayWithLen:INITIAL_CALL_STACK_SIZE];
         /** Tree (nil A B C) trees like flat A B C streams */
         hasNilRoot = NO;
         level = 0;
@@ -165,7 +165,7 @@
 - (void) push:(NSInteger) index
 {
     if ( calls == nil ) {
-        calls = [ANTLRIntArray newANTLRIntArrayWithLen:INITIAL_CALL_STACK_SIZE];
+        calls = [ANTLRIntArray newArrayWithLen:INITIAL_CALL_STACK_SIZE];
     }
     [calls push:p]; // save current index
     [self seek:index];

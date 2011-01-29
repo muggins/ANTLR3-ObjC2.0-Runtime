@@ -175,7 +175,7 @@
         if ( nc == 1 ) newRootTree = [(id<ANTLRTree>)newRootTree getChild:0];
         else if ( nc > 1 ) {
             // TODO: make tree run time exceptions hierarchy
-            @throw [ANTLRRuntimeException newANTLRRuntimeException:NSStringFromClass([self class]) reason:@"more than one node as root (TODO: make exception hierarchy)"];
+            @throw [ANTLRRuntimeException newException:NSStringFromClass([self class]) reason:@"more than one node as root (TODO: make exception hierarchy)"];
         }
     }
     // add oldRoot to newRoot; addChild takes care of case where oldRoot

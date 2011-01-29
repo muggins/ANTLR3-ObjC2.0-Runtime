@@ -41,22 +41,37 @@ import java.util.HashMap;
 
 /** Add this to each rule's return value struct */
 @returnScope.ruleReturnMembers() ::= <<
-public StringTemplate st;
-public Object getTemplate() { return st; }
-public String toString() { return st==null?null:st.toString(); }
+//public StringTemplate st;
+//public Object getTemplate() { return st; }
+//public String toString() { return st==null?null:st.toString(); }
 >>
 
-@genericParser.members() ::= <<
-<@super.members()>
-protected StringTemplateGroup templateLib =
-  new StringTemplateGroup("<name>Templates", AngleBracketTemplateLexer.class);
+@returnScopeInterface.memVars() ::= <<
+ST *st;
+>>
 
-public void setTemplateLib(StringTemplateGroup templateLib) {
-  this.templateLib = templateLib;
-}
-public StringTemplateGroup getTemplateLib() {
-  return templateLib;
-}
+@returnScopeInterface.methodsDecl() ::= <<
+/* AST returnScopeInterface.methodsdecl */
+- (id) getTemplate;
+>>
+
+@returnScope.methods() ::= <<
+- (id) getTemplate { return st; }
+>>
+
+@genericParser.methods() ::= <<
+<@super.methods()>
+//protected StringTemplateGroup templateLib = new StringTemplateGroup("<name>Templates", AngleBracketTemplateLexer.class);
+STGroup templateLib = [STGroup newSTGroup:"<name>Templates" lexer:AngleBracketTemplateLexer.class];
+
+//public void setTemplateLib(StringTemplateGroup templateLib) {
+//  this.templateLib = templateLib;
+//}
+//public StringTemplateGroup getTemplateLib() {
+//  return templateLib;
+//}
+- (void) setTemplateLib:(STGroup *)aTemplateLib { templateLib = aTemplateLib; } 
+- (STGroup *)getTemplateLib { return templateLib; } 
 /** allows convenient multi-value initialization:
  *  "new STAttrMap().put(...).put(...)"
  */

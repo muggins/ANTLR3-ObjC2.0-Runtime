@@ -33,12 +33,12 @@
 
 @implementation ANTLRIntArray
 
-+ (ANTLRIntArray *)newANTLRIntArray
++ (ANTLRIntArray *)newArray
 {
     return [[ANTLRIntArray alloc] init];
 }
 
-+ (ANTLRIntArray *)newANTLRIntArrayWithLen:(NSInteger)aLen
++ (ANTLRIntArray *)newArrayWithLen:(NSInteger)aLen
 {
     return [[ANTLRIntArray alloc] initWithLen:aLen];
 }
@@ -46,6 +46,7 @@
 -(id) init
 {
 	if ((self = [super initWithLen:ANTLR_INT_ARRAY_INITIAL_SIZE]) != nil) {
+        ip = (NSInteger *)ptrBuffer;
 	}
 	return self;
 }
@@ -53,6 +54,7 @@
 -(id) initWithLen:(NSInteger)aLen
 {
 	if ((self = [super initWithLen:aLen]) != nil) {
+        ip = (NSInteger *)ptrBuffer;
 	}
 	return self;
 }
@@ -84,7 +86,7 @@
 -(void) addInteger:(NSInteger) v
 {
 	[self ensureCapacity:ptr];
-	ptrBuffer[ptr++] = (id) v;
+	ip[ptr++] = (id) v;
 }
 
 -(void) push:(NSInteger) v
@@ -94,22 +96,42 @@
 
 -(NSInteger) pop
 {
-	NSInteger v = (NSInteger) ptrBuffer[--ptr];
+	NSInteger v = (NSInteger) ip[--ptr];
 	return v;
 }
 
 -(NSInteger) integerAtIndex:(NSInteger) i
 {
-	return (NSInteger) ptrBuffer[i];
+    if (i >= BuffSize) {
+        return (NSInteger)-1;
+    }
+	return (NSInteger) ip[i];
 }
 
 -(void) insertInteger:(NSInteger)anInteger AtIndex:(NSInteger)idx
 {
-    ptrBuffer[idx] = (id) anInteger;
+    if ( idx >= BuffSize ) {
+        [self ensureCapacity:idx];
+    }
+    ip[idx] = (id) anInteger;
 }
 -(void) reset
 {
 	ptr = 0;
+}
+
+- (void) ensureCapacity:(NSInteger) index
+{
+	if ((index * sizeof(NSInteger)) >= [buffer length])
+	{
+		NSInteger newSize = ([buffer length] / sizeof(NSInteger)) * 2;
+		if (index > newSize) {
+			newSize = index + 1;
+		}
+        BuffSize = newSize;
+		[buffer setLength:(BuffSize * sizeof(NSInteger))];
+        ip = (NSInteger *)ptrBuffer = [buffer mutableBytes];
+	}
 }
 
 @end

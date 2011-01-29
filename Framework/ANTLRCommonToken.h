@@ -73,15 +73,15 @@
 + (ANTLRTokenChannel) defaultChannel;
 
 // designated initializer. This is used as the default way to initialize a Token in the generated code.
-- (ANTLRCommonToken *) init;
-- (ANTLRCommonToken *) initWithInput:(id<ANTLRCharStream>)anInput
+- (id) init;
+- (id) initWithInput:(id<ANTLRCharStream>)anInput
                                 Type:(NSInteger)aTType
                              Channel:(NSInteger)aChannel
                                Start:(NSInteger)theStart
                                 Stop:(NSInteger)theStop;
-- (ANTLRCommonToken *) initWithToken:(ANTLRCommonToken *)aToken;
-- (ANTLRCommonToken *) initWithType:(ANTLRTokenType)aType;
-- (ANTLRCommonToken *) initWithType:(ANTLRTokenType)aTType Text:(NSString *)tokenText;
+- (id) initWithToken:(ANTLRCommonToken *)aToken;
+- (id) initWithType:(ANTLRTokenType)aType;
+- (id) initWithType:(ANTLRTokenType)aTType Text:(NSString *)tokenText;
 
 //---------------------------------------------------------- 
 //  text 

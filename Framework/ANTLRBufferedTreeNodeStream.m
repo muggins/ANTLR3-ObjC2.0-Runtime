@@ -398,7 +398,7 @@
 -(void) push:(NSInteger) i
 {
 	if (calls == nil) {
-		calls = [ANTLRIntArray newANTLRIntArrayWithLen:INITIAL_CALL_STACK_SIZE];
+		calls = [ANTLRIntArray newArrayWithLen:INITIAL_CALL_STACK_SIZE];
 	}
 	[calls push:p];
 	[self seek:i];

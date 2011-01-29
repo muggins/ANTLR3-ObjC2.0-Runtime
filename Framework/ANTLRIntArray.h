@@ -34,10 +34,11 @@
 
 @interface ANTLRIntArray : ANTLRPtrBuffer 
 {
+    NSInteger *ip;
 }
 
-+ (ANTLRIntArray *)newANTLRIntArray;
-+ (ANTLRIntArray *)newANTLRIntArrayWithLen:(NSInteger)aLen;
++ (ANTLRIntArray *)newArray;
++ (ANTLRIntArray *)newArrayWithLen:(NSInteger)aLen;
 
 - (id) init;
 - (id) initWithLen:(NSInteger)aLen;
@@ -56,5 +57,6 @@
 
 - (NSInteger) count;
 - (NSInteger) size;
+- (void) ensureCapacity:(NSInteger) index;
 
 @end

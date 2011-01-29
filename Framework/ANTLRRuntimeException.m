@@ -49,12 +49,12 @@
     return [[ANTLRRuntimeException alloc] initWithRuntime:aReason];
 }
 
-+ (ANTLRRuntimeException *) newANTLRRuntimeException:(NSString *)aName reason:(NSString *)aReason
++ (ANTLRRuntimeException *) newException:(NSString *)aName reason:(NSString *)aReason
 {
     return [[ANTLRRuntimeException alloc] initWithName:aName reason:aReason];
 }
 
-+ (ANTLRRuntimeException *) newANTLRRuntimeException:(NSString *)aName reason:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo
++ (ANTLRRuntimeException *) newException:(NSString *)aName reason:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo
 {
     return [[ANTLRRuntimeException alloc] initWithName:aName reason:aReason userInfo:aUserInfo];
 }

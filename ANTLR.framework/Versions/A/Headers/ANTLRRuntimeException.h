@@ -38,8 +38,8 @@
 + (ANTLRRuntimeException *) newANTLRNoSuchElementException:(NSString *)aReason;
 + (ANTLRRuntimeException *) newANTLRIllegalArgumentException:(NSString *)aReason;
 + (ANTLRRuntimeException *) newANTLRRuntimeException:(NSString *)aReason;
-+ (ANTLRRuntimeException *) newANTLRRuntimeException:(NSString *)aName reason:(NSString *)aReason;
-+ (ANTLRRuntimeException *) newANTLRRuntimeException:(NSString *)aName reason:(NSString *)aReason userInfo:aUserInfo;
++ (ANTLRRuntimeException *) newException:(NSString *)aName reason:(NSString *)aReason;
++ (ANTLRRuntimeException *) newException:(NSString *)aName reason:(NSString *)aReason userInfo:aUserInfo;
 
 - (id) init;
 - (id)initWithRuntime:(NSString *)aReason;

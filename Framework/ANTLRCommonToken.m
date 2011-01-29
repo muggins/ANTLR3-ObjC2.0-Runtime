@@ -111,7 +111,7 @@ static ANTLRCommonToken *INVALID_TOKEN;
 	return ANTLRTokenChannelDefault;
 }
 
-- (ANTLRCommonToken *) init
+- (id) init
 {
     if ((self = [super init]) != nil) {
         input = nil;
@@ -124,7 +124,7 @@ static ANTLRCommonToken *INVALID_TOKEN;
 }
 
 // designated initializer
-- (ANTLRCommonToken *) initWithInput:(id<ANTLRCharStream>)anInput
+- (id) initWithInput:(id<ANTLRCharStream>)anInput
                            Type:(NSInteger)aTType
                              Channel:(NSInteger)aChannel
                                Start:(NSInteger)aStart
@@ -140,7 +140,7 @@ static ANTLRCommonToken *INVALID_TOKEN;
     return self;
 }
 
-- (ANTLRCommonToken *) initWithToken:(ANTLRCommonToken *)oldToken
+- (id) initWithToken:(ANTLRCommonToken *)oldToken
 {
     if ((self = [super init]) != nil) {
         text = oldToken.text;
@@ -158,7 +158,7 @@ static ANTLRCommonToken *INVALID_TOKEN;
 	return self;
 }
 
-- (ANTLRCommonToken *) initWithType:(ANTLRTokenType)aTType
+- (id) initWithType:(ANTLRTokenType)aTType
 {
 	if ((self = [super init]) != nil) {
         self.type = aTType;
@@ -166,7 +166,7 @@ static ANTLRCommonToken *INVALID_TOKEN;
 	return self;
 }
 
-- (ANTLRCommonToken *) initWithType:(ANTLRTokenType)aTType Text:(NSString *)tokenText
+- (id) initWithType:(ANTLRTokenType)aTType Text:(NSString *)tokenText
 {
 	if ((self = [super init]) != nil) {
         self.type = aTType;
