@@ -123,7 +123,7 @@ matchSetBang(s,label,elementIndex,postmatchCode) ::= "<super.matchSet(...)>"
 matchSetRuleRoot(s,label,hetero,elementIndex,debug) ::= <<
 /* ASTParser matchSetRuleRoot */
 <if(label)>
-<label>=(<labelType>)[input LT:1];<\n>
+<label>=(<labelType> *)[input LT:1];<\n>
 <endif>
 <super.matchSet(..., postmatchCode={<if(backtracking)>if ( <actions.(actionScope).synpredgate> )<endif>
 root_0 = (<ASTLabelType> *)[treeAdaptor becomeRoot:<createNodeFromToken(...)> old:root_0];})>

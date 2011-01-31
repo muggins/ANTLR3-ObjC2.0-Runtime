@@ -523,7 +523,7 @@ createImaginaryNode(tokenType,hetero,args) ::= <<
 <! new MethodNode(IDLabel, args) !>
 new <hetero>(<tokenType><if(args)>, <args; separator=", "><endif>)
 <else>
-[treeAdaptor createTree:<tokenType>  Text:<args; separator=", "><if(!args)>@"<tokenType>"<endif>]
+[treeAdaptor createTree:<if(args)><first(args)> Text:<rest(args)><else><tokenType> Text:@"<tokenType>"<endif>]
 <endif>
 >>
 

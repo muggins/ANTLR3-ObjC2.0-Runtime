@@ -224,7 +224,7 @@ headerFile( LEXER,
  * Standard antlr3 OBJC runtime definitions
  */
 #import \<Cocoa/Cocoa.h>
-#import \<ANTLR/ANTLR.h>"
+#import \<ANTLR/ANTLR.h>
 /* End of standard antlr3 runtime definitions
  * =============================================================================
  */
