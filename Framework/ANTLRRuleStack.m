@@ -32,6 +32,8 @@
 #define SUCCESS (0)
 #define FAILURE (-1)
 
+extern NSInteger debug;
+
 #import "ANTLRRuleStack.h"
 #import "ANTLRTree.h"
 
@@ -105,7 +107,7 @@
 - (void) insertObject:(ANTLRHashRule *)aRule atIndex:(NSInteger)idx
 {
     if ( idx >= BuffSize ) {
-        NSLog( @"In ANTLRRuleStack attempting to insert aRule at Index %d, but Buffer is only %d long\n", idx, BuffSize );
+        if ( debug > 2 ) NSLog( @"In ANTLRRuleStack attempting to insert aRule at Index %d, but Buffer is only %d long\n", idx, BuffSize );
         [self ensureCapacity:idx];
     }
     if ( aRule != ptrBuffer[idx] ) {
@@ -129,7 +131,7 @@
     ANTLRRuleMemo *aRuleMemo;
 
     if (aRuleIndex >= BuffSize) {
-        NSLog( @"putHashRuleAtRuleIndex attempting to insert aRule at Index %d, but Buffer is only %d long\n", aRuleIndex, BuffSize );
+        if ( debug) NSLog( @"putHashRuleAtRuleIndex attempting to insert aRule at Index %d, but Buffer is only %d long\n", aRuleIndex, BuffSize );
         [self ensureCapacity:aRuleIndex];
     }
     if ((aHashRule = ptrBuffer[aRuleIndex]) == nil) {

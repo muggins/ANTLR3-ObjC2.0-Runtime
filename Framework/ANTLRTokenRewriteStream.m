@@ -36,6 +36,8 @@ static NSString *DEFAULT_PROGRAM_NAME = @"default";
 static NSInteger PROGRAM_INIT_SIZE = 100;
 static NSInteger MIN_TOKEN_INDEX = 0;
 
+extern NSInteger debug;
+
 // Define the rewrite operation hierarchy
 
 @implementation ANTLRRewriteOperation
@@ -552,7 +554,7 @@ static NSInteger MIN_TOKEN_INDEX = 0;
 - (ANTLRHashMap *)reduceToSingleOperationPerIndex:(ANTLRHashMap *)rewrites
 {
     //System.out.println("rewrites="+rewrites);
-    NSLog(@"rewrites=%@\n", [rewrites getName:DEFAULT_PROGRAM_NAME]);
+    if (debug > 1) NSLog(@"rewrites=%@\n", [rewrites getName:DEFAULT_PROGRAM_NAME]);
     // WALK REPLACES
     for (int i = 0; i < [rewrites count]; i++) {
         ANTLRRewriteOperation *op = (ANTLRRewriteOperation *)[rewrites objectAtIndex:i];
@@ -637,7 +639,7 @@ static NSInteger MIN_TOKEN_INDEX = 0;
         [m setObject:op atIndex:op.index];
     }
     //System.out.println("index to op: "+m);
-    NSLog(@"index to  op %d\n", m);
+    if (debug > 1) NSLog(@"index to  op %d\n", m);
     return m;
 }
 

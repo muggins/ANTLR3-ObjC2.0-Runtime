@@ -28,7 +28,7 @@
 #import <ANTLRToken.h>
 #import <ANTLRNoViableAltException.h>
 
-static BOOL debug = NO;
+NSInteger debug = 0;
 
 @implementation ANTLRDFA
 @synthesize recognizer;
@@ -40,7 +40,7 @@ static BOOL debug = NO;
 	if ((self = [super init]) != nil) {
 		recognizer = theRecognizer;
         [recognizer retain];
-        debug = NO;
+        debug = 0;
 	}
 	return self;
 }
@@ -49,24 +49,24 @@ static BOOL debug = NO;
 // and returns the prediction of the alternative to be used.
 - (NSInteger) predict:(id<ANTLRIntStream>)input
 {
-    if ( debug ) {
+    if ( debug > 2 ) {
         NSLog(@"Enter DFA.predict for decision %d", decisionNumber);
     }
 	int aMark = [input mark];
 	int s = 0;
 	@try {
 		while (YES) {
-			if ( debug )
+			if ( debug > 2 )
                 NSLog(@"DFA %d state %d LA(1)='%c'(%x)", decisionNumber, s, (unichar)[input LA:1], [input LA:1]);
 			NSInteger specialState = special[s];
 			if (specialState >= 0) {
 				// this state is special in that it has some code associated with it. we cannot do this in a pure DFA so
 				// we signal the caller accordingly.
-				if ( debug ) {
+				if ( debug > 2 ) {
                     NSLog(@"DFA %d state %d is special state %d", decisionNumber, s, specialState);
                 }
 				s = [self specialStateTransition:specialState Stream:input];
-                if ( debug ) {
+                if ( debug > 2 ) {
                     NSLog(@"DFA %d returns from special state %d to %d", decisionNumber, specialState, s);
                 }
                 if (s == -1 ) {
@@ -77,7 +77,7 @@ static BOOL debug = NO;
 				continue;
 			}
 			if (accept[s] >= 1) {  // if this is an accepting state return the prediction
-				if ( debug ) NSLog(@"accept; predict %d from state %d", accept[s], s);
+				if ( debug > 2 ) NSLog(@"accept; predict %d from state %d", accept[s], s);
 				return accept[s];
 			}
 			// based on the lookahead lookup the next transition, consume and do transition
@@ -91,7 +91,7 @@ static BOOL debug = NO;
                     // eot[s]>=0 indicates that an EOT edge goes to another
                     // state.
 					if (eot[s] >= 0) {
-						if ( debug ) NSLog(@"EOT transition");
+						if ( debug > 2 ) NSLog(@"EOT transition");
 						s = eot[s];
 						[input consume];
                         // TODO: I had this as return accept[eot[s]]
@@ -110,16 +110,16 @@ static BOOL debug = NO;
 			}
 			
 			if (eot[s] >= 0) {// EOT transition? we may still accept the input in the next state
-				if ( debug ) NSLog(@"EOT transition");
+				if ( debug > 2 ) NSLog(@"EOT transition");
 				s = eot[s];
 				[input consume];
 				continue;
 			}
 			if ( c == ANTLRTokenTypeEOF && eof[s] >= 0) {  // we are at EOF and may even accept the input.
-				if ( debug ) NSLog(@"accept via EOF; predict %d from %d", accept[eof[s]], eof[s]);
+				if ( debug > 2 ) NSLog(@"accept via EOF; predict %d from %d", accept[eof[s]], eof[s]);
 				return accept[eof[s]];
 			}
-			if (debug) {
+			if ( debug > 2 ) {
                 NSLog(@"no viable alt!\n");
                 NSLog(@"min[%d] = $d\n", s, min[s]);
                 NSLog(@"max[%d] = $d\n", s, min[s]);

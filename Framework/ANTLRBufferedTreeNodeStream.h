@@ -93,7 +93,7 @@
 @property (assign, getter=getLastMarker, setter=setLastMarker:) NSInteger lastMarker;
 @property (retain, getter=getCalls, setter=setCalls:) ANTLRIntArray *calls;
 @property (retain, getter=getEnum, setter=setEnum:) NSEnumerator *e;
-@property(readonly) id currentSymbol;
+@property (retain, getter=getCurrentSymbol, setter=setCurrentSymbol:) id currentSymbol;
 
 + (ANTLRBufferedTreeNodeStream *) newANTLRBufferedTreeNodeStream:(id<ANTLRTree>)tree;
 + (ANTLRBufferedTreeNodeStream *) newANTLRBufferedTreeNodeStream:(id<ANTLRTreeAdaptor>)adaptor Tree:(id<ANTLRTree>)tree;

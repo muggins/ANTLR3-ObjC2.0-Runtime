@@ -32,6 +32,8 @@
 #import "ANTLRStreamEnumerator.h"
 #import "ANTLRCommonTreeAdaptor.h"
 
+extern NSInteger debug;
+
 #ifdef DONTUSENOMO
 @implementation ANTLRTreeStreamIterator
 + newANTLRTreeStreamIteratorWithNodes:(ANTLRBufferedTreeNodeStream *)theStream
@@ -85,6 +87,7 @@
 @synthesize lastMarker;
 @synthesize calls;
 @synthesize e;
+@synthesize currentSymbol;
 
 + (ANTLRBufferedTreeNodeStream *) newANTLRBufferedTreeNodeStream:(id<ANTLRTree>) aTree
 {
@@ -204,7 +207,7 @@
 -(void) fillBuffer
 {
 	[self fillBufferWithTree:root];
-	// NSLog("revIndex="+tokenTypeToStreamIndexesMap);
+	// if (debug > 1) NSLog("revIndex=%@", tokenTypeToStreamIndexesMap);
 	p = 0; // buffer of nodes intialized now
 }
 

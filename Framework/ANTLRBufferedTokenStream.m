@@ -28,6 +28,8 @@
 #import "ANTLRTokenSource.h"
 #import "ANTLRCommonTreeAdaptor.h"
 
+extern NSInteger debug;
+
 @implementation ANTLRBufferedTokenStream
 
 @synthesize tokenSource;
@@ -172,7 +174,7 @@
 {
     // how many more elements we need?
     NSInteger n = (i - [tokens count]) + 1;
-    // NSLog(@"[self sync:%d] needs %d\n", i, n);
+    if (debug > 1) NSLog(@"[self sync:%d] needs %d\n", i, n);
     if ( n > 0 )
         [self fetch:n];
 }
@@ -183,7 +185,7 @@
     for (NSInteger i=1; i <= n; i++) {
         id<ANTLRToken> t = [tokenSource nextToken];
         [t setTokenIndex:[tokens count]];
-        // NSLog(@"adding %@ at index %d\n", [t getText], [tokens count]);
+        if (debug > 1) NSLog(@"adding %@ at index %d\n", [t getText], [tokens count]);
         [tokens addObject:t];
         [t retain];
         if ( [t getType] == ANTLRTokenTypeEOF )
