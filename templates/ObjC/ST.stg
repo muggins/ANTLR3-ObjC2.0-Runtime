@@ -30,76 +30,131 @@
  */
 group ST;
 
-/*
-@outputFile.imports() ::= <<
-<@super.imports()>
-import org.antlr.stringtemplate.*;
-import org.antlr.stringtemplate.language.*;
-import java.util.HashMap;
->>
-*/
-
-/** Add this to each rule's return value struct */
-@returnScope.ruleReturnMembers() ::= <<
-//public StringTemplate st;
-//public Object getTemplate() { return st; }
-//public String toString() { return st==null?null:st.toString(); }
->>
-
 @returnScopeInterface.memVars() ::= <<
+/* ST returnInterface.memVars */
 ST *st;
 >>
 
+
 @returnScopeInterface.methodsDecl() ::= <<
-/* AST returnScopeInterface.methodsdecl */
+/* ST AST returnScopeInterface.methodsDecl */
 - (id) getTemplate;
 >>
 
 @returnScope.methods() ::= <<
-- (id) getTemplate { return st; }
+/* ST returnScope.methods */
+/@property (retain, getter=getST, setter=setST:) ST *st;
+- (id) getTemplate { return st; }  
+- (NSString *) toString { return st==nil?nil:[st toString]; }
+- (NSString *) description { [self toString]; }
+>>
+
+/** Add this to each rule's return value struct */
+@returnScope.ruleReturnMembers() ::= <<
+/* ST returnScope.ruleReturnMembers -- empty */
+>>
+
+@genericParser.methodsDecl() ::= <<
+/* ST genericParser.methodsDecl */
+/@interface STAttrMap : ANTLRHashMap {
+    STGroup *templateLib;
+}
+
+/@property (retain, getter=getTemplateLib, setter=setTemplateLib:) STGroup *templateLib;
+- init;
+- (STGroup *) getTemplateLib; 
+- (void) setTemplateLib:(STGroup *)aTemplateLib; 
+/@end
 >>
 
 @genericParser.methods() ::= <<
 <@super.methods()>
-//protected StringTemplateGroup templateLib = new StringTemplateGroup("<name>Templates", AngleBracketTemplateLexer.class);
-STGroup templateLib = [STGroup newSTGroup:"<name>Templates" lexer:AngleBracketTemplateLexer.class];
+/* ST genericParser.methods */
+- (void) setTemplateLib:(STGroup *)aTemplateLib
+{
+    templateLib = aTemplateLib;
+} 
 
-//public void setTemplateLib(StringTemplateGroup templateLib) {
-//  this.templateLib = templateLib;
-//}
-//public StringTemplateGroup getTemplateLib() {
-//  return templateLib;
-//}
-- (void) setTemplateLib:(STGroup *)aTemplateLib { templateLib = aTemplateLib; } 
-- (STGroup *)getTemplateLib { return templateLib; } 
+- (STGroup *)getTemplateLib
+{
+    return templateLib;
+} 
+>>
+<! -------------------
+STAttrMap.interface() ::= <<
+/@interface STAttrMap : ANTLRHashMap {
+    <@STAttrMap.memVars()>
+}
+<@STAttrMap.methodsDecl()>
+/@end
+>>
+
+STAttrMap.memVars() ::= <<
+    STGroup *templateLib;
+>>
+
+STAttrMap.methodsDecl() ::= <<
+    @property (retain, getter=getTemplateLib, setter=setTemplateLib:) STGroup *templateLib;
+>>
+
+STAttrMap.implementation() ::= <<
 /** allows convenient multi-value initialization:
  *  "new STAttrMap().put(...).put(...)"
  */
-public static class STAttrMap extends HashMap {
-  public STAttrMap put(String attrName, Object value) {
-    super.put(attrName, value);
-    return this;
-  }
-  public STAttrMap put(String attrName, int value) {
-    super.put(attrName, new Integer(value));
-    return this;
-  }
-}
+/@implementation STAttrMap
+/@synthesize templateLib;
+
+<@STAttrMap.methods()>
+/@end
 >>
+
+STAttrMap.methods() ::= <<
+/* -------- ST STAttrMap.methods ------------ */
+- (id) init
+{
+    if (self = [super init]) {
+        templateLib = [STGroup newSTGroup:"<name>Templates"/* ABTL:[AngleBracketTemplateLexer class]*/];
+    }
+    return self;
+}
+
+- (STAttrMap *) setObject:(id)value forKey:(NSString *)attrName
+{
+    [super setObject:value forKey:attrName];
+    return self;
+}
+
+- (STAttrMap *) setObjectWithInt:(NSInteger)value forKey:(NSString *)attrName
+{
+    [super setObject:[NSNumber numberWithInteger:value] forKey:attrName];
+    return self;
+}
+- (void) setTemplateLib:(STGroup *)aTemplateLib
+{
+    templateLib = aTemplateLib;
+}
+
+- (STGroup *)getTemplateLib
+{
+    return templateLib;
+} 
+>>
+_____________________________ !>
 
 /** x+=rule when output=template */
 ruleRefAndListLabel(rule,label,elementIndex,args,scope) ::= <<
+/* ST ruleRefAndListLable */
 <ruleRef(...)>
-<listLabel(elem=label+".getTemplate()",...)>
+<listLabel(elem=[label "getTemplate",...]>
 >>
 
 rewriteTemplate(alts) ::= <<
 
-// TEMPLATE REWRITE
+/* ST TEMPLATE REWRITE */
 <if(backtracking)>
 if ( <actions.(actionScope).synpredgate> ) {
-  <alts:rewriteTemplateAlt(); separator="else ">
-  <if(rewriteMode)><replaceTextInLine()><endif>
+    <alts:rewriteTemplateAlt(); separator="else ">
+    <if(rewriteMode)><replaceTextInLine()><endif>
 }
 <else>
 <alts:rewriteTemplateAlt(); separator="else ">
@@ -108,21 +163,21 @@ if ( <actions.(actionScope).synpredgate> ) {
 >>
 
 replaceTextInLine() ::= <<
+/* ST replaceTextInLine */
 <if(TREE_PARSER)>
-[(ANTLRTokenRewriteStream)input getTokenStream] replace(
-  [[input getTreeAdaptor] getTokenStartIndex:retval.start],
-  [[input getTreeAdaptor] getTokenStopIndex:retval.start],
-  retval.st);
+[[(ANTLRTokenRewriteStream *)input getTokenStream]
+    replaceFromIndex:[[input getTreeAdaptor] getTokenStartIndex:retval.start]
+             ToIndex:[[input getTreeAdaptor] getTokenStopIndex:retval.start]
+                Text:retval.st];
 <else>
-[(ANTLRTokenRewriteStream)input) replace(
-  [((Token)retval.start) getTokenIndex],
-  [[input LT:-1] getTokenIndex],
-  retval.st);
+[(ANTLRTokenRewriteStream *)input) replaceFromIndex:[((ANTLRCommonToken *)retval.start) getTokenIndex]
+                                          ToIndex:[[input LT:-1] getTokenIndex]
+                                             Text:retval.st];
 <endif>
 >>
 
 rewriteTemplateAlt() ::= <<
-// <it.description>
+/* ST <it.description> */
 <if(it.pred)>
 if (<it.pred>) {
     retval.st = <it.alt>;
@@ -135,7 +190,7 @@ if (<it.pred>) {
 >>
 
 rewriteEmptyTemplate(alts) ::= <<
-null;
+nil;
 >>
 
 /** Invoke a template with a set of attribute name/value pairs.
@@ -145,36 +200,47 @@ null;
  *  template.
  */
 rewriteExternalTemplate(name,args) ::= <<
-templateLib.getInstanceOf("<name>"<if(args)>,
-  new STAttrMap()<args:{a | .put("<a.name>", <a.value>)}>
-  <endif>)
+/* ST rewriteExternalTemplate */
+<!
+<if(args)>[templateLib getInstanceOf:"<name>" 
+        [[STAttrMap newSTAttrMap] <args:{a | setObject:<a.value> forKey:@"<a.name>"]]}>
+<else>[templateLib getInstanceOf:"<name>"]<endif>
+!>
 >>
 
 /** expr is a string expression that says what template to load */
 rewriteIndirectTemplate(expr,args) ::= <<
-templateLib.getInstanceOf(<expr><if(args)>,
-  new STAttrMap()<args:{a | .put("<a.name>", <a.value>)}>
-  <endif>)
+/* ST rewriteIndirectTemplate */
+<!
+<if(args)>
+[[templateLib getInstanceOf:<expr>] [[STAttrMap newSTAttrMap]<args:{a | setObject:<a.value> forKey:@"<a.name>"]]}>
+<else>[templateLib getInstanceOf:<expr>]<endif>
+!>
 >>
 
 /** Invoke an inline template with a set of attribute name/value pairs */
 rewriteInlineTemplate(args, template) ::= <<
-new StringTemplate(templateLib, "<template>"<if(args)>,
-  new STAttrMap()<args:{a | .put("<a.name>", <a.value>)}>
-  <endif>)
+/* ST rewriteInlineTemplate */
+<!
+<if(args)[STLib newST:templateLib template:@"<template>" args:[[STAttrMap newSTAttrMap]
+    <args:{a | setObject:<a.value> forKey:@"<a.name>"]];}>
+<else>[STLib newST:templateLib template:@"<template>"];<endif>
+!>
 >>
 
 /** plain -> {foo} action */
 rewriteAction(action) ::= <<
+/* ST rewriteAction */
 <action>
 >>
 
 /** An action has %st.attrName=expr; or %{st}.attrName=expr; */
 actionSetAttribute(st,attrName,expr) ::= <<
-(<st>).setAttribute("<attrName>",<expr>);
+[<st> setAttribute:<expr> name:@"<attrName>"];
 >>
 
 /** Translate %{stringExpr} */
 actionStringConstructor(stringExpr) ::= <<
-new StringTemplate(templateLib,<stringExpr>)
+/* ST actionStringConstructor */
+[ST newST:templateLib template:<stringExpr>]
 >>

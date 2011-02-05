@@ -31,14 +31,14 @@ group AST;
 /* AST parserHeaderFile.memVars */
 NSInteger ruleLevel;
 NSArray *ruleNames;
-<@super.memVars()>  /* super.memVars */
-<parsermemVars()>   /* parsermemVars */
+<@super.memVars()>  /* AST super.memVars */
+<parsermemVars()>   /* AST parsermemVars */
 >>
 
-@genericParserHeaderFile.methodsdecl() ::= <<
-/* AST parserHeaderFile.methodsdecl */
-<@super.methodsdecl()>  /* super.methodsdecl */
-<parserMethodsDecl()>   /* parserMethodsDecl */
+@genericParserHeaderFile.methodsDecl() ::= <<
+/* AST parserHeaderFile.methodsDecl */
+<@super.methodsDecl()>  /* AST super.methodsDecl */
+<parsermethodsDecl()>   /* AST parsermethodsDecl */
 >>
 
 @genericParser.methods() ::= <<
@@ -67,8 +67,8 @@ id\<ANTLRTreeAdaptor> treeAdaptor;
 >>
 
 /** Declaration of additional tree support methods - go in interface of parserHeaderFile() */
-parserMethodsDecl() ::= <<
-/* AST parserMethodsDecl */
+parsermethodsDecl() ::= <<
+/* AST parsermethodsDecl */
 - (id\<ANTLRTreeAdaptor>) getTreeAdaptor;
 - (void) setTreeAdaptor:(id\<ANTLRTreeAdaptor>)theTreeAdaptor;
 >>
@@ -103,7 +103,7 @@ parserMethods() ::= <<
 
 /** the interface of returnScope methodsDecl */
 @returnScopeInterface.methodsDecl() ::= <<
-/* AST returnScopeInterface.methodsdecl */
+/* AST returnScopeInterface.methodsDecl */
 - (<recognizer.ASTLabelType; null="ANTLRCommonTree"> *)getTree;
 - (void) setTree:(<recognizer.ASTLabelType; null="ANTLRCommonTree"> *)aTree;<\n>
 >>

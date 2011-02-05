@@ -288,14 +288,14 @@ lexerHeaderFile( LEXER,
 @interface <className()> <@superClassName>: <superClass><@end> { // line 283
 <cyclicDFAs:{dfa | DFA<dfa.decisionNumber> *dfa<dfa.decisionNumber>;}; separator="\n">
 <synpreds:{pred | SEL <pred>Selector;}; separator="\n">
-// start of actions.lexer.memVars
+/* ObjC start of actions.lexer.memVars */
 <actions.lexer.memVars>
-// start of action-actionScope-memVars
-<actions.(actionScope).memVars>
+/* ObjC end of actions.lexer.memVars */
 }
 + (<className()> *)new<className()>WithCharStream:(id\<ANTLRCharStream>)anInput;
-
-<actions.lexer.methodsdecl>
+/* ObjC start actions.lexer.methodsDecl */
+<actions.lexer.methodsDecl>
+/* ObjC end actions.lexer.methodsDecl */
 <rules:{rule |
 - (<rule.ruleDescriptor:{ruleDescriptor|<returnType()>}>)<if(!rule.ruleDescriptor.isSynPred)>m<rule.ruleName><else><rule.ruleName>_fragment<endif><if(rule.ruleDescriptor.parameterScope)><rule.ruleDescriptor.parameterScope:parameterScope(scope=it)><endif>; }; separator="\n"><\n>
 <! <synpreds:{pred|- (void)<pred>_fragment;}; separator="\n"><\n> !>
@@ -381,10 +381,12 @@ lexer(  grammar,
     [super dealloc];
 }
 
-/* Start of actions.lexer.methods */
+/* ObjC Start of actions.lexer.methods */
 <actions.lexer.methods>
-/* start methods() */
+/* ObjC end of actions.lexer.methods */
+/* ObjC start methods() */
 <@methods()>
+/* ObjC end methods() */
 
 <if(actions.lexer.reset)>
 - (void) reset
@@ -588,25 +590,29 @@ typedef enum {
 !>
 <! @interface <grammar.recognizerName> <@superClassName>: <superClass><@end> { !>
 @interface <className()> <@superClassName>: <superClass><@end> { /* line 572 */
-// start of globalAttributeScopeMemVar
+/* ObjC start of globalAttributeScopeMemVar */
 <scopes:{<if(it.isDynamicGlobalScope)><globalAttributeScopeMemVar(scope=it)><endif>}><\n>
-// start of action-actionScope-memVars
+/* ObjC start of actions.(actionScope).memVars */
 <actions.(actionScope).memVars>
-// start of ruleAttributeScopeMemVar
+/* ObjC end of actions.(actionScope).memVars */
+/* ObjC start of ruleAttributeScopeMemVar */
 <rules:{rule | <rule.ruleDescriptor.ruleScope:ruleAttributeScopeMemVar(scope=it)>}><\n>
-// Start of memVars
+/* ObjC start of memVars */
 <@memVars()>
+/* ObjC end of memVars */
 
 <cyclicDFAs:{dfa | DFA<dfa.decisionNumber> *dfa<dfa.decisionNumber>;}; separator="\n">
 <synpreds:{pred | SEL <pred>Selector;}; separator="\n">
  }
 
-// start of action-actionScope-methodsDecl
 + (id) new<className()>:(id\<ANTLRTreeNodeStream\>)aStream;
-
+/* ObjC start of actions.(actionScope).methodsDecl */
 <actions.(actionScope).methodsDecl>
+/* ObjC end of actions.(actionScope).methodsDecl */
 
-<@methodsdecl()>
+/* ObjC start of methodsDecl */
+<@methodsDecl()>
+/* ObjC end of methodsDecl */
 
 <rules:{rule |
 - (<rule.ruleDescriptor:{ruleDescriptor|<returnType()>}>)<if(!rule.ruleDescriptor.isSynPred)><rule.ruleName><else><rule.ruleName>_fragment<endif><if(rule.ruleDescriptor.parameterScope)><rule.ruleDescriptor.parameterScope:parameterScope(scope=it)><endif>; }; separator="\n"><\n>
@@ -702,15 +708,18 @@ genericParser(  grammar,
     [super dealloc];
 }
 
-/* members */
+/* ObjC start members */
 <members> 
-
-// start actions.actionScope.methods
+/* ObjC end members */
+/* ObjC start actions.(actionScope).methods */
 <actions.(actionScope).methods>
-// start methods()
+/* ObjC end actions.(actionScope).methods */
+/* ObjC start methods() */
 <@methods()>
-// start rules
+/* ObjC end methods() */
+/* ObjC start rules */
 <rules; separator="\n">
+/* ObjC end rules */
 
 @end /* end of <grammar.recognizerName> implementation line 692 */<\n>
 >>
@@ -1212,7 +1221,7 @@ matchSet(s,label,elementIndex,postmatchCode="") ::= <<
 <if(LEXER)>
 <label> = [input LA:1];<\n>
 <else>
-<label> = (<labelType> *)[input LT:1];<\n>
+<label> = (<labelType> *)[input LT:1]; /* matchSet */<\n>
 <endif>
 <endif>
 if (<s>) {
@@ -1840,7 +1849,7 @@ returnScopeInterface(scope) ::= <<
 <if(ruleDescriptor.hasMultipleReturnValues)>
 /* returnScopeInterface */
 @interface <ruleDescriptor:returnStructName()> :ANTLR<if(TREE_PARSER)>Tree<else>Parser<endif>RuleReturnScope { /* returnScopeInterface line 1838 */
-<@memVars()> /* start of memVars() */
+<@memVars()> /* ObjC start of memVars() */
 <if(scope.attributes)>
 <scope.attributes:{a|<a.type> <a.name>;}; separator="\n"><\n>
 <endif>

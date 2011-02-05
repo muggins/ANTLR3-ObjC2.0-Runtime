@@ -40,7 +40,7 @@ NSInteger ruleLevel;
 NSArray *ruleNames;
 >>
 
-@parserHeaderFile.methodsdecl() ::= <<
+@parserHeaderFile.methodsDecl() ::= <<
 -(BOOL) evalPredicate:(NSString *)predicate matched:(BOOL)result;<\n>
 >>
 
