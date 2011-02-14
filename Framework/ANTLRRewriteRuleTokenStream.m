@@ -54,9 +54,9 @@
 }
 
 /** Create a stream, but feed off an existing list */
-+ (id) ANTLRRewriteRuleTokenStream:(id<ANTLRTreeAdaptor>)adaptor
-                  description:(NSString *)elementDescription
-                     elements:(NSMutableArray *)elements
++ (id) newANTLRRewriteRuleTokenStream:(id<ANTLRTreeAdaptor>)adaptor
+                          description:(NSString *)elementDescription
+                             elements:(NSMutableArray *)elements
 {
     return [[ANTLRRewriteRuleTokenStream alloc] initWithTreeAdaptor:adaptor
                                                         description:elementDescription

@@ -50,9 +50,14 @@ typedef union {
 @property (assign, getter=GetElementDescription, setter=SetElementDescription:) NSString *elementDescription;
 @property (retain, getter=GetTreeAdaptor, setter=SetTreeAdaptor:) id<ANTLRTreeAdaptor> treeAdaptor;
 
-+ (ANTLRRewriteRuleElementStream*) newANTLRRewriteRuleElementStream:(id<ANTLRTreeAdaptor>)aTreeAdaptor description:(NSString *)anElementDescription;
-+ (ANTLRRewriteRuleElementStream*) newANTLRRewriteRuleElementStream:(id<ANTLRTreeAdaptor>)aTreeAdaptor description:(NSString *)anElementDescription element:(id)anElement;
-+ (ANTLRRewriteRuleElementStream*) newANTLRRewriteRuleElementStream:(id<ANTLRTreeAdaptor>)aTreeAdaptor description:(NSString *)anElementDescription elements:(NSArray *)theElements;
++ (ANTLRRewriteRuleElementStream*) newANTLRRewriteRuleElementStream:(id<ANTLRTreeAdaptor>)aTreeAdaptor
+                                                        description:(NSString *)anElementDescription;
++ (ANTLRRewriteRuleElementStream*) newANTLRRewriteRuleElementStream:(id<ANTLRTreeAdaptor>)aTreeAdaptor
+                                                        description:(NSString *)anElementDescription
+                                                            element:(id)anElement;
++ (ANTLRRewriteRuleElementStream*) newANTLRRewriteRuleElementStream:(id<ANTLRTreeAdaptor>)aTreeAdaptor
+                                                        description:(NSString *)anElementDescription
+                                                           elements:(NSArray *)theElements;
 
 - (id) initWithTreeAdaptor:(id<ANTLRTreeAdaptor>)aTreeAdaptor description:(NSString *)anElementDescription;
 - (id) initWithTreeAdaptor:(id<ANTLRTreeAdaptor>)aTreeAdaptor description:(NSString *)anElementDescription element:(id)anElement;

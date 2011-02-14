@@ -209,7 +209,7 @@
     return [self becomeRoot:[self createTree:newRoot] old:oldRoot];
 }
 
-- (id<ANTLRTree>)createTree:(NSInteger)tokenType With:(id<ANTLRToken>)fromToken
+- (id<ANTLRTree>)createTree:(NSInteger)tokenType FromToken:(id<ANTLRToken>)fromToken
 {
     fromToken = [self createToken:fromToken];
     //((ClassicToken)fromToken).setType(tokenType);

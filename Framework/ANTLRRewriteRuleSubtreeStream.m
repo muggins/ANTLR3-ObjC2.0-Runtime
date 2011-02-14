@@ -34,19 +34,29 @@
 
 @implementation ANTLRRewriteRuleSubtreeStream
 
-+ (ANTLRRewriteRuleSubtreeStream*) newANTLRRewriteRuleSubtreeStream:(id<ANTLRTreeAdaptor>)aTreeAdaptor description:(NSString *)anElementDescription;
++ (ANTLRRewriteRuleSubtreeStream*) newANTLRRewriteRuleSubtreeStream:(id<ANTLRTreeAdaptor>)aTreeAdaptor
+                                                        description:(NSString *)anElementDescription;
 {
-    return [[ANTLRRewriteRuleSubtreeStream alloc] initWithTreeAdaptor:aTreeAdaptor description:anElementDescription];
+    return [[ANTLRRewriteRuleSubtreeStream alloc] initWithTreeAdaptor:aTreeAdaptor
+                                                          description:anElementDescription];
 }
 
-+ (ANTLRRewriteRuleSubtreeStream*) newANTLRRewriteRuleSubtreeStream:(id<ANTLRTreeAdaptor>)aTreeAdaptor description:(NSString *)anElementDescription element:(id)anElement;
++ (ANTLRRewriteRuleSubtreeStream*) newANTLRRewriteRuleSubtreeStream:(id<ANTLRTreeAdaptor>)aTreeAdaptor
+                                                        description:(NSString *)anElementDescription
+                                                            element:(id)anElement;
 {
-    return [[ANTLRRewriteRuleSubtreeStream alloc] initWithTreeAdaptor:aTreeAdaptor description:anElementDescription element:anElement];
+    return [[ANTLRRewriteRuleSubtreeStream alloc] initWithTreeAdaptor:aTreeAdaptor
+                                                          description:anElementDescription
+                                                              element:anElement];
 }
 
-+ (ANTLRRewriteRuleSubtreeStream*) newANTLRRewriteRuleSubtree:(id<ANTLRTreeAdaptor>)aTreeAdaptor description:(NSString *)anElementDescription elements:(NSArray *)theElements;
++ (ANTLRRewriteRuleSubtreeStream*) newANTLRRewriteRuleSubtreeStream:(id<ANTLRTreeAdaptor>)aTreeAdaptor
+                                                        description:(NSString *)anElementDescription
+                                                           elements:(NSArray *)theElements;
 {
-    return [[ANTLRRewriteRuleSubtreeStream alloc] initWithTreeAdaptor:aTreeAdaptor description:anElementDescription elements:theElements];
+    return [[ANTLRRewriteRuleSubtreeStream alloc] initWithTreeAdaptor:aTreeAdaptor
+                                                          description:anElementDescription
+                                                             elements:theElements];
 }
 
 - (id) initWithTreeAdaptor:(id<ANTLRTreeAdaptor>)aTreeAdaptor description:(NSString *)anElementDescription

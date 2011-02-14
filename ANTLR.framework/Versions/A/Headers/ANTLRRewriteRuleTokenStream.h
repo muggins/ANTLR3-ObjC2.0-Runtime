@@ -33,15 +33,15 @@
 }
 
 + (id) newANTLRRewriteRuleTokenStream:(id<ANTLRTreeAdaptor>)anAdaptor
-                     description:(NSString *)elementDescription;
+                          description:(NSString *)elementDescription;
 /** Create a stream with one element */
 + (id) newANTLRRewriteRuleTokenStream:(id<ANTLRTreeAdaptor>)adaptor
-                     description:(NSString *)elementDescription
-                         element:(id) oneElement;
+                          description:(NSString *)elementDescription
+                              element:(id) oneElement;
 /** Create a stream, but feed off an existing list */
-+ (id) ANTLRRewriteRuleTokenStream:(id<ANTLRTreeAdaptor>)adaptor
-                  description:(NSString *)elementDescription
-                     elements:(NSMutableArray *)elements;
++ (id) newANTLRRewriteRuleTokenStream:(id<ANTLRTreeAdaptor>)adaptor
+                          description:(NSString *)elementDescription
+                             elements:(NSMutableArray *)elements;
 
 - (id) init;
 - (id) initWithTreeAdaptor:(id<ANTLRTreeAdaptor>)anAdaptor
