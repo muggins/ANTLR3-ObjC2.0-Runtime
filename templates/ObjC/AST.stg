@@ -104,7 +104,7 @@ parserMethods() ::= <<
 /** the interface of returnScope methodsDecl */
 @returnScopeInterface.methodsDecl() ::= <<
 /* AST returnScopeInterface.methodsDecl */
-- (<recognizer.ASTLabelType; null="ANTLRCommonTree"> *)getTree;
+- (<recognizer.ASTLabelType; null="ANTLRCommonTree"> *)getTree;<\n>
 - (void) setTree:(<recognizer.ASTLabelType; null="ANTLRCommonTree"> *)aTree;<\n>
 >>
 
@@ -153,7 +153,7 @@ ruleLabelDefs() ::= <<
   ruleDescriptor.wildcardTreeListLabels]:{<ASTLabelType> *<it.label.text>_tree=nil;}; separator="\n">
 <ruleDescriptor.tokenListLabels:{<ASTLabelType> *<it.label.text>_tree = nil;}; separator="\n">
 <ruleDescriptor.allTokenRefsInAltsWithRewrites: {ANTLRRewriteRuleTokenStream *stream_<it> = 
-    [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor
+    [[ANTLRRewriteRule<rewriteElementType>Stream newANTLRRewriteRule<rewriteElementType>Stream:treeAdaptor
                                                      description:@"token <it>"] retain];}; separator="\n">
 <ruleDescriptor.allRuleRefsInAltsWithRewrites:{ANTLRRewriteRuleSubtreeStream *stream_<it> = 
     [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
@@ -316,13 +316,13 @@ root_0 = (<ASTLabelType> *)[[[treeAdaptor class] newEmptyTree] retain];<\n>
 
 rewriteCodeLabels() ::= <<
 <referencedTokenLabels
-    :{ANTLRRewriteRuleTokenStream *stream_<it> = 
-    [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor description:@"token <it>" element:<it>] retain];};
+    :{ANTLRRewriteRule<rewriteElementType>Stream *stream_<it> = 
+    [[ANTLRRewriteRule<rewriteElementType>Stream newANTLRRewriteRule<rewriteElementType>Stream:treeAdaptor description:@"token <it>" element:<it>] retain];};
     separator="\n"
 >
 <referencedTokenListLabels:{ANTLRRewriteRule<rewriteElementType>Stream *stream_<it> =
     [[ANTLRRewriteRule<rewriteElementType>Stream newANTLRRewriteRule<rewriteElementType>Stream:treeAdaptor
-        description:@"token <it>" elements:<it>_list] retain];};
+        description:@"token <it>" elements:list_<it>] retain];};
     separator="\n"
 >
 <referencedWildcardLabels:{RewriteRuleSubtreeStream stream_<it> =
@@ -332,7 +332,7 @@ rewriteCodeLabels() ::= <<
 >
 <referencedWildcardListLabels:{RewriteRuleSubtreeStream stream_<it> =
     [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
-        descriptor:"wildcard <it>" element:list_<it>] retain];};
+        descriptor:"wildcard <it>" elements:list_<it>] retain];};
     separator="\n"
 >
 <referencedRuleLabels:{ANTLRRewriteRuleSubtreeStream *stream_<it> =
@@ -501,7 +501,7 @@ rewriteRuleLabelRef(label) ::= <<
 
 /** Gen $ruleLabel ... where defined via ruleLabel+=rule */
 rewriteRuleListLabelRef(label) ::= <<
-[treeAdaptor addChild:[(ANTLR<if(TREE_PARSER)>Tree<else>Parser<endif>RuleReturnScope *)[stream_<label> nextTree]] toTree:root_<treeLevel>];<\n>
+[treeAdaptor addChild:[stream_<label> nextTree] toTree:root_<treeLevel>];<\n>
 >>
 
 /** Gen ^($ruleLabel ...) where ruleLabel=rule */
@@ -520,21 +520,24 @@ rewriteWildcardLabelRef(label) ::= <<
 
 createImaginaryNode(tokenType,hetero,args) ::= <<
 <if(hetero)>
-<! new MethodNode(IDLabel, args) !>
-new <hetero>(<tokenType><if(args)>, <args; separator=", "><endif>)
+    [<hetero> new<hetero>:<tokenType> <if(args)>, <args; separator=", "><endif>]
 <else>
-[treeAdaptor createTree:<if(args)><first(args)> Text:<rest(args)><else><tokenType> Text:@"<tokenType>"<endif>]
+    <if(args)>
+        [treeAdaptor createTree:<tokenType> <if(first(args))>FromToken:<first(args)><endif> <if(first(rest(args)))>Text:<first(rest(args))><else>Text:@"<tokenType>"<endif>]
+    <else>
+        [treeAdaptor createTree:<tokenType> Text:@"<tokenType>"]
+    <endif>
 <endif>
 >>
 
 createRewriteNodeFromElement(token,hetero,args) ::= <<
 <if(hetero)>
-new <hetero>[stream_<token> nextToken]<if(args)>, <args; separator=", "><endif>)
+    [<hetero> new<hetero>:[stream_<token> nextToken]<if(args)>, <args; separator=", "><endif>]
 <else>
-<if(args)> <! must create new node from old !>
-[[treeAdaptor create:<token>] retain] <args; separator=", ">)
-<else>
-[stream_<token> nextNode]
-<endif>
+    <if(args)> <! must create new node from old !>
+        [treeAdaptor createTree:<token> Text:<first(rest(args))> <args; separator=", ">]
+    <else>
+        [stream_<token> nextNode]
+    <endif>
 <endif>
 >>

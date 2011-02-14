@@ -44,7 +44,7 @@ NSArray *ruleNames;
 -(BOOL) evalPredicate:(NSString *)predicate matched:(BOOL)result;<\n>
 >>
 
-@genericParser.members() ::= <<
+@genericParser.methods() ::= <<
 <if(grammar.grammarIsRoot)>
 NSMutableArray *ruleNames = [NSMutableArray arrayWithArray:{
     @"invalidRule", <grammar.allImportedRules:{rST | @"<rST.name>"}; wrap=@"\n    ", separator=", ">
