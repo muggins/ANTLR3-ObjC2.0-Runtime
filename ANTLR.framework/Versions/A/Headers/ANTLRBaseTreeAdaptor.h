@@ -113,7 +113,7 @@
 
 - (id<ANTLRTree>)becomeRootfromToken:(id<ANTLRToken>)aNewRoot old:(id<ANTLRTree>)oldRoot;
 
-- (id<ANTLRTree>)createTree:(NSInteger)aTType With:(id<ANTLRToken>)aFromToken;
+- (id<ANTLRTree>)createTree:(NSInteger)aTType FromToken:(id<ANTLRToken>)aFromToken;
 
 - (id<ANTLRTree>)createTree:(NSInteger)aTType FromToken:(id<ANTLRToken>)aFromToken Text:(NSString *)theText;
 

@@ -225,7 +225,7 @@
     fromToken = [self createToken:fromToken];
     [fromToken setType:tokenType];
     [fromToken setText:text];
-    id<ANTLRTree>t = [[self class] createTree:fromToken];
+    id<ANTLRTree>t = [self createTree:fromToken];
     return t;
 }
 
