@@ -285,7 +285,6 @@ lexerHeaderFile( LEXER,
 #undef EOF
 #endif
 <tokens:{#define <it.name> <it.type>}; separator="\n">
-<! <tokens:{extern int const <it.name>;}; separator="\n"> !>
 /* interface lexer class */
 @interface <className()> <@superClassName>: <superClass><@end> { // line 283
 <cyclicDFAs:{dfa | DFA<dfa.decisionNumber> *dfa<dfa.decisionNumber>;}; separator="\n">
@@ -302,7 +301,6 @@ lexerHeaderFile( LEXER,
 - (<rule.ruleDescriptor:{ruleDescriptor|<returnType()>}>)
     <if(!rule.ruleDescriptor.isSynPred)>m<rule.ruleName><else><rule.ruleName>_fragment<endif>
     <if(rule.ruleDescriptor.parameterScope)><rule.ruleDescriptor.parameterScope:parameterScope(scope=it)><endif>; }; separator="\n"><\n>
-<! <synpreds:{pred|- (void)<pred>_fragment;}; separator="\n"><\n> !>
 @end /* end of <className()> interface */<\n>
 >>
 
@@ -365,7 +363,7 @@ lexer(  grammar,
         }
         if ( [state.ruleMemo count] == 0 ) {
             // initialize the memoization cache - the indices are 1-based in the runtime code!
-            <! [state.ruleMemo addObject:[NSNull null]];     // dummy entry to ensure 1-basedness. !>
+            <! [state.ruleMemo addObject:[NSNull null]];     /* dummy entry to ensure 1-basedness. */ !>
             for (NSInteger i = 0; i \< <numRules>; i++) {
                 [state.ruleMemo addObject:[ANTLRHashRule newANTLRHashRuleWithLen:17]];
             }
@@ -589,7 +587,6 @@ typedef enum {
 #undef EOF
 #endif
 <tokens:{#define <it.name> <it.type>}; separator="\n">
-<! <tokens:{extern int const <it.name>;}; separator="\n"> !>
 #pragma mark Dynamic Global Scopes
 <scopes:{<if(it.isDynamicGlobalScope)><globalAttributeScopeInterface(scope=it)><endif>}>
 #pragma mark Dynamic Rule Scopes
@@ -615,7 +612,6 @@ typedef enum {
 <synpreds:{pred | SEL <pred>Selector;}; separator="\n">
  }
 
-<! + (id) new<className()>:(id\<ANTLRTreeNodeStream\>)aStream; !>
 + (id) new<className()>:(<inputStreamType>)aStream;
 /* ObjC start of actions.(actionScope).methodsDecl */
 <actions.(actionScope).methodsDecl>
@@ -627,7 +623,6 @@ typedef enum {
 
 <rules:{rule |
 - (<rule.ruleDescriptor:{ruleDescriptor|<returnType()>}>)<if(!rule.ruleDescriptor.isSynPred)><rule.ruleName><else><rule.ruleName>_fragment<endif><if(rule.ruleDescriptor.parameterScope)><rule.ruleDescriptor.parameterScope:parameterScope(scope=it)><endif>; }; separator="\n"><\n>
-<! <synpreds:{pred|- (void)<pred>_fragment;}; separator="\n"><\n> !>
 
 @end /* end of <className()> interface */<\n>
 >>
@@ -692,7 +687,6 @@ genericParser(  grammar,
 #pragma mark Bitsets
 <bitsets:bitset(name={FOLLOW_<it.name>_in_<it.inName><it.tokenIndex>}, words64=it.bits)>
 
-<! <tokens:{int const <it.name>=<it.type>;}; separator="\n"> !>
 #pragma mark Dynamic Global Scopes
 <scopes:{<if(it.isDynamicGlobalScope)><globalAttributeScopeImplementation(scope=it)><endif>}>
 
@@ -1038,7 +1032,7 @@ lexerRule(ruleName, nakedBlock, ruleDescriptor, block, memoize) ::= <<
     }
     return;
 }
-// $ANTLR end "<ruleName>"
+/* $ANTLR end "<ruleName>" */
 >>
 
 /** How to generate code for the implicitly-defined lexer grammar rule
@@ -1311,10 +1305,6 @@ ruleRef(rule,label,elementIndex,args,scope) ::= <<
 /* ruleRef */
 [self pushFollow:FOLLOW_<rule.name>_in_<ruleName><elementIndex>];
 <if(label)><label> = <endif>[self <if(scope)><scope:delegateName()>.<endif><rule.name><if(args)>:<args; separator=" :"><endif>];<\n>
-<! <if(label)><label> = [self <rule.name><if(args)>:<args; separator=" :"><endif>];<\n>
-<else>
-[self <rule.name><if(args)>:<args; separator=" :"><endif>];<\n>
-<endif> !>
 [self popFollow];
 <checkRuleBacktrackFailure()><\n>
 >>
@@ -1912,7 +1902,7 @@ returnScopeInterface(scope) ::= <<
 <if(scope.attributes)>
 /* start of iterated get and set functions */<\n>
 <methodsDecl(scope)>
-// End of iterated get and set functions<\n>
+/* End of iterated get and set functions */<\n>
 <endif>
 @end /* end of returnScopeInterface interface */<\n>
 <endif>
@@ -1950,7 +1940,8 @@ returnScope(scope) ::= <<
 >>
 
 parameterScope(scope) ::= <<
-<scope.attributes:{:(<it.type>)<it.name>}; separator=" ">
+<! <scope.attributes:{:(<it.type>)<it.name>}; separator=" "> !>
+<first(scope.attributes):{ a | :(<a.type>)<a.name>}> <rest(scope.attributes):{ a | arg<i>:(<a.type>)<a.name> }; separator=" ">
 >>
 
 parameterAttributeRef(attr) ::= "<attr.name>"
@@ -2035,8 +2026,8 @@ tokenLabelRef(label) ::= "<label>"
 listLabelRef(label) ::= "list_<label>"
 
 
-// not sure the next are the right approach; and they are evaluated early;
-// they cannot see TREE_PARSER or PARSER attributes for example. :(
+/* not sure the next are the right approach; and they are evaluated early; */
+/* they cannot see TREE_PARSER or PARSER attributes for example. :( */
 
 tokenLabelPropertyRef_text(scope,attr) ::= "(<scope>!=nil?[<scope> getText]:@\"nil\")"
 tokenLabelPropertyRef_type(scope,attr) ::= "(<scope>!=nil?[<scope> getType]:0)"

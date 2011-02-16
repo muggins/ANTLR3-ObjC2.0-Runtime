@@ -51,6 +51,7 @@ ST *st;
 >>
 
 @returnScopeInterface() ::= <<
+/* ST returnScopeInterface */
 /@interface <returnScopeInterface.name> : ANTLRReturnScope {
 <returnScopeInterface.memVars()>
 }
@@ -103,8 +104,6 @@ STGroup *templateLib; /* ST -- really a part of STAttrMap */
 @genericParserHeaderFile.methodsDecl() ::= <<
 <@super.methodsDecl()>
 /* ST genericParser.methodsDecl */
-/@property (retain, getter=getTemplateLib, setter=setTemplateLib:) STGroup *templateLib;
-
 - init;
 - (STGroup *) getTemplateLib; 
 - (void) setTemplateLib:(STGroup *)aTemplateLib; 
