@@ -39,7 +39,7 @@ ST *st;
 @returnScopeInterface.properties() ::= <<
 <@super.properties()>
 /* ST returnScope.properties */
-/@property (retain, getter=getST, setter=setST:) ST *st;
+@property (retain, getter=getST, setter=setST:) ST *st;
 >>
 
 @returnScopeInterface.methodsDecl() ::= <<
@@ -52,19 +52,19 @@ ST *st;
 
 @returnScopeInterface() ::= <<
 /* ST returnScopeInterface */
-/@interface <returnScopeInterface.name> : ANTLRReturnScope {
+@interface <returnScopeInterface.name> : ANTLRReturnScope {
 <returnScopeInterface.memVars()>
 }
 <returnScopeInterface.properties()>
 
 <returnScopeInterface.methods()>
-/@end
+@end
 >>
 
 @returnScopeImplementation.synthesize() ::= <<
 <@super.synthesize()>
 /* ST returnScope.synthesize */
-/@synthesize st;
+@synthesize st;
 >>
 
 @returnScopeImplementation.methods() ::= <<
@@ -80,7 +80,7 @@ ST *st;
 <returnScopeImplementation.synthesize()>
 
 <returnScopeImplementation.methods()>
-/@end
+@end
 >>
 
 /** Add this to each rule's return value struct */
@@ -98,7 +98,7 @@ STGroup *templateLib; /* ST -- really a part of STAttrMap */
 @genericParserHeaderFile.properties() ::= <<
 <@super.properties()>
 /* ST genericParser.properties */
-/@property (retain, getter=getTemplateLib, setter=setTemplateLib:) STGroup *templateLib;
+@property (retain, getter=getTemplateLib, setter=setTemplateLib:) STGroup *templateLib;
 >>
 
 @genericParserHeaderFile.methodsDecl() ::= <<
@@ -107,13 +107,13 @@ STGroup *templateLib; /* ST -- really a part of STAttrMap */
 - init;
 - (STGroup *) getTemplateLib; 
 - (void) setTemplateLib:(STGroup *)aTemplateLib; 
-/@end
+@end
 >>
 
 @genericParser.synthesize() ::= <<
 <@super.synthesize()>
 /* ST genericParserImplementation.synthesize */
-/@synthesize templateLib;
+@synthesize templateLib;
 >>
 
 @genericParser.methods() ::= <<
@@ -174,20 +174,20 @@ static class STAttrMap extends HashMap {
 
 @STAttrMap.interface() ::= <<
 /* -------- ST start STAttrMap.interface ------------ */
-/@interface STAttrMap : ANTLRHashMap {
+@interface STAttrMap : ANTLRHashMap {
 /*    <@STAttrMap.memVars()> */
     STGroup *templateLib;
 }
 
 /*    <@STAttrMap.properties()> */
-/@property (retain, getter=getTemplateLib, setter=setTemplateLib:) STGroup *templateLib;
+@property (retain, getter=getTemplateLib, setter=setTemplateLib:) STGroup *templateLib;
 /* <@STAttrMap.methodsDecl()> */
 - (id) init;
 - (STAttrMap *) setObject:(id)value forKey:(NSString *)attrName;
 - (STAttrMap *) setObjectWithInt:(NSInteger)value forKey:(NSString *)attrName;
 - (void) setTemplateLib:(STGroup *)aTemplateLib;
 - (STGroup *) getTemplateLib;
-/@end
+@end
 /* -------- ST end STAttrMap.interface ------------ */
 >>
 
@@ -196,11 +196,11 @@ static class STAttrMap extends HashMap {
 /** allows convenient multi-value initialization:
  *  "new STAttrMap().put(...).put(...)"
  */
-/@implementation STAttrMap
-/@synthesize templateLib;
+@implementation STAttrMap
+@synthesize templateLib;
 
 <@STAttrMap.methods()>
-/@end
+@end
 /* -------- ST end STAttrMap.implementation ------------ */
 >>
 
@@ -212,7 +212,7 @@ static class STAttrMap extends HashMap {
 
 @STAttrMap.properties() ::= <<
 /* -------- ST start STAttrMap.properties ------------ */
-/@property (retain, getter=getTemplateLib, setter=setTemplateLib:) STGroup *templateLib;
+@property (retain, getter=getTemplateLib, setter=setTemplateLib:) STGroup *templateLib;
 /* -------- ST end STAttrMap.properties ------------ */
 >>
 
@@ -324,7 +324,7 @@ nil;
  */
 rewriteExternalTemplate(name,args) ::= <<
 /* -------- ST start rewriteExternalTemplate ------------ */
-[templateLib getInstanceOf:@"<name>"
+[templateLib getInstanceOf:@"<name>" 
 <if(args)>[[STAttrMap newSTAttrMap] <args:{a | setObject:<a.value> forKey:@"<a.name>"]}><endif>]
 /* -------- ST end rewriteExternalTemplate ------------ */
 >>
@@ -333,7 +333,7 @@ rewriteExternalTemplate(name,args) ::= <<
 rewriteIndirectTemplate(expr,args) ::= <<
 /* -------- ST start rewriteIndirectTemplate ------------ */
 [templateLib getInstanceOf:<expr>
-<if(args)> [[STAttrMap newSTAttrMap]<args:{a | setObject:<a.value> forKey:@"<a.name>"]]}>
+<if(args)> [[STAttrMap newSTAttrMap]<args:{a | setObject:<a.value> forKey:@"<a.name>"]}>]
 <else>]<endif>
 /* -------- ST end rewriteIndirectTemplate ------------ */
 >>

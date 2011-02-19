@@ -32,13 +32,25 @@ group AST;
 NSInteger ruleLevel;
 NSArray *ruleNames;
 <@super.memVars()>  /* AST super.memVars */
-<parsermemVars()>   /* AST parsermemVars */
+<parserMemVars()>   /* AST parserMemVars */
+>>
+
+@genericParserHeaderFile.properties() ::= <<
+/* AST parserHeaderFile.properties */
+<@super.properties()>  /* AST super.properties */
+<parserProperties()>   /* AST parserproperties */
 >>
 
 @genericParserHeaderFile.methodsDecl() ::= <<
 /* AST parserHeaderFile.methodsDecl */
 <@super.methodsDecl()>  /* AST super.methodsDecl */
-<parsermethodsDecl()>   /* AST parsermethodsDecl */
+<parserMethodsDecl()>   /* AST parsermethodsDecl */
+>>
+
+@genericParser.synthesize() ::= <<
+/* AST genericParser.synthesize */
+<@super.synthesize()>
+<parserSynthesize()>
 >>
 
 @genericParser.methods() ::= <<
@@ -61,16 +73,28 @@ NSArray *ruleNames;
 >>
 
 /* Add an adaptor property that knows how to build trees */
-parsermemVars() ::= <<
-/* AST parsermemVars */
+parserMemVars() ::= <<
+/* AST parserMemVars */
 id\<ANTLRTreeAdaptor> treeAdaptor;
 >>
 
+/* Add an adaptor property that knows how to build trees */
+parserProperties() ::= <<
+/* AST parserProperties */
+@property (retain, getter=getTreeAdaptor, setter=setTreeAdaptor:) id\<ANTLRTreeAdaptor> treeAdaptor;
+>>
+
 /** Declaration of additional tree support methods - go in interface of parserHeaderFile() */
-parsermethodsDecl() ::= <<
-/* AST parsermethodsDecl */
+parserMethodsDecl() ::= <<
+/* AST parserMethodsDecl */
 - (id\<ANTLRTreeAdaptor>) getTreeAdaptor;
 - (void) setTreeAdaptor:(id\<ANTLRTreeAdaptor>)theTreeAdaptor;
+>>
+
+/* Add an adaptor property that knows how to build trees */
+parserSynthesize() ::= <<
+/* AST parserProperties */
+@synthesize treeAdaptor;
 >>
 
 /** Definition of addition tree support methods - go in implementation of genericParser() */
@@ -109,13 +133,13 @@ parserMethods() ::= <<
 >>
 
 /** the implementation of returnScope synthesize */
-@returnScope.synthesize() ::= <<
+@returnScopeImplementation.synthesize() ::= <<
 /* AST returnScope.synthesize */
 @synthesize tree;
 >>
 
 /** the implementation of returnScope methods */
-@returnScope.methods() ::= <<
+@returnScopeImplementation.methods() ::= <<
 /* AST returnScope.methods */
 - (<ASTLabelType> *)getTree
 {

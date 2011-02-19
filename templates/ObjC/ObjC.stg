@@ -304,7 +304,7 @@ lexerHeaderFile( LEXER,
 @end /* end of <className()> interface */<\n>
 >>
 
-headerReturnScope(ruleDescriptor) ::= "<returnScope(...)>"
+headerReturnScope(ruleDescriptor) ::= "<returnScopeInterface(...)>"
 headerReturnType(ruleDescriptor) ::= <<
 <if(LEXER)>
 <if(!r.ruleDescriptor.isSynPred)>
@@ -333,7 +333,7 @@ lexer(  grammar,
 <!
 #pragma mark Rule return scopes start
 <rules:{rule |
-<rule.ruleDescriptor:{ruleDescriptor | <returnScope(scope=ruleDescriptor.returnScope)>}>
+<rule.ruleDescriptor:{ruleDescriptor | <returnScopeImplementation(scope=ruleDescriptor.returnScope)>}>
 }>
 #pragma mark Rule return scopes end
 !>
@@ -597,13 +597,15 @@ typedef enum {
 
 /* Interface grammar class */
 @interface <className()> <@superClassName>: <superClass><@end> { /* line 572 */
+/* ObjC start of ruleAttributeScopeMemVar */
+<rules:{rule | <rule.ruleDescriptor.ruleScope:ruleAttributeScopeMemVar(scope=it)>}><\n>
+/* ObjC end of ruleAttributeScopeMemVar */
 /* ObjC start of globalAttributeScopeMemVar */
 <scopes:{<if(it.isDynamicGlobalScope)><globalAttributeScopeMemVar(scope=it)><endif>}><\n>
+/* ObjC end of globalAttributeScopeMemVar */
 /* ObjC start of actions.(actionScope).memVars */
 <actions.(actionScope).memVars>
 /* ObjC end of actions.(actionScope).memVars */
-/* ObjC start of ruleAttributeScopeMemVar */
-<rules:{rule | <rule.ruleDescriptor.ruleScope:ruleAttributeScopeMemVar(scope=it)>}><\n>
 /* ObjC start of memVars */
 <@memVars()>
 /* ObjC end of memVars */
@@ -611,6 +613,15 @@ typedef enum {
 <cyclicDFAs:{dfa | DFA<dfa.decisionNumber> *dfa<dfa.decisionNumber>;}; separator="\n">
 <synpreds:{pred | SEL <pred>Selector;}; separator="\n">
  }
+
+/* ObjC start of globalAttributeScopeMemVar */
+// <scopes:{<if(it.isDynamicGlobalScope)><globalAttributeScopeMemVar(scope=it)><endif>}><\n>
+/* ObjC start of actions.(actionScope).properties */
+<actions.(actionScope).properties>
+/* ObjC end of actions.(actionScope).properties */
+/* ObjC start of properties */
+<@properties()>
+/* ObjC end of properties */
 
 + (id) new<className()>:(<inputStreamType>)aStream;
 /* ObjC start of actions.(actionScope).methodsDecl */
@@ -697,10 +708,28 @@ genericParser(  grammar,
 
 #pragma mark Rule return scopes start
 <rules:{rule |
-<rule.ruleDescriptor:{ruleDescriptor | <returnScope(scope=ruleDescriptor.returnScope)>}>
-}>
+<rule:{ruleDescriptor | <returnScopeImplementation(scope=ruleDescriptor.returnScope)>}>}>
+
+#pragma mark Rule return scopes start
+<! <rules:{rule |
+<rule.ruleDescriptor:{ruleDescriptor | <returnScopeImplementation(scope=ruleDescriptor.returnScope)>}>}> !>
 
 @implementation <grammar.recognizerName>  // line 637
+
+/* ObjC start of ruleAttributeScope */
+#pragma mark Dynamic Rule Scopes
+<rules:{rule | <rule.ruleDescriptor.ruleScope:ruleAttributeScope(scope=it)>}>
+/* ObjC end of ruleAttributeScope */
+#pragma mark global Attribute Scopes
+/* ObjC start globalAttributeScope */
+<scopes:{<if(it.isDynamicGlobalScope)><globalAttributeScope(scope=it)><endif>}>
+/* ObjC end globalAttributeScope */
+/* ObjC start actions.(actionScope).synthesize */
+<actions.(actionScope).synthesize>
+/* ObjC end actions.(actionScope).synthesize */
+/* ObjC start synthesize() */
+<@synthesize()>
+/* ObjC end synthesize() */
 
 + (void) initialize
 {
@@ -850,6 +879,7 @@ ruleBacktrackFailure() ::= <<
  *  The return type aggregates are declared in the header file (headerFile template)
  */
 rule(ruleName,ruleDescriptor,block,emptyRule,description,exceptions,finally,memoize) ::= <<
+
 /*
  * $ANTLR start <ruleName>
  * <fileName>:<description>
@@ -1304,7 +1334,7 @@ wildcardCharListLabel(label, elementIndex) ::= <<
 ruleRef(rule,label,elementIndex,args,scope) ::= <<
 /* ruleRef */
 [self pushFollow:FOLLOW_<rule.name>_in_<ruleName><elementIndex>];
-<if(label)><label> = <endif>[self <if(scope)><scope:delegateName()>.<endif><rule.name><if(args)>:<args; separator=" :"><endif>];<\n>
+<if(label)><label> = <endif>[self <if(scope)><scope:delegateName()>.<endif><rule.name><if(args)>:<first(args)> <rest(args):{ a | arg<i>:<rest(args)>}; separator=" "><endif>];<\n>
 [self popFollow];
 <checkRuleBacktrackFailure()><\n>
 >>
@@ -1680,7 +1710,7 @@ memVars(scope) ::= <<
 >>
 
 properties(scope) ::= <<
-<scope.attributes:{a|@property (retain, getter=get<a.name>, setter=set<a.name>:) <a.type> <a.name>;<\n>}; separator="\n">
+<scope.attributes:{a|@property (assign, getter=get<a.name>, setter=set<a.name>:) <a.type> <a.name>;<\n>}; separator="\n">
 >>
 
 methodsDecl(scope) ::= <<
@@ -1764,9 +1794,7 @@ globalAttributeScopeDealloc(scope) ::= <<
 >>
 
 globalAttributeScope(scope) ::= <<
-<if(scope.attributes)>
-<scope.name>_stack = [ANTLRSymbolStack newANTLRSymbolStackWithLen:30];<\n>
-<endif>
+static <scope.name>_stack = [ANTLRSymbolStack newANTLRSymbolStackWithLen:30];<\n>
 >>
 
 ruleAttributeScopeMemVar(scope) ::= <<
@@ -1819,6 +1847,7 @@ ruleAttributeScopeImplementation(scope) ::= <<
 ruleAttributeScopeInit(scope) ::= <<
 /* ruleAttributeScopeInit */
 <scope.name>_scope = [<scope.name>_Scope new<scope.name>_Scope];
+<scope.name>_stack = [ANTLRSymbolStack newANTLRSymbolStackWithLen:30];
 >>
 
 ruleAttributeScopeDealloc(scope) ::= <<
@@ -1828,7 +1857,7 @@ ruleAttributeScopeDealloc(scope) ::= <<
 ruleAttributeScope(scope) ::= <<
 <if(scope.attributes)>
 /* ruleAttributeScope */
-ANTLRSymbolStack *<scope.name>Stack = [ANTLRSymbolStack newANTLRSymbolStackWithLen:30];<\n>
+static ANTLRSymbolStack *<scope.name>_stack;<\n>
 <endif>
 >>
 
@@ -1883,15 +1912,15 @@ ruleLabelDef(label) ::= <<
  */
 returnScopeInterface(scope) ::= <<
 <if(ruleDescriptor.hasMultipleReturnValues)>
-/* returnScopeInterface */
+/* returnScopeInterface <ruleDescriptor:returnStructName()> */
 @interface <ruleDescriptor:returnStructName()> :ANTLR<if(TREE_PARSER)>Tree<else>Parser<endif>RuleReturnScope { /* returnScopeInterface line 1838 */
 <@memVars()> /* ObjC start of memVars() */
 <if(scope.attributes)>
 <memVars(scope)>
 <endif>
 }
-
-<@properties()> /* start properties */
+/* start properties */
+<@properties()>
 <if(scope.attributes)>
 <properties(scope)>
 /* end properties */<\n>
@@ -1904,11 +1933,11 @@ returnScopeInterface(scope) ::= <<
 <methodsDecl(scope)>
 /* End of iterated get and set functions */<\n>
 <endif>
-@end /* end of returnScopeInterface interface */<\n>
+@end /* end of returnScopeInterface interface */<\n><\n>
 <endif>
 >>
 
-returnScope(scope) ::= <<
+returnScopeImplementation(scope) ::= <<
 <if(ruleDescriptor.hasMultipleReturnValues)>
 @implementation <ruleDescriptor:returnStructName()> /* returnScope */
 <@synthesize()> /* start of synthesize -- OBJC-Line 1837 */
@@ -1992,7 +2021,7 @@ scopeAttributeRefStack() ::= <<
  *  to stack itself not top of stack.  This is useful for predicates
  *  like {$function.size()>0 && $function::name.equals("foo")}?
  */
-isolatedDynamicScopeRef(scope) ::= "<scope>Stack"
+isolatedDynamicScopeRef(scope) ::= "<scope>_stack"
 
 /** reference an attribute of rule; might only have single return value */
 ruleLabelRef(referencedRule,scope,attr) ::= <<
@@ -2005,7 +2034,7 @@ ruleLabelRef(referencedRule,scope,attr) ::= <<
 
 returnAttributeRef(ruleDescriptor,attr) ::= <<
 <if(ruleDescriptor.hasMultipleReturnValues)>
-retval.<attr.name>;  /* added to returnAttributeRef */
+retval.<attr.name>  /* added to returnAttributeRef */
 <else>
 <attr.name>
 <endif>
@@ -2038,15 +2067,15 @@ tokenLabelPropertyRef_index(scope,attr) ::= "(<scope>!=nil?[<scope> getTokenInde
 tokenLabelPropertyRef_tree(scope,attr) ::= "<scope>_tree"
 tokenLabelPropertyRef_int(scope,attr) ::= "(<scope>!=nil?[[<scope> getText] integerValue]:0)"
 
-ruleLabelPropertyRef_start(scope,attr) ::= "(<scope>!=nil?((<labelType> *)<scope>.startToken):nil)"
+ruleLabelPropertyRef_start(scope,attr) ::= "(<scope>!=nil?((<labelType> *)<scope>.start):nil)"
 ruleLabelPropertyRef_stop(scope,attr) ::= "(<scope>!=nil?((<labelType> *)<scope>.stopToken):nil)"
 ruleLabelPropertyRef_tree(scope,attr) ::= "(<scope>!=nil?((<ASTLabelType> *)<scope>.tree):nil)"
 ruleLabelPropertyRef_text(scope,attr) ::= <<
 <if(TREE_PARSER)>
 (<scope>!=nil?[[input getTokenStream] toStringFromStart:[[input getTreeAdaptor] getTokenStartIndex:[<scope> getStart]]
-         ToEnd:[[input getTreeAdaptor] getTokenStopIndex:[<scope> getStart]]]:nil)
+         ToEnd:[[input getTreeAdaptor] getTokenStopIndex:[<scope> getStart]]]:0)
 <else>
-(<scope>!=nil?([input toStringFromStart:[<scope> getStart] ToEnd:[<scope> getStop]]:nil)
+(<scope>!=nil?([input toStringFromStart:[<scope> getStart] ToEnd:[<scope> getStop]]:0)
 <endif>
 >>
 ruleLabelPropertyRef_st(scope,attr) ::= "(<scope>!=nil?[<scope> st]:nil)"
@@ -2063,13 +2092,13 @@ lexerRuleLabelPropertyRef_text(scope,attr) ::= "(<scope>!=nil?[<scope> getText]:
 lexerRuleLabelPropertyRef_int(scope,attr) ::="(<scope>!=nil?[[<scope> text] integerValue]:0)"
 
 // Somebody may ref $template or $tree or $stop within a rule:
-rulePropertyRef_start(scope,attr) ::= "((<labelType> *)retval.startToken)"
+rulePropertyRef_start(scope,attr) ::= "((<labelType> *)retval.start)"
 rulePropertyRef_stop(scope,attr) ::= "((<labelType> *)retval.stopToken)"
 rulePropertyRef_tree(scope,attr) ::= "((<ASTLabelType> *)retval.tree)"
 rulePropertyRef_text(scope,attr) ::= <<
 <if(TREE_PARSER)>
-[[input getTokenStream] toStringFromStart:[[input getTreeAdaptor] getTokenStartIndex:retval.start]
-                                    ToEnd:[[input getTreeAdaptor] getTokenStopIndex:retval.start]]
+[[input getTokenStream] toStringFromStart:[[input getTreeAdaptor] getTokenStartIndex:retval.start.token.startIndex]
+                                    ToEnd:[[input getTreeAdaptor] getTokenStopIndex:retval.start.token.stopIndex]]
 <else>
 [input toStringFromToken:retval.start ToToken:[input LT:-1]]
 <endif>
@@ -2100,7 +2129,7 @@ lexerRulePropertyRef_int(scope,attr) ::= "[[<scope> getText] integerValue]"
 
 // setting $st and $tree is allowed in local rule. everything else
 // is flagged as error
-ruleSetPropertyRef_tree(scope,attr,expr) ::= "retval.tree =<expr>;"
+ruleSetPropertyRef_tree(scope,attr,expr) ::= "retval.start =<expr>;"
 ruleSetPropertyRef_st(scope,attr,expr) ::= "retval.st =<expr>;" /* "<\n>#error StringTemplates are unsupported<\n>" */
 
 
