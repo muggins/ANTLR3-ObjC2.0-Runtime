@@ -122,11 +122,11 @@
         if ( [self getFailed] )
             return t;
         if ( showTransformations &&
-            r != nil && !(t == [r getNode]) && [r getNode] != nil ) {
-            [self reportTransformation:(id<ANTLRTree>)t Tree:[r getNode]];
+            r != nil && !(t == r.start) && r.start != nil ) {
+            [self reportTransformation:(id<ANTLRTree>)t Tree:r.start];
         }
-        if ( r != nil && [r getNode] != nil )
-            return [r getNode];
+        if ( r != nil && r.start != nil )
+            return r.start;
         else
             return t;
     }

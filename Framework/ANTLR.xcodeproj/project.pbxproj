@@ -1798,6 +1798,20 @@
 			passBuildSettingsInEnvironment = 1;
 			productName = Untitled;
 		};
+		1A871C46130CB1E200B5F5A6 /* Regenerate fuzzy copy */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "-jar /Library/Java/Extensions/antlr-3.3.1.jar codeGenerator.g";
+			buildConfigurationList = 1A871C47130CB1E200B5F5A6 /* Build configuration list for PBXLegacyTarget "Regenerate fuzzy copy" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/java;
+			buildWorkingDirectory = "$(PROJECT_DIR)";
+			dependencies = (
+			);
+			name = "Regenerate fuzzy copy";
+			passBuildSettingsInEnvironment = 1;
+			productName = Untitled;
+		};
 		1AC5AC9312E7BE0400DF0C58 /* Regenerate treeparser */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = "-jar /Library/Java/Extensions/antlr-3.3.1.jar Lang.g LangDumpDecl.g";
@@ -2317,6 +2331,7 @@
 				1AC5AC9812E7BEFE00DF0C58 /* treeparser */,
 				F7CD47610C64D23800FF933A /* Regenerate treerewrite */,
 				F7CD475C0C64D22800FF933A /* treerewrite */,
+				1A871C46130CB1E200B5F5A6 /* Regenerate fuzzy copy */,
 			);
 		};
 /* End PBXProject section */
@@ -4001,6 +4016,27 @@
 				PRODUCT_NAME = TreeRewriteRuleTokenStream;
 				WRAPPER_EXTENSION = octest;
 				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		1A871C48130CB1E200B5F5A6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = codeGenerator;
+			};
+			name = Debug;
+		};
+		1A871C49130CB1E200B5F5A6 /* Debug with StringTemplate Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = fuzzy;
+			};
+			name = "Debug with StringTemplate Debug";
+		};
+		1A871C4A130CB1E200B5F5A6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = fuzzy;
 			};
 			name = Release;
 		};
@@ -6072,6 +6108,16 @@
 				1A77EE8B12E6A552007F323A /* Debug */,
 				1A77EE8C12E6A552007F323A /* Debug with StringTemplate Debug */,
 				1A77EE8D12E6A552007F323A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		1A871C47130CB1E200B5F5A6 /* Build configuration list for PBXLegacyTarget "Regenerate fuzzy copy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A871C48130CB1E200B5F5A6 /* Debug */,
+				1A871C49130CB1E200B5F5A6 /* Debug with StringTemplate Debug */,
+				1A871C4A130CB1E200B5F5A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

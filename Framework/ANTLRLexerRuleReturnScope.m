@@ -29,17 +29,19 @@
 
 @implementation ANTLRLexerRuleReturnScope
 
+@synthesize start;
+
 //---------------------------------------------------------- 
 //  start 
 //---------------------------------------------------------- 
 - (NSInteger) getStart
 {
-    return startToken;
+    return start;
 }
 
 - (void) setStart: (NSInteger) aStart
 {
-    startToken = aStart;
+    start = aStart;
 }
 
 //---------------------------------------------------------- 

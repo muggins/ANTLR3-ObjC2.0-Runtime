@@ -431,6 +431,11 @@ extern NSInteger debug;
 	return [nodes count];
 }
 
+-(NSUInteger) size
+{
+	return [self count];
+}
+
 -(NSEnumerator *) objectEnumerator
 {
 	if (e == nil) {

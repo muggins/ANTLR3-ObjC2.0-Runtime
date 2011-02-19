@@ -34,15 +34,15 @@
 #import "ANTLRCommonTree.h"
 
 @interface ANTLRTreeRuleReturnScope : ANTLRRuleReturnScope {
-    ANTLRCommonTree *startNode;
+    ANTLRCommonTree *start;
 }
 
-@property (retain, getter=getStart, setter=setStart:) ANTLRCommonTree *startNode;
+@property (retain, getter=getStart, setter=setStart:) ANTLRCommonTree *start;
 
 /** First node or root node of tree matched for this rule. */
 
 - (ANTLRCommonTree *)getStart;
-- (void)setStart:(ANTLRCommonTree *)aStartNode;
+- (void)setStart:(ANTLRCommonTree *)aStart;
 
 - (id) copyWithZone:(NSZone *)theZone;
 

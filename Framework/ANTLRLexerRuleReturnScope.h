@@ -27,10 +27,11 @@
 #import <Cocoa/Cocoa.h>
 
 @interface ANTLRLexerRuleReturnScope : NSObject {
-	int startToken;
-	int stopToken;
+	NSInteger start;
+	NSInteger stopToken;
 }
 
+@property (assign, getter=getStart, setter=setStart:) NSInteger start;
 - (NSInteger) getStart;
 - (void) setStart: (NSInteger) aStart;
 

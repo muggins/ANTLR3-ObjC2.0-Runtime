@@ -33,16 +33,16 @@
 
 
 @implementation ANTLRTreeRuleReturnScope
-@synthesize startNode;
+@synthesize start;
 
 - (ANTLRCommonTree *)getStart
 {
-    return startNode;
+    return start;
 }	
 
-- (void)setStart:(ANTLRCommonTree *)aStartNode
+- (void)setStart:(ANTLRCommonTree *)aStart
 {
-    startNode = aStartNode;
+    start = aStart;
 }	
 
 // create a copy, including the text if available
@@ -50,7 +50,7 @@
 - (id) copyWithZone:(NSZone *)theZone
 {
     ANTLRTreeRuleReturnScope *copy = [super copyWithZone:theZone];
-    copy.startNode = startNode;
+    copy.start = start;
     return copy;
 }
 

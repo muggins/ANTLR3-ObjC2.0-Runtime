@@ -86,7 +86,7 @@
 -(void) addInteger:(NSInteger) v
 {
 	[self ensureCapacity:ptr];
-	ip[ptr++] = (id) v;
+	ip[ptr++] = (NSInteger) v;
 }
 
 -(void) push:(NSInteger) v
@@ -113,7 +113,7 @@
     if ( idx >= BuffSize ) {
         [self ensureCapacity:idx];
     }
-    ip[idx] = (id) anInteger;
+    ip[idx] = (NSInteger) anInteger;
 }
 -(void) reset
 {
@@ -130,7 +130,8 @@
 		}
         BuffSize = newSize;
 		[buffer setLength:(BuffSize * sizeof(NSInteger))];
-        ip = (NSInteger *)ptrBuffer = [buffer mutableBytes];
+        ptrBuffer = (id *)[buffer mutableBytes];
+        ip = (NSInteger *)ptrBuffer;
 	}
 }
 
