@@ -706,9 +706,10 @@ genericParser(  grammar,
 <rule.ruleDescriptor.ruleScope:ruleAttributeScopeImplementation(scope=it)>
 }>
 
-#pragma mark Rule return scopes start
-<rules:{rule |
-<rule:{ruleDescriptor | <returnScopeImplementation(scope=ruleDescriptor.returnScope)>}>}>
+#pragma mark Rule Return Scopes start
+<rules:{rule |<rule.ruleDescriptor:{ ruleDescriptor | <returnScopeImplementation(scope=ruleDescriptor.returnScope)>}>}>
+//#pragma mark Rule return scopes start
+//<rules:{rule |<rule:{ruleDescriptor | <returnScopeImplementation(scope=ruleDescriptor.returnScope)>}>}>
 
 #pragma mark Rule return scopes start
 <! <rules:{rule |
