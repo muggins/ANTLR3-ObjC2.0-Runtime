@@ -56,6 +56,7 @@
 #import <ANTLR/ANTLRFastQueue.h>
 #import <ANTLR/ANTLRHashMap.h>
 #import <ANTLR/ANTLRHashRule.h>
+#import <ANTLR/ANTLRInputStream.h>
 #import <ANTLR/ANTLRIntArray.h>
 #import <ANTLR/ANTLRIntStream.h>
 #import <ANTLR/ANTLRLexer.h>
@@ -75,6 +76,7 @@
 #import <ANTLR/ANTLRParser.h>
 #import <ANTLR/ANTLRParserRuleReturnScope.h>
 #import <ANTLR/ANTLRPtrBuffer.h>
+#import <ANTLR/ANTLRReaderStream.h>
 #import <ANTLR/ANTLRRecognitionException.h>
 #import <ANTLR/ANTLRRecognizerSharedState.h>
 #import <ANTLR/ANTLRRewriteRuleElementStream.h>

@@ -165,6 +165,12 @@
 		1A6C451711BF4EE00039788A /* ANTLRMissingTokenException.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6C451511BF4EE00039788A /* ANTLRMissingTokenException.m */; };
 		1A6C452811BF50A40039788A /* ANTLRUnwantedTokenException.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A6C452611BF50A40039788A /* ANTLRUnwantedTokenException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A6C452911BF50A40039788A /* ANTLRUnwantedTokenException.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6C452711BF50A40039788A /* ANTLRUnwantedTokenException.m */; };
+		1A7381801312C3AF008CCA16 /* ANTLRReaderStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A73817F1312C3AF008CCA16 /* ANTLRReaderStream.m */; };
+		1A7381811312C3AF008CCA16 /* ANTLRReaderStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A73817E1312C3AF008CCA16 /* ANTLRReaderStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1A7381821312C3AF008CCA16 /* ANTLRReaderStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A73817F1312C3AF008CCA16 /* ANTLRReaderStream.m */; };
+		1A7381851312C3BE008CCA16 /* ANTLRInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7381841312C3BE008CCA16 /* ANTLRInputStream.m */; };
+		1A7381861312C3BE008CCA16 /* ANTLRInputStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A7381831312C3BE008CCA16 /* ANTLRInputStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1A7381871312C3BE008CCA16 /* ANTLRInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7381841312C3BE008CCA16 /* ANTLRInputStream.m */; };
 		1A75BF5911D6B3FD0096C6F5 /* ANTLRMissingTokenException.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A6C451411BF4EE00039788A /* ANTLRMissingTokenException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A75BFBA11D6C2B10096C6F5 /* ANTLRDFA.m in Sources */ = {isa = PBXBuildFile; fileRef = F7754E3E0A5C0A0500D0873A /* ANTLRDFA.m */; };
 		1A77EE9312E6A57C007F323A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A348BB511D2C711000C72FC /* Cocoa.framework */; };
@@ -575,7 +581,7 @@
 		1A1211D211D3BF4700F27B38 /* ANTLRStringStreamTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ANTLRStringStreamTest-Info.plist"; sourceTree = "<group>"; };
 		1A12122411D3C92400F27B38 /* ANTLRFastQueueTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ANTLRFastQueueTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A12122511D3C92400F27B38 /* ANTLRFastQueueTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ANTLRFastQueueTest-Info.plist"; sourceTree = "<group>"; };
-		1A12122A11D3C93500F27B38 /* ANTLR.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ANTLR.framework; path = Library/Frameworks/ANTLR.framework; sourceTree = SDKROOT; };
+		1A12122A11D3C93500F27B38 /* ANTLR.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ANTLR.framework; path = /Library/Frameworks/ANTLR.framework; sourceTree = "<absolute>"; };
 		1A1212DC11D3F53600F27B38 /* ANTLRIntArrayTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ANTLRIntArrayTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A1212DD11D3F53600F27B38 /* ANTLRIntArrayTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ANTLRIntArrayTest-Info.plist"; sourceTree = "<group>"; };
 		1A12130C11D3F7CD00F27B38 /* ANTLRCommonTreeTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ANTLRCommonTreeTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -662,6 +668,10 @@
 		1A6C451511BF4EE00039788A /* ANTLRMissingTokenException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANTLRMissingTokenException.m; sourceTree = "<group>"; };
 		1A6C452611BF50A40039788A /* ANTLRUnwantedTokenException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANTLRUnwantedTokenException.h; sourceTree = "<group>"; };
 		1A6C452711BF50A40039788A /* ANTLRUnwantedTokenException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANTLRUnwantedTokenException.m; sourceTree = "<group>"; };
+		1A73817E1312C3AF008CCA16 /* ANTLRReaderStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANTLRReaderStream.h; sourceTree = "<group>"; };
+		1A73817F1312C3AF008CCA16 /* ANTLRReaderStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANTLRReaderStream.m; sourceTree = "<group>"; };
+		1A7381831312C3BE008CCA16 /* ANTLRInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANTLRInputStream.h; sourceTree = "<group>"; };
+		1A7381841312C3BE008CCA16 /* ANTLRInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANTLRInputStream.m; sourceTree = "<group>"; };
 		1A77EE8912E6A552007F323A /* TreeRewriteRuleTokenStream.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TreeRewriteRuleTokenStream.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A77EE8A12E6A552007F323A /* TreeRewriteRuleTokenStream-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TreeRewriteRuleTokenStream-Info.plist"; sourceTree = "<group>"; };
 		1A86B91911EB9F6300C67A03 /* ANTLRParseTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANTLRParseTree.h; sourceTree = "<group>"; };
@@ -1387,9 +1397,13 @@
 				1A18EF5611B8028D0006186A /* ANTLRBufferedTokenStream.m */,
 				F700ED940A5FF2A5005D0757 /* ANTLRCommonTokenStream.h */,
 				F700ED950A5FF2A5005D0757 /* ANTLRCommonTokenStream.m */,
+				1A7381831312C3BE008CCA16 /* ANTLRInputStream.h */,
+				1A7381841312C3BE008CCA16 /* ANTLRInputStream.m */,
 				F70AA7AD09AA2AC000C3FD5E /* ANTLRIntStream.h */,
 				1A1CCCA911B724B2002E5F53 /* ANTLRLookaheadStream.h */,
 				1A1CCCAA11B724B2002E5F53 /* ANTLRLookaheadStream.m */,
+				1A73817E1312C3AF008CCA16 /* ANTLRReaderStream.h */,
+				1A73817F1312C3AF008CCA16 /* ANTLRReaderStream.m */,
 				1AB4A58F11B9A0DA0076E91A /* ANTLRStreamEnumerator.h */,
 				1AB4A59011B9A0DA0076E91A /* ANTLRStreamEnumerator.m */,
 				F70AA7C509AA339900C3FD5E /* ANTLRStringStream.h */,
@@ -1721,6 +1735,7 @@
 				1A10050911B879A80022B434 /* ANTLRFailedPredicateException.h in Headers */,
 				1A10050811B879A40022B434 /* ANTLRFastQueue.h in Headers */,
 				1A1702FE11C05D4800F6978A /* ANTLRHashMap.h in Headers */,
+				1A7381861312C3BE008CCA16 /* ANTLRInputStream.h in Headers */,
 				1A10050B11B879B80022B434 /* ANTLRIntArray.h in Headers */,
 				F70AA7AF09AA2AC000C3FD5E /* ANTLRIntStream.h in Headers */,
 				F777678E09DD618000517181 /* ANTLRLexer.h in Headers */,
@@ -1738,6 +1753,7 @@
 				F79D598B0A0E51AB00EA3CEE /* ANTLRNoViableAltException.h in Headers */,
 				F700E8FB0A5FAD21005D0757 /* ANTLRParser.h in Headers */,
 				F72C5ECE0AB7E5A500282574 /* ANTLRParserRuleReturnScope.h in Headers */,
+				1A7381811312C3AF008CCA16 /* ANTLRReaderStream.h in Headers */,
 				F777669309DC72D600517181 /* ANTLRRecognitionException.h in Headers */,
 				F7B1E5B00CD7CF1900CE136E /* ANTLRRecognizerSharedState.h in Headers */,
 				F71325880C4A060900B99F2D /* ANTLRRewriteRuleElementStream.h in Headers */,
@@ -2525,6 +2541,8 @@
 				1A0F348A12EA444500496BB8 /* PolyParser.m in Sources */,
 				1A01BD9312EB5A6000428792 /* Simplifier.m in Sources */,
 				1A69627C12F24C60002725BD /* ANTLRDoubleKeyMap.m in Sources */,
+				1A7381801312C3AF008CCA16 /* ANTLRReaderStream.m in Sources */,
+				1A7381851312C3BE008CCA16 /* ANTLRInputStream.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2680,6 +2698,8 @@
 				1AEECE1611E7EB3D00554AAF /* ANTLRTokenRewriteStream.m in Sources */,
 				1A86B91C11EB9F6300C67A03 /* ANTLRParseTree.m in Sources */,
 				1A86BAD011EC1CD000C67A03 /* ANTLRUnbufferedTokenStream.m in Sources */,
+				1A7381821312C3AF008CCA16 /* ANTLRReaderStream.m in Sources */,
+				1A7381871312C3BE008CCA16 /* ANTLRInputStream.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
