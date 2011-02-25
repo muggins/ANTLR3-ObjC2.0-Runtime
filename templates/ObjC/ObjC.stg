@@ -614,8 +614,6 @@ typedef enum {
 <synpreds:{pred | SEL <pred>Selector;}; separator="\n">
  }
 
-/* ObjC start of globalAttributeScopeMemVar */
-// <scopes:{<if(it.isDynamicGlobalScope)><globalAttributeScopeMemVar(scope=it)><endif>}><\n>
 /* ObjC start of actions.(actionScope).properties */
 <actions.(actionScope).properties>
 /* ObjC end of actions.(actionScope).properties */
@@ -761,7 +759,7 @@ genericParser(  grammar,
 <endif><\n>
         <! <parserCtorBody()> !>
         <cyclicDFAs:{dfa | dfa<dfa.decisionNumber> = [DFA<dfa.decisionNumber> newDFA<dfa.decisionNumber>WithRecognizer:self];}; separator="\n">
-        <scopes:{<if(it.isDynamicGlobalScope)><globalAttributeScope(scope=it)><endif>}>
+        <scopes:{<if(it.isDynamicGlobalScope)><globalAttributeScopeInit(scope=it)><endif>}>
         <rules:{rule | <rule.ruleDescriptor.ruleScope:ruleAttributeScopeInit(scope=it)>}>
         /* start of actions-actionScope-init */
         <actions.(actionScope).init>
@@ -1788,6 +1786,7 @@ globalAttributeScopeImplementation(scope) ::= <<
 globalAttributeScopeInit(scope) ::= <<
 /* globalAttributeScopeInit */
 <scope.name>_scope = [<scope.name>_Scope new<scope.name>_Scope];
+<scope.name>_stack = [ANTLRSymbolStack newANTLRSymbolStackWithLen:30];
 >>
 
 globalAttributeScopeDealloc(scope) ::= <<
@@ -1795,7 +1794,7 @@ globalAttributeScopeDealloc(scope) ::= <<
 >>
 
 globalAttributeScope(scope) ::= <<
-static <scope.name>_stack = [ANTLRSymbolStack newANTLRSymbolStackWithLen:30];<\n>
+static <scope.name>_stack;<\n>
 >>
 
 ruleAttributeScopeMemVar(scope) ::= <<
