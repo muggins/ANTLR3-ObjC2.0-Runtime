@@ -1,5 +1,5 @@
 /*
- [The "BSD licence"]
+ [The "BSD license"]
  Copyright (c) 2005-2006 Terence Parr
  All rights reserved.
 
@@ -70,7 +70,7 @@ ST *st;
 @returnScopeImplementation.methods() ::= <<
 <@super.methods()>
 /* ST returnScope.methods */
-- (id) getTemplate { return st; }  
+- (id) getTemplate { return st; }
 - (NSString *) toString { return st==nil?nil:[st toString]; }
 - (NSString *) description { [self toString]; }
 >>
@@ -105,8 +105,8 @@ STGroup *templateLib; /* ST -- really a part of STAttrMap */
 <@super.methodsDecl()>
 /* ST genericParser.methodsDecl */
 - init;
-- (STGroup *) getTemplateLib; 
-- (void) setTemplateLib:(STGroup *)aTemplateLib; 
+- (STGroup *) getTemplateLib;
+- (void) setTemplateLib:(STGroup *)aTemplateLib;
 @end
 >>
 
@@ -128,7 +128,7 @@ STGroup *templateLib; /* ST -- really a part of STAttrMap */
 - (void) setTemplateLib:(STGroup *)aTemplateLib
 {
     templateLib = aTemplateLib;
-} 
+}
 
 >>
 
@@ -255,7 +255,7 @@ static class STAttrMap extends HashMap {
 - (STGroup *)getTemplateLib
 {
     return templateLib;
-} 
+}
 /* -------- ST end STAttrMap.methods ------------ */
 >>
 
@@ -324,7 +324,7 @@ nil;
  */
 rewriteExternalTemplate(name,args) ::= <<
 /* -------- ST start rewriteExternalTemplate ------------ */
-[templateLib getInstanceOf:@"<name>" 
+[templateLib getInstanceOf:@"<name>"
 <if(args)>[[STAttrMap newSTAttrMap] <args:{a | setObject:<a.value> forKey:@"<a.name>"]}><endif>]
 /* -------- ST end rewriteExternalTemplate ------------ */
 >>

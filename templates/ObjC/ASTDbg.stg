@@ -1,5 +1,5 @@
 /*
- [The "BSD licence"]
+ [The "BSD license"]
  Copyright (c) 2006 Kay Roepke 2010 Alan Condit
  All rights reserved.
 
@@ -41,7 +41,7 @@ ANTLRDebugTreeAdaptor *adaptor = [ANTLRDebugTreeAdaptor newTreeAdaptor:(id)dbg A
 <if(grammar.grammarIsRoot)>
     adaptor = [ANTLRDebugTreeAdaptor newTreeAdaptor:adaptor withDBG:dbg];
 <else>
-    adaptor = (ANTLRDebugTreeAdaptor *)adaptor; // delegator sends dbg adaptor 
+    adaptor = (ANTLRDebugTreeAdaptor *)adaptor; // delegator sends dbg adaptor
 <endif><\n>
     <grammar.directDelegates:{g|[<g:delegateName()> setTreeAdaptor:adaptor];}>
 }
