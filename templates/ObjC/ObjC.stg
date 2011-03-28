@@ -1141,7 +1141,7 @@ do {
                 goto loop<decisionNumber>;
             <ruleBacktrackFailure()>
             ANTLREarlyExitException *eee =
-                [ANTLREarlyExitException exceptionWithStream:input decisionNumber:<decisionNumber>];
+                [ANTLREarlyExitException newException:input decisionNumber:<decisionNumber>];
             <@earlyExitException()>
             @throw eee;
     }
@@ -1266,7 +1266,7 @@ if (<s>) {
     <if(backtracking)>state.failed = NO;<\n><endif>
 } else {
     <ruleBacktrackFailure()>
-    ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException exceptionWithSet:nil stream:input];
+    ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException newException:nil stream:input];
     <@mismatchedSetException()>
 <if(LEXER)>
     [self recover:mse];
@@ -1425,7 +1425,7 @@ else {
     alt<decisionNumber> = <eotPredictsAlt>;
 <else>
     <ruleBacktrackFailure()>
-    ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newANTLRNoViableAltException:<decisionNumber> state:<stateNumber> stream:input];
+    ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newException:<decisionNumber> state:<stateNumber> stream:input];
     <@noViableAltException()>
     @throw nvae;<\n>
 <endif>
@@ -1488,7 +1488,7 @@ default: ;
     alt<decisionNumber> = <eotPredictsAlt>;
 <else>
     <ruleBacktrackFailure()>
-    ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newANTLRNoViableAltException:<decisionNumber> state:<stateNumber> stream:input];
+    ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newException:<decisionNumber> state:<stateNumber> stream:input];
     <@noViableAltException()>
     @throw nvae;<\n>
 <endif>
@@ -1616,7 +1616,7 @@ const static NSInteger dfa<dfa.decisionNumber>_transition<i0>[] = {<table; separ
 <if(backtracking)>
     if ( [recognizer getBacktrackingLevel] > 0 ) { [recognizer setFailed:YES]; return -1; }<\n>
 <endif>
-    ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newANTLRNoViableAltException:<dfa.decisionNumber> state:s stream:[recognizer getInput]];
+    ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newException:<dfa.decisionNumber> state:s stream:[recognizer getInput]];
     /* [self error:nvae]; */ <! for debugger - do later !>
     @throw nvae;
 }<\n>
@@ -2123,7 +2123,7 @@ lexerRuleSetPropertyRef_pos(scope,attr,expr) ::= "state.tokenStartCharPositionIn
 lexerRuleSetPropertyRef_index(scope,attr,expr) ::= "-1" /* undefined token index in lexer */
 lexerRuleSetPropertyRef_channel(scope,attr,expr) ::= "state.channel=<expr>;"
 lexerRuleSetPropertyRef_start(scope,attr,expr) ::= "state.tokenStartCharIndex"
-lexerRuleSetPropertyRef_stop(scope,attr,expr) ::= "(self.index-1)"
+lexerRuleSetPropertyRef_stop(scope,attr,expr) ::= "([self getIndex]-1)"
 
 
 lexerRulePropertyRef_text(scope,attr) ::= "[self getText]"
