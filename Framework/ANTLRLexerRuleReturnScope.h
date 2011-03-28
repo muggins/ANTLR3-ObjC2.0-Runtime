@@ -31,13 +31,13 @@
 	NSInteger stopToken;
 }
 
-@property (assign, getter=getStart, setter=setStart:) NSInteger start;
 - (NSInteger) getStart;
 - (void) setStart: (NSInteger) aStart;
 
 - (NSInteger) getStop;
 - (void) setStop: (NSInteger) aStop;
 
-
+@property (assign, getter=getStart, setter=setStart:) NSInteger start;
+@property (getter=getStop,setter=setStop:) NSInteger stopToken;
 
 @end

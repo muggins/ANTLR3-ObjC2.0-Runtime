@@ -135,4 +135,6 @@
     }
 }
     
+@synthesize payload;
+@synthesize hiddenTokens;
 @end

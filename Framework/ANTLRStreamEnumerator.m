@@ -71,4 +71,7 @@
 	return eof;
 }
 
+@synthesize i;
+@synthesize eof;
+@synthesize nodes;
 @end

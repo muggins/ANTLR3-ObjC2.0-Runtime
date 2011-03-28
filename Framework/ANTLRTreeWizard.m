@@ -77,6 +77,10 @@
     return;
 }
 
+@synthesize action;
+@synthesize actor;
+@synthesize object1;
+@synthesize object2;
 @end
 
 /** When using %label:TOKENNAME in a tree for parse(), we must
@@ -699,4 +703,6 @@ public int getNodeIndex(Object node) {
  
 */
 
+@synthesize adaptor;
+@synthesize tokenNameToTypeMap;
 @end

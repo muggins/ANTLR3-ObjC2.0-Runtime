@@ -64,4 +64,9 @@
 - (id) nextObject;
 - (NSArray *) allObjects;
 
+@property (retain) id<ANTLRTreeAdaptor> adaptor;
+@property (retain) id<ANTLRTree> root;
+@property (retain) id<ANTLRTree> tree;
+@property BOOL firstTime;
+@property (retain) ANTLRFastQueue *nodes;
 @end

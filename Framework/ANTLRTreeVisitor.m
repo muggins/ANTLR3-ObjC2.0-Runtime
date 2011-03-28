@@ -90,4 +90,5 @@
     return t;
 }
 
+@synthesize adaptor;
 @end

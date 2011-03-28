@@ -15,7 +15,7 @@
     NSMutableDictionary *data2 = [data objectForKey:k1];
     id prev = nil;
     if (data2 == nil) {
-        data2 = [NSMutableDictionary dictionaryWithCapacity:30];
+        data2 = [[NSMutableDictionary dictionaryWithCapacity:30] retain];
         [data setObject:k1 forKey:data2];
     }
     else {
@@ -92,4 +92,5 @@
     [super dealloc];
 }
 
+@synthesize data;
 @end

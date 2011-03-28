@@ -165,10 +165,9 @@
 {
 	if ((self = [super init]) != nil) {
         bitVector = CFBitVectorCreateMutable ( kCFAllocatorDefault, 0 );
-		NSEnumerator *enumerator = [theArray objectEnumerator];
 		id value;
 		int bit = 0;
-		while (value = [enumerator nextObject]) {
+		for (value in theArray) {
 			if ([value boolValue] == YES) {
                 [self add:bit];
 				//CFBitVectorSetBitAtIndex(bitVector, bit, 1);
@@ -310,9 +309,11 @@
 	return bitVector;
 }
 
+@synthesize bitVector;
 @end
 
 NSInteger max(NSInteger a, NSInteger b)
 {
     return (a>b)?a:b;
 }
+

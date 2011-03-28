@@ -42,4 +42,5 @@
 - (id)initWithAdaptor:(id<ANTLRTreeAdaptor>)anAdaptor;
 - (ANTLRTreeVisitor *)visit:(id<ANTLRTree>)t Action:(ANTLRTreeVisitorAction *)action;
 
+@property (retain) id<ANTLRTreeAdaptor> adaptor;
 @end

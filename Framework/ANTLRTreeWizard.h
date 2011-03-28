@@ -55,6 +55,10 @@
 - (void) visit:(id<ANTLRTree>)t;
 - (void) visit:(id<ANTLRTree>)t Parent:(id<ANTLRTree>)parent ChildIndex:(NSInteger)childIndex Map:(ANTLRMap *)labels;
 
+@property NSInteger action;
+@property (retain) id actor;
+@property (retain) id object1;
+@property (retain) id object2;
 @end
 
 /** When using %label:TOKENNAME in a tree for parse(), we must
@@ -130,5 +134,7 @@
 - (BOOL)equals:(id)t1 O2:(id)t2;
 - (BOOL) _equals:(id)t1 O2:(id)t2 Adaptor:(id<ANTLRTreeAdaptor>)anAdaptor;
 
+@property (retain) id<ANTLRTreeAdaptor> adaptor;
+@property (retain) ANTLRMap *tokenNameToTypeMap;
 @end
 
