@@ -73,7 +73,7 @@
 
 - (void) mismatch:(id<ANTLRIntStream>)aStream tokenType:(ANTLRTokenType)aTType follow:(ANTLRBitSet *)aBitset
 {
-	ANTLRMismatchedTreeNodeException *mte = [ANTLRMismatchedTreeNodeException newANTLRMismatchedTreeNodeException:aTType Stream:aStream];
+	ANTLRMismatchedTreeNodeException *mte = [ANTLRMismatchedTreeNodeException newException:aTType Stream:aStream];
     [mte setNode:[((id<ANTLRTreeNodeStream>)aStream) LT:1]];
 	[self recoverFromMismatchedToken:aStream Type:aTType Follow:aBitset];
 }
@@ -146,7 +146,7 @@
  */
 - (id) recoverFromMismatchedToken:(id<ANTLRIntStream>)anInput Type:(NSInteger)ttype Follow:(ANTLRBitSet *)follow
 {
-    @throw [ANTLRMismatchedTreeNodeException newANTLRMismatchedTreeNodeException:ttype Stream:anInput];
+    @throw [ANTLRMismatchedTreeNodeException newException:ttype Stream:anInput];
 }
 
 /** Prefix error message with the grammar name because message is

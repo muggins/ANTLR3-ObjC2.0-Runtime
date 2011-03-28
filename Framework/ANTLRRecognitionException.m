@@ -36,17 +36,17 @@
 @synthesize line;
 @synthesize charPositionInLine;
 
-+ (ANTLRRecognitionException *) newANTLRRecognitionException
++ (ANTLRRecognitionException *) newException
 {
 	return [[ANTLRRecognitionException alloc] init];
 }
 
-+ (ANTLRRecognitionException *) exceptionWithStream:(id<ANTLRIntStream>) anInputStream
++ (ANTLRRecognitionException *) newException:(id<ANTLRIntStream>) anInputStream
 {
 	return [[ANTLRRecognitionException alloc] initWithStream:anInputStream];
 }
 
-+ (ANTLRRecognitionException *) exceptionWithStream:(id<ANTLRIntStream>) anInputStream reason:(NSString *)aReason
++ (ANTLRRecognitionException *) newException:(id<ANTLRIntStream>) anInputStream reason:(NSString *)aReason
 {
 	return [[ANTLRRecognitionException alloc] initWithStream:anInputStream reason:aReason];
 }
@@ -195,4 +195,6 @@
     charPositionInLine = aPos;
 }
 
+@synthesize index;
+@synthesize c;
 @end

@@ -150,7 +150,7 @@
 
 - (ANTLRCommonTree *)getNode:(NSInteger) i
 {
-    @throw [ANTLRRuntimeException newANTLRRuntimeException:@"Absolute node indexes are meaningless in an unbuffered stream"];
+    @throw [ANTLRRuntimeException newException:@"Absolute node indexes are meaningless in an unbuffered stream"];
     return nil;
 }
 
@@ -214,5 +214,8 @@
     return buf;
 }
 
+@synthesize it;
+@synthesize calls;
+@synthesize hasNilRoot;
 @end
 

@@ -243,7 +243,7 @@
 
 - (void) setType:(id<ANTLRTree>)t Type:(NSInteger)type
 {
-    @throw [ANTLRRuntimeException newANTLRNoSuchElementException:@"don't know enough about Tree node"];
+    @throw [ANTLRNoSuchElementException newException:@"don't know enough about Tree node"];
 }
 
 - (NSString *)getText:(id<ANTLRTree>)t
@@ -253,7 +253,7 @@
 
 - (void) setText:(id<ANTLRTree>)t Text:(NSString *)text
 {
-    @throw [ANTLRRuntimeException newANTLRNoSuchElementException:@"don't know enough about Tree node"];
+    @throw [ANTLRNoSuchElementException newException:@"don't know enough about Tree node"];
 }
 
 - (id<ANTLRTree>) getChild:(id<ANTLRTree>)t At:(NSInteger)index

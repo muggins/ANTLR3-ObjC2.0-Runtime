@@ -33,7 +33,7 @@
 	id<ANTLRTree> newRoot;
 }
 
-+ (id) exceptionWithOldRoot:(id<ANTLRTree>)theOldRoot newRoot:(id<ANTLRTree>)theNewRoot stream:(id<ANTLRIntStream>)aStream;
++ (id) newException:(id<ANTLRTree>)theOldRoot newRoot:(id<ANTLRTree>)theNewRoot stream:(id<ANTLRIntStream>)aStream;
 - (id) initWithOldRoot:(id<ANTLRTree>)theOldRoot newRoot:(id<ANTLRTree>)theNewRoot stream:(id<ANTLRIntStream>)aStream;
 
 - (void) setOldRoot:(id<ANTLRTree>)aTree;

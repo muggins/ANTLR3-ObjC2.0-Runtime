@@ -158,10 +158,15 @@
 
 - (void)remove
 {
-    @throw [ANTLRRuntimeException newANTLRRuntimeException:@"UnsupportedOperationException"];
+    @throw [ANTLRRuntimeException newException:@"UnsupportedOperationException"];
 }
 @synthesize up;
 @synthesize down;
 @synthesize eof;
 
+@synthesize adaptor;
+@synthesize root;
+@synthesize tree;
+@synthesize firstTime;
+@synthesize nodes;
 @end

@@ -83,7 +83,7 @@
 - (id<ANTLRTree>) parseTree
 {
     if ( ttype != ANTLRLexerTokenTypeBEGIN ) {
-        @throw [ANTLRRuntimeException newANTLRRuntimeException:@"no BEGIN"];
+        @throw [ANTLRRuntimeException newException:@"no BEGIN"];
     }
     ttype = [tokenizer nextToken];
     id<ANTLRTree> root = [self parseNode];
@@ -108,7 +108,7 @@
         }
     }
     if ( ttype != ANTLRLexerTokenTypeEND ) {
-        @throw [ANTLRRuntimeException newANTLRRuntimeException:@"no END"];
+        @throw [ANTLRRuntimeException newException:@"no END"];
     }
     ttype = [tokenizer nextToken];
     return root;
@@ -176,4 +176,8 @@
     return node;
 }
 
+@synthesize tokenizer;
+@synthesize ttype;
+@synthesize wizard;
+@synthesize adaptor;
 @end

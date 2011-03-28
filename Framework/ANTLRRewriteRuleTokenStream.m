@@ -122,7 +122,7 @@
 
 - (id) copyElement:(id)element
 {
-    @throw [ANTLRRuntimeException newANTLRRuntimeException:@"copy can't be called for a token stream."];
+    @throw [ANTLRRuntimeException newException:@"copy can't be called for a token stream."];
 }
 
 @end

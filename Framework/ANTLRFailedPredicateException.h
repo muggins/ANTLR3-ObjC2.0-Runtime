@@ -37,7 +37,7 @@
 @property (retain, getter=getPredicate, setter=setPredicate:) NSString *predicate;
 @property (retain, getter=getRuleName, setter=setRuleName:) NSString *ruleName;
 
-+ (ANTLRFailedPredicateException *) exceptionWithRuleName:(NSString *)theRuleName predicate:(NSString *)thePredicate stream:(id<ANTLRIntStream>)theStream;
++ (ANTLRFailedPredicateException *) newException:(NSString *)theRuleName predicate:(NSString *)thePredicate stream:(id<ANTLRIntStream>)theStream;
 - (ANTLRFailedPredicateException *) initWithRuleName:(NSString *)theRuleName predicate:(NSString *)thePredicate stream:(id<ANTLRIntStream>)theStream;
 
 #ifdef DONTUSEYET

@@ -33,6 +33,7 @@
 #import "ANTLRError.h"
 #import "ANTLRRecognitionException.h"
 #import "ANTLRCommonToken.h"
+#import "ANTLRRuntimeException.h"
 
 @implementation ANTLRLookaheadStream
 
@@ -141,7 +142,7 @@
 	if (k == 1) {
 		return prevElement;
 	}
-	@throw [ANTLRRuntimeException newANTLRNoSuchElementException:[NSString stringWithString:@"can't look backwards more than one token in this stream"]];
+	@throw [ANTLRNoSuchElementException newException:[NSString stringWithString:@"can't look backwards more than one token in this stream"]];
 }
 
 -(id) getCurrentSymbol

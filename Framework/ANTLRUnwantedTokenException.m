@@ -33,12 +33,12 @@
 
 @implementation ANTLRUnwantedTokenException : ANTLRMismatchedTokenException
 	/** Used for remote debugger deserialization */
-+ (ANTLRUnwantedTokenException *)newANTLRUnwantedTokenException
++ (ANTLRUnwantedTokenException *)newException
 {
     return [[ANTLRUnwantedTokenException alloc] init];
 }
     
-+ (ANTLRUnwantedTokenException *)newANTLRUnwantedTokenException:(NSInteger)expected Stream:(id<ANTLRIntStream>)anInput
++ (ANTLRUnwantedTokenException *)newException:(NSInteger)expected Stream:(id<ANTLRIntStream>)anInput
 {
     return [[ANTLRUnwantedTokenException alloc] initWithStream:anInput And:expected];
 }

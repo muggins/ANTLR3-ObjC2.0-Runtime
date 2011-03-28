@@ -137,11 +137,11 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
         return; // do nothing upon addChild(nil)
     }
     if ( self == t )
-        [NSException raise:ANTLRIllegalArgumentException format:(NSString *)@"ANTLRBaseTree Can't add self to self as child"];        
+        @throw [ANTLRIllegalArgumentException newException:@"ANTLRBaseTree Can't add self to self as child"];        
     ANTLRBaseTree *childTree = (ANTLRBaseTree *) t;
     if ( [childTree isNil] ) { // t is an empty node possibly with children
         if ( children != nil && children == childTree.children ) {
-            @throw [ANTLRRuntimeException newANTLRRuntimeException:@"ANTLRBaseTree add child list to itself"];
+            @throw [ANTLRRuntimeException newException:@"ANTLRBaseTree add child list to itself"];
         }
         // just add all of childTree's children to this
         if ( childTree.children != nil ) {
@@ -189,7 +189,7 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
         return;
     }
     if ( [t isNil] ) {
-        [NSException raise:ANTLRIllegalArgumentException format:(NSString *)@"ANTLRBaseTree Can't set single child to a list"];        
+        @throw [ANTLRIllegalArgumentException newException:@"ANTLRBaseTree Can't set single child to a list"];        
     }
     if ( children == nil ) {
         children = [NSMutableArray arrayWithCapacity:5];
@@ -229,7 +229,7 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
      System.out.println("in="+toStringTree());
      */
     if ( children == nil ) {
-        [NSException raise:ANTLRIllegalArgumentException format:(NSString *)@"ANTLRBaseTree Invalid Indexes; no children in list"];        
+        @throw [ANTLRIllegalArgumentException newException:@"ANTLRBaseTree Invalid Indexes; no children in list"];        
     }
     int replacingHowMany = stopChildIndex - startChildIndex + 1;
     int replacingWithHowMany;
@@ -318,12 +318,10 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
 - (void) sanityCheckParentAndChildIndexes:(id<ANTLRTree>) parent At:(NSInteger) i
 {
     if ( parent != [self getParent] ) {
-        [NSException raise:@"ANTLRIllegalArgumentException" format:(NSString *)@"parents do not match; expected %s found %s", parent, [self getParent]];        
-        //        throw new IllegalStateException("parents don't match; expected "+parent+" found "+self.getParent());
+        @throw [ANTLRIllegalStateException newException:[NSString stringWithFormat:@"parents don't match; expected %s found %s", parent, [self getParent]]];
     }
     if ( i != [self getChildIndex] ) {
-        [NSException raise:@"ANTLRIllegalArgumentException" format:(NSString *)@"child indexes don't match; expected %d found %d", i, [self getChildIndex]];        
-        //        throw new IllegalStateException("child indexes don't match; expected "+i+" found "+self.getChildIndex());
+        @throw [ANTLRIllegalStateException newException:[NSString stringWithFormat:@"child indexes don't match; expected %d found %d", i, [self getChildIndex]]];
     }
     int n = [self getChildCount];
     for (int c = 0; c < n; c++) {
@@ -495,9 +493,8 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
         
     [theCopy.children removeAllObjects];
     NSMutableArray *childrenCopy = theCopy.children;
-    NSUInteger childIdx = 0;
-    for (childIdx = 0; childIdx < [children count]; childIdx++) {
-        id<ANTLRTree> childCopy = [[children objectAtIndex:childIdx] deepCopyWithZone:aZone];
+    for (id loopItem in children) {
+        id<ANTLRTree> childCopy = [loopItem deepCopyWithZone:aZone];
         [theCopy addChild:childCopy];
     }
     [childrenCopy release];
@@ -514,6 +511,7 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
     return nil;
 }
 
+@synthesize anException;
 @end
 
 #pragma mark -

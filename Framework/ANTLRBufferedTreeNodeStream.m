@@ -67,7 +67,7 @@ extern NSInteger debug;
 
 - (void) remove
 {
-	@throw [ANTLRRuntimeException newANTLRRuntimeException:@"cannot remove nodes from stream"];
+	@throw [ANTLRRuntimeException newException:@"cannot remove nodes from stream"];
 }
 
 @end

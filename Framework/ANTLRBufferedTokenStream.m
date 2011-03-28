@@ -27,6 +27,7 @@
 #import "ANTLRBufferedTokenStream.h"
 #import "ANTLRTokenSource.h"
 #import "ANTLRCommonTreeAdaptor.h"
+#import "ANTLRRuntimeException.h"
 
 extern NSInteger debug;
 
@@ -196,7 +197,7 @@ extern NSInteger debug;
 - (id<ANTLRToken>) getToken:(NSInteger) i
 {
     if ( i < 0 || i >= [tokens count] ) {
-        @throw [ANTLRRuntimeException newANTLRNoSuchElementException:[NSString stringWithFormat:@"token index %d out of range 0..%d", i, [tokens count]-1]];
+        @throw [ANTLRNoSuchElementException newException:[NSString stringWithFormat:@"token index %d out of range 0..%d", i, [tokens count]-1]];
     }
     return [tokens objectAtIndex:i];
 }
