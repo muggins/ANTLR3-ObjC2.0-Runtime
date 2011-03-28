@@ -57,4 +57,6 @@
 - (NSString *)toInputString;
 - (void)_toStringLeaves:(NSMutableString *)buf;
 
+@property (retain) id<ANTLRToken> payload;
+@property (retain) NSMutableArray *hiddenTokens;
 @end

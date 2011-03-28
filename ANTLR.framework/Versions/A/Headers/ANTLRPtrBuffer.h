@@ -39,17 +39,17 @@
 @interface ANTLRPtrBuffer : ANTLRLinkBase {
 	//ANTLRPtrBuffer *fNext;
     NSInteger BuffSize;
-    NSMutableData *buffer;
-    id *ptrBuffer;
     NSInteger count;
     NSInteger ptr;
+    NSMutableData *buffer;
+    id *ptrBuffer;
 }
 
 @property (getter=getBuffSize, setter=setBuffSize:) NSInteger BuffSize;
-@property (retain, getter=getBuffer, setter=setBuffer:) NSMutableData *buffer;
-@property (retain, getter=getPtrBuffer, setter=setPtrBuffer:) id *ptrBuffer;
 @property (getter=getCount, setter=setCount:) NSInteger count;
 @property (getter=getPtr, setter=setPtr:) NSInteger ptr;
+@property (retain, getter=getBuffer, setter=setBuffer:) NSMutableData *buffer;
+@property (retain, getter=getPtrBuffer, setter=setPtrBuffer:) id *ptrBuffer;
 
 // Contruction/Destruction
 +(ANTLRPtrBuffer *)newANTLRPtrBuffer;

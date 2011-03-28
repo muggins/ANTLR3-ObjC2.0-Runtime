@@ -39,8 +39,8 @@
 }
 @property (retain, getter=getExpecting, setter=setExpecting) ANTLRBitSet *expecting;
 
-- (ANTLRMismatchedNotSetException *)newANTLRMismatchedNotSetException;
-- (ANTLRMismatchedNotSetException *)newANTLRMismatchedNotSetException:(id<ANTLRIntStream>)anInput
+- (ANTLRMismatchedNotSetException *)newException;
+- (ANTLRMismatchedNotSetException *)newException:(id<ANTLRIntStream>)anInput
                                                                Follow:(ANTLRBitSet *)expecting;
 
 - (id) init;

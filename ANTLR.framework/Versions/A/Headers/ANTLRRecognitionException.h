@@ -47,8 +47,8 @@
 @property (getter=getLine, setter=setLine:) NSInteger line;
 @property (getter=getCharPositionInLine, setter=setCharPositionInLine:) NSInteger charPositionInLine;
 
-+ (ANTLRRecognitionException *) newANTLRRecognitionException;
-+ (ANTLRRecognitionException *) exceptionWithStream:(id<ANTLRIntStream>) anInputStream; 
++ (ANTLRRecognitionException *) newException;
++ (ANTLRRecognitionException *) newException:(id<ANTLRIntStream>) anInputStream; 
 - (id) init;
 - (id) initWithStream:(id<ANTLRIntStream>)anInputStream;
 - (id) initWithStream:(id<ANTLRIntStream>)anInputStream reason:(NSString *)aReason;
@@ -69,4 +69,6 @@
 - (NSInteger)getCharPositionInLine;
 - (void)setCharPositionInLine:(NSInteger)aPos;
 
+@property NSInteger index;
+@property unichar c;
 @end

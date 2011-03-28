@@ -54,4 +54,8 @@ id<ANTLRTreeAdaptor> adaptor;
 - (id<ANTLRTree>) parseTree;
 - (id<ANTLRTree>) parseNode;
 
+@property (retain) ANTLRTreePatternLexer *tokenizer;
+@property NSInteger ttype;
+@property (retain) ANTLRTreeWizard *wizard;
+@property (retain) id<ANTLRTreeAdaptor> adaptor;
 @end

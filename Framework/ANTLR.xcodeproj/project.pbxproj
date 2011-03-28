@@ -115,6 +115,9 @@
 		1A26329611C53578000DCDD4 /* ANTLRMismatchedNotSetException.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A26329411C53578000DCDD4 /* ANTLRMismatchedNotSetException.m */; };
 		1A270BF911C1451200DCC8F3 /* ANTLRTreeIterator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A270BF711C1451200DCC8F3 /* ANTLRTreeIterator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A270BFA11C1451200DCC8F3 /* ANTLRTreeIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A270BF811C1451200DCC8F3 /* ANTLRTreeIterator.m */; };
+		1A2BD16E133C06A6005C2AFB /* ANTLRFileStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2BD16D133C06A6005C2AFB /* ANTLRFileStream.m */; };
+		1A2BD16F133C06A6005C2AFB /* ANTLRFileStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2BD16C133C06A6005C2AFB /* ANTLRFileStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1A2BD170133C06A6005C2AFB /* ANTLRFileStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2BD16D133C06A6005C2AFB /* ANTLRFileStream.m */; };
 		1A2D217511E4F57C00DFE328 /* ANTLRUniqueIDMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2D217311E4F57C00DFE328 /* ANTLRUniqueIDMap.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A2D217611E4F57C00DFE328 /* ANTLRUniqueIDMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D217411E4F57C00DFE328 /* ANTLRUniqueIDMap.m */; };
 		1A2D218611E502DE00DFE328 /* ANTLRNodeMapElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2D218411E502DE00DFE328 /* ANTLRNodeMapElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -563,7 +566,7 @@
 		1A0F343312EA411F00496BB8 /* PolyDifferentiator.g */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PolyDifferentiator.g; sourceTree = "<group>"; };
 		1A0F343412EA411F00496BB8 /* PolyPrinter.g */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PolyPrinter.g; sourceTree = "<group>"; };
 		1A0F343512EA411F00496BB8 /* Simplifier.g */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Simplifier.g; sourceTree = "<group>"; };
-		1A0F346612EA42D800496BB8 /* treerewrite */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = treerewrite; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A0F346612EA42D800496BB8 /* polydiff */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = polydiff; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A0F347812EA444500496BB8 /* Poly.tokens */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Poly.tokens; sourceTree = "<group>"; };
 		1A0F347912EA444500496BB8 /* PolyDifferentiator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PolyDifferentiator.m; sourceTree = "<group>"; };
 		1A0F347A12EA444500496BB8 /* PolyLexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolyLexer.h; sourceTree = "<group>"; };
@@ -619,6 +622,8 @@
 		1A270BF811C1451200DCC8F3 /* ANTLRTreeIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANTLRTreeIterator.m; sourceTree = "<group>"; };
 		1A2B096312E797DE00A75133 /* TestRewriteRuleTokenStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestRewriteRuleTokenStream.m; path = test/runtime/TestRewriteRuleTokenStream/TestRewriteRuleTokenStream.m; sourceTree = "<group>"; };
 		1A2B096612E797F600A75133 /* TestRewriteRuleTokenStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestRewriteRuleTokenStream.h; path = test/runtime/TestRewriteRuleTokenStream/TestRewriteRuleTokenStream.h; sourceTree = "<group>"; };
+		1A2BD16C133C06A6005C2AFB /* ANTLRFileStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANTLRFileStream.h; sourceTree = "<group>"; };
+		1A2BD16D133C06A6005C2AFB /* ANTLRFileStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANTLRFileStream.m; sourceTree = "<group>"; };
 		1A2D217311E4F57C00DFE328 /* ANTLRUniqueIDMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANTLRUniqueIDMap.h; sourceTree = "<group>"; };
 		1A2D217411E4F57C00DFE328 /* ANTLRUniqueIDMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANTLRUniqueIDMap.m; sourceTree = "<group>"; };
 		1A2D218411E502DE00DFE328 /* ANTLRNodeMapElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANTLRNodeMapElement.h; sourceTree = "<group>"; };
@@ -703,7 +708,7 @@
 		1AC5AC7712E7BBB600DF0C58 /* output */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = output; path = treeparser/output; sourceTree = "<group>"; };
 		1AC5AC7812E7BBB600DF0C58 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.txt; path = treeparser/README.txt; sourceTree = "<group>"; };
 		1AC5AC8112E7BC9100DF0C58 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = treeparser/main.m; sourceTree = "<group>"; };
-		1AC5ACA712E7BEFE00DF0C58 /* treerewrite */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = treerewrite; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AC5ACA712E7BEFE00DF0C58 /* treeparser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = treeparser; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AC5ACC412E7C03C00DF0C58 /* Lang.tokens */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Lang.tokens; path = treeparser/Lang.tokens; sourceTree = "<group>"; };
 		1AC5ACC512E7C03C00DF0C58 /* LangDumpDecl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LangDumpDecl.h; path = treeparser/LangDumpDecl.h; sourceTree = "<group>"; };
 		1AC5ACC612E7C03C00DF0C58 /* LangDumpDecl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LangDumpDecl.m; path = treeparser/LangDumpDecl.m; sourceTree = "<group>"; };
@@ -1081,10 +1086,10 @@
 				F7037EA00A05AFB60070435D /* lexertest-simple */,
 				F700ECD70A5FE186005D0757 /* LL-star */,
 				F7DD05EE0A7B15E1006A006C /* hoistedPredicates */,
-				1A0F346612EA42D800496BB8 /* treerewrite */,
+				1A0F346612EA42D800496BB8 /* polydiff */,
 				F7DD07440A7B6618006A006C /* scopes */,
 				F72C5E690AB7E4C900282574 /* simplectree */,
-				1AC5ACA712E7BEFE00DF0C58 /* treerewrite */,
+				1AC5ACA712E7BEFE00DF0C58 /* treeparser */,
 				F7CD475D0C64D22800FF933A /* treerewrite */,
 				1A348B4E11D2BEE8000C72FC /* Test.octest */,
 				1A348BEC11D2D0A1000C72FC /* ANTLRBitsetTest.octest */,
@@ -1391,6 +1396,8 @@
 		F70AA7AA09AA2AAB00C3FD5E /* Streams */ = {
 			isa = PBXGroup;
 			children = (
+				1A2BD16C133C06A6005C2AFB /* ANTLRFileStream.h */,
+				1A2BD16D133C06A6005C2AFB /* ANTLRFileStream.m */,
 				F71325850C4A05DC00B99F2D /* Trees */,
 				F70AA7B509AA2B8800C3FD5E /* ANTLRCharStream.h */,
 				1A18EF5511B8028D0006186A /* ANTLRBufferedTokenStream.h */,
@@ -1528,6 +1535,8 @@
 		F7A4094C096597C4002CC781 /* Exceptions */ = {
 			isa = PBXGroup;
 			children = (
+				F700E6190A5F66EC005D0757 /* ANTLREarlyExitException.h */,
+				F700E61A0A5F66EC005D0757 /* ANTLREarlyExitException.m */,
 				F738D1730B07AEAA001813C4 /* ANTLRFailedPredicateException.h */,
 				F738D1740B07AEAA001813C4 /* ANTLRFailedPredicateException.m */,
 				1A26329311C53578000DCDD4 /* ANTLRMismatchedNotSetException.h */,
@@ -1542,14 +1551,12 @@
 				F72C5D610AB63E0B00282574 /* ANTLRMismatchedTreeNodeException.m */,
 				1A6C451411BF4EE00039788A /* ANTLRMissingTokenException.h */,
 				1A6C451511BF4EE00039788A /* ANTLRMissingTokenException.m */,
-				1A8AC00A11BAEC710038DBB0 /* ANTLRRuntimeException.h */,
-				1A8AC00B11BAEC710038DBB0 /* ANTLRRuntimeException.m */,
 				F79D59890A0E51AB00EA3CEE /* ANTLRNoViableAltException.h */,
 				F79D598A0A0E51AB00EA3CEE /* ANTLRNoViableAltException.m */,
 				F777669109DC72D600517181 /* ANTLRRecognitionException.h */,
 				F777669209DC72D600517181 /* ANTLRRecognitionException.m */,
-				F700E6190A5F66EC005D0757 /* ANTLREarlyExitException.h */,
-				F700E61A0A5F66EC005D0757 /* ANTLREarlyExitException.m */,
+				1A8AC00A11BAEC710038DBB0 /* ANTLRRuntimeException.h */,
+				1A8AC00B11BAEC710038DBB0 /* ANTLRRuntimeException.m */,
 				F738D1750B07AEAA001813C4 /* ANTLRTreeException.h */,
 				F738D1760B07AEAA001813C4 /* ANTLRTreeException.m */,
 				1A6C452611BF50A40039788A /* ANTLRUnwantedTokenException.h */,
@@ -1794,6 +1801,7 @@
 				1AEECE1511E7EB3C00554AAF /* ANTLRTokenRewriteStream.h in Headers */,
 				1A86B91B11EB9F6300C67A03 /* ANTLRParseTree.h in Headers */,
 				1A86BACF11EC1CD000C67A03 /* ANTLRUnbufferedTokenStream.h in Headers */,
+				1A2BD16F133C06A6005C2AFB /* ANTLRFileStream.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1971,7 +1979,7 @@
 			);
 			name = polydiff;
 			productName = treerewrite;
-			productReference = 1A0F346612EA42D800496BB8 /* treerewrite */;
+			productReference = 1A0F346612EA42D800496BB8 /* polydiff */;
 			productType = "com.apple.product-type.tool";
 		};
 		1A1210FA11D3A5D900F27B38 /* ANTLRCommonTokenTest */ = {
@@ -2138,7 +2146,7 @@
 			);
 			name = treeparser;
 			productName = treerewrite;
-			productReference = 1AC5ACA712E7BEFE00DF0C58 /* treerewrite */;
+			productReference = 1AC5ACA712E7BEFE00DF0C58 /* treeparser */;
 			productType = "com.apple.product-type.tool";
 		};
 		8DC2EF4F0486A6940098B216 /* ANTLR */ = {
@@ -2543,6 +2551,7 @@
 				1A69627C12F24C60002725BD /* ANTLRDoubleKeyMap.m in Sources */,
 				1A7381801312C3AF008CCA16 /* ANTLRReaderStream.m in Sources */,
 				1A7381851312C3BE008CCA16 /* ANTLRInputStream.m in Sources */,
+				1A2BD16E133C06A6005C2AFB /* ANTLRFileStream.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2700,6 +2709,7 @@
 				1A86BAD011EC1CD000C67A03 /* ANTLRUnbufferedTokenStream.m in Sources */,
 				1A7381821312C3AF008CCA16 /* ANTLRReaderStream.m in Sources */,
 				1A7381871312C3BE008CCA16 /* ANTLRInputStream.m in Sources */,
+				1A2BD170133C06A6005C2AFB /* ANTLRFileStream.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4602,6 +4612,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_ENABLE_SYMBOL_SEPARATION = NO;
 				GCC_MODEL_TUNING = G4;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -4655,7 +4666,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_ENABLE_OBJC_GC = supported;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_ENABLE_SYMBOL_SEPARATION = NO;
 				GCC_OPTIMIZATION_LEVEL = 1;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = NO;

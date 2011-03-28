@@ -114,4 +114,7 @@ NSInteger level;
 /** For debugging; destructive: moves tree iterator to end. */
 - (NSString *) toTokenTypeString;
 
+@property (retain) ANTLRTreeIterator *it;
+@property (retain) ANTLRIntArray *calls;
+@property BOOL hasNilRoot;
 @end

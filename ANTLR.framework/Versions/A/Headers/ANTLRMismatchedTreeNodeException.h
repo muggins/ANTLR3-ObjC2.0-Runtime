@@ -35,7 +35,7 @@
 
 @property (getter=getExpecting, setter=setExpecting) NSInteger expecting;
 
-+ (id) newANTLRMismatchedTreeNodeException:(NSInteger)expectedTokenType Stream:(id<ANTLRIntStream>)anInput;
++ (id) newException:(NSInteger)expectedTokenType Stream:(id<ANTLRIntStream>)anInput;
 - (id) initWithTokenType:(NSInteger) expectedTokenType Stream:(id<ANTLRIntStream>)anInput;
 
 

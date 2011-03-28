@@ -166,6 +166,7 @@
 - (NSString *) toString;
 - (NSString *) toStringTree;
 
+@property (retain) NSException *anException;
 @end
 
 @interface ANTLRTreeNavigationNode : ANTLRBaseTree {

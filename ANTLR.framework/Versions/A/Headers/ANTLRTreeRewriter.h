@@ -42,6 +42,8 @@
 
 - (id)rule;
 
+@property (retain) id  actor;
+@property SEL ruleSEL;
 @end
 
 @interface ANTLRTreeRewriter : ANTLRTreeParser {
@@ -69,4 +71,8 @@
 - (ANTLRTreeRewriter *) topdown;
 - (ANTLRTreeRewriter *) bottomup;
 
+@property BOOL showTransformations;
+@property (retain) id<ANTLRTokenStream> originalTokenStream;
+@property (retain) id<ANTLRTreeAdaptor> originalAdaptor;
+@property (retain) ANTLRfptr *rule;
 @end
