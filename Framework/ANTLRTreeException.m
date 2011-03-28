@@ -35,7 +35,7 @@
 
 @implementation ANTLRTreeException
 
-+ (id) exceptionWithOldRoot:(id<ANTLRTree>)theOldRoot newRoot:(id<ANTLRTree>)theNewRoot stream:(id<ANTLRIntStream>)aStream;
++ (id) newException:(id<ANTLRTree>)theOldRoot newRoot:(id<ANTLRTree>)theNewRoot stream:(id<ANTLRIntStream>)aStream;
 {
 	return [[ANTLRTreeException alloc] initWithOldRoot:theOldRoot newRoot:theNewRoot stream:aStream];
 }

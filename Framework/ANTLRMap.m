@@ -44,18 +44,12 @@
 
 +(id)newANTLRMap
 {
-    ANTLRMap *aNewANTLRMap;
-    
-    aNewANTLRMap = [[ANTLRMap alloc] init];
-	return( aNewANTLRMap );
+    return [[ANTLRMap alloc] init];
 }
 
 +(id)newANTLRMapWithLen:(NSInteger)aBuffSize
 {
-    ANTLRMap *aNewANTLRMap;
-    
-    aNewANTLRMap = [[ANTLRMap alloc] initWithLen:aBuffSize];
-	return( aNewANTLRMap );
+    return [[ANTLRMap alloc] initWithLen:aBuffSize];
 }
 
 -(id)init

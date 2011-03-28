@@ -34,7 +34,7 @@
 
 @interface ANTLRIntArray : ANTLRPtrBuffer 
 {
-    NSInteger *ip;
+    NSUInteger *ip;
 }
 
 + (ANTLRIntArray *)newArray;
@@ -50,13 +50,14 @@
 - (void) addInteger:(NSInteger) v;
 - (void) push:(NSInteger) v;
 - (NSInteger) pop;
-- (NSInteger) integerAtIndex:(NSInteger) i;
-- (void) insertInteger:(NSInteger)anInteger AtIndex:(NSInteger) idx;
-- (NSInteger) size;
+- (NSInteger) integerAtIndex:(NSUInteger) i;
+- (void) insertInteger:(NSInteger)anInteger AtIndex:(NSUInteger) idx;
+- (NSUInteger) size;
 - (void) reset;
 
-- (NSInteger) count;
-- (NSInteger) size;
-- (void) ensureCapacity:(NSInteger) index;
+- (NSUInteger) count;
+- (NSUInteger) size;
+- (void) ensureCapacity:(NSUInteger) index;
 
+@property NSUInteger *ip;
 @end

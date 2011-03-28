@@ -48,12 +48,12 @@
 
 +(ANTLRPtrBuffer *)newANTLRPtrBuffer
 {
-    return [[ANTLRPtrBuffer alloc] init];
+    return [[[ANTLRPtrBuffer alloc] init] retain];
 }
 
 +(ANTLRPtrBuffer *)newANTLRPtrBufferWithLen:(NSInteger)cnt
 {
-    return [[ANTLRPtrBuffer alloc] initWithLen:cnt];
+    return [[[ANTLRPtrBuffer alloc] initWithLen:cnt] retain];
 }
 
 -(id)init
@@ -61,11 +61,9 @@
     NSInteger idx;
     
 	if ((self = [super init]) != nil) {
-		fNext = nil;
         BuffSize  = BUFFSIZE;
         ptr = 0;
-        buffer = [NSMutableData dataWithLength:(NSUInteger)BuffSize * sizeof(id)];
-        [buffer retain];
+        buffer = [[NSMutableData dataWithLength:(NSUInteger)BuffSize * sizeof(id)] retain];
         ptrBuffer = (id *)[buffer mutableBytes];
         for( idx = 0; idx < BuffSize; idx++ ) {
             ptrBuffer[idx] = nil;
@@ -79,11 +77,9 @@
     NSInteger idx;
     
 	if ((self = [super init]) != nil) {
-		fNext = nil;
         BuffSize  = cnt;
         ptr = 0;
-        buffer = [NSMutableData dataWithLength:(NSUInteger)BuffSize * sizeof(id)];
-        [buffer retain];
+        buffer = [[NSMutableData dataWithLength:(NSUInteger)BuffSize * sizeof(id)] retain];
         ptrBuffer = (id *)[buffer mutableBytes];
         for( idx = 0; idx < BuffSize; idx++ ) {
             ptrBuffer[idx] = nil;
@@ -102,7 +98,10 @@
             tmp = ptrBuffer[idx];
             while ( tmp ) {
                 rtmp = tmp;
-                tmp = (id)tmp.fNext;
+                if ([tmp isKindOfClass:[ANTLRLinkBase class]])
+                    tmp = (id)tmp.fNext;
+                else
+                    tmp = nil;
                 [rtmp dealloc];
             }
         }
@@ -132,7 +131,10 @@
         tmp = ptrBuffer[idx];
         while ( tmp ) {
             rtmp = tmp;
-            tmp = [tmp getfNext];
+            if ([tmp isKindOfClass:[ANTLRLinkBase class]])
+                tmp = (id)tmp.fNext;
+            else
+                tmp = nil;
             [rtmp dealloc];
         }
         ptrBuffer[idx] = nil;

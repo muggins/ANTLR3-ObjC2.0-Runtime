@@ -35,12 +35,12 @@
 
 + (ANTLRIntArray *)newArray
 {
-    return [[ANTLRIntArray alloc] init];
+    return [[[ANTLRIntArray alloc] init] retain];
 }
 
 + (ANTLRIntArray *)newArrayWithLen:(NSInteger)aLen
 {
-    return [[ANTLRIntArray alloc] initWithLen:aLen];
+    return [[[ANTLRIntArray alloc] initWithLen:aLen] retain];
 }
 
 -(id) init
@@ -51,10 +51,10 @@
 	return self;
 }
 
--(id) initWithLen:(NSInteger)aLen
+-(id) initWithLen:(NSUInteger)aLen
 {
 	if ((self = [super initWithLen:aLen]) != nil) {
-        ip = (NSInteger *)ptrBuffer;
+        ip = (NSUInteger *)ptrBuffer;
 	}
 	return self;
 }
@@ -80,7 +80,7 @@
 // FIXME: Java runtime returns p, I'm not so sure it's right so have added p + 1 to show true size!
 -(NSInteger) size
 {
-	return (ptr * sizeof(NSInteger));
+	return (ptr * sizeof(NSUInteger));
 }
 
 -(void) addInteger:(NSInteger) v
@@ -100,7 +100,7 @@
 	return v;
 }
 
--(NSInteger) integerAtIndex:(NSInteger) i
+-(NSInteger) integerAtIndex:(NSUInteger) i
 {
     if (i >= BuffSize) {
         return (NSInteger)-1;
@@ -108,7 +108,7 @@
 	return (NSInteger) ip[i];
 }
 
--(void) insertInteger:(NSInteger)anInteger AtIndex:(NSInteger)idx
+-(void) insertInteger:(NSInteger)anInteger AtIndex:(NSUInteger)idx
 {
     if ( idx >= BuffSize ) {
         [self ensureCapacity:idx];
@@ -120,20 +120,21 @@
 	ptr = 0;
 }
 
-- (void) ensureCapacity:(NSInteger) index
+- (void) ensureCapacity:(NSUInteger) index
 {
-	if ((index * sizeof(NSInteger)) >= [buffer length])
+	if ((index * sizeof(NSUInteger)) >= [buffer length])
 	{
 		NSInteger newSize = ([buffer length] / sizeof(NSInteger)) * 2;
 		if (index > newSize) {
 			newSize = index + 1;
 		}
         BuffSize = newSize;
-		[buffer setLength:(BuffSize * sizeof(NSInteger))];
+		[buffer setLength:(BuffSize * sizeof(NSUInteger))];
         ptrBuffer = (id *)[buffer mutableBytes];
         ip = (NSInteger *)ptrBuffer;
 	}
 }
 
+@synthesize ip;
 @end
 

@@ -150,7 +150,10 @@ static ANTLRCommonToken *INVALID_TOKEN;
         channel = aChannel;
         startIndex = aStart;
         stopIndex = aStop;
-        text = [input substringWithRange:NSMakeRange(startIndex, (stopIndex-startIndex)+1)];
+        if (type == ANTLRTokenTypeEOF)
+            text = @"EOF";
+        else
+            text = [input substringWithRange:NSMakeRange(startIndex, (stopIndex-startIndex)+1)];
     }
     return self;
 }

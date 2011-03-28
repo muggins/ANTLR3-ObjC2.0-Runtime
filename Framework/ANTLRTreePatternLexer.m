@@ -44,7 +44,7 @@
         p = -1;
         n = 0;
         error = NO;
-        sval = [NSMutableData dataWithLength:1000];
+        sval = [[NSMutableData dataWithLength:1000] retain];
         data = [sval mutableBytes];
         pattern = @"";
         n = [pattern length];
@@ -59,7 +59,7 @@
         p = -1;
         n = 0;
         error = NO;
-        sval = [NSMutableData dataWithLength:1000];
+        sval = [[NSMutableData dataWithLength:1000] retain];
         data = [sval mutableBytes];
         pattern = aPattern;
         n = [pattern length];
