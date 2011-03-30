@@ -91,6 +91,13 @@
 	return self;
 }
 
+- (id) initWithName:(NSString *)aName reason:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo
+{
+    if ((self = [super initWithName:(NSString *)aName reason:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo]) != nil) {
+    }
+    return self;
+}
+
 - (void) dealloc
 {
 	[self setStream:nil];

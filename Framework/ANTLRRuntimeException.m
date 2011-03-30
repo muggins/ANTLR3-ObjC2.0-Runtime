@@ -244,3 +244,24 @@
 
 @end
 
+@implementation ANTLRRewriteEarlyExitException
+
++ (id) newException
+{
+	return [[self alloc] init];
+}
+
+- (id) init
+{
+	if ( self = [super initWithName:@"RewriteEarlyExitException" reason:nil userInfo:nil] ) {
+	}
+	return self;
+}
+
+- (NSString *) description
+{
+	NSMutableString *desc = @"Early Exit from rewrite stream";
+	return desc;
+}
+
+@end
