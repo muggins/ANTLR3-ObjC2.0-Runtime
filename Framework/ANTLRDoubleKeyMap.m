@@ -16,12 +16,12 @@
     id prev = nil;
     if (data2 == nil) {
         data2 = [[NSMutableDictionary dictionaryWithCapacity:30] retain];
-        [data setObject:k1 forKey:data2];
+        [data setObject:data2 forKey:k1];
     }
     else {
         prev = [data2 objectForKey:k2];
     }
-    [data2 setObject:k2 forKey:v];
+    [data2 setObject:v forKey:k2];
     return prev;
 }
 
