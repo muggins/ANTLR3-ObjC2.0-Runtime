@@ -268,7 +268,7 @@
         }
         return;
     }
-    for (int i=0; i < [children count]; i++) {
+    for (NSUInteger i=0; i < [children count]; i++) {
         [[children objectAtIndex:i] setUnknownTokenBoundaries];
     }
     if ( startIndex >= 0 && stopIndex >= 0 )

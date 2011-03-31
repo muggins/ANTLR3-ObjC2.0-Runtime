@@ -42,7 +42,7 @@
     NSInteger lastHash;
 }
 
-@property (getter=getLastHash, setter=setLastHash) NSInteger lastHash;
+@property (getter=getLastHash, setter=setLastHash:) NSInteger lastHash;
 
 + (id)newANTLRUniqueIDMap;
 + (id)newANTLRUniqueIDMapWithLen:(NSInteger)aHashSize;

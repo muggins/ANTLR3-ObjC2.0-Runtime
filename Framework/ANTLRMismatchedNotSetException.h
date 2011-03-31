@@ -37,7 +37,7 @@
 {
     ANTLRBitSet *expecting;
 }
-@property (retain, getter=getExpecting, setter=setExpecting) ANTLRBitSet *expecting;
+@property (retain, getter=getExpecting, setter=setExpecting:) ANTLRBitSet *expecting;
 
 - (ANTLRMismatchedNotSetException *)newException;
 - (ANTLRMismatchedNotSetException *)newException:(id<ANTLRIntStream>)anInput

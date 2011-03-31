@@ -37,7 +37,7 @@
     id<ANTLRTree> node;
 }
 
-@property (retain, getter=getNode, setter=setNode:) id node;
+@property (retain, getter=getNode, setter=setNode:) id<ANTLRTree> node;
 
 + (void)initialize;
 

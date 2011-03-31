@@ -28,7 +28,7 @@
 
 @protocol ANTLRBaseTree <ANTLRTree>
 
-@property (retain, getter=getChildren, setter=setChildren) NSMutableArray *children;
+@property (retain, getter=getChildren, setter=setChildren:) NSMutableArray *children;
 
 + (id<ANTLRBaseTree>) newTree;
 + (id<ANTLRBaseTree>) newTree:(id<ANTLRBaseTree>)node;
@@ -101,7 +101,7 @@
     NSException *anException;
 }
 
-@property (retain, getter=getChildren, setter=setChildren) NSMutableArray *children;
+@property (retain, getter=getChildren, setter=setChildren:) NSMutableArray *children;
 
 + (id<ANTLRBaseTree>) newTree;
 + (id<ANTLRBaseTree>) newTree:(id<ANTLRBaseTree>)node;

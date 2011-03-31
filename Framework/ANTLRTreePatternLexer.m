@@ -33,6 +33,14 @@
 
 @implementation ANTLRTreePatternLexer
 
+@synthesize pattern;
+@synthesize p;
+@synthesize c;
+@synthesize n;
+@synthesize sval;
+@synthesize data;
+@synthesize error;
+
 + (ANTLRTreePatternLexer *)newANTLRTreePatternLexer:(NSString *)aPattern
 {
     return [[ANTLRTreePatternLexer alloc] initWithPattern:aPattern];

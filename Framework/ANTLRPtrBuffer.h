@@ -49,7 +49,7 @@
 @property (getter=getCount, setter=setCount:) NSUInteger count;
 @property (getter=getPtr, setter=setPtr:) NSUInteger ptr;
 @property (retain, getter=getBuffer, setter=setBuffer:) NSMutableData *buffer;
-@property (retain, getter=getPtrBuffer, setter=setPtrBuffer:) id *ptrBuffer;
+@property (assign, getter=getPtrBuffer, setter=setPtrBuffer:) id *ptrBuffer;
 
 // Contruction/Destruction
 +(ANTLRPtrBuffer *)newANTLRPtrBuffer;

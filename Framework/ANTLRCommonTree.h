@@ -36,11 +36,11 @@
     NSInteger childIndex;
 }
 
-@property (retain, getter=getANTLRCommonToken, setter=setANTLRCommonToken) ANTLRCommonToken *token;
-@property (assign, getter=getTokenStartIndex, setter=setTokenStartIndex) NSInteger startIndex;
-@property (assign, getter=getTokenStopIndex, setter=setTokenStopIndex) NSInteger stopIndex;
+@property (retain, getter=getANTLRCommonToken, setter=setANTLRCommonToken:) ANTLRCommonToken *token;
+@property (assign, getter=getTokenStartIndex, setter=setTokenStartIndex:) NSInteger startIndex;
+@property (assign, getter=getTokenStopIndex, setter=setTokenStopIndex:) NSInteger stopIndex;
 @property (retain, getter=getParent, setter=setParent:) ANTLRCommonTree *parent;
-@property (assign, getter=getChildIndex, setter=setChildIndex) NSInteger childIndex;
+@property (assign, getter=getChildIndex, setter=setChildIndex:) NSInteger childIndex;
 
 + (ANTLRCommonTree *) invalidNode;
 + (ANTLRCommonTree *) newTree;
