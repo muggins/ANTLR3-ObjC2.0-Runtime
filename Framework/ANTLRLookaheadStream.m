@@ -185,9 +185,9 @@
 //    if (lastMarker == 0) [self reset];
 }
 
--(void) seek:(NSInteger) index
+-(void) seek:(NSInteger) anIndex
 {
-	p = index;
+	p = anIndex;
 }
 
 - (id) getEof

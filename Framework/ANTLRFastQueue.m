@@ -103,17 +103,17 @@
 	[data addObject:o];
 }
 
-- (NSInteger) count
+- (NSUInteger) count
 {
 	return [data count];
 }
 
-- (NSInteger) size
+- (NSUInteger) size
 {
 	return [data count] - p;
 }
 
-- (NSInteger) range
+- (NSUInteger) range
 {
     return range;
 }

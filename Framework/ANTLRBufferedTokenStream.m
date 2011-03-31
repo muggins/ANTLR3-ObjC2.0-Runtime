@@ -97,9 +97,9 @@ extern NSInteger debug;
     return p;
 }
 
-- (void) setIndex:(NSInteger) index
+- (void) setIndex:(NSInteger) anIndex
 {
-    p = index;
+    p = anIndex;
 }
 
 - (NSInteger) getRange
@@ -143,9 +143,9 @@ extern NSInteger debug;
     lastMarker = 0;
 }
 
-- (void) seek:(NSInteger) index
+- (void) seek:(NSInteger) anIndex
 {
-    p = index;
+    p = anIndex;
 }
 
 - (NSInteger) size

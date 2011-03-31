@@ -235,7 +235,7 @@ extern NSInteger debug;
 	if (p == -1) {
 		[self fillBuffer];
 	}
-	for (NSInteger i = 0; i < [nodes count]; i++) {
+	for (NSUInteger i = 0; i < [nodes count]; i++) {
 		id t = [nodes objectAtIndex:i];
 		if (t == node) {
 			return i;
@@ -267,7 +267,7 @@ extern NSInteger debug;
 	[nodes addObject:navNode];
 }
 
--(id) getNode:(NSInteger) i
+-(id) getNode:(NSUInteger) i
 {
 	if (p == -1) {
 		[self fillBuffer];
@@ -458,7 +458,7 @@ extern NSInteger debug;
 		[self fillBuffer];
 	}
 	NSMutableString *buf = [NSMutableString stringWithCapacity:10];
-	for (NSInteger i= 0; i < [nodes count]; i++) {
+	for (NSUInteger i= 0; i < [nodes count]; i++) {
 		id<ANTLRTree> aTree = (id<ANTLRTree>)[self getNode:i];
 		[buf appendFormat:@" %d", [adaptor getType:aTree]];
 	}
@@ -471,7 +471,7 @@ extern NSInteger debug;
 		[self fillBuffer];
 	}
 	NSMutableString *buf = [NSMutableString stringWithCapacity:10];
-	for (NSInteger i = aStart; i < [nodes count] && i <= aStop; i++) {
+	for (NSUInteger i = aStart; i < [nodes count] && i <= aStop; i++) {
 		id<ANTLRTree> t = (id<ANTLRTree>)[self getNode:i];
 		[buf appendFormat:@" %d", [adaptor getType:t]];
 	}
@@ -502,7 +502,7 @@ extern NSInteger debug;
 	}
 	// walk nodes looking for aStart
 	id<ANTLRTree> aTree = nil;
-	NSInteger i = 0;
+	NSUInteger i = 0;
 	for (; i < [nodes count]; i++) {
 		aTree = [nodes objectAtIndex:i];
 		if (aTree == aStart) {

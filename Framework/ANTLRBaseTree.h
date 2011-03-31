@@ -123,8 +123,8 @@
 - (void) addChild:(id<ANTLRTree>) tree;
 - (void) addChildren:(NSArray *) theChildren;
 
-- (void) setChild:(NSInteger) i With:(id<ANTLRTree>)t;
-- (id) deleteChild:(NSInteger) i;
+- (void) setChild:(NSUInteger) i With:(id<ANTLRTree>)t;
+- (id) deleteChild:(NSUInteger) i;
 - (NSMutableArray *) createChildrenList;
 - (void) replaceChildrenFrom:(NSInteger)startChildIndex To:(NSInteger)stopChildIndex With:(id) t;
 // Indicates the node is a nil node but may still have children, meaning

@@ -47,11 +47,13 @@
 @property (getter=getLine, setter=setLine:) NSInteger line;
 @property (getter=getCharPositionInLine, setter=setCharPositionInLine:) NSInteger charPositionInLine;
 
-+ (ANTLRRecognitionException *) newException;
-+ (ANTLRRecognitionException *) newException:(id<ANTLRIntStream>) anInputStream; 
++ (id) newException;
++ (id) newException:(id<ANTLRIntStream>) anInputStream; 
 - (id) init;
 - (id) initWithStream:(id<ANTLRIntStream>)anInputStream;
 - (id) initWithStream:(id<ANTLRIntStream>)anInputStream reason:(NSString *)aReason;
+- (id) initWithName:(NSString *)aName reason:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo;
+
 - (NSInteger) unexpectedType;
 - (id<ANTLRToken>)getUnexpectedToken;
 

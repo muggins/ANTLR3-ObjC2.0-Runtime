@@ -38,10 +38,10 @@
 }
 
 + (ANTLRIntArray *)newArray;
-+ (ANTLRIntArray *)newArrayWithLen:(NSInteger)aLen;
++ (ANTLRIntArray *)newArrayWithLen:(NSUInteger)aLen;
 
 - (id) init;
-- (id) initWithLen:(NSInteger)aLen;
+- (id) initWithLen:(NSUInteger)aLen;
 
 - (void) dealloc;
 
@@ -52,7 +52,6 @@
 - (NSInteger) pop;
 - (NSInteger) integerAtIndex:(NSUInteger) i;
 - (void) insertInteger:(NSInteger)anInteger AtIndex:(NSUInteger) idx;
-- (NSUInteger) size;
 - (void) reset;
 
 - (NSUInteger) count;

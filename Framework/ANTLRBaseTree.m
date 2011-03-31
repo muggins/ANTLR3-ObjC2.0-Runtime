@@ -106,7 +106,7 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
 
 - (id<ANTLRTree>) getFirstChildWithType:(NSInteger) type
 {
-    for (int i = 0; children != nil && i < [children count]; i++) {
+    for (NSUInteger i = 0; children != nil && i < [children count]; i++) {
         id<ANTLRTree> t = (id<ANTLRTree>) [children objectAtIndex:i];
         if ( [t getType] == type ) {
             return t;
@@ -177,13 +177,13 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
 /** Add all elements of kids list as children of this node */
 - (void) addChildren:(NSMutableArray *) kids
 {
-    for (int i = 0; i < [kids count]; i++) {
+    for (NSUInteger i = 0; i < [kids count]; i++) {
         id<ANTLRTree> t = (id<ANTLRTree>) [kids objectAtIndex:i];
         [self addChild:t];
     }
 }
 
-- (void) setChild:(NSInteger) i With:(id<ANTLRTree>)t
+- (void) setChild:(NSUInteger) i With:(id<ANTLRTree>)t
 {
     if ( t == nil ) {
         return;
@@ -338,7 +338,7 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
     return 0;
 }
 
-- (void) setTokenStartIndex:(NSInteger) index
+- (void) setTokenStartIndex:(NSInteger) anIndex
 {
 }
 
@@ -350,7 +350,7 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
     return 0;
 }
 
-- (void) setTokenStopIndex:(NSInteger) index
+- (void) setTokenStopIndex:(NSInteger) anIndex
 {
 }
 
@@ -366,7 +366,7 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
     return 0;
 }
 
-- (void) setChildIndex:(NSInteger) index
+- (void) setChildIndex:(NSInteger) anIndex
 {
 }
 

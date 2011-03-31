@@ -187,9 +187,9 @@
     [(id<ANTLRTree>) t setChild:i With:child];
 }
 
-- (id) deleteChild:(id<ANTLRTree>)t Index:(int)index
+- (id) deleteChild:(id<ANTLRTree>)t Index:(NSInteger)anIndex
 {
-    return [t deleteChild:index];
+    return [t deleteChild:anIndex];
 }
 
 - (NSInteger) getChildCount:(id<ANTLRTree>) t
@@ -219,10 +219,10 @@
     return [(id<ANTLRTree>) t getChildIndex];
 }
 
-- (void) setChildIndex:(id<ANTLRTree>)t With:(NSInteger)index
+- (void) setChildIndex:(id<ANTLRTree>)t With:(NSInteger)anIndex
 {
     if ( t!=nil )
-        [(id<ANTLRTree>)t setChildIndex:index];
+        [(id<ANTLRTree>)t setChildIndex:anIndex];
 }
 
 - (void) replaceChildren:(id<ANTLRTree>)parent From:(NSInteger)startChildIndex To:(NSInteger)stopChildIndex With:(id<ANTLRTree>)t

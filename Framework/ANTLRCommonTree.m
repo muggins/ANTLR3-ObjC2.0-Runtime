@@ -296,9 +296,9 @@
     parent = (ANTLRCommonTree *)t;
 }
 
-- (void) setChildIndex:(NSInteger) index
+- (void) setChildIndex:(NSInteger) anIndex
 {
-    childIndex = index;
+    childIndex = anIndex;
 }
 
 - (NSString *) description

@@ -1055,7 +1055,7 @@ static NSString *NEXT_TOKEN_RULE_NAME;
 
     int aCnt = 0;
     aRuleStack = state.ruleMemo;
-    for (int i = 0; aRuleStack != nil && i < [aRuleStack length]; i++) {
+    for (NSUInteger i = 0; aRuleStack != nil && i < [aRuleStack length]; i++) {
         aHashRule = [aRuleStack objectAtIndex:i];
         if ( aHashRule != nil ) {
             aCnt += [aHashRule count]; // how many input indexes are recorded?

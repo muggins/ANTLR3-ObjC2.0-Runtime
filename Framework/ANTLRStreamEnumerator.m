@@ -62,7 +62,7 @@
 
 -(id) nextObject
 {
-	NSInteger current = i;
+	NSUInteger current = i;
 	i++;
 	if (current < [nodes count])
 	{

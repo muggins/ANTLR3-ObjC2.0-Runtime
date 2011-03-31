@@ -162,17 +162,17 @@
 /** Make stream jump to a new location, saving old location.
  *  Switch back with pop().
  */
-- (void) push:(NSInteger) index
+- (void) push:(NSInteger) anIndex
 {
     if ( calls == nil ) {
         calls = [ANTLRIntArray newArrayWithLen:INITIAL_CALL_STACK_SIZE];
     }
-    [calls push:p]; // save current index
-    [self seek:index];
+    [calls push:p]; // save current anIndex
+    [self seek:anIndex];
 }
 
-/** Seek back to previous index saved during last push() call.
- *  Return top of stack (return index).
+/** Seek back to previous anIndex saved during last push() call.
+ *  Return top of stack (return anIndex).
  */
 - (NSInteger) pop
 {

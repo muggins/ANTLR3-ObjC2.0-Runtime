@@ -90,3 +90,11 @@
 - (id) init:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo;
 
 @end
+
+@interface ANTLRRewriteEarlyExitException : ANTLRRuntimeException {
+}
+
++ (id) newException;
+- (id) initWithName:(NSString *)aName reason:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo;
+
+@end

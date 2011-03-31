@@ -298,19 +298,19 @@ extern NSInteger debug;
 // when seeking forward we must handle character position and line numbers.
 // seeking backward already has the correct line information on the markers stack, 
 // so we just take it from there.
-- (void) seek:(NSInteger) index 
+- (void) seek:(NSInteger) anIndex 
 {
-    if (debug > 1) NSLog(@"seek entry -- index=%d p=%d\n", index, p);
-	if ( index <= p ) {
-		p = index; // just jump; don't update stream charState (line, ...)
-        if (debug > 1) NSLog(@"seek exit return -- index=%d p=%d\n", index, p);
+    if (debug > 1) NSLog(@"seek entry -- index=%d p=%d\n", anIndex, p);
+	if ( anIndex <= p ) {
+		p = anIndex; // just jump; don't update stream charState (line, ...)
+        if (debug > 1) NSLog(@"seek exit return -- index=%d p=%d\n", anIndex, p);
 		return;
 	}
-	// seek forward, consume until p hits index
-	while ( p < index ) {
+	// seek forward, consume until p hits anIndex
+	while ( p < anIndex ) {
 		[self consume];
 	}
-    if (debug > 1) NSLog(@"seek exit end -- index=%d p=%d\n", index, p);
+    if (debug > 1) NSLog(@"seek exit end -- index=%d p=%d\n", anIndex, p);
 }
 
 // get a substring from our raw data.

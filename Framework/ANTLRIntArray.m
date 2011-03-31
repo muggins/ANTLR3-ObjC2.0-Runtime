@@ -38,7 +38,7 @@
     return [[[ANTLRIntArray alloc] init] retain];
 }
 
-+ (ANTLRIntArray *)newArrayWithLen:(NSInteger)aLen
++ (ANTLRIntArray *)newArrayWithLen:(NSUInteger)aLen
 {
     return [[[ANTLRIntArray alloc] initWithLen:aLen] retain];
 }
@@ -46,7 +46,7 @@
 -(id) init
 {
 	if ((self = [super initWithLen:ANTLR_INT_ARRAY_INITIAL_SIZE]) != nil) {
-        ip = (NSInteger *)ptrBuffer;
+        ip = (NSUInteger *)ptrBuffer;
 	}
 	return self;
 }
@@ -72,13 +72,13 @@
     return copy;
 }
 
-- (NSInteger)count
+- (NSUInteger)count
 {
     return ptr;
 }
 
 // FIXME: Java runtime returns p, I'm not so sure it's right so have added p + 1 to show true size!
--(NSInteger) size
+-(NSUInteger) size
 {
 	return (ptr * sizeof(NSUInteger));
 }
@@ -120,18 +120,18 @@
 	ptr = 0;
 }
 
-- (void) ensureCapacity:(NSUInteger) index
+- (void) ensureCapacity:(NSUInteger) anIndex
 {
-	if ((index * sizeof(NSUInteger)) >= [buffer length])
+	if ((anIndex * sizeof(NSUInteger)) >= [buffer length])
 	{
-		NSInteger newSize = ([buffer length] / sizeof(NSInteger)) * 2;
-		if (index > newSize) {
-			newSize = index + 1;
+		NSUInteger newSize = ([buffer length] / sizeof(NSUInteger)) * 2;
+		if (anIndex > newSize) {
+			newSize = anIndex + 1;
 		}
         BuffSize = newSize;
 		[buffer setLength:(BuffSize * sizeof(NSUInteger))];
         ptrBuffer = (id *)[buffer mutableBytes];
-        ip = (NSInteger *)ptrBuffer;
+        ip = (NSUInteger *)ptrBuffer;
 	}
 }
 

@@ -495,9 +495,9 @@ extern NSInteger debug;
     if ( end == [tokens count]-1 ) {
         // Scan any remaining operations after last token
         // should be included (they will be inserts).
-        int i = 0;
-        while ( i < [indexToOp count] - 1 ) {
-            ANTLRRewriteOperation *op = [indexToOp objectAtIndex:i];
+        int i2 = 0;
+        while ( i2 < [indexToOp count] - 1 ) {
+            ANTLRRewriteOperation *op = [indexToOp objectAtIndex:i2];
             if ( op.index >= [tokens count]-1 ) {
                 [buf appendString:op.text];
             }

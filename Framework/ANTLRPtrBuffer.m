@@ -58,7 +58,7 @@
 
 -(id)init
 {
-    NSInteger idx;
+    NSUInteger idx;
     
 	if ((self = [super init]) != nil) {
         BuffSize  = BUFFSIZE;
@@ -72,9 +72,9 @@
     return( self );
 }
 
--(id)initWithLen:(NSInteger)cnt
+-(id)initWithLen:(NSUInteger)cnt
 {
-    NSInteger idx;
+    NSUInteger idx;
     
 	if ((self = [super init]) != nil) {
         BuffSize  = cnt;
@@ -151,12 +151,12 @@
     buffer = np;
 }
 
-- (NSInteger)getCount
+- (NSUInteger)getCount
 {
 	return( count );
 }
 
-- (void)setCount:(NSInteger)aCount
+- (void)setCount:(NSUInteger)aCount
 {
     count = aCount;
 }
@@ -171,12 +171,12 @@
     ptrBuffer = np;
 }
 
-- (NSInteger)getPtr
+- (NSUInteger)getPtr
 {
 	return( ptr );
 }
 
-- (void)setPtr:(NSInteger)aPtr
+- (void)setPtr:(NSUInteger)aPtr
 {
     ptr = aPtr;
 }
@@ -220,7 +220,7 @@
 	return v;
 }
 
-- (NSInteger)count
+- (NSUInteger)count
 {
     int cnt = 0;
     
@@ -233,14 +233,14 @@
     return cnt;
 }
 
-- (NSInteger)length
+- (NSUInteger)length
 {
     return BuffSize;
 }
 
-- (NSInteger)size
+- (NSUInteger)size
 {
-    NSInteger aSize = 0;
+    NSUInteger aSize = 0;
     for (int i = 0; i < BuffSize; i++ ) {
         if (ptrBuffer[i] != nil) {
             aSize += sizeof(id);
@@ -249,7 +249,7 @@
     return aSize;
 }
 
-- (void) insertObject:(id)aRule atIndex:(NSInteger)idx
+- (void) insertObject:(id)aRule atIndex:(NSUInteger)idx
 {
     if ( idx >= BuffSize ) {
         [self ensureCapacity:idx];
@@ -261,7 +261,7 @@
     ptrBuffer[idx] = aRule;
 }
 
-- (id)objectAtIndex:(NSInteger)idx
+- (id)objectAtIndex:(NSUInteger)idx
 {
     if ( idx < BuffSize ) {
         return ptrBuffer[idx];
@@ -293,13 +293,13 @@
     ptr = 0;
 }
 
-- (void) ensureCapacity:(NSInteger) index
+- (void) ensureCapacity:(NSUInteger) anIndex
 {
-	if ((index * sizeof(id)) >= [buffer length])
+	if ((anIndex * sizeof(id)) >= [buffer length])
 	{
 		NSInteger newSize = ([buffer length] / sizeof(id)) * 2;
-		if (index > newSize) {
-			newSize = index + 1;
+		if (anIndex > newSize) {
+			newSize = anIndex + 1;
 		}
         BuffSize = newSize;
 		[buffer setLength:(BuffSize * sizeof(id))];
@@ -307,7 +307,7 @@
 	}
 }
 
-- (NSString *) toString
+- (NSString *) description
 {
     NSMutableString *str;
     NSInteger idx, cnt;
@@ -319,6 +319,11 @@
     }
     [str appendString:@"]"];
     return str;
+}
+
+- (NSString *) toString
+{
+    return [self description];
 }
 
 @end
