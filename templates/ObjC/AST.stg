@@ -409,7 +409,7 @@ rewritePositiveClosureBlock(
 // <fileName>:<description>
 {
 if ( !(<referencedElements:{el | [stream_<el> hasNext]}; separator=" || ">) ) {
-    @throw [NSException newException:@"RewriteEarlyExitException" reason:nil userInfo:nil];
+    @throw [ANTLRRewriteEarlyExitException newException];
 }
 while ( <referencedElements:{el | [stream_<el> hasNext]}; separator=" || "> ) {
     <alt>

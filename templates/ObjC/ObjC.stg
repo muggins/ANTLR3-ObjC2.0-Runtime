@@ -1411,7 +1411,7 @@ if ( [input LA:1] == DOWN ) {
 validateSemanticPredicate(pred,description) ::= <<
 if ( !(<evalPredicate(...)>) ) {
     <ruleBacktrackFailure()>
-    @throw [ANTLRFailedPredicateException exceptionWithRuleName:@"<ruleName>" predicate:@"<description>" stream:input];
+    @throw [ANTLRFailedPredicateException newException:@"<ruleName>" predicate:@"<description>" stream:input];
 }
 >>
 
@@ -1679,7 +1679,7 @@ s = <targetStateNumber>;<\n> /* eotDFAEdge */
 
 andPredicates(left,right) ::= "(<left>&&<right>)"
 
-orPredicates(operands) ::= "(first(operands)<rest(operands):{o | ||<o>}>)"
+orPredicates(operands) ::= "(<first(operands)><rest(operands):{o | ||<o>}>)"
 
 notPredicate(pred) ::= "!(<evalPredicate(...)>)"
 
