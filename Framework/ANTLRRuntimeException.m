@@ -62,36 +62,31 @@
 
 - (id) init
 {
-    if ((self = [super initWithName:@"ANTLRRuntimeException" reason:@"UnknownException" userInfo:nil]) != nil) {
-    }
+    self = [super initWithName:@"ANTLRRuntimeException" reason:@"UnknownException" userInfo:nil];
     return(self);
 }
 
 - (id) init:(NSString *)aReason
 {
-    if (self = [super initWithName:(NSString *)@"ANTLRRuntimeException" reason:(NSString *)aReason userInfo:(NSDictionary *)nil]) {
-    }
+    self = [super initWithName:(NSString *)@"ANTLRRuntimeException" reason:(NSString *)aReason userInfo:(NSDictionary *)nil];
     return(self);
 }
 
 - (id) init:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo
 {
-    if (self = [super initWithName:@"ANTLRRuntimeException" reason:aReason userInfo:aUserInfo]) {
-    }
+    self = [super initWithName:@"ANTLRRuntimeException" reason:aReason userInfo:aUserInfo];
     return(self);
 }
 
 - (id) initWithName:(NSString *)aName reason:(NSString *)aReason
 {
-    if (self = [super initWithName:(NSString *)aName reason:(NSString *)aReason userInfo:(NSDictionary *)nil]) {
-    }
+    self = [super initWithName:(NSString *)aName reason:(NSString *)aReason userInfo:(NSDictionary *)nil];
     return(self);
 }
 
 - (id) initWithName:(NSString *)aName reason:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo
 {
-    if (self = [super initWithName:(NSString *)aName reason:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo]) {
-    }
+    self = [super initWithName:(NSString *)aName reason:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo];
     return(self);
 }
 
@@ -137,22 +132,19 @@
 
 - (id) init
 {
-    if ( self = [super initWithName:@"ANTLRIllegalArgumentException" reason:@"UnknownException" userInfo:nil] ) {
-    }
+    self = [super initWithName:@"ANTLRIllegalArgumentException" reason:@"UnknownException" userInfo:nil];
     return(self);
 }
 
 - (id) init:(NSString *)aReason
 {
-    if ( self = [super initWithName:@"ANTLRIllegalArgumentException" reason:(NSString *)aReason userInfo:nil] ) {
-    }
+    self = [super initWithName:@"ANTLRIllegalArgumentException" reason:(NSString *)aReason userInfo:nil];
     return(self);
 }
 
 - (id) init:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo
 {
-    if ( self = [super initWithName:@"ANTLRIllegalArgumentException" reason:aReason userInfo:aUserInfo] ) {
-    }
+    self = [super initWithName:@"ANTLRIllegalArgumentException" reason:aReason userInfo:aUserInfo];
     return(self);
 }
 
@@ -177,22 +169,19 @@
 
 - (id) init
 {
-    if ( self = [super initWithName:@"ANTLRIllegalStateException" reason:@"UnknownException" userInfo:nil] ) {
-    }
+    self = [super initWithName:@"ANTLRIllegalStateException" reason:@"UnknownException" userInfo:nil];
     return(self);
 }
 
 - (id) init:(NSString *)aReason
 {
-    if ( self = [super initWithName:@"ANTLRIllegalStateException" reason:(NSString *)aReason userInfo:nil] ) {
-    }
+    self = [super initWithName:@"ANTLRIllegalStateException" reason:(NSString *)aReason userInfo:nil];
     return(self);
 }
 
 - (id) init:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo
 {
-    if ( self = [super initWithName:@"ANTLRIllegalStateException" reason:aReason userInfo:aUserInfo] ) {
-    }
+    self = [super initWithName:@"ANTLRIllegalStateException" reason:aReason userInfo:aUserInfo];
     return(self);
 }
 
@@ -217,29 +206,25 @@
 
 - (id) init
 {
-    if ((self = [super initWithName:@"ANTLRNoSuchElementException" reason:@"UnknownException" userInfo:nil]) != nil) {
-    }
+    self = [super initWithName:@"ANTLRNoSuchElementException" reason:@"UnknownException" userInfo:nil];
     return(self);
 }
 
 - (id) init:(NSString *)aReason
 {
-    if (self = [super initWithName:@"ANTLRNoSuchElementException" reason:(NSString *)aReason userInfo:(NSDictionary *)nil]) {
-    }
+    self = [super initWithName:@"ANTLRNoSuchElementException" reason:(NSString *)aReason userInfo:(NSDictionary *)nil];
     return(self);
 }
 
 - (id) init:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo
 {
-    if (self = [super initWithName:@"ANTLRNoSuchElementException" reason:aReason userInfo:aUserInfo]) {
-    }
+    self = [super initWithName:@"ANTLRNoSuchElementException" reason:aReason userInfo:aUserInfo];
     return(self);
 }
 
 - (id) initWithName:(NSString *)aName reason:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo
 {
-    if (self = [super initWithName:aName reason:aReason userInfo:aUserInfo]) {
-    }
+    self = [super initWithName:aName reason:aReason userInfo:aUserInfo];
     return(self);
 }
 
@@ -254,8 +239,7 @@
 
 - (id) init
 {
-	if ( self = [super initWithName:@"RewriteEarlyExitException" reason:nil userInfo:nil] ) {
-	}
+	self = [super initWithName:@"RewriteEarlyExitException" reason:nil userInfo:nil];
 	return self;
 }
 

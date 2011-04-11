@@ -37,12 +37,12 @@
 	NSUInteger charPositionInLine;
 	NSUInteger channel;
 	// this token's position in the TokenStream
-	NSUInteger index;
+	NSInteger index;
 	
 	// indices into the CharStream to avoid copying the text
 	// can manually override the text by using -setText:
-	NSUInteger startIndex;
-	NSUInteger stopIndex;
+	NSInteger startIndex;
+	NSInteger stopIndex;
 	// the actual input stream this token was found in
 	id<ANTLRCharStream> input;
 }
@@ -112,14 +112,14 @@
 - (void) setInput: (id<ANTLRCharStream>) anInput;
 
 - (NSUInteger) getStart;
-- (void) setStart: (NSUInteger) aStart;
+- (void) setStart: (NSInteger) aStart;
 
 - (NSUInteger) getStop;
-- (void) setStop: (NSUInteger) aStop;
+- (void) setStop: (NSInteger) aStop;
 
 // the index of this Token into the TokenStream
 - (NSUInteger) getTokenIndex;
-- (void) setTokenIndex: (NSUInteger) aTokenIndex;
+- (void) setTokenIndex: (NSInteger) aTokenIndex;
 
 // conform to NSCopying
 - (id) copyWithZone:(NSZone *)theZone;
@@ -132,9 +132,9 @@
 @property (assign) NSUInteger line;
 @property (assign) NSUInteger charPositionInLine;
 @property (assign) NSUInteger channel;
-@property (assign) NSUInteger index;
-@property (assign, getter=getStart, setter=setStart:) NSUInteger startIndex;
-@property (assign, getter=getStop, setter=setStop:) NSUInteger stopIndex;
+@property (assign) NSInteger index;
+@property (assign, getter=getStart, setter=setStart:) NSInteger startIndex;
+@property (assign, getter=getStop, setter=setStop:) NSInteger stopIndex;
 @property (retain) id<ANTLRCharStream> input;
 
 @end

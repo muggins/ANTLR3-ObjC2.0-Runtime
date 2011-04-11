@@ -37,11 +37,31 @@ ANTLRTreeNavigationNodeDown *navigationNodeDown = nil;
 ANTLRTreeNavigationNodeUp *navigationNodeUp = nil;
 ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
 
+
 @implementation ANTLRBaseTree
 
+static id<ANTLRTree> invalidNode = nil;
+
 @synthesize children;
+@synthesize anException;
 
 #pragma mark ANTLRTree protocol conformance
+
++ (id<ANTLRTree>) INVALID_NODE
+{
+	if ( invalidNode == nil ) {
+		invalidNode = [[ANTLRCommonTree alloc] initWithTokenType:ANTLRTokenTypeInvalid];
+	}
+	return invalidNode;
+}
+
++ (id<ANTLRTree>) invalidNode
+{
+	if ( invalidNode == nil ) {
+		invalidNode = [[ANTLRCommonTree alloc] initWithTokenType:ANTLRTokenTypeInvalid];
+	}
+	return invalidNode;
+}
 
 + newTree
 {
@@ -417,31 +437,6 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
     return ancestors;
 }
 
-/** Print out a whole tree not just a node */
-- (NSString *) toStringTree
-{
-    if ( children == nil || [children count] == 0 ) {
-        return [self toString];
-    }
-    NSMutableString *buf = [NSMutableString stringWithCapacity:[children count]];
-    if ( ![self isNil] ) {
-        [buf appendString:@"("];
-        [buf appendString:[self toString]];
-        [buf appendString:@" "];
-    }
-    for (int i = 0; children != nil && i < [children count]; i++) {
-        id<ANTLRTree> t = (id<ANTLRTree>)[children objectAtIndex:i];
-        if ( i > 0 ) {
-            [buf appendString:@" "];
-        }
-        [buf appendString:[(id<ANTLRBaseTree>)t toStringTree]];
-    }
-    if ( ![self isNil] ) {
-        [buf appendString:@")"];
-    }
-    return buf;
-}
-
 - (NSInteger) getType
 {
     return ANTLRTokenTypeInvalid;
@@ -464,12 +459,6 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
 
 - (void) setCharPositionInLine:(NSInteger) pos
 {
-}
-
-/** Override to say how a node (not a tree) should look as text */
-- (NSString *) toString
-{
-    return nil;
 }
 
 #pragma mark Copying
@@ -503,7 +492,32 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
      
 - (NSString *) treeDescription
 {
-    return [self toStringTree];
+    if ( children == nil || [children count] == 0 ) {
+        return [self description];
+    }
+    NSMutableString *buf = [NSMutableString stringWithCapacity:[children count]];
+    if ( ![self isNil] ) {
+        [buf appendString:@"("];
+        [buf appendString:[self toString]];
+        [buf appendString:@" "];
+    }
+    for (int i = 0; children != nil && i < [children count]; i++) {
+        id<ANTLRTree> t = (id<ANTLRTree>)[children objectAtIndex:i];
+        if ( i > 0 ) {
+            [buf appendString:@" "];
+        }
+        [buf appendString:[(id<ANTLRBaseTree>)t toStringTree]];
+    }
+    if ( ![self isNil] ) {
+        [buf appendString:@")"];
+    }
+    return buf;
+}
+
+/** Print out a whole tree not just a node */
+- (NSString *) toStringTree
+{
+    return [self treeDescription];
 }
 
 - (NSString *) description
@@ -511,7 +525,12 @@ ANTLRTreeNavigationNodeEOF *navigationNodeEOF = nil;
     return nil;
 }
 
-@synthesize anException;
+/** Override to say how a node (not a tree) should look as text */
+- (NSString *) toString
+{
+    return nil;
+}
+
 @end
 
 #pragma mark -

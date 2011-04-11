@@ -4,7 +4,8 @@
 
 - (id) init
 {
-    if (self = [super init]) {
+    self = [super init];
+    if ( self  != nil ) {
         data = [NSMutableDictionary dictionaryWithCapacity:30];
     }
     return self;

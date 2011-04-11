@@ -158,7 +158,7 @@
 
 - (void)remove
 {
-    @throw [ANTLRRuntimeException newException:@"UnsupportedOperationException"];
+    @throw [ANTLRRuntimeException newException:@"ANTLRUnsupportedOperationException"];
 }
 @synthesize up;
 @synthesize down;

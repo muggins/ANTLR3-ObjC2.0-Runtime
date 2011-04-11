@@ -7,7 +7,7 @@
 //
 
 #import "ANTLRRewriteRuleNodeStream.h"
-
+#import "ANTLRRuntimeException.h"
 
 @implementation ANTLRRewriteRuleNodeStream
 
@@ -62,13 +62,13 @@
 
 - (id<ANTLRTree>) nextTree:(id<ANTLRToken>)element
 {
-    return [adaptor dupNode:element];
+    return [treeAdaptor dupNode:element];
 }
 
 - (id) dup:(id)element
 {
     return [treeAdaptor dupTree:element];
-    @throw [ANTLRRuntimeException newUnsupportedOperationException:@"dup can't be called for a node stream."];
+    @throw [ANTLRRuntimeException newException:@"ANTLRUnsupportedOperationException" reason:@"dup can't be called for a node stream."];
 }
 
 @end

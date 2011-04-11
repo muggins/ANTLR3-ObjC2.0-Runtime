@@ -229,7 +229,7 @@ extern NSInteger debug;
 // Note: markers are 1-based!
 - (NSInteger) mark 
 {
-    if (debug > 1) NSLog(@"mark entry -- markers=%x, markDepth=%d\n", markers, markDepth);
+    if (debug > 1) NSLog(@"mark entry -- markers=%x, markDepth=%d\n", (int)markers, markDepth);
     if ( markers == nil ) {
         markers = [ANTLRPtrBuffer newANTLRPtrBufferWithLen:100];
 		[markers addObject:[NSNull null]]; // ANTLR generates code that assumes markers to be 1-based,

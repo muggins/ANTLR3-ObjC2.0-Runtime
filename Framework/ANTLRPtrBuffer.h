@@ -85,6 +85,7 @@
 - (void) insertObject:(id)aRule atIndex:(NSUInteger)idx;
 - (id)   objectAtIndex:(NSUInteger)idx;
 - (void) removeAllObjects;
+- (void)removeObjectAtIndex:(NSInteger)idx;
 
 - (void) ensureCapacity:(NSUInteger) index;
 - (NSString *) description;

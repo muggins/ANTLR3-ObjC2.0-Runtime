@@ -318,7 +318,7 @@ static ANTLRCommonToken *INVALID_TOKEN;
 //---------------------------------------------------------- 
 //  start 
 //---------------------------------------------------------- 
-- (NSUInteger) getStart
+- (NSInteger) getStart
 {
     return startIndex;
 }
@@ -331,12 +331,12 @@ static ANTLRCommonToken *INVALID_TOKEN;
 //---------------------------------------------------------- 
 //  stop 
 //---------------------------------------------------------- 
-- (NSUInteger) getStop
+- (NSInteger) getStop
 {
     return stopIndex;
 }
 
-- (void) setStop: (NSUInteger) aStop
+- (void) setStop: (NSInteger) aStop
 {
     stopIndex = aStop;
 }
@@ -344,12 +344,12 @@ static ANTLRCommonToken *INVALID_TOKEN;
 //---------------------------------------------------------- 
 //  index 
 //---------------------------------------------------------- 
-- (NSUInteger) getTokenIndex;
+- (NSInteger) getTokenIndex;
 {
     return index;
 }
 
-- (void) setTokenIndex: (NSUInteger) aTokenIndex;
+- (void) setTokenIndex: (NSInteger) aTokenIndex;
 {
     index = aTokenIndex;
 }
@@ -357,11 +357,6 @@ static ANTLRCommonToken *INVALID_TOKEN;
 
 // provide a textual representation for debugging
 - (NSString *) description
-{
-   return [self toString];
-}
-
-- (NSString *)toString
 {
     NSString *channelStr;
     NSMutableString *txtString;
@@ -379,6 +374,11 @@ static ANTLRCommonToken *INVALID_TOKEN;
 		txtString = [NSMutableString stringWithString:@"<no text>"];
     }
 	return [NSString stringWithFormat:@"[@%d, %d:%d='%@',<%d>%@,%d:%d]", index, startIndex, stopIndex, txtString, type, channelStr, line, charPositionInLine];
+}
+
+- (NSString *)toString
+{
+   return [self description];
 }
 
 @end

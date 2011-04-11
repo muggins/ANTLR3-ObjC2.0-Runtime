@@ -29,6 +29,7 @@
 @protocol ANTLRBaseTree <ANTLRTree>
 
 @property (retain, getter=getChildren, setter=setChildren:) NSMutableArray *children;
++ (id<ANTLRTree>) INVALID_NODE;
 
 + (id<ANTLRBaseTree>) newTree;
 + (id<ANTLRBaseTree>) newTree:(id<ANTLRBaseTree>)node;
@@ -101,8 +102,7 @@
     NSException *anException;
 }
 
-@property (retain, getter=getChildren, setter=setChildren:) NSMutableArray *children;
-
++ (id<ANTLRTree>) INVALID_NODE;
 + (id<ANTLRBaseTree>) newTree;
 + (id<ANTLRBaseTree>) newTree:(id<ANTLRBaseTree>)node;
          
@@ -166,7 +166,9 @@
 - (NSString *) toString;
 - (NSString *) toStringTree;
 
+@property (retain, getter=getChildren, setter=setChildren:) NSMutableArray *children;
 @property (retain) NSException *anException;
+
 @end
 
 @interface ANTLRTreeNavigationNode : ANTLRBaseTree {

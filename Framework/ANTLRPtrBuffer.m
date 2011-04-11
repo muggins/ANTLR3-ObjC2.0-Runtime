@@ -293,6 +293,19 @@
     ptr = 0;
 }
 
+- (void)removeObjectAtIndex:(NSInteger)idx
+{
+    int i;
+    if ( idx >= 0 && idx < count ) {
+        if ( ptrBuffer[idx] != nil ) [ptrBuffer[idx] release];
+        for ( i = idx; i < count-1; i++ ) {
+            ptrBuffer[i] = ptrBuffer[i+1];
+        }
+        ptrBuffer[i] = nil;
+        count--;
+    }
+}
+
 - (void) ensureCapacity:(NSUInteger) anIndex
 {
 	if ((anIndex * sizeof(id)) >= [buffer length])

@@ -142,7 +142,7 @@
 	if (k == 1) {
 		return prevElement;
 	}
-	@throw [ANTLRNoSuchElementException newException:[NSString stringWithString:@"can't look backwards more than one token in this stream"]];
+	@throw [ANTLRNoSuchElementException newException:@"can't look backwards more than one token in this stream"];
 }
 
 -(id) getCurrentSymbol

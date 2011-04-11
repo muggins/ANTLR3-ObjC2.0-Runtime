@@ -91,7 +91,7 @@
 
 - (id<ANTLRTree>) newANTLRTreeWithToken:(id<ANTLRToken>) payload
 {
-	id<ANTLRTree> newTree = [ANTLRTreeAdaptor newANTLRTreeWithToken:payload];
+	id<ANTLRTree> newTree = [ANTLRCommonTree newTreeWithToken:payload];
 	[debugListener createNode:[treeAdaptor uniqueIdForTree:newTree] fromTokenAtIndex:[payload getTokenIndex]];
 	return newTree;
 }
