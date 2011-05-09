@@ -123,7 +123,7 @@
 
 - (NSInteger) LA:(NSUInteger) i
 {
-	id<ANTLRTree> node = [self LT:1];
+	id<ANTLRBaseTree> node = [self LT:1];
 	return [node getType];
 }
 
@@ -136,7 +136,7 @@
 
 - (NSUInteger) getIndex
 {
-	return [input getIndex];
+	return input.index;
 }
 
 - (void) rewind:(NSUInteger) marker

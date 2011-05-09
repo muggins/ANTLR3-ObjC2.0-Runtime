@@ -1,25 +1,15 @@
-// $ANTLR 3.3.1-SNAPSHOT Jan 20, 2011 10:02:28 Fuzzy.g 2011-01-20 10:06:09
+// $ANTLR ${project.version} ${buildNumber} Fuzzy.g 2011-05-06 11:47:46
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
  */
 #import <Cocoa/Cocoa.h>
-#import "antlr3.h"
+#import <ANTLR/ANTLR.h>
 /* End of standard antlr3 runtime definitions
  * =============================================================================
  */
 
-
 /* Start cyclicDFAInterface */
-#pragma mark Cyclic DFA interface start DFA38
-@interface DFA38 : ANTLRDFA {
-}
-+ newDFA38WithRecognizer:(ANTLRBaseRecognizer *)theRecognizer;
-- initWithRecognizer:(ANTLRBaseRecognizer *)recognizer;
-@end /* end of DFA38 interface  */
-
-#pragma mark Cyclic DFA interface end DFA38
-
 
 #pragma mark Rule return scopes start
 #pragma mark Rule return scopes end
@@ -28,26 +18,26 @@
 #undef EOF
 #endif
 #define EOF -1
-#define WS 4
-#define QIDStar 5
-#define IMPORT 6
-#define RETURN 7
-#define ID 8
-#define QID 9
-#define CLASS 10
-#define TYPE 11
-#define ARG 12
+#define ARG 4
+#define CALL 5
+#define CHAR 6
+#define CLASS 7
+#define COMMENT 8
+#define ESC 9
+#define FIELD 10
+#define ID 11
+#define IMPORT 12
 #define METHOD 13
-#define FIELD 14
-#define STAT 15
-#define CALL 16
-#define COMMENT 17
-#define SL_COMMENT 18
-#define ESC 19
-#define STRING 20
-#define CHAR 21
+#define QID 14
+#define QIDStar 15
+#define RETURN 16
+#define SL_COMMENT 17
+#define STAT 18
+#define STRING 19
+#define TYPE 20
+#define WS 21
+/* interface lexer class */
 @interface Fuzzy : ANTLRLexer { // line 283
-DFA38 *dfa38;
 SEL synpred9_FuzzySelector;
 SEL synpred2_FuzzySelector;
 SEL synpred7_FuzzySelector;
@@ -57,38 +47,41 @@ SEL synpred6_FuzzySelector;
 SEL synpred5_FuzzySelector;
 SEL synpred3_FuzzySelector;
 SEL synpred1_FuzzySelector;
-// start of actions.lexer.memVars
-// start of action-actionScope-memVars
+/* ObjC start of actions.lexer.memVars */
+/* ObjC end of actions.lexer.memVars */
 }
++ (void) initialize;
 + (Fuzzy *)newFuzzyWithCharStream:(id<ANTLRCharStream>)anInput;
-
-- (void)mIMPORT; 
-- (void)mRETURN; 
-- (void)mCLASS; 
-- (void)mMETHOD; 
-- (void)mFIELD; 
-- (void)mSTAT; 
-- (void)mCALL; 
-- (void)mCOMMENT; 
-- (void)mSL_COMMENT; 
-- (void)mSTRING; 
-- (void)mCHAR; 
-- (void)mWS; 
-- (void)mQID; 
-- (void)mQIDStar; 
-- (void)mTYPE; 
-- (void)mARG; 
-- (void)mID; 
-- (void)mESC; 
-- (void)mTokens; 
-- (void)synpred1_Fuzzy_fragment; 
-- (void)synpred2_Fuzzy_fragment; 
-- (void)synpred3_Fuzzy_fragment; 
-- (void)synpred4_Fuzzy_fragment; 
-- (void)synpred5_Fuzzy_fragment; 
-- (void)synpred6_Fuzzy_fragment; 
-- (void)synpred7_Fuzzy_fragment; 
-- (void)synpred8_Fuzzy_fragment; 
-- (void)synpred9_Fuzzy_fragment; 
+/* ObjC start actions.lexer.methodsDecl */
+/* ObjC end actions.lexer.methodsDecl */
+- (void) mIMPORT ; 
+- (void) mRETURN ; 
+- (void) mCLASS ; 
+- (void) mMETHOD ; 
+- (void) mFIELD ; 
+- (void) mSTAT ; 
+- (void) mCALL ; 
+- (void) mCOMMENT ; 
+- (void) mSL_COMMENT ; 
+- (void) mSTRING ; 
+- (void) mCHAR ; 
+- (void) mWS ; 
+- (void) mQID ; 
+- (void) mQIDStar ; 
+- (void) mTYPE ; 
+- (void) mARG ; 
+- (void) mID ; 
+- (void) mESC ; 
+- (void) mTokens ; 
+- (void) synpred1_Fuzzy_fragment ; 
+- (void) synpred2_Fuzzy_fragment ; 
+- (void) synpred3_Fuzzy_fragment ; 
+- (void) synpred4_Fuzzy_fragment ; 
+- (void) synpred5_Fuzzy_fragment ; 
+- (void) synpred6_Fuzzy_fragment ; 
+- (void) synpred7_Fuzzy_fragment ; 
+- (void) synpred8_Fuzzy_fragment ; 
+- (void) synpred9_Fuzzy_fragment ; 
 
 @end /* end of Fuzzy interface */
+

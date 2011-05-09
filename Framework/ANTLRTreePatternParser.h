@@ -50,9 +50,9 @@ id<ANTLRTreeAdaptor> adaptor;
 - (id) initWithTokenizer:(ANTLRTreePatternLexer *)tokenizer
                   Wizard:(ANTLRTreeWizard *)aWizard
                  Adaptor:(id<ANTLRTreeAdaptor>)anAdaptor;
-- (id<ANTLRTree>) pattern;
-- (id<ANTLRTree>) parseTree;
-- (id<ANTLRTree>) parseNode;
+- (id<ANTLRBaseTree>) pattern;
+- (id<ANTLRBaseTree>) parseTree;
+- (id<ANTLRBaseTree>) parseNode;
 
 @property (retain) ANTLRTreePatternLexer *tokenizer;
 @property NSInteger ttype;

@@ -49,14 +49,15 @@
 
 + (void) initialize;
 + (NSInteger) DEFAULT_CHANNEL;
++ (id<ANTLRToken>)INVALID_TOKEN;
 + (NSInteger) INVALID_TOKEN_TYPE;
-+ (ANTLRCommonToken *) newToken;
-+ (ANTLRCommonToken *) newToken:(id<ANTLRCharStream>)anInput
-                                      Type:(NSInteger)aTType
-                                   Channel:(NSInteger)aChannel
-                                     Start:(NSInteger)aStart
-                                      Stop:(NSInteger)aStop;
-+ (ANTLRCommonToken *) newToken:(ANTLRTokenType)aType;
++ (id<ANTLRToken>) newToken;
++ (id<ANTLRToken>) newToken:(id<ANTLRCharStream>)anInput
+                       Type:(NSInteger)aTType
+                    Channel:(NSInteger)aChannel
+                      Start:(NSInteger)aStart
+                       Stop:(NSInteger)aStop;
++ (id<ANTLRToken>) newToken:(ANTLRTokenType)aType;
 + (id<ANTLRToken>) newToken:(NSInteger)tokenType Text:(NSString *)tokenText;
 + (id<ANTLRToken>) newTokenWithToken:(ANTLRCommonToken *)fromToken;
 + (id<ANTLRToken>) eofToken;
@@ -71,14 +72,14 @@
                              Channel:(NSInteger)aChannel
                                Start:(NSInteger)theStart
                                 Stop:(NSInteger)theStop;
-- (id) initWithToken:(ANTLRCommonToken *)aToken;
+- (id) initWithToken:(id<ANTLRToken>)aToken;
 - (id) initWithType:(ANTLRTokenType)aType;
 - (id) initWithType:(ANTLRTokenType)aTType Text:(NSString *)tokenText;
 
 //---------------------------------------------------------- 
 //  text 
 //---------------------------------------------------------- 
-- (NSString *) getText;
+- (NSString *) text;
 - (void) setText: (NSString *) aText;
 
 //---------------------------------------------------------- 
@@ -86,18 +87,6 @@
 //---------------------------------------------------------- 
 - (NSInteger) getType;
 - (void) setType: (NSInteger) aType;
-
-//---------------------------------------------------------- 
-//  line 
-//---------------------------------------------------------- 
-- (NSUInteger) getLine;
-- (void) setLine: (NSUInteger) aLine;
-
-//---------------------------------------------------------- 
-//  charPositionInLine 
-//---------------------------------------------------------- 
-- (NSUInteger) getCharPositionInLine;
-- (void) setCharPositionInLine: (NSUInteger) aCharPositionInLine;
 
 //---------------------------------------------------------- 
 //  channel 
@@ -111,14 +100,14 @@
 - (id<ANTLRCharStream>) getInput;
 - (void) setInput: (id<ANTLRCharStream>) anInput;
 
-- (NSUInteger) getStart;
+- (NSInteger) getStart;
 - (void) setStart: (NSInteger) aStart;
 
-- (NSUInteger) getStop;
+- (NSInteger) getStop;
 - (void) setStop: (NSInteger) aStop;
 
 // the index of this Token into the TokenStream
-- (NSUInteger) getTokenIndex;
+- (NSInteger) getTokenIndex;
 - (void) setTokenIndex: (NSInteger) aTokenIndex;
 
 // conform to NSCopying
@@ -127,10 +116,10 @@
 - (NSString *) description;
 - (NSString *) toString;
 
-@property (retain) NSString *text;
+@property (retain, getter = text, setter = setText:) NSString *text;
 @property (assign) NSInteger type;
-@property (assign) NSUInteger line;
-@property (assign) NSUInteger charPositionInLine;
+@property (assign, getter = line, setter = setLine:) NSUInteger line;
+@property (assign, getter=charPositionInLine, setter = setCharPositionInLine:) NSUInteger charPositionInLine;
 @property (assign) NSUInteger channel;
 @property (assign) NSInteger index;
 @property (assign, getter=getStart, setter=setStart:) NSInteger startIndex;

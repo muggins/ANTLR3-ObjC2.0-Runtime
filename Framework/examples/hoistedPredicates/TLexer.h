@@ -1,14 +1,13 @@
-// $ANTLR 3.3.1-SNAPSHOT Jan 20, 2011 10:02:28 T.g 2011-01-20 10:06:15
+// $ANTLR ${project.version} ${buildNumber} T.g 2011-05-06 19:14:23
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
  */
 #import <Cocoa/Cocoa.h>
-#import "antlr3.h"
+#import <ANTLR/ANTLR.h>
 /* End of standard antlr3 runtime definitions
  * =============================================================================
  */
-
 
 /* Start cyclicDFAInterface */
 
@@ -23,16 +22,20 @@
 #define ID 4
 #define INT 5
 #define WS 6
+/* interface lexer class */
 @interface TLexer : ANTLRLexer { // line 283
-// start of actions.lexer.memVars
-// start of action-actionScope-memVars
+/* ObjC start of actions.lexer.memVars */
+/* ObjC end of actions.lexer.memVars */
 }
++ (void) initialize;
 + (TLexer *)newTLexerWithCharStream:(id<ANTLRCharStream>)anInput;
-
-- (void)mT__7; 
-- (void)mID; 
-- (void)mINT; 
-- (void)mWS; 
-- (void)mTokens; 
+/* ObjC start actions.lexer.methodsDecl */
+/* ObjC end actions.lexer.methodsDecl */
+- (void) mT__7 ; 
+- (void) mID ; 
+- (void) mINT ; 
+- (void) mWS ; 
+- (void) mTokens ; 
 
 @end /* end of TLexer interface */
+

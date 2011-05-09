@@ -29,23 +29,25 @@
 #import "ANTLRRuntimeException.h"
 #import "ANTLRToken.h"
 #import "ANTLRIntStream.h"
-#import "ANTLRTree.h"
+#import "ANTLRBaseTree.h"
 
 @interface ANTLRRecognitionException : ANTLRRuntimeException {
 	id<ANTLRIntStream> input;
 	NSInteger index;
 	id<ANTLRToken> token;
-	id<ANTLRTree> node;
+	id<ANTLRBaseTree> node;
 	unichar c;
-	NSInteger line;
-	NSInteger charPositionInLine;
+	NSUInteger line;
+	NSUInteger charPositionInLine;
 }
 
 @property (retain, getter=getStream, setter=setStream:) id<ANTLRIntStream> input;
+@property (assign) NSInteger index;
 @property (retain, getter=getToken, setter=setToken:) id<ANTLRToken>token;
-@property (retain, getter=getNode, setter=setNode:) id<ANTLRTree>node;
-@property (getter=getLine, setter=setLine:) NSInteger line;
-@property (getter=getCharPositionInLine, setter=setCharPositionInLine:) NSInteger charPositionInLine;
+@property (retain, getter=getNode, setter=setNode:) id<ANTLRBaseTree>node;
+@property (assign) unichar c;
+@property (assign) NSUInteger line;
+@property (assign) NSUInteger charPositionInLine;
 
 + (id) newException;
 + (id) newException:(id<ANTLRIntStream>) anInputStream; 
@@ -63,14 +65,10 @@
 - (id<ANTLRToken>) getToken;
 - (void) setToken: (id<ANTLRToken>) aToken;
 
-- (id<ANTLRTree>) getNode;
-- (void) setNode: (id<ANTLRTree>) aNode;
+- (id<ANTLRBaseTree>) getNode;
+- (void) setNode: (id<ANTLRBaseTree>) aNode;
 
 - (NSString *)getMessage;
 
-- (NSInteger)getCharPositionInLine;
-- (void)setCharPositionInLine:(NSInteger)aPos;
 
-@property NSInteger index;
-@property unichar c;
 @end

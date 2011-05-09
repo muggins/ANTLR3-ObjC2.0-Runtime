@@ -35,12 +35,12 @@
 
 @implementation ANTLRTreeException
 
-+ (id) newException:(id<ANTLRTree>)theOldRoot newRoot:(id<ANTLRTree>)theNewRoot stream:(id<ANTLRIntStream>)aStream;
++ (id) newException:(id<ANTLRBaseTree>)theOldRoot newRoot:(id<ANTLRBaseTree>)theNewRoot stream:(id<ANTLRIntStream>)aStream;
 {
 	return [[ANTLRTreeException alloc] initWithOldRoot:theOldRoot newRoot:theNewRoot stream:aStream];
 }
 
-- (id) initWithOldRoot:(id<ANTLRTree>)theOldRoot newRoot:(id<ANTLRTree>)theNewRoot stream:(id<ANTLRIntStream>)aStream;
+- (id) initWithOldRoot:(id<ANTLRBaseTree>)theOldRoot newRoot:(id<ANTLRBaseTree>)theNewRoot stream:(id<ANTLRIntStream>)aStream;
 {
 	if ((self = [super initWithStream:aStream reason:@"The new root has more than one child. Cannot make it the root node."]) != nil ) {
 		[self setOldRoot:theOldRoot];
@@ -56,20 +56,20 @@
 	[super dealloc];
 }
 
-- (void) setNewRoot:(id<ANTLRTree>)aTree
+- (void) setNewRoot:(id<ANTLRBaseTree>)aTree
 {
 	if (newRoot != aTree) {
 		[aTree retain];
-		[newRoot release];
+		if ( newRoot ) [newRoot release];
 		newRoot = aTree;
 	}
 }
 
-- (void) setOldRoot:(id<ANTLRTree>)aTree
+- (void) setOldRoot:(id<ANTLRBaseTree>)aTree
 {
 	if (oldRoot != aTree) {
 		[aTree retain];
-		[oldRoot release];
+		if ( oldRoot ) [oldRoot release];
 		oldRoot = aTree;
 	}
 }

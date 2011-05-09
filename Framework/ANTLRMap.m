@@ -33,7 +33,7 @@
 #define FAILURE (-1)
 
 #import "ANTLRMap.h"
-#import "ANTLRTree.h"
+#import "ANTLRBaseTree.h"
 
 /*
  * Start of ANTLRMap
@@ -56,7 +56,8 @@
 {
     NSInteger idx;
     
-	if ((self = [super initWithLen:HASHSIZE]) != nil) {
+	self = [super initWithLen:HASHSIZE];
+    if ( self != nil ) {
 		fNext = nil;
         for( idx = 0; idx < HASHSIZE; idx++ ) {
             ptrBuffer[idx] = nil;
@@ -67,7 +68,8 @@
 
 -(id)initWithLen:(NSInteger)aBuffSize
 {
-	if ((self = [super initWithLen:aBuffSize]) != nil) {
+	self = [super initWithLen:aBuffSize];
+    if ( self != nil ) {
 	}
     return( self );
 }
@@ -147,7 +149,7 @@
     
     for (int i = 0; i < BuffSize; i++) {
         if ((anElement = ptrBuffer[i]) != nil) {
-            aSize =+ (NSInteger)[anElement size];
+            aSize += (NSInteger)[anElement size];
         }
     }
     return aSize;
@@ -291,22 +293,22 @@
 
     aTType = ttype % HASHSIZE;
     for( np = self->ptrBuffer[ttype]; np != nil; np = [np getfNext] ) {
-        if ( [np.index integerValue] == ttype ) {
+        if ( [(NSNumber *)np.node integerValue] == ttype ) {
             return( np );        /*   found it       */
         }
     }
     return( nil );              /*   not found      */
 }
 
-- (NSInteger)getNode:(id<ANTLRTree>)aNode
+- (NSInteger)getNode:(id<ANTLRBaseTree>)aNode
 {
     ANTLRMapElement *np;
     NSInteger idx;
 
-    idx = [(id<ANTLRTree>)aNode getType];
+    idx = [(id<ANTLRBaseTree>)aNode getType];
     idx %= HASHSIZE;
     np = ptrBuffer[idx];
-    return( [(NSNumber *)np.index integerValue] );
+    return( [(NSNumber *)np.node integerValue] );
 }
 
 - (ANTLRMapElement *)getTType:(NSString *)name

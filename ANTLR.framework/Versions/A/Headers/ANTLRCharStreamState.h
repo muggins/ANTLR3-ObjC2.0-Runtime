@@ -33,26 +33,17 @@
 
 @interface ANTLRCharStreamState : NSObject
 {
-NSInteger p;
-NSInteger line;
-NSInteger charPositionInLine;
+NSInteger index;
+NSUInteger line;
+NSUInteger charPositionInLine;
 }
 
-@property (getter=getP,setter=setP:) NSInteger p;
-@property (getter=getLine,setter=setLine:) NSInteger line;
-@property (getter=getCharPositionInLine,setter=setCharPositionInLine:) NSInteger charPositionInLine;
+@property (assign) NSInteger index;
+@property (assign) NSUInteger line;
+@property (assign) NSUInteger charPositionInLine;
 
 + newANTLRCharStreamState;
 
 - (id) init;
-
-- (NSInteger) getP;
-- (void) setP: (NSInteger) anIndex;
-
-- (NSInteger) getLine;
-- (void) setLine: (NSInteger) aLine;
-
-- (NSInteger) getCharPositionInLine;
-- (void) setCharPositionInLine:(NSInteger)aCharPositionInLine;
 
 @end

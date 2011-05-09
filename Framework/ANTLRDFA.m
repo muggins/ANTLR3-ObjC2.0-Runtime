@@ -121,10 +121,10 @@ NSInteger debug = 0;
 			}
 			if ( debug > 2 ) {
                 NSLog(@"no viable alt!\n");
-                NSLog(@"min[%d] = $d\n", s, min[s]);
-                NSLog(@"max[%d] = $d\n", s, min[s]);
-                NSLog(@"eot[%d] = $d\n", s, min[s]);
-                NSLog(@"eof[%d] = $d\n", s, min[s]);
+                NSLog(@"min[%d] = %d\n", s, min[s]);
+                NSLog(@"max[%d] = %d\n", s, min[s]);
+                NSLog(@"eot[%d] = %d\n", s, min[s]);
+                NSLog(@"eof[%d] = %d\n", s, min[s]);
                 for (NSInteger p = 0; p < self.len; p++) {
                     NSLog(@"%d ", transition[s][p]);
                 }
@@ -212,7 +212,7 @@ NSInteger debug = 0;
         size += [encodedString characterAtIndex:i];
     }
     NSMutableData *dp = [[NSMutableData dataWithLength:size] retain];
-    char *data = (short *)[dp mutableBytes];
+    char *data = (char *)[dp mutableBytes];
     int di = 0;
     for (int i=0; i < [encodedString length]; i+=2) {
         char n = [encodedString characterAtIndex:i];
@@ -242,9 +242,8 @@ NSInteger debug = 0;
 
 - (void)setRecognizer:(ANTLRBaseRecognizer *)aRecognizer
 {
-    if (recognizer != aRecognizer) {
-        if (recognizer != nil)
-            [recognizer release];
+    if ( recognizer != aRecognizer ) {
+        if ( recognizer ) [recognizer release];
         [aRecognizer retain];
     }
     recognizer = aRecognizer;

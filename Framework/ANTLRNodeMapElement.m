@@ -47,7 +47,7 @@ static NSInteger _aUniqueID;
     return [[ANTLRNodeMapElement alloc] init];
 }
 
-+ (ANTLRNodeMapElement *)newANTLRNodeMapElementWithIndex:(id)anIndex Node:(id<ANTLRTree>)aNode
++ (ANTLRNodeMapElement *)newANTLRNodeMapElementWithIndex:(id)anIndex Node:(id<ANTLRBaseTree>)aNode
 {
     return [[ANTLRNodeMapElement alloc] initWithAnIndex:anIndex Node:aNode];
 }
@@ -63,9 +63,10 @@ static NSInteger _aUniqueID;
 
 - (id) initWithAnIndex:(id)anIndex Node:(id)aNode
 {
-    if ((self = [super initWithAnIndex:anIndex]) != nil ) {
+    self = [super initWithAnIndex:anIndex];
+    if ( self ) {
         if ( aNode != node ) {
-            if (node  != nil) [node release];
+            if ( node ) [node release];
             [aNode retain];
         }
         node = aNode;
@@ -82,15 +83,15 @@ static NSInteger _aUniqueID;
     return( copy );
 }
 
-- (id<ANTLRTree>)getNode
+- (id<ANTLRBaseTree>)getNode
 {
     return node;
 }
 
-- (void)setNode:(id<ANTLRTree>)aNode
+- (void)setNode:(id<ANTLRBaseTree>)aNode
 {
     if ( aNode != node ) {
-        if (node  != nil) [node release];
+        if ( node ) [node release];
         [aNode retain];
     }
     node = aNode;

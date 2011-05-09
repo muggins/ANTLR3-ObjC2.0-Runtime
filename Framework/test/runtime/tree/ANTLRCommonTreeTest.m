@@ -12,6 +12,7 @@
 #import "ANTLRCommonTree.h"
 #import "ANTLRCommonToken.h"
 #import "ANTLRError.h"
+#import "ANTLRRuntimeException.h"
 
 @implementation ANTLRCommonTreeTest
 
@@ -36,7 +37,7 @@
 -(void) test03WithToken
 {
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
+	ANTLRCommonToken *token = [ANTLRCommonToken newToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	token.line = 1;
 	token.charPositionInLine = 4;
 	ANTLRCommonTree *tree = [ANTLRCommonTree newTreeWithToken:token];
@@ -46,7 +47,7 @@
     if (tree != nil && tree.token != nil) {
         STAssertEquals((NSUInteger) tree.token.line, (NSUInteger)1, [NSString stringWithFormat:@"Tree should be at line 1, but was at %d", tree.token.line] );
         STAssertEquals((NSUInteger) tree.token.charPositionInLine, (NSUInteger)4, [NSString stringWithFormat:@"Char position should be 1, but was at %d", tree.token.charPositionInLine]);
-        STAssertNotNil(tree.token.text, @"Tree with token with text was nil");
+        STAssertNotNil(((ANTLRCommonToken *)tree.token).text, @"Tree with token with text was nil");
     }
     if (tree != nil && tree.token != nil && tree.token.text != nil)
         STAssertTrue([tree.token.text isEqualToString:@"||"], @"Text was not ||");
@@ -66,7 +67,7 @@
 -(void) test05InitWithCommonTreeNode
 {
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
+	ANTLRCommonToken *token = [ANTLRCommonToken newToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	ANTLRCommonTree *tree = [ANTLRCommonTree newTreeWithToken:token];
 	STAssertNotNil(tree, @"Tree was nil");
 	STAssertNotNil(tree.token, @"Tree token was nil");
@@ -86,10 +87,10 @@
 -(void) test06CopyTree
 {
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
+	ANTLRCommonToken *token = [ANTLRCommonToken newToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	ANTLRCommonTree *tree = [ANTLRCommonTree newTreeWithToken:token];
 	STAssertNotNil(tree, @"Tree was nil");
-	ANTLRCommonTree *newTree = [tree copyWithZone:nil];
+	ANTLRCommonTree *newTree = (ANTLRCommonTree *)[tree copyWithZone:nil];
 	STAssertTrue([newTree isKindOfClass:[ANTLRCommonTree class]], @"Copied tree was not an ANTLRCommonTree");
 	STAssertNotNil(newTree, @"New tree was nil");
 	// STAssertEquals(newTree.token, tree.token, @"Tokens did not match");
@@ -132,7 +133,7 @@
 	//[tree release];
 	
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
+	ANTLRCommonToken *token = [ANTLRCommonToken newToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	tree = [ANTLRCommonTree newTreeWithToken:token];
 	STAssertNotNil(tree, @"Tree node is nil");
     aString = [tree description];
@@ -146,7 +147,7 @@
 -(void) test08Text
 {
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
+	ANTLRCommonToken *token = [ANTLRCommonToken newToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	ANTLRCommonTree *tree = [ANTLRCommonTree newTreeWithToken:token];
 	STAssertNotNil(tree, @"Tree was nil");
 	STAssertTrue([tree.token.text isEqualToString:@"||"], @"Tree text was not valid, should have been || was %@", tree.token.text);
@@ -168,7 +169,7 @@
 	
 	// Child tree
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
+	ANTLRCommonToken *token = [ANTLRCommonToken newToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	token.line = 1;
 	token.charPositionInLine = 4;
 	ANTLRCommonTree *tree = [ANTLRCommonTree newTreeWithToken:token];
@@ -198,7 +199,7 @@
 	
 	// Child tree
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
+	ANTLRCommonToken *token = [ANTLRCommonToken newToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	token.line = 1;
 	token.charPositionInLine = 4;
 	ANTLRCommonTree *tree = [ANTLRCommonTree newTreeWithToken:token];
@@ -222,7 +223,7 @@
 	}
 	@catch (NSException *e) 
 	{
-		STAssertTrue([[e name] isEqualToString:ANTLRIllegalArgumentException], @"Got wrong kind of exception! %@", [e name]);
+		STAssertTrue([[e name] isEqualToString:@"ANTLRIllegalArgumentException"], @"Got wrong kind of exception! %@", [e name]);
 		//[parent release];
 		return;
 	}
@@ -248,7 +249,7 @@
 	
 	// Child tree
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
+	ANTLRCommonToken *token = [ANTLRCommonToken newToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	token.line = 1;
 	token.charPositionInLine = 4;
 	ANTLRCommonTree *tree = [ANTLRCommonTree newTreeWithToken:token];
@@ -274,7 +275,7 @@
 	
 	// Child tree
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
+	ANTLRCommonToken *token = [ANTLRCommonToken newToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	ANTLRCommonTree *tree = [ANTLRCommonTree newTreeWithToken:token];
 	
 	// Add a child to the parent tree
@@ -295,7 +296,7 @@
 	
 	// Child tree
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
+	ANTLRCommonToken *token = [ANTLRCommonToken newToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	ANTLRCommonTree *tree = [ANTLRCommonTree newTreeWithToken:token];
 	
 	
@@ -326,7 +327,7 @@
 	
 	// Child tree
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
+	ANTLRCommonToken *token = [ANTLRCommonToken newToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	ANTLRCommonTree *tree = [ANTLRCommonTree newTreeWithToken:token];
 	
 	[down addChild:tree];
@@ -350,14 +351,14 @@
 	[parent addChild:up];
 	[parent addChild:down];
 	
-	ANTLRCommonTree *found = [parent getFirstChildWithType:ANTLRTokenTypeDOWN];
+	ANTLRCommonTree *found = (ANTLRCommonTree *)[parent getFirstChildWithType:ANTLRTokenTypeDOWN];
 	STAssertNotNil(found, @"Child with type DOWN should not be nil");
     if (found != nil) {
         STAssertNotNil(found.token, @"Child token with type DOWN should not be nil");
         if (found.token != nil)
             STAssertEquals((NSInteger)found.token.type, (NSInteger)ANTLRTokenTypeDOWN, @"Token type was not correct, should be down!");
     }
-	found = [parent getFirstChildWithType:ANTLRTokenTypeUP];
+	found = (ANTLRCommonTree *)[parent getFirstChildWithType:ANTLRTokenTypeUP];
 	STAssertNotNil(found, @"Child with type UP should not be nil");
     if (found != nil) {
         STAssertNotNil(found.token, @"Child token with type UP should not be nil");
@@ -372,7 +373,7 @@
 {
 	// Child tree
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
+	ANTLRCommonToken *token = [ANTLRCommonToken newToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	ANTLRCommonTree *tree = [ANTLRCommonTree newTreeWithToken:token];
 	
 	ANTLRCommonTree *parent = [ANTLRCommonTree newTreeWithTokenType:555];
@@ -393,7 +394,7 @@
 	}
 	@catch (NSException * e) 
 	{
-		STAssertTrue([[e name] isEqualToString:ANTLRIllegalArgumentException], @"Exception was not an ANTLRIllegalArgumentException but was %@", [e name]);
+		STAssertTrue([[e name] isEqualToString:@"ANTLRIllegalStateException"], @"Exception was not an ANTLRIllegalStateException but was %@", [e name]);
 		passed = YES;
 	}
 	if (!passed)
@@ -418,7 +419,7 @@
 {
 	// Child tree
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
+	ANTLRCommonToken *token = [ANTLRCommonToken newToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	ANTLRCommonTree *tree = [ANTLRCommonTree newTreeWithToken:token];
 	
 	ANTLRCommonTree *parent = [ANTLRCommonTree newTree];
@@ -434,7 +435,7 @@
 {
 	// Child tree
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"this||is||a||double||piped||separated||csv"];
-	ANTLRCommonToken *token = [ANTLRCommonToken newANTLRCommonToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
+	ANTLRCommonToken *token = [ANTLRCommonToken newToken:stream Type:555 Channel:ANTLRTokenChannelDefault Start:4 Stop:5];
 	ANTLRCommonTree *tree = [ANTLRCommonTree newTreeWithToken:token];
 	
 	// Description for tree
@@ -471,7 +472,7 @@
 	}
 	@catch (NSException *ex)
 	{
-		STAssertTrue([[ex name] isEqualToString:ANTLRIllegalArgumentException], @"Expected an illegal argument exception... Got instead: %@", [ex name]);
+		STAssertTrue([[ex name] isEqualToString:@"ANTLRIllegalArgumentException"], @"Expected an illegal argument exception... Got instead: %@", [ex name]);
 		return;
 	}
 	STFail(@"Exception was not thrown when I tried to replace a child on a parent with no children");

@@ -31,89 +31,107 @@
 @implementation ANTLRTreeAdaptor
 
 
-+ (id<ANTLRTree>) newEmptyTree
++ (id) newEmptyTree
 {
-	return [self newTreeWithToken:nil];
+	return [ANTLRTreeAdaptor newTreeWithToken:nil];
 }
 
-+ (id<ANTLRTree>) newTreeWithToken:(id<ANTLRToken>) payload
++ (id) newAdaptor
 {
-    ANTLRTreeAdaptor *ATA;
-    ATA = [[ANTLRTreeAdaptor alloc] initWith:payload];
-    return ATA;
+    return [[ANTLRTreeAdaptor alloc] init];
+}
+
+- (id) init
+{
+    self = [super init];
+    return self;
+}
+
+- (id) initWithPayload:(id<ANTLRToken>)payload
+{
+    self = [super init];
+    return self;
 }
 
 #pragma mark Rewrite Rules
 
-- (id<ANTLRTree>) newTreeWithTokenType:(NSInteger)tokenType
+/** Create a tree node from Token object; for CommonTree type trees,
+ *  then the token just becomes the payload.  This is the most
+ *  common create call.
+ *
+ *  Override if you want another kind of node to be built.
+ */
+- (id) create:(id<ANTLRToken>) payload
 {
-	id<ANTLRToken> newToken = [self newTokenWithTokenType:tokenType text:nil];
-	
-	id<ANTLRTree> newTree = [self newTreeWithToken:newToken];
-	[newToken release];
-	return newTree;
+    return nil;
 }
 
-- (id<ANTLRTree>) newTreeWithTokenType:(NSInteger)tokenType text:(NSString *)tokenText
+/** Create a new node derived from a token, with a new token type.
+ *  This is invoked from an imaginary node ref on right side of a
+ *  rewrite rule as IMAG[$tokenLabel].
+ *
+ *  This should invoke createToken(Token).
+ */
+- (id) createTree:(NSInteger)tokenType fromToken:(id<ANTLRToken>)fromToken
 {
-	id<ANTLRToken> newToken = [self newTokenWithTokenType:tokenType text:tokenText];
-	
-	id<ANTLRTree> newTree = [self newTreeWithToken:newToken];
-	[newToken release];
-	return newTree;
-}
-
-- (id<ANTLRTree>) newTreeWithToken:(id<ANTLRToken>)fromToken tokenType:(NSInteger)tokenType
-{
-	id<ANTLRToken> newToken = [self newTokenWithToken:fromToken];
+	id<ANTLRToken> newToken = [self createToken:fromToken];
 	[newToken setType:tokenType];
     
-	id<ANTLRTree> newTree = [self newTreeWithToken:newToken];
+	id newTree = [self create:newToken];
 	[newToken release];
 	return newTree;
 }
 
-- (id<ANTLRTree>) newTreeWithToken:(id<ANTLRToken>)fromToken tokenType:(NSInteger)tokenType text:(NSString *)tokenText
+/** Create a new node derived from a token, with a new token type.
+ *  This is invoked from an imaginary node ref on right side of a
+ *  rewrite rule as IMAG[$tokenLabel].
+ *
+ *  This should invoke createToken(Token).
+ */
+- (id) createTree:(NSInteger)tokenType fromToken:(id<ANTLRToken>)fromToken text:(NSString *)tokenText
 {
-	id<ANTLRToken> newToken = [self newTokenWithToken:fromToken];
-	[newToken setType:tokenType];
-	[newToken setText:tokenText];
-    
-	id<ANTLRTree> newTree = [self newTreeWithToken:newToken];
-	[newToken release];
-	return newTree;
-}
-
-- (id<ANTLRTree>) newTreeWithToken:(id<ANTLRToken>)fromToken text:(NSString *)tokenText
-{
-	id<ANTLRToken> newToken = [self newTokenWithToken:fromToken];
+	id<ANTLRToken> newToken = [self createToken:fromToken];
 	[newToken setText:tokenText];
 	
-	id<ANTLRTree> newTree = [self newTreeWithToken:newToken];
+	id newTree = [self create:newToken];
 	[newToken release];
 	return newTree;
 }
 
+/** Create a new node derived from a token, with a new token type.
+ *  This is invoked from an imaginary node ref on right side of a
+ *  rewrite rule as IMAG["IMAG"].
+ *
+ *  This should invoke createToken(int,String).
+ */
+- (id) createTree:(NSInteger)tokenType text:(NSString *)tokenText
+{
+	id<ANTLRToken> newToken = [self createToken:tokenType text:tokenText];
+	
+	id newTree = [self create:newToken];
+	[newToken release];
+	return newTree;
+}
 
-- (id) copyNode:(id<ANTLRTree>)aNode
+- (id) copyNode:(id)aNode
 {
 	return [aNode copyWithZone:nil];	// not -copy: to silence warnings
 }
 
-- (id) copyTree:(id<ANTLRTree>)aTree
+- (id) copyTree:(id)aTree
 {
 	return [aTree deepCopy];
 }
 
 
-- (void) addChild:(id<ANTLRTree>)child toTree:(id<ANTLRTree>)aTree
+- (void) addChild:(id)child toTree:(id)aTree
 {
 	[aTree addChild:child];
 }
 
-- (id) makeNode:(id<ANTLRTree>)newRoot parentOf:(id<ANTLRTree>)oldRoot
+- (id) makeNode:(id)newRoot parentOf:(id)oldRoot
 {
-	id<ANTLRTree> newRootNode = newRoot;
+	id newRootNode = newRoot;
 
 	if (oldRoot == nil)
 		return newRootNode;
@@ -125,7 +143,7 @@
 		}
 #warning TODO: double check memory management with respect to code generation
 		// remove the empty node, placing its sole child in its role.
-		id<ANTLRTree> tmpRootNode = [[newRootNode childAtIndex:0] retain];
+		id tmpRootNode = [[newRootNode childAtIndex:0] retain];
 		[newRootNode release];
 		newRootNode = tmpRootNode;		
 	}
@@ -142,9 +160,9 @@
 }
 
 
-- (id<ANTLRTree>) postProcessTree:(id<ANTLRTree>)aTree
+- (id) postProcessTree:(id)aTree
 {
-	id<ANTLRTree> processedNode = aTree;
+	id processedNode = aTree;
 	if (aTree != nil && [aTree isNil] != NO && [aTree getChildCount] == 1) {
 		processedNode = [aTree childAtIndex:0];
 	}
@@ -152,7 +170,7 @@
 }
 
 
-- (NSUInteger) uniqueIdForTree:(id<ANTLRTree>)aNode
+- (NSUInteger) uniqueIdForTree:(id)aNode
 {
 	// TODO: is hash appropriate here?
 	return [aNode hash];
@@ -161,7 +179,7 @@
 
 #pragma mark Content
 
-- (NSInteger) tokenTypeForNode:(id<ANTLRTree>)aNode
+- (NSInteger) tokenTypeForNode:(id)aNode
 {
 	return [aNode getType];
 }
@@ -172,12 +190,12 @@
 }
 
 
-- (NSString *) textForNode:(id<ANTLRTree>)aNode
+- (NSString *) textForNode:(id)aNode
 {
 	return [aNode getText];
 }
 
-- (void) setText:(NSString *)tokenText forNode:(id<ANTLRTree>)aNode
+- (void) setText:(NSString *)tokenText forNode:(id)aNode
 {
 	// currently unimplemented
 }
@@ -185,13 +203,13 @@
 
 #pragma mark Navigation / Tree Parsing
 
-- (id<ANTLRTree>) childForNode:(id<ANTLRTree>) aNode atIndex:(NSInteger) i
+- (id) childForNode:(id) aNode atIndex:(NSInteger) i
 {
 	// currently unimplemented
 	return nil;
 }
 
-- (NSInteger) childCountForTree:(id<ANTLRTree>) aTree
+- (NSInteger) childCountForTree:(id) aTree
 {
 	// currently unimplemented
 	return 0;
@@ -199,36 +217,18 @@
 
 #pragma mark Subclass Responsibilties
 
-- (id<ANTLRTree>) newTreeWithToken:(id<ANTLRToken>) payload
-{
-	// subclass responsibility
-	return nil;
-}
-
-- (id<ANTLRToken>) newTokenWithToken:(id<ANTLRToken>)fromToken
-{
-	// subclass responsibility
-	return nil;
-}
-
-- (id<ANTLRToken>) newTokenWithTokenType:(NSInteger)tokenType text:(NSString *)tokenText
-{
-	// subclass responsibility
-	return nil;
-}
-
-- (void) setBoundariesForTree:(id<ANTLRTree>)aTree fromToken:(id<ANTLRToken>)startToken toToken:(id<ANTLRToken>)stopToken
+- (void) setBoundariesForTree:(id)aTree fromToken:(id<ANTLRToken>)startToken toToken:(id<ANTLRToken>)stopToken
 {
 	// subclass responsibility
 }
 
-- (NSInteger) tokenStartIndexForTree:(id<ANTLRTree>)aTree
+- (NSInteger) tokenStartIndexForTree:(id)aTree
 {
 	// subclass responsibility
 	return 0;
 }
 
-- (NSInteger) tokenStopIndexForTree:(id<ANTLRTree>)aTree
+- (NSInteger) tokenStopIndexForTree:(id)aTree
 {
 	// subclass responsibility
 	return 0;

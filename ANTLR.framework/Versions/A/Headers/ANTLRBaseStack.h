@@ -44,7 +44,7 @@
 }
 
 //@property (copy) ANTLRRuleStack *fNext;
-@property (getter=getLastHash, setter=setLastHash) NSInteger LastHash;
+@property (getter=getLastHash, setter=setLastHash:) NSInteger LastHash;
 
 // Contruction/Destruction
 + (ANTLRBaseStack *)newANTLRBaseStack;
@@ -56,8 +56,8 @@
 // Instance Methods
 - (id) copyWithZone:(NSZone *)aZone;
 
-- (NSInteger)count;
-- (NSInteger)size;
+- (NSUInteger)count;
+- (NSUInteger)size;
 /* clear -- reinitialize the maplist array */
 
 - (NSInteger)getLastHash;

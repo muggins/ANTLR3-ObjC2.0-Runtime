@@ -60,7 +60,7 @@
         return [self _next];
 }
 
-- (id<ANTLRTree>) nextTree:(id<ANTLRToken>)element
+- (id<ANTLRBaseTree>) toTree:(id<ANTLRBaseTree>)element
 {
     return [treeAdaptor dupNode:element];
 }

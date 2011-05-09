@@ -48,7 +48,7 @@
 {
     if (start != aStart) {
         [aStart retain];
-        [start release];
+        if ( start ) [start release];
         start = aStart;
     }
 }
@@ -62,7 +62,7 @@
 {
     if (stopToken != aStop) {
         [aStop retain];
-        [stopToken release];
+        if ( stopToken ) [stopToken release];
         stopToken = aStop;
     }
 }

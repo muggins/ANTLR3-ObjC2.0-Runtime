@@ -1,16 +1,15 @@
-// $ANTLR 3.3.1-SNAPSHOT Jan 20, 2011 10:02:28 Combined.g 2011-01-20 10:06:11
+// $ANTLR ${project.version} ${buildNumber} Combined.g 2011-05-06 11:53:18
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
  */
 #import <Cocoa/Cocoa.h>
-#import "antlr3.h"
+#import <ANTLR/ANTLR.h>
 /* End of standard antlr3 runtime definitions
  * =============================================================================
  */
 
 /* parserHeaderFile */
-
 #ifndef ANTLR3TokenTypeAlreadyDefined
 #define ANTLR3TokenTypeAlreadyDefined
 typedef enum {
@@ -24,6 +23,9 @@ typedef enum {
 #endif
 
 #pragma mark Tokens
+#ifdef EOF
+#undef EOF
+#endif
 #define EOF -1
 #define ID 4
 #define INT 5
@@ -31,26 +33,40 @@ typedef enum {
 #pragma mark Dynamic Global Scopes
 #pragma mark Dynamic Rule Scopes
 #pragma mark Rule Return Scopes start
-#pragma mark Rule return scopes end
+
+/* Interface grammar class */
 @interface CombinedParser : ANTLRParser { /* line 572 */
-// start of globalAttributeScopeMemVar
+/* ObjC start of ruleAttributeScopeMemVar */
 
 
-// start of action-actionScope-memVars
-// start of ruleAttributeScopeMemVar
+/* ObjC end of ruleAttributeScopeMemVar */
+/* ObjC start of globalAttributeScopeMemVar */
 
 
-// Start of memVars
+/* ObjC end of globalAttributeScopeMemVar */
+/* ObjC start of actions.(actionScope).memVars */
+/* ObjC end of actions.(actionScope).memVars */
+/* ObjC start of memVars */
+/* ObjC end of memVars */
 
  }
 
-// start of action-actionScope-methodsDecl
-+ (id) newCombinedParser:(id<ANTLRTreeNodeStream>)aStream;
+/* ObjC start of actions.(actionScope).properties */
+/* ObjC end of actions.(actionScope).properties */
+/* ObjC start of properties */
+/* ObjC end of properties */
 
++ (void) initialize;
++ (id) newCombinedParser:(id<ANTLRTokenStream>)aStream;
+/* ObjC start of actions.(actionScope).methodsDecl */
+/* ObjC end of actions.(actionScope).methodsDecl */
 
+/* ObjC start of methodsDecl */
+/* ObjC end of methodsDecl */
 
 - (void)stat; 
 - (void)identifier; 
 
 
 @end /* end of CombinedParser interface */
+

@@ -25,33 +25,35 @@
 // THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "ANTLRTree.h"
+#import "ANTLRCommonToken.h"
+#import "AMutableArray.h"
 
 @protocol ANTLRBaseTree <ANTLRTree>
 
-@property (retain, getter=getChildren, setter=setChildren) NSMutableArray *children;
++ (id<ANTLRBaseTree>) INVALID_NODE;
 
 + (id<ANTLRBaseTree>) newTree;
 + (id<ANTLRBaseTree>) newTree:(id<ANTLRBaseTree>)node;
 
 - (id<ANTLRBaseTree>) init;
-- (id<ANTLRBaseTree>) initWith:(id<ANTLRTree>)node;
+- (id<ANTLRBaseTree>) initWith:(id<ANTLRBaseTree>)node;
 
 - (id<ANTLRBaseTree>) getChild:(NSUInteger)i;
-- (NSMutableArray *)getChildren;
-- (void) setChildren:(NSMutableArray *)anArray;
+- (AMutableArray *)getChildren;
+- (void) setChildren:(AMutableArray *)anArray;
 - (id<ANTLRBaseTree>)getFirstChildWithType:(NSInteger)type;
 - (NSUInteger) getChildCount;
 
 // Add t as a child to this node.  If t is null, do nothing.  If t
 //  is nil, add all children of t to this' children.
 
-- (void) addChild:(id<ANTLRTree>) tree;
+- (void) addChild:(id<ANTLRBaseTree>) tree;
 - (void) addChildren:(NSArray *) theChildren;
 //- (void) removeAllChildren;
 
-- (void) setChild:(NSInteger) i With:(id<ANTLRTree>)t;
+- (void) setChild:(NSInteger) i With:(id<ANTLRBaseTree>)t;
 - (id) deleteChild:(NSInteger) i;
-- (NSMutableArray *) createChildrenList;
+- (AMutableArray *) createChildrenList;
 - (void) replaceChildrenFrom:(NSInteger)startChildIndex To:(NSInteger)stopChildIndex With:(id) t;
 // Indicates the node is a nil node but may still have children, meaning
 // the tree is a flat list.
@@ -65,13 +67,13 @@
 - (void) freshenParentAndChildIndexes;
 - (void) freshenParentAndChildIndexes:(NSInteger) offset;
 - (void) sanityCheckParentAndChildIndexes;
-- (void) sanityCheckParentAndChildIndexes:(id<ANTLRTree>) parent At:(NSInteger) i;
+- (void) sanityCheckParentAndChildIndexes:(id<ANTLRBaseTree>) parent At:(NSInteger) i;
 
 - (NSInteger) getChildIndex;
 - (void) setChildIndex:(NSInteger)i;
 
-- (id<ANTLRTree>)getAncestor:(NSInteger)ttype;
-- (NSMutableArray *)getAncestors;
+- (id<ANTLRBaseTree>)getAncestor:(NSInteger)ttype;
+- (AMutableArray *)getAncestors;
 
 #pragma mark Copying
 - (id) copyWithZone:(NSZone *)aZone;	// the children themselves are not copied here!
@@ -80,10 +82,10 @@
 
 #pragma mark Tree Parser support
 - (NSInteger) getType;
-- (NSString *) getText;
+- (NSString *) text;
 // In case we don't have a token payload, what is the line for errors?
-- (NSInteger) getLine;
-- (NSInteger) getCharPositionInLine;
+- (NSUInteger) line;
+- (NSUInteger) charPositionInLine;
 
 
 #pragma mark Informational
@@ -93,25 +95,27 @@
 - (NSString *) toString;
 - (NSString *) toStringTree;
 
+@property (retain) AMutableArray *children;
+@property (retain) NSException *anException;
+
 @end
 
 @interface ANTLRBaseTree : NSObject <ANTLRTree>
 {
-	NSMutableArray *children;
+	AMutableArray *children;
     NSException *anException;
 }
 
-@property (retain, getter=getChildren, setter=setChildren) NSMutableArray *children;
-
++ (id<ANTLRBaseTree>) INVALID_NODE;
 + (id<ANTLRBaseTree>) newTree;
 + (id<ANTLRBaseTree>) newTree:(id<ANTLRBaseTree>)node;
          
-- (id<ANTLRTree>) init;
-- (id<ANTLRBaseTree>) initWith:(id<ANTLRTree>)node;
+- (id<ANTLRBaseTree>) init;
+- (id<ANTLRBaseTree>) initWith:(id<ANTLRBaseTree>)node;
 
 - (id<ANTLRBaseTree>) getChild:(NSUInteger)i;
-- (NSMutableArray *)getChildren;
-- (void) setChildren:(NSMutableArray *)anArray;
+- (AMutableArray *)getChildren;
+- (void) setChildren:(AMutableArray *)anArray;
 - (id<ANTLRBaseTree>)getFirstChildWithType:(NSInteger)type;
 - (NSUInteger) getChildCount;
 
@@ -120,12 +124,12 @@
 // Add t as a child to this node.  If t is null, do nothing.  If t
 //  is nil, add all children of t to this' children.
 
-- (void) addChild:(id<ANTLRTree>) tree;
+- (void) addChild:(id<ANTLRBaseTree>) tree;
 - (void) addChildren:(NSArray *) theChildren;
 
-- (void) setChild:(NSUInteger) i With:(id<ANTLRTree>)t;
-- (id) deleteChild:(NSUInteger) i;
-- (NSMutableArray *) createChildrenList;
+- (void) setChild:(NSUInteger) i With:(id<ANTLRBaseTree>)t;
+- (id) deleteChild:(NSUInteger) idx;
+- (AMutableArray *) createChildrenList;
 - (void) replaceChildrenFrom:(NSInteger)startChildIndex To:(NSInteger)stopChildIndex With:(id) t;
 // Indicates the node is a nil node but may still have children, meaning
 	// the tree is a flat list.
@@ -139,14 +143,14 @@
 - (void) freshenParentAndChildIndexes;
 - (void) freshenParentAndChildIndexes:(NSInteger) offset;
 - (void) sanityCheckParentAndChildIndexes;
-- (void) sanityCheckParentAndChildIndexes:(id<ANTLRTree>) parent At:(NSInteger) i;
+- (void) sanityCheckParentAndChildIndexes:(id<ANTLRBaseTree>) parent At:(NSInteger) i;
 
 - (NSInteger) getChildIndex;
 - (void) setChildIndex:(NSInteger)i;
 
 - (BOOL) hasAncestor:(NSInteger) ttype;
-- (id<ANTLRTree>)getAncestor:(NSInteger)ttype;
-- (NSMutableArray *)getAncestors;
+- (id<ANTLRBaseTree>)getAncestor:(NSInteger)ttype;
+- (AMutableArray *)getAncestors;
 
 - (id) copyWithZone:(NSZone *)aZone;
 - (id) deepCopy;					// performs a deepCopyWithZone: with the default zone
@@ -154,19 +158,21 @@
 
 	// Return a token type; needed for tree parsing
 - (NSInteger) getType;
-- (NSString *) getText;
+- (NSString *) text;
 
 	// In case we don't have a token payload, what is the line for errors?
-- (NSInteger) getLine;
-- (NSInteger) getCharPositionInLine;
-- (void) setCharPositionInLine:(NSInteger)pos;
+- (NSUInteger) line;
+- (NSUInteger) charPositionInLine;
+- (void) setCharPositionInLine:(NSUInteger)pos;
 
 - (NSString *) treeDescription;
 - (NSString *) description;
 - (NSString *) toString;
 - (NSString *) toStringTree;
 
+@property (retain) AMutableArray *children;
 @property (retain) NSException *anException;
+
 @end
 
 @interface ANTLRTreeNavigationNode : ANTLRBaseTree {

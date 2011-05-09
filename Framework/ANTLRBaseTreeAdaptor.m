@@ -28,19 +28,22 @@
 #import "ANTLRRuntimeException.h"
 #import "ANTLRUniqueIDMap.h"
 #import "ANTLRMapElement.h"
+#import "ANTLRCommonTree.h"
 
 @implementation ANTLRBaseTreeAdaptor
 
-+ (ANTLRBaseTreeAdaptor *) newEmptyTree
+@synthesize treeToUniqueIDMap;
+@synthesize uniqueNodeID;
+
++ (id<ANTLRTree>) newEmptyTree
 {
     return [[ANTLRCommonTree alloc] init];
-//    return nil;
 }
 
 - (id) init
 {
-    if ((self = [super init]) != nil) {
-        
+    self = [super init];
+    if ( self != nil ) {
     }
     return self;
 }
@@ -57,9 +60,14 @@
 }
     
 
+- (id) createNil
+{
+    return [ANTLRCommonTree newTreeWithToken:nil];
+}
+
 - (id) emptyNode
 {
-    return [[ANTLRBaseTreeAdaptor alloc] init];
+    return [ANTLRCommonTree newTreeWithToken:nil];
 }
 
 /** create tree node that holds the start and stop tokens associated
@@ -85,39 +93,39 @@
                                                Exception:e];
 }
 
-- (BOOL) isNil:(id<ANTLRTree>) tree
+- (BOOL) isNil:(id) tree
 {
-    return [(id<ANTLRTree>)tree isNil];
+    return [(id)tree isNil];
 }
 
-- (id<ANTLRTree>)dupTree:(id<ANTLRTree>)tree
+- (id)dupTree:(id)tree
 {
-    return [self dupTree:(id<ANTLRTree>)tree Parent:nil];
+    return [self dupTree:(id)tree Parent:nil];
 }
 
 /** This is generic in the sense that it will work with any kind of
  *  tree (not just Tree interface).  It invokes the adaptor routines
  *  not the tree node routines to do the construction.  
  */
-- (id<ANTLRTree>)dupTree:(id<ANTLRTree>)t Parent:(id<ANTLRTree>)parent
+- (id)dupTree:(id)t Parent:(id)parent
 {
     if ( t==nil ) {
         return nil;
     }
-    id<ANTLRTree>newTree = [self dupNode:t];
+    id newTree = [self dupNode:t];
     // ensure new subtree root has parent/child index set
     [self setChildIndex:newTree With:[self getChildIndex:t]]; // same index in new tree
     [self setParent:newTree With:parent];
     NSInteger n = [self getChildCount:t];
     for (NSInteger i = 0; i < n; i++) {
-        id<ANTLRTree> child = [self getChild:t At:i];
-        id<ANTLRTree> newSubTree = [self dupTree:child Parent:t];
+        id child = [self getChild:t At:i];
+        id newSubTree = [self dupTree:child Parent:t];
         [self addChild:newSubTree toTree:newTree];
     }
     return newTree;
 }
 
-- (id<ANTLRTree>)dupNode:(id<ANTLRTree>)aNode
+- (id)dupNode:(id)aNode
 {
     return aNode; // override for better results :>)
 }
@@ -128,10 +136,10 @@
  *  make sure that this is consistent with have the user will build
  *  ASTs.
  */
-- (void) addChild:(id<ANTLRTree>)child toTree:(id<ANTLRTree>)t
+- (void) addChild:(id)child toTree:(id)t
 {
     if ( t != nil && child != nil ) {
-        [(id<ANTLRTree>)t addChild:[(id<ANTLRTree>)child retain]];
+        [(id)t addChild:[(id)child retain]];
     }
 }
 
@@ -161,18 +169,18 @@
  *  constructing these nodes so we should have this control for
  *  efficiency.
  */
-- (id<ANTLRTree>)becomeRoot:(id<ANTLRTree>)newRoot old:(id<ANTLRTree>)oldRoot
+- (id)becomeRoot:(id)newRoot old:(id)oldRoot
 {
     if ( oldRoot == nil ) {
         return newRoot;
     }
     //System.out.println("becomeroot new "+newRoot.toString()+" old "+oldRoot);
-    id<ANTLRTree> newRootTree = (id<ANTLRTree>)newRoot;
-    id<ANTLRTree> oldRootTree = (id<ANTLRTree>)oldRoot;
+    id newRootTree = (id)newRoot;
+    id oldRootTree = (id)oldRoot;
     // handle ^(nil real-node)
     if ( [newRootTree isNil] ) {
         NSInteger nc = [newRootTree getChildCount];
-        if ( nc == 1 ) newRootTree = [(id<ANTLRTree>)newRootTree getChild:0];
+        if ( nc == 1 ) newRootTree = [(id)newRootTree getChild:0];
         else if ( nc > 1 ) {
             // TODO: make tree run time exceptions hierarchy
             @throw [ANTLRRuntimeException newException:NSStringFromClass([self class]) reason:@"more than one node as root (TODO: make exception hierarchy)"];
@@ -186,16 +194,16 @@
 }
 
 /** Transform ^(nil x) to x and nil to null */
-- (id<ANTLRTree>)rulePostProcessing:(id<ANTLRTree>)root
+- (id)rulePostProcessing:(id)root
 {
     //System.out.println("rulePostProcessing: "+((Tree)root).toStringTree());
-    id<ANTLRTree> r = (id<ANTLRTree>)root;
+    id r = (id)root;
     if ( r != nil && [r isNil] ) {
         if ( [r getChildCount] == 0 ) {
             r = nil;
         }
         else if ( [r getChildCount] == 1 ) {
-            r = (id<ANTLRTree>)[r getChild:0];
+            r = (id)[r getChild:0];
             // whoever invokes rule will set parent and child index
             [r setParent:nil];
             [r setChildIndex:-1];
@@ -204,79 +212,109 @@
     return r;
 }
 
-- (id<ANTLRTree>)becomeRootfromToken:(id<ANTLRToken>)newRoot old:(id<ANTLRTree>)oldRoot
+- (id)becomeRootfromToken:(id<ANTLRToken>)newRoot old:(id)oldRoot
 {
-    return [self becomeRoot:[self createTree:newRoot] old:oldRoot];
+    return [self becomeRoot:(id)[self create:newRoot] old:oldRoot];
 }
 
-- (id<ANTLRTree>)createTree:(NSInteger)tokenType FromToken:(id<ANTLRToken>)fromToken
+- (id) create:(id<ANTLRToken>)aToken
+{
+    return [ANTLRCommonTree newTreeWithToken:aToken];
+}
+
+- (id)createTree:(NSInteger)tokenType FromToken:(id<ANTLRToken>)fromToken
 {
     fromToken = [self createToken:fromToken];
     //((ClassicToken)fromToken).setType(tokenType);
     [fromToken setType:tokenType];
-    id<ANTLRTree> t = [[self class] createTree:fromToken];
+    id t = [self create:fromToken];
     return t;
 }
 
-- (id<ANTLRTree>)createTree:(NSInteger)tokenType FromToken:(id<ANTLRToken>)fromToken Text:(NSString *)text;
+- (id)createTree:(NSInteger)tokenType FromToken:(id<ANTLRToken>)fromToken Text:(NSString *)text
 {
     if (fromToken == nil)
         return [self createTree:tokenType Text:text];
     fromToken = [self createToken:fromToken];
     [fromToken setType:tokenType];
     [fromToken setText:text];
-    id<ANTLRTree>t = [self createTree:fromToken];
+    id t = [self create:fromToken];
     return t;
 }
 
-- (id<ANTLRTree>)createTree:(NSInteger)tokenType Text:(NSString *)text
+- (id)createTree:(NSInteger)tokenType Text:(NSString *)text
 {
     id<ANTLRToken> fromToken = [self createToken:tokenType Text:text];
-    id<ANTLRTree> t = (id<ANTLRTree>)[self createTree:fromToken];
+    id t = (id)[self create:fromToken];
     return t;
 }
 
-- (NSInteger) getType:(id<ANTLRTree>) t
+- (NSInteger) getType:(id) t
 {
-    return [(id<ANTLRTree>)t getType];
+    return [(id)t getType];
 }
 
-- (void) setType:(id<ANTLRTree>)t Type:(NSInteger)type
-{
-    @throw [ANTLRNoSuchElementException newException:@"don't know enough about Tree node"];
-}
-
-- (NSString *)getText:(id<ANTLRTree>)t
-{
-    return [(id<ANTLRTree>)t getText];
-}
-
-- (void) setText:(id<ANTLRTree>)t Text:(NSString *)text
+- (void) setType:(id)t Type:(NSInteger)type
 {
     @throw [ANTLRNoSuchElementException newException:@"don't know enough about Tree node"];
 }
 
-- (id<ANTLRTree>) getChild:(id<ANTLRTree>)t At:(NSInteger)index
+/** What is the Token associated with this node?  If
+ *  you are not using ANTLRCommonTree, then you must
+ *  override this in your own adaptor.
+ */
+- (id<ANTLRToken>) getToken:(ANTLRCommonTree *) t
 {
-    return [(id<ANTLRTree>)t getChild:index ];
+    if ( [t isKindOfClass:[ANTLRCommonTree class]] ) {
+        return [t getToken];
+    }
+    return nil; // no idea what to do
 }
 
-- (void) setChild:(id<ANTLRTree>)t At:(NSInteger)index Child:(id<ANTLRTree>)child
+- (NSString *)getText:(id)t
 {
-    [(id<ANTLRTree>)t setChild:index With:(id<ANTLRTree>)child];
+    return [(id)t text];
 }
 
-- (id<ANTLRTree>) deleteChild:(id<ANTLRTree>)t Index:(NSInteger)index
+- (void) setText:(id)t Text:(NSString *)text
 {
-    return [(id<ANTLRTree>)t deleteChild:index];
+    @throw [ANTLRNoSuchElementException newException:@"don't know enough about Tree node"];
 }
 
-- (NSInteger) getChildCount:(id<ANTLRTree>)t
+- (id) getChild:(id)t At:(NSInteger)index
 {
-    return [(id<ANTLRTree>)t getChildCount];
+    return [(id)t getChild:index ];
 }
 
-- (NSInteger) getUniqueID:(id<ANTLRTree>)node
+- (void) setChild:(id)t At:(NSInteger)index Child:(id)child
+{
+    [(id)t setChild:index With:(id)child];
+}
+
+- (id) deleteChild:(id)t Index:(NSInteger)index
+{
+    return [(id)t deleteChild:index];
+}
+
+- (NSInteger) getChildCount:(id)t
+{
+    return [(id)t getChildCount];
+}
+
+- (id<ANTLRBaseTree>) getParent:(id<ANTLRBaseTree>) t
+{
+    if ( t == nil )
+        return nil;
+    return (id<ANTLRBaseTree>)[t getParent];
+}
+
+- (void) setParent:(id<ANTLRBaseTree>)t With:(id<ANTLRBaseTree>) parent
+{
+    if ( t != nil )
+        [(id<ANTLRBaseTree>) t setParent:(id<ANTLRBaseTree>)parent];
+}
+
+- (NSInteger) getUniqueID:(id)node
 {
     if ( treeToUniqueIDMap == nil ) {
         treeToUniqueIDMap = [ANTLRUniqueIDMap newANTLRUniqueIDMap];
@@ -326,12 +364,37 @@
     return nil;
 }
 
+/** Track start/stop token for subtree root created for a rule.
+ *  Only works with Tree nodes.  For rules that match nothing,
+ *  seems like this will yield start=i and stop=i-1 in a nil node.
+ *  Might be useful info so I'll not force to be i..i.
+ */
+- (void) setTokenBoundaries:(id)aTree From:(id<ANTLRToken>)startToken To:(id<ANTLRToken>)stopToken
+{
+    return;
+}
+
+- (NSInteger) getTokenStartIndex:(id)aTree
+{
+    return -1;
+}
+
+- (NSInteger) getTokenStopIndex:(id)aTree
+{
+    return -1;
+}
+
+#ifdef DONTUSENOMO
+- (NSInteger)getUniqueID
+{
+    return uniqueNodeID;
+}
+
 - (void) setUniqueNodeID:(NSInteger)aUniqueNodeID
 {
     uniqueNodeID = aUniqueNodeID;
 }
 
-#ifdef DONTUSENOMO
 - (ANTLRUniqueIDMap *)getTreeToUniqueIDMap
 {
     return treeToUniqueIDMap;
@@ -340,11 +403,6 @@
 - (void) setTreeToUniqueIDMap:(ANTLRUniqueIDMap *)aMapListNode
 {
     treeToUniqueIDMap = aMapListNode;
-}
-
-- (NSInteger)getUniqueID
-{
-    return uniqueNodeID;
 }
 
 #endif

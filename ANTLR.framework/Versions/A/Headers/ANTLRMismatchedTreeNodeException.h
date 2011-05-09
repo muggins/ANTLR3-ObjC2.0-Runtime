@@ -33,7 +33,7 @@
 	NSInteger expecting;
 }
 
-@property (getter=getExpecting, setter=setExpecting) NSInteger expecting;
+@property (getter=getExpecting, setter=setExpecting:) NSInteger expecting;
 
 + (id) newException:(NSInteger)expectedTokenType Stream:(id<ANTLRIntStream>)anInput;
 - (id) initWithTokenType:(NSInteger) expectedTokenType Stream:(id<ANTLRIntStream>)anInput;

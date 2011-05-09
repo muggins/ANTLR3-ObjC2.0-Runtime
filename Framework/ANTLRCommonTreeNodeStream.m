@@ -28,6 +28,7 @@
 #import "ANTLRTokenStream.h"
 #import "ANTLRIntStream.h"
 #import "ANTLRCharStream.h"
+#import "AMutableArray.h"
 
 @implementation ANTLRCommonTreeNodeStream
 
@@ -109,7 +110,7 @@
     return t;
 }
 
-- (BOOL) isEOF:(id<ANTLRTree>) aTree
+- (BOOL) isEOF:(id<ANTLRBaseTree>) aTree
 {
     return [adaptor getType:aTree] == ANTLRTokenTypeEOF;
 }
@@ -190,7 +191,7 @@
     }
 }
 
-- (NSString *) toStringFromNode:(id<ANTLRTree>)startNode ToNode:(id<ANTLRTree>)stopNode
+- (NSString *) toStringFromNode:(id<ANTLRBaseTree>)startNode ToNode:(id<ANTLRBaseTree>)stopNode
 {
     // we'll have to walk from start to stop in tree; we're not keeping
     // a complete node stream buffer

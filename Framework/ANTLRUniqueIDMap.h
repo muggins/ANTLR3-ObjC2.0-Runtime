@@ -58,7 +58,7 @@
 
 - (void)deleteANTLRUniqueIDMap:(ANTLRNodeMapElement *)np;
 - (void)delete_chain:(ANTLRNodeMapElement *)np;
-- (id)getNode:(id<ANTLRTree>)aNode;
-- (void)putID:(id)anID Node:(id<ANTLRTree>)aNode;
+- (id)getNode:(id<ANTLRBaseTree>)aNode;
+- (void)putID:(id)anID Node:(id<ANTLRBaseTree>)aNode;
 
 @end

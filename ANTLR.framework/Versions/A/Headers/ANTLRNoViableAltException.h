@@ -40,6 +40,6 @@
 - (void)setStateNumber:(NSInteger)stateNumber;
 
 
-@property (getter=decisionNumber,setter=setDecisionNumber:) int decisionNumber;
-@property (getter=stateNumber,setter=setStateNumber:) int stateNumber;
+@property (getter=decisionNumber,setter=setDecisionNumber:) NSInteger decisionNumber;
+@property (getter=stateNumber,setter=setStateNumber:) NSInteger stateNumber;
 @end

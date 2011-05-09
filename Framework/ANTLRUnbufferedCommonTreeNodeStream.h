@@ -104,7 +104,7 @@
 - (NSUInteger) size;
 
 #pragma mark Lookahead Handling
-- (void) addLookahead:(id<ANTLRTree>)aNode;
+- (void) addLookahead:(id<ANTLRBaseTree>)aNode;
 - (NSUInteger) lookaheadSize;
 - (void) fillBufferWithLookahead:(NSInteger)k;
 - (id) nextObject;

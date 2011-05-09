@@ -51,7 +51,8 @@
 
 - (id) init:(NSString *)aFileName
 {
-    if ( self = [super init] ) {
+    self = [super init];
+    if ( self != nil ) {
         fileName = aFileName;
         [self load:aFileName encoding:NSUTF8StringEncoding];
     }
@@ -60,7 +61,8 @@
 
 - (id) init:(NSString *) aFileName encoding:(NSStringEncoding)encoding
 {
-    if ( self = [super init] ) {
+    self = [super init];
+    if ( self != nil ) {
         fileName = aFileName;
         [self load:aFileName encoding:encoding];
     }

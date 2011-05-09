@@ -1,14 +1,13 @@
-// $ANTLR 3.3.1-SNAPSHOT Jan 20, 2011 10:02:28 Combined.g 2011-01-20 10:06:11
+// $ANTLR ${project.version} ${buildNumber} Combined.g 2011-05-06 11:53:18
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
  */
 #import <Cocoa/Cocoa.h>
-#import "antlr3.h"
+#import <ANTLR/ANTLR.h>
 /* End of standard antlr3 runtime definitions
  * =============================================================================
  */
-
 
 /* Start cyclicDFAInterface */
 
@@ -22,15 +21,19 @@
 #define ID 4
 #define INT 5
 #define WS 6
+/* interface lexer class */
 @interface CombinedLexer : ANTLRLexer { // line 283
-// start of actions.lexer.memVars
-// start of action-actionScope-memVars
+/* ObjC start of actions.lexer.memVars */
+/* ObjC end of actions.lexer.memVars */
 }
++ (void) initialize;
 + (CombinedLexer *)newCombinedLexerWithCharStream:(id<ANTLRCharStream>)anInput;
-
-- (void)mID; 
-- (void)mINT; 
-- (void)mWS; 
-- (void)mTokens; 
+/* ObjC start actions.lexer.methodsDecl */
+/* ObjC end actions.lexer.methodsDecl */
+- (void) mID ; 
+- (void) mINT ; 
+- (void) mWS ; 
+- (void) mTokens ; 
 
 @end /* end of CombinedLexer interface */
+

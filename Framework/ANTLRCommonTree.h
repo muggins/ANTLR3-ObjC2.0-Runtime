@@ -36,24 +36,12 @@
     NSInteger childIndex;
 }
 
-@property (retain, getter=getANTLRCommonToken, setter=setANTLRCommonToken:) ANTLRCommonToken *token;
-@property (assign, getter=getTokenStartIndex, setter=setTokenStartIndex:) NSInteger startIndex;
-@property (assign, getter=getTokenStopIndex, setter=setTokenStopIndex:) NSInteger stopIndex;
-@property (retain, getter=getParent, setter=setParent:) ANTLRCommonTree *parent;
-@property (assign, getter=getChildIndex, setter=setChildIndex:) NSInteger childIndex;
-
 + (ANTLRCommonTree *) invalidNode;
 + (ANTLRCommonTree *) newTree;
 + (ANTLRCommonTree *) newTreeWithTree:(ANTLRCommonTree *)aTree;
 + (ANTLRCommonTree *) newTreeWithToken:(ANTLRCommonToken *)aToken;
 + (ANTLRCommonTree *) newTreeWithTokenType:(NSInteger)tokenType;
 + (ANTLRCommonTree *) newTreeWithTokenType:(NSInteger)aTType Text:(NSString *)theText;
-#ifdef DONTUSEYET
-+ (id<ANTLRTree>) newTreeWithTokenType:(NSInteger)tokenType;
-+ (id<ANTLRTree>) newTreeWithToken:(id<ANTLRToken>)fromToken TokenType:(NSInteger)tokenType;
-+ (id<ANTLRTree>) newTreeWithToken:(id<ANTLRToken>)fromToken TokenType:(NSInteger)tokenType Text:(NSString *)tokenText;
-+ (id<ANTLRTree>) newTreeWithToken:(id<ANTLRToken>)fromToken Text:(NSString *)tokenText;
-#endif
 
 - (id) init;
 - (id) initWithTreeNode:(ANTLRCommonTree *)aNode;
@@ -61,17 +49,17 @@
 - (id) initWithTokenType:(NSInteger)aTokenType;
 - (id) initWithTokenType:(NSInteger)aTokenType Text:(NSString *)theText;
 
-- (id<ANTLRTree>) copyWithZone:(NSZone *)aZone;
+- (id<ANTLRBaseTree>) copyWithZone:(NSZone *)aZone;
 
 - (BOOL) isNil;
 
 - (ANTLRCommonToken *) getToken;
 - (void) setToken:(ANTLRCommonToken *)aToken;
-- (id<ANTLRTree>) dupNode;
+- (ANTLRCommonToken *) dupNode;
 - (NSInteger) getType;
-- (NSString *) getText;
-- (NSUInteger) getLine;
-- (NSUInteger) getCharPositionInLine;
+- (NSString *) text;
+- (NSUInteger) line;
+- (NSUInteger) charPositionInLine;
 - (ANTLRCommonTree *) getParent;
 - (void) setParent:(ANTLRCommonTree *) t;
 
@@ -84,5 +72,19 @@
 - (void) setTokenStartIndex: (NSInteger) aStartIndex;
 - (NSInteger) getTokenStopIndex;
 - (void) setTokenStopIndex: (NSInteger) aStopIndex;
+
+/*
+ @property (retain, getter=getANTLRCommonToken, setter=setANTLRCommonToken:) ANTLRCommonToken *token;
+ @property (assign, getter=getTokenStartIndex, setter=setTokenStartIndex:) NSInteger startIndex;
+ @property (assign, getter=getTokenStopIndex, setter=setTokenStopIndex:) NSInteger stopIndex;
+ @property (retain, getter=getParent, setter=setParent:) id<ANTLRBaseTree> parentparent;
+ @property (assign, getter=getChildIndex, setter=setChildIndex:) NSInteger childIndex;
+ */
+
+@property (retain) ANTLRCommonToken *token;
+@property (assign) NSInteger startIndex;
+@property (assign) NSInteger stopIndex;
+@property (retain) ANTLRCommonTree *parent;
+@property (assign) NSInteger childIndex;
 
 @end

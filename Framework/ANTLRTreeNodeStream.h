@@ -35,9 +35,8 @@
 @protocol ANTLRTreeNodeStream < ANTLRIntStream > 
 
 - (id) initWithTree:(ANTLRCommonTree *)theTree;
-- (id) initWithTreeAdaptor:(id<ANTLRTreeAdaptor>)theAdaptor Tree:(ANTLRCommonTree *)theTree;
 
-- (id) getNode:(NSInteger) idx;
+- (id) getTree:(NSInteger) idx;
 - (id) LT:(NSInteger)k;
 - (id) getTreeSource;
 - (id<ANTLRTokenStream>) getTokenStream; 

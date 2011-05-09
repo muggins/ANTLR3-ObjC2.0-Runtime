@@ -34,30 +34,32 @@
 @interface ANTLRCommonTreeAdaptor : ANTLRBaseTreeAdaptor {
 }
 
-+ (id<ANTLRTree>) newEmptyTree;
++ (ANTLRCommonTree *) newEmptyTree;
 + (ANTLRCommonTreeAdaptor *)newTreeAdaptor;
 - (id) init;
-- (id<ANTLRTree>)dupNode:(id<ANTLRTree>)t;    
-- (ANTLRCommonTree *)createTree:(ANTLRCommonToken *)aToken;
-- (ANTLRCommonTree *)createTree:(NSInteger)tokenType Text:(NSString *)text;
+- (ANTLRCommonTree *)dupNode:(ANTLRCommonTree *)t;   
+
+- (ANTLRCommonTree *) create:(id<ANTLRToken>) payload;
+//- (ANTLRCommonTree *) createTree:(NSInteger)tokenType fromToken:(ANTLRCommonToken *)aToken;
+//- (ANTLRCommonTree *) createTree:(NSInteger)tokenType fromToken:(ANTLRCommonToken *)aToken Text:(NSString *)text;
 - (id<ANTLRToken>)createToken:(NSInteger)tokenType Text:(NSString *)text;
 - (id<ANTLRToken>)createToken:(id<ANTLRToken>)fromToken;
-- (void) setTokenBoundaries:(id<ANTLRTree>)t From:(id<ANTLRToken>)startToken To:(id<ANTLRToken>)stopToken;
-- (NSInteger)getTokenStartIndex:(id<ANTLRTree>)t;
-- (NSInteger)getTokenStopIndex:(id<ANTLRTree>)t;
-- (NSString *)getText:(id<ANTLRTree>)t;
-- (void)setText:(id<ANTLRTree>)t Text:(NSString *)text;
-- (NSInteger)getType:(id<ANTLRTree>)t;
-- (void) setType:(id<ANTLRTree>)t Type:(NSInteger)tokenType;
-- (id<ANTLRToken>)getToken:(id<ANTLRTree>)t;
-- (id<ANTLRTree>)getChild:(id<ANTLRTree>)t At:(NSInteger)i;
-- (void) setChild:(id<ANTLRTree>)t At:(NSInteger)i Child:(id<ANTLRTree>)child;
-- (NSInteger)getChildCount:(id<ANTLRTree>)t;
-- (id<ANTLRTree>)getParent:(id<ANTLRTree>)t;
-- (void)setParent:(id<ANTLRTree>)t With:(id<ANTLRTree>)parent;
-- (NSInteger)getChildIndex:(id<ANTLRTree>)t;
-- (void)setChildIndex:(id<ANTLRTree>)t With:(NSInteger)index;
-- (void)replaceChildren:(id<ANTLRTree>)parent From:(NSInteger)startChildIndex To:(NSInteger)stopChildIndex With:(id<ANTLRTree>)t;
+- (void) setTokenBoundaries:(ANTLRCommonTree *)t From:(id<ANTLRToken>)startToken To:(id<ANTLRToken>)stopToken;
+- (NSInteger)getTokenStartIndex:(ANTLRCommonTree *)t;
+- (NSInteger)getTokenStopIndex:(ANTLRCommonTree *)t;
+- (NSString *)getText:(ANTLRCommonTree *)t;
+- (void)setText:(ANTLRCommonTree *)t Text:(NSString *)text;
+- (NSInteger)getType:(ANTLRCommonTree *)t;
+- (void) setType:(ANTLRCommonTree *)t Type:(NSInteger)tokenType;
+- (id<ANTLRToken>)getToken:(ANTLRCommonTree *)t;
+- (ANTLRCommonTree *)getChild:(ANTLRCommonTree *)t At:(NSInteger)i;
+- (void) setChild:(ANTLRCommonTree *)t At:(NSInteger)i Child:(ANTLRCommonTree *)child;
+- (NSInteger)getChildCount:(ANTLRCommonTree *)t;
+- (ANTLRCommonTree *)getParent:(ANTLRCommonTree *)t;
+- (void)setParent:(ANTLRCommonTree *)t With:(ANTLRCommonTree *)parent;
+- (NSInteger)getChildIndex:(ANTLRCommonTree *)t;
+- (void)setChildIndex:(ANTLRCommonTree *)t With:(NSInteger)index;
+- (void)replaceChildren:(ANTLRCommonTree *)parent From:(NSInteger)startChildIndex To:(NSInteger)stopChildIndex With:(ANTLRCommonTree *)t;
 - (id)copyWithZone:(NSZone *)zone;
 
 @end

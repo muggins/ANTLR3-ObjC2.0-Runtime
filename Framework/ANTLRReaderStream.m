@@ -51,7 +51,8 @@ static NSInteger INITIAL_BUFFER_SIZE = 1024;
 
 - (id) init
 {
-    if (self = [super init]) {
+	self = [super init];
+	if ( self != nil ) {
         fh = nil;
         rbSize = READ_BUFFER_SIZE;
         size = INITIAL_BUFFER_SIZE;
@@ -61,7 +62,8 @@ static NSInteger INITIAL_BUFFER_SIZE = 1024;
 
 - (id) initWithReader:(NSFileHandle *)r size:(NSInteger)aSize readBufferSize:(NSInteger)aReadChunkSize
 {
-    if (self = [super init]) {
+	self = [super init];
+	if ( self != nil ) {
         fh = r;
         rbSize = aSize;
         size = aReadChunkSize;

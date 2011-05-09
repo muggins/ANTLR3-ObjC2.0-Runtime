@@ -29,16 +29,15 @@
 
 @implementation ANTLRCommonTree
 
-@synthesize token;
-@synthesize startIndex;
-@synthesize stopIndex;
-@synthesize parent;
-@synthesize childIndex;
++ (ANTLRCommonTree *)INVALID_NODE
+{
+	return [[ANTLRCommonTree alloc] initWithToken:[ANTLRCommonToken invalidToken]];
+}
 
 + (ANTLRCommonTree *)invalidNode
 {
-    // Had to cast to id<ANTLRTree> here, because GCC is dumb.
-	return [((ANTLRCommonTree *)[ANTLRCommonTree alloc]) initWithToken:[ANTLRCommonToken invalidToken]];
+    // Had to cast to ANTLRCommonTree * here, because GCC is dumb.
+	return [[ANTLRCommonTree alloc] initWithToken:ANTLRCommonToken.INVALID_TOKEN];
 }
 
 + (ANTLRCommonTree *)newTree
@@ -51,39 +50,38 @@
     return [[ANTLRCommonTree alloc] initWithTreeNode:aTree];
 }
 
-+ (ANTLRCommonTree *)newTreeWithToken:(ANTLRCommonToken *)aToken
++ (ANTLRCommonTree *)newTreeWithToken:(id<ANTLRToken>)aToken
 {
-    // Had to cast to id<ANTLRTree> here, because GCC is dumb.
-	return [((ANTLRCommonTree *)[ANTLRCommonTree alloc]) initWithToken:aToken];
+	return [[ANTLRCommonTree alloc] initWithToken:aToken];
 }
 
 + (ANTLRCommonTree *)newTreeWithTokenType:(NSInteger)aTType
 {
-    // Had to cast to id<ANTLRTree> here, because GCC is dumb.
 	return [[ANTLRCommonTree alloc] initWithTokenType:(NSInteger)aTType];
 }
 
 + (ANTLRCommonTree *)newTreeWithTokenType:(NSInteger)aTType Text:(NSString *)theText
 {
-    // Had to cast to id<ANTLRTree> here, because GCC is dumb.
 	return [[ANTLRCommonTree alloc] initWithTokenType:(NSInteger)aTType Text:theText];
 }
 
 - (id)init
 {
-	if ((self = [super init]) != nil) {
+	self = (ANTLRCommonTree *)[super init];
+	if ( self != nil ) {
         token = nil;
 		startIndex = -1;
 		stopIndex = -1;
         parent = nil;
         childIndex = -1;
 	}
-	return self;
+	return (ANTLRCommonTree *)self;
 }
 
 - (id)initWithTreeNode:(ANTLRCommonTree *)aNode
 {
-	if ((self = [super init]) != nil) {
+	self = (ANTLRCommonTree *)[super init];
+	if ( self != nil ) {
 		token = aNode.token;
 		startIndex = aNode.startIndex;
 		stopIndex = aNode.stopIndex;
@@ -93,9 +91,10 @@
 	return self;
 }
 
-- (id)initWithToken:(ANTLRCommonToken *)aToken
+- (id)initWithToken:(id<ANTLRToken>)aToken
 {
-	if ((self = [super init]) != nil ) {
+	self = (ANTLRCommonTree *)[super init];
+	if ( self != nil ) {
 		token = aToken;
 		startIndex = -1;
 		stopIndex = -1;
@@ -107,7 +106,8 @@
 
 - (id)initWithTokenType:(NSInteger)aTokenType
 {
-	if ((self = [super init]) != nil ) {
+	self = (ANTLRCommonTree *)[super init];
+	if ( self != nil ) {
 		token = [ANTLRCommonToken newToken:aTokenType];
 //		startIndex = token.startIndex;
 		startIndex = -1;
@@ -121,7 +121,8 @@
 
 - (id) initWithTokenType:(NSInteger)aTokenType Text:(NSString *)theText
 {
-	if ((self = [super init]) != nil ) {
+	self = (ANTLRCommonTree *)[super init];
+	if ( self != nil ) {
 		token = [ANTLRCommonToken newToken:aTokenType Text:theText];
 //		startIndex = token.startIndex;
 		startIndex = -1;
@@ -167,13 +168,13 @@
 - (void) setToken:(ANTLRCommonToken *) aToken
 {
 	if (token != aToken) {
-		[aToken retain];
 		[token release];
 		token = aToken;
+		[token retain];
 	}
 }
 
-- (id<ANTLRTree>) dupNode
+- (ANTLRCommonTree *) dupNode
 {
     return [ANTLRCommonTree newTreeWithTree:self ];
 }
@@ -185,31 +186,31 @@
 	return ANTLRTokenTypeInvalid;
 }
 
-- (NSString *) getText
+- (NSString *) text
 {
 	if (token)
-		return [token getText];
+		return [token text];
 	return nil;
 }
 
-- (NSUInteger) getLine
+- (NSUInteger) line
 {
 	if (token)
-		return [token getLine];
+		return token.line;
 	return 0;
 }
 
-- (NSUInteger) getCharPositionInLine
+- (NSUInteger) charPositionInLine
 {
 	if (token)
-		return [token getCharPositionInLine];
+		return token.charPositionInLine;
 	return 0;
 }
 
 - (void) setCharPositionInLine:(int)pos
 {
     if (token)
-        [token setCharPositionInLine:pos];
+        token.charPositionInLine = pos;
 }
 
 - (NSInteger) getTokenStartIndex
@@ -286,14 +287,14 @@
     return childIndex;
 }
 
-- (id<ANTLRTree>) getParent
+- (ANTLRCommonTree *) getParent
 {
     return parent;
 }
 
-- (void) setParent:(id<ANTLRTree>) t
+- (void) setParent:(ANTLRCommonTree *) t
 {
-    parent = (ANTLRCommonTree *)t;
+    parent = t;
 }
 
 - (void) setChildIndex:(NSInteger) anIndex
@@ -317,7 +318,13 @@
     if ( token==nil ) {
         return nil;
     }
-    return [token getText];
+    return token.text;
 }
+
+@synthesize token;
+@synthesize startIndex;
+@synthesize stopIndex;
+@synthesize parent;
+@synthesize childIndex;
 
 @end

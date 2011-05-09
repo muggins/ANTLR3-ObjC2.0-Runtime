@@ -28,8 +28,6 @@
 /** Template overrides to add debugging to normal Objective-C output;
  *  If ASTs are built, then you'll also get ASTDbg.stg loaded.
  */
-group Dbg;
-
 @headerFile.imports() ::= <<
 <@super.imports()>
 #import \<ANTLR/ANTLRDebug.h>
@@ -46,7 +44,7 @@ NSArray *ruleNames;
 
 @genericParser.methods() ::= <<
 <if(grammar.grammarIsRoot)>
-NSMutableArray *ruleNames = [NSMutableArray arrayWithArray:{
+AMutableArray *ruleNames = [AMutableArray arrayWithArray:{
     @"invalidRule", <grammar.allImportedRules:{rST | @"<rST.name>"}; wrap=@"\n    ", separator=", ">
 };<\n>
 <endif>
