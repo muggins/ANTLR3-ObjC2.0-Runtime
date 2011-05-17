@@ -31,15 +31,16 @@
 #import "ANTLRTokenSource.h"
 #import "ANTLRBitSet.h"
 #import "ANTLRBufferedTokenStream.h"
+#import "AMutableDictionary.h"
 
 @interface ANTLRCommonTokenStream : ANTLRBufferedTokenStream < ANTLRTokenStream >
 {
-	NSMutableDictionary *channelOverride;
+	__strong AMutableDictionary *channelOverride;
 	NSUInteger channel;
 }
 
-@property (retain, getter=getChannelOverride,setter=setChannelOverride:) NSMutableDictionary *channelOverride;
-@property (assign, getter=getChannel,setter=setChannel:) NSUInteger channel;
+@property (retain, getter=getChannelOverride,setter=setChannelOverride:) AMutableDictionary *channelOverride;
+@property (assign, getter=channel,setter=setChannel:) NSUInteger channel;
 
 + (ANTLRCommonTokenStream *)newANTLRCommonTokenStream;
 + (ANTLRCommonTokenStream *)newANTLRCommonTokenStreamWithTokenSource:(id<ANTLRTokenSource>)theTokenSource;
@@ -64,11 +65,11 @@
 // - (id<ANTLRTokenSource>) getTokenSource;
 - (void) setTokenSource: (id<ANTLRTokenSource>) aTokenSource;
 
-- (NSUInteger)getChannel;
+- (NSUInteger)channel;
 - (void)setChannel:(NSUInteger)aChannel;
 
-- (NSMutableDictionary *)getChannelOverride;
-- (void)setChannelOverride:(NSMutableDictionary *)anOverride;
+- (AMutableDictionary *)channelOverride;
+- (void)setChannelOverride:(AMutableDictionary *)anOverride;
 
 - (id) copyWithZone:(NSZone *)aZone;
 

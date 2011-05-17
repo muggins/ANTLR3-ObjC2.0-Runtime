@@ -83,6 +83,7 @@
 	self = (ANTLRCommonTree *)[super init];
 	if ( self != nil ) {
 		token = aNode.token;
+        if ( token ) [token retain];
 		startIndex = aNode.startIndex;
 		stopIndex = aNode.stopIndex;
         parent = nil;
@@ -96,6 +97,7 @@
 	self = (ANTLRCommonTree *)[super init];
 	if ( self != nil ) {
 		token = aToken;
+        if ( token ) [token retain];
 		startIndex = -1;
 		stopIndex = -1;
         parent = nil;
@@ -108,7 +110,7 @@
 {
 	self = (ANTLRCommonTree *)[super init];
 	if ( self != nil ) {
-		token = [ANTLRCommonToken newToken:aTokenType];
+		token = [[ANTLRCommonToken newToken:aTokenType] retain];
 //		startIndex = token.startIndex;
 		startIndex = -1;
 //		stopIndex = token.stopIndex;
@@ -123,7 +125,7 @@
 {
 	self = (ANTLRCommonTree *)[super init];
 	if ( self != nil ) {
-		token = [ANTLRCommonToken newToken:aTokenType Text:theText];
+		token = [[ANTLRCommonToken newToken:aTokenType Text:theText] retain];
 //		startIndex = token.startIndex;
 		startIndex = -1;
 //		stopIndex = token.stopIndex;
@@ -136,7 +138,14 @@
 
 - (void) dealloc
 {
-	[self setToken:nil];
+    if ( token ) {
+        [token release];
+        token = nil;
+    }
+    if ( parent ) {
+        [parent release];
+        parent = nil;
+    }
 	[super dealloc];
 }
 
@@ -150,7 +159,7 @@
         copy.token = [self.token copyWithZone:aZone];
     copy.startIndex = startIndex;
     copy.stopIndex = stopIndex;
-    copy.parent = [self.parent copyWithZone:aZone];
+    copy.parent = (ANTLRCommonTree *)[self.parent copyWithZone:aZone];
     copy.childIndex = childIndex;
     return copy;
 }
@@ -167,10 +176,9 @@
 
 - (void) setToken:(ANTLRCommonToken *) aToken
 {
-	if (token != aToken) {
-		[token release];
-		token = aToken;
-		[token retain];
+	if ( token != aToken ) {
+		if ( token ) [token release];
+		token = [aToken retain];
 	}
 }
 
@@ -179,35 +187,41 @@
     return [ANTLRCommonTree newTreeWithTree:self ];
 }
 
-- (NSInteger) getType
+- (NSInteger)type
 {
 	if (token)
-		return [token getType];
+		return token.type;
 	return ANTLRTokenTypeInvalid;
 }
 
-- (NSString *) text
+- (NSString *)text
 {
 	if (token)
-		return [token text];
+		return token.text;
 	return nil;
 }
 
-- (NSUInteger) line
+- (NSUInteger)line
 {
 	if (token)
 		return token.line;
 	return 0;
 }
 
-- (NSUInteger) charPositionInLine
+- (void) setLine:(NSUInteger)aLine
+{
+    if (token)
+        token.line = aLine;
+}
+
+- (NSUInteger)charPositionInLine
 {
 	if (token)
 		return token.charPositionInLine;
 	return 0;
 }
 
-- (void) setCharPositionInLine:(int)pos
+- (void) setCharPositionInLine:(NSUInteger)pos
 {
     if (token)
         token.charPositionInLine = pos;
@@ -312,7 +326,7 @@
     if ( [self isNil] ) {
         return @"nil";
     }
-    if ( [self getType] == ANTLRTokenTypeInvalid ) {
+    if ( [self type] == ANTLRTokenTypeInvalid ) {
         return @"<errornode>";
     }
     if ( token==nil ) {

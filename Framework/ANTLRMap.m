@@ -76,6 +76,9 @@
 
 -(void)dealloc
 {
+#ifdef DEBUG_DEALLOC
+    NSLog( @"called dealloc in ANTLRMMap" );
+#endif
     ANTLRMapElement *tmp, *rtmp;
     NSInteger idx;
 	
@@ -85,7 +88,7 @@
             while ( tmp ) {
                 rtmp = tmp;
                 tmp = (ANTLRMapElement *)tmp.fNext;
-                [rtmp dealloc];
+                [rtmp release];
             }
         }
     }
@@ -103,7 +106,7 @@
             while ( tmp ) {
                 rtmp = tmp;
                 tmp = [tmp getfNext];
-                [rtmp dealloc];
+                [rtmp release];
             }
         }
     }
@@ -252,7 +255,7 @@
     for ( tmp = self->ptrBuffer[idx], np = self->ptrBuffer[idx]; np != nil; np = [np getfNext] ) {
         if ( [s isEqualToString:[np getName]] ) {
             tmp = [np getfNext];             /* get the next link  */
-            [np dealloc];
+            [np release];
             return( SUCCESS );            /* report SUCCESS     */
         }
         tmp = [np getfNext];              //  BAD!!!!!!
@@ -264,7 +267,7 @@
 {
     if ( [np getfNext] != nil )
 		[self delete_chain:[np getfNext]];
-	[np dealloc];
+	[np release];
 }
 
 #ifdef DONTUSEYET
@@ -305,7 +308,7 @@
     ANTLRMapElement *np;
     NSInteger idx;
 
-    idx = [(id<ANTLRBaseTree>)aNode getType];
+    idx = [(id<ANTLRBaseTree>)aNode type];
     idx %= HASHSIZE;
     np = ptrBuffer[idx];
     return( [(NSNumber *)np.node integerValue] );

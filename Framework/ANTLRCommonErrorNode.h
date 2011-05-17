@@ -52,13 +52,13 @@ ANTLRRecognitionException *trappedException;
                 From:(id<ANTLRToken>)startToken
                   To:(id<ANTLRToken>)stopToken
            Exception:(ANTLRRecognitionException *) e;
+
+- (void)dealloc;
 - (BOOL) isNil;
 
-- (NSInteger) getType;
-
-- (NSString *) text;
-
-- (NSString *) toString;
+- (NSInteger)type;
+- (NSString *)text;
+- (NSString *)toString;
 
 @property (retain) id<ANTLRIntStream> input;
 @property (retain) id<ANTLRToken> startToken;

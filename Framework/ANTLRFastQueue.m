@@ -47,9 +47,9 @@
 
 - (id) init
 {
-	if ((self = [super init]) != nil ) {
-//		pool = [NSAutoreleasePool new];
-		data = [AMutableArray arrayWithCapacity:100];
+	self = [super init];
+	if ( self != nil ) {
+		data = [[AMutableArray arrayWithCapacity:100] retain];
 		p = 0;
 		range = -1;
 	}
@@ -58,7 +58,10 @@
 
 - (void) dealloc
 {
-//	[pool drain];
+#ifdef DEBUG_DEALLOC
+    NSLog( @"called dealloc in ANTLRFastQueue" );
+#endif
+	if ( data ) [data release];
 	[super dealloc];
 }
 
@@ -67,9 +70,9 @@
     ANTLRFastQueue *copy;
     
     copy = [[[self class] allocWithZone:aZone] init];
-//    copy.pool = pool;
     copy.data = [data copyWithZone:nil];
     copy.p = p;
+    copy.range = range;
     return copy;
 }
 
@@ -88,21 +91,19 @@
 
 - (id) remove
 {
-	id o = [self objectAtIndex:0];
+	id obj = [self objectAtIndex:0];
 	p++;
 	// check to see if we have hit the end of the buffer
-	if (p == [data count])
-	{
+	if ( p == [data count] ) {
 		// if we have, then we need to clear it out
 		[self clear];
 	}
-	return o;
+	return obj;
 }
 
-- (void) addObject:(id) o
+- (void) addObject:(id) obj
 {
-	[o retain];
-    [data addObject:o];
+    [data addObject:obj];
 }
 
 - (NSUInteger) count
@@ -130,10 +131,10 @@
     NSUInteger absIndex;
 
     absIndex = p + i;
-	if (absIndex >= [data count]) {
+	if ( absIndex >= [data count] ) {
 		@throw [ANTLRNoSuchElementException newException:[NSString stringWithFormat:@"queue index %d > last index %d", absIndex, [data count]-1]];
 	}
-	if (absIndex < 0) {
+	if ( absIndex < 0 ) {
 	    @throw [ANTLRNoSuchElementException newException:[NSString stringWithFormat:@"queue index %d < 0", absIndex]];
 	}
 	if ( absIndex > range ) range = absIndex;
@@ -141,6 +142,11 @@
 }
 
 - (NSString *) toString
+{
+    return [self description];
+}
+
+- (NSString *) description
 {
 	NSMutableString *buf = [NSMutableString stringWithCapacity:30];
 	NSInteger n = [self size];
@@ -151,11 +157,6 @@
 		}
 	}
 	return buf;
-}
-
-- (NSString *) description
-{
-    return [self toString];
 }
 
 #ifdef DONTUSENOMO

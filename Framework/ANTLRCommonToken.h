@@ -30,7 +30,7 @@
 #import "ANTLRCharStream.h"
 
 @interface ANTLRCommonToken : NSObject < ANTLRToken > {
-	NSString *text;
+	__strong NSString *text;
 	NSInteger type;
 	// information about the Token's position in the input stream
 	NSUInteger line;
@@ -44,7 +44,7 @@
 	NSInteger startIndex;
 	NSInteger stopIndex;
 	// the actual input stream this token was found in
-	id<ANTLRCharStream> input;
+	__strong id<ANTLRCharStream> input;
 }
 
 + (void) initialize;
@@ -79,36 +79,36 @@
 //---------------------------------------------------------- 
 //  text 
 //---------------------------------------------------------- 
-- (NSString *) text;
-- (void) setText: (NSString *) aText;
+- (NSString *)text;
+- (void) setText:(NSString *)aText;
 
 //---------------------------------------------------------- 
 //  type 
 //---------------------------------------------------------- 
-- (NSInteger) getType;
-- (void) setType: (NSInteger) aType;
+- (NSInteger)type;
+- (void) setType:(NSInteger)aType;
 
 //---------------------------------------------------------- 
 //  channel 
 //---------------------------------------------------------- 
-- (NSUInteger) getChannel;
-- (void) setChannel: (NSUInteger) aChannel;
+- (NSUInteger)channel;
+- (void) setChannel:(NSUInteger)aChannel;
 
 //---------------------------------------------------------- 
 //  input 
 //---------------------------------------------------------- 
-- (id<ANTLRCharStream>) getInput;
-- (void) setInput: (id<ANTLRCharStream>) anInput;
+- (id<ANTLRCharStream>)input;
+- (void) setInput:(id<ANTLRCharStream>)anInput;
 
-- (NSInteger) getStart;
-- (void) setStart: (NSInteger) aStart;
+- (NSInteger)getStart;
+- (void) setStart: (NSInteger)aStart;
 
-- (NSInteger) getStop;
+- (NSInteger)getStop;
 - (void) setStop: (NSInteger) aStop;
 
 // the index of this Token into the TokenStream
-- (NSInteger) getTokenIndex;
-- (void) setTokenIndex: (NSInteger) aTokenIndex;
+- (NSInteger)getTokenIndex;
+- (void) setTokenIndex:(NSInteger)aTokenIndex;
 
 // conform to NSCopying
 - (id) copyWithZone:(NSZone *)theZone;

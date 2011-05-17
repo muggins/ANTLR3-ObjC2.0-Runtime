@@ -28,20 +28,25 @@
 
 -(id)init
 {
-	if ((self = [super initWithLen:HASHSIZE]) != nil) {
+	self = [super initWithLen:HASHSIZE];
+	if ( self != nil ) {
 	}
     return( self );
 }
 
 -(id)initWithLen:(NSInteger)cnt
 {
-	if ((self = [super initWithLen:cnt]) != nil) {
+	self = [super initWithLen:cnt];
+	if ( self != nil ) {
 	}
     return( self );
 }
 
 -(void)dealloc
 {
+#ifdef DEBUG_DEALLOC
+    NSLog( @"called dealloc in ANTLRPtrStack" );
+#endif
 	[super dealloc];
 }
 
@@ -56,7 +61,7 @@
             while ( tmp ) {
                 rtmp = tmp;
                 tmp = [tmp getfNext];
-                [rtmp dealloc];
+                [rtmp release];
             }
         }
     }
@@ -132,7 +137,7 @@
     np = [self lookup:[sym getName]];
     if ( np == nil ) {
         [sym setFNext:ptrBuffer[ LastHash ]];
-        ptrBuffer[ LastHash ] = sym;
+        ptrBuffer[ LastHash ] = [sym retain];
         return( ptrBuffer[ LastHash ] );
     }
     return( nil );            /*   not found      */

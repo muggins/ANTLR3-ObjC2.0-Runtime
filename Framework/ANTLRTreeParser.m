@@ -59,7 +59,10 @@
 
 - (void) dealloc
 {
-	[self setInput:nil];
+#ifdef DEBUG_DEALLOC
+    NSLog( @"called dealloc in ANTLRTreeParser" );
+#endif
+	if ( input ) [input release];
 	[super dealloc];
 }
 
@@ -165,7 +168,7 @@
 - (NSString *)getErrorMessage:(ANTLRRecognitionException *)e  TokenNames:(AMutableArray *) theTokNams
 {
     if ( [self isKindOfClass:[ANTLRTreeParser class]] ) {
-        id<ANTLRTreeAdaptor> adaptor = (id<ANTLRTreeAdaptor>)[((id<ANTLRTreeNodeStream>)e.input) getTreeAdaptor];
+        ANTLRCommonTreeAdaptor *adaptor = (ANTLRCommonTreeAdaptor *)[((id<ANTLRTreeNodeStream>)e.input) getTreeAdaptor];
         e.token = [adaptor getToken:((id<ANTLRBaseTree>)e.node)];
         if ( e.token == nil ) { // could be an UP/DOWN node
             e.token = [ANTLRCommonToken newToken:[adaptor getType:e.node]

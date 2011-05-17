@@ -56,10 +56,20 @@
 {
     if ((self = [super init]) != nil) {
         tokenSource = aTokenSource;
+        if ( tokenSource ) [tokenSource retain];
         tokenIndex = 0;
         channel = ANTLRTokenChannelDefault;
     }
     return self;
+}
+
+- (void) dealloc
+{
+#ifdef DEBUG_DEALLOC
+    NSLog( @"called dealloc in ANTLRUnbufferedTokenStream" );
+#endif
+    if ( tokenSource ) [tokenSource release];
+    [super dealloc];
 }
 
 - (id<ANTLRToken>)nextElement
@@ -71,7 +81,7 @@
 
 - (BOOL)isEOF:(id<ANTLRToken>)aToken
 {
-    return [aToken getType] == ANTLRTokenTypeEOF;
+    return (aToken.type == ANTLRTokenTypeEOF);
 }    
 
 - (id<ANTLRTokenSource>)getTokenSource
@@ -91,7 +101,7 @@
 
 - (NSInteger)LA:(NSInteger)anIdx
 {
-    return [[self LT:anIdx] getType];
+    return [[self LT:anIdx] type];
 }
 
 - (id<ANTLRToken>)objectAtIndex:(NSInteger)anIdx

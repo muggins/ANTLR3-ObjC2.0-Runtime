@@ -76,8 +76,11 @@
     return self;
 }
 
-- (void)dealloc
+- (void) dealloc
 {
+#ifdef DEBUG_DEALLOC
+    NSLog( @"called dealloc in AMutableDictionary" );
+#endif
     if ( root ) [root release];
     [super dealloc];
 }
@@ -109,8 +112,10 @@
         ret = [node searchnode:kp.key match:YES];
         if ( ret >= 0 && ret < node.numkeys ) {
             obj = node.btNodes[ret];
-            if ( obj == [NSNull null] )
+            if ( obj == [NSNull null] ) {
+                [obj release];
                 obj = nil;
+            }
         }
     }
     if ( mustRelease ) [kp release];
@@ -134,16 +139,18 @@
                                      userInfo:nil];
     }
     if ( [root search:kp.key] == nil ) {
-        if ( obj == nil ) obj = [NSNull null];
+        if ( obj == nil ) {
+            obj = [NSNull null];
+        }
         root = [root insertkey:kp value:obj];
         [kp retain];
         [obj retain];
         kp.recnum = count++;
     }
     else {
+        if ( mustRelease ) [kp release];
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"key alreadyExists" userInfo:nil];
     }
-    if ( mustRelease ) [kp release];
     return;
 }
 

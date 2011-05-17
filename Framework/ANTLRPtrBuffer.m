@@ -48,12 +48,12 @@
 
 +(ANTLRPtrBuffer *)newANTLRPtrBuffer
 {
-    return [[[ANTLRPtrBuffer alloc] init] retain];
+    return [[ANTLRPtrBuffer alloc] init];
 }
 
 +(ANTLRPtrBuffer *)newANTLRPtrBufferWithLen:(NSInteger)cnt
 {
-    return [[[ANTLRPtrBuffer alloc] initWithLen:cnt] retain];
+    return [[ANTLRPtrBuffer alloc] initWithLen:cnt];
 }
 
 -(id)init
@@ -65,7 +65,7 @@
         BuffSize  = BUFFSIZE;
         ptr = 0;
         buffer = [[NSMutableData dataWithLength:(NSUInteger)BuffSize * sizeof(id)] retain];
-        ptrBuffer = (id *)[buffer mutableBytes];
+        ptrBuffer = (id *) [buffer mutableBytes];
         for( idx = 0; idx < BuffSize; idx++ ) {
             ptrBuffer[idx] = nil;
         }
@@ -94,6 +94,9 @@
 
 -(void)dealloc
 {
+#ifdef DEBUG_DEALLOC
+    NSLog( @"called dealloc in ANTLRPtrBuffer" );
+#endif
     ANTLRLinkBase *tmp, *rtmp;
     NSInteger idx;
     
@@ -106,7 +109,7 @@
                     tmp = (id)tmp.fNext;
                 else
                     tmp = nil;
-                [rtmp dealloc];
+                [rtmp release];
             }
         }
     }

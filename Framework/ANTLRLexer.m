@@ -31,13 +31,13 @@
 
 @synthesize input;
 @synthesize ruleNestingLevel;
-// init
 #pragma mark Initializer
 
 - (id) initWithCharStream:(id<ANTLRCharStream>)anInput
 {
-	if ((self = [super initWithState:[[ANTLRRecognizerSharedState alloc] init]]) != nil) {
-        input = anInput;
+	self = [super initWithState:[[ANTLRRecognizerSharedState alloc] init]];
+	if ( self != nil ) {
+        input = [anInput retain];
         if (state.token != nil)
             [((ANTLRCommonToken *)state.token) setInput:anInput];
 		ruleNestingLevel = 0;
@@ -47,8 +47,9 @@
 
 - (id) initWithCharStream:(id<ANTLRCharStream>)anInput State:(ANTLRRecognizerSharedState *)aState
 {
-	if ((self = [super initWithState:aState]) != nil) {
-        input = anInput;
+	self = [super initWithState:aState];
+	if ( self != nil ) {
+        input = [anInput retain];
         if (state.token != nil)
             [((ANTLRCommonToken *)state.token) setInput:anInput];
 		ruleNestingLevel = 0;
@@ -58,9 +59,7 @@
 
 - (void) dealloc
 {
-    [self setToken:nil];
-    [self setInput:nil];
-    [self setText:nil];
+    if ( input ) [input release];
     [super dealloc];
 }
 
@@ -106,6 +105,7 @@
 - (void) setToken: (id<ANTLRToken>) aToken
 {
     if (state.token != aToken) {
+        [aToken retain];
         state.token = aToken;
     }
 }
@@ -164,16 +164,20 @@
     state.token = [ANTLRCommonToken skipToken];
 }
 
-- (id<ANTLRCharStream>) getInput
+- (id<ANTLRCharStream>) input
 {
     return input; 
 }
 
 - (void) setInput:(id<ANTLRCharStream>) anInput
 {
+    if ( anInput != input ) {
+        if ( input ) [input release];
+    }
     input = nil;
     [self reset];
     input = anInput;
+    [input retain];
 }
 
 /** Currently does not support multiple emits per nextToken invocation

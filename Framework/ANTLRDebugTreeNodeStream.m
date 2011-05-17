@@ -44,7 +44,7 @@
 {
     [self setDebugListener: nil];
     [self setTreeAdaptor: nil];
-    [self setInput: nil];
+    input = nil;
     [super dealloc];
 }
 
@@ -78,18 +78,18 @@
 }
 
 
-- (id<ANTLRTreeNodeStream>) getInput
+- (id<ANTLRTreeNodeStream>) input
 {
     return input; 
 }
 
-- (void) setInput: (id<ANTLRTreeNodeStream>) aTreeNodeStream
+- (void) setInput:(id<ANTLRTreeNodeStream>) aTreeNodeStream
 {
     if (input != aTreeNodeStream) {
+        [input release];
         [(id<ANTLRTreeNodeStream,NSObject>)aTreeNodeStream retain];
-        [(id<ANTLRTreeNodeStream,NSObject>)input release];
-        input = aTreeNodeStream;
     }
+    input = aTreeNodeStream;
 }
 
 
@@ -116,15 +116,15 @@
 	id node = [input LT:1];
 	[input consume];
 	unsigned hash = [treeAdaptor uniqueIdForTree:node];
-	NSString *text = [treeAdaptor textForNode:node];
-	int type = [treeAdaptor tokenTypeForNode:node];
-	[debugListener consumeNode:hash ofType:type text:text];
+	NSString *theText = [treeAdaptor textForNode:node];
+	int aType = [treeAdaptor tokenTypeForNode:node];
+	[debugListener consumeNode:hash ofType:aType text:theText];
 }
 
 - (NSInteger) LA:(NSUInteger) i
 {
 	id<ANTLRBaseTree> node = [self LT:1];
-	return [node getType];
+	return node.type;
 }
 
 - (NSUInteger) mark

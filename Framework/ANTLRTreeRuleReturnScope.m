@@ -35,6 +35,26 @@
 @implementation ANTLRTreeRuleReturnScope
 @synthesize start;
 
++ (id) newReturnScope
+{
+    return [[ANTLRTreeRuleReturnScope alloc] init];
+}
+
+- (id) init
+{
+    self = [super init];
+    return self;
+}
+
+- (void) dealloc
+{
+#ifdef DEBUG_DEALLOC
+    NSLog( @"called dealloc in ANTLRTreeRuleReturnScope" );
+#endif
+	if ( start ) [start release];
+	[super dealloc];
+}
+
 - (ANTLRCommonTree *)getStart
 {
     return start;
@@ -42,6 +62,10 @@
 
 - (void)setStart:(ANTLRCommonTree *)aStart
 {
+    if ( start != aStart ) {
+        if ( start ) [start release];
+        [aStart retain];
+    }
     start = aStart;
 }	
 

@@ -53,14 +53,16 @@
 
 - (id) init
 {
-	if ((self = [super initWithName:@"Recognition Exception" reason:@"Recognition Exception" userInfo:nil]) != nil) {
+	self = [super initWithName:@"Recognition Exception" reason:@"Recognition Exception" userInfo:nil];
+	if ( self != nil ) {
 	}
 	return self;
 }
 
 - (id) initWithStream:(id<ANTLRIntStream>)anInputStream reason:(NSString *)aReason
 {
-	if ((self = [super initWithName:NSStringFromClass([self class]) reason:aReason userInfo:nil]) != nil) {
+	self = [super initWithName:NSStringFromClass([self class]) reason:aReason userInfo:nil];
+	if ( self != nil ) {
 		[self setStream:anInputStream];
 		index = input.index;
 		
@@ -71,8 +73,8 @@
 			charPositionInLine = token.charPositionInLine;
 		} else if ([inputClass conformsToProtocol:@protocol(ANTLRCharStream)]) {
 			c = (unichar)[input LA:1];
-			line = (id<ANTLRCharStream>)input.line;
-			charPositionInLine = (id<ANTLRCharStream>)input.charPositionInLine;
+			line = ((id<ANTLRCharStream>)input).line;
+			charPositionInLine = ((id<ANTLRCharStream>)input).charPositionInLine;
 		} else if ([inputClass conformsToProtocol:@protocol(ANTLRTreeNodeStream)]) {
 			[self setNode:[(id<ANTLRTreeNodeStream>)input LT:1]];
 			line = [node line];
@@ -86,32 +88,37 @@
 
 - (id) initWithStream:(id<ANTLRIntStream>)anInputStream
 {
-	if ((self = [super initWithName:NSStringFromClass([self class]) reason:@"Runtime Exception" userInfo:nil]) != nil) {
+	self = [super initWithName:NSStringFromClass([self class]) reason:@"Runtime Exception" userInfo:nil];
+	if ( self != nil ) {
 	}
 	return self;
 }
 
 - (id) initWithName:(NSString *)aName reason:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo
 {
-    if ((self = [super initWithName:(NSString *)aName reason:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo]) != nil) {
+	self = [super initWithName:aName reason:aReason userInfo:aUserInfo];
+	if ( self != nil ) {
     }
     return self;
 }
 
 - (void) dealloc
 {
-	[self setStream:nil];
-	[self setToken:nil];
-	[self setNode:nil];
+#ifdef DEBUG_DEALLOC
+    NSLog( @"called dealloc in ANTLRRecognitionException" );
+#endif
+	if ( input ) [input release];
+	if ( token ) [token release];
+	if ( node ) [node release];
 	[super dealloc];
 }
 
 - (NSInteger) unexpectedType
 {
 	if (token) {
-		return [token getType];
+		return token.type;
     } else if (node) {
-        return [node getType];
+        return [node type];
 	} else {
 		return c;
 	}
@@ -124,7 +131,8 @@
 
 - (NSString *) description
 {
-	NSMutableString *desc = [[NSMutableString alloc] initWithString:NSStringFromClass([self class])];
+	//NSMutableString *desc = [[NSMutableString alloc] initWithString:NSStringFromClass([self class])];
+	NSMutableString *desc = [NSMutableString stringWithString:[self className]];
 	if (token) {
 		[desc appendFormat:@" token:%@", token];
 	} else if (node) {
@@ -146,9 +154,9 @@
 
 - (void) setStream: (id<ANTLRIntStream>) aStream
 {
-    if (input != aStream) {
-        [aStream retain];
+    if ( input != aStream ) {
         if ( input ) [input release];
+        if ( aStream ) [aStream retain];
         input = aStream;
     }
 }
@@ -164,8 +172,8 @@
 - (void) setToken: (id<ANTLRToken>) aToken
 {
     if (token != aToken) {
-        [aToken retain];
         if ( token ) [token release];
+        if ( aToken ) [aToken retain];
         token = aToken;
     }
 }
@@ -181,8 +189,8 @@
 - (void) setNode: (id<ANTLRBaseTree>) aNode
 {
     if (node != aNode) {
-        [aNode retain];
         if ( node ) [node release];
+        if ( aNode ) [aNode retain];
         node = aNode;
     }
 }

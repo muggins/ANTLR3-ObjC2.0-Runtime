@@ -39,7 +39,7 @@
 - (id<ANTLRBaseTree>) initWith:(id<ANTLRBaseTree>)node;
 
 - (id<ANTLRBaseTree>) getChild:(NSUInteger)i;
-- (AMutableArray *)getChildren;
+- (AMutableArray *)children;
 - (void) setChildren:(AMutableArray *)anArray;
 - (id<ANTLRBaseTree>)getFirstChildWithType:(NSInteger)type;
 - (NSUInteger) getChildCount;
@@ -81,11 +81,11 @@
 - (id) deepCopyWithZone:(NSZone *)aZone;
 
 #pragma mark Tree Parser support
-- (NSInteger) getType;
-- (NSString *) text;
+- (NSInteger)type;
+- (NSString *)text;
 // In case we don't have a token payload, what is the line for errors?
-- (NSUInteger) line;
-- (NSUInteger) charPositionInLine;
+- (NSUInteger)line;
+- (NSUInteger)charPositionInLine;
 
 
 #pragma mark Informational
@@ -102,8 +102,8 @@
 
 @interface ANTLRBaseTree : NSObject <ANTLRTree>
 {
-	AMutableArray *children;
-    NSException *anException;
+	__strong AMutableArray *children;
+    __strong NSException *anException;
 }
 
 + (id<ANTLRBaseTree>) INVALID_NODE;
@@ -114,7 +114,7 @@
 - (id<ANTLRBaseTree>) initWith:(id<ANTLRBaseTree>)node;
 
 - (id<ANTLRBaseTree>) getChild:(NSUInteger)i;
-- (AMutableArray *)getChildren;
+- (AMutableArray *)children;
 - (void) setChildren:(AMutableArray *)anArray;
 - (id<ANTLRBaseTree>)getFirstChildWithType:(NSInteger)type;
 - (NSUInteger) getChildCount;
@@ -143,7 +143,7 @@
 - (void) freshenParentAndChildIndexes;
 - (void) freshenParentAndChildIndexes:(NSInteger) offset;
 - (void) sanityCheckParentAndChildIndexes;
-- (void) sanityCheckParentAndChildIndexes:(id<ANTLRBaseTree>) parent At:(NSInteger) i;
+- (void) sanityCheckParentAndChildIndexes:(id<ANTLRBaseTree>)parent At:(NSInteger) i;
 
 - (NSInteger) getChildIndex;
 - (void) setChildIndex:(NSInteger)i;
@@ -157,12 +157,12 @@
 - (id) deepCopyWithZone:(NSZone *)aZone;
 
 	// Return a token type; needed for tree parsing
-- (NSInteger) getType;
-- (NSString *) text;
+- (NSInteger)type;
+- (NSString *)text;
 
 	// In case we don't have a token payload, what is the line for errors?
-- (NSUInteger) line;
-- (NSUInteger) charPositionInLine;
+- (NSUInteger)line;
+- (NSUInteger)charPositionInLine;
 - (void) setCharPositionInLine:(NSUInteger)pos;
 
 - (NSString *) treeDescription;
@@ -177,12 +177,14 @@
 
 @interface ANTLRTreeNavigationNode : ANTLRBaseTree {
 }
+- (id) init;
 - (id) copyWithZone:(NSZone *)aZone;
 @end
 
 @interface ANTLRTreeNavigationNodeDown : ANTLRTreeNavigationNode {
 }
 + (ANTLRTreeNavigationNodeDown *) getNavigationNodeDown;
+- (id) init;
 - (NSInteger) tokenType;
 - (NSString *) description;
 @end
@@ -190,6 +192,7 @@
 @interface ANTLRTreeNavigationNodeUp : ANTLRTreeNavigationNode {
 }
 + (ANTLRTreeNavigationNodeUp *) getNavigationNodeUp;
+- (id) init;
 - (NSInteger) tokenType;
 - (NSString *) description;
 @end
@@ -197,6 +200,7 @@
 @interface ANTLRTreeNavigationNodeEOF : ANTLRTreeNavigationNode {
 }
 + (ANTLRTreeNavigationNodeEOF *) getNavigationNodeEOF;
+- (id) init;
 - (NSInteger) tokenType;
 - (NSString *) description;
 @end

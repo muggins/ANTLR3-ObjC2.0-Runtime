@@ -78,13 +78,19 @@ static NSString *NEXT_TOKEN_RULE_NAME;
 
 + (void)setTokenNames:(AMutableArray *)theTokNams
 {
+    if ( _tokenNames != theTokNams ) {
+        if ( _tokenNames ) [_tokenNames release];
+        [theTokNams retain];
+    }
     _tokenNames = theTokNams;
-    [_tokenNames retain];
 }
 
 + (void)setGrammarFileName:(NSString *)aFileName
 {
-    _grammarFileName = aFileName;
+    if ( _grammarFileName != aFileName ) {
+        if ( _grammarFileName ) [_grammarFileName release];
+        [aFileName retain];
+    }
     [_grammarFileName retain];
 }
 
@@ -95,7 +101,9 @@ static NSString *NEXT_TOKEN_RULE_NAME;
             state = [[ANTLRRecognizerSharedState newANTLRRecognizerSharedState] retain];
         }
         tokenNames = _tokenNames;
+        if ( tokenNames ) [tokenNames retain];
         grammarFileName = _grammarFileName;
+        if ( grammarFileName ) [grammarFileName retain];
         state._fsp = -1;
         state.errorRecovery = NO;		// are we recovering?
         state.lastErrorIndex = -1;
@@ -114,7 +122,9 @@ static NSString *NEXT_TOKEN_RULE_NAME;
             state = [[ANTLRRecognizerSharedState newANTLRRecognizerSharedStateWithRuleLen:aLen] retain];
         }
         tokenNames = _tokenNames;
+        if ( tokenNames ) [tokenNames retain];
         grammarFileName = _grammarFileName;
+        if ( grammarFileName ) [grammarFileName retain];
         state._fsp = -1;
         state.errorRecovery = NO;		// are we recovering?
         state.lastErrorIndex = -1;
@@ -135,7 +145,9 @@ static NSString *NEXT_TOKEN_RULE_NAME;
         }
         [state retain];
         tokenNames = _tokenNames;
+        if ( tokenNames ) [tokenNames retain];
         grammarFileName = _grammarFileName;
+        if ( grammarFileName ) [grammarFileName retain];
         state._fsp = -1;
         state.errorRecovery = NO;		// are we recovering?
         state.lastErrorIndex = -1;
@@ -147,9 +159,14 @@ static NSString *NEXT_TOKEN_RULE_NAME;
 	return self;
 }
 
-- (void) dealloc
+- (void)dealloc
 {
-	[state release];
+#ifdef DEBUG_DEALLOC
+    NSLog( @"called dealloc in ANTLRBaseRecognizer" );
+#endif
+	if ( grammarFileName ) [grammarFileName release];
+	if ( tokenNames ) [tokenNames release];
+	if ( state ) [state release];
 	[super dealloc];
 }
 
@@ -200,7 +217,7 @@ static NSString *NEXT_TOKEN_RULE_NAME;
 	}
 }
 
-- (id)getInput
+- (id)input
 {
     return nil; // Must be overriden in inheriting class
 }
@@ -331,7 +348,8 @@ static NSString *NEXT_TOKEN_RULE_NAME;
  */
 - (NSString *)getErrorMessage:(ANTLRRecognitionException *)e TokenNames:(AMutableArray *)theTokNams
 {
-    NSString *msg = [e getMessage];
+    // NSString *msg = [e getMessage];
+    NSString *msg;
     if ( [e isKindOfClass:[ANTLRUnwantedTokenException class]] ) {
         ANTLRUnwantedTokenException *ute = (ANTLRUnwantedTokenException *)e;
         NSString *tokenName=@"<unknown>";
@@ -446,7 +464,7 @@ static NSString *NEXT_TOKEN_RULE_NAME;
             s = @"<EOF>";
         }
         else {
-            s = [NSString stringWithFormat:@"<%@>", [t getType]];
+            s = [NSString stringWithFormat:@"<%@>", t.type];
         }
     }
     s = [s stringByReplacingOccurrencesOfString:@"\n" withString:@"\\\\n"];
@@ -844,7 +862,6 @@ static NSString *NEXT_TOKEN_RULE_NAME;
     if ( state._fsp >= 0 && [state.following count] > 0 ) {
         fset = [state.following objectAtIndex:state._fsp--];
         [state.following removeLastObject];
-        [fset release];
         return fset;
     }
     else {
@@ -959,11 +976,11 @@ static NSString *NEXT_TOKEN_RULE_NAME;
 {
     if ( tokens == nil )
         return nil;
-    AMutableArray *strings = [[AMutableArray arrayWithCapacity:[tokens count]] retain];
+    AMutableArray *strings = [AMutableArray arrayWithCapacity:[tokens count]];
     id object;
     NSInteger i = 0;
     for (object in tokens) {
-        [strings addObject:[[object text] retain]];
+        [strings addObject:[object text]];
         i++;
     }
     return strings;
@@ -984,7 +1001,7 @@ static NSString *NEXT_TOKEN_RULE_NAME;
     NSNumber *stopIndexI;
     ANTLRHashRule *aHashRule;
     if ( (aHashRule = [state.ruleMemo objectAtIndex:ruleIndex]) == nil ) {
-        aHashRule = [[ANTLRHashRule newANTLRHashRuleWithLen:17] retain];
+        aHashRule = [ANTLRHashRule newANTLRHashRuleWithLen:17];
         [state.ruleMemo insertObject:aHashRule atIndex:ruleIndex];
     }
     stopIndexI = [aHashRule getRuleMemoStopIndex:ruleStartIndex];
@@ -1092,8 +1109,8 @@ static NSString *NEXT_TOKEN_RULE_NAME;
     id<ANTLRIntStream> input;
 
     state.backtracking++;
-    // input = [((ANTLRCommonToken*)state.token) getInput];
-    input = [self getInput];
+    // input = state.token.input;
+    input = self.input;
     int start = [input mark];
     @try {
         [self performSelector:synpredFragment];

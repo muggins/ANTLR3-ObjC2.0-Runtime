@@ -28,6 +28,7 @@
 #import "ANTLRBaseTreeAdaptor.h"
 #import "ANTLRToken.h"
 // TODO: this shouldn't be here...but needed for invalidNode
+#import "AMutableArray.h"
 #import "ANTLRCommonTree.h"
 #import "ANTLRRuntimeException.h"
 #import "ANTLRError.h"
@@ -88,7 +89,7 @@ static id<ANTLRBaseTree> invalidNode = nil;
 {
     self = [super init];
     if ( self != nil ) {
-        children = nil;
+        children = [[AMutableArray arrayWithCapacity:5] retain];
         [children addObject:node];
         return self;
     }
@@ -97,6 +98,9 @@ static id<ANTLRBaseTree> invalidNode = nil;
 
 - (void) dealloc
 {
+#ifdef DEBUG_DEALLOC
+    NSLog( @"called dealloc in ANTLRBaseTree" );
+#endif
 	if ( children ) [children release];
 	children = nil;
 	[super dealloc];
@@ -113,21 +117,25 @@ static id<ANTLRBaseTree> invalidNode = nil;
 /** Get the children internal List; note that if you directly mess with
  *  the list, do so at your own risk.
  */
-- (AMutableArray *) getChildren
+- (AMutableArray *) children
 {
     return children; // [[children retain] autorelease];
 }
 
 - (void) setChildren:(AMutableArray *)anArray
 {
+    if ( children != anArray ) {
+        if ( children ) [children release];
+        [anArray retain];
+    }
     children = anArray;
 }
 
-- (id<ANTLRBaseTree>) getFirstChildWithType:(NSInteger) type
+- (id<ANTLRBaseTree>) getFirstChildWithType:(NSInteger) aType
 {
     for (NSUInteger i = 0; children != nil && i < [children count]; i++) {
         id<ANTLRBaseTree> t = (id<ANTLRBaseTree>) [children objectAtIndex:i];
-        if ( [t getType] == type ) {
+        if ( t.type == aType ) {
             return t;
         }
     }	
@@ -184,7 +192,7 @@ static id<ANTLRBaseTree> invalidNode = nil;
     }
     else { // child is not nil (don't care about children)
         if ( children == nil ) {
-            children = [AMutableArray arrayWithCapacity:5]; // create children list on demand
+            children = [[AMutableArray arrayWithCapacity:5] retain]; // create children list on demand
         }
         [children addObject:t];
         [childTree setParent:(id<ANTLRBaseTree>)self];
@@ -211,7 +219,7 @@ static id<ANTLRBaseTree> invalidNode = nil;
         @throw [ANTLRIllegalArgumentException newException:@"ANTLRBaseTree Can't set single child to a list"];        
     }
     if ( children == nil ) {
-        children = [AMutableArray arrayWithCapacity:5];
+        children = [[AMutableArray arrayWithCapacity:5] retain];
     }
     if ([children count] > i ) {
         [children replaceObjectAtIndex:i withObject:t];
@@ -411,7 +419,7 @@ static id<ANTLRBaseTree> invalidNode = nil;
     id<ANTLRBaseTree> t = (id<ANTLRBaseTree>)self;
     t = (id<ANTLRBaseTree>)[t getParent];
     while ( t != nil ) {
-        if ( [t getType]==ttype )
+        if ( t.type == ttype )
             return t;
         t = (id<ANTLRBaseTree>)[t getParent];
     }
@@ -432,26 +440,25 @@ static id<ANTLRBaseTree> invalidNode = nil;
         [ancestors insertObject:t atIndex:0]; // insert at start
         t = (id<ANTLRBaseTree>)[t getParent];
     }
-    [ancestors retain];
     return ancestors;
 }
 
-- (NSInteger) getType
+- (NSInteger)type
 {
     return ANTLRTokenTypeInvalid;
 }
 
-- (NSString *) text
+- (NSString *)text
 {
     return nil;
 }
 
-- (NSUInteger) line
+- (NSUInteger)line
 {
     return 0;
 }
 
-- (NSUInteger) charPositionInLine
+- (NSUInteger)charPositionInLine
 {
     return 0;
 }
@@ -539,6 +546,12 @@ static id<ANTLRBaseTree> invalidNode = nil;
 #pragma mark -
 
 @implementation ANTLRTreeNavigationNode
+- (id)init
+{
+    self = (ANTLRTreeNavigationNode *)[super init];
+    return self;
+}
+
 - (id) copyWithZone:(NSZone *)aZone
 {
 	return nil;
@@ -551,6 +564,12 @@ static id<ANTLRBaseTree> invalidNode = nil;
     if ( navigationNodeDown == nil )
         navigationNodeDown = [[ANTLRTreeNavigationNodeDown alloc] init];
     return navigationNodeDown;
+}
+
+- (id)init
+{
+    self = [super init];
+    return self;
 }
 
 - (NSInteger) tokenType { return ANTLRTokenTypeDOWN; }
@@ -566,6 +585,12 @@ static id<ANTLRBaseTree> invalidNode = nil;
 }
 
 
+- (id)init
+{
+    self = [super init];
+    return self;
+}
+
 - (NSInteger) tokenType { return ANTLRTokenTypeUP; }
 - (NSString *) description { return @"UP"; }
 @end
@@ -576,6 +601,12 @@ static id<ANTLRBaseTree> invalidNode = nil;
     if ( navigationNodeEOF == nil )
         navigationNodeEOF = [[ANTLRTreeNavigationNodeEOF alloc] init];
     return navigationNodeEOF;
+}
+
+- (id)init
+{
+    self = [super init];
+    return self;
 }
 
 - (NSInteger) tokenType { return ANTLRTokenTypeEOF; }

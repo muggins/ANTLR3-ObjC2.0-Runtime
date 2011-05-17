@@ -135,11 +135,11 @@
     return [(id<ANTLRBaseTree>)t getTokenStopIndex];
 }
 
-- (NSString *)getText:(id<ANTLRBaseTree>)t
+- (NSString *)getText:(ANTLRCommonTree *)t
 {
     if ( t == nil )
         return nil;
-    return [(id<ANTLRBaseTree>) t text];
+    return t.token.text;
 }
 
 - (void)setText:(id<ANTLRBaseTree>)t Text:(NSString *)text
@@ -148,11 +148,11 @@
         return;
 }
 
-- (NSInteger)getType:(id<ANTLRBaseTree>)t
+- (NSInteger)getType:(ANTLRCommonTree *)t
 {
     if ( t==nil )
         return ANTLRTokenTypeInvalid;
-    return [(id<ANTLRBaseTree>) t getType];
+    return t.token.type;
 }
 
 - (void) setType:(id<ANTLRBaseTree>)t Type:(NSInteger)tokenType
@@ -168,7 +168,7 @@
 - (id<ANTLRToken>) getToken:(ANTLRCommonTree *) t
 {
     if ( [t isKindOfClass:[ANTLRCommonTree class]] ) {
-        return [t getToken];
+        return t.token;
     }
     return nil; // no idea what to do
 }
@@ -177,14 +177,14 @@
 {
     if ( t == nil )
         return nil;
-    return [(id<ANTLRBaseTree>) t getChild:i];
+    return [(id<ANTLRBaseTree>)t getChild:i];
 }
 
 - (void) setChild:(id<ANTLRBaseTree>)t At:(NSInteger)i Child:(id<ANTLRBaseTree>)child
 {
     if ( t == nil )
         return;
-    [(id<ANTLRBaseTree>) t setChild:i With:child];
+    [(id<ANTLRBaseTree>)t setChild:i With:child];
 }
 
 - (id) deleteChild:(id<ANTLRBaseTree>)t Index:(NSInteger)anIndex

@@ -73,6 +73,9 @@
 
 -(void)dealloc
 {
+#ifdef DEBUG_DEALLOC
+    NSLog( @"called dealloc in ANTLRUniqueIDMap" );
+#endif
     ANTLRNodeMapElement *tmp, *rtmp;
     NSInteger idx;
 	
@@ -82,7 +85,7 @@
             while ( tmp ) {
                 rtmp = tmp;
                 tmp = (ANTLRNodeMapElement *)tmp.fNext;
-                [rtmp dealloc];
+                [rtmp release];
             }
         }
     }
@@ -144,7 +147,7 @@
 {
     if ( np.fNext != nil )
 		[self delete_chain:np.fNext];
-	[np dealloc];
+	[np release];
 }
 
 - (id)getNode:(id<ANTLRBaseTree>)aNode
@@ -152,7 +155,7 @@
     ANTLRNodeMapElement *np;
     NSInteger idx;
     
-    idx = [(id<ANTLRBaseTree>)aNode getType];
+    idx = [(id<ANTLRBaseTree>)aNode type];
     np = ptrBuffer[idx];
     while ( np != nil ) {
         if (np.node == aNode) {
@@ -168,9 +171,9 @@
     ANTLRNodeMapElement *np, *np1;
     NSInteger idx;
     
-    idx = [(id<ANTLRBaseTree>)aNode getType];
+    idx = [(id<ANTLRBaseTree>)aNode type];
     idx %= HASHSIZE;
-    np = [ANTLRNodeMapElement newANTLRNodeMapElementWithIndex:anID Node:aNode];
+    np = [[ANTLRNodeMapElement newANTLRNodeMapElementWithIndex:anID Node:aNode] retain];
     np1 = ptrBuffer[idx];
     np.fNext = np1;
     ptrBuffer[idx] = np;

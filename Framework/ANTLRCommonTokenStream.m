@@ -53,7 +53,7 @@
 - (id) init
 {
 	if ((self = [super init]) != nil) {
-		channelOverride = [[NSMutableDictionary dictionaryWithCapacity:100] retain];
+		channelOverride = [[AMutableDictionary dictionaryWithCapacity:100] retain];
 		channel = ANTLRTokenChannelDefault;
 	}
 	return self;
@@ -62,7 +62,7 @@
 - (id) initWithTokenSource:(id<ANTLRTokenSource>)theTokenSource
 {
 	if ((self = [super initWithTokenSource:theTokenSource]) != nil) {
-		channelOverride = [[NSMutableDictionary dictionaryWithCapacity:100] retain];
+		channelOverride = [[AMutableDictionary dictionaryWithCapacity:100] retain];
 		channel = ANTLRTokenChannelDefault;
 	}
 	return self;
@@ -71,7 +71,7 @@
 - (id) initWithTokenSource:(id<ANTLRTokenSource>)theTokenSource Channel:(NSUInteger)aChannel
 {
 	if ((self = [super initWithTokenSource:theTokenSource]) != nil) {
-		channelOverride = [[NSMutableDictionary dictionaryWithCapacity:100] retain];
+		channelOverride = [[AMutableDictionary dictionaryWithCapacity:100] retain];
 		channel = aChannel;
 	}
 	return self;
@@ -79,6 +79,9 @@
 
 - (void) dealloc
 {
+#ifdef DEBUG_DEALLOC
+    NSLog( @"called dealloc in ANTLRCommonTokenStream" );
+#endif
 	if ( channelOverride ) [channelOverride release];
 	if ( tokens ) [tokens release];
 	[self setTokenSource:nil];
@@ -91,7 +94,7 @@
     if (index == -1) [self setup];
     index++;
     [self sync:index];
-    while ( [[tokens objectAtIndex:index] getChannel] != channel ) {
+    while ( ((ANTLRCommonToken *)[tokens objectAtIndex:index]).channel != channel ) {
 		index++;
 		[self sync:index];
 	}
@@ -131,7 +134,7 @@
 //	if ( i >= (NSInteger)[tokens count] ) {
 //		return [ANTLRCommonToken eofToken];
 //	}
-    if (i > range) range = i;
+    if ( i > range ) range = i;
 	return [tokens objectAtIndex:i];
 }
 
@@ -140,7 +143,7 @@
 - (NSInteger) skipOffChannelTokens:(NSInteger) idx
 {
     [self sync:idx];
-	while ( [[tokens objectAtIndex:idx] getChannel] != channel ) {
+	while ( ((ANTLRCommonToken *)[tokens objectAtIndex:idx]).channel != channel ) {
 		idx++;
         [self sync:idx];
 	}
@@ -149,7 +152,7 @@
 
 - (NSInteger) skipOffChannelTokensReverse:(NSInteger) i
 {
-	while ( i >= 0 && [(id<ANTLRToken>)[tokens objectAtIndex:i] getChannel] != channel ) {
+	while ( i >= 0 && ((ANTLRCommonToken *)[tokens objectAtIndex:i]).channel != channel ) {
 		i--;
 	}
 	return i;
@@ -160,7 +163,7 @@
     index = 0;
     [self sync:0];
     int i = 0;
-    while ( [((id<ANTLRToken>)[tokens objectAtIndex:i]) getChannel] != channel ) {
+    while ( ((ANTLRCommonToken *)[tokens objectAtIndex:i]).channel != channel ) {
         i++;
         [self sync:i];
     }
@@ -173,10 +176,10 @@
     NSInteger n = 0;
     [self fill];
     for( int i = 0; i < [tokens count]; i++ ) {
-        id<ANTLRToken> t = [tokens objectAtIndex:i];
-        if ( [t getChannel] == channel )
+        ANTLRCommonToken *t = [tokens objectAtIndex:i];
+        if ( t.channel == channel )
             n++;
-        if ( [t getType] == ANTLRTokenTypeEOF )
+        if ( t.type == ANTLRTokenTypeEOF )
             break;
     }
     return n;
@@ -201,7 +204,7 @@
     return copy;
 }
 
-- (NSUInteger)getChannel
+- (NSUInteger)channel
 {
     return channel;
 }
@@ -211,12 +214,12 @@
     channel = aChannel;
 }
 
-- (NSMutableDictionary *)getChannelOverride
+- (AMutableDictionary *)channelOverride
 {
     return channelOverride;
 }
 
-- (void)setChannelOverride:(NSMutableDictionary *)anOverride
+- (void)setChannelOverride:(AMutableDictionary *)anOverride
 {
     channelOverride = anOverride;
 }
@@ -250,9 +253,8 @@
 	unsigned int i=0;
 	for (i = startIndex; i<=stopIndex; i++) {
 		id<ANTLRToken> token = [tokens objectAtIndex:i];
-		if (aBitSet == nil || [aBitSet member:[token getType]]) {
+		if (aBitSet == nil || [aBitSet member:token.type]) {
 			[filteredTokens addObject:token];
-            [token retain];
 		}
 	}
 	if ([filteredTokens count]) {

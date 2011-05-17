@@ -249,9 +249,9 @@
     return t;
 }
 
-- (NSInteger) getType:(id) t
+- (NSInteger) getType:(ANTLRCommonTree *) t
 {
-    return [(id)t getType];
+    return [t type];
 }
 
 - (void) setType:(id)t Type:(NSInteger)type
@@ -271,9 +271,9 @@
     return nil; // no idea what to do
 }
 
-- (NSString *)getText:(id)t
+- (NSString *)getText:(ANTLRCommonTree *)t
 {
-    return [(id)t text];
+    return [t text];
 }
 
 - (void) setText:(id)t Text:(NSString *)text
@@ -312,6 +312,25 @@
 {
     if ( t != nil )
         [(id<ANTLRBaseTree>) t setParent:(id<ANTLRBaseTree>)parent];
+}
+
+/** What index is this node in the child list? Range: 0..n-1
+ *  If your node type doesn't handle this, it's ok but the tree rewrites
+ *  in tree parsers need this functionality.
+ */
+- (NSInteger) getChildIndex:(id)t
+{
+    return ((ANTLRCommonTree *)t).childIndex;
+}
+
+- (void) setChildIndex:(id)t With:(NSInteger)index
+{
+    ((ANTLRCommonTree *)t).childIndex = index;
+}
+
+- (void) replaceChildren:(id)parent From:(NSInteger)startChildIndex To:(NSInteger)stopChildIndex With:(id)t
+{
+    return;
 }
 
 - (NSInteger) getUniqueID:(id)node

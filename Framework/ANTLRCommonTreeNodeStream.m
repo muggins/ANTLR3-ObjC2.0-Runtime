@@ -29,6 +29,11 @@
 #import "ANTLRIntStream.h"
 #import "ANTLRCharStream.h"
 #import "AMutableArray.h"
+#import "ANTLRCommonTreeAdaptor.h"
+
+#ifndef DEBUG_DEALLOC
+#define DEBUG_DEALLOC
+#endif
 
 @implementation ANTLRCommonTreeNodeStream
 
@@ -50,10 +55,11 @@
 - (id) initWithTree:(ANTLRCommonTree *)theTree
 {
     if ((self = [super init]) != nil ) {
-        root = theTree;
-        adaptor = [ANTLRCommonTreeAdaptor newTreeAdaptor];
-        it = [ANTLRTreeIterator newANTRLTreeIteratorWithAdaptor:adaptor andTree:root];
-        calls = [ANTLRIntArray newArrayWithLen:INITIAL_CALL_STACK_SIZE];
+        adaptor = [[ANTLRCommonTreeAdaptor newTreeAdaptor] retain];
+        root = [theTree retain];
+        navigationNodeEOF = [[adaptor createTree:ANTLRTokenTypeEOF Text:@"EOF"] retain]; // set EOF
+        it = [[ANTLRTreeIterator newANTRLTreeIteratorWithAdaptor:adaptor andTree:root] retain];
+        calls = [[ANTLRIntArray newArrayWithLen:INITIAL_CALL_STACK_SIZE] retain];
         /** Tree (nil A B C) trees like flat A B C streams */
         hasNilRoot = NO;
         level = 0;
@@ -64,18 +70,31 @@
 - (id) initWithTreeAdaptor:(id<ANTLRTreeAdaptor>)anAdaptor Tree:(ANTLRCommonTree *)theTree
 {
     if ((self = [super init]) != nil ) {
-        [adaptor createTree:ANTLRTokenTypeEOF Text:@"EOF"]; // set EOF
-        root = theTree;
-        adaptor = anAdaptor;
+        adaptor = [anAdaptor retain];
+        root = [theTree retain];
+        navigationNodeEOF = [[adaptor createTree:ANTLRTokenTypeEOF Text:@"EOF"] retain]; // set EOF
         //    it = [root objectEnumerator];
-        it = [ANTLRTreeIterator newANTRLTreeIteratorWithAdaptor:adaptor andTree:root];
-        calls = [ANTLRIntArray newArrayWithLen:INITIAL_CALL_STACK_SIZE];
+        it = [[ANTLRTreeIterator newANTRLTreeIteratorWithAdaptor:adaptor andTree:root] retain];
+        calls = [[ANTLRIntArray newArrayWithLen:INITIAL_CALL_STACK_SIZE] retain];
         /** Tree (nil A B C) trees like flat A B C streams */
         hasNilRoot = NO;
         level = 0;
     }
     //    eof = [self isEOF]; // make sure tree iterator returns the EOF we want
     return self;
+}
+
+- (void)dealloc
+{
+#ifdef DEBUG_DEALLOC
+    NSLog( @"called dealloc in ANTLRCommonTreeNodeStream" );
+#endif
+    if ( root ) [root release];
+    if ( tokens ) [tokens release];
+    if ( adaptor ) [adaptor release];
+    if ( it ) [it release];
+    if ( calls ) [calls release];    
+    [super dealloc];
 }
 
 - (void) reset
@@ -112,7 +131,7 @@
 
 - (BOOL) isEOF:(id<ANTLRBaseTree>) aTree
 {
-    return [adaptor getType:aTree] == ANTLRTokenTypeEOF;
+    return [adaptor getType:(ANTLRCommonTree *)aTree] == ANTLRTokenTypeEOF;
 }
 
 - (void) setUniqueNavigationNodes:(BOOL) uniqueNavigationNodes
@@ -136,6 +155,10 @@
 
 - (void) setTokenStream:(id<ANTLRTokenStream>)theTokens
 {
+    if ( tokens != theTokens ) {
+        if ( tokens ) [tokens release];
+        [theTokens retain];
+    }
     tokens = theTokens;
 }
 
@@ -146,6 +169,10 @@
 
 - (void) setTreeAdaptor:(ANTLRCommonTreeAdaptor *) anAdaptor
 {
+    if ( adaptor != anAdaptor ) {
+        if ( adaptor ) [adaptor release];
+        [anAdaptor retain];
+    }
     adaptor = anAdaptor;
 }
 
@@ -166,7 +193,7 @@
 - (void) push:(NSInteger) anIndex
 {
     if ( calls == nil ) {
-        calls = [ANTLRIntArray newArrayWithLen:INITIAL_CALL_STACK_SIZE];
+        calls = [[ANTLRIntArray newArrayWithLen:INITIAL_CALL_STACK_SIZE] retain];
     }
     [calls push:p]; // save current anIndex
     [self seek:anIndex];
@@ -203,14 +230,14 @@
 {
     [self reset];
     NSMutableString *buf = [NSMutableString stringWithCapacity:5];
-    id o = [self LT:1];
-    NSInteger type = [adaptor getType:o];
+    id obj = [self LT:1];
+    NSInteger type = [adaptor getType:obj];
     while ( type != ANTLRTokenTypeEOF ) {
         [buf appendString:@" "];
         [buf appendString:[NSString stringWithFormat:@"%d", type]];
         [self consume];
-        o = [self LT:1];
-        type = [adaptor getType:o];
+        obj = [self LT:1];
+        type = [adaptor getType:obj];
     }
     return buf;
 }

@@ -45,8 +45,8 @@
 @interface ANTLRStreamIterator : ANTLRTreeIterator
 {
     NSInteger idx;
-    ANTLRBufferedTreeNodeStream *input;
-    AMutableArray *nodes;
+    __strong ANTLRBufferedTreeNodeStream *input;
+    __strong AMutableArray *nodes;
 }
 
 + (id) newANTLRStreamIterator:(ANTLRBufferedTreeNodeStream *) theStream;
@@ -105,6 +105,7 @@
 - (id) initWithTreeAdaptor:(ANTLRCommonTreeAdaptor *)anAdaptor Tree:(ANTLRCommonTree *)tree;
 - (id) initWithTreeAdaptor:(ANTLRCommonTreeAdaptor *)anAdaptor Tree:(ANTLRCommonTree *)tree WithBufferSize:(NSInteger)bufferSize;
 
+- (void)dealloc;
 - (id) copyWithZone:(NSZone *)aZone;
 
 // protected methods. DO NOT USE

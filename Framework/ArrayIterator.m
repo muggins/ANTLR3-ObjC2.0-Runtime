@@ -25,6 +25,7 @@
  *  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  *  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#import "AMutableArray.h"
 #import "ArrayIterator.h"
 #import "ANTLRRuntimeException.h"
 
@@ -110,6 +111,15 @@
     return self;
 }
 
+- (void)dealloc
+{
+#ifdef DEBUG_DEALLOC
+    NSLog( @"called dealloc in ArrayIterator" );
+#endif
+    if ( anArray ) [anArray release];
+    [super dealloc];
+}
+
 - (BOOL) hasNext
 {
     if ( peekObj == nil ) {
@@ -168,12 +178,6 @@
 - (void) setCount:(NSInteger)cnt
 {
     count = cnt;
-}
-
-- (void) dealloc
-{
-    if ( anArray ) [anArray release];
-    [super dealloc];
 }
 
 @end
