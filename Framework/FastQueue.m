@@ -1,93 +1,174 @@
-/*
-[The "BSD licence"]
-Copyright (c) 2005-2008 Terence Parr
-All rights reserved.
+//
+//  FastQueue.m
+//  ANTLR
+//
+//  Created by Ian Michell on 26/04/2010.
+// [The "BSD licence"]
+// Copyright (c) 2010 Ian Michell 2010 Alan Condit
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+// 1. Redistributions of source code must retain the above copyright
+//    notice, this list of conditions and the following disclaimer.
+// 2. Redistributions in binary form must reproduce the above copyright
+//    notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 3. The name of the author may not be used to endorse or promote products
+//    derived from this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+// IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+// OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+// IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+// INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+// NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+// THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions
-are met:
-1. Redistributions of source code must retain the above copyright
-notice, this list of conditions and the following disclaimer.
-2. Redistributions in binary form must reproduce the above copyright
-notice, this list of conditions and the following disclaimer in the
-documentation and/or other materials provided with the distribution.
-3. The name of the author may not be used to endorse or promote products
-derived from this software without specific prior written permission.
+#import "FastQueue.h"
+#import "ANTLRError.h"
+#import "RuntimeException.h"
 
-THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
-IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
-INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
-NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
-THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
-package org.antlr.runtime.misc;
+@implementation FastQueue
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
+//@synthesize pool;
+@synthesize data;
+@synthesize p;
+@synthesize range;
 
-/** A queue that can dequeue and get(i) in O(1) and grow arbitrarily large.
- *  A linked list is fast at dequeue but slow at get(i).  An array is
- *  the reverse.  This is O(1) for both operations.
- *
- *  List grows until you dequeue last element at end of buffer. Then
- *  it resets to start filling at 0 again.  If adds/removes are balanced, the
- *  buffer will not grow too large.
- *
- *  No iterator stuff as that's not how we'll use it.
- */
-public class FastQueue<T> {
-    /** dynamically-sized buffer of elements */
-    protected List<T> data = new ArrayList<T>();
-    /** index of next element to fill */
-    protected int p = 0;
-
-    public void reset() { p = 0; data.clear(); }
-
-    /** Get and remove first element in queue */
-    public T remove() {
-        T o = get(0);
-        p++;
-        // have we hit end of buffer?
-        if ( p == data.size() ) {
-            // if so, it's an opportunity to start filling at index 0 again
-            clear(); // size goes to 0, but retains memory
-        }
-        return o;
-    }
-
-    public void add(T o) { data.add(o); }
-
-    public int size() { return data.size() - p; }
-
-    public T head() { return get(0); }
-
-    /** Return element i elements ahead of current element.  i==0 gets
-     *  current element.  This is not an absolute index into the data list
-     *  since p defines the start of the real list.
-     */
-    public T get(int i) {
-        if ( p+i >= data.size() ) {
-            throw new NoSuchElementException("queue index "+(p+i)+" > size "+data.size());
-        }
-        return data.get(p+i);
-    }
-
-    public void clear() { p = 0; data.clear(); }
-
-    /** Return string of current buffer contents; non-destructive */
-    public String toString() {
-        StringBuffer buf = new StringBuffer();
-        int n = size();
-        for (int i=0; i<n; i++) {
-            buf.append(get(i));
-            if ( (i+1)<n ) buf.append(" ");
-        }
-        return buf.toString();
-    }
++ (id) newFastQueue
+{
+    return [[FastQueue alloc] init];
 }
+
+- (id) init
+{
+	self = [super init];
+	if ( self != nil ) {
+		data = [[AMutableArray arrayWithCapacity:100] retain];
+		p = 0;
+		range = -1;
+	}
+	return self;
+}
+
+- (void) dealloc
+{
+#ifdef DEBUG_DEALLOC
+    NSLog( @"called dealloc in FastQueue" );
+#endif
+	if ( data ) [data release];
+	[super dealloc];
+}
+
+- (id) copyWithZone:(NSZone *)aZone
+{
+    FastQueue *copy;
+    
+    copy = [[[self class] allocWithZone:aZone] init];
+    copy.data = [data copyWithZone:nil];
+    copy.p = p;
+    copy.range = range;
+    return copy;
+}
+
+// FIXME: Java code has this, it doesn't seem like it needs to be there... Then again a lot of the code in the java runtime is not great...
+- (void) reset
+{
+	[self clear];
+}
+
+- (void) clear
+{
+	p = 0;
+    if ( [data count] )
+        [data removeAllObjects];
+}
+
+- (id) remove
+{
+	id obj = [self objectAtIndex:0];
+	p++;
+	// check to see if we have hit the end of the buffer
+	if ( p == [data count] ) {
+		// if we have, then we need to clear it out
+		[self clear];
+	}
+	return obj;
+}
+
+- (void) addObject:(id) obj
+{
+    [data addObject:obj];
+}
+
+- (NSUInteger) count
+{
+	return [data count];
+}
+
+- (NSUInteger) size
+{
+	return [data count] - p;
+}
+
+- (NSUInteger) range
+{
+    return range;
+}
+
+- (id) head
+{
+	return [self objectAtIndex:0];
+}
+
+- (id) objectAtIndex:(NSInteger) i
+{
+    NSInteger absIndex;
+
+    absIndex = p + i;
+	if ( absIndex >= [data count] ) {
+		@throw [NoSuchElementException newException:[NSString stringWithFormat:@"queue index %d > last index %d", absIndex, [data count]-1]];
+	}
+	if ( absIndex < 0 ) {
+	    @throw [NoSuchElementException newException:[NSString stringWithFormat:@"queue index %d < 0", absIndex]];
+	}
+	if ( absIndex > range ) range = absIndex;
+	return [data objectAtIndex:absIndex];
+}
+
+- (NSString *) toString
+{
+    return [self description];
+}
+
+- (NSString *) description
+{
+	NSMutableString *buf = [NSMutableString stringWithCapacity:30];
+	NSInteger n = [self size];
+	for (NSInteger i = 0; i < n; i++) {
+		[buf appendString:[[self objectAtIndex:i] description]];
+		if ((i + 1) < n) {
+			[buf appendString:@" "];
+		}
+	}
+	return buf;
+}
+
+#ifdef DONTUSENOMO
+- (NSAutoreleasePool *)getPool
+{
+    return pool;
+}
+
+- (void)setPool:(NSAutoreleasePool *)aPool
+{
+    pool = aPool;
+}
+#endif
+
+@end

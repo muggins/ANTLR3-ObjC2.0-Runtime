@@ -2,7 +2,7 @@ tree grammar PolyPrinter;
 options {
 	tokenVocab=Poly;
     language=ObjC;
-	ASTLabelType=ANTLRCommonTree;
+	ASTLabelType=CommonTree;
 	output=template;
 }
 

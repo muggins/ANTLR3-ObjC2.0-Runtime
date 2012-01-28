@@ -148,9 +148,9 @@ const unsigned long long FOLLOW_13_in_decl217_data[] = { 0x0000000000000002LL};
 }
 /* start of iterate get and set functions */
 
-- (ANTLRHashMap *)getnames { return( names ); }
+- (HashMap *)getnames { return( names ); }
 
-- (void)setnames:(ANTLRHashMap *)aVal { names = aVal; }
+- (void)setnames:(HashMap *)aVal { names = aVal; }
 
 
 
@@ -166,41 +166,41 @@ const unsigned long long FOLLOW_13_in_decl217_data[] = { 0x0000000000000002LL};
 
 + (void) initialize
 {
-    FOLLOW_globals_in_prog44 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_globals_in_prog44_data Count:(NSUInteger)1] retain];
-    FOLLOW_method_in_prog47 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_method_in_prog47_data Count:(NSUInteger)1] retain];
-    FOLLOW_decl_in_globals79 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_decl_in_globals79_data Count:(NSUInteger)1] retain];
-    FOLLOW_7_in_method110 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_7_in_method110_data Count:(NSUInteger)1] retain];
-    FOLLOW_ID_in_method112 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_method112_data Count:(NSUInteger)1] retain];
-    FOLLOW_8_in_method114 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_8_in_method114_data Count:(NSUInteger)1] retain];
-    FOLLOW_9_in_method116 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_9_in_method116_data Count:(NSUInteger)1] retain];
-    FOLLOW_block_in_method118 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_block_in_method118_data Count:(NSUInteger)1] retain];
-    FOLLOW_10_in_block147 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_10_in_block147_data Count:(NSUInteger)1] retain];
-    FOLLOW_decl_in_block150 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_decl_in_block150_data Count:(NSUInteger)1] retain];
-    FOLLOW_stat_in_block155 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_stat_in_block155_data Count:(NSUInteger)1] retain];
-    FOLLOW_11_in_block159 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_11_in_block159_data Count:(NSUInteger)1] retain];
-    FOLLOW_ID_in_stat183 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_stat183_data Count:(NSUInteger)1] retain];
-    FOLLOW_12_in_stat185 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_12_in_stat185_data Count:(NSUInteger)1] retain];
-    FOLLOW_INT_in_stat187 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_INT_in_stat187_data Count:(NSUInteger)1] retain];
-    FOLLOW_13_in_stat189 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_13_in_stat189_data Count:(NSUInteger)1] retain];
-    FOLLOW_block_in_stat199 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_block_in_stat199_data Count:(NSUInteger)1] retain];
-    FOLLOW_14_in_decl213 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_14_in_decl213_data Count:(NSUInteger)1] retain];
-    FOLLOW_ID_in_decl215 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_decl215_data Count:(NSUInteger)1] retain];
-    FOLLOW_13_in_decl217 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_13_in_decl217_data Count:(NSUInteger)1] retain];
+    FOLLOW_globals_in_prog44 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_globals_in_prog44_data Count:(NSUInteger)1] retain];
+    FOLLOW_method_in_prog47 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_method_in_prog47_data Count:(NSUInteger)1] retain];
+    FOLLOW_decl_in_globals79 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_decl_in_globals79_data Count:(NSUInteger)1] retain];
+    FOLLOW_7_in_method110 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_7_in_method110_data Count:(NSUInteger)1] retain];
+    FOLLOW_ID_in_method112 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_method112_data Count:(NSUInteger)1] retain];
+    FOLLOW_8_in_method114 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_8_in_method114_data Count:(NSUInteger)1] retain];
+    FOLLOW_9_in_method116 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_9_in_method116_data Count:(NSUInteger)1] retain];
+    FOLLOW_block_in_method118 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_block_in_method118_data Count:(NSUInteger)1] retain];
+    FOLLOW_10_in_block147 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_10_in_block147_data Count:(NSUInteger)1] retain];
+    FOLLOW_decl_in_block150 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_decl_in_block150_data Count:(NSUInteger)1] retain];
+    FOLLOW_stat_in_block155 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_stat_in_block155_data Count:(NSUInteger)1] retain];
+    FOLLOW_11_in_block159 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_11_in_block159_data Count:(NSUInteger)1] retain];
+    FOLLOW_ID_in_stat183 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_stat183_data Count:(NSUInteger)1] retain];
+    FOLLOW_12_in_stat185 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_12_in_stat185_data Count:(NSUInteger)1] retain];
+    FOLLOW_INT_in_stat187 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_INT_in_stat187_data Count:(NSUInteger)1] retain];
+    FOLLOW_13_in_stat189 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_13_in_stat189_data Count:(NSUInteger)1] retain];
+    FOLLOW_block_in_stat199 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_block_in_stat199_data Count:(NSUInteger)1] retain];
+    FOLLOW_14_in_decl213 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_14_in_decl213_data Count:(NSUInteger)1] retain];
+    FOLLOW_ID_in_decl215 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_decl215_data Count:(NSUInteger)1] retain];
+    FOLLOW_13_in_decl217 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_13_in_decl217_data Count:(NSUInteger)1] retain];
 
-    [ANTLRBaseRecognizer setTokenNames:[[[NSArray alloc] initWithObjects:@"<invalid>", @"<EOR>", @"<DOWN>", @"<UP>", 
+    [BaseRecognizer setTokenNames:[[[NSArray alloc] initWithObjects:@"<invalid>", @"<EOR>", @"<DOWN>", @"<UP>", 
  @"ID", @"INT", @"WS", @"'method'", @"'('", @"')'", @"'{'", @"'}'", @"'='", 
  @"';'", @"'int'", nil] retain]];
 }
 
-+ (SymbolTableParser *)newSymbolTableParser:(id<ANTLRTokenStream>)aStream
++ (SymbolTableParser *)newSymbolTableParser:(id<TokenStream>)aStream
 {
     return [[SymbolTableParser alloc] initWithTokenStream:aStream];
 
 }
 
-- (id) initWithTokenStream:(id<ANTLRTokenStream>)aStream
+- (id) initWithTokenStream:(id<TokenStream>)aStream
 {
-    if ((self = [super initWithTokenStream:aStream State:[[ANTLRRecognizerSharedState newANTLRRecognizerSharedStateWithRuleLen:6+1] retain]]) != nil) {
+    if ((self = [super initWithTokenStream:aStream State:[[RecognizerSharedState newRecognizerSharedStateWithRuleLen:6+1] retain]]) != nil) {
 
 
         (Symbols_Scope *)Symbols_scope = [Symbols_Scope newSymbols_Scope];
@@ -272,7 +272,7 @@ const unsigned long long FOLLOW_13_in_decl217_data[] = { 0x0000000000000002LL};
         // token+rule list labels
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }    @finally {
@@ -287,14 +287,14 @@ const unsigned long long FOLLOW_13_in_decl217_data[] = { 0x0000000000000002LL};
 - (void) globals
 {
     // ruleScopeSetUp
-    gStack = [ANTLRSymbolStack newANTLRSymbolStackWithLen:30];
+    gStack = [SymbolStack newSymbolStackWithLen:30];
     Symbols_scope = [[Symbols_Scope newSymbols_Scope] retain];
     [gStack push:Symbols_scope];
 
 
         level++;
         /* scopeSetAttributeRef */
-    ((Symbols_Scope *)[gStack peek]).names =  [ANTLRHashMap newANTLRHashMapWithLen:101];
+    ((Symbols_Scope *)[gStack peek]).names =  [HashMap newHashMapWithLen:101];
 
     @try {
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:34:5: ( ( decl )* ) // ruleBlockSingleAlt
@@ -338,7 +338,7 @@ const unsigned long long FOLLOW_13_in_decl217_data[] = { 0x0000000000000002LL};
         // token+rule list labels
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }    @finally {
@@ -375,7 +375,7 @@ const unsigned long long FOLLOW_13_in_decl217_data[] = { 0x0000000000000002LL};
         // token+rule list labels
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }    @finally {
@@ -390,14 +390,14 @@ const unsigned long long FOLLOW_13_in_decl217_data[] = { 0x0000000000000002LL};
 - (void) block
 {
     // ruleScopeSetUp
-    gStack = [ANTLRSymbolStack newANTLRSymbolStackWithLen:30];
+    gStack = [SymbolStack newSymbolStackWithLen:30];
     Symbols_scope = [[Symbols_Scope newSymbols_Scope] retain];
     [gStack push:Symbols_scope];
 
 
         level++;
         /* scopeSetAttributeRef */
-    ((Symbols_Scope *)[gStack peek]).names =  [ANTLRHashMap newANTLRHashMapWithLen:101];
+    ((Symbols_Scope *)[gStack peek]).names =  [HashMap newHashMapWithLen:101];
 
     @try {
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:51:5: ( '{' ( decl )* ( stat )* '}' ) // ruleBlockSingleAlt
@@ -470,7 +470,7 @@ const unsigned long long FOLLOW_13_in_decl217_data[] = { 0x0000000000000002LL};
         // token+rule list labels
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }    @finally {
@@ -500,7 +500,7 @@ const unsigned long long FOLLOW_13_in_decl217_data[] = { 0x0000000000000002LL};
             alt5=2;
         }
         else {
-            ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newANTLRNoViableAltException:5 state:0 stream:input];
+            NoViableAltException *nvae = [NoViableAltException newNoViableAltException:5 state:0 stream:input];
             @throw nvae;
         }
         switch (alt5) {
@@ -530,7 +530,7 @@ const unsigned long long FOLLOW_13_in_decl217_data[] = { 0x0000000000000002LL};
         // token+rule list labels
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }    @finally {
@@ -547,13 +547,13 @@ const unsigned long long FOLLOW_13_in_decl217_data[] = { 0x0000000000000002LL};
     // ruleScopeSetUp
 
     @try {
-        id<ANTLRToken> ID1 = nil;
+        id<Token> ID1 = nil;
 
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:62:5: ( 'int' ID ';' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:62:9: 'int' ID ';' // alt
         {
         [self match:input TokenType:14 Follow:FOLLOW_14_in_decl213];   /* element() */
-        ID1=(id<ANTLRToken>)[self match:input TokenType:ID Follow:FOLLOW_ID_in_decl215];   /* element() */
+        ID1=(id<Token>)[self match:input TokenType:ID Follow:FOLLOW_ID_in_decl215];   /* element() */
         [self match:input TokenType:13 Follow:FOLLOW_13_in_decl217];   /* element() */
         [/* scopeAttributeRef */
         ((Symbols_Scope *)[gStack peek]).names addObject:ID1];  /* element() */
@@ -563,7 +563,7 @@ const unsigned long long FOLLOW_13_in_decl217_data[] = { 0x0000000000000002LL};
         // token+rule list labels
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }    @finally {

@@ -26,11 +26,11 @@
 #define ID 6
 #define WS 7
 /* interface lexer class */
-@interface PolyLexer : ANTLRLexer { // line 283
+@interface PolyLexer : Lexer { // line 283
 /* ObjC start of actions.lexer.memVars */
 /* ObjC end of actions.lexer.memVars */
 }
-+ (PolyLexer *)newPolyLexerWithCharStream:(id<ANTLRCharStream>)anInput;
++ (PolyLexer *)newPolyLexerWithCharStream:(id<CharStream>)anInput;
 /* ObjC start actions.lexer.methodsDecl */
 /* ObjC end actions.lexer.methodsDecl */
 - (void)mT__8; 

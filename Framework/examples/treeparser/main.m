@@ -38,14 +38,14 @@ int main(int argc, const char * argv[])
 	NSLog(@"input = %@", string);
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:string];
 	LangLexer *lex = [LangLexer newLangLexerWithCharStream:stream];
-    ANTLRCommonTokenStream *tokens = [ANTLRCommonTokenStream newANTLRCommonTokenStreamWithTokenSource:lex];
+    CommonTokenStream *tokens = [CommonTokenStream newCommonTokenStreamWithTokenSource:lex];
     LangParser *parser = [LangParser newLangParser:tokens];
 //    LangParser_decl_return *r = [parser decl];
     LangParser_start_return *r = [parser start];
     NSLog( @"tree: %@", [r.tree toStringTree]);
-    ANTLRCommonTree *r0 = [r getTree];
+    CommonTree *r0 = [r getTree];
     
-    ANTLRCommonTreeNodeStream *nodes = [ANTLRCommonTreeNodeStream newANTLRCommonTreeNodeStream:r0];
+    CommonTreeNodeStream *nodes = [CommonTreeNodeStream newCommonTreeNodeStream:r0];
     [nodes setTokenStream:tokens];
     LangDumpDecl *walker = [LangDumpDecl newLangDumpDecl:nodes];
     [walker decl];

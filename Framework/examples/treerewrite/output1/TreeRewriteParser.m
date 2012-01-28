@@ -82,12 +82,12 @@ const unsigned long long FOLLOW_INT_in_subrule53_data[] = { 0x0000000000000002LL
 }
 
 // returnScope.methods
-- (ANTLRCommonTree *)getTree
+- (CommonTree *)getTree
 {
     return tree;
 }
 
-- (void) setTree:(ANTLRCommonTree *)aTree
+- (void) setTree:(CommonTree *)aTree
 {
     if ( tree != aTree ) {
         if ( tree ) [tree release];
@@ -98,12 +98,12 @@ const unsigned long long FOLLOW_INT_in_subrule53_data[] = { 0x0000000000000002LL
 
 - (void) dealloc
 {
-    [self setTree:nil];
+#ifdef DEBUG_DEALLOC
+    NSLog( @"called dealloc in TreeRewriteParser_rule_return" );
+#endif
+    if ( tree ) [tree release];
     [super dealloc];
 }
-
-
-
 
 @end 
 
@@ -115,12 +115,12 @@ const unsigned long long FOLLOW_INT_in_subrule53_data[] = { 0x0000000000000002LL
 }
 
 // returnScope.methods
-- (ANTLRCommonTree *)getTree
+- (CommonTree *)getTree
 {
     return tree;
 }
 
-- (void) setTree:(ANTLRCommonTree *)aTree
+- (void) setTree:(CommonTree *)aTree
 {
     if (tree != aTree) {
         if (tree != nil) [tree release];
@@ -131,12 +131,12 @@ const unsigned long long FOLLOW_INT_in_subrule53_data[] = { 0x0000000000000002LL
 
 - (void) dealloc
 {
-    [self setTree:nil];
+#ifdef DEBUG_DEALLOC
+    NSLog( @"called dealloc in TreeRewriteParser_subrule_return" );
+#endif
+    if ( tree ) [tree release];
     [super dealloc];
 }
-
-
-
 
 @end 
 
@@ -146,50 +146,53 @@ const unsigned long long FOLLOW_INT_in_subrule53_data[] = { 0x0000000000000002LL
 
 + (void) initialize
 {
-    FOLLOW_INT_in_rule26 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_INT_in_rule26_data Count:(NSUInteger)1] retain];
-    FOLLOW_subrule_in_rule28 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_subrule_in_rule28_data Count:(NSUInteger)1] retain];
-    FOLLOW_INT_in_subrule53 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_INT_in_subrule53_data Count:(NSUInteger)1] retain];
+    FOLLOW_INT_in_rule26 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_INT_in_rule26_data Count:(NSUInteger)1] retain];
+    FOLLOW_subrule_in_rule28 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_subrule_in_rule28_data Count:(NSUInteger)1] retain];
+    FOLLOW_INT_in_subrule53 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_INT_in_subrule53_data Count:(NSUInteger)1] retain];
 
-    [ANTLRBaseRecognizer setTokenNames:[[[NSArray alloc] initWithObjects:@"<invalid>", @"<EOR>", @"<DOWN>", @"<UP>", 
+    [BaseRecognizer setTokenNames:[[[NSArray alloc] initWithObjects:@"<invalid>", @"<EOR>", @"<DOWN>", @"<UP>", 
  @"INT", @"WS", nil] retain]];
 }
 
-+ (TreeRewriteParser *)newTreeRewriteParser:(id<ANTLRTokenStream>)aStream
++ (TreeRewriteParser *)newTreeRewriteParser:(id<TokenStream>)aStream
 {
     return [[TreeRewriteParser alloc] initWithTokenStream:aStream];
 
 }
 
-- (id) initWithTokenStream:(id<ANTLRTokenStream>)aStream
+- (id) initWithTokenStream:(id<TokenStream>)aStream
 {
-    if ((self = [super initWithTokenStream:aStream State:[[ANTLRRecognizerSharedState newANTLRRecognizerSharedStateWithRuleLen:2+1] retain]]) != nil) {
+    if ((self = [super initWithTokenStream:aStream State:[[RecognizerSharedState newRecognizerSharedStateWithRuleLen:2+1] retain]]) != nil) {
 
 
                         
         // start of actions-actionScope-init
         // start of init
         // genericParser.init
-        [self setTreeAdaptor:[[ANTLRCommonTreeAdaptor newANTLRCommonTreeAdaptor] retain]];
+        [self setTreeAdaptor:[[CommonTreeAdaptor newCommonTreeAdaptor] retain]];
     }
     return self;
 }
 
 - (void) dealloc
 {
-    [self setTreeAdaptor:nil];
-
+#ifdef DEBUG_DEALLOC
+    NSLog( @"called dealloc in TreeRewriteParser" );
+#endif
+    if ( treeAdaptor ) [treeAdaptor release];
     [super dealloc];
 }
+
 // start actions.actionScope.methods
 // start methods()
 // genericParser.methods
 // parserMethods
-- (id<ANTLRTreeAdaptor>) getTreeAdaptor
+- (id<TreeAdaptor>) getTreeAdaptor
 {
 	return treeAdaptor;
 }
 
-- (void) setTreeAdaptor:(id<ANTLRTreeAdaptor>)aTreeAdaptor
+- (void) setTreeAdaptor:(id<TreeAdaptor>)aTreeAdaptor
 {
 	if (aTreeAdaptor != treeAdaptor) {
 		treeAdaptor = aTreeAdaptor;
@@ -208,25 +211,25 @@ const unsigned long long FOLLOW_INT_in_subrule53_data[] = { 0x0000000000000002LL
     TreeRewriteParser_rule_return * retval = [TreeRewriteParser_rule_return newTreeRewriteParser_rule_return];
     [retval setStart:[input LT:1]];
 
-    ANTLRCommonTree *root_0 = nil;
+    CommonTree *root_0 = nil;
 
     @try {
         // ruleLabelDefs
-        id<ANTLRToken> INT1 = nil;
+        id<Token> INT1 = nil;
         TreeRewriteParser_subrule_return * subrule2 = nil;
 
 
-        ANTLRCommonTree *INT1_tree=nil;
-        ANTLRRewriteRuleTokenStream *stream_INT = 
-            [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor
+        CommonTree *INT1_tree=nil;
+        RewriteRuleTokenStream *stream_INT = 
+            [[RewriteRuleTokenStream newRewriteRuleTokenStream:treeAdaptor
                                                              description:@"token INT"] retain];
-        ANTLRRewriteRuleSubtreeStream *stream_subrule = 
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_subrule = 
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"rule subrule"] retain];
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/treerewrite/TreeRewrite.g:8:5: ( INT subrule -> ^( subrule INT ) ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/treerewrite/TreeRewrite.g:8:7: INT subrule // alt
         {
-        INT1=(id<ANTLRToken>)[self match:input TokenType:INT Follow:FOLLOW_INT_in_rule26];  
+        INT1=(id<Token>)[self match:input TokenType:INT Follow:FOLLOW_INT_in_rule26];  
             [stream_INT addElement:INT1];
           /* element() */
         [self pushFollow:FOLLOW_subrule_in_rule28];
@@ -248,19 +251,19 @@ const unsigned long long FOLLOW_INT_in_subrule53_data[] = { 0x0000000000000002LL
 
         retval.tree = root_0;
 
-        ANTLRRewriteRuleSubtreeStream *stream_retval =
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_retval =
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"token retval"
                                                                     element:retval!=nil?[retval getTree]:nil] retain];
 
-        root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+        root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
         // 8:19: -> ^( subrule INT )
         {
             // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/treerewrite/TreeRewrite.g:8:22: ^( subrule INT )
             {
-                ANTLRCommonTree *root_1 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
-                root_1 = (ANTLRCommonTree *)[treeAdaptor becomeRoot:(id<ANTLRTree>)[stream_subrule nextNode]
+                CommonTree *root_1 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_1 = (CommonTree *)[treeAdaptor becomeRoot:(id<Tree>)[stream_subrule nextNode]
                                                                          old:root_1];
 
                  // TODO: args: 
@@ -281,14 +284,14 @@ const unsigned long long FOLLOW_INT_in_subrule53_data[] = { 0x0000000000000002LL
         [stream_INT release];
         [stream_subrule release];
 
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor rulePostProcessing:root_0];
+        retval.tree = (CommonTree *)[treeAdaptor rulePostProcessing:root_0];
         [treeAdaptor setTokenBoundaries:retval.tree From:retval.startToken To:retval.stopToken];
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor errorNode:input From:retval.startToken To:[input LT:-1] Exception:re];
+        retval.tree = (CommonTree *)[treeAdaptor errorNode:input From:retval.startToken To:[input LT:-1] Exception:re];
 
     }    @finally {
     }
@@ -307,21 +310,21 @@ const unsigned long long FOLLOW_INT_in_subrule53_data[] = { 0x0000000000000002LL
     TreeRewriteParser_subrule_return * retval = [TreeRewriteParser_subrule_return newTreeRewriteParser_subrule_return];
     [retval setStart:[input LT:1]];
 
-    ANTLRCommonTree *root_0 = nil;
+    CommonTree *root_0 = nil;
 
     @try {
         // ruleLabelDefs
-        id<ANTLRToken> INT3 = nil;
+        id<Token> INT3 = nil;
 
-        ANTLRCommonTree *INT3_tree=nil;
+        CommonTree *INT3_tree=nil;
 
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/treerewrite/TreeRewrite.g:12:5: ( INT ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/treerewrite/TreeRewrite.g:12:9: INT // alt
         {
-        root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+        root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
-        INT3=(id<ANTLRToken>)[self match:input TokenType:INT Follow:FOLLOW_INT_in_subrule53]; 
-        INT3_tree = (ANTLRCommonTree *)[[treeAdaptor createTree:INT3] retain];
+        INT3=(id<Token>)[self match:input TokenType:INT Follow:FOLLOW_INT_in_subrule53]; 
+        INT3_tree = (CommonTree *)[[treeAdaptor createTree:INT3] retain];
         [treeAdaptor addChild:INT3_tree  toTree:root_0];
           /* element() */
          /* elements */
@@ -331,14 +334,14 @@ const unsigned long long FOLLOW_INT_in_subrule53_data[] = { 0x0000000000000002LL
         [retval setStop:[input LT:-1]];
 
 
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor rulePostProcessing:root_0];
+        retval.tree = (CommonTree *)[treeAdaptor rulePostProcessing:root_0];
         [treeAdaptor setTokenBoundaries:retval.tree From:retval.startToken To:retval.stopToken];
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor errorNode:input From:retval.startToken To:[input LT:-1] Exception:re];
+        retval.tree = (CommonTree *)[treeAdaptor errorNode:input From:retval.startToken To:[input LT:-1] Exception:re];
 
     }    @finally {
     }

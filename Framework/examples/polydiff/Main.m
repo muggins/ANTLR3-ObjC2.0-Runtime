@@ -17,28 +17,28 @@ int main(int argc, const char *argv[])
 
 // BUILD AST
     PolyLexer *lex = [PolyLexer newPolyLexerWithCharStream:stream];
-    ANTLRCommonTokenStream *tokens = [ANTLRCommonTokenStream newANTLRCommonTokenStreamWithTokenSource:lex];
+    CommonTokenStream *tokens = [CommonTokenStream newCommonTokenStreamWithTokenSource:lex];
     PolyParser *parser = [PolyParser newPolyParser:tokens];
     PolyParser_poly_return *r = [parser poly];
     NSLog(@"tree=%@", [r.tree toStringTree]);
 
 #ifdef DONTUSENOMO
 // DIFFERENTIATE
-    ANTLRCommonTreeNodeStream *nodes = [ANTLRCommonTreeNodeStream newANTLRCommonTreeNodeStream:r.tree];
+    CommonTreeNodeStream *nodes = [CommonTreeNodeStream newCommonTreeNodeStream:r.tree];
     [nodes setTokenStream:tokens];
     PolyDifferentiator *differ = [PolyDifferentiator newPolyDifferentiator:nodes];
     PolyDifferentiator_poly_return *r2 = [differ poly];
     NSLog("d/dx=%@", [r2.tree toStringTree]);
 
 // SIMPLIFY / NORMALIZE
-    nodes = [ANTLRCommonTreeNodeStream newANTLRCommonTreeNodeStream:r2.tree];
+    nodes = [CommonTreeNodeStream newCommonTreeNodeStream:r2.tree];
     [nodes setTokenStream:tokens];
     Simplifier *reducer = [Simplifier newSimplifier:nodes];
     Simplifier_poly_return *r3 = [reducer poly];
     NSLog("simplified=%@", [r3.tree toStringTree]);
 
 // CONVERT BACK TO POLYNOMIAL
-    nodes = [ANTLRCommonTreeNodeStream newANTLRCommonTreeNodeStream:r3.tree];
+    nodes = [CommonTreeNodeStream newCommonTreeNodeStream:r3.tree];
     [nodes setTokenStream:tokens];
     PolyPrinter *printer = [PolyPrinter newPolyPrinter:nodes];
     PolyPrinter_poly_return *r4 = [printer poly];

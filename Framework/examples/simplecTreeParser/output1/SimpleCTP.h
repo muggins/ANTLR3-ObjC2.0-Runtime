@@ -35,20 +35,20 @@
 #define VAR_DEF 4
 #define K_PLUS 18
 #pragma mark Dynamic Global Scopes
-@interface Symbols_Scope : ANTLRSymbolsScope {  /* globalAttributeScopeDecl */
-ANTLRCommonTree * tree;
+@interface Symbols_Scope : SymbolsScope {  /* globalAttributeScopeDecl */
+CommonTree * tree;
 }
 /* start of properties */
 
-@property (retain, getter=gettree, setter=settree:) ANTLRCommonTree * tree;
+@property (retain, getter=gettree, setter=settree:) CommonTree * tree;
 
 /* end properties */
 
 + (Symbols_Scope *)newSymbols_Scope;
 /* start of iterated get and set functions */
 
-- (ANTLRCommonTree *)gettree;
-- (void)settree:(ANTLRCommonTree *)aVal;
+- (CommonTree *)gettree;
+- (void)settree:(CommonTree *)aVal;
 
 /* End of iterated get and set functions */
 
@@ -56,22 +56,22 @@ ANTLRCommonTree * tree;
 
 #pragma mark Dynamic Rule Scopes
 #pragma mark Rule Return Scopes start
-@interface SimpleCTP_expr_return :ANTLRTreeRuleReturnScope { // line 1672
+@interface SimpleCTP_expr_return :TreeRuleReturnScope { // line 1672
  // start of memVars()
 }
 
 // start properties
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+@property (retain, getter=getTree, setter=setTree:) CommonTree *tree;
 + (SimpleCTP_expr_return *)newSimpleCTP_expr_return;
 // this is start of set and get methods
   // methodsDecl
 @end /* end of returnScopeInterface interface */
 
 #pragma mark Rule return scopes end
-@interface SimpleCTP : ANTLRTreeParser { // line 529
+@interface SimpleCTP : TreeParser { // line 529
 // start of globalAttributeScopeMemVar
 /* globalAttributeScopeMemVar */
-ANTLRSymbolStack *gStack;
+SymbolStack *gStack;
 Symbols_Scope *Symbols_scope;
 
 // start of action-actionScope-memVars

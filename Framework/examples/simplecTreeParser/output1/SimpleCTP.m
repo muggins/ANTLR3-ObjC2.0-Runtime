@@ -156,9 +156,9 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
 }
 /* start of iterate get and set functions */
 
-- (ANTLRCommonTree *)gettree { return( tree ); }
+- (CommonTree *)gettree { return( tree ); }
 
-- (void)settree:(ANTLRCommonTree *)aVal { tree = aVal; }
+- (void)settree:(CommonTree *)aVal { tree = aVal; }
 
 
 
@@ -188,59 +188,59 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
 + (void) initialize
 {
     #pragma mark Bitsets
-    FOLLOW_declaration_in_program56 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_declaration_in_program56_data Count:(NSUInteger)1] retain];
-    FOLLOW_variable_in_declaration76 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_variable_in_declaration76_data Count:(NSUInteger)1] retain];
-    FOLLOW_FUNC_DECL_in_declaration87 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_FUNC_DECL_in_declaration87_data Count:(NSUInteger)1] retain];
-    FOLLOW_functionHeader_in_declaration89 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_functionHeader_in_declaration89_data Count:(NSUInteger)1] retain];
-    FOLLOW_FUNC_DEF_in_declaration101 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_FUNC_DEF_in_declaration101_data Count:(NSUInteger)1] retain];
-    FOLLOW_functionHeader_in_declaration103 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_functionHeader_in_declaration103_data Count:(NSUInteger)1] retain];
-    FOLLOW_block_in_declaration105 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_block_in_declaration105_data Count:(NSUInteger)1] retain];
-    FOLLOW_VAR_DEF_in_variable126 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_VAR_DEF_in_variable126_data Count:(NSUInteger)1] retain];
-    FOLLOW_type_in_variable128 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_type_in_variable128_data Count:(NSUInteger)1] retain];
-    FOLLOW_declarator_in_variable130 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_declarator_in_variable130_data Count:(NSUInteger)1] retain];
-    FOLLOW_K_ID_in_declarator150 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_K_ID_in_declarator150_data Count:(NSUInteger)1] retain];
-    FOLLOW_FUNC_HDR_in_functionHeader171 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_FUNC_HDR_in_functionHeader171_data Count:(NSUInteger)1] retain];
-    FOLLOW_type_in_functionHeader173 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_type_in_functionHeader173_data Count:(NSUInteger)1] retain];
-    FOLLOW_K_ID_in_functionHeader175 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_K_ID_in_functionHeader175_data Count:(NSUInteger)1] retain];
-    FOLLOW_formalParameter_in_functionHeader177 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_formalParameter_in_functionHeader177_data Count:(NSUInteger)1] retain];
-    FOLLOW_ARG_DEF_in_formalParameter199 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_ARG_DEF_in_formalParameter199_data Count:(NSUInteger)1] retain];
-    FOLLOW_type_in_formalParameter201 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_type_in_formalParameter201_data Count:(NSUInteger)1] retain];
-    FOLLOW_declarator_in_formalParameter203 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_declarator_in_formalParameter203_data Count:(NSUInteger)1] retain];
-    FOLLOW_set_in_type0 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_set_in_type0_data Count:(NSUInteger)1] retain];
-    FOLLOW_BLOCK_in_block286 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_BLOCK_in_block286_data Count:(NSUInteger)1] retain];
-    FOLLOW_variable_in_block288 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_variable_in_block288_data Count:(NSUInteger)1] retain];
-    FOLLOW_stat_in_block291 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_stat_in_block291_data Count:(NSUInteger)1] retain];
-    FOLLOW_forStat_in_stat305 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_forStat_in_stat305_data Count:(NSUInteger)1] retain];
-    FOLLOW_expr_in_stat313 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_stat313_data Count:(NSUInteger)1] retain];
-    FOLLOW_block_in_stat321 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_block_in_stat321_data Count:(NSUInteger)1] retain];
-    FOLLOW_K_FOR_in_forStat341 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_K_FOR_in_forStat341_data Count:(NSUInteger)1] retain];
-    FOLLOW_expr_in_forStat343 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_forStat343_data Count:(NSUInteger)1] retain];
-    FOLLOW_expr_in_forStat345 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_forStat345_data Count:(NSUInteger)1] retain];
-    FOLLOW_expr_in_forStat347 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_forStat347_data Count:(NSUInteger)1] retain];
-    FOLLOW_block_in_forStat349 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_block_in_forStat349_data Count:(NSUInteger)1] retain];
-    FOLLOW_K_EQEQ_in_expr365 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_K_EQEQ_in_expr365_data Count:(NSUInteger)1] retain];
-    FOLLOW_expr_in_expr367 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_expr367_data Count:(NSUInteger)1] retain];
-    FOLLOW_expr_in_expr369 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_expr369_data Count:(NSUInteger)1] retain];
-    FOLLOW_K_LT_in_expr381 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_K_LT_in_expr381_data Count:(NSUInteger)1] retain];
-    FOLLOW_expr_in_expr383 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_expr383_data Count:(NSUInteger)1] retain];
-    FOLLOW_expr_in_expr385 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_expr385_data Count:(NSUInteger)1] retain];
-    FOLLOW_K_PLUS_in_expr397 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_K_PLUS_in_expr397_data Count:(NSUInteger)1] retain];
-    FOLLOW_expr_in_expr399 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_expr399_data Count:(NSUInteger)1] retain];
-    FOLLOW_expr_in_expr401 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_expr401_data Count:(NSUInteger)1] retain];
-    FOLLOW_K_EQ_in_expr413 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_K_EQ_in_expr413_data Count:(NSUInteger)1] retain];
-    FOLLOW_K_ID_in_expr415 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_K_ID_in_expr415_data Count:(NSUInteger)1] retain];
-    FOLLOW_expr_in_expr419 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_expr419_data Count:(NSUInteger)1] retain];
-    FOLLOW_atom_in_expr432 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_atom_in_expr432_data Count:(NSUInteger)1] retain];
-    FOLLOW_set_in_atom0 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_set_in_atom0_data Count:(NSUInteger)1] retain];
+    FOLLOW_declaration_in_program56 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_declaration_in_program56_data Count:(NSUInteger)1] retain];
+    FOLLOW_variable_in_declaration76 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_variable_in_declaration76_data Count:(NSUInteger)1] retain];
+    FOLLOW_FUNC_DECL_in_declaration87 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_FUNC_DECL_in_declaration87_data Count:(NSUInteger)1] retain];
+    FOLLOW_functionHeader_in_declaration89 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_functionHeader_in_declaration89_data Count:(NSUInteger)1] retain];
+    FOLLOW_FUNC_DEF_in_declaration101 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_FUNC_DEF_in_declaration101_data Count:(NSUInteger)1] retain];
+    FOLLOW_functionHeader_in_declaration103 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_functionHeader_in_declaration103_data Count:(NSUInteger)1] retain];
+    FOLLOW_block_in_declaration105 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_block_in_declaration105_data Count:(NSUInteger)1] retain];
+    FOLLOW_VAR_DEF_in_variable126 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_VAR_DEF_in_variable126_data Count:(NSUInteger)1] retain];
+    FOLLOW_type_in_variable128 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_type_in_variable128_data Count:(NSUInteger)1] retain];
+    FOLLOW_declarator_in_variable130 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_declarator_in_variable130_data Count:(NSUInteger)1] retain];
+    FOLLOW_K_ID_in_declarator150 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_K_ID_in_declarator150_data Count:(NSUInteger)1] retain];
+    FOLLOW_FUNC_HDR_in_functionHeader171 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_FUNC_HDR_in_functionHeader171_data Count:(NSUInteger)1] retain];
+    FOLLOW_type_in_functionHeader173 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_type_in_functionHeader173_data Count:(NSUInteger)1] retain];
+    FOLLOW_K_ID_in_functionHeader175 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_K_ID_in_functionHeader175_data Count:(NSUInteger)1] retain];
+    FOLLOW_formalParameter_in_functionHeader177 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_formalParameter_in_functionHeader177_data Count:(NSUInteger)1] retain];
+    FOLLOW_ARG_DEF_in_formalParameter199 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_ARG_DEF_in_formalParameter199_data Count:(NSUInteger)1] retain];
+    FOLLOW_type_in_formalParameter201 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_type_in_formalParameter201_data Count:(NSUInteger)1] retain];
+    FOLLOW_declarator_in_formalParameter203 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_declarator_in_formalParameter203_data Count:(NSUInteger)1] retain];
+    FOLLOW_set_in_type0 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_set_in_type0_data Count:(NSUInteger)1] retain];
+    FOLLOW_BLOCK_in_block286 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_BLOCK_in_block286_data Count:(NSUInteger)1] retain];
+    FOLLOW_variable_in_block288 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_variable_in_block288_data Count:(NSUInteger)1] retain];
+    FOLLOW_stat_in_block291 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_stat_in_block291_data Count:(NSUInteger)1] retain];
+    FOLLOW_forStat_in_stat305 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_forStat_in_stat305_data Count:(NSUInteger)1] retain];
+    FOLLOW_expr_in_stat313 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_stat313_data Count:(NSUInteger)1] retain];
+    FOLLOW_block_in_stat321 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_block_in_stat321_data Count:(NSUInteger)1] retain];
+    FOLLOW_K_FOR_in_forStat341 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_K_FOR_in_forStat341_data Count:(NSUInteger)1] retain];
+    FOLLOW_expr_in_forStat343 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_forStat343_data Count:(NSUInteger)1] retain];
+    FOLLOW_expr_in_forStat345 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_forStat345_data Count:(NSUInteger)1] retain];
+    FOLLOW_expr_in_forStat347 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_forStat347_data Count:(NSUInteger)1] retain];
+    FOLLOW_block_in_forStat349 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_block_in_forStat349_data Count:(NSUInteger)1] retain];
+    FOLLOW_K_EQEQ_in_expr365 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_K_EQEQ_in_expr365_data Count:(NSUInteger)1] retain];
+    FOLLOW_expr_in_expr367 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_expr367_data Count:(NSUInteger)1] retain];
+    FOLLOW_expr_in_expr369 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_expr369_data Count:(NSUInteger)1] retain];
+    FOLLOW_K_LT_in_expr381 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_K_LT_in_expr381_data Count:(NSUInteger)1] retain];
+    FOLLOW_expr_in_expr383 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_expr383_data Count:(NSUInteger)1] retain];
+    FOLLOW_expr_in_expr385 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_expr385_data Count:(NSUInteger)1] retain];
+    FOLLOW_K_PLUS_in_expr397 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_K_PLUS_in_expr397_data Count:(NSUInteger)1] retain];
+    FOLLOW_expr_in_expr399 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_expr399_data Count:(NSUInteger)1] retain];
+    FOLLOW_expr_in_expr401 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_expr401_data Count:(NSUInteger)1] retain];
+    FOLLOW_K_EQ_in_expr413 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_K_EQ_in_expr413_data Count:(NSUInteger)1] retain];
+    FOLLOW_K_ID_in_expr415 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_K_ID_in_expr415_data Count:(NSUInteger)1] retain];
+    FOLLOW_expr_in_expr419 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_expr419_data Count:(NSUInteger)1] retain];
+    FOLLOW_atom_in_expr432 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_atom_in_expr432_data Count:(NSUInteger)1] retain];
+    FOLLOW_set_in_atom0 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_set_in_atom0_data Count:(NSUInteger)1] retain];
 
-    [ANTLRBaseRecognizer setTokenNames:[[[NSArray alloc] initWithObjects:@"<invalid>", @"<EOR>", @"<DOWN>", @"<UP>", 
+    [BaseRecognizer setTokenNames:[[[NSArray alloc] initWithObjects:@"<invalid>", @"<EOR>", @"<DOWN>", @"<UP>", 
  @"VAR_DEF", @"ARG_DEF", @"FUNC_HDR", @"FUNC_DECL", @"FUNC_DEF", @"BLOCK", 
  @"K_ID", @"K_INT", @"K_CHAR", @"K_VOID", @"K_FOR", @"K_EQ", @"K_EQEQ", 
  @"K_LT", @"K_PLUS", @"K_INT_TYPE", @"WS", @"';'", @"'('", @"','", @"')'", 
  @"'{'", @"'}'", nil] retain]];
 }
 
-+ (SimpleCTP *)newSimpleCTP:(id<ANTLRTreeNodeStream>)aStream
++ (SimpleCTP *)newSimpleCTP:(id<TreeNodeStream>)aStream
 {
 
     return [[SimpleCTP alloc] initWithStream:aStream];
@@ -248,9 +248,9 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
 }
 
 
-- (id) initWithStream:(id<ANTLRTreeNodeStream>)aStream
+- (id) initWithStream:(id<TreeNodeStream>)aStream
 {
-    if ((self = [super initWithStream:aStream State:[[ANTLRRecognizerSharedState newANTLRRecognizerSharedStateWithRuleLen:12+1] retain]]) != nil) {
+    if ((self = [super initWithStream:aStream State:[[RecognizerSharedState newRecognizerSharedStateWithRuleLen:12+1] retain]]) != nil) {
 
 
 
@@ -306,7 +306,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
                 default :
                     if ( cnt1 >= 1 )
                         goto loop1;
-                    ANTLREarlyExitException *eee = [ANTLREarlyExitException exceptionWithStream:input decisionNumber:1];
+                    EarlyExitException *eee = [EarlyExitException exceptionWithStream:input decisionNumber:1];
                     @throw eee;
             }
             cnt1++;
@@ -319,7 +319,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
         // token+rule list labels
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }    @finally {
@@ -356,7 +356,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
                 break;
 
         default: ;
-            ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newANTLRNoViableAltException:2 state:0 stream:input];
+            NoViableAltException *nvae = [NoViableAltException newNoViableAltException:2 state:0 stream:input];
             @throw nvae;
         }
 
@@ -377,14 +377,14 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
                 {
                 [self match:input TokenType:FUNC_DECL Follow:FOLLOW_FUNC_DECL_in_declaration87];   /* element() */
 
-                    [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; 
+                    [self match:input TokenType:TokenTypeDOWN Follow:nil]; 
                     [self pushFollow:FOLLOW_functionHeader_in_declaration89];
                     [self functionHeader];
                     [self popFollow];
 
                       /* element() */
 
-                    [self match:input TokenType:ANTLRTokenTypeUP Follow:nil];   /* element() */
+                    [self match:input TokenType:TokenTypeUP Follow:nil];   /* element() */
                  /* elements */
                 }
                 break;
@@ -393,7 +393,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
                 {
                 [self match:input TokenType:FUNC_DEF Follow:FOLLOW_FUNC_DEF_in_declaration101];   /* element() */
 
-                    [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; 
+                    [self match:input TokenType:TokenTypeDOWN Follow:nil]; 
                     [self pushFollow:FOLLOW_functionHeader_in_declaration103];
                     [self functionHeader];
                     [self popFollow];
@@ -405,7 +405,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
 
                       /* element() */
 
-                    [self match:input TokenType:ANTLRTokenTypeUP Follow:nil];   /* element() */
+                    [self match:input TokenType:TokenTypeUP Follow:nil];   /* element() */
                  /* elements */
                 }
                 break;
@@ -414,7 +414,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
         // token+rule list labels
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }    @finally {
@@ -436,7 +436,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
         {
         [self match:input TokenType:VAR_DEF Follow:FOLLOW_VAR_DEF_in_variable126];   /* element() */
 
-            [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; 
+            [self match:input TokenType:TokenTypeDOWN Follow:nil]; 
             [self pushFollow:FOLLOW_type_in_variable128];
             [self type];
             [self popFollow];
@@ -448,14 +448,14 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
 
               /* element() */
 
-            [self match:input TokenType:ANTLRTokenTypeUP Follow:nil];   /* element() */
+            [self match:input TokenType:TokenTypeUP Follow:nil];   /* element() */
          /* elements */
         }
 
         // token+rule list labels
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }    @finally {
@@ -482,7 +482,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
         // token+rule list labels
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }    @finally {
@@ -504,7 +504,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
         {
         [self match:input TokenType:FUNC_HDR Follow:FOLLOW_FUNC_HDR_in_functionHeader171];   /* element() */
 
-            [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; 
+            [self match:input TokenType:TokenTypeDOWN Follow:nil]; 
             [self pushFollow:FOLLOW_type_in_functionHeader173];
             [self type];
             [self popFollow];
@@ -537,7 +537,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
                     default :
                         if ( cnt3 >= 1 )
                             goto loop3;
-                        ANTLREarlyExitException *eee = [ANTLREarlyExitException exceptionWithStream:input decisionNumber:3];
+                        EarlyExitException *eee = [EarlyExitException exceptionWithStream:input decisionNumber:3];
                         @throw eee;
                 }
                 cnt3++;
@@ -545,14 +545,14 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
             loop3: ;
               /* element() */
 
-            [self match:input TokenType:ANTLRTokenTypeUP Follow:nil];   /* element() */
+            [self match:input TokenType:TokenTypeUP Follow:nil];   /* element() */
          /* elements */
         }
 
         // token+rule list labels
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }    @finally {
@@ -574,7 +574,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
         {
         [self match:input TokenType:ARG_DEF Follow:FOLLOW_ARG_DEF_in_formalParameter199];   /* element() */
 
-            [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; 
+            [self match:input TokenType:TokenTypeDOWN Follow:nil]; 
             [self pushFollow:FOLLOW_type_in_formalParameter201];
             [self type];
             [self popFollow];
@@ -586,14 +586,14 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
 
               /* element() */
 
-            [self match:input TokenType:ANTLRTokenTypeUP Follow:nil];   /* element() */
+            [self match:input TokenType:TokenTypeUP Follow:nil];   /* element() */
          /* elements */
         }
 
         // token+rule list labels
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }    @finally {
@@ -617,7 +617,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
             [input consume];
             [state setIsErrorRecovery:NO];
         } else {
-            ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException exceptionWithSet:nil stream:input];
+            MismatchedSetException *mse = [MismatchedSetException exceptionWithSet:nil stream:input];
             @throw mse;
         }
           /* element() */
@@ -627,7 +627,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
         // token+rule list labels
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }    @finally {
@@ -649,8 +649,8 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
         {
         [self match:input TokenType:BLOCK Follow:FOLLOW_BLOCK_in_block286];   /* element() */
 
-        if ( [input LA:1] == ANTLRTokenTypeDOWN ) {
-            [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; 
+        if ( [input LA:1] == TokenTypeDOWN ) {
+            [self match:input TokenType:TokenTypeDOWN Follow:nil]; 
             do {
                 NSInteger alt4=2;
                 NSInteger LA4_0 = [input LA:1];
@@ -706,7 +706,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
             loop5: ;
               /* element() */
 
-            [self match:input TokenType:ANTLRTokenTypeUP Follow:nil]; 
+            [self match:input TokenType:TokenTypeUP Follow:nil]; 
         }  /* element() */
          /* elements */
         }
@@ -714,7 +714,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
         // token+rule list labels
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }    @finally {
@@ -756,7 +756,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
                 break;
 
         default: ;
-            ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newANTLRNoViableAltException:6 state:0 stream:input];
+            NoViableAltException *nvae = [NoViableAltException newNoViableAltException:6 state:0 stream:input];
             @throw nvae;
         }
 
@@ -799,7 +799,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
         // token+rule list labels
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }    @finally {
@@ -821,7 +821,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
         {
         [self match:input TokenType:K_FOR Follow:FOLLOW_K_FOR_in_forStat341];   /* element() */
 
-            [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; 
+            [self match:input TokenType:TokenTypeDOWN Follow:nil]; 
             [self pushFollow:FOLLOW_expr_in_forStat343];
             [self expr];
             [self popFollow];
@@ -843,14 +843,14 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
 
               /* element() */
 
-            [self match:input TokenType:ANTLRTokenTypeUP Follow:nil];   /* element() */
+            [self match:input TokenType:TokenTypeUP Follow:nil];   /* element() */
          /* elements */
         }
 
         // token+rule list labels
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }    @finally {
@@ -870,7 +870,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
     [retval setStart:[input LT:1]];
 
     @try {
-        ANTLRCommonTree *K_ID1 = nil;
+        CommonTree *K_ID1 = nil;
         SimpleCTP_expr_return * e = nil;
 
 
@@ -905,7 +905,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
                 break;
 
         default: ;
-            ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newANTLRNoViableAltException:7 state:0 stream:input];
+            NoViableAltException *nvae = [NoViableAltException newNoViableAltException:7 state:0 stream:input];
             @throw nvae;
         }
 
@@ -915,7 +915,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
                 {
                 [self match:input TokenType:K_EQEQ Follow:FOLLOW_K_EQEQ_in_expr365];   /* element() */
 
-                    [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; 
+                    [self match:input TokenType:TokenTypeDOWN Follow:nil]; 
                     [self pushFollow:FOLLOW_expr_in_expr367];
                     [self expr];
                     [self popFollow];
@@ -927,7 +927,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
 
                       /* element() */
 
-                    [self match:input TokenType:ANTLRTokenTypeUP Follow:nil];   /* element() */
+                    [self match:input TokenType:TokenTypeUP Follow:nil];   /* element() */
                  /* elements */
                 }
                 break;
@@ -936,7 +936,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
                 {
                 [self match:input TokenType:K_LT Follow:FOLLOW_K_LT_in_expr381];   /* element() */
 
-                    [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; 
+                    [self match:input TokenType:TokenTypeDOWN Follow:nil]; 
                     [self pushFollow:FOLLOW_expr_in_expr383];
                     [self expr];
                     [self popFollow];
@@ -948,7 +948,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
 
                       /* element() */
 
-                    [self match:input TokenType:ANTLRTokenTypeUP Follow:nil];   /* element() */
+                    [self match:input TokenType:TokenTypeUP Follow:nil];   /* element() */
                  /* elements */
                 }
                 break;
@@ -957,7 +957,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
                 {
                 [self match:input TokenType:K_PLUS Follow:FOLLOW_K_PLUS_in_expr397];   /* element() */
 
-                    [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; 
+                    [self match:input TokenType:TokenTypeDOWN Follow:nil]; 
                     [self pushFollow:FOLLOW_expr_in_expr399];
                     [self expr];
                     [self popFollow];
@@ -969,7 +969,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
 
                       /* element() */
 
-                    [self match:input TokenType:ANTLRTokenTypeUP Follow:nil];   /* element() */
+                    [self match:input TokenType:TokenTypeUP Follow:nil];   /* element() */
                  /* elements */
                 }
                 break;
@@ -978,15 +978,15 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
                 {
                 [self match:input TokenType:K_EQ Follow:FOLLOW_K_EQ_in_expr413];   /* element() */
 
-                    [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; 
-                    K_ID1=(ANTLRCommonTree *)[self match:input TokenType:K_ID Follow:FOLLOW_K_ID_in_expr415];   /* element() */
+                    [self match:input TokenType:TokenTypeDOWN Follow:nil]; 
+                    K_ID1=(CommonTree *)[self match:input TokenType:K_ID Follow:FOLLOW_K_ID_in_expr415];   /* element() */
                     [self pushFollow:FOLLOW_expr_in_expr419];
                     e = [self expr];
                     [self popFollow];
 
                       /* element() */
 
-                    [self match:input TokenType:ANTLRTokenTypeUP Follow:nil];   /* element() */
+                    [self match:input TokenType:TokenTypeUP Follow:nil];   /* element() */
                  NSLog(@"assigning %@ to variable %@", (e!=nil?[[input getTokenStream] toStringFromStart:[[input getTreeAdaptor] getTokenStartIndex:[e getStart]]
                          ToEnd:[[input getTreeAdaptor] getTokenStopIndex:[e getStart]]]:nil), (K_ID1!=nil?[K_ID1 text]:0));   /* element() */
                  /* elements */
@@ -1008,7 +1008,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
         // token+rule list labels
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }    @finally {
@@ -1032,7 +1032,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
             [input consume];
             [state setIsErrorRecovery:NO];
         } else {
-            ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException exceptionWithSet:nil stream:input];
+            MismatchedSetException *mse = [MismatchedSetException exceptionWithSet:nil stream:input];
             @throw mse;
         }
           /* element() */
@@ -1042,7 +1042,7 @@ static const unsigned long long FOLLOW_set_in_atom0_data[] = { 0x000000000000000
         // token+rule list labels
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }    @finally {

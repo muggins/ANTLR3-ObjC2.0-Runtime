@@ -31,7 +31,7 @@
 
 + (void) initialize
 {
-    [ANTLRBaseRecognizer setGrammarFileName:@"/Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g"];
+    [BaseRecognizer setGrammarFileName:@"/Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g"];
 }
 
 + (NSString *) tokenNameForType:(NSInteger)aTokenType
@@ -39,14 +39,14 @@
     return [[self getTokenNames] objectAtIndex:aTokenType];
 }
 
-+ (Fuzzy *)newFuzzyWithCharStream:(id<ANTLRCharStream>)anInput
++ (Fuzzy *)newFuzzyWithCharStream:(id<CharStream>)anInput
 {
     return [[Fuzzy alloc] initWithCharStream:anInput];
 }
 
-- (id) initWithCharStream:(id<ANTLRCharStream>)anInput
+- (id) initWithCharStream:(id<CharStream>)anInput
 {
-    self = [super initWithCharStream:anInput State:[[ANTLRRecognizerSharedState newANTLRRecognizerSharedStateWithRuleLen:30+1] retain]];
+    self = [super initWithCharStream:anInput State:[[RecognizerSharedState newRecognizerSharedStateWithRuleLen:30+1] retain]];
     if ( self != nil ) {
         SEL synpred9_FuzzySelector = @selector(synpred9_Fuzzy_fragment);
 
@@ -80,14 +80,14 @@
 /* ObjC start methods() */
 /* ObjC end methods() */
 
-- (id<ANTLRToken>) nextToken
+- (id<Token>) nextToken
 {
     while (YES) {
-        if ( [input LA:1] == ANTLRCharStreamEOF ) {
+        if ( [input LA:1] == CharStreamEOF ) {
             return [ eofToken];
         }
         state.token = nil;
-        state.channel = ANTLRTokenChannelDefault;
+        state.channel = TokenChannelDefault;
         state.tokenStartCharIndex = input.index;
         state.tokenStartCharPositionInLine = input.charPositionInLine;
         state.tokenStartLine = input.line;
@@ -108,7 +108,7 @@
                 return state.token;
             }
         }
-        @catch (ANTLRRecognitionException *re) {
+        @catch (RecognitionException *re) {
             // shouldn't happen in backtracking mode, but...
             [self reportError:re];
             [self recover:re];
@@ -116,14 +116,14 @@
     }
 }
 
-- (void)memoize:(id<ANTLRIntStream>)anInput
+- (void)memoize:(id<IntStream>)anInput
       RuleIndex:(NSInteger)ruleIndex
      StartIndex:(NSInteger)ruleStartIndex
 {
     if ( state.backtracking > 1 ) [super memoize:anInput RuleIndex:ruleIndex StartIndex:ruleStartIndex];
 }
 
-- (BOOL)alreadyParsedRule:(id<ANTLRIntStream>)anInput RuleIndex:(NSInteger)ruleIndex
+- (BOOL)alreadyParsedRule:(id<IntStream>)anInput RuleIndex:(NSInteger)ruleIndex
 {
     if ( state.backtracking > 1 ) return [super alreadyParsedRule:anInput RuleIndex:ruleIndex];
     return NO;
@@ -138,8 +138,8 @@
 
     @try {
         NSInteger _type = IMPORT;
-        NSInteger _channel = ANTLRTokenChannelDefault;
-        ANTLRCommonToken *name=nil;
+        NSInteger _channel = TokenChannelDefault;
+        CommonToken *name=nil;
 
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:5:2: ( 'import' WS name= QIDStar ( WS )? ';' ) // ruleBlockSingleAlt
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:5:4: 'import' WS name= QIDStar ( WS )? ';' // alt
@@ -155,7 +155,7 @@
         NSInteger nameStart31 = input.index;
         [self mQIDStar]; if ( state.failed ) return ;
 
-        name = [[ newToken:input Type:ANTLRTokenTypeInvalid Channel:ANTLRTokenChannelDefault Start:nameStart31 Stop:input.index-1] retain];
+        name = [[ newToken:input Type:TokenTypeInvalid Channel:TokenChannelDefault Start:nameStart31 Stop:input.index-1] retain];
         name.line = self.line;
 
 
@@ -209,7 +209,7 @@
 
     @try {
         NSInteger _type = RETURN;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:10:2: ( 'return' ( options {greedy=false; } : . )* ';' ) // ruleBlockSingleAlt
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:10:4: 'return' ( options {greedy=false; } : . )* ';' // alt
         {
@@ -274,8 +274,8 @@
 
     @try {
         NSInteger _type = CLASS;
-        NSInteger _channel = ANTLRTokenChannelDefault;
-        ANTLRCommonToken *name=nil;
+        NSInteger _channel = TokenChannelDefault;
+        CommonToken *name=nil;
 
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:14:2: ( 'class' WS name= ID ( WS )? ( 'extends' WS QID ( WS )? )? ( 'implements' WS QID ( WS )? ( ',' ( WS )? QID ( WS )? )* )? '{' ) // ruleBlockSingleAlt
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:14:4: 'class' WS name= ID ( WS )? ( 'extends' WS QID ( WS )? )? ( 'implements' WS QID ( WS )? ( ',' ( WS )? QID ( WS )? )* )? '{' // alt
@@ -291,7 +291,7 @@
         NSInteger nameStart81 = input.index;
         [self mID]; if ( state.failed ) return ;
 
-        name = [[ newToken:input Type:ANTLRTokenTypeInvalid Channel:ANTLRTokenChannelDefault Start:nameStart81 Stop:input.index-1] retain];
+        name = [[ newToken:input Type:TokenTypeInvalid Channel:TokenChannelDefault Start:nameStart81 Stop:input.index-1] retain];
         name.line = self.line;
 
 
@@ -521,8 +521,8 @@
 
     @try {
         NSInteger _type = METHOD;
-        NSInteger _channel = ANTLRTokenChannelDefault;
-        ANTLRCommonToken *name=nil;
+        NSInteger _channel = TokenChannelDefault;
+        CommonToken *name=nil;
 
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:20:5: ( TYPE WS name= ID ( WS )? '(' ( ARG ( WS )? ( ',' ( WS )? ARG ( WS )? )* )? ')' ( WS )? ( 'throws' WS QID ( WS )? ( ',' ( WS )? QID ( WS )? )* )? '{' ) // ruleBlockSingleAlt
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:20:9: TYPE WS name= ID ( WS )? '(' ( ARG ( WS )? ( ',' ( WS )? ARG ( WS )? )* )? ')' ( WS )? ( 'throws' WS QID ( WS )? ( ',' ( WS )? QID ( WS )? )* )? '{' // alt
@@ -538,7 +538,7 @@
         NSInteger nameStart158 = input.index;
         [self mID]; if ( state.failed ) return ;
 
-        name = [[ newToken:input Type:ANTLRTokenTypeInvalid Channel:ANTLRTokenChannelDefault Start:nameStart158 Stop:input.index-1] retain];
+        name = [[ newToken:input Type:TokenTypeInvalid Channel:TokenChannelDefault Start:nameStart158 Stop:input.index-1] retain];
         name.line = self.line;
 
 
@@ -858,8 +858,8 @@
 
     @try {
         NSInteger _type = FIELD;
-        NSInteger _channel = ANTLRTokenChannelDefault;
-        ANTLRCommonToken *name=nil;
+        NSInteger _channel = TokenChannelDefault;
+        CommonToken *name=nil;
 
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:26:5: ( TYPE WS name= ID ( '[]' )? ( WS )? ( ';' | '=' ) ) // ruleBlockSingleAlt
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:26:9: TYPE WS name= ID ( '[]' )? ( WS )? ( ';' | '=' ) // alt
@@ -875,7 +875,7 @@
         NSInteger nameStart261 = input.index;
         [self mID]; if ( state.failed ) return ;
 
-        name = [[ newToken:input Type:ANTLRTokenTypeInvalid Channel:ANTLRTokenChannelDefault Start:nameStart261 Stop:input.index-1] retain];
+        name = [[ newToken:input Type:TokenTypeInvalid Channel:TokenChannelDefault Start:nameStart261 Stop:input.index-1] retain];
         name.line = self.line;
 
 
@@ -928,7 +928,7 @@
         } else {
             if ( state.backtracking > 0 ) { state.failed = YES; return ; }
 
-            ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException newException:nil stream:input];
+            MismatchedSetException *mse = [MismatchedSetException newException:nil stream:input];
             [self recover:mse];
             @throw mse;
         }
@@ -965,7 +965,7 @@
 
     @try {
         NSInteger _type = STAT;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:30:5: ( ( 'if' | 'while' | 'switch' | 'for' ) ( WS )? '(' ) // ruleBlockSingleAlt
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:30:7: ( 'if' | 'while' | 'switch' | 'for' ) ( WS )? '(' // alt
         {
@@ -997,7 +997,7 @@
         default: ;
             if ( state.backtracking > 0 ) { state.failed = YES; return ; }
 
-            ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newException:25 state:0 stream:input];
+            NoViableAltException *nvae = [NoViableAltException newException:25 state:0 stream:input];
             nvae.c = charLA25;
             @throw nvae;
 
@@ -1094,8 +1094,8 @@
 
     @try {
         NSInteger _type = CALL;
-        NSInteger _channel = ANTLRTokenChannelDefault;
-        ANTLRCommonToken *name=nil;
+        NSInteger _channel = TokenChannelDefault;
+        CommonToken *name=nil;
 
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:33:5: (name= QID ( WS )? '(' ) // ruleBlockSingleAlt
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:33:9: name= QID ( WS )? '(' // alt
@@ -1103,7 +1103,7 @@
         NSInteger nameStart326 = input.index;
         [self mQID]; if ( state.failed ) return ;
 
-        name = [[ newToken:input Type:ANTLRTokenTypeInvalid Channel:ANTLRTokenChannelDefault Start:nameStart326 Stop:input.index-1] retain];
+        name = [[ newToken:input Type:TokenTypeInvalid Channel:TokenChannelDefault Start:nameStart326 Stop:input.index-1] retain];
         name.line = self.line;
 
 
@@ -1162,7 +1162,7 @@
 
     @try {
         NSInteger _type = COMMENT;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:38:5: ( '/*' ( options {greedy=false; } : . )* '*/' ) // ruleBlockSingleAlt
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:38:9: '/*' ( options {greedy=false; } : . )* '*/' // alt
         {
@@ -1241,7 +1241,7 @@
 
     @try {
         NSInteger _type = SL_COMMENT;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:43:5: ( '//' ( options {greedy=false; } : . )* '\\n' ) // ruleBlockSingleAlt
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:43:9: '//' ( options {greedy=false; } : . )* '\\n' // alt
         {
@@ -1311,7 +1311,7 @@
 
     @try {
         NSInteger _type = STRING;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:48:2: ( '\"' ( options {greedy=false; } : ESC | . )* '\"' ) // ruleBlockSingleAlt
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:48:4: '\"' ( options {greedy=false; } : ESC | . )* '\"' // alt
         {
@@ -1401,7 +1401,7 @@
 
     @try {
         NSInteger _type = CHAR;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:52:2: ( '\\'' ( options {greedy=false; } : ESC | . )* '\\'' ) // ruleBlockSingleAlt
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:52:4: '\\'' ( options {greedy=false; } : ESC | . )* '\\'' // alt
         {
@@ -1491,7 +1491,7 @@
 
     @try {
         NSInteger _type = WS;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:55:5: ( ( ' ' | '\\t' | '\\n' )+ ) // ruleBlockSingleAlt
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/fuzzy/Fuzzy.g:55:9: ( ' ' | '\\t' | '\\n' )+ // alt
         {
@@ -1516,7 +1516,7 @@
                     } else {
                         if ( state.backtracking > 0 ) { state.failed = YES; return ; }
 
-                        ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException newException:nil stream:input];
+                        MismatchedSetException *mse = [MismatchedSetException newException:nil stream:input];
                         [self recover:mse];
                         @throw mse;
                     }
@@ -1530,8 +1530,8 @@
                         goto loop32;
                     if ( state.backtracking > 0 ) { state.failed = YES; return ; }
 
-                    ANTLREarlyExitException *eee =
-                        [ANTLREarlyExitException newException:input decisionNumber:32];
+                    EarlyExitException *eee =
+                        [EarlyExitException newException:input decisionNumber:32];
                     @throw eee;
             }
             cnt32++;
@@ -1803,7 +1803,7 @@
         } else {
             if ( state.backtracking > 0 ) { state.failed = YES; return ; }
 
-            ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException newException:nil stream:input];
+            MismatchedSetException *mse = [MismatchedSetException newException:nil stream:input];
             [self recover:mse];
             @throw mse;
         }
@@ -1828,7 +1828,7 @@
                     } else {
                         if ( state.backtracking > 0 ) { state.failed = YES; return ; }
 
-                        ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException newException:nil stream:input];
+                        MismatchedSetException *mse = [MismatchedSetException newException:nil stream:input];
                         [self recover:mse];
                         @throw mse;
                     }
@@ -1879,7 +1879,7 @@
         } else {
             if ( state.backtracking > 0 ) { state.failed = YES; return ; }
 
-            ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException newException:nil stream:input];
+            MismatchedSetException *mse = [MismatchedSetException newException:nil stream:input];
             [self recover:mse];
             @throw mse;
         }
@@ -1927,7 +1927,7 @@
             else {
                 if ( state.backtracking > 0 ) { state.failed = YES; return ; }
 
-                ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newException:38 state:1 stream:input];
+                NoViableAltException *nvae = [NoViableAltException newException:38 state:1 stream:input];
                 nvae.c = LA38_1;
                 @throw nvae;
 
@@ -1953,7 +1953,7 @@
             else {
                 if ( state.backtracking > 0 ) { state.failed = YES; return ; }
 
-                ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newException:38 state:7 stream:input];
+                NoViableAltException *nvae = [NoViableAltException newException:38 state:7 stream:input];
                 nvae.c = LA38_7;
                 @throw nvae;
 
@@ -1979,7 +1979,7 @@
             else {
                 if ( state.backtracking > 0 ) { state.failed = YES; return ; }
 
-                ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newException:38 state:9 stream:input];
+                NoViableAltException *nvae = [NoViableAltException newException:38 state:9 stream:input];
                 nvae.c = LA38_9;
                 @throw nvae;
 
@@ -2007,7 +2007,7 @@
             else {
                 if ( state.backtracking > 0 ) { state.failed = YES; return ; }
 
-                ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newException:38 state:11 stream:input];
+                NoViableAltException *nvae = [NoViableAltException newException:38 state:11 stream:input];
                 nvae.c = LA38_11;
                 @throw nvae;
 
@@ -2076,7 +2076,7 @@
             else {
                 if ( state.backtracking > 0 ) { state.failed = YES; return ; }
 
-                ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newException:38 state:12 stream:input];
+                NoViableAltException *nvae = [NoViableAltException newException:38 state:12 stream:input];
                 nvae.c = LA38_12;
                 @throw nvae;
 
@@ -2096,7 +2096,7 @@
             else {
                 if ( state.backtracking > 0 ) { state.failed = YES; return ; }
 
-                ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newException:38 state:13 stream:input];
+                NoViableAltException *nvae = [NoViableAltException newException:38 state:13 stream:input];
                 nvae.c = LA38_13;
                 @throw nvae;
 
@@ -2124,7 +2124,7 @@
     default: ;
         if ( state.backtracking > 0 ) { state.failed = YES; return ; }
 
-        ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newException:38 state:0 stream:input];
+        NoViableAltException *nvae = [NoViableAltException newException:38 state:0 stream:input];
         nvae.c = charLA38;
         @throw nvae;
 

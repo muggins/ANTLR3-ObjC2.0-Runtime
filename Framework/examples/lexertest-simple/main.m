@@ -9,8 +9,8 @@ int main(int argc, const char * argv[])
 	
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:@"abB9Cdd44"];
 	TestLexer *lexer = [[TestLexer alloc] initWithCharStream:stream];
-	id<ANTLRToken> currentToken;
-	while ((currentToken = [[lexer nextToken] retain]) && [currentToken getType] != ANTLRTokenTypeEOF) {
+	id<Token> currentToken;
+	while ((currentToken = [[lexer nextToken] retain]) && currentToken.type != TokenTypeEOF) {
 		NSLog(@"%@", currentToken);
 	}
 	[lexer release];

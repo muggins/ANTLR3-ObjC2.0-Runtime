@@ -85,12 +85,12 @@ const static NSInteger dfa4_transition8[] = {9, 9, 9, 9, 9, 9, 9, 9, 9,
  9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9};
 
 
-+ () newDFA4WithRecognizer:(ANTLRBaseRecognizer *)aRecognizer
++ () newDFA4WithRecognizer:(BaseRecognizer *)aRecognizer
 {
     return [[[DFA4 alloc] initWithRecognizer:aRecognizer] retain];
 }
 
-- (id) initWithRecognizer:(ANTLRBaseRecognizer *) theRecognizer
+- (id) initWithRecognizer:(BaseRecognizer *) theRecognizer
 {
     if ((self = [super initWithRecognizer:theRecognizer]) != nil) {
         decisionNumber = 4;
@@ -155,7 +155,7 @@ const static NSInteger dfa4_transition8[] = {9, 9, 9, 9, 9, 9, 9, 9, 9,
 
 + (void) initialize
 {
-    [ANTLRBaseRecognizer setGrammarFileName:@"/usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g"];
+    [BaseRecognizer setGrammarFileName:@"/usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g"];
 }
 
 + (NSString *) tokenNameForType:(NSInteger)aTokenType
@@ -163,14 +163,14 @@ const static NSInteger dfa4_transition8[] = {9, 9, 9, 9, 9, 9, 9, 9, 9,
     return [[self getTokenNames] objectAtIndex:aTokenType];
 }
 
-+ (SymbolTableLexer *)newSymbolTableLexer:(id<ANTLRCharStream>)anInput
++ (SymbolTableLexer *)newSymbolTableLexer:(id<CharStream>)anInput
 {
     return [[SymbolTableLexer alloc] initWithCharStream:anInput];
 }
 
-- (id) initWithCharStream:(id<ANTLRCharStream>)anInput
+- (id) initWithCharStream:(id<CharStream>)anInput
 {
-    if ((self = [super initWithCharStream:anInput State:[ANTLRRecognizerSharedState newANTLRRecognizerSharedStateWithRuleLen:12+1]]) != nil) {
+    if ((self = [super initWithCharStream:anInput State:[RecognizerSharedState newRecognizerSharedStateWithRuleLen:12+1]]) != nil) {
 
         dfa4 = [DFA4 newDFA4WithRecognizer:self];
     }
@@ -195,7 +195,7 @@ const static NSInteger dfa4_transition8[] = {9, 9, 9, 9, 9, 9, 9, 9, 9,
 
     @try {
         NSInteger _type = T__7;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:7:6: ( 'method' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:7:8: 'method' // alt
         {
@@ -225,7 +225,7 @@ const static NSInteger dfa4_transition8[] = {9, 9, 9, 9, 9, 9, 9, 9, 9,
 
     @try {
         NSInteger _type = T__8;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:8:6: ( '(' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:8:8: '(' // alt
         {
@@ -255,7 +255,7 @@ const static NSInteger dfa4_transition8[] = {9, 9, 9, 9, 9, 9, 9, 9, 9,
 
     @try {
         NSInteger _type = T__9;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:9:6: ( ')' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:9:8: ')' // alt
         {
@@ -285,7 +285,7 @@ const static NSInteger dfa4_transition8[] = {9, 9, 9, 9, 9, 9, 9, 9, 9,
 
     @try {
         NSInteger _type = T__10;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:10:7: ( '{' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:10:9: '{' // alt
         {
@@ -315,7 +315,7 @@ const static NSInteger dfa4_transition8[] = {9, 9, 9, 9, 9, 9, 9, 9, 9,
 
     @try {
         NSInteger _type = T__11;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:11:7: ( '}' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:11:9: '}' // alt
         {
@@ -345,7 +345,7 @@ const static NSInteger dfa4_transition8[] = {9, 9, 9, 9, 9, 9, 9, 9, 9,
 
     @try {
         NSInteger _type = T__12;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:12:7: ( '=' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:12:9: '=' // alt
         {
@@ -375,7 +375,7 @@ const static NSInteger dfa4_transition8[] = {9, 9, 9, 9, 9, 9, 9, 9, 9,
 
     @try {
         NSInteger _type = T__13;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:13:7: ( ';' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:13:9: ';' // alt
         {
@@ -405,7 +405,7 @@ const static NSInteger dfa4_transition8[] = {9, 9, 9, 9, 9, 9, 9, 9, 9,
 
     @try {
         NSInteger _type = T__14;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:14:7: ( 'int' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:14:9: 'int' // alt
         {
@@ -435,7 +435,7 @@ const static NSInteger dfa4_transition8[] = {9, 9, 9, 9, 9, 9, 9, 9, 9,
 
     @try {
         NSInteger _type = ID;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:66:5: ( ( 'a' .. 'z' )+ ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:66:9: ( 'a' .. 'z' )+ // alt
         {
@@ -461,7 +461,7 @@ const static NSInteger dfa4_transition8[] = {9, 9, 9, 9, 9, 9, 9, 9, 9,
                 default :
                     if ( cnt1 >= 1 )
                         goto loop1;
-                    ANTLREarlyExitException *eee = [ANTLREarlyExitException exceptionWithStream:input decisionNumber:1];
+                    EarlyExitException *eee = [EarlyExitException exceptionWithStream:input decisionNumber:1];
                     @throw eee;
             }
             cnt1++;
@@ -492,7 +492,7 @@ const static NSInteger dfa4_transition8[] = {9, 9, 9, 9, 9, 9, 9, 9, 9,
 
     @try {
         NSInteger _type = INT;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:69:5: ( ( '0' .. '9' )+ ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:69:9: ( '0' .. '9' )+ // alt
         {
@@ -518,7 +518,7 @@ const static NSInteger dfa4_transition8[] = {9, 9, 9, 9, 9, 9, 9, 9, 9,
                 default :
                     if ( cnt2 >= 1 )
                         goto loop2;
-                    ANTLREarlyExitException *eee = [ANTLREarlyExitException exceptionWithStream:input decisionNumber:2];
+                    EarlyExitException *eee = [EarlyExitException exceptionWithStream:input decisionNumber:2];
                     @throw eee;
             }
             cnt2++;
@@ -549,7 +549,7 @@ const static NSInteger dfa4_transition8[] = {9, 9, 9, 9, 9, 9, 9, 9, 9,
 
     @try {
         NSInteger _type = WS;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:72:5: ( ( ' ' | '\\n' | '\\r' )+ ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/scopes/SymbolTable.g:72:9: ( ' ' | '\\n' | '\\r' )+ // alt
         {
@@ -571,7 +571,7 @@ const static NSInteger dfa4_transition8[] = {9, 9, 9, 9, 9, 9, 9, 9, 9,
                         [input consume];
 
                     } else {
-                        ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException exceptionWithSet:nil stream:input];
+                        MismatchedSetException *mse = [MismatchedSetException exceptionWithSet:nil stream:input];
                         [self recover:mse];
                         @throw mse;}
                       /* element() */
@@ -582,7 +582,7 @@ const static NSInteger dfa4_transition8[] = {9, 9, 9, 9, 9, 9, 9, 9, 9,
                 default :
                     if ( cnt3 >= 1 )
                         goto loop3;
-                    ANTLREarlyExitException *eee = [ANTLREarlyExitException exceptionWithStream:input decisionNumber:3];
+                    EarlyExitException *eee = [EarlyExitException exceptionWithStream:input decisionNumber:3];
                     @throw eee;
             }
             cnt3++;

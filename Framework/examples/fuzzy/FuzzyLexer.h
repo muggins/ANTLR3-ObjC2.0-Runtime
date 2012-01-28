@@ -1,9 +1,9 @@
-// $ANTLR ${project.version} ${buildNumber} Fuzzy.g 2011-05-06 11:47:46
+// $ANTLR ${project.version} ${buildNumber} Fuzzy.g 2011-06-20 13:46:22
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
  */
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 #import <ANTLR/ANTLR.h>
 /* End of standard antlr3 runtime definitions
  * =============================================================================
@@ -11,8 +11,8 @@
 
 /* Start cyclicDFAInterface */
 
-#pragma mark Rule return scopes start
-#pragma mark Rule return scopes end
+#pragma mark Rule return scopes Interface start
+#pragma mark Rule return scopes Interface end
 #pragma mark Tokens
 #ifdef EOF
 #undef EOF

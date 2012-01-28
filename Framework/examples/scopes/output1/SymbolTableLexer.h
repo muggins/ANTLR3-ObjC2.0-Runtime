@@ -10,10 +10,10 @@
  */
 
 #pragma mark Cyclic DFA interface start DFA4
-@interface DFA4 : ANTLRDFA {
+@interface DFA4 : DFA {
 }
-+ newDFA4WithRecognizer:(ANTLRBaseRecognizer *)theRecognizer;
-- initWithRecognizer:(ANTLRBaseRecognizer *)recognizer;
++ newDFA4WithRecognizer:(BaseRecognizer *)theRecognizer;
+- initWithRecognizer:(BaseRecognizer *)recognizer;
 @end
 
 #pragma mark Cyclic DFA interface end DFA4
@@ -33,10 +33,10 @@
 #define T__9 9
 #define T__8 8
 #define T__7 7
-@interface SymbolTableLexer : ANTLRLexer { // line 283
+@interface SymbolTableLexer : Lexer { // line 283
     DFA4 *dfa4;
 }
-+ (SymbolTableLexer *)newSymbolTableLexer:(id<ANTLRCharStream>)anInput;
++ (SymbolTableLexer *)newSymbolTableLexer:(id<CharStream>)anInput;
 
 - (void) mT__7; 
 - (void) mT__8; 

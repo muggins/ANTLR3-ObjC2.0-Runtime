@@ -11,10 +11,10 @@
 
 /* Start cyclicDFAInterface */
 #pragma mark Cyclic DFA interface start DFA4
-@interface DFA4 : ANTLRDFA {
+@interface DFA4 : DFA {
 }
-+ newDFA4WithRecognizer:(ANTLRBaseRecognizer *)theRecognizer;
-- initWithRecognizer:(ANTLRBaseRecognizer *)recognizer;
++ newDFA4WithRecognizer:(BaseRecognizer *)theRecognizer;
+- initWithRecognizer:(BaseRecognizer *)recognizer;
 @end /* end of DFA4 interface  */
 
 #pragma mark Cyclic DFA interface end DFA4
@@ -46,12 +46,12 @@
 #define K_VOID 13
 #define VAR_DEF 4
 #define K_PLUS 18
-@interface SimpleCLexer : ANTLRLexer { // line 283
+@interface SimpleCLexer : Lexer { // line 283
 DFA4 *dfa4;
 // start of actions.lexer.memVars
 // start of action-actionScope-memVars
 }
-+ (SimpleCLexer *)newSimpleCLexer:(id<ANTLRCharStream>)anInput;
++ (SimpleCLexer *)newSimpleCLexer:(id<CharStream>)anInput;
 
 - (void)mT__21; 
 - (void)mT__22; 

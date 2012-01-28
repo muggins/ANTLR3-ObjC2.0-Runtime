@@ -17,11 +17,11 @@
 #define INT 4
 #define WS 5
 #define EOF -1
-@interface TreeRewriteLexer : ANTLRLexer { // line 283
+@interface TreeRewriteLexer : Lexer { // line 283
 // start of actions.lexer.memVars
 // start of action-actionScope-memVars
 }
-+ (TreeRewriteLexer *)newTreeRewriteLexer:(id<ANTLRCharStream>)anInput;
++ (TreeRewriteLexer *)newTreeRewriteLexer:(id<CharStream>)anInput;
 
 - (void)mINT; 
 - (void)mWS; 

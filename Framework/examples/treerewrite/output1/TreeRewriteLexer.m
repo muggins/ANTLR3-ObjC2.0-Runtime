@@ -61,7 +61,7 @@
 
 + (void) initialize
 {
-    [ANTLRBaseRecognizer setGrammarFileName:@"/usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/treerewrite/TreeRewrite.g"];
+    [BaseRecognizer setGrammarFileName:@"/usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/treerewrite/TreeRewrite.g"];
 }
 
 + (NSString *) tokenNameForType:(NSInteger)aTokenType
@@ -69,14 +69,14 @@
     return [[self getTokenNames] objectAtIndex:aTokenType];
 }
 
-+ (TreeRewriteLexer *)newTreeRewriteLexer:(id<ANTLRCharStream>)anInput
++ (TreeRewriteLexer *)newTreeRewriteLexer:(id<CharStream>)anInput
 {
     return [[TreeRewriteLexer alloc] initWithCharStream:anInput];
 }
 
-- (id) initWithCharStream:(id<ANTLRCharStream>)anInput
+- (id) initWithCharStream:(id<CharStream>)anInput
 {
-    if ((self = [super initWithCharStream:anInput State:[ANTLRRecognizerSharedState newANTLRRecognizerSharedStateWithRuleLen:3+1]]) != nil) {
+    if ((self = [super initWithCharStream:anInput State:[RecognizerSharedState newRecognizerSharedStateWithRuleLen:3+1]]) != nil) {
 
     }
     return self;
@@ -99,7 +99,7 @@
 
     @try {
         NSInteger _type = INT;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/treerewrite/TreeRewrite.g:15:5: ( ( '0' .. '9' )+ ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/treerewrite/TreeRewrite.g:15:7: ( '0' .. '9' )+ // alt
         {
@@ -125,7 +125,7 @@
                 default :
                     if ( cnt1 >= 1 )
                         goto loop1;
-                    ANTLREarlyExitException *eee = [ANTLREarlyExitException exceptionWithStream:input decisionNumber:1];
+                    EarlyExitException *eee = [EarlyExitException exceptionWithStream:input decisionNumber:1];
                     @throw eee;
             }
             cnt1++;
@@ -156,7 +156,7 @@
 
     @try {
         NSInteger _type = WS;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/treerewrite/TreeRewrite.g:18:5: ( ' ' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/treerewrite/TreeRewrite.g:18:9: ' ' // alt
         {
@@ -192,7 +192,7 @@
         alt2=2;
     }
     else {
-        ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newANTLRNoViableAltException:2 state:0 stream:input];
+        NoViableAltException *nvae = [NoViableAltException newNoViableAltException:2 state:0 stream:input];
         @throw nvae;
     }
     switch (alt2) {

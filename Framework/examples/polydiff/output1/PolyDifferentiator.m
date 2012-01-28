@@ -72,12 +72,12 @@ const static NSInteger dfa1_transition2[] = {2, 4, 5, -1, 1, 3};
 const static NSInteger dfa1_transition3[] = {7};
 
 
-+ (id) newDFA1WithRecognizer:(ANTLRBaseRecognizer *)aRecognizer
++ (id) newDFA1WithRecognizer:(BaseRecognizer *)aRecognizer
 {
     return [[[DFA1 alloc] initWithRecognizer:aRecognizer] retain];
 }
 
-- (id) initWithRecognizer:(ANTLRBaseRecognizer *) theRecognizer
+- (id) initWithRecognizer:(BaseRecognizer *) theRecognizer
 {
     if ((self = [super initWithRecognizer:theRecognizer]) != nil) {
         decisionNumber = 1;
@@ -180,12 +180,12 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
 }
 
 /* ASTTreeParser returnScope.methods */
-- (ANTLRCommonTree *)getTree
+- (CommonTree *)getTree
 {
     return tree;
 }
 
-- (void) setTree:(ANTLRCommonTree *)aTree
+- (void) setTree:(CommonTree *)aTree
 {
     if (tree != aTree) {
         if (tree != nil) [tree release];

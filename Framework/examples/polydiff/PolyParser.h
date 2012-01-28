@@ -37,57 +37,57 @@ typedef enum {
 #pragma mark Dynamic Rule Scopes
 #pragma mark Rule Return Scopes start
 /* returnScopeInterface PolyParser_poly_return */
-@interface PolyParser_poly_return :ANTLRParserRuleReturnScope { /* returnScopeInterface line 1838 */
+@interface PolyParser_poly_return :ParserRuleReturnScope { /* returnScopeInterface line 1838 */
 /* AST returnScopeInterface.memVars */
-ANTLRCommonTree *tree; /* ObjC start of memVars() */
+CommonTree *tree; /* ObjC start of memVars() */
 }
 /* start properties */
 /* AST returnScopeInterface.properties */
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+@property (retain, getter=getTree, setter=setTree:) CommonTree *tree;
 + (PolyParser_poly_return *)newPolyParser_poly_return;
 /* this is start of set and get methods */
 /* AST returnScopeInterface.methodsDecl */
-- (ANTLRCommonTree *)getTree;
+- (CommonTree *)getTree;
 
-- (void) setTree:(ANTLRCommonTree *)aTree;
+- (void) setTree:(CommonTree *)aTree;
   /* methodsDecl */
 @end /* end of returnScopeInterface interface */
 
 
 
 /* returnScopeInterface PolyParser_term_return */
-@interface PolyParser_term_return :ANTLRParserRuleReturnScope { /* returnScopeInterface line 1838 */
+@interface PolyParser_term_return :ParserRuleReturnScope { /* returnScopeInterface line 1838 */
 /* AST returnScopeInterface.memVars */
-ANTLRCommonTree *tree; /* ObjC start of memVars() */
+CommonTree *tree; /* ObjC start of memVars() */
 }
 /* start properties */
 /* AST returnScopeInterface.properties */
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+@property (retain, getter=getTree, setter=setTree:) CommonTree *tree;
 + (PolyParser_term_return *)newPolyParser_term_return;
 /* this is start of set and get methods */
 /* AST returnScopeInterface.methodsDecl */
-- (ANTLRCommonTree *)getTree;
+- (CommonTree *)getTree;
 
-- (void) setTree:(ANTLRCommonTree *)aTree;
+- (void) setTree:(CommonTree *)aTree;
   /* methodsDecl */
 @end /* end of returnScopeInterface interface */
 
 
 
 /* returnScopeInterface PolyParser_exp_return */
-@interface PolyParser_exp_return :ANTLRParserRuleReturnScope { /* returnScopeInterface line 1838 */
+@interface PolyParser_exp_return :ParserRuleReturnScope { /* returnScopeInterface line 1838 */
 /* AST returnScopeInterface.memVars */
-ANTLRCommonTree *tree; /* ObjC start of memVars() */
+CommonTree *tree; /* ObjC start of memVars() */
 }
 /* start properties */
 /* AST returnScopeInterface.properties */
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+@property (retain, getter=getTree, setter=setTree:) CommonTree *tree;
 + (PolyParser_exp_return *)newPolyParser_exp_return;
 /* this is start of set and get methods */
 /* AST returnScopeInterface.methodsDecl */
-- (ANTLRCommonTree *)getTree;
+- (CommonTree *)getTree;
 
-- (void) setTree:(ANTLRCommonTree *)aTree;
+- (void) setTree:(CommonTree *)aTree;
   /* methodsDecl */
 @end /* end of returnScopeInterface interface */
 
@@ -95,7 +95,7 @@ ANTLRCommonTree *tree; /* ObjC start of memVars() */
 
 
 /* Interface grammar class */
-@interface PolyParser : ANTLRParser { /* line 572 */
+@interface PolyParser : Parser { /* line 572 */
 /* ObjC start of ruleAttributeScopeMemVar */
 
 
@@ -112,7 +112,7 @@ NSInteger ruleLevel;
 NSArray *ruleNames;
   /* AST super.memVars */
 /* AST parserMemVars */
-id<ANTLRTreeAdaptor> treeAdaptor;   /* AST parserMemVars */
+id<TreeAdaptor> treeAdaptor;   /* AST parserMemVars */
 /* ObjC end of memVars */
 
  }
@@ -123,11 +123,11 @@ id<ANTLRTreeAdaptor> treeAdaptor;   /* AST parserMemVars */
 /* AST parserHeaderFile.properties */
   /* AST super.properties */
 /* AST parserProperties */
-@property (retain, getter=getTreeAdaptor, setter=setTreeAdaptor:) id<ANTLRTreeAdaptor> treeAdaptor;   /* AST parserproperties */
+@property (retain, getter=getTreeAdaptor, setter=setTreeAdaptor:) id<TreeAdaptor> treeAdaptor;   /* AST parserproperties */
 /* ObjC end of properties */
 
 + (void) initialize;
-+ (id) newPolyParser:(id<ANTLRTokenStream>)aStream;
++ (id) newPolyParser:(id<TokenStream>)aStream;
 /* ObjC start of actions.(actionScope).methodsDecl */
 /* ObjC end of actions.(actionScope).methodsDecl */
 
@@ -135,8 +135,8 @@ id<ANTLRTreeAdaptor> treeAdaptor;   /* AST parserMemVars */
 /* AST parserHeaderFile.methodsDecl */
   /* AST super.methodsDecl */
 /* AST parserMethodsDecl */
-- (id<ANTLRTreeAdaptor>) getTreeAdaptor;
-- (void) setTreeAdaptor:(id<ANTLRTreeAdaptor>)theTreeAdaptor;   /* AST parsermethodsDecl */
+- (id<TreeAdaptor>) getTreeAdaptor;
+- (void) setTreeAdaptor:(id<TreeAdaptor>)theTreeAdaptor;   /* AST parsermethodsDecl */
 /* ObjC end of methodsDecl */
 
 - (PolyParser_poly_return *)poly; 

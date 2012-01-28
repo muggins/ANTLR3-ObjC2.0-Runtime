@@ -17,6 +17,7 @@
 /* -----------------------------------------
  * Include the ANTLR3 generated header file.
  */
+#import <ANTLR/ANTLR.h>
 #import "PolyDifferentiator.h"
 /* ----------------------------------------- */
 
@@ -81,12 +82,12 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
 }
 
 /* AST returnScope.methods */
-- (ANTLRCommonTree *)getTree
+- (CommonTree *)getTree
 {
     return tree;
 }
 
-- (void) setTree:(ANTLRCommonTree *)aTree
+- (void) setTree:(CommonTree *)aTree
 {
     if (tree != aTree) {
         if (tree != nil) [tree release];
@@ -130,45 +131,45 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
 + (void) initialize
 {
     #pragma mark Bitsets
-    FOLLOW_8_in_poly44 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_8_in_poly44_data Count:(NSUInteger)1] retain];
-    FOLLOW_poly_in_poly46 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_poly_in_poly46_data Count:(NSUInteger)1] retain];
-    FOLLOW_poly_in_poly48 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_poly_in_poly48_data Count:(NSUInteger)1] retain];
-    FOLLOW_MULT_in_poly55 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_MULT_in_poly55_data Count:(NSUInteger)1] retain];
-    FOLLOW_INT_in_poly57 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_INT_in_poly57_data Count:(NSUInteger)1] retain];
-    FOLLOW_ID_in_poly59 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_poly59_data Count:(NSUInteger)1] retain];
-    FOLLOW_MULT_in_poly71 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_MULT_in_poly71_data Count:(NSUInteger)1] retain];
-    FOLLOW_INT_in_poly75 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_INT_in_poly75_data Count:(NSUInteger)1] retain];
-    FOLLOW_9_in_poly78 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_9_in_poly78_data Count:(NSUInteger)1] retain];
-    FOLLOW_ID_in_poly80 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_poly80_data Count:(NSUInteger)1] retain];
-    FOLLOW_INT_in_poly84 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_INT_in_poly84_data Count:(NSUInteger)1] retain];
-    FOLLOW_9_in_poly122 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_9_in_poly122_data Count:(NSUInteger)1] retain];
-    FOLLOW_ID_in_poly124 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_poly124_data Count:(NSUInteger)1] retain];
-    FOLLOW_INT_in_poly128 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_INT_in_poly128_data Count:(NSUInteger)1] retain];
-    FOLLOW_INT_in_poly164 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_INT_in_poly164_data Count:(NSUInteger)1] retain];
-    FOLLOW_ID_in_poly178 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_poly178_data Count:(NSUInteger)1] retain];
+    FOLLOW_8_in_poly44 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_8_in_poly44_data Count:(NSUInteger)1] retain];
+    FOLLOW_poly_in_poly46 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_poly_in_poly46_data Count:(NSUInteger)1] retain];
+    FOLLOW_poly_in_poly48 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_poly_in_poly48_data Count:(NSUInteger)1] retain];
+    FOLLOW_MULT_in_poly55 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_MULT_in_poly55_data Count:(NSUInteger)1] retain];
+    FOLLOW_INT_in_poly57 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_INT_in_poly57_data Count:(NSUInteger)1] retain];
+    FOLLOW_ID_in_poly59 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_poly59_data Count:(NSUInteger)1] retain];
+    FOLLOW_MULT_in_poly71 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_MULT_in_poly71_data Count:(NSUInteger)1] retain];
+    FOLLOW_INT_in_poly75 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_INT_in_poly75_data Count:(NSUInteger)1] retain];
+    FOLLOW_9_in_poly78 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_9_in_poly78_data Count:(NSUInteger)1] retain];
+    FOLLOW_ID_in_poly80 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_poly80_data Count:(NSUInteger)1] retain];
+    FOLLOW_INT_in_poly84 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_INT_in_poly84_data Count:(NSUInteger)1] retain];
+    FOLLOW_9_in_poly122 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_9_in_poly122_data Count:(NSUInteger)1] retain];
+    FOLLOW_ID_in_poly124 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_poly124_data Count:(NSUInteger)1] retain];
+    FOLLOW_INT_in_poly128 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_INT_in_poly128_data Count:(NSUInteger)1] retain];
+    FOLLOW_INT_in_poly164 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_INT_in_poly164_data Count:(NSUInteger)1] retain];
+    FOLLOW_ID_in_poly178 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_poly178_data Count:(NSUInteger)1] retain];
 
-    [ANTLRBaseRecognizer setTokenNames:[[AMutableArray arrayWithObjects:@"<invalid>", @"<EOR>", @"<DOWN>", @"<UP>", 
+    [BaseRecognizer setTokenNames:[[AMutableArray arrayWithObjects:@"<invalid>", @"<EOR>", @"<DOWN>", @"<UP>", 
  @"ID", @"INT", @"MULT", @"WS", @"'+'", @"'^'", nil] retain]];
-    [ANTLRBaseRecognizer setGrammarFileName:@"PolyDifferentiator.g"];
+    [BaseRecognizer setGrammarFileName:@"PolyDifferentiator.g"];
 }
 
-+ (PolyDifferentiator *)newPolyDifferentiator:(id<ANTLRTreeNodeStream>)aStream
++ (PolyDifferentiator *)newPolyDifferentiator:(id<TreeNodeStream>)aStream
 {
     return [[PolyDifferentiator alloc] initWithStream:aStream];
 
 
 }
 
-- (id) initWithStream:(id<ANTLRTreeNodeStream>)aStream
+- (id) initWithStream:(id<TreeNodeStream>)aStream
 {
-    self = [super initWithStream:aStream State:[[ANTLRRecognizerSharedState newANTLRRecognizerSharedStateWithRuleLen:1+1] retain]];
+    self = [super initWithStream:aStream State:[[RecognizerSharedState newRecognizerSharedStateWithRuleLen:1+1] retain]];
     if ( self != nil ) {
 
 
         /* start of actions-actionScope-init */
         /* start of init */
         /* AST genericParser.init */
-        [self setTreeAdaptor:[[ANTLRCommonTreeAdaptor newTreeAdaptor] retain]];
+        [self setTreeAdaptor:[[CommonTreeAdaptor newTreeAdaptor] retain]];
     }
     return self;
 }
@@ -188,12 +189,12 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
 /* ObjC start methods() */
 /* AST genericParser.methods */
 /* AST parserMethods */
-- (id<ANTLRTreeAdaptor>) getTreeAdaptor
+- (id<TreeAdaptor>) getTreeAdaptor
 {
 	return treeAdaptor;
 }
 
-- (void) setTreeAdaptor:(id<ANTLRTreeAdaptor>)aTreeAdaptor
+- (void) setTreeAdaptor:(id<TreeAdaptor>)aTreeAdaptor
 {
 	if (aTreeAdaptor != treeAdaptor) {
 		treeAdaptor = aTreeAdaptor;
@@ -216,55 +217,55 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
     [retval setStart:[input LT:1]];
 
 
-    ANTLRCommonTree *root_0 = nil;
+    CommonTree *root_0 = nil;
 
-    ANTLRCommonTree *_first_0 = nil;
-    ANTLRCommonTree *_last = nil;
+    CommonTree *_first_0 = nil;
+    CommonTree *_last = nil;
 
     @try {
         /* AST ruleLabelDefs */
-        ANTLRCommonTree *c = nil;
-        ANTLRCommonTree *e = nil;
-        ANTLRCommonTree *char_literal1 = nil;
-        ANTLRCommonTree *MULT4 = nil;
-        ANTLRCommonTree *INT5 = nil;
-        ANTLRCommonTree *ID6 = nil;
-        ANTLRCommonTree *MULT7 = nil;
-        ANTLRCommonTree *char_literal8 = nil;
-        ANTLRCommonTree *ID9 = nil;
-        ANTLRCommonTree *char_literal10 = nil;
-        ANTLRCommonTree *ID11 = nil;
-        ANTLRCommonTree *INT12 = nil;
-        ANTLRCommonTree *ID13 = nil;
+        CommonTree *c = nil;
+        CommonTree *e = nil;
+        CommonTree *char_literal1 = nil;
+        CommonTree *MULT4 = nil;
+        CommonTree *INT5 = nil;
+        CommonTree *ID6 = nil;
+        CommonTree *MULT7 = nil;
+        CommonTree *char_literal8 = nil;
+        CommonTree *ID9 = nil;
+        CommonTree *char_literal10 = nil;
+        CommonTree *ID11 = nil;
+        CommonTree *INT12 = nil;
+        CommonTree *ID13 = nil;
          PolyDifferentiator_poly_return * poly2 = nil ;
          
          PolyDifferentiator_poly_return * poly3 = nil ;
          
 
-        ANTLRCommonTree *c_tree=nil;
-        ANTLRCommonTree *e_tree=nil;
-        ANTLRCommonTree *char_literal1_tree=nil;
-        ANTLRCommonTree *MULT4_tree=nil;
-        ANTLRCommonTree *INT5_tree=nil;
-        ANTLRCommonTree *ID6_tree=nil;
-        ANTLRCommonTree *MULT7_tree=nil;
-        ANTLRCommonTree *char_literal8_tree=nil;
-        ANTLRCommonTree *ID9_tree=nil;
-        ANTLRCommonTree *char_literal10_tree=nil;
-        ANTLRCommonTree *ID11_tree=nil;
-        ANTLRCommonTree *INT12_tree=nil;
-        ANTLRCommonTree *ID13_tree=nil;
-        ANTLRRewriteRuleTokenStream *stream_INT =
-            [[ANTLRRewriteRuleNodeStream newANTLRRewriteRuleNodeStream:treeAdaptor
+        CommonTree *c_tree=nil;
+        CommonTree *e_tree=nil;
+        CommonTree *char_literal1_tree=nil;
+        CommonTree *MULT4_tree=nil;
+        CommonTree *INT5_tree=nil;
+        CommonTree *ID6_tree=nil;
+        CommonTree *MULT7_tree=nil;
+        CommonTree *char_literal8_tree=nil;
+        CommonTree *ID9_tree=nil;
+        CommonTree *char_literal10_tree=nil;
+        CommonTree *ID11_tree=nil;
+        CommonTree *INT12_tree=nil;
+        CommonTree *ID13_tree=nil;
+        RewriteRuleTokenStream *stream_INT =
+            [[RewriteRuleNodeStream newRewriteRuleNodeStream:treeAdaptor
                                                              description:@"token INT"] retain];
-        ANTLRRewriteRuleTokenStream *stream_MULT =
-            [[ANTLRRewriteRuleNodeStream newANTLRRewriteRuleNodeStream:treeAdaptor
+        RewriteRuleTokenStream *stream_MULT =
+            [[RewriteRuleNodeStream newRewriteRuleNodeStream:treeAdaptor
                                                              description:@"token MULT"] retain];
-        ANTLRRewriteRuleTokenStream *stream_ID =
-            [[ANTLRRewriteRuleNodeStream newANTLRRewriteRuleNodeStream:treeAdaptor
+        RewriteRuleTokenStream *stream_ID =
+            [[RewriteRuleNodeStream newRewriteRuleNodeStream:treeAdaptor
                                                              description:@"token ID"] retain];
-        ANTLRRewriteRuleTokenStream *stream_9 =
-            [[ANTLRRewriteRuleNodeStream newANTLRRewriteRuleNodeStream:treeAdaptor
+        RewriteRuleTokenStream *stream_9 =
+            [[RewriteRuleNodeStream newRewriteRuleNodeStream:treeAdaptor
                                                              description:@"token 9"] retain];
 
         // PolyDifferentiator.g:10:5: ( ^( '+' poly poly ) | ^( MULT INT ID ) -> INT | ^( MULT c= INT ^( '^' ID e= INT ) ) -> ^( MULT[@\"*\"] INT[c2] ^( '^' ID INT[e2] ) ) | ^( '^' ID e= INT ) -> ^( MULT[@\"*\"] INT[c2] ^( '^' ID INT[e2] ) ) | INT -> INT[@\"0\"] | ID -> INT[@\"1\"] ) //ruleblock
@@ -293,21 +294,21 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
                             alt1=3;
                         }
                         else {
-                            ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newException:1 state:7 stream:input];
+                            NoViableAltException *nvae = [NoViableAltException newException:1 state:7 stream:input];
                             nvae.c = LA1_7;
                             @throw nvae;
 
                         }
                     }
                     else {
-                        ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newException:1 state:6 stream:input];
+                        NoViableAltException *nvae = [NoViableAltException newException:1 state:6 stream:input];
                         nvae.c = LA1_6;
                         @throw nvae;
 
                     }
                 }
                 else {
-                    ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newException:1 state:2 stream:input];
+                    NoViableAltException *nvae = [NoViableAltException newException:1 state:2 stream:input];
                     nvae.c = LA1_2;
                     @throw nvae;
 
@@ -331,7 +332,7 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
                 break;
 
         default: ;
-            ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newException:1 state:0 stream:input];
+            NoViableAltException *nvae = [NoViableAltException newException:1 state:0 stream:input];
             nvae.c = charLA1;
             @throw nvae;
 
@@ -341,27 +342,27 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
             case 1 : ;
                 // PolyDifferentiator.g:10:7: ^( '+' poly poly ) // alt
                 {
-                root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
 
                 /* ASTTreeParser tree */
-                _last = (ANTLRCommonTree *)[input LT:1];
+                _last = (CommonTree *)[input LT:1];
                 {
-                ANTLRCommonTree *_save_last_1 = _last;
-                ANTLRCommonTree *_first_1 = nil;
-                ANTLRCommonTree *root_1 = [[[treeAdaptor class] newEmptyTree] retain];
+                CommonTree *_save_last_1 = _last;
+                CommonTree *_first_1 = nil;
+                CommonTree *root_1 = [[[treeAdaptor class] newEmptyTree] retain];
                 /* ASTTreeParser tokenRefRuleRoot */
-                _last = (ANTLRCommonTree *)[input LT:1];
-                char_literal1=(ANTLRCommonTree *)[self match:input TokenType:8 Follow:FOLLOW_8_in_poly44]; 
-                char_literal1_tree = (ANTLRCommonTree *)[treeAdaptor dupNode:char_literal1];
+                _last = (CommonTree *)[input LT:1];
+                char_literal1=(CommonTree *)[self match:input TokenType:8 Follow:FOLLOW_8_in_poly44]; 
+                char_literal1_tree = (CommonTree *)[treeAdaptor dupNode:char_literal1];
 
 
-                root_1 = (ANTLRCommonTree *)[treeAdaptor becomeRoot:char_literal1_tree old:root_1];
+                root_1 = (CommonTree *)[treeAdaptor becomeRoot:char_literal1_tree old:root_1];
 
 
-                [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; 
+                [self match:input TokenType:TokenTypeDOWN Follow:nil]; 
                 /* ASTTreeParser ruleRef */
-                _last = (ANTLRCommonTree *)[input LT:1];
+                _last = (CommonTree *)[input LT:1];
                 /* ruleRef */
                 [self pushFollow:FOLLOW_poly_in_poly46];
                 poly2 = [self poly];
@@ -373,7 +374,7 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
 
 
                 /* ASTTreeParser ruleRef */
-                _last = (ANTLRCommonTree *)[input LT:1];
+                _last = (CommonTree *)[input LT:1];
                 /* ruleRef */
                 [self pushFollow:FOLLOW_poly_in_poly48];
                 poly3 = [self poly];
@@ -384,7 +385,7 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
                     [treeAdaptor addChild:poly3.tree toTree:root_1];
 
 
-                [self match:input TokenType:ANTLRTokenTypeUP Follow:nil]; 
+                [self match:input TokenType:TokenTypeUP Follow:nil]; 
                 [treeAdaptor addChild:root_1 toTree:root_0];
                 _last = _save_last_1;
                 }
@@ -398,31 +399,31 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
                 // PolyDifferentiator.g:11:4: ^( MULT INT ID ) // alt
                 {
                 /* ASTTreeParser tree */
-                _last = (ANTLRCommonTree *)[input LT:1];
+                _last = (CommonTree *)[input LT:1];
                 {
-                ANTLRCommonTree *_save_last_1 = _last;
-                ANTLRCommonTree *_first_1 = nil;
-                ANTLRCommonTree *root_1 = [[[treeAdaptor class] newEmptyTree] retain];
+                CommonTree *_save_last_1 = _last;
+                CommonTree *_first_1 = nil;
+                CommonTree *root_1 = [[[treeAdaptor class] newEmptyTree] retain];
                 /* ASTTreeParser tokenRefBang */
-                _last = (ANTLRCommonTree *)[input LT:1];
-                MULT4=(ANTLRCommonTree *)[self match:input TokenType:MULT Follow:FOLLOW_MULT_in_poly55];  
+                _last = (CommonTree *)[input LT:1];
+                MULT4=(CommonTree *)[self match:input TokenType:MULT Follow:FOLLOW_MULT_in_poly55];  
                     [stream_MULT addElement:MULT4];
 
 
-                [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; 
+                [self match:input TokenType:TokenTypeDOWN Follow:nil]; 
                 /* ASTTreeParser tokenRefBang */
-                _last = (ANTLRCommonTree *)[input LT:1];
-                INT5=(ANTLRCommonTree *)[self match:input TokenType:INT Follow:FOLLOW_INT_in_poly57];  
+                _last = (CommonTree *)[input LT:1];
+                INT5=(CommonTree *)[self match:input TokenType:INT Follow:FOLLOW_INT_in_poly57];  
                     [stream_INT addElement:INT5];
 
 
                 /* ASTTreeParser tokenRefBang */
-                _last = (ANTLRCommonTree *)[input LT:1];
-                ID6=(ANTLRCommonTree *)[self match:input TokenType:ID Follow:FOLLOW_ID_in_poly59];  
+                _last = (CommonTree *)[input LT:1];
+                ID6=(CommonTree *)[self match:input TokenType:ID Follow:FOLLOW_ID_in_poly59];  
                     [stream_ID addElement:ID6];
 
 
-                [self match:input TokenType:ANTLRTokenTypeUP Follow:nil]; 
+                [self match:input TokenType:TokenTypeUP Follow:nil]; 
                 [treeAdaptor addChild:root_1 toTree:root_0];
                 _last = _save_last_1;
                 }
@@ -437,11 +438,11 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
                 // wildcard labels: 
                 retval.tree = root_0;
 
-                ANTLRRewriteRuleSubtreeStream *stream_retval =
-                    [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+                RewriteRuleSubtreeStream *stream_retval =
+                    [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                         description:@"token retval" element:retval!=nil?[retval getTree]:nil] retain];
 
-                root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
                 // 11:20: -> INT
                 {
@@ -462,56 +463,56 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
                 // PolyDifferentiator.g:12:4: ^( MULT c= INT ^( '^' ID e= INT ) ) // alt
                 {
                 /* ASTTreeParser tree */
-                _last = (ANTLRCommonTree *)[input LT:1];
+                _last = (CommonTree *)[input LT:1];
                 {
-                ANTLRCommonTree *_save_last_1 = _last;
-                ANTLRCommonTree *_first_1 = nil;
-                ANTLRCommonTree *root_1 = [[[treeAdaptor class] newEmptyTree] retain];
+                CommonTree *_save_last_1 = _last;
+                CommonTree *_first_1 = nil;
+                CommonTree *root_1 = [[[treeAdaptor class] newEmptyTree] retain];
                 /* ASTTreeParser tokenRefBang */
-                _last = (ANTLRCommonTree *)[input LT:1];
-                MULT7=(ANTLRCommonTree *)[self match:input TokenType:MULT Follow:FOLLOW_MULT_in_poly71];  
+                _last = (CommonTree *)[input LT:1];
+                MULT7=(CommonTree *)[self match:input TokenType:MULT Follow:FOLLOW_MULT_in_poly71];  
                     [stream_MULT addElement:MULT7];
 
 
-                [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; 
+                [self match:input TokenType:TokenTypeDOWN Follow:nil]; 
                 /* ASTTreeParser tokenRefBang */
-                _last = (ANTLRCommonTree *)[input LT:1];
-                c=(ANTLRCommonTree *)[self match:input TokenType:INT Follow:FOLLOW_INT_in_poly75];  
+                _last = (CommonTree *)[input LT:1];
+                c=(CommonTree *)[self match:input TokenType:INT Follow:FOLLOW_INT_in_poly75];  
                     [stream_INT addElement:c];
 
 
                 /* ASTTreeParser tree */
-                _last = (ANTLRCommonTree *)[input LT:1];
+                _last = (CommonTree *)[input LT:1];
                 {
-                ANTLRCommonTree *_save_last_2 = _last;
-                ANTLRCommonTree *_first_2 = nil;
-                ANTLRCommonTree *root_2 = [[[treeAdaptor class] newEmptyTree] retain];
+                CommonTree *_save_last_2 = _last;
+                CommonTree *_first_2 = nil;
+                CommonTree *root_2 = [[[treeAdaptor class] newEmptyTree] retain];
                 /* ASTTreeParser tokenRefBang */
-                _last = (ANTLRCommonTree *)[input LT:1];
-                char_literal8=(ANTLRCommonTree *)[self match:input TokenType:9 Follow:FOLLOW_9_in_poly78];  
+                _last = (CommonTree *)[input LT:1];
+                char_literal8=(CommonTree *)[self match:input TokenType:9 Follow:FOLLOW_9_in_poly78];  
                     [stream_9 addElement:char_literal8];
 
 
-                [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; 
+                [self match:input TokenType:TokenTypeDOWN Follow:nil]; 
                 /* ASTTreeParser tokenRefBang */
-                _last = (ANTLRCommonTree *)[input LT:1];
-                ID9=(ANTLRCommonTree *)[self match:input TokenType:ID Follow:FOLLOW_ID_in_poly80];  
+                _last = (CommonTree *)[input LT:1];
+                ID9=(CommonTree *)[self match:input TokenType:ID Follow:FOLLOW_ID_in_poly80];  
                     [stream_ID addElement:ID9];
 
 
                 /* ASTTreeParser tokenRefBang */
-                _last = (ANTLRCommonTree *)[input LT:1];
-                e=(ANTLRCommonTree *)[self match:input TokenType:INT Follow:FOLLOW_INT_in_poly84];  
+                _last = (CommonTree *)[input LT:1];
+                e=(CommonTree *)[self match:input TokenType:INT Follow:FOLLOW_INT_in_poly84];  
                     [stream_INT addElement:e];
 
 
-                [self match:input TokenType:ANTLRTokenTypeUP Follow:nil]; 
+                [self match:input TokenType:TokenTypeUP Follow:nil]; 
                 [treeAdaptor addChild:root_2 toTree:root_1];
                 _last = _save_last_2;
                 }
 
 
-                [self match:input TokenType:ANTLRTokenTypeUP Follow:nil]; 
+                [self match:input TokenType:TokenTypeUP Follow:nil]; 
                 [treeAdaptor addChild:root_1 toTree:root_0];
                 _last = _save_last_1;
                 }
@@ -532,18 +533,18 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
                 // wildcard labels: 
                 retval.tree = root_0;
 
-                ANTLRRewriteRuleSubtreeStream *stream_retval =
-                    [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+                RewriteRuleSubtreeStream *stream_retval =
+                    [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                         description:@"token retval" element:retval!=nil?[retval getTree]:nil] retain];
 
-                root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
                 // 17:8: -> ^( MULT[@\"*\"] INT[c2] ^( '^' ID INT[e2] ) )
                 {
                     // PolyDifferentiator.g:17:11: ^( MULT[@\"*\"] INT[c2] ^( '^' ID INT[e2] ) )
                     {
-                        ANTLRCommonTree *root_1 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
-                        root_1 = (ANTLRCommonTree *)[treeAdaptor becomeRoot:
+                        CommonTree *root_1 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                        root_1 = (CommonTree *)[treeAdaptor becomeRoot:
                                 [treeAdaptor createTree:MULT FromToken:@"*" Text:@"MULT"]
                          old:root_1];
 
@@ -553,8 +554,8 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
 
                         // PolyDifferentiator.g:17:32: ^( '^' ID INT[e2] )
                         {
-                            ANTLRCommonTree *root_2 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
-                            root_2 = (ANTLRCommonTree *)[treeAdaptor becomeRoot:/* ASTTreeParser createRewriteNodeFromElement */
+                            CommonTree *root_2 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                            root_2 = (CommonTree *)[treeAdaptor becomeRoot:/* ASTTreeParser createRewriteNodeFromElement */
                             [stream_9 nextNode]
                              old:root_2];
 
@@ -585,31 +586,31 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
                 // PolyDifferentiator.g:18:4: ^( '^' ID e= INT ) // alt
                 {
                 /* ASTTreeParser tree */
-                _last = (ANTLRCommonTree *)[input LT:1];
+                _last = (CommonTree *)[input LT:1];
                 {
-                ANTLRCommonTree *_save_last_1 = _last;
-                ANTLRCommonTree *_first_1 = nil;
-                ANTLRCommonTree *root_1 = [[[treeAdaptor class] newEmptyTree] retain];
+                CommonTree *_save_last_1 = _last;
+                CommonTree *_first_1 = nil;
+                CommonTree *root_1 = [[[treeAdaptor class] newEmptyTree] retain];
                 /* ASTTreeParser tokenRefBang */
-                _last = (ANTLRCommonTree *)[input LT:1];
-                char_literal10=(ANTLRCommonTree *)[self match:input TokenType:9 Follow:FOLLOW_9_in_poly122];  
+                _last = (CommonTree *)[input LT:1];
+                char_literal10=(CommonTree *)[self match:input TokenType:9 Follow:FOLLOW_9_in_poly122];  
                     [stream_9 addElement:char_literal10];
 
 
-                [self match:input TokenType:ANTLRTokenTypeDOWN Follow:nil]; 
+                [self match:input TokenType:TokenTypeDOWN Follow:nil]; 
                 /* ASTTreeParser tokenRefBang */
-                _last = (ANTLRCommonTree *)[input LT:1];
-                ID11=(ANTLRCommonTree *)[self match:input TokenType:ID Follow:FOLLOW_ID_in_poly124];  
+                _last = (CommonTree *)[input LT:1];
+                ID11=(CommonTree *)[self match:input TokenType:ID Follow:FOLLOW_ID_in_poly124];  
                     [stream_ID addElement:ID11];
 
 
                 /* ASTTreeParser tokenRefBang */
-                _last = (ANTLRCommonTree *)[input LT:1];
-                e=(ANTLRCommonTree *)[self match:input TokenType:INT Follow:FOLLOW_INT_in_poly128];  
+                _last = (CommonTree *)[input LT:1];
+                e=(CommonTree *)[self match:input TokenType:INT Follow:FOLLOW_INT_in_poly128];  
                     [stream_INT addElement:e];
 
 
-                [self match:input TokenType:ANTLRTokenTypeUP Follow:nil]; 
+                [self match:input TokenType:TokenTypeUP Follow:nil]; 
                 [treeAdaptor addChild:root_1 toTree:root_0];
                 _last = _save_last_1;
                 }
@@ -630,18 +631,18 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
                 // wildcard labels: 
                 retval.tree = root_0;
 
-                ANTLRRewriteRuleSubtreeStream *stream_retval =
-                    [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+                RewriteRuleSubtreeStream *stream_retval =
+                    [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                         description:@"token retval" element:retval!=nil?[retval getTree]:nil] retain];
 
-                root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
                 // 23:8: -> ^( MULT[@\"*\"] INT[c2] ^( '^' ID INT[e2] ) )
                 {
                     // PolyDifferentiator.g:23:11: ^( MULT[@\"*\"] INT[c2] ^( '^' ID INT[e2] ) )
                     {
-                        ANTLRCommonTree *root_1 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
-                        root_1 = (ANTLRCommonTree *)[treeAdaptor becomeRoot:
+                        CommonTree *root_1 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                        root_1 = (CommonTree *)[treeAdaptor becomeRoot:
                                 [treeAdaptor createTree:MULT FromToken:@"*" Text:@"MULT"]
                          old:root_1];
 
@@ -651,8 +652,8 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
 
                         // PolyDifferentiator.g:23:32: ^( '^' ID INT[e2] )
                         {
-                            ANTLRCommonTree *root_2 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
-                            root_2 = (ANTLRCommonTree *)[treeAdaptor becomeRoot:/* ASTTreeParser createRewriteNodeFromElement */
+                            CommonTree *root_2 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                            root_2 = (CommonTree *)[treeAdaptor becomeRoot:/* ASTTreeParser createRewriteNodeFromElement */
                             [stream_9 nextNode]
                              old:root_2];
 
@@ -683,8 +684,8 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
                 // PolyDifferentiator.g:24:4: INT // alt
                 {
                 /* ASTTreeParser tokenRefBang */
-                _last = (ANTLRCommonTree *)[input LT:1];
-                INT12=(ANTLRCommonTree *)[self match:input TokenType:INT Follow:FOLLOW_INT_in_poly164];  
+                _last = (CommonTree *)[input LT:1];
+                INT12=(CommonTree *)[self match:input TokenType:INT Follow:FOLLOW_INT_in_poly164];  
                     [stream_INT addElement:INT12];
 
 
@@ -697,11 +698,11 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
                 // wildcard labels: 
                 retval.tree = root_0;
 
-                ANTLRRewriteRuleSubtreeStream *stream_retval =
-                    [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+                RewriteRuleSubtreeStream *stream_retval =
+                    [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                         description:@"token retval" element:retval!=nil?[retval getTree]:nil] retain];
 
-                root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
                 // 24:12: -> INT[@\"0\"]
                 {
@@ -721,8 +722,8 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
                 // PolyDifferentiator.g:25:4: ID // alt
                 {
                 /* ASTTreeParser tokenRefBang */
-                _last = (ANTLRCommonTree *)[input LT:1];
-                ID13=(ANTLRCommonTree *)[self match:input TokenType:ID Follow:FOLLOW_ID_in_poly178];  
+                _last = (CommonTree *)[input LT:1];
+                ID13=(CommonTree *)[self match:input TokenType:ID Follow:FOLLOW_ID_in_poly178];  
                     [stream_ID addElement:ID13];
 
 
@@ -735,11 +736,11 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
                 // wildcard labels: 
                 retval.tree = root_0;
 
-                ANTLRRewriteRuleSubtreeStream *stream_retval =
-                    [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+                RewriteRuleSubtreeStream *stream_retval =
+                    [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                         description:@"token retval" element:retval!=nil?[retval getTree]:nil] retain];
 
-                root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
                 // 25:11: -> INT[@\"1\"]
                 {
@@ -766,10 +767,10 @@ static const unsigned long long FOLLOW_ID_in_poly178_data[] = { 0x00000000000000
         [stream_ID release];
         [stream_9 release];
 
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor rulePostProcessing:root_0];
+        retval.tree = (CommonTree *)[treeAdaptor rulePostProcessing:root_0];
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }

@@ -2,12 +2,12 @@ tree grammar SimpleCWalker;
 options {
     tokenVocab = SimpleC;
 	language = ObjC;
-	ASTLabelType = ANTLRCommonTree;
+	ASTLabelType = CommonTree;
 }
 
 scope Symbols
 {
-ANTLRCommonTree *tree;
+CommonTree *tree;
 }
 
 program

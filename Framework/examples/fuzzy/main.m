@@ -10,11 +10,11 @@ int main(int argc, const char * argv[])
 	NSLog(@"%@", input);
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:input];
 	Fuzzy *lex = [Fuzzy newFuzzyWithCharStream:stream];
-	ANTLRCommonTokenStream *tokens = [ANTLRCommonTokenStream newANTLRCommonTokenStreamWithTokenSource:lex];
+	CommonTokenStream *tokens = [CommonTokenStream newCommonTokenStreamWithTokenSource:lex];
 	NSLog( [tokens toString] );
 
-	id<ANTLRToken> currentToken;
-	while ((currentToken = [lex nextToken]) && [currentToken getType] != ANTLRTokenTypeEOF) {
+	id<Token> currentToken;
+	while ((currentToken = [lex nextToken]) && currentToken.type != TokenTypeEOF) {
 		NSLog(@"### %@", [currentToken toString]);
 	}
 

@@ -15,9 +15,11 @@
 #pragma mark Tokens
 #define DIGIT 5
 #define ID 6
+#ifndef EOF
 #define EOF -1
+#endif
 #define LETTER 4
-@interface TestLexer : ANTLRLexer {
+@interface TestLexer : Lexer {
 }
 - (void) mID; 
 - (void) mDIGIT; 

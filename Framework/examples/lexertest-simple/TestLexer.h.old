@@ -14,7 +14,7 @@
 #define TestLexer_DIGIT	5
 #define TestLexer_ID	6
 
-@interface TestLexer : ANTLRLexer {
+@interface TestLexer : Lexer {
     NSInteger _tokenType;
 }
 

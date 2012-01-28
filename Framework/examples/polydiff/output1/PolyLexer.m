@@ -57,7 +57,7 @@
 
 + (void) initialize
 {
-    [ANTLRBaseRecognizer setGrammarFileName:@"/Users/acondit/source/antlr3/acondit_localhost/code/antlr/main/runtime/ObjC/Framework/examples/polydiff/Poly.g"];
+    [BaseRecognizer setGrammarFileName:@"/Users/acondit/source/antlr3/acondit_localhost/code/antlr/main/runtime/ObjC/Framework/examples/polydiff/Poly.g"];
 }
 
 + (NSString *) tokenNameForType:(NSInteger)aTokenType
@@ -65,14 +65,14 @@
     return [[self getTokenNames] objectAtIndex:aTokenType];
 }
 
-+ (PolyLexer *)newPolyLexerWithCharStream:(id<ANTLRCharStream>)anInput
++ (PolyLexer *)newPolyLexerWithCharStream:(id<CharStream>)anInput
 {
     return [[PolyLexer alloc] initWithCharStream:anInput];
 }
 
-- (id) initWithCharStream:(id<ANTLRCharStream>)anInput
+- (id) initWithCharStream:(id<CharStream>)anInput
 {
-    if ((self = [super initWithCharStream:anInput State:[ANTLRRecognizerSharedState newANTLRRecognizerSharedStateWithRuleLen:6+1]]) != nil) {
+    if ((self = [super initWithCharStream:anInput State:[RecognizerSharedState newRecognizerSharedStateWithRuleLen:6+1]]) != nil) {
 
     }
     return self;
@@ -97,7 +97,7 @@
 
     @try {
         NSInteger _type = T__8;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/main/runtime/ObjC/Framework/examples/polydiff/Poly.g:7:6: ( '+' ) // ruleBlockSingleAlt
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/main/runtime/ObjC/Framework/examples/polydiff/Poly.g:7:8: '+' // alt
         {
@@ -127,7 +127,7 @@
 
     @try {
         NSInteger _type = T__9;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/main/runtime/ObjC/Framework/examples/polydiff/Poly.g:8:6: ( '^' ) // ruleBlockSingleAlt
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/main/runtime/ObjC/Framework/examples/polydiff/Poly.g:8:8: '^' // alt
         {
@@ -159,7 +159,7 @@
 
     @try {
         NSInteger _type = ID;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/main/runtime/ObjC/Framework/examples/polydiff/Poly.g:22:5: ( ( 'a' .. 'z' )+ ) // ruleBlockSingleAlt
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/main/runtime/ObjC/Framework/examples/polydiff/Poly.g:22:7: ( 'a' .. 'z' )+ // alt
         {
@@ -185,8 +185,8 @@
                 default :
                     if ( cnt1 >= 1 )
                         goto loop1;
-                    ANTLREarlyExitException *eee = 
-                        [ANTLREarlyExitException exceptionWithStream:input decisionNumber:1];
+                    EarlyExitException *eee = 
+                        [EarlyExitException exceptionWithStream:input decisionNumber:1];
                     @throw eee;
             }
             cnt1++;
@@ -219,7 +219,7 @@
 
     @try {
         NSInteger _type = INT;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/main/runtime/ObjC/Framework/examples/polydiff/Poly.g:25:5: ( ( '0' .. '9' )+ ) // ruleBlockSingleAlt
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/main/runtime/ObjC/Framework/examples/polydiff/Poly.g:25:7: ( '0' .. '9' )+ // alt
         {
@@ -245,8 +245,8 @@
                 default :
                     if ( cnt2 >= 1 )
                         goto loop2;
-                    ANTLREarlyExitException *eee = 
-                        [ANTLREarlyExitException exceptionWithStream:input decisionNumber:2];
+                    EarlyExitException *eee = 
+                        [EarlyExitException exceptionWithStream:input decisionNumber:2];
                     @throw eee;
             }
             cnt2++;
@@ -277,7 +277,7 @@
 
     @try {
         NSInteger _type = WS;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/main/runtime/ObjC/Framework/examples/polydiff/Poly.g:27:4: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ ) // ruleBlockSingleAlt
         // /Users/acondit/source/antlr3/acondit_localhost/code/antlr/main/runtime/ObjC/Framework/examples/polydiff/Poly.g:27:6: ( ' ' | '\\t' | '\\r' | '\\n' )+ // alt
         {
@@ -299,7 +299,7 @@
                         [input consume];
 
                     } else {
-                        ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException exceptionWithSet:nil stream:input];
+                        MismatchedSetException *mse = [MismatchedSetException exceptionWithSet:nil stream:input];
                         [self recover:mse];
                         @throw mse;}
 
@@ -310,8 +310,8 @@
                 default :
                     if ( cnt3 >= 1 )
                         goto loop3;
-                    ANTLREarlyExitException *eee = 
-                        [ANTLREarlyExitException exceptionWithStream:input decisionNumber:3];
+                    EarlyExitException *eee = 
+                        [EarlyExitException exceptionWithStream:input decisionNumber:3];
                     @throw eee;
             }
             cnt3++;
@@ -404,7 +404,7 @@
             break;
 
     default: ;
-        ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newANTLRNoViableAltException:4 state:0 stream:input];
+        NoViableAltException *nvae = [NoViableAltException newNoViableAltException:4 state:0 stream:input];
         @throw nvae;
     }
 

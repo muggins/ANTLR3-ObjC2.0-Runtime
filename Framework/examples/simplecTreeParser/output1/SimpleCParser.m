@@ -80,12 +80,12 @@ const static NSInteger dfa2_transition7[] = {12};
 const static NSInteger dfa2_transition8[] = {2};
 
 
-+ () newDFA2WithRecognizer:(ANTLRBaseRecognizer *)aRecognizer
++ () newDFA2WithRecognizer:(BaseRecognizer *)aRecognizer
 {
     return [[[DFA2 alloc] initWithRecognizer:aRecognizer] retain];
 }
 
-- (id) initWithRecognizer:(ANTLRBaseRecognizer *) theRecognizer
+- (id) initWithRecognizer:(BaseRecognizer *) theRecognizer
 {
     if ((self = [super initWithRecognizer:theRecognizer]) != nil) {
         decisionNumber = 2;
@@ -262,12 +262,12 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 }
 
 /* AST returnScope.methods */
-- (ANTLRCommonTree *)getTree
+- (CommonTree *)getTree
 {
     return tree;
 }
 
-- (void) setTree:(ANTLRCommonTree *)aTree
+- (void) setTree:(CommonTree *)aTree
 {
     if (tree != aTree) {
         if (tree != nil) [tree release];
@@ -294,12 +294,12 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 }
 
 /* AST returnScope.methods */
-- (ANTLRCommonTree *)getTree
+- (CommonTree *)getTree
 {
     return tree;
 }
 
-- (void) setTree:(ANTLRCommonTree *)aTree
+- (void) setTree:(CommonTree *)aTree
 {
     if (tree != aTree) {
         if (tree != nil) [tree release];
@@ -326,12 +326,12 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 }
 
 /* AST returnScope.methods */
-- (ANTLRCommonTree *)getTree
+- (CommonTree *)getTree
 {
     return tree;
 }
 
-- (void) setTree:(ANTLRCommonTree *)aTree
+- (void) setTree:(CommonTree *)aTree
 {
     if (tree != aTree) {
         if (tree != nil) [tree release];
@@ -358,12 +358,12 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 }
 
 /* AST returnScope.methods */
-- (ANTLRCommonTree *)getTree
+- (CommonTree *)getTree
 {
     return tree;
 }
 
-- (void) setTree:(ANTLRCommonTree *)aTree
+- (void) setTree:(CommonTree *)aTree
 {
     if (tree != aTree) {
         if (tree != nil) [tree release];
@@ -390,12 +390,12 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 }
 
 /* AST returnScope.methods */
-- (ANTLRCommonTree *)getTree
+- (CommonTree *)getTree
 {
     return tree;
 }
 
-- (void) setTree:(ANTLRCommonTree *)aTree
+- (void) setTree:(CommonTree *)aTree
 {
     if (tree != aTree) {
         if (tree != nil) [tree release];
@@ -422,12 +422,12 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 }
 
 /* AST returnScope.methods */
-- (ANTLRCommonTree *)getTree
+- (CommonTree *)getTree
 {
     return tree;
 }
 
-- (void) setTree:(ANTLRCommonTree *)aTree
+- (void) setTree:(CommonTree *)aTree
 {
     if (tree != aTree) {
         if (tree != nil) [tree release];
@@ -454,12 +454,12 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 }
 
 /* AST returnScope.methods */
-- (ANTLRCommonTree *)getTree
+- (CommonTree *)getTree
 {
     return tree;
 }
 
-- (void) setTree:(ANTLRCommonTree *)aTree
+- (void) setTree:(CommonTree *)aTree
 {
     if (tree != aTree) {
         if (tree != nil) [tree release];
@@ -486,12 +486,12 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 }
 
 /* AST returnScope.methods */
-- (ANTLRCommonTree *)getTree
+- (CommonTree *)getTree
 {
     return tree;
 }
 
-- (void) setTree:(ANTLRCommonTree *)aTree
+- (void) setTree:(CommonTree *)aTree
 {
     if (tree != aTree) {
         if (tree != nil) [tree release];
@@ -518,12 +518,12 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 }
 
 /* AST returnScope.methods */
-- (ANTLRCommonTree *)getTree
+- (CommonTree *)getTree
 {
     return tree;
 }
 
-- (void) setTree:(ANTLRCommonTree *)aTree
+- (void) setTree:(CommonTree *)aTree
 {
     if (tree != aTree) {
         if (tree != nil) [tree release];
@@ -550,12 +550,12 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 }
 
 /* AST returnScope.methods */
-- (ANTLRCommonTree *)getTree
+- (CommonTree *)getTree
 {
     return tree;
 }
 
-- (void) setTree:(ANTLRCommonTree *)aTree
+- (void) setTree:(CommonTree *)aTree
 {
     if (tree != aTree) {
         if (tree != nil) [tree release];
@@ -582,12 +582,12 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 }
 
 /* AST returnScope.methods */
-- (ANTLRCommonTree *)getTree
+- (CommonTree *)getTree
 {
     return tree;
 }
 
-- (void) setTree:(ANTLRCommonTree *)aTree
+- (void) setTree:(CommonTree *)aTree
 {
     if (tree != aTree) {
         if (tree != nil) [tree release];
@@ -614,12 +614,12 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 }
 
 /* AST returnScope.methods */
-- (ANTLRCommonTree *)getTree
+- (CommonTree *)getTree
 {
     return tree;
 }
 
-- (void) setTree:(ANTLRCommonTree *)aTree
+- (void) setTree:(CommonTree *)aTree
 {
     if (tree != aTree) {
         if (tree != nil) [tree release];
@@ -646,12 +646,12 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 }
 
 /* AST returnScope.methods */
-- (ANTLRCommonTree *)getTree
+- (CommonTree *)getTree
 {
     return tree;
 }
 
-- (void) setTree:(ANTLRCommonTree *)aTree
+- (void) setTree:(CommonTree *)aTree
 {
     if (tree != aTree) {
         if (tree != nil) [tree release];
@@ -678,12 +678,12 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 }
 
 /* AST returnScope.methods */
-- (ANTLRCommonTree *)getTree
+- (CommonTree *)getTree
 {
     return tree;
 }
 
-- (void) setTree:(ANTLRCommonTree *)aTree
+- (void) setTree:(CommonTree *)aTree
 {
     if (tree != aTree) {
         if (tree != nil) [tree release];
@@ -710,12 +710,12 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 }
 
 /* AST returnScope.methods */
-- (ANTLRCommonTree *)getTree
+- (CommonTree *)getTree
 {
     return tree;
 }
 
-- (void) setTree:(ANTLRCommonTree *)aTree
+- (void) setTree:(CommonTree *)aTree
 {
     if (tree != aTree) {
         if (tree != nil) [tree release];
@@ -742,79 +742,79 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 + (void) initialize
 {
     #pragma mark Bitsets
-    FOLLOW_declaration_in_program85 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_declaration_in_program85_data Count:(NSUInteger)1] retain];
-    FOLLOW_variable_in_declaration105 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_variable_in_declaration105_data Count:(NSUInteger)1] retain];
-    FOLLOW_functionHeader_in_declaration115 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_functionHeader_in_declaration115_data Count:(NSUInteger)1] retain];
-    FOLLOW_21_in_declaration117 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_21_in_declaration117_data Count:(NSUInteger)1] retain];
-    FOLLOW_functionHeader_in_declaration135 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_functionHeader_in_declaration135_data Count:(NSUInteger)1] retain];
-    FOLLOW_block_in_declaration137 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_block_in_declaration137_data Count:(NSUInteger)1] retain];
-    FOLLOW_type_in_variable166 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_type_in_variable166_data Count:(NSUInteger)1] retain];
-    FOLLOW_declarator_in_variable168 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_declarator_in_variable168_data Count:(NSUInteger)1] retain];
-    FOLLOW_21_in_variable170 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_21_in_variable170_data Count:(NSUInteger)1] retain];
-    FOLLOW_K_ID_in_declarator199 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_K_ID_in_declarator199_data Count:(NSUInteger)1] retain];
-    FOLLOW_type_in_functionHeader219 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_type_in_functionHeader219_data Count:(NSUInteger)1] retain];
-    FOLLOW_K_ID_in_functionHeader221 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_K_ID_in_functionHeader221_data Count:(NSUInteger)1] retain];
-    FOLLOW_22_in_functionHeader223 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_22_in_functionHeader223_data Count:(NSUInteger)1] retain];
-    FOLLOW_formalParameter_in_functionHeader227 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_formalParameter_in_functionHeader227_data Count:(NSUInteger)1] retain];
-    FOLLOW_23_in_functionHeader231 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_23_in_functionHeader231_data Count:(NSUInteger)1] retain];
-    FOLLOW_formalParameter_in_functionHeader233 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_formalParameter_in_functionHeader233_data Count:(NSUInteger)1] retain];
-    FOLLOW_24_in_functionHeader241 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_24_in_functionHeader241_data Count:(NSUInteger)1] retain];
-    FOLLOW_type_in_formalParameter281 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_type_in_formalParameter281_data Count:(NSUInteger)1] retain];
-    FOLLOW_declarator_in_formalParameter283 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_declarator_in_formalParameter283_data Count:(NSUInteger)1] retain];
-    FOLLOW_set_in_type0 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_set_in_type0_data Count:(NSUInteger)1] retain];
-    FOLLOW_25_in_block376 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_25_in_block376_data Count:(NSUInteger)1] retain];
-    FOLLOW_variable_in_block390 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_variable_in_block390_data Count:(NSUInteger)1] retain];
-    FOLLOW_stat_in_block405 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_stat_in_block405_data Count:(NSUInteger)1] retain];
-    FOLLOW_26_in_block416 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_26_in_block416_data Count:(NSUInteger)1] retain];
-    FOLLOW_forStat_in_stat449 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_forStat_in_stat449_data Count:(NSUInteger)1] retain];
-    FOLLOW_expr_in_stat457 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_stat457_data Count:(NSUInteger)1] retain];
-    FOLLOW_21_in_stat459 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_21_in_stat459_data Count:(NSUInteger)1] retain];
-    FOLLOW_block_in_stat468 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_block_in_stat468_data Count:(NSUInteger)1] retain];
-    FOLLOW_assignStat_in_stat476 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_assignStat_in_stat476_data Count:(NSUInteger)1] retain];
-    FOLLOW_21_in_stat478 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_21_in_stat478_data Count:(NSUInteger)1] retain];
-    FOLLOW_21_in_stat487 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_21_in_stat487_data Count:(NSUInteger)1] retain];
-    FOLLOW_K_FOR_in_forStat507 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_K_FOR_in_forStat507_data Count:(NSUInteger)1] retain];
-    FOLLOW_22_in_forStat509 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_22_in_forStat509_data Count:(NSUInteger)1] retain];
-    FOLLOW_assignStat_in_forStat513 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_assignStat_in_forStat513_data Count:(NSUInteger)1] retain];
-    FOLLOW_21_in_forStat515 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_21_in_forStat515_data Count:(NSUInteger)1] retain];
-    FOLLOW_expr_in_forStat517 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_forStat517_data Count:(NSUInteger)1] retain];
-    FOLLOW_21_in_forStat519 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_21_in_forStat519_data Count:(NSUInteger)1] retain];
-    FOLLOW_assignStat_in_forStat523 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_assignStat_in_forStat523_data Count:(NSUInteger)1] retain];
-    FOLLOW_24_in_forStat525 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_24_in_forStat525_data Count:(NSUInteger)1] retain];
-    FOLLOW_block_in_forStat527 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_block_in_forStat527_data Count:(NSUInteger)1] retain];
-    FOLLOW_K_ID_in_assignStat570 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_K_ID_in_assignStat570_data Count:(NSUInteger)1] retain];
-    FOLLOW_K_EQ_in_assignStat572 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_K_EQ_in_assignStat572_data Count:(NSUInteger)1] retain];
-    FOLLOW_expr_in_assignStat574 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_assignStat574_data Count:(NSUInteger)1] retain];
-    FOLLOW_condExpr_in_expr598 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_condExpr_in_expr598_data Count:(NSUInteger)1] retain];
-    FOLLOW_aexpr_in_condExpr617 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_aexpr_in_condExpr617_data Count:(NSUInteger)1] retain];
-    FOLLOW_K_EQEQ_in_condExpr622 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_K_EQEQ_in_condExpr622_data Count:(NSUInteger)1] retain];
-    FOLLOW_K_LT_in_condExpr627 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_K_LT_in_condExpr627_data Count:(NSUInteger)1] retain];
-    FOLLOW_aexpr_in_condExpr631 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_aexpr_in_condExpr631_data Count:(NSUInteger)1] retain];
-    FOLLOW_atom_in_aexpr653 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_atom_in_aexpr653_data Count:(NSUInteger)1] retain];
-    FOLLOW_K_PLUS_in_aexpr657 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_K_PLUS_in_aexpr657_data Count:(NSUInteger)1] retain];
-    FOLLOW_atom_in_aexpr660 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_atom_in_aexpr660_data Count:(NSUInteger)1] retain];
-    FOLLOW_K_ID_in_atom680 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_K_ID_in_atom680_data Count:(NSUInteger)1] retain];
-    FOLLOW_K_INT_in_atom694 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_K_INT_in_atom694_data Count:(NSUInteger)1] retain];
-    FOLLOW_22_in_atom708 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_22_in_atom708_data Count:(NSUInteger)1] retain];
-    FOLLOW_expr_in_atom710 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_atom710_data Count:(NSUInteger)1] retain];
-    FOLLOW_24_in_atom712 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_24_in_atom712_data Count:(NSUInteger)1] retain];
+    FOLLOW_declaration_in_program85 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_declaration_in_program85_data Count:(NSUInteger)1] retain];
+    FOLLOW_variable_in_declaration105 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_variable_in_declaration105_data Count:(NSUInteger)1] retain];
+    FOLLOW_functionHeader_in_declaration115 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_functionHeader_in_declaration115_data Count:(NSUInteger)1] retain];
+    FOLLOW_21_in_declaration117 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_21_in_declaration117_data Count:(NSUInteger)1] retain];
+    FOLLOW_functionHeader_in_declaration135 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_functionHeader_in_declaration135_data Count:(NSUInteger)1] retain];
+    FOLLOW_block_in_declaration137 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_block_in_declaration137_data Count:(NSUInteger)1] retain];
+    FOLLOW_type_in_variable166 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_type_in_variable166_data Count:(NSUInteger)1] retain];
+    FOLLOW_declarator_in_variable168 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_declarator_in_variable168_data Count:(NSUInteger)1] retain];
+    FOLLOW_21_in_variable170 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_21_in_variable170_data Count:(NSUInteger)1] retain];
+    FOLLOW_K_ID_in_declarator199 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_K_ID_in_declarator199_data Count:(NSUInteger)1] retain];
+    FOLLOW_type_in_functionHeader219 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_type_in_functionHeader219_data Count:(NSUInteger)1] retain];
+    FOLLOW_K_ID_in_functionHeader221 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_K_ID_in_functionHeader221_data Count:(NSUInteger)1] retain];
+    FOLLOW_22_in_functionHeader223 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_22_in_functionHeader223_data Count:(NSUInteger)1] retain];
+    FOLLOW_formalParameter_in_functionHeader227 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_formalParameter_in_functionHeader227_data Count:(NSUInteger)1] retain];
+    FOLLOW_23_in_functionHeader231 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_23_in_functionHeader231_data Count:(NSUInteger)1] retain];
+    FOLLOW_formalParameter_in_functionHeader233 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_formalParameter_in_functionHeader233_data Count:(NSUInteger)1] retain];
+    FOLLOW_24_in_functionHeader241 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_24_in_functionHeader241_data Count:(NSUInteger)1] retain];
+    FOLLOW_type_in_formalParameter281 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_type_in_formalParameter281_data Count:(NSUInteger)1] retain];
+    FOLLOW_declarator_in_formalParameter283 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_declarator_in_formalParameter283_data Count:(NSUInteger)1] retain];
+    FOLLOW_set_in_type0 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_set_in_type0_data Count:(NSUInteger)1] retain];
+    FOLLOW_25_in_block376 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_25_in_block376_data Count:(NSUInteger)1] retain];
+    FOLLOW_variable_in_block390 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_variable_in_block390_data Count:(NSUInteger)1] retain];
+    FOLLOW_stat_in_block405 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_stat_in_block405_data Count:(NSUInteger)1] retain];
+    FOLLOW_26_in_block416 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_26_in_block416_data Count:(NSUInteger)1] retain];
+    FOLLOW_forStat_in_stat449 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_forStat_in_stat449_data Count:(NSUInteger)1] retain];
+    FOLLOW_expr_in_stat457 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_stat457_data Count:(NSUInteger)1] retain];
+    FOLLOW_21_in_stat459 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_21_in_stat459_data Count:(NSUInteger)1] retain];
+    FOLLOW_block_in_stat468 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_block_in_stat468_data Count:(NSUInteger)1] retain];
+    FOLLOW_assignStat_in_stat476 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_assignStat_in_stat476_data Count:(NSUInteger)1] retain];
+    FOLLOW_21_in_stat478 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_21_in_stat478_data Count:(NSUInteger)1] retain];
+    FOLLOW_21_in_stat487 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_21_in_stat487_data Count:(NSUInteger)1] retain];
+    FOLLOW_K_FOR_in_forStat507 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_K_FOR_in_forStat507_data Count:(NSUInteger)1] retain];
+    FOLLOW_22_in_forStat509 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_22_in_forStat509_data Count:(NSUInteger)1] retain];
+    FOLLOW_assignStat_in_forStat513 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_assignStat_in_forStat513_data Count:(NSUInteger)1] retain];
+    FOLLOW_21_in_forStat515 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_21_in_forStat515_data Count:(NSUInteger)1] retain];
+    FOLLOW_expr_in_forStat517 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_forStat517_data Count:(NSUInteger)1] retain];
+    FOLLOW_21_in_forStat519 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_21_in_forStat519_data Count:(NSUInteger)1] retain];
+    FOLLOW_assignStat_in_forStat523 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_assignStat_in_forStat523_data Count:(NSUInteger)1] retain];
+    FOLLOW_24_in_forStat525 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_24_in_forStat525_data Count:(NSUInteger)1] retain];
+    FOLLOW_block_in_forStat527 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_block_in_forStat527_data Count:(NSUInteger)1] retain];
+    FOLLOW_K_ID_in_assignStat570 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_K_ID_in_assignStat570_data Count:(NSUInteger)1] retain];
+    FOLLOW_K_EQ_in_assignStat572 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_K_EQ_in_assignStat572_data Count:(NSUInteger)1] retain];
+    FOLLOW_expr_in_assignStat574 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_assignStat574_data Count:(NSUInteger)1] retain];
+    FOLLOW_condExpr_in_expr598 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_condExpr_in_expr598_data Count:(NSUInteger)1] retain];
+    FOLLOW_aexpr_in_condExpr617 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_aexpr_in_condExpr617_data Count:(NSUInteger)1] retain];
+    FOLLOW_K_EQEQ_in_condExpr622 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_K_EQEQ_in_condExpr622_data Count:(NSUInteger)1] retain];
+    FOLLOW_K_LT_in_condExpr627 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_K_LT_in_condExpr627_data Count:(NSUInteger)1] retain];
+    FOLLOW_aexpr_in_condExpr631 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_aexpr_in_condExpr631_data Count:(NSUInteger)1] retain];
+    FOLLOW_atom_in_aexpr653 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_atom_in_aexpr653_data Count:(NSUInteger)1] retain];
+    FOLLOW_K_PLUS_in_aexpr657 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_K_PLUS_in_aexpr657_data Count:(NSUInteger)1] retain];
+    FOLLOW_atom_in_aexpr660 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_atom_in_aexpr660_data Count:(NSUInteger)1] retain];
+    FOLLOW_K_ID_in_atom680 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_K_ID_in_atom680_data Count:(NSUInteger)1] retain];
+    FOLLOW_K_INT_in_atom694 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_K_INT_in_atom694_data Count:(NSUInteger)1] retain];
+    FOLLOW_22_in_atom708 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_22_in_atom708_data Count:(NSUInteger)1] retain];
+    FOLLOW_expr_in_atom710 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_expr_in_atom710_data Count:(NSUInteger)1] retain];
+    FOLLOW_24_in_atom712 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_24_in_atom712_data Count:(NSUInteger)1] retain];
 
-    [ANTLRBaseRecognizer setTokenNames:[[[NSArray alloc] initWithObjects:@"<invalid>", @"<EOR>", @"<DOWN>", @"<UP>", 
+    [BaseRecognizer setTokenNames:[[[NSArray alloc] initWithObjects:@"<invalid>", @"<EOR>", @"<DOWN>", @"<UP>", 
  @"VAR_DEF", @"ARG_DEF", @"FUNC_HDR", @"FUNC_DECL", @"FUNC_DEF", @"BLOCK", 
  @"K_ID", @"K_INT", @"K_CHAR", @"K_VOID", @"K_FOR", @"K_EQ", @"K_EQEQ", 
  @"K_LT", @"K_PLUS", @"K_INT_TYPE", @"WS", @"';'", @"'('", @"','", @"')'", 
  @"'{'", @"'}'", nil] retain]];
 }
 
-+ (SimpleCParser *)newSimpleCParser:(id<ANTLRTokenStream>)aStream
++ (SimpleCParser *)newSimpleCParser:(id<TokenStream>)aStream
 {
     return [[SimpleCParser alloc] initWithTokenStream:aStream];
 
 }
 
-- (id) initWithTokenStream:(id<ANTLRTokenStream>)aStream
+- (id) initWithTokenStream:(id<TokenStream>)aStream
 {
-    if ((self = [super initWithTokenStream:aStream State:[[ANTLRRecognizerSharedState newANTLRRecognizerSharedStateWithRuleLen:15+1] retain]]) != nil) {
+    if ((self = [super initWithTokenStream:aStream State:[[RecognizerSharedState newRecognizerSharedStateWithRuleLen:15+1] retain]]) != nil) {
 
 
         dfa2 = [DFA2 newDFA2WithRecognizer:self];
@@ -822,7 +822,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         /* start of actions-actionScope-init */
         /* start of init */
         /* AST genericParser.init */
-        [self setTreeAdaptor:[[ANTLRCommonTreeAdaptor newTreeAdaptor] retain]];
+        [self setTreeAdaptor:[[CommonTreeAdaptor newTreeAdaptor] retain]];
     }
     return self;
 }
@@ -839,12 +839,12 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 // start methods()
 /* AST genericParser.methods */
 /* AST parserMethods */
-- (id<ANTLRTreeAdaptor>) getTreeAdaptor
+- (id<TreeAdaptor>) getTreeAdaptor
 {
 	return treeAdaptor;
 }
 
-- (void) setTreeAdaptor:(id<ANTLRTreeAdaptor>)aTreeAdaptor
+- (void) setTreeAdaptor:(id<TreeAdaptor>)aTreeAdaptor
 {
 	if (aTreeAdaptor != treeAdaptor) {
 		treeAdaptor = aTreeAdaptor;
@@ -863,7 +863,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
     SimpleCParser_program_return * retval = [SimpleCParser_program_return newSimpleCParser_program_return];
     [retval setStart:[input LT:1]];
 
-    ANTLRCommonTree *root_0 = nil;
+    CommonTree *root_0 = nil;
 
     @try {
         /* AST ruleLabelDefs */
@@ -874,7 +874,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:17:5: ( ( declaration )+ ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:17:9: ( declaration )+ // alt
         {
-        root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+        root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:17:9: ( declaration )+ // positiveClosureBlock
         NSInteger cnt1=0;
@@ -904,7 +904,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
                 default :
                     if ( cnt1 >= 1 )
                         goto loop1;
-                    ANTLREarlyExitException *eee = [ANTLREarlyExitException exceptionWithStream:input decisionNumber:1];
+                    EarlyExitException *eee = [EarlyExitException exceptionWithStream:input decisionNumber:1];
                     @throw eee;
             }
             cnt1++;
@@ -920,15 +920,15 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         [retval setStop:[input LT:-1]];
 
 
-            retval.tree = (ANTLRCommonTree *)[treeAdaptor rulePostProcessing:root_0];
+            retval.tree = (CommonTree *)[treeAdaptor rulePostProcessing:root_0];
             [treeAdaptor setTokenBoundaries:retval.tree From:retval.start To:retval.stopToken];
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
         /* ASTParser rule.setErrorReturnValue */
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
+        retval.tree = (CommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
 
     }    @finally {
     }
@@ -947,11 +947,11 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
     SimpleCParser_declaration_return * retval = [SimpleCParser_declaration_return newSimpleCParser_declaration_return];
     [retval setStart:[input LT:1]];
 
-    ANTLRCommonTree *root_0 = nil;
+    CommonTree *root_0 = nil;
 
     @try {
         /* AST ruleLabelDefs */
-        ANTLRCommonToken *char_literal4 = nil;
+        CommonToken *char_literal4 = nil;
         SimpleCParser_variable_return * variable2 = nil;
 
         SimpleCParser_functionHeader_return * functionHeader3 = nil;
@@ -961,15 +961,15 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         SimpleCParser_block_return * block6 = nil;
 
 
-        ANTLRCommonTree *char_literal4_tree=nil;
-        ANTLRRewriteRuleTokenStream *stream_21 = 
-            [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor
+        CommonTree *char_literal4_tree=nil;
+        RewriteRuleTokenStream *stream_21 = 
+            [[RewriteRuleTokenStream newRewriteRuleTokenStream:treeAdaptor
                                                              description:@"token 21"] retain];
-        ANTLRRewriteRuleSubtreeStream *stream_functionHeader = 
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_functionHeader = 
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"rule functionHeader"] retain];
-        ANTLRRewriteRuleSubtreeStream *stream_block = 
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_block = 
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"rule block"] retain];
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:21:5: ( variable | functionHeader ';' -> ^( FUNC_DECL functionHeader ) | functionHeader block -> ^( FUNC_DEF functionHeader block ) ) //ruleblock
         NSInteger alt2=3;
@@ -978,7 +978,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
             case 1 : ;
                 // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:21:9: variable // alt
                 {
-                root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
                 /* ASTParser ruleRef */
                 [self pushFollow:FOLLOW_variable_in_declaration105];
@@ -999,7 +999,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 
 
                 [stream_functionHeader addElement:[functionHeader3 getTree]];  /* element() */
-                char_literal4=(ANTLRCommonToken *)[self match:input TokenType:21 Follow:FOLLOW_21_in_declaration117];  
+                char_literal4=(CommonToken *)[self match:input TokenType:21 Follow:FOLLOW_21_in_declaration117];  
                     [stream_21 addElement:char_literal4];
                   /* element() */
                  /* elements */
@@ -1015,19 +1015,19 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 
                 retval.tree = root_0;
 
-                ANTLRRewriteRuleSubtreeStream *stream_retval =
-                    [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+                RewriteRuleSubtreeStream *stream_retval =
+                    [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                         description:@"token retval"
                                                                             element:retval!=nil?[retval getTree]:nil] retain];
 
-                root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
                 // 22:28: -> ^( FUNC_DECL functionHeader )
                 {
                     // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:22:31: ^( FUNC_DECL functionHeader )
                     {
-                        ANTLRCommonTree *root_1 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
-                        root_1 = (ANTLRCommonTree *)[treeAdaptor becomeRoot:[[treeAdaptor createTree:(NSInteger)FUNC_DECL Text:[[ANTLRBaseRecognizer getTokenNames] objectAtIndex:(NSUInteger)FUNC_DECL]] retain]
+                        CommonTree *root_1 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                        root_1 = (CommonTree *)[treeAdaptor becomeRoot:[[treeAdaptor createTree:(NSInteger)FUNC_DECL Text:[[BaseRecognizer getTokenNames] objectAtIndex:(NSUInteger)FUNC_DECL]] retain]
                                                                                old:root_1];
 
                         [treeAdaptor addChild:[stream_functionHeader nextTree] toTree:root_1];
@@ -1069,19 +1069,19 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 
                 retval.tree = root_0;
 
-                ANTLRRewriteRuleSubtreeStream *stream_retval =
-                    [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+                RewriteRuleSubtreeStream *stream_retval =
+                    [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                         description:@"token retval"
                                                                             element:retval!=nil?[retval getTree]:nil] retain];
 
-                root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
                 // 23:30: -> ^( FUNC_DEF functionHeader block )
                 {
                     // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:23:33: ^( FUNC_DEF functionHeader block )
                     {
-                        ANTLRCommonTree *root_1 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
-                        root_1 = (ANTLRCommonTree *)[treeAdaptor becomeRoot:[[treeAdaptor createTree:(NSInteger)FUNC_DEF Text:[[ANTLRBaseRecognizer getTokenNames] objectAtIndex:(NSUInteger)FUNC_DEF]] retain]
+                        CommonTree *root_1 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                        root_1 = (CommonTree *)[treeAdaptor becomeRoot:[[treeAdaptor createTree:(NSInteger)FUNC_DEF Text:[[BaseRecognizer getTokenNames] objectAtIndex:(NSUInteger)FUNC_DEF]] retain]
                                                                                old:root_1];
 
                         [treeAdaptor addChild:[stream_functionHeader nextTree] toTree:root_1];
@@ -1107,15 +1107,15 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         [stream_functionHeader release];
         [stream_block release];
 
-            retval.tree = (ANTLRCommonTree *)[treeAdaptor rulePostProcessing:root_0];
+            retval.tree = (CommonTree *)[treeAdaptor rulePostProcessing:root_0];
             [treeAdaptor setTokenBoundaries:retval.tree From:retval.start To:retval.stopToken];
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
         /* ASTParser rule.setErrorReturnValue */
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
+        retval.tree = (CommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
 
     }    @finally {
     }
@@ -1134,25 +1134,25 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
     SimpleCParser_variable_return * retval = [SimpleCParser_variable_return newSimpleCParser_variable_return];
     [retval setStart:[input LT:1]];
 
-    ANTLRCommonTree *root_0 = nil;
+    CommonTree *root_0 = nil;
 
     @try {
         /* AST ruleLabelDefs */
-        ANTLRCommonToken *char_literal9 = nil;
+        CommonToken *char_literal9 = nil;
         SimpleCParser_type_return * type7 = nil;
 
         SimpleCParser_declarator_return * declarator8 = nil;
 
 
-        ANTLRCommonTree *char_literal9_tree=nil;
-        ANTLRRewriteRuleTokenStream *stream_21 = 
-            [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor
+        CommonTree *char_literal9_tree=nil;
+        RewriteRuleTokenStream *stream_21 = 
+            [[RewriteRuleTokenStream newRewriteRuleTokenStream:treeAdaptor
                                                              description:@"token 21"] retain];
-        ANTLRRewriteRuleSubtreeStream *stream_declarator = 
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_declarator = 
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"rule declarator"] retain];
-        ANTLRRewriteRuleSubtreeStream *stream_type = 
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_type = 
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"rule type"] retain];
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:27:5: ( type declarator ';' -> ^( VAR_DEF type declarator ) ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:27:9: type declarator ';' // alt
@@ -1169,7 +1169,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 
 
         [stream_declarator addElement:[declarator8 getTree]];  /* element() */
-        char_literal9=(ANTLRCommonToken *)[self match:input TokenType:21 Follow:FOLLOW_21_in_variable170];  
+        char_literal9=(CommonToken *)[self match:input TokenType:21 Follow:FOLLOW_21_in_variable170];  
             [stream_21 addElement:char_literal9];
           /* element() */
          /* elements */
@@ -1185,19 +1185,19 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 
         retval.tree = root_0;
 
-        ANTLRRewriteRuleSubtreeStream *stream_retval =
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_retval =
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"token retval"
                                                                     element:retval!=nil?[retval getTree]:nil] retain];
 
-        root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+        root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
         // 27:29: -> ^( VAR_DEF type declarator )
         {
             // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:27:32: ^( VAR_DEF type declarator )
             {
-                ANTLRCommonTree *root_1 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
-                root_1 = (ANTLRCommonTree *)[treeAdaptor becomeRoot:[[treeAdaptor createTree:(NSInteger)VAR_DEF Text:[[ANTLRBaseRecognizer getTokenNames] objectAtIndex:(NSUInteger)VAR_DEF]] retain]
+                CommonTree *root_1 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_1 = (CommonTree *)[treeAdaptor becomeRoot:[[treeAdaptor createTree:(NSInteger)VAR_DEF Text:[[BaseRecognizer getTokenNames] objectAtIndex:(NSUInteger)VAR_DEF]] retain]
                                                                        old:root_1];
 
                 [treeAdaptor addChild:[stream_type nextTree] toTree:root_1];
@@ -1221,15 +1221,15 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         [stream_declarator release];
         [stream_type release];
 
-            retval.tree = (ANTLRCommonTree *)[treeAdaptor rulePostProcessing:root_0];
+            retval.tree = (CommonTree *)[treeAdaptor rulePostProcessing:root_0];
             [treeAdaptor setTokenBoundaries:retval.tree From:retval.start To:retval.stopToken];
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
         /* ASTParser rule.setErrorReturnValue */
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
+        retval.tree = (CommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
 
     }    @finally {
     }
@@ -1248,23 +1248,23 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
     SimpleCParser_declarator_return * retval = [SimpleCParser_declarator_return newSimpleCParser_declarator_return];
     [retval setStart:[input LT:1]];
 
-    ANTLRCommonTree *root_0 = nil;
+    CommonTree *root_0 = nil;
 
     @try {
         /* AST ruleLabelDefs */
-        ANTLRCommonToken *K_ID10 = nil;
+        CommonToken *K_ID10 = nil;
 
-        ANTLRCommonTree *K_ID10_tree=nil;
+        CommonTree *K_ID10_tree=nil;
 
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:31:5: ( K_ID ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:31:9: K_ID // alt
         {
-        root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+        root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
         /* ASTParser tokenRef */
-        K_ID10=(ANTLRCommonToken *)[self match:input TokenType:K_ID Follow:FOLLOW_K_ID_in_declarator199]; 
+        K_ID10=(CommonToken *)[self match:input TokenType:K_ID Follow:FOLLOW_K_ID_in_declarator199]; 
         K_ID10_tree = /* ASTParser createNodeFromToken */
-        (ANTLRCommonTree *)[[treeAdaptor createTree:K_ID10] retain];
+        (CommonTree *)[[treeAdaptor createTree:K_ID10] retain];
         [treeAdaptor addChild:K_ID10_tree  toTree:root_0];
           /* element() */
          /* elements */
@@ -1276,15 +1276,15 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         [retval setStop:[input LT:-1]];
 
 
-            retval.tree = (ANTLRCommonTree *)[treeAdaptor rulePostProcessing:root_0];
+            retval.tree = (CommonTree *)[treeAdaptor rulePostProcessing:root_0];
             [treeAdaptor setTokenBoundaries:retval.tree From:retval.start To:retval.stopToken];
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
         /* ASTParser rule.setErrorReturnValue */
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
+        retval.tree = (CommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
 
     }    @finally {
     }
@@ -1303,14 +1303,14 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
     SimpleCParser_functionHeader_return * retval = [SimpleCParser_functionHeader_return newSimpleCParser_functionHeader_return];
     [retval setStart:[input LT:1]];
 
-    ANTLRCommonTree *root_0 = nil;
+    CommonTree *root_0 = nil;
 
     @try {
         /* AST ruleLabelDefs */
-        ANTLRCommonToken *K_ID12 = nil;
-        ANTLRCommonToken *char_literal13 = nil;
-        ANTLRCommonToken *char_literal15 = nil;
-        ANTLRCommonToken *char_literal17 = nil;
+        CommonToken *K_ID12 = nil;
+        CommonToken *char_literal13 = nil;
+        CommonToken *char_literal15 = nil;
+        CommonToken *char_literal17 = nil;
         SimpleCParser_type_return * type11 = nil;
 
         SimpleCParser_formalParameter_return * formalParameter14 = nil;
@@ -1318,27 +1318,27 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         SimpleCParser_formalParameter_return * formalParameter16 = nil;
 
 
-        ANTLRCommonTree *K_ID12_tree=nil;
-        ANTLRCommonTree *char_literal13_tree=nil;
-        ANTLRCommonTree *char_literal15_tree=nil;
-        ANTLRCommonTree *char_literal17_tree=nil;
-        ANTLRRewriteRuleTokenStream *stream_K_ID = 
-            [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor
+        CommonTree *K_ID12_tree=nil;
+        CommonTree *char_literal13_tree=nil;
+        CommonTree *char_literal15_tree=nil;
+        CommonTree *char_literal17_tree=nil;
+        RewriteRuleTokenStream *stream_K_ID = 
+            [[RewriteRuleTokenStream newRewriteRuleTokenStream:treeAdaptor
                                                              description:@"token K_ID"] retain];
-        ANTLRRewriteRuleTokenStream *stream_22 = 
-            [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor
+        RewriteRuleTokenStream *stream_22 = 
+            [[RewriteRuleTokenStream newRewriteRuleTokenStream:treeAdaptor
                                                              description:@"token 22"] retain];
-        ANTLRRewriteRuleTokenStream *stream_23 = 
-            [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor
+        RewriteRuleTokenStream *stream_23 = 
+            [[RewriteRuleTokenStream newRewriteRuleTokenStream:treeAdaptor
                                                              description:@"token 23"] retain];
-        ANTLRRewriteRuleTokenStream *stream_24 = 
-            [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor
+        RewriteRuleTokenStream *stream_24 = 
+            [[RewriteRuleTokenStream newRewriteRuleTokenStream:treeAdaptor
                                                              description:@"token 24"] retain];
-        ANTLRRewriteRuleSubtreeStream *stream_formalParameter = 
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_formalParameter = 
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"rule formalParameter"] retain];
-        ANTLRRewriteRuleSubtreeStream *stream_type = 
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_type = 
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"rule type"] retain];
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:35:5: ( type K_ID '(' ( formalParameter ( ',' formalParameter )* )? ')' -> ^( FUNC_HDR type K_ID ( formalParameter )+ ) ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:35:9: type K_ID '(' ( formalParameter ( ',' formalParameter )* )? ')' // alt
@@ -1349,10 +1349,10 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 
 
         [stream_type addElement:[type11 getTree]];  /* element() */
-        K_ID12=(ANTLRCommonToken *)[self match:input TokenType:K_ID Follow:FOLLOW_K_ID_in_functionHeader221];  
+        K_ID12=(CommonToken *)[self match:input TokenType:K_ID Follow:FOLLOW_K_ID_in_functionHeader221];  
             [stream_K_ID addElement:K_ID12];
           /* element() */
-        char_literal13=(ANTLRCommonToken *)[self match:input TokenType:22 Follow:FOLLOW_22_in_functionHeader223];  
+        char_literal13=(CommonToken *)[self match:input TokenType:22 Follow:FOLLOW_22_in_functionHeader223];  
             [stream_22 addElement:char_literal13];
           /* element() */
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:35:23: ( formalParameter ( ',' formalParameter )* )? // block
@@ -1384,7 +1384,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
                         case 1 : ;
                             // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:35:43: ',' formalParameter // alt
                             {
-                            char_literal15=(ANTLRCommonToken *)[self match:input TokenType:23 Follow:FOLLOW_23_in_functionHeader231];  
+                            char_literal15=(CommonToken *)[self match:input TokenType:23 Follow:FOLLOW_23_in_functionHeader231];  
                                 [stream_23 addElement:char_literal15];
                               /* element() */
                             [self pushFollow:FOLLOW_formalParameter_in_functionHeader233];
@@ -1409,7 +1409,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 
         }
           /* element() */
-        char_literal17=(ANTLRCommonToken *)[self match:input TokenType:24 Follow:FOLLOW_24_in_functionHeader241];  
+        char_literal17=(CommonToken *)[self match:input TokenType:24 Follow:FOLLOW_24_in_functionHeader241];  
             [stream_24 addElement:char_literal17];
           /* element() */
          /* elements */
@@ -1425,19 +1425,19 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 
         retval.tree = root_0;
 
-        ANTLRRewriteRuleSubtreeStream *stream_retval =
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_retval =
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"token retval"
                                                                     element:retval!=nil?[retval getTree]:nil] retain];
 
-        root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+        root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
         // 36:9: -> ^( FUNC_HDR type K_ID ( formalParameter )+ )
         {
             // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:36:12: ^( FUNC_HDR type K_ID ( formalParameter )+ )
             {
-                ANTLRCommonTree *root_1 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
-                root_1 = (ANTLRCommonTree *)[treeAdaptor becomeRoot:[[treeAdaptor createTree:(NSInteger)FUNC_HDR Text:[[ANTLRBaseRecognizer getTokenNames] objectAtIndex:(NSUInteger)FUNC_HDR]] retain]
+                CommonTree *root_1 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_1 = (CommonTree *)[treeAdaptor becomeRoot:[[treeAdaptor createTree:(NSInteger)FUNC_HDR Text:[[BaseRecognizer getTokenNames] objectAtIndex:(NSUInteger)FUNC_HDR]] retain]
                                                                        old:root_1];
 
                 [treeAdaptor addChild:[stream_type nextTree] toTree:root_1];
@@ -1476,15 +1476,15 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         [stream_formalParameter release];
         [stream_type release];
 
-            retval.tree = (ANTLRCommonTree *)[treeAdaptor rulePostProcessing:root_0];
+            retval.tree = (CommonTree *)[treeAdaptor rulePostProcessing:root_0];
             [treeAdaptor setTokenBoundaries:retval.tree From:retval.start To:retval.stopToken];
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
         /* ASTParser rule.setErrorReturnValue */
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
+        retval.tree = (CommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
 
     }    @finally {
     }
@@ -1503,7 +1503,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
     SimpleCParser_formalParameter_return * retval = [SimpleCParser_formalParameter_return newSimpleCParser_formalParameter_return];
     [retval setStart:[input LT:1]];
 
-    ANTLRCommonTree *root_0 = nil;
+    CommonTree *root_0 = nil;
 
     @try {
         /* AST ruleLabelDefs */
@@ -1512,11 +1512,11 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         SimpleCParser_declarator_return * declarator19 = nil;
 
 
-        ANTLRRewriteRuleSubtreeStream *stream_declarator = 
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_declarator = 
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"rule declarator"] retain];
-        ANTLRRewriteRuleSubtreeStream *stream_type = 
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_type = 
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"rule type"] retain];
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:40:5: ( type declarator -> ^( ARG_DEF type declarator ) ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:40:9: type declarator // alt
@@ -1546,19 +1546,19 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 
         retval.tree = root_0;
 
-        ANTLRRewriteRuleSubtreeStream *stream_retval =
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_retval =
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"token retval"
                                                                     element:retval!=nil?[retval getTree]:nil] retain];
 
-        root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+        root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
         // 40:25: -> ^( ARG_DEF type declarator )
         {
             // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:40:28: ^( ARG_DEF type declarator )
             {
-                ANTLRCommonTree *root_1 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
-                root_1 = (ANTLRCommonTree *)[treeAdaptor becomeRoot:[[treeAdaptor createTree:(NSInteger)ARG_DEF Text:[[ANTLRBaseRecognizer getTokenNames] objectAtIndex:(NSUInteger)ARG_DEF]] retain]
+                CommonTree *root_1 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_1 = (CommonTree *)[treeAdaptor becomeRoot:[[treeAdaptor createTree:(NSInteger)ARG_DEF Text:[[BaseRecognizer getTokenNames] objectAtIndex:(NSUInteger)ARG_DEF]] retain]
                                                                        old:root_1];
 
                 [treeAdaptor addChild:[stream_type nextTree] toTree:root_1];
@@ -1581,15 +1581,15 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         [stream_declarator release];
         [stream_type release];
 
-            retval.tree = (ANTLRCommonTree *)[treeAdaptor rulePostProcessing:root_0];
+            retval.tree = (CommonTree *)[treeAdaptor rulePostProcessing:root_0];
             [treeAdaptor setTokenBoundaries:retval.tree From:retval.start To:retval.stopToken];
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
         /* ASTParser rule.setErrorReturnValue */
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
+        retval.tree = (CommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
 
     }    @finally {
     }
@@ -1608,29 +1608,29 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
     SimpleCParser_type_return * retval = [SimpleCParser_type_return newSimpleCParser_type_return];
     [retval setStart:[input LT:1]];
 
-    ANTLRCommonTree *root_0 = nil;
+    CommonTree *root_0 = nil;
 
     @try {
         /* AST ruleLabelDefs */
-        ANTLRCommonToken *set20 = nil;
+        CommonToken *set20 = nil;
 
-        ANTLRCommonTree *set20_tree=nil;
+        CommonTree *set20_tree=nil;
 
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:44:5: ( K_INT | K_CHAR | K_VOID | K_ID ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g: // alt
         {
-        root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+        root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
         /* ASTParser matchRuleBlockSet */
         /* ASTParser matchSet */
-        set20 = (ANTLRCommonToken *)[input LT:1];
+        set20 = (CommonToken *)[input LT:1];
         if ((([input LA:1] >= K_ID) && ([input LA:1] <= K_VOID))) {
             [input consume];
                 [treeAdaptor addChild:/* ASTParser createNodeFromToken */
-            (ANTLRCommonTree *)[[treeAdaptor createTree:set20] retain] toTree:root_0 ];
+            (CommonTree *)[[treeAdaptor createTree:set20] retain] toTree:root_0 ];
             [state setIsErrorRecovery:NO];
         } else {
-            ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException exceptionWithSet:nil stream:input];
+            MismatchedSetException *mse = [MismatchedSetException exceptionWithSet:nil stream:input];
             @throw mse;
         }
           /* element() */
@@ -1643,15 +1643,15 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         [retval setStop:[input LT:-1]];
 
 
-            retval.tree = (ANTLRCommonTree *)[treeAdaptor rulePostProcessing:root_0];
+            retval.tree = (CommonTree *)[treeAdaptor rulePostProcessing:root_0];
             [treeAdaptor setTokenBoundaries:retval.tree From:retval.start To:retval.stopToken];
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
         /* ASTParser rule.setErrorReturnValue */
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
+        retval.tree = (CommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
 
     }    @finally {
     }
@@ -1670,35 +1670,35 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
     SimpleCParser_block_return * retval = [SimpleCParser_block_return newSimpleCParser_block_return];
     [retval setStart:[input LT:1]];
 
-    ANTLRCommonTree *root_0 = nil;
+    CommonTree *root_0 = nil;
 
     @try {
         /* AST ruleLabelDefs */
-        ANTLRCommonToken *lc = nil;
-        ANTLRCommonToken *char_literal23 = nil;
+        CommonToken *lc = nil;
+        CommonToken *char_literal23 = nil;
         SimpleCParser_variable_return * variable21 = nil;
 
         SimpleCParser_stat_return * stat22 = nil;
 
 
-        ANTLRCommonTree *lc_tree=nil;
-        ANTLRCommonTree *char_literal23_tree=nil;
-        ANTLRRewriteRuleTokenStream *stream_25 = 
-            [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor
+        CommonTree *lc_tree=nil;
+        CommonTree *char_literal23_tree=nil;
+        RewriteRuleTokenStream *stream_25 = 
+            [[RewriteRuleTokenStream newRewriteRuleTokenStream:treeAdaptor
                                                              description:@"token 25"] retain];
-        ANTLRRewriteRuleTokenStream *stream_26 = 
-            [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor
+        RewriteRuleTokenStream *stream_26 = 
+            [[RewriteRuleTokenStream newRewriteRuleTokenStream:treeAdaptor
                                                              description:@"token 26"] retain];
-        ANTLRRewriteRuleSubtreeStream *stream_variable = 
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_variable = 
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"rule variable"] retain];
-        ANTLRRewriteRuleSubtreeStream *stream_stat = 
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_stat = 
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"rule stat"] retain];
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:51:5: (lc= '{' ( variable )* ( stat )* '}' -> ^( BLOCK[$lc,@\"BLOCK\"] ( variable )* ( stat )* ) ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:51:9: lc= '{' ( variable )* ( stat )* '}' // alt
         {
-        lc=(ANTLRCommonToken *)[self match:input TokenType:25 Follow:FOLLOW_25_in_block376];  
+        lc=(CommonToken *)[self match:input TokenType:25 Follow:FOLLOW_25_in_block376];  
             [stream_25 addElement:lc];
           /* element() */
         do {
@@ -1781,7 +1781,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         } while (YES);
         loop6: ;
           /* element() */
-        char_literal23=(ANTLRCommonToken *)[self match:input TokenType:26 Follow:FOLLOW_26_in_block416];  
+        char_literal23=(CommonToken *)[self match:input TokenType:26 Follow:FOLLOW_26_in_block416];  
             [stream_26 addElement:char_literal23];
           /* element() */
          /* elements */
@@ -1797,19 +1797,19 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 
         retval.tree = root_0;
 
-        ANTLRRewriteRuleSubtreeStream *stream_retval =
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_retval =
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"token retval"
                                                                     element:retval!=nil?[retval getTree]:nil] retain];
 
-        root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+        root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
         // 55:9: -> ^( BLOCK[$lc,@\"BLOCK\"] ( variable )* ( stat )* )
         {
             // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:55:12: ^( BLOCK[$lc,@\"BLOCK\"] ( variable )* ( stat )* )
             {
-                ANTLRCommonTree *root_1 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
-                root_1 = (ANTLRCommonTree *)[treeAdaptor becomeRoot:[[treeAdaptor createTree:(NSInteger)BLOCK Text:[[ANTLRBaseRecognizer getTokenNames] objectAtIndex:(NSUInteger)BLOCK]] retain]
+                CommonTree *root_1 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_1 = (CommonTree *)[treeAdaptor becomeRoot:[[treeAdaptor createTree:(NSInteger)BLOCK Text:[[BaseRecognizer getTokenNames] objectAtIndex:(NSUInteger)BLOCK]] retain]
                                                                        old:root_1];
 
                 // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:55:34: ( variable )*
@@ -1844,15 +1844,15 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         [stream_variable release];
         [stream_stat release];
 
-            retval.tree = (ANTLRCommonTree *)[treeAdaptor rulePostProcessing:root_0];
+            retval.tree = (CommonTree *)[treeAdaptor rulePostProcessing:root_0];
             [treeAdaptor setTokenBoundaries:retval.tree From:retval.start To:retval.stopToken];
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
         /* ASTParser rule.setErrorReturnValue */
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
+        retval.tree = (CommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
 
     }    @finally {
     }
@@ -1871,13 +1871,13 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
     SimpleCParser_stat_return * retval = [SimpleCParser_stat_return newSimpleCParser_stat_return];
     [retval setStart:[input LT:1]];
 
-    ANTLRCommonTree *root_0 = nil;
+    CommonTree *root_0 = nil;
 
     @try {
         /* AST ruleLabelDefs */
-        ANTLRCommonToken *char_literal26 = nil;
-        ANTLRCommonToken *char_literal29 = nil;
-        ANTLRCommonToken *char_literal30 = nil;
+        CommonToken *char_literal26 = nil;
+        CommonToken *char_literal29 = nil;
+        CommonToken *char_literal30 = nil;
         SimpleCParser_forStat_return * forStat24 = nil;
 
         SimpleCParser_expr_return * expr25 = nil;
@@ -1887,9 +1887,9 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         SimpleCParser_assignStat_return * assignStat28 = nil;
 
 
-        ANTLRCommonTree *char_literal26_tree=nil;
-        ANTLRCommonTree *char_literal29_tree=nil;
-        ANTLRCommonTree *char_literal30_tree=nil;
+        CommonTree *char_literal26_tree=nil;
+        CommonTree *char_literal29_tree=nil;
+        CommonTree *char_literal30_tree=nil;
 
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:58:5: ( forStat | expr ';' | block | assignStat ';' | ';' ) //ruleblock
         NSInteger alt7=5;
@@ -1910,7 +1910,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
                     alt7=2;
                 }
                 else {
-                    ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newANTLRNoViableAltException:7 state:2 stream:input];
+                    NoViableAltException *nvae = [NoViableAltException newNoViableAltException:7 state:2 stream:input];
                     @throw nvae;
                 }
                 }
@@ -1933,7 +1933,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
                 break;
 
         default: ;
-            ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newANTLRNoViableAltException:7 state:0 stream:input];
+            NoViableAltException *nvae = [NoViableAltException newNoViableAltException:7 state:0 stream:input];
             @throw nvae;
         }
 
@@ -1941,7 +1941,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
             case 1 : ;
                 // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:58:7: forStat // alt
                 {
-                root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
                 /* ASTParser ruleRef */
                 [self pushFollow:FOLLOW_forStat_in_stat449];
@@ -1956,7 +1956,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
             case 2 : ;
                 // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:59:7: expr ';' // alt
                 {
-                root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
                 /* ASTParser ruleRef */
                 [self pushFollow:FOLLOW_expr_in_stat457];
@@ -1965,14 +1965,14 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 
 
                 [treeAdaptor addChild:[expr25 getTree] toTree:root_0];  /* element() */
-                char_literal26=(ANTLRCommonToken *)[self match:input TokenType:21 Follow:FOLLOW_21_in_stat459];   /* element() */
+                char_literal26=(CommonToken *)[self match:input TokenType:21 Follow:FOLLOW_21_in_stat459];   /* element() */
                  /* elements */
                 }
                 break;
             case 3 : ;
                 // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:60:7: block // alt
                 {
-                root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
                 /* ASTParser ruleRef */
                 [self pushFollow:FOLLOW_block_in_stat468];
@@ -1987,7 +1987,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
             case 4 : ;
                 // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:61:7: assignStat ';' // alt
                 {
-                root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
                 /* ASTParser ruleRef */
                 [self pushFollow:FOLLOW_assignStat_in_stat476];
@@ -1996,16 +1996,16 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 
 
                 [treeAdaptor addChild:[assignStat28 getTree] toTree:root_0];  /* element() */
-                char_literal29=(ANTLRCommonToken *)[self match:input TokenType:21 Follow:FOLLOW_21_in_stat478];   /* element() */
+                char_literal29=(CommonToken *)[self match:input TokenType:21 Follow:FOLLOW_21_in_stat478];   /* element() */
                  /* elements */
                 }
                 break;
             case 5 : ;
                 // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:62:7: ';' // alt
                 {
-                root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
-                char_literal30=(ANTLRCommonToken *)[self match:input TokenType:21 Follow:FOLLOW_21_in_stat487];   /* element() */
+                char_literal30=(CommonToken *)[self match:input TokenType:21 Follow:FOLLOW_21_in_stat487];   /* element() */
                  /* elements */
                 }
                 break;
@@ -2017,15 +2017,15 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         [retval setStop:[input LT:-1]];
 
 
-            retval.tree = (ANTLRCommonTree *)[treeAdaptor rulePostProcessing:root_0];
+            retval.tree = (CommonTree *)[treeAdaptor rulePostProcessing:root_0];
             [treeAdaptor setTokenBoundaries:retval.tree From:retval.start To:retval.stopToken];
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
         /* ASTParser rule.setErrorReturnValue */
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
+        retval.tree = (CommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
 
     }    @finally {
     }
@@ -2044,15 +2044,15 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
     SimpleCParser_forStat_return * retval = [SimpleCParser_forStat_return newSimpleCParser_forStat_return];
     [retval setStart:[input LT:1]];
 
-    ANTLRCommonTree *root_0 = nil;
+    CommonTree *root_0 = nil;
 
     @try {
         /* AST ruleLabelDefs */
-        ANTLRCommonToken *K_FOR31 = nil;
-        ANTLRCommonToken *char_literal32 = nil;
-        ANTLRCommonToken *char_literal33 = nil;
-        ANTLRCommonToken *char_literal35 = nil;
-        ANTLRCommonToken *char_literal36 = nil;
+        CommonToken *K_FOR31 = nil;
+        CommonToken *char_literal32 = nil;
+        CommonToken *char_literal33 = nil;
+        CommonToken *char_literal35 = nil;
+        CommonToken *char_literal36 = nil;
         SimpleCParser_assignStat_return * start = nil;
 
         SimpleCParser_assignStat_return * next = nil;
@@ -2062,39 +2062,39 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         SimpleCParser_block_return * block37 = nil;
 
 
-        ANTLRCommonTree *K_FOR31_tree=nil;
-        ANTLRCommonTree *char_literal32_tree=nil;
-        ANTLRCommonTree *char_literal33_tree=nil;
-        ANTLRCommonTree *char_literal35_tree=nil;
-        ANTLRCommonTree *char_literal36_tree=nil;
-        ANTLRRewriteRuleTokenStream *stream_21 = 
-            [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor
+        CommonTree *K_FOR31_tree=nil;
+        CommonTree *char_literal32_tree=nil;
+        CommonTree *char_literal33_tree=nil;
+        CommonTree *char_literal35_tree=nil;
+        CommonTree *char_literal36_tree=nil;
+        RewriteRuleTokenStream *stream_21 = 
+            [[RewriteRuleTokenStream newRewriteRuleTokenStream:treeAdaptor
                                                              description:@"token 21"] retain];
-        ANTLRRewriteRuleTokenStream *stream_22 = 
-            [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor
+        RewriteRuleTokenStream *stream_22 = 
+            [[RewriteRuleTokenStream newRewriteRuleTokenStream:treeAdaptor
                                                              description:@"token 22"] retain];
-        ANTLRRewriteRuleTokenStream *stream_24 = 
-            [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor
+        RewriteRuleTokenStream *stream_24 = 
+            [[RewriteRuleTokenStream newRewriteRuleTokenStream:treeAdaptor
                                                              description:@"token 24"] retain];
-        ANTLRRewriteRuleTokenStream *stream_K_FOR = 
-            [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor
+        RewriteRuleTokenStream *stream_K_FOR = 
+            [[RewriteRuleTokenStream newRewriteRuleTokenStream:treeAdaptor
                                                              description:@"token K_FOR"] retain];
-        ANTLRRewriteRuleSubtreeStream *stream_assignStat = 
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_assignStat = 
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"rule assignStat"] retain];
-        ANTLRRewriteRuleSubtreeStream *stream_block = 
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_block = 
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"rule block"] retain];
-        ANTLRRewriteRuleSubtreeStream *stream_expr = 
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_expr = 
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"rule expr"] retain];
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:66:5: ( K_FOR '(' start= assignStat ';' expr ';' next= assignStat ')' block -> ^( K_FOR $start expr $next block ) ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:66:9: K_FOR '(' start= assignStat ';' expr ';' next= assignStat ')' block // alt
         {
-        K_FOR31=(ANTLRCommonToken *)[self match:input TokenType:K_FOR Follow:FOLLOW_K_FOR_in_forStat507];  
+        K_FOR31=(CommonToken *)[self match:input TokenType:K_FOR Follow:FOLLOW_K_FOR_in_forStat507];  
             [stream_K_FOR addElement:K_FOR31];
           /* element() */
-        char_literal32=(ANTLRCommonToken *)[self match:input TokenType:22 Follow:FOLLOW_22_in_forStat509];  
+        char_literal32=(CommonToken *)[self match:input TokenType:22 Follow:FOLLOW_22_in_forStat509];  
             [stream_22 addElement:char_literal32];
           /* element() */
         [self pushFollow:FOLLOW_assignStat_in_forStat513];
@@ -2103,7 +2103,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 
 
         [stream_assignStat addElement:[start getTree]];  /* element() */
-        char_literal33=(ANTLRCommonToken *)[self match:input TokenType:21 Follow:FOLLOW_21_in_forStat515];  
+        char_literal33=(CommonToken *)[self match:input TokenType:21 Follow:FOLLOW_21_in_forStat515];  
             [stream_21 addElement:char_literal33];
           /* element() */
         [self pushFollow:FOLLOW_expr_in_forStat517];
@@ -2112,7 +2112,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 
 
         [stream_expr addElement:[expr34 getTree]];  /* element() */
-        char_literal35=(ANTLRCommonToken *)[self match:input TokenType:21 Follow:FOLLOW_21_in_forStat519];  
+        char_literal35=(CommonToken *)[self match:input TokenType:21 Follow:FOLLOW_21_in_forStat519];  
             [stream_21 addElement:char_literal35];
           /* element() */
         [self pushFollow:FOLLOW_assignStat_in_forStat523];
@@ -2121,7 +2121,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 
 
         [stream_assignStat addElement:[next getTree]];  /* element() */
-        char_literal36=(ANTLRCommonToken *)[self match:input TokenType:24 Follow:FOLLOW_24_in_forStat525];  
+        char_literal36=(CommonToken *)[self match:input TokenType:24 Follow:FOLLOW_24_in_forStat525];  
             [stream_24 addElement:char_literal36];
           /* element() */
         [self pushFollow:FOLLOW_block_in_forStat527];
@@ -2143,27 +2143,27 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 
         retval.tree = root_0;
 
-        ANTLRRewriteRuleSubtreeStream *stream_retval =
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_retval =
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"token retval"
                                                                     element:retval!=nil?[retval getTree]:nil] retain];
-        ANTLRRewriteRuleSubtreeStream *stream_start =
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_start =
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"token start"
                                                                     element:start!=nil?[start getTree]:nil] retain];
-        ANTLRRewriteRuleSubtreeStream *stream_next =
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_next =
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"token next"
                                                                     element:next!=nil?[next getTree]:nil] retain];
 
-        root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+        root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
         // 67:9: -> ^( K_FOR $start expr $next block )
         {
             // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:67:12: ^( K_FOR $start expr $next block )
             {
-                ANTLRCommonTree *root_1 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
-                root_1 = (ANTLRCommonTree *)[treeAdaptor becomeRoot:[stream_K_FOR nextNode] old:root_1];
+                CommonTree *root_1 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_1 = (CommonTree *)[treeAdaptor becomeRoot:[stream_K_FOR nextNode] old:root_1];
 
                 [treeAdaptor addChild:[stream_start nextTree] toTree:root_1];
                 [treeAdaptor addChild:[stream_expr nextTree] toTree:root_1];
@@ -2192,15 +2192,15 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         [stream_block release];
         [stream_expr release];
 
-            retval.tree = (ANTLRCommonTree *)[treeAdaptor rulePostProcessing:root_0];
+            retval.tree = (CommonTree *)[treeAdaptor rulePostProcessing:root_0];
             [treeAdaptor setTokenBoundaries:retval.tree From:retval.start To:retval.stopToken];
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
         /* ASTParser rule.setErrorReturnValue */
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
+        retval.tree = (CommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
 
     }    @finally {
     }
@@ -2219,33 +2219,33 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
     SimpleCParser_assignStat_return * retval = [SimpleCParser_assignStat_return newSimpleCParser_assignStat_return];
     [retval setStart:[input LT:1]];
 
-    ANTLRCommonTree *root_0 = nil;
+    CommonTree *root_0 = nil;
 
     @try {
         /* AST ruleLabelDefs */
-        ANTLRCommonToken *K_ID38 = nil;
-        ANTLRCommonToken *K_EQ39 = nil;
+        CommonToken *K_ID38 = nil;
+        CommonToken *K_EQ39 = nil;
         SimpleCParser_expr_return * expr40 = nil;
 
 
-        ANTLRCommonTree *K_ID38_tree=nil;
-        ANTLRCommonTree *K_EQ39_tree=nil;
-        ANTLRRewriteRuleTokenStream *stream_K_ID = 
-            [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor
+        CommonTree *K_ID38_tree=nil;
+        CommonTree *K_EQ39_tree=nil;
+        RewriteRuleTokenStream *stream_K_ID = 
+            [[RewriteRuleTokenStream newRewriteRuleTokenStream:treeAdaptor
                                                              description:@"token K_ID"] retain];
-        ANTLRRewriteRuleTokenStream *stream_K_EQ = 
-            [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor
+        RewriteRuleTokenStream *stream_K_EQ = 
+            [[RewriteRuleTokenStream newRewriteRuleTokenStream:treeAdaptor
                                                              description:@"token K_EQ"] retain];
-        ANTLRRewriteRuleSubtreeStream *stream_expr = 
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_expr = 
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"rule expr"] retain];
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:71:5: ( K_ID K_EQ expr -> ^( K_EQ K_ID expr ) ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:71:9: K_ID K_EQ expr // alt
         {
-        K_ID38=(ANTLRCommonToken *)[self match:input TokenType:K_ID Follow:FOLLOW_K_ID_in_assignStat570];  
+        K_ID38=(CommonToken *)[self match:input TokenType:K_ID Follow:FOLLOW_K_ID_in_assignStat570];  
             [stream_K_ID addElement:K_ID38];
           /* element() */
-        K_EQ39=(ANTLRCommonToken *)[self match:input TokenType:K_EQ Follow:FOLLOW_K_EQ_in_assignStat572];  
+        K_EQ39=(CommonToken *)[self match:input TokenType:K_EQ Follow:FOLLOW_K_EQ_in_assignStat572];  
             [stream_K_EQ addElement:K_EQ39];
           /* element() */
         [self pushFollow:FOLLOW_expr_in_assignStat574];
@@ -2267,19 +2267,19 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 
         retval.tree = root_0;
 
-        ANTLRRewriteRuleSubtreeStream *stream_retval =
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_retval =
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"token retval"
                                                                     element:retval!=nil?[retval getTree]:nil] retain];
 
-        root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+        root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
         // 71:24: -> ^( K_EQ K_ID expr )
         {
             // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:71:27: ^( K_EQ K_ID expr )
             {
-                ANTLRCommonTree *root_1 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
-                root_1 = (ANTLRCommonTree *)[treeAdaptor becomeRoot:[stream_K_EQ nextNode] old:root_1];
+                CommonTree *root_1 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_1 = (CommonTree *)[treeAdaptor becomeRoot:[stream_K_EQ nextNode] old:root_1];
 
                  // TODO: args: 
                 [treeAdaptor addChild:[stream_K_ID nextNode] toTree:root_1];
@@ -2303,15 +2303,15 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         [stream_K_EQ release];
         [stream_expr release];
 
-            retval.tree = (ANTLRCommonTree *)[treeAdaptor rulePostProcessing:root_0];
+            retval.tree = (CommonTree *)[treeAdaptor rulePostProcessing:root_0];
             [treeAdaptor setTokenBoundaries:retval.tree From:retval.start To:retval.stopToken];
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
         /* ASTParser rule.setErrorReturnValue */
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
+        retval.tree = (CommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
 
     }    @finally {
     }
@@ -2330,7 +2330,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
     SimpleCParser_expr_return * retval = [SimpleCParser_expr_return newSimpleCParser_expr_return];
     [retval setStart:[input LT:1]];
 
-    ANTLRCommonTree *root_0 = nil;
+    CommonTree *root_0 = nil;
 
     @try {
         /* AST ruleLabelDefs */
@@ -2341,7 +2341,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:74:5: ( condExpr ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:74:9: condExpr // alt
         {
-        root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+        root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
         /* ASTParser ruleRef */
         [self pushFollow:FOLLOW_condExpr_in_expr598];
@@ -2359,15 +2359,15 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         [retval setStop:[input LT:-1]];
 
 
-            retval.tree = (ANTLRCommonTree *)[treeAdaptor rulePostProcessing:root_0];
+            retval.tree = (CommonTree *)[treeAdaptor rulePostProcessing:root_0];
             [treeAdaptor setTokenBoundaries:retval.tree From:retval.start To:retval.stopToken];
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
         /* ASTParser rule.setErrorReturnValue */
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
+        retval.tree = (CommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
 
     }    @finally {
     }
@@ -2386,24 +2386,24 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
     SimpleCParser_condExpr_return * retval = [SimpleCParser_condExpr_return newSimpleCParser_condExpr_return];
     [retval setStart:[input LT:1]];
 
-    ANTLRCommonTree *root_0 = nil;
+    CommonTree *root_0 = nil;
 
     @try {
         /* AST ruleLabelDefs */
-        ANTLRCommonToken *K_EQEQ43 = nil;
-        ANTLRCommonToken *K_LT44 = nil;
+        CommonToken *K_EQEQ43 = nil;
+        CommonToken *K_LT44 = nil;
         SimpleCParser_aexpr_return * aexpr42 = nil;
 
         SimpleCParser_aexpr_return * aexpr45 = nil;
 
 
-        ANTLRCommonTree *K_EQEQ43_tree=nil;
-        ANTLRCommonTree *K_LT44_tree=nil;
+        CommonTree *K_EQEQ43_tree=nil;
+        CommonTree *K_LT44_tree=nil;
 
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:78:5: ( aexpr ( ( K_EQEQ | K_LT ) aexpr )? ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:78:9: aexpr ( ( K_EQEQ | K_LT ) aexpr )? // alt
         {
-        root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+        root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
         /* ASTParser ruleRef */
         [self pushFollow:FOLLOW_aexpr_in_condExpr617];
@@ -2434,17 +2434,17 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
                     alt8=2;
                 }
                 else {
-                    ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newANTLRNoViableAltException:8 state:0 stream:input];
+                    NoViableAltException *nvae = [NoViableAltException newNoViableAltException:8 state:0 stream:input];
                     @throw nvae;
                 }
                 switch (alt8) {
                     case 1 : ;
                         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:78:18: K_EQEQ // alt
                         {
-                        K_EQEQ43=(ANTLRCommonToken *)[self match:input TokenType:K_EQEQ Follow:FOLLOW_K_EQEQ_in_condExpr622]; 
+                        K_EQEQ43=(CommonToken *)[self match:input TokenType:K_EQEQ Follow:FOLLOW_K_EQEQ_in_condExpr622]; 
                         K_EQEQ43_tree = /* ASTParser createNodeFromToken */
-                        (ANTLRCommonTree *)[[treeAdaptor createTree:K_EQEQ43] retain];
-                        root_0 = (ANTLRCommonTree *)[treeAdaptor becomeRoot:K_EQEQ43_tree old:root_0];
+                        (CommonTree *)[[treeAdaptor createTree:K_EQEQ43] retain];
+                        root_0 = (CommonTree *)[treeAdaptor becomeRoot:K_EQEQ43_tree old:root_0];
                           /* element() */
                          /* elements */
                         }
@@ -2452,10 +2452,10 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
                     case 2 : ;
                         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:78:28: K_LT // alt
                         {
-                        K_LT44=(ANTLRCommonToken *)[self match:input TokenType:K_LT Follow:FOLLOW_K_LT_in_condExpr627]; 
+                        K_LT44=(CommonToken *)[self match:input TokenType:K_LT Follow:FOLLOW_K_LT_in_condExpr627]; 
                         K_LT44_tree = /* ASTParser createNodeFromToken */
-                        (ANTLRCommonTree *)[[treeAdaptor createTree:K_LT44] retain];
-                        root_0 = (ANTLRCommonTree *)[treeAdaptor becomeRoot:K_LT44_tree old:root_0];
+                        (CommonTree *)[[treeAdaptor createTree:K_LT44] retain];
+                        root_0 = (CommonTree *)[treeAdaptor becomeRoot:K_LT44_tree old:root_0];
                           /* element() */
                          /* elements */
                         }
@@ -2485,15 +2485,15 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         [retval setStop:[input LT:-1]];
 
 
-            retval.tree = (ANTLRCommonTree *)[treeAdaptor rulePostProcessing:root_0];
+            retval.tree = (CommonTree *)[treeAdaptor rulePostProcessing:root_0];
             [treeAdaptor setTokenBoundaries:retval.tree From:retval.start To:retval.stopToken];
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
         /* ASTParser rule.setErrorReturnValue */
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
+        retval.tree = (CommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
 
     }    @finally {
     }
@@ -2512,22 +2512,22 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
     SimpleCParser_aexpr_return * retval = [SimpleCParser_aexpr_return newSimpleCParser_aexpr_return];
     [retval setStart:[input LT:1]];
 
-    ANTLRCommonTree *root_0 = nil;
+    CommonTree *root_0 = nil;
 
     @try {
         /* AST ruleLabelDefs */
-        ANTLRCommonToken *K_PLUS47 = nil;
+        CommonToken *K_PLUS47 = nil;
         SimpleCParser_atom_return * atom46 = nil;
 
         SimpleCParser_atom_return * atom48 = nil;
 
 
-        ANTLRCommonTree *K_PLUS47_tree=nil;
+        CommonTree *K_PLUS47_tree=nil;
 
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:82:5: ( atom ( K_PLUS atom )* ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:82:9: atom ( K_PLUS atom )* // alt
         {
-        root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+        root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
         /* ASTParser ruleRef */
         [self pushFollow:FOLLOW_atom_in_aexpr653];
@@ -2548,10 +2548,10 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
                 case 1 : ;
                     // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:82:16: K_PLUS atom // alt
                     {
-                    K_PLUS47=(ANTLRCommonToken *)[self match:input TokenType:K_PLUS Follow:FOLLOW_K_PLUS_in_aexpr657]; 
+                    K_PLUS47=(CommonToken *)[self match:input TokenType:K_PLUS Follow:FOLLOW_K_PLUS_in_aexpr657]; 
                     K_PLUS47_tree = /* ASTParser createNodeFromToken */
-                    (ANTLRCommonTree *)[[treeAdaptor createTree:K_PLUS47] retain];
-                    root_0 = (ANTLRCommonTree *)[treeAdaptor becomeRoot:K_PLUS47_tree old:root_0];
+                    (CommonTree *)[[treeAdaptor createTree:K_PLUS47] retain];
+                    root_0 = (CommonTree *)[treeAdaptor becomeRoot:K_PLUS47_tree old:root_0];
                       /* element() */
                     /* ASTParser ruleRef */
                     [self pushFollow:FOLLOW_atom_in_aexpr660];
@@ -2579,15 +2579,15 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         [retval setStop:[input LT:-1]];
 
 
-            retval.tree = (ANTLRCommonTree *)[treeAdaptor rulePostProcessing:root_0];
+            retval.tree = (CommonTree *)[treeAdaptor rulePostProcessing:root_0];
             [treeAdaptor setTokenBoundaries:retval.tree From:retval.start To:retval.stopToken];
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
         /* ASTParser rule.setErrorReturnValue */
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
+        retval.tree = (CommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
 
     }    @finally {
     }
@@ -2606,29 +2606,29 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
     SimpleCParser_atom_return * retval = [SimpleCParser_atom_return newSimpleCParser_atom_return];
     [retval setStart:[input LT:1]];
 
-    ANTLRCommonTree *root_0 = nil;
+    CommonTree *root_0 = nil;
 
     @try {
         /* AST ruleLabelDefs */
-        ANTLRCommonToken *K_ID49 = nil;
-        ANTLRCommonToken *K_INT50 = nil;
-        ANTLRCommonToken *char_literal51 = nil;
-        ANTLRCommonToken *char_literal53 = nil;
+        CommonToken *K_ID49 = nil;
+        CommonToken *K_INT50 = nil;
+        CommonToken *char_literal51 = nil;
+        CommonToken *char_literal53 = nil;
         SimpleCParser_expr_return * expr52 = nil;
 
 
-        ANTLRCommonTree *K_ID49_tree=nil;
-        ANTLRCommonTree *K_INT50_tree=nil;
-        ANTLRCommonTree *char_literal51_tree=nil;
-        ANTLRCommonTree *char_literal53_tree=nil;
-        ANTLRRewriteRuleTokenStream *stream_22 = 
-            [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor
+        CommonTree *K_ID49_tree=nil;
+        CommonTree *K_INT50_tree=nil;
+        CommonTree *char_literal51_tree=nil;
+        CommonTree *char_literal53_tree=nil;
+        RewriteRuleTokenStream *stream_22 = 
+            [[RewriteRuleTokenStream newRewriteRuleTokenStream:treeAdaptor
                                                              description:@"token 22"] retain];
-        ANTLRRewriteRuleTokenStream *stream_24 = 
-            [[ANTLRRewriteRuleTokenStream newANTLRRewriteRuleTokenStream:treeAdaptor
+        RewriteRuleTokenStream *stream_24 = 
+            [[RewriteRuleTokenStream newRewriteRuleTokenStream:treeAdaptor
                                                              description:@"token 24"] retain];
-        ANTLRRewriteRuleSubtreeStream *stream_expr = 
-            [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+        RewriteRuleSubtreeStream *stream_expr = 
+            [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                 description:@"rule expr"] retain];
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:86:5: ( K_ID | K_INT | '(' expr ')' -> expr ) //ruleblock
         NSInteger alt11=3;
@@ -2650,7 +2650,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
                 break;
 
         default: ;
-            ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newANTLRNoViableAltException:11 state:0 stream:input];
+            NoViableAltException *nvae = [NoViableAltException newNoViableAltException:11 state:0 stream:input];
             @throw nvae;
         }
 
@@ -2658,12 +2658,12 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
             case 1 : ;
                 // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:86:7: K_ID // alt
                 {
-                root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
                 /* ASTParser tokenRef */
-                K_ID49=(ANTLRCommonToken *)[self match:input TokenType:K_ID Follow:FOLLOW_K_ID_in_atom680]; 
+                K_ID49=(CommonToken *)[self match:input TokenType:K_ID Follow:FOLLOW_K_ID_in_atom680]; 
                 K_ID49_tree = /* ASTParser createNodeFromToken */
-                (ANTLRCommonTree *)[[treeAdaptor createTree:K_ID49] retain];
+                (CommonTree *)[[treeAdaptor createTree:K_ID49] retain];
                 [treeAdaptor addChild:K_ID49_tree  toTree:root_0];
                   /* element() */
                  /* elements */
@@ -2672,12 +2672,12 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
             case 2 : ;
                 // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:87:7: K_INT // alt
                 {
-                root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
                 /* ASTParser tokenRef */
-                K_INT50=(ANTLRCommonToken *)[self match:input TokenType:K_INT Follow:FOLLOW_K_INT_in_atom694]; 
+                K_INT50=(CommonToken *)[self match:input TokenType:K_INT Follow:FOLLOW_K_INT_in_atom694]; 
                 K_INT50_tree = /* ASTParser createNodeFromToken */
-                (ANTLRCommonTree *)[[treeAdaptor createTree:K_INT50] retain];
+                (CommonTree *)[[treeAdaptor createTree:K_INT50] retain];
                 [treeAdaptor addChild:K_INT50_tree  toTree:root_0];
                   /* element() */
                  /* elements */
@@ -2686,7 +2686,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
             case 3 : ;
                 // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:88:7: '(' expr ')' // alt
                 {
-                char_literal51=(ANTLRCommonToken *)[self match:input TokenType:22 Follow:FOLLOW_22_in_atom708];  
+                char_literal51=(CommonToken *)[self match:input TokenType:22 Follow:FOLLOW_22_in_atom708];  
                     [stream_22 addElement:char_literal51];
                   /* element() */
                 [self pushFollow:FOLLOW_expr_in_atom710];
@@ -2695,7 +2695,7 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 
 
                 [stream_expr addElement:[expr52 getTree]];  /* element() */
-                char_literal53=(ANTLRCommonToken *)[self match:input TokenType:24 Follow:FOLLOW_24_in_atom712];  
+                char_literal53=(CommonToken *)[self match:input TokenType:24 Follow:FOLLOW_24_in_atom712];  
                     [stream_24 addElement:char_literal53];
                   /* element() */
                  /* elements */
@@ -2711,12 +2711,12 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
 
                 retval.tree = root_0;
 
-                ANTLRRewriteRuleSubtreeStream *stream_retval =
-                    [[ANTLRRewriteRuleSubtreeStream newANTLRRewriteRuleSubtreeStream:treeAdaptor
+                RewriteRuleSubtreeStream *stream_retval =
+                    [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
                                                                         description:@"token retval"
                                                                             element:retval!=nil?[retval getTree]:nil] retain];
 
-                root_0 = (ANTLRCommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
+                root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
                 // 88:20: -> expr
                 {
@@ -2739,15 +2739,15 @@ static const unsigned long long FOLLOW_24_in_atom712_data[] = { 0x00000000000000
         [stream_24 release];
         [stream_expr release];
 
-            retval.tree = (ANTLRCommonTree *)[treeAdaptor rulePostProcessing:root_0];
+            retval.tree = (CommonTree *)[treeAdaptor rulePostProcessing:root_0];
             [treeAdaptor setTokenBoundaries:retval.tree From:retval.start To:retval.stopToken];
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
         /* ASTParser rule.setErrorReturnValue */
-        retval.tree = (ANTLRCommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
+        retval.tree = (CommonTree *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
 
     }    @finally {
     }

@@ -98,12 +98,12 @@ const static NSInteger dfa4_transition11[] = {17};
 const static NSInteger dfa4_transition12[] = {30};
 
 
-+ () newDFA4WithRecognizer:(ANTLRBaseRecognizer *)aRecognizer
++ () newDFA4WithRecognizer:(BaseRecognizer *)aRecognizer
 {
     return [[[DFA4 alloc] initWithRecognizer:aRecognizer] retain];
 }
 
-- (id) initWithRecognizer:(ANTLRBaseRecognizer *) theRecognizer
+- (id) initWithRecognizer:(BaseRecognizer *) theRecognizer
 {
     if ((self = [super initWithRecognizer:theRecognizer]) != nil) {
         decisionNumber = 4;
@@ -181,7 +181,7 @@ const static NSInteger dfa4_transition12[] = {30};
 
 + (void) initialize
 {
-    [ANTLRBaseRecognizer setGrammarFileName:@"/usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g"];
+    [BaseRecognizer setGrammarFileName:@"/usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g"];
 }
 
 + (NSString *) tokenNameForType:(NSInteger)aTokenType
@@ -189,14 +189,14 @@ const static NSInteger dfa4_transition12[] = {30};
     return [[self getTokenNames] objectAtIndex:aTokenType];
 }
 
-+ (SimpleCLexer *)newSimpleCLexer:(id<ANTLRCharStream>)anInput
++ (SimpleCLexer *)newSimpleCLexer:(id<CharStream>)anInput
 {
     return [[SimpleCLexer alloc] initWithCharStream:anInput];
 }
 
-- (id) initWithCharStream:(id<ANTLRCharStream>)anInput
+- (id) initWithCharStream:(id<CharStream>)anInput
 {
-    if ((self = [super initWithCharStream:anInput State:[ANTLRRecognizerSharedState newANTLRRecognizerSharedStateWithRuleLen:18+1]]) != nil) {
+    if ((self = [super initWithCharStream:anInput State:[RecognizerSharedState newRecognizerSharedStateWithRuleLen:18+1]]) != nil) {
 
         dfa4 = [DFA4 newDFA4WithRecognizer:self];
     }
@@ -221,7 +221,7 @@ const static NSInteger dfa4_transition12[] = {30};
 
     @try {
         NSInteger _type = T__21;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:7:7: ( ';' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:7:9: ';' // alt
         {
@@ -251,7 +251,7 @@ const static NSInteger dfa4_transition12[] = {30};
 
     @try {
         NSInteger _type = T__22;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:8:7: ( '(' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:8:9: '(' // alt
         {
@@ -281,7 +281,7 @@ const static NSInteger dfa4_transition12[] = {30};
 
     @try {
         NSInteger _type = T__23;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:9:7: ( ',' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:9:9: ',' // alt
         {
@@ -311,7 +311,7 @@ const static NSInteger dfa4_transition12[] = {30};
 
     @try {
         NSInteger _type = T__24;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:10:7: ( ')' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:10:9: ')' // alt
         {
@@ -341,7 +341,7 @@ const static NSInteger dfa4_transition12[] = {30};
 
     @try {
         NSInteger _type = T__25;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:11:7: ( '{' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:11:9: '{' // alt
         {
@@ -371,7 +371,7 @@ const static NSInteger dfa4_transition12[] = {30};
 
     @try {
         NSInteger _type = T__26;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:12:7: ( '}' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:12:9: '}' // alt
         {
@@ -401,7 +401,7 @@ const static NSInteger dfa4_transition12[] = {30};
 
     @try {
         NSInteger _type = K_FOR;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:91:7: ( 'for' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:91:9: 'for' // alt
         {
@@ -431,7 +431,7 @@ const static NSInteger dfa4_transition12[] = {30};
 
     @try {
         NSInteger _type = K_INT_TYPE;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:92:12: ( 'int' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:92:14: 'int' // alt
         {
@@ -461,7 +461,7 @@ const static NSInteger dfa4_transition12[] = {30};
 
     @try {
         NSInteger _type = K_CHAR;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:93:7: ( 'char' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:93:9: 'char' // alt
         {
@@ -491,7 +491,7 @@ const static NSInteger dfa4_transition12[] = {30};
 
     @try {
         NSInteger _type = K_VOID;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:94:7: ( 'void' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:94:9: 'void' // alt
         {
@@ -521,7 +521,7 @@ const static NSInteger dfa4_transition12[] = {30};
 
     @try {
         NSInteger _type = K_ID;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:96:7: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:96:11: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* // alt
         {
@@ -529,7 +529,7 @@ const static NSInteger dfa4_transition12[] = {30};
             [input consume];
 
         } else {
-            ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException exceptionWithSet:nil stream:input];
+            MismatchedSetException *mse = [MismatchedSetException exceptionWithSet:nil stream:input];
             [self recover:mse];
             @throw mse;}
           /* element() */
@@ -549,7 +549,7 @@ const static NSInteger dfa4_transition12[] = {30};
                         [input consume];
 
                     } else {
-                        ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException exceptionWithSet:nil stream:input];
+                        MismatchedSetException *mse = [MismatchedSetException exceptionWithSet:nil stream:input];
                         [self recover:mse];
                         @throw mse;}
                       /* element() */
@@ -587,8 +587,8 @@ const static NSInteger dfa4_transition12[] = {30};
 
     @try {
         NSInteger _type = K_INT;
-        NSInteger _channel = ANTLRTokenChannelDefault;
-        id<ANTLRToken> *int=nil;
+        NSInteger _channel = TokenChannelDefault;
+        id<Token> *int=nil;
         AMutableArray *list_int=nil; 
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:99:7: ( (int+= ( '0' .. '9' ) )+ ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:99:9: (int+= ( '0' .. '9' ) )+ // alt
@@ -621,7 +621,7 @@ const static NSInteger dfa4_transition12[] = {30};
                 default :
                     if ( cnt2 >= 1 )
                         goto loop2;
-                    ANTLREarlyExitException *eee = [ANTLREarlyExitException exceptionWithStream:input decisionNumber:2];
+                    EarlyExitException *eee = [EarlyExitException exceptionWithStream:input decisionNumber:2];
                     @throw eee;
             }
             cnt2++;
@@ -654,7 +654,7 @@ const static NSInteger dfa4_transition12[] = {30};
 
     @try {
         NSInteger _type = K_EQ;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:102:8: ( '=' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:102:10: '=' // alt
         {
@@ -684,7 +684,7 @@ const static NSInteger dfa4_transition12[] = {30};
 
     @try {
         NSInteger _type = K_EQEQ;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:103:8: ( '==' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:103:10: '==' // alt
         {
@@ -714,7 +714,7 @@ const static NSInteger dfa4_transition12[] = {30};
 
     @try {
         NSInteger _type = K_LT;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:104:8: ( '<' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:104:10: '<' // alt
         {
@@ -744,7 +744,7 @@ const static NSInteger dfa4_transition12[] = {30};
 
     @try {
         NSInteger _type = K_PLUS;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:105:8: ( '+' ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:105:10: '+' // alt
         {
@@ -774,7 +774,7 @@ const static NSInteger dfa4_transition12[] = {30};
 
     @try {
         NSInteger _type = WS;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:107:5: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/simplecTreeParser/SimpleC.g:107:9: ( ' ' | '\\t' | '\\r' | '\\n' )+ // alt
         {
@@ -796,7 +796,7 @@ const static NSInteger dfa4_transition12[] = {30};
                         [input consume];
 
                     } else {
-                        ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException exceptionWithSet:nil stream:input];
+                        MismatchedSetException *mse = [MismatchedSetException exceptionWithSet:nil stream:input];
                         [self recover:mse];
                         @throw mse;}
                       /* element() */
@@ -807,7 +807,7 @@ const static NSInteger dfa4_transition12[] = {30};
                 default :
                     if ( cnt3 >= 1 )
                         goto loop3;
-                    ANTLREarlyExitException *eee = [ANTLREarlyExitException exceptionWithStream:input decisionNumber:3];
+                    EarlyExitException *eee = [EarlyExitException exceptionWithStream:input decisionNumber:3];
                     @throw eee;
             }
             cnt3++;

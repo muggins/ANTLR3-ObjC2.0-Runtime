@@ -4,7 +4,8 @@
  * Standard antlr3 OBJC runtime definitions
  */
 #import <Cocoa/Cocoa.h>
-#import "antlr3.h"
+#import <ANTLR/ANTLR.h>
+#import <ST4/ST.h>
 
 /* End of standard antlr3 runtime definitions
  * =============================================================================
@@ -39,7 +40,7 @@ typedef enum {
 #pragma mark Dynamic Rule Scopes
 #pragma mark Rule Return Scopes start
 /* returnScopeInterface */
-@interface PolyPrinter_poly_return :ANTLRTreeRuleReturnScope { /* returnScopeInterface line 1838 */
+@interface PolyPrinter_poly_return :TreeRuleReturnScope { /* returnScopeInterface line 1838 */
 ST *st; /* start of memVars() */
 }
  /* start properties */
@@ -50,7 +51,7 @@ ST *st; /* start of memVars() */
 @end /* end of returnScopeInterface interface */
 
 #pragma mark Rule return scopes end
-@interface PolyPrinter : ANTLRTreeParser { /* line 572 */
+@interface PolyPrinter : TreeParser { /* line 572 */
 // start of globalAttributeScopeMemVar
 
 
@@ -63,7 +64,7 @@ ST *st; /* start of memVars() */
  }
 
 // start of action-actionScope-methodsDecl
-+ (id) newPolyPrinter:(id<ANTLRTreeNodeStream>)aStream;
++ (id) newPolyPrinter:(id<TreeNodeStream>)aStream;
 
 
 

@@ -2,7 +2,7 @@ tree grammar PolyDifferentiator;
 options {
 	tokenVocab=Poly;
     language=ObjC;
-	ASTLabelType=ANTLRCommonTree;
+	ASTLabelType=CommonTree;
 	output=AST;
 //	rewrite=true; // works either in rewrite or normal mode
 }

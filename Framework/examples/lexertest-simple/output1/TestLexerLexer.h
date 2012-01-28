@@ -17,7 +17,7 @@
 #define ID 6
 #define EOF -1
 #define LETTER 4
-@interface TestLexer : ANTLRLexer {
+@interface TestLexer : Lexer {
 }
 - (void) mID; 
 - (void) mDIGIT; 

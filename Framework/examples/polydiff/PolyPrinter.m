@@ -42,6 +42,8 @@
 /* -----------------------------------------
  * Include the ANTLR3 generated header file.
  */
+#import <ST4/ST.h>
+#import <ST4/STGroup.h>
 #import "PolyPrinter.h"
 /* ----------------------------------------- */
 
@@ -106,24 +108,24 @@ static const unsigned long long FOLLOW_ID_in_poly148_data[] = { 0x00000000000000
 + (void) initialize
 {
     #pragma mark Bitsets
-    FOLLOW_8_in_poly43 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_8_in_poly43_data Count:(NSUInteger)1] retain];
-    FOLLOW_poly_in_poly48 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_poly_in_poly48_data Count:(NSUInteger)1] retain];
-    FOLLOW_poly_in_poly52 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_poly_in_poly52_data Count:(NSUInteger)1] retain];
-    FOLLOW_MULT_in_poly74 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_MULT_in_poly74_data Count:(NSUInteger)1] retain];
-    FOLLOW_poly_in_poly78 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_poly_in_poly78_data Count:(NSUInteger)1] retain];
-    FOLLOW_poly_in_poly82 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_poly_in_poly82_data Count:(NSUInteger)1] retain];
-    FOLLOW_9_in_poly104 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_9_in_poly104_data Count:(NSUInteger)1] retain];
-    FOLLOW_poly_in_poly109 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_poly_in_poly109_data Count:(NSUInteger)1] retain];
-    FOLLOW_poly_in_poly113 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_poly_in_poly113_data Count:(NSUInteger)1] retain];
-    FOLLOW_INT_in_poly134 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_INT_in_poly134_data Count:(NSUInteger)1] retain];
-    FOLLOW_ID_in_poly148 = [[ANTLRBitSet newANTLRBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_poly148_data Count:(NSUInteger)1] retain];
+    FOLLOW_8_in_poly43 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_8_in_poly43_data Count:(NSUInteger)1] retain];
+    FOLLOW_poly_in_poly48 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_poly_in_poly48_data Count:(NSUInteger)1] retain];
+    FOLLOW_poly_in_poly52 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_poly_in_poly52_data Count:(NSUInteger)1] retain];
+    FOLLOW_MULT_in_poly74 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_MULT_in_poly74_data Count:(NSUInteger)1] retain];
+    FOLLOW_poly_in_poly78 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_poly_in_poly78_data Count:(NSUInteger)1] retain];
+    FOLLOW_poly_in_poly82 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_poly_in_poly82_data Count:(NSUInteger)1] retain];
+    FOLLOW_9_in_poly104 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_9_in_poly104_data Count:(NSUInteger)1] retain];
+    FOLLOW_poly_in_poly109 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_poly_in_poly109_data Count:(NSUInteger)1] retain];
+    FOLLOW_poly_in_poly113 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_poly_in_poly113_data Count:(NSUInteger)1] retain];
+    FOLLOW_INT_in_poly134 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_INT_in_poly134_data Count:(NSUInteger)1] retain];
+    FOLLOW_ID_in_poly148 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_poly148_data Count:(NSUInteger)1] retain];
 
-    [ANTLRBaseRecognizer setTokenNames:[[NSArray arrayWithObjects:@"<invalid>", @"<EOR>", @"<DOWN>", @"<UP>", 
+    [BaseRecognizer setTokenNames:[[NSArray arrayWithObjects:@"<invalid>", @"<EOR>", @"<DOWN>", @"<UP>", 
  @"MULT", @"INT", @"ID", @"WS", @"'+'", @"'^'", nil] retain]];
-    [ANTLRBaseRecognizer setGrammarFileName:@"PolyPrinter.g"];
+    [BaseRecognizer setGrammarFileName:@"PolyPrinter.g"];
 }
 
-+ (PolyPrinter *)newPolyPrinter:(id<ANTLRTreeNodeStream>)aStream
++ (PolyPrinter *)newPolyPrinter:(id<TreeNodeStream>)aStream
 {
 
     return [[PolyPrinter alloc] initWithStream:aStream];
@@ -131,9 +133,9 @@ static const unsigned long long FOLLOW_ID_in_poly148_data[] = { 0x00000000000000
 }
 
 
-- (id) initWithStream:(id<ANTLRTreeNodeStream>)aStream
+- (id) initWithStream:(id<TreeNodeStream>)aStream
 {
-    if ((self = [super initWithStream:aStream State:[[ANTLRRecognizerSharedState newANTLRRecognizerSharedStateWithRuleLen:1+1] retain]]) != nil) {
+    if ((self = [super initWithStream:aStream State:[[RecognizerSharedState newRecognizerSharedStateWithRuleLen:1+1] retain]]) != nil) {
 
 
         /* start of actions-actionScope-init */
@@ -150,10 +152,10 @@ static const unsigned long long FOLLOW_ID_in_poly148_data[] = { 0x00000000000000
 /* members */
  
 
-// start actions.actionScope.methods
-// start methods()
-//protected StringTemplateGroup templateLib = new StringTemplateGroup("PolyPrinterTemplates", AngleBracketTemplateLexer.class);
-STGroup templateLib = [STGroup newSTGroup:"PolyPrinterTemplates" lexer:AngleBracketTemplateLexer.class];
+/* start actions.actionScope.methods */
+/* start methods() */
+/*protected StringTemplateGroup templateLib = new StringTemplateGroup("PolyPrinterTemplates", AngleBracketTemplateLexer.class); */
+STGroup *templateLib = [STGroup newSTGroup];
 
 //public void setTemplateLib(StringTemplateGroup templateLib) {
 //  this.templateLib = templateLib;
@@ -166,6 +168,7 @@ STGroup templateLib = [STGroup newSTGroup:"PolyPrinterTemplates" lexer:AngleBrac
 /** allows convenient multi-value initialization:
  *  "new STAttrMap().put(...).put(...)"
  */
+/*
 public static class STAttrMap extends HashMap {
   public STAttrMap put(String attrName, Object value) {
     super.put(attrName, value);
@@ -176,6 +179,7 @@ public static class STAttrMap extends HashMap {
     return this;
   }
 }
+ */
 // start rules
 /*
  * $ANTLR start poly
@@ -189,8 +193,8 @@ public static class STAttrMap extends HashMap {
     [retval setStart:[input LT:1]];
 
     @try {
-        ANTLRCommonTree *INT1 = nil;
-        ANTLRCommonTree *ID2 = nil;
+        CommonTree *INT1 = nil;
+        CommonTree *ID2 = nil;
         PolyPrinter_poly_return * a = nil;
 
         PolyPrinter_poly_return * b = nil;
@@ -226,7 +230,7 @@ public static class STAttrMap extends HashMap {
                 break;
 
         default: ;
-            ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newANTLRNoViableAltException:1 state:0 stream:input];
+            NoViableAltException *nvae = [NoViableAltException newException:1 state:0 stream:input];
             @throw nvae;
         }
 
@@ -326,8 +330,8 @@ public static class STAttrMap extends HashMap {
                 // TEMPLATE REWRITE
                 // 11:26: -> template(a=$a.stb=$b.st) \"<a>^<b>\"
                 {
-                    retval.st = new StringTemplate(templateLib, "<a>^<b>",
-                  new STAttrMap().put("a", (a!=nil?[a st]:nil)).put("b", (b!=nil?[b st]:nil)));
+                    retval.st = [ST newST:@"<a>^<b>"]
+                    [retval.st add:@"a" value:@"b"];
                 }
 
 
@@ -336,13 +340,13 @@ public static class STAttrMap extends HashMap {
             case 4 : ;
                 // PolyPrinter.g:12:4: INT // alt
                 {
-                INT1=(ANTLRCommonTree *)[self match:input TokenType:INT Follow:FOLLOW_INT_in_poly134]; 
+                INT1=(CommonTree *)[self match:input TokenType:INT Follow:FOLLOW_INT_in_poly134]; 
 
 
                 // TEMPLATE REWRITE
                 // 12:13: -> {%{$INT.text}}
                 {
-                    retval.st = new StringTemplate(templateLib,(INT1!=nil?[INT1 getText]:0));
+                    retval.st = [ST newST:(INT1!=nil?INT1.text:nil)];
                 }
 
 
@@ -351,13 +355,13 @@ public static class STAttrMap extends HashMap {
             case 5 : ;
                 // PolyPrinter.g:13:4: ID // alt
                 {
-                ID2=(ANTLRCommonTree *)[self match:input TokenType:ID Follow:FOLLOW_ID_in_poly148]; 
+                ID2=(CommonTree *)[self match:input TokenType:ID Follow:FOLLOW_ID_in_poly148]; 
 
 
                 // TEMPLATE REWRITE
                 // 13:12: -> {%{$ID.text}}
                 {
-                    retval.st = new StringTemplate(templateLib,(ID2!=nil?[ID2 getText]:0));
+                    retval.st = [ST newST:ID2!=nil?[ID2.text]:nil];
                 }
 
 
@@ -368,7 +372,7 @@ public static class STAttrMap extends HashMap {
         // token+rule list labels
 
     }
-    @catch (ANTLRRecognitionException *re) {
+    @catch (RecognitionException *re) {
         [self reportError:re];
         [self recover:input Exception:re];
     }

@@ -8,7 +8,7 @@
 */
 @implementation TestLexer
 
-- (id) initWithCharStream:(id<ANTLRCharStream>)anInput
+- (id) initWithCharStream:(id<CharStream>)anInput
 {
 	if ((self = [super initWithCharStream:anInput]) != nil) {
 	}
@@ -59,7 +59,7 @@
         	    	[input consume];
 
         	    } else {
-        	    	ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException exceptionWithSet:nil stream:input];
+        	    	MismatchedSetException *mse = [MismatchedSetException exceptionWithSet:nil stream:input];
         	    	[self recover:mse];	@throw mse;
         	    }
 
@@ -122,7 +122,7 @@
         	[input consume];
 
         } else {
-        	ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException exceptionWithSet:nil stream:input];
+        	MismatchedSetException *mse = [MismatchedSetException exceptionWithSet:nil stream:input];
         	[self recover:mse];	@throw mse;
         }
 

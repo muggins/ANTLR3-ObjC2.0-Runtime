@@ -31,7 +31,7 @@
 
 + (void) initialize
 {
-    [ANTLRBaseRecognizer setGrammarFileName:@"Poly.g"];
+    [BaseRecognizer setGrammarFileName:@"Poly.g"];
 }
 
 + (NSString *) tokenNameForType:(NSInteger)aTokenType
@@ -39,14 +39,14 @@
     return [[self getTokenNames] objectAtIndex:aTokenType];
 }
 
-+ (PolyLexer *)newPolyLexerWithCharStream:(id<ANTLRCharStream>)anInput
++ (PolyLexer *)newPolyLexerWithCharStream:(id<CharStream>)anInput
 {
     return [[PolyLexer alloc] initWithCharStream:anInput];
 }
 
-- (id) initWithCharStream:(id<ANTLRCharStream>)anInput
+- (id) initWithCharStream:(id<CharStream>)anInput
 {
-    self = [super initWithCharStream:anInput State:[[ANTLRRecognizerSharedState newANTLRRecognizerSharedStateWithRuleLen:6+1] retain]];
+    self = [super initWithCharStream:anInput State:[[RecognizerSharedState newRecognizerSharedStateWithRuleLen:6+1] retain]];
     if ( self != nil ) {
     }
     return self;
@@ -72,7 +72,7 @@
 
     @try {
         NSInteger _type = T__8;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // Poly.g:7:6: ( '+' ) // ruleBlockSingleAlt
         // Poly.g:7:8: '+' // alt
         {
@@ -104,7 +104,7 @@
 
     @try {
         NSInteger _type = T__9;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // Poly.g:8:6: ( '^' ) // ruleBlockSingleAlt
         // Poly.g:8:8: '^' // alt
         {
@@ -139,7 +139,7 @@
 
     @try {
         NSInteger _type = ID;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // Poly.g:22:5: ( ( 'a' .. 'z' )+ ) // ruleBlockSingleAlt
         // Poly.g:22:7: ( 'a' .. 'z' )+ // alt
         {
@@ -160,7 +160,7 @@
                     if ((([input LA:1] >= 'a') && ([input LA:1] <= 'z'))) {
                         [input consume];
                     } else {
-                        ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException newException:nil stream:input];
+                        MismatchedSetException *mse = [MismatchedSetException newException:nil stream:input];
                         [self recover:mse];
                         @throw mse;
                     }
@@ -172,8 +172,8 @@
                 default :
                     if ( cnt1 >= 1 )
                         goto loop1;
-                    ANTLREarlyExitException *eee =
-                        [ANTLREarlyExitException newException:input decisionNumber:1];
+                    EarlyExitException *eee =
+                        [EarlyExitException newException:input decisionNumber:1];
                     @throw eee;
             }
             cnt1++;
@@ -209,7 +209,7 @@
 
     @try {
         NSInteger _type = INT;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // Poly.g:25:5: ( ( '0' .. '9' )+ ) // ruleBlockSingleAlt
         // Poly.g:25:7: ( '0' .. '9' )+ // alt
         {
@@ -230,7 +230,7 @@
                     if ((([input LA:1] >= '0') && ([input LA:1] <= '9'))) {
                         [input consume];
                     } else {
-                        ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException newException:nil stream:input];
+                        MismatchedSetException *mse = [MismatchedSetException newException:nil stream:input];
                         [self recover:mse];
                         @throw mse;
                     }
@@ -242,8 +242,8 @@
                 default :
                     if ( cnt2 >= 1 )
                         goto loop2;
-                    ANTLREarlyExitException *eee =
-                        [ANTLREarlyExitException newException:input decisionNumber:2];
+                    EarlyExitException *eee =
+                        [EarlyExitException newException:input decisionNumber:2];
                     @throw eee;
             }
             cnt2++;
@@ -276,7 +276,7 @@
 
     @try {
         NSInteger _type = WS;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // Poly.g:27:4: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ ) // ruleBlockSingleAlt
         // Poly.g:27:6: ( ' ' | '\\t' | '\\r' | '\\n' )+ // alt
         {
@@ -297,7 +297,7 @@
                     if ((([input LA:1] >= '\t') && ([input LA:1] <= '\n'))||[input LA:1] == '\r'||[input LA:1] == ' ') {
                         [input consume];
                     } else {
-                        ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException newException:nil stream:input];
+                        MismatchedSetException *mse = [MismatchedSetException newException:nil stream:input];
                         [self recover:mse];
                         @throw mse;
                     }
@@ -309,8 +309,8 @@
                 default :
                     if ( cnt3 >= 1 )
                         goto loop3;
-                    ANTLREarlyExitException *eee =
-                        [ANTLREarlyExitException newException:input decisionNumber:3];
+                    EarlyExitException *eee =
+                        [EarlyExitException newException:input decisionNumber:3];
                     @throw eee;
             }
             cnt3++;
@@ -407,7 +407,7 @@
             break;
 
     default: ;
-        ANTLRNoViableAltException *nvae = [ANTLRNoViableAltException newException:4 state:0 stream:input];
+        NoViableAltException *nvae = [NoViableAltException newException:4 state:0 stream:input];
         nvae.c = charLA4;
         @throw nvae;
 

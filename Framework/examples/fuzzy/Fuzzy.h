@@ -37,7 +37,7 @@
 #define TYPE 20
 #define WS 21
 /* interface lexer class */
-@interface Fuzzy : ANTLRLexer { // line 283
+@interface Fuzzy : Lexer { // line 283
 SEL synpred9_FuzzySelector;
 SEL synpred2_FuzzySelector;
 SEL synpred7_FuzzySelector;
@@ -51,7 +51,7 @@ SEL synpred1_FuzzySelector;
 /* ObjC end of actions.lexer.memVars */
 }
 + (void) initialize;
-+ (Fuzzy *)newFuzzyWithCharStream:(id<ANTLRCharStream>)anInput;
++ (Fuzzy *)newFuzzyWithCharStream:(id<CharStream>)anInput;
 /* ObjC start actions.lexer.methodsDecl */
 /* ObjC end actions.lexer.methodsDecl */
 - (void) mIMPORT ; 

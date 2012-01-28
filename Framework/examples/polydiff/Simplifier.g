@@ -2,7 +2,7 @@ tree grammar Simplifier;
 options {
 	tokenVocab=Poly;
     language=ObjC;
-	ASTLabelType=ANTLRCommonTree;
+	ASTLabelType=CommonTree;
 	output=AST;
 	backtrack=true;
 //	rewrite=true; // works either in rewrite or normal mode

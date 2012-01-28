@@ -1,9 +1,9 @@
-// $ANTLR ${project.version} ${buildNumber} Combined.g 2011-05-06 11:53:18
+// $ANTLR ${project.version} ${buildNumber} Combined.g 2011-06-20 13:45:25
 
 /* =============================================================================
  * Standard antlr3 OBJC runtime definitions
  */
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 #import <ANTLR/ANTLR.h>
 /* End of standard antlr3 runtime definitions
  * =============================================================================
@@ -30,20 +30,16 @@ typedef enum {
 #define ID 4
 #define INT 5
 #define WS 6
-#pragma mark Dynamic Global Scopes
-#pragma mark Dynamic Rule Scopes
-#pragma mark Rule Return Scopes start
+#pragma mark Dynamic Global Scopes globalAttributeScopeInterface
+#pragma mark Dynamic Rule Scopes ruleAttributeScopeInterface
+#pragma mark Rule Return Scopes returnScopeInterface
 
 /* Interface grammar class */
-@interface CombinedParser : ANTLRParser { /* line 572 */
-/* ObjC start of ruleAttributeScopeMemVar */
+@interface CombinedParser  : Parser { /* line 572 */
+#pragma mark Dynamic Rule Scopes ruleAttributeScopeDecl
+#pragma mark Dynamic Global Rule Scopes globalAttributeScopeMemVar
 
 
-/* ObjC end of ruleAttributeScopeMemVar */
-/* ObjC start of globalAttributeScopeMemVar */
-
-
-/* ObjC end of globalAttributeScopeMemVar */
 /* ObjC start of actions.(actionScope).memVars */
 /* ObjC end of actions.(actionScope).memVars */
 /* ObjC start of memVars */
@@ -57,7 +53,7 @@ typedef enum {
 /* ObjC end of properties */
 
 + (void) initialize;
-+ (id) newCombinedParser:(id<ANTLRTokenStream>)aStream;
++ (id) newCombinedParser:(id<TokenStream>)aStream;
 /* ObjC start of actions.(actionScope).methodsDecl */
 /* ObjC end of actions.(actionScope).methodsDecl */
 

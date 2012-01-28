@@ -23,20 +23,20 @@
 #define T__8 8
 #define T__7 7
 #pragma mark Dynamic Global Scopes
-@interface Symbols_Scope : ANTLRSymbolsScope {  /* globalAttributeScopeDecl */
-ANTLRHashMap * names;
+@interface Symbols_Scope : SymbolsScope {  /* globalAttributeScopeDecl */
+HashMap * names;
 }
 /* start of properties */
 
-@property (retain, getter=getnames, setter=setnames:) ANTLRHashMap * names;
+@property (retain, getter=getnames, setter=setnames:) HashMap * names;
 
 /* end properties */
 
 + (Symbols_Scope *)newSymbols_Scope;
 /* start of iterated get and set functions */
 
-- (ANTLRHashMap *)getnames;
-- (void)setnames:(ANTLRHashMap *)aVal;
+- (HashMap *)getnames;
+- (void)setnames:(HashMap *)aVal;
 
 /* End of iterated get and set functions */
 
@@ -44,10 +44,10 @@ ANTLRHashMap * names;
 #pragma mark Dynamic Rule Scopes
 #pragma mark Rule Return Scopes start
 #pragma mark Rule return scopes end
-@interface SymbolTableParser : ANTLRParser { // line 529
+@interface SymbolTableParser : Parser { // line 529
 // start of globalAttributeScopeMemVar
 /* globalAttributeScopeMemVar */
-ANTLRSymbolStack *gStack;
+SymbolStack *gStack;
 Symbols_Scope *Symbols_scope;
 
 // start of action-actionScope-memVars

@@ -62,12 +62,12 @@
 
 + (void) initialize
 {
-    [ANTLRBaseRecognizer setGrammarFileName:@"/usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/lexertest-simple/TestLexer.g"];
+    [BaseRecognizer setGrammarFileName:@"/usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/lexertest-simple/TestLexer.g"];
 }
 
-- (id) initWithCharStream:(id<ANTLRCharStream>)anInput
+- (id) initWithCharStream:(id<CharStream>)anInput
 {
-    if ((self = [super initWithCharStream:anInput State:[ANTLRRecognizerSharedState newANTLRRecognizerSharedStateWithRuleLen:4+1]]) != nil) {
+    if ((self = [super initWithCharStream:anInput State:[RecognizerSharedState newRecognizerSharedStateWithRuleLen:4+1]]) != nil) {
     }
     return self;
 }
@@ -90,7 +90,7 @@
 
     @try {
         NSInteger _type = ID;
-        NSInteger _channel = ANTLRTokenChannelDefault;
+        NSInteger _channel = TokenChannelDefault;
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/lexertest-simple/TestLexer.g:8:4: ( LETTER ( LETTER | DIGIT )* ) // ruleBlockSingleAlt
         // /usr/local/ANTLR3-ObjC2.0-Runtime/Framework/examples/lexertest-simple/TestLexer.g:8:6: LETTER ( LETTER | DIGIT )* // alt
         {
@@ -114,7 +114,7 @@
                         [input consume];
 
                     } else {
-                        ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException exceptionWithSet:nil stream:input];
+                        MismatchedSetException *mse = [MismatchedSetException exceptionWithSet:nil stream:input];
                         [self recover:mse];
                         @throw mse;}
                       /* element() */
@@ -180,7 +180,7 @@
             [input consume];
 
         } else {
-            ANTLRMismatchedSetException *mse = [ANTLRMismatchedSetException exceptionWithSet:nil stream:input];
+            MismatchedSetException *mse = [MismatchedSetException exceptionWithSet:nil stream:input];
             [self recover:mse];
             @throw mse;}
           /* element() */
