@@ -1,7 +1,7 @@
-// $ANTLR ${project.version} ${buildNumber} Simplifier.g 2011-05-06 19:19:02
+// $ANTLR 3.4 /Users/acondit/source/antlr/code/antlr3/runtime/ObjC/Framework/examples/polydiff/Simplifier.g 2012-02-16 18:11:30
 
 /* =============================================================================
- * Standard antlr3 OBJC runtime definitions
+ * Standard antlr OBJC runtime definitions
  */
 #import <Cocoa/Cocoa.h>
 #import <ANTLR/ANTLR.h>
@@ -33,110 +33,126 @@ typedef enum {
 #define INT 5
 #define MULT 6
 #define WS 7
-#pragma mark Dynamic Global Scopes
-#pragma mark Dynamic Rule Scopes
-#pragma mark Rule Return Scopes start
+#pragma mark Dynamic Global Scopes globalAttributeScopeInterface
+#pragma mark Dynamic Rule Scopes ruleAttributeScopeInterface
+#pragma mark Rule Return Scopes returnScopeInterface
 /* returnScopeInterface Simplifier_poly_return */
-@interface Simplifier_poly_return :TreeRuleReturnScope { /* returnScopeInterface line 1838 */
+@interface Simplifier_poly_return : TreeRuleReturnScope { /* returnScopeInterface line 1838 */
 /* ASTTreeParser returnScopeInterface.memVars */
 CommonTree *tree; /* ObjC start of memVars() */
+
 }
-/* start properties */
+/* start property declarations */
 /* AST returnScopeInterface.properties */
 @property (retain, getter=getTree, setter=setTree:) CommonTree *tree;
+
+/* start of method declarations */
+
 + (Simplifier_poly_return *)newSimplifier_poly_return;
 /* this is start of set and get methods */
 /* ASTTreeParser returnScopeInterface.methodsDecl */
 - (CommonTree *)getTree;
 - (void) setTree:(CommonTree *)aTree;
   /* methodsDecl */
+
 @end /* end of returnScopeInterface interface */
 
 
-
 /* returnScopeInterface Simplifier_synpred1_Simplifier_return */
-@interface Simplifier_synpred1_Simplifier_return :TreeRuleReturnScope { /* returnScopeInterface line 1838 */
+@interface Simplifier_synpred1_Simplifier_return : TreeRuleReturnScope { /* returnScopeInterface line 1838 */
 /* ASTTreeParser returnScopeInterface.memVars */
 CommonTree *tree; /* ObjC start of memVars() */
+
 }
-/* start properties */
+/* start property declarations */
 /* AST returnScopeInterface.properties */
 @property (retain, getter=getTree, setter=setTree:) CommonTree *tree;
+
+/* start of method declarations */
+
 + (Simplifier_synpred1_Simplifier_return *)newSimplifier_synpred1_Simplifier_return;
 /* this is start of set and get methods */
 /* ASTTreeParser returnScopeInterface.methodsDecl */
 - (CommonTree *)getTree;
 - (void) setTree:(CommonTree *)aTree;
   /* methodsDecl */
+
 @end /* end of returnScopeInterface interface */
 
 
-
 /* returnScopeInterface Simplifier_synpred2_Simplifier_return */
-@interface Simplifier_synpred2_Simplifier_return :TreeRuleReturnScope { /* returnScopeInterface line 1838 */
+@interface Simplifier_synpred2_Simplifier_return : TreeRuleReturnScope { /* returnScopeInterface line 1838 */
 /* ASTTreeParser returnScopeInterface.memVars */
 CommonTree *tree; /* ObjC start of memVars() */
+
 }
-/* start properties */
+/* start property declarations */
 /* AST returnScopeInterface.properties */
 @property (retain, getter=getTree, setter=setTree:) CommonTree *tree;
+
+/* start of method declarations */
+
 + (Simplifier_synpred2_Simplifier_return *)newSimplifier_synpred2_Simplifier_return;
 /* this is start of set and get methods */
 /* ASTTreeParser returnScopeInterface.methodsDecl */
 - (CommonTree *)getTree;
 - (void) setTree:(CommonTree *)aTree;
   /* methodsDecl */
+
 @end /* end of returnScopeInterface interface */
 
 
-
 /* returnScopeInterface Simplifier_synpred3_Simplifier_return */
-@interface Simplifier_synpred3_Simplifier_return :TreeRuleReturnScope { /* returnScopeInterface line 1838 */
+@interface Simplifier_synpred3_Simplifier_return : TreeRuleReturnScope { /* returnScopeInterface line 1838 */
 /* ASTTreeParser returnScopeInterface.memVars */
 CommonTree *tree; /* ObjC start of memVars() */
+
 }
-/* start properties */
+/* start property declarations */
 /* AST returnScopeInterface.properties */
 @property (retain, getter=getTree, setter=setTree:) CommonTree *tree;
+
+/* start of method declarations */
+
 + (Simplifier_synpred3_Simplifier_return *)newSimplifier_synpred3_Simplifier_return;
 /* this is start of set and get methods */
 /* ASTTreeParser returnScopeInterface.methodsDecl */
 - (CommonTree *)getTree;
 - (void) setTree:(CommonTree *)aTree;
   /* methodsDecl */
+
 @end /* end of returnScopeInterface interface */
 
 
-
 /* returnScopeInterface Simplifier_synpred4_Simplifier_return */
-@interface Simplifier_synpred4_Simplifier_return :TreeRuleReturnScope { /* returnScopeInterface line 1838 */
+@interface Simplifier_synpred4_Simplifier_return : TreeRuleReturnScope { /* returnScopeInterface line 1838 */
 /* ASTTreeParser returnScopeInterface.memVars */
 CommonTree *tree; /* ObjC start of memVars() */
+
 }
-/* start properties */
+/* start property declarations */
 /* AST returnScopeInterface.properties */
 @property (retain, getter=getTree, setter=setTree:) CommonTree *tree;
+
+/* start of method declarations */
+
 + (Simplifier_synpred4_Simplifier_return *)newSimplifier_synpred4_Simplifier_return;
 /* this is start of set and get methods */
 /* ASTTreeParser returnScopeInterface.methodsDecl */
 - (CommonTree *)getTree;
 - (void) setTree:(CommonTree *)aTree;
   /* methodsDecl */
+
 @end /* end of returnScopeInterface interface */
 
 
 
-
 /* Interface grammar class */
-@interface Simplifier : TreeParser { /* line 572 */
-/* ObjC start of ruleAttributeScopeMemVar */
+@interface Simplifier  : TreeParser { /* line 572 */
+#pragma mark Dynamic Rule Scopes ruleAttributeScopeDecl
+#pragma mark Dynamic Global Rule Scopes globalAttributeScopeMemVar
 
 
-/* ObjC end of ruleAttributeScopeMemVar */
-/* ObjC start of globalAttributeScopeMemVar */
-
-
-/* ObjC end of globalAttributeScopeMemVar */
 /* ObjC start of actions.(actionScope).memVars */
 /* ObjC end of actions.(actionScope).memVars */
 /* ObjC start of memVars */

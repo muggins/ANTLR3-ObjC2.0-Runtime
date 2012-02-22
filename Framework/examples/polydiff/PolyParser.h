@@ -1,7 +1,7 @@
-// $ANTLR ${project.version} ${buildNumber} Poly.g 2011-05-06 19:17:59
+// $ANTLR 3.4 /Users/acondit/source/antlr/code/antlr3/runtime/ObjC/Framework/examples/polydiff/Poly.g 2012-02-16 18:10:10
 
 /* =============================================================================
- * Standard antlr3 OBJC runtime definitions
+ * Standard antlr OBJC runtime definitions
  */
 #import <Cocoa/Cocoa.h>
 #import <ANTLR/ANTLR.h>
@@ -33,17 +33,21 @@ typedef enum {
 #define INT 5
 #define MULT 6
 #define WS 7
-#pragma mark Dynamic Global Scopes
-#pragma mark Dynamic Rule Scopes
-#pragma mark Rule Return Scopes start
+#pragma mark Dynamic Global Scopes globalAttributeScopeInterface
+#pragma mark Dynamic Rule Scopes ruleAttributeScopeInterface
+#pragma mark Rule Return Scopes returnScopeInterface
 /* returnScopeInterface PolyParser_poly_return */
-@interface PolyParser_poly_return :ParserRuleReturnScope { /* returnScopeInterface line 1838 */
+@interface PolyParser_poly_return : ParserRuleReturnScope { /* returnScopeInterface line 1838 */
 /* AST returnScopeInterface.memVars */
 CommonTree *tree; /* ObjC start of memVars() */
+
 }
-/* start properties */
+/* start property declarations */
 /* AST returnScopeInterface.properties */
 @property (retain, getter=getTree, setter=setTree:) CommonTree *tree;
+
+/* start of method declarations */
+
 + (PolyParser_poly_return *)newPolyParser_poly_return;
 /* this is start of set and get methods */
 /* AST returnScopeInterface.methodsDecl */
@@ -51,18 +55,22 @@ CommonTree *tree; /* ObjC start of memVars() */
 
 - (void) setTree:(CommonTree *)aTree;
   /* methodsDecl */
+
 @end /* end of returnScopeInterface interface */
 
 
-
 /* returnScopeInterface PolyParser_term_return */
-@interface PolyParser_term_return :ParserRuleReturnScope { /* returnScopeInterface line 1838 */
+@interface PolyParser_term_return : ParserRuleReturnScope { /* returnScopeInterface line 1838 */
 /* AST returnScopeInterface.memVars */
 CommonTree *tree; /* ObjC start of memVars() */
+
 }
-/* start properties */
+/* start property declarations */
 /* AST returnScopeInterface.properties */
 @property (retain, getter=getTree, setter=setTree:) CommonTree *tree;
+
+/* start of method declarations */
+
 + (PolyParser_term_return *)newPolyParser_term_return;
 /* this is start of set and get methods */
 /* AST returnScopeInterface.methodsDecl */
@@ -70,18 +78,22 @@ CommonTree *tree; /* ObjC start of memVars() */
 
 - (void) setTree:(CommonTree *)aTree;
   /* methodsDecl */
+
 @end /* end of returnScopeInterface interface */
 
 
-
 /* returnScopeInterface PolyParser_exp_return */
-@interface PolyParser_exp_return :ParserRuleReturnScope { /* returnScopeInterface line 1838 */
+@interface PolyParser_exp_return : ParserRuleReturnScope { /* returnScopeInterface line 1838 */
 /* AST returnScopeInterface.memVars */
 CommonTree *tree; /* ObjC start of memVars() */
+
 }
-/* start properties */
+/* start property declarations */
 /* AST returnScopeInterface.properties */
 @property (retain, getter=getTree, setter=setTree:) CommonTree *tree;
+
+/* start of method declarations */
+
 + (PolyParser_exp_return *)newPolyParser_exp_return;
 /* this is start of set and get methods */
 /* AST returnScopeInterface.methodsDecl */
@@ -89,21 +101,17 @@ CommonTree *tree; /* ObjC start of memVars() */
 
 - (void) setTree:(CommonTree *)aTree;
   /* methodsDecl */
+
 @end /* end of returnScopeInterface interface */
 
 
 
-
 /* Interface grammar class */
-@interface PolyParser : Parser { /* line 572 */
-/* ObjC start of ruleAttributeScopeMemVar */
+@interface PolyParser  : Parser { /* line 572 */
+#pragma mark Dynamic Rule Scopes ruleAttributeScopeDecl
+#pragma mark Dynamic Global Rule Scopes globalAttributeScopeMemVar
 
 
-/* ObjC end of ruleAttributeScopeMemVar */
-/* ObjC start of globalAttributeScopeMemVar */
-
-
-/* ObjC end of globalAttributeScopeMemVar */
 /* ObjC start of actions.(actionScope).memVars */
 /* ObjC end of actions.(actionScope).memVars */
 /* ObjC start of memVars */

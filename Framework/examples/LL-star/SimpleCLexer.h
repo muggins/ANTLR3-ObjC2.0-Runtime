@@ -1,9 +1,9 @@
-// $ANTLR ${project.version} ${buildNumber} SimpleC.g 2011-06-20 13:49:40
+// $ANTLR 3.4 /Users/acondit/source/antlr/code/antlr3/runtime/ObjC/Framework/examples/LL-star/SimpleC.g 2012-02-16 17:39:19
 
 /* =============================================================================
- * Standard antlr3 OBJC runtime definitions
+ * Standard antlr OBJC runtime definitions
  */
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 #import <ANTLR/ANTLR.h>
 /* End of standard antlr3 runtime definitions
  * =============================================================================

@@ -330,7 +330,7 @@ public static class STAttrMap extends HashMap {
                 // TEMPLATE REWRITE
                 // 11:26: -> template(a=$a.stb=$b.st) \"<a>^<b>\"
                 {
-                    retval.st = [ST newST:@"<a>^<b>"]
+                    retval.st = [ST newST:@"<a>^<b>"];
                     [retval.st add:@"a" value:@"b"];
                 }
 

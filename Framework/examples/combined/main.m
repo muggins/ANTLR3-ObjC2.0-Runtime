@@ -1,6 +1,6 @@
 #import <Cocoa/Cocoa.h>
 #import "CombinedLexer.h"
-#import "antlr3.h"
+#import <ANTLR/ANTLR.h>
 
 int main(int argc, const char * argv[])
 {

@@ -1,7 +1,7 @@
-// $ANTLR ${project.version} ${buildNumber} Poly.g 2011-05-06 19:17:59
+// $ANTLR 3.4 /Users/acondit/source/antlr/code/antlr3/runtime/ObjC/Framework/examples/polydiff/Poly.g 2012-02-16 18:10:11
 
 /* =============================================================================
- * Standard antlr3 OBJC runtime definitions
+ * Standard antlr OBJC runtime definitions
  */
 #import <Cocoa/Cocoa.h>
 #import <ANTLR/ANTLR.h>
@@ -11,8 +11,8 @@
 
 /* Start cyclicDFAInterface */
 
-#pragma mark Rule return scopes start
-#pragma mark Rule return scopes end
+#pragma mark Rule return scopes Interface start
+#pragma mark Rule return scopes Interface end
 #pragma mark Tokens
 #ifdef EOF
 #undef EOF

@@ -1,6 +1,6 @@
 #import <Cocoa/Cocoa.h>
 #import "TestLexer.h"
-#import "antlr3.h"
+#import <ANTLR/ANTLR.h>
 #import <unistd.h>
 
 int main(int argc, const char * argv[])

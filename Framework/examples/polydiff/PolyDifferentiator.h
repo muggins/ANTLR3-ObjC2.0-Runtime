@@ -1,7 +1,7 @@
-// $ANTLR ${project.version} ${buildNumber} PolyDifferentiator.g 2011-05-06 19:18:20
+// $ANTLR 3.4 /Users/acondit/source/antlr/code/antlr3/runtime/ObjC/Framework/examples/polydiff/PolyDifferentiator.g 2012-02-16 18:10:53
 
 /* =============================================================================
- * Standard antlr3 OBJC runtime definitions
+ * Standard antlr OBJC runtime definitions
  */
 #import <Cocoa/Cocoa.h>
 #import <ANTLR/ANTLR.h>
@@ -33,38 +33,38 @@ typedef enum {
 #define INT 5
 #define MULT 6
 #define WS 7
-#pragma mark Dynamic Global Scopes
-#pragma mark Dynamic Rule Scopes
-#pragma mark Rule Return Scopes start
+#pragma mark Dynamic Global Scopes globalAttributeScopeInterface
+#pragma mark Dynamic Rule Scopes ruleAttributeScopeInterface
+#pragma mark Rule Return Scopes returnScopeInterface
 /* returnScopeInterface PolyDifferentiator_poly_return */
-@interface PolyDifferentiator_poly_return :ANTLRTreeRuleReturnScope { /* returnScopeInterface line 1838 */
+@interface PolyDifferentiator_poly_return : TreeRuleReturnScope { /* returnScopeInterface line 1838 */
 /* ASTTreeParser returnScopeInterface.memVars */
-ANTLRCommonTree *tree; /* ObjC start of memVars() */
+CommonTree *tree; /* ObjC start of memVars() */
+
 }
-/* start properties */
+/* start property declarations */
 /* AST returnScopeInterface.properties */
-@property (retain, getter=getTree, setter=setTree:) ANTLRCommonTree *tree;
+@property (retain, getter=getTree, setter=setTree:) CommonTree *tree;
+
+/* start of method declarations */
+
 + (PolyDifferentiator_poly_return *)newPolyDifferentiator_poly_return;
 /* this is start of set and get methods */
 /* ASTTreeParser returnScopeInterface.methodsDecl */
-- (ANTLRCommonTree *)getTree;
-- (void) setTree:(ANTLRCommonTree *)aTree;
+- (CommonTree *)getTree;
+- (void) setTree:(CommonTree *)aTree;
   /* methodsDecl */
+
 @end /* end of returnScopeInterface interface */
 
 
 
-
 /* Interface grammar class */
-@interface PolyDifferentiator : ANTLRTreeParser { /* line 572 */
-/* ObjC start of ruleAttributeScopeMemVar */
+@interface PolyDifferentiator  : TreeParser { /* line 572 */
+#pragma mark Dynamic Rule Scopes ruleAttributeScopeDecl
+#pragma mark Dynamic Global Rule Scopes globalAttributeScopeMemVar
 
 
-/* ObjC end of ruleAttributeScopeMemVar */
-/* ObjC start of globalAttributeScopeMemVar */
-
-
-/* ObjC end of globalAttributeScopeMemVar */
 /* ObjC start of actions.(actionScope).memVars */
 /* ObjC end of actions.(actionScope).memVars */
 /* ObjC start of memVars */
@@ -73,7 +73,7 @@ NSInteger ruleLevel;
 NSArray *ruleNames;
   /* AST super.memVars */
 /* AST parserMemVars */
-id<ANTLRTreeAdaptor> treeAdaptor;   /* AST parserMemVars */
+id<TreeAdaptor> treeAdaptor;   /* AST parserMemVars */
 /* ObjC end of memVars */
 
  }
@@ -84,11 +84,11 @@ id<ANTLRTreeAdaptor> treeAdaptor;   /* AST parserMemVars */
 /* AST parserHeaderFile.properties */
   /* AST super.properties */
 /* AST parserProperties */
-@property (retain, getter=getTreeAdaptor, setter=setTreeAdaptor:) id<ANTLRTreeAdaptor> treeAdaptor;   /* AST parserproperties */
+@property (retain, getter=getTreeAdaptor, setter=setTreeAdaptor:) id<TreeAdaptor> treeAdaptor;   /* AST parserproperties */
 /* ObjC end of properties */
 
 + (void) initialize;
-+ (id) newPolyDifferentiator:(id<ANTLRTreeNodeStream>)aStream;
++ (id) newPolyDifferentiator:(id<TreeNodeStream>)aStream;
 /* ObjC start of actions.(actionScope).methodsDecl */
 /* ObjC end of actions.(actionScope).methodsDecl */
 
@@ -96,8 +96,8 @@ id<ANTLRTreeAdaptor> treeAdaptor;   /* AST parserMemVars */
 /* AST parserHeaderFile.methodsDecl */
   /* AST super.methodsDecl */
 /* AST parserMethodsDecl */
-- (id<ANTLRTreeAdaptor>) getTreeAdaptor;
-- (void) setTreeAdaptor:(id<ANTLRTreeAdaptor>)theTreeAdaptor;   /* AST parsermethodsDecl */
+- (id<TreeAdaptor>) getTreeAdaptor;
+- (void) setTreeAdaptor:(id<TreeAdaptor>)theTreeAdaptor;   /* AST parsermethodsDecl */
 /* ObjC end of methodsDecl */
 
 - (PolyDifferentiator_poly_return *)poly; 

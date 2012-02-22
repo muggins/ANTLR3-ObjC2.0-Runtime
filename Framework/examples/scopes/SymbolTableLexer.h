@@ -1,9 +1,9 @@
-// $ANTLR ${project.version} ${buildNumber} SymbolTable.g 2011-06-20 13:51:22
+// $ANTLR 3.4 /Users/acondit/source/antlr/code/antlr3/runtime/ObjC/Framework/examples/scopes/SymbolTable.g 2012-02-16 17:50:30
 
 /* =============================================================================
- * Standard antlr3 OBJC runtime definitions
+ * Standard antlr OBJC runtime definitions
  */
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 #import <ANTLR/ANTLR.h>
 /* End of standard antlr3 runtime definitions
  * =============================================================================

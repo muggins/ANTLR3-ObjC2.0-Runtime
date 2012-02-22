@@ -1,5 +1,5 @@
 #import <Cocoa/Cocoa.h>
-#import "antlr3.h"
+#import <ANTLR/ANTLR.h>
 #import "LangLexer.h"
 #import "LangParser.h"
 #import "LangDumpDecl.h"
@@ -33,7 +33,7 @@ int main(int argc, const char * argv[])
 {
     NSError *error;
     NSLog(@"starting treeparser\n");
-    NSString *dir = @"/Users/acondit/source/antlr3/acondit_localhost/code/antlr/main/runtime/ObjC/Framework/examples/treeparser/input";
+    NSString *dir = @"/Users/acondit/source/antlr/code/antlr3/runtime/ObjC/Framework/examples/treeparser/input";
 	NSString *string = [NSString stringWithContentsOfFile:dir  encoding:NSASCIIStringEncoding error:&error];
 	NSLog(@"input = %@", string);
 	ANTLRStringStream *stream = [ANTLRStringStream newANTLRStringStream:string];

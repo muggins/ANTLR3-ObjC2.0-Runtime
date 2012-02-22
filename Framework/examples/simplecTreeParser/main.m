@@ -1,5 +1,5 @@
 #import <Cocoa/Cocoa.h>
-#import "antlr3.h"
+#import <ANTLR/ANTLR.h>
 #import "SimpleCLexer.h"
 #import "SimpleCParser.h"
 #import "SimpleCWalker.h"
@@ -9,7 +9,7 @@
 int main(int argc, const char * argv[]) {
     NSError *anError;
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    char *inp = "/Users/acondit/source/antlr3/acondit_localhost/code/antlr/antlr3-main/runtime/ObjC/Framework/examples/simplecTreeParser/input";
+    char *inp = "/Users/acondit/source/antlr/code/antlr3/runtime/ObjC/Framework/examples/simplecTreeParser/input";
     
 /*
     if (argc < 2) {

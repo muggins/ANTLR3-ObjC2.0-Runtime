@@ -1,5 +1,5 @@
 #import <Cocoa/Cocoa.h>
-#import "antlr3.h"
+#import <ANTLR/ANTLR.h>
 #import "PolyLexer.h"
 #import "PolyParser.h"
 // #import "PolyDifferentiator.h"

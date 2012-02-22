@@ -1,5 +1,5 @@
 #import <Cocoa/Cocoa.h>
-#import "antlr3.h"
+#import <ANTLR/ANTLR.h>
 #import "TreeRewriteLexer.h"
 #import "TreeRewriteParser.h"
 //#import "stdio.h"
