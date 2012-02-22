@@ -16,17 +16,16 @@ they will be incorporated into the ANTLR release code, so that the
 individual user doesn't have to do anything but load the framework into
 the proper location. However, for now you need to create an ObjC
 directory in antlr-3.2/tool/src/main/resources/org/antlr/codegen/templates
-and then copy the ObjC ".stg" files to
+and then copy the ObjC ".stg" files to 
 antlr-3.2/tool/src/main/resources/org/antlr/codegen/templates/ObjC/*.
 
 There is also a java file ObjCTarget.java that goes in <
 antlr-3.2/tool/src/main/java/org/antlr/codegen/ObjCTarget/Java>.
 
-If you are using Antlr3.4 the code from here is included with the Antlr tarball. You just need
+If you are using Antlr3.3 the code from here is included with the Antlr tarball. You just need
 to copy the ANTLR.framework to /Library/Frameworks.
-The Objective-C target for ANTLR3.4 is still a work in progress.
-Something in the addition of ST4 to ANTLR3.4 has broken the ObjC.stg file.
-It generates code but some of the code is definitely incorrect.
 
-If you replace the templates in the pre-release jar the code generates correctly
-but if you put the same templates in the latest jar it generates code incorrectly.
+antlr3.4.1
+Feb. 22, 2012 -- I just uploaded a new binary(zipped) copy of the ANTLR.framework and antlr3.4.jar 
+that has all of the renaming changes that I did to match the Java source names and 
+fixes to the DFA transitions. This is antlr-3.4.1.jar.
