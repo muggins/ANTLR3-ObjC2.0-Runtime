@@ -241,9 +241,15 @@
 
 - (void) removeAllObjects
 {
-    root = [ACBTree newNodeWithDictionary:self];
-    root.nodeid = 0;
-    nxt_nodeid = 1;
+    if ( [self count] > 0 ) {
+        // root = [ACBTree newNodeWithDictionary:self];
+        NSArray *list = [self allKeys];
+        for ( NSInteger i = [self count] - 1; i >= 0; i-- ) {
+            [self removeObjectForKey:[list objectAtIndex:i]];
+        }
+        root.nodeid = 0;
+        nxt_nodeid = 1;
+    }
 }
 
 - (NSInteger) nextNodeId

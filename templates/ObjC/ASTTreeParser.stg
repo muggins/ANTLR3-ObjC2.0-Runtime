@@ -62,8 +62,8 @@
 - (void) setTree:(<ASTLabelType> *)aTree
 {
     if (tree != aTree) {
-        if ( tree ) [tree release];
-        if ( aTree ) [aTree retain];
+        if (tree != nil) [tree release];
+        if (aTree != nil) [aTree retain];
         tree = aTree;
     }
 }
