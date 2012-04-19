@@ -41,18 +41,18 @@
 
 - (id) initWithTokenStream:(id<TokenStream>)theStream
 {
-	if ((self = [super init]) != nil) {
-		[self setInput:theStream];
-	}
-	return self;
+    if ((self = [super init]) != nil) {
+        [self setInput:theStream];
+    }
+    return self;
 }
 
 - (id) initWithTokenStream:(id<TokenStream>)theStream State:(RecognizerSharedState *)aState
 {
-	if ((self = [super initWithState:aState]) != nil) {
-		[self setInput:theStream];
-	}
-	return self;
+    if ((self = [super initWithState:aState]) != nil) {
+        [self setInput:theStream];
+    }
+    return self;
 }
 
 - (void) reset
