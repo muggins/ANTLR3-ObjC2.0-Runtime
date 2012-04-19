@@ -42,7 +42,7 @@
 - (id) initWithTokenStream:(id<TokenStream>)theStream
 {
 	if ((self = [super init]) != nil) {
-		input = theStream;
+		[self setInput:theStream];
 	}
 	return self;
 }
@@ -50,7 +50,7 @@
 - (id) initWithTokenStream:(id<TokenStream>)theStream State:(RecognizerSharedState *)aState
 {
 	if ((self = [super initWithState:aState]) != nil) {
-        input = theStream;
+		[self setInput:theStream];
 	}
 	return self;
 }
@@ -68,7 +68,7 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in Parser" );
 #endif
-	[self setInput:nil];
+    [input release];
 	[super dealloc];
 }
 
