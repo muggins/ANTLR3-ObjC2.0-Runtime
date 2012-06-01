@@ -56,7 +56,7 @@ NSInteger range; // how deep have we gone?
     
 }
 @property (retain, getter=getTokenSource,setter=setTokenSource:) id<TokenSource> tokenSource;
-@property (retain, getter=getTokens,setter=setTokens:) AMutableArray *tokens;
+@property (retain, getter=getTokens) AMutableArray *tokens;
 @property (assign, getter=getLastMarker,setter=setLastMarker:) NSInteger lastMarker;
 @property (assign) NSInteger index;
 @property (assign, getter=getRange,setter=setRange:) NSInteger range;
@@ -94,9 +94,9 @@ NSInteger range; // how deep have we gone?
 - (AMutableArray *)getTokensFrom:(NSInteger)startIndex To:(NSInteger)stopIndex With:(ANTLRBitSet *)types;
 - (AMutableArray *)getTokensFrom:(NSInteger)startIndex To:(NSInteger)stopIndex WithList:(AMutableArray *)types;
 - (AMutableArray *)getTokensFrom:(NSInteger)startIndex To:(NSInteger)stopIndex WithType:(NSInteger)ttype;
-- (NSString *) toString;
-- (NSString *) toStringFromStart:(NSInteger)startIndex ToEnd:(NSInteger)stopIndex;
-- (NSString *) toStringFromToken:(id<Token>)startIndex ToToken:(id<Token>)stopIndex;
+- (NSString *) description;
+- (NSString *) descriptionFromStart:(NSInteger)startIndex ToEnd:(NSInteger)stopIndex;
+- (NSString *) descriptionFromToken:(id<Token>)startIndex ToToken:(id<Token>)stopIndex;
 - (void) fill;
 
 @end

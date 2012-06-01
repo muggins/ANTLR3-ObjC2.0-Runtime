@@ -65,10 +65,10 @@
 - (CommonTree *) getParent;
 - (void) setParent:(CommonTree *) t;
 
-#ifdef DONTUSENOMO
-- (NSString *) treeDescription;
-#endif
 - (NSString *) description;
+#ifdef DONTUSENOMO
+- (NSString *) descriptionTree;
+#endif
 - (void) setUnknownTokenBoundaries;
 - (NSInteger) getTokenStartIndex;
 - (void) setTokenStartIndex: (NSInteger) aStartIndex;

@@ -81,6 +81,7 @@
 - (BOOL) getFailed;
 - (void) setFailed: (BOOL) flag;
 
+
 - (RecognizerSharedState *) getState;
 - (void) setState:(RecognizerSharedState *) theState;
 
@@ -171,7 +172,7 @@
 - (BOOL) evaluateSyntacticPredicate:(SEL)synpredFragment;
 // stream:(id<IntStream>)anInput;
 
-@property (retain) RecognizerSharedState *state;
+@property (retain, getter=getState, setter=setState:) RecognizerSharedState *state;
 @property (retain) NSString *grammarFileName;
 @property (retain) NSString *sourceName;
 @property (retain) AMutableArray *tokenNames;

@@ -55,8 +55,8 @@
 - (NSInteger) size;
 - (id<TokenSource>) getTokenSource;
 - (NSString *) getSourceName;
-- (NSString *) toString;
-- (NSString *) toStringFromStart:(NSInteger)aStart ToEnd:(NSInteger)aStop;
-- (NSString *) toStringFromToken:(CommonToken *)startToken ToToken:(CommonToken *)stopToken;
+- (NSString *) description;
+- (NSString *) descriptionFromStart:(NSInteger)aStart ToEnd:(NSInteger)aStop;
+- (NSString *) descriptionFromToken:(CommonToken *)startToken ToToken:(CommonToken *)stopToken;
 
 @end

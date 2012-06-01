@@ -460,7 +460,7 @@ extern NSInteger debug;
 	}
 }
 
--(NSString *) toTokenTypeString
+-(NSString *) description
 {
 	if (index == -1)
 	{
@@ -474,7 +474,7 @@ extern NSInteger debug;
 	return buf;
 }
 
--(NSString *) toTokenString:(NSInteger)aStart ToEnd:(NSInteger)aStop
+-(NSString *) description:(NSInteger)aStart ToEnd:(NSInteger)aStop
 {
 	if (index == -1) {
 		[self fillBuffer];
@@ -487,7 +487,7 @@ extern NSInteger debug;
 	return buf;
 }
 
--(NSString *) toStringFromNode:(id)aStart ToNode:(id)aStop
+-(NSString *) descriptionFromNode:(id)aStart ToNode:(id)aStop
 {
 	if (aStart == nil || aStop == nil) {
 		return nil;
@@ -507,7 +507,7 @@ extern NSInteger debug;
 		else if ([adaptor getType:aStop] == TokenTypeEOF) {
 			endTokenIndex = [self count] - 2; //don't use EOF
 		}
-        [tokens toStringFromStart:beginTokenIndex ToEnd:endTokenIndex];
+        [tokens descriptionFromStart:beginTokenIndex ToEnd:endTokenIndex];
 	}
 	// walk nodes looking for aStart
 	CommonTree * aTree = nil;

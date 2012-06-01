@@ -109,10 +109,10 @@ NSInteger level;
     
 - (void) replaceChildren:(id)parent From:(NSInteger)startChildIndex To:(NSInteger)stopChildIndex With:(id) t;
     
-- (NSString *) toStringFromNode:(id<BaseTree>)startNode ToNode:(id<BaseTree>)stopNode;
+- (NSString *) descriptionFromNode:(id<BaseTree>)startNode ToNode:(id<BaseTree>)stopNode;
 
 /** For debugging; destructive: moves tree iterator to end. */
-- (NSString *) toTokenTypeString;
+- (NSString *) description;
 
 @property (retain) TreeIterator *it;
 @property (retain) IntArray *calls;

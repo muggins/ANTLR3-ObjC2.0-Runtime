@@ -89,12 +89,12 @@
     return tokenSource;
 }
 
-- (NSString *)toStringFromStart:(NSInteger)aStart ToEnd:(NSInteger)aStop
+- (NSString *)descriptionFromStart:(NSInteger)aStart ToEnd:(NSInteger)aStop
 {
     return @"n/a";
 }
 
-- (NSString *)toStringFromToken:(id<Token>)aStart ToEnd:(id<Token>)aStop
+- (NSString *)descriptionFromToken:(id<Token>)aStart ToEnd:(id<Token>)aStop
 {
     return @"n/a";
 }

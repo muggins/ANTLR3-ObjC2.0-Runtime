@@ -103,13 +103,13 @@
 
 - (id) getMissingSymbol:(id<IntStream>)anInput
               Exception:(RecognitionException *)e
-          ExpectedToken:(NSInteger)expectedTokenType
-                 BitSet:(ANTLRBitSet *)follow
+              TokenType:(NSInteger)expectedTokenType
+                 Follow:(ANTLRBitSet *)follow
 {
     NSString *tokenText =[NSString stringWithFormat:@"<missing %@ %d>", [self getTokenNames], expectedTokenType];
-    //id<TreeAdaptor> anAdaptor = (id<TreeAdaptor>)[((id<TreeNodeStream>)e.input) getTreeAdaptor];
-    //return [anAdaptor createToken:expectedTokenType Text:tokenText];
-    return [CommonToken newToken:expectedTokenType Text:tokenText];
+    id<TreeAdaptor> anAdaptor = (id<TreeAdaptor>)[((id<TreeNodeStream>)e.input) getTreeAdaptor];
+    return [anAdaptor createToken:expectedTokenType Text:tokenText];
+//    return [CommonToken newToken:expectedTokenType Text:tokenText];
 }
 
 /** Match '.' in tree parser has special meaning.  Skip node or
@@ -158,7 +158,7 @@
  */
 - (NSString *)getErrorHeader:(RecognitionException *)e
 {
-     return [NSString stringWithFormat:@"%@: node after line %@:%@",
+     return [NSString stringWithFormat:@"%@: node after line %d:%d",
             [self getGrammarFileName], e.line, e.charPositionInLine];
 }
 
@@ -167,7 +167,7 @@
  */
 - (NSString *)getErrorMessage:(RecognitionException *)e  TokenNames:(AMutableArray *) theTokNams
 {
-    if ( [self isKindOfClass:[TreeParser class]] ) {
+    if ( [self isMemberOfClass:[TreeParser class]] ) {
         CommonTreeAdaptor *adaptor = (CommonTreeAdaptor *)[((id<TreeNodeStream>)e.input) getTreeAdaptor];
         e.token = [adaptor getToken:((CommonTree *)e.node)];
         if ( e.token == nil ) { // could be an UP/DOWN node

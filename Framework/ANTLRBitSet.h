@@ -82,7 +82,6 @@
 - (BOOL) member:(NSUInteger)bitNumber;
 - (BOOL) isNil;
 - (NSString *) description;
-- (NSString *) toString;
 
 #pragma mark NSCopying support
 
@@ -91,5 +90,5 @@
 
 //private
 - (CFMutableBitVectorRef) _bitVector;
-@property (getter=_bitVector) CFMutableBitVectorRef bitVector;
+@property (assign) CFMutableBitVectorRef bitVector;
 @end

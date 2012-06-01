@@ -295,13 +295,6 @@
 	return descString;
 }
 
-// return a string representation of the bit vector, indicating by their bitnumber which bits are set
-- (NSString *) toString
-{
-	
-	return [self description];
-}
-
 	// NSCopying
 #pragma mark NSCopying support
 

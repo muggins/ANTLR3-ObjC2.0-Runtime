@@ -382,9 +382,9 @@ extern NSInteger debug;
     charState = aCharState;
 }
 
-- (NSString *)toString
+- (NSString *)description
 {
-    return [NSString stringWithString:data];
+    return (data != nil) ? [NSString stringWithString:data] : @"";
 }
 
 //---------------------------------------------------------- 

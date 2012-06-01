@@ -96,15 +96,15 @@
 }
 
 - (CommonToken *)getMissingSymbol:(id<TokenStream>)anInput
-                             Exception:(RecognitionException *)e
-                                 TType:(NSInteger)expectedTokenType
-                                BitSet:(ANTLRBitSet *)follow
+                        Exception:(RecognitionException *)e
+                        TokenType:(NSInteger)expectedTokenType
+                           Follow:(ANTLRBitSet *)follow
 {
     NSString *tokenText = nil;
     if ( expectedTokenType == TokenTypeEOF )
         tokenText = @"<missing EOF>";
     else
-        tokenText = [NSString stringWithFormat:@"<missing %@>\n",[[BaseRecognizer getTokenNames] objectAtIndex:expectedTokenType]];
+        tokenText = [NSString stringWithFormat:@"<missing %@>",[[BaseRecognizer getTokenNames] objectAtIndex:expectedTokenType]];
     CommonToken *t = [[CommonToken newToken:expectedTokenType Text:tokenText] retain];
     CommonToken *current = [anInput LT:1];
     if ( current.type == TokenTypeEOF ) {

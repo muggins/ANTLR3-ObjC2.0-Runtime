@@ -176,7 +176,7 @@
     adaptor = anAdaptor;
 }
 
-- (CommonTree *)getNode:(NSInteger) i
+- (CommonTree *)get:(NSInteger) i
 {
     @throw [RuntimeException newException:@"Absolute node indexes are meaningless in an unbuffered stream"];
     return nil;
@@ -218,7 +218,7 @@
     }
 }
 
-- (NSString *) toStringFromNode:(id<BaseTree>)startNode ToNode:(id<BaseTree>)stopNode
+- (NSString *) descriptionFromNode:(id<BaseTree>)startNode ToNode:(id<BaseTree>)stopNode
 {
     // we'll have to walk from start to stop in tree; we're not keeping
     // a complete node stream buffer
@@ -226,7 +226,7 @@
 }
 
 /** For debugging; destructive: moves tree iterator to end. */
-- (NSString *) toTokenTypeString
+- (NSString *) description
 {
     [self reset];
     NSMutableString *buf = [NSMutableString stringWithCapacity:5];

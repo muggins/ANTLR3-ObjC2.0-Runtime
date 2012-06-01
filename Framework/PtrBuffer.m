@@ -345,9 +345,4 @@
     return str;
 }
 
-- (NSString *) toString
-{
-    return [self description];
-}
-
 @end

@@ -53,7 +53,6 @@ static NSInteger INITIAL_BUFFER_SIZE = 1024;
 {
 	self = [super init];
 	if ( self != nil ) {
-        int p1 = n;  // init from ANTLRStringStream val
         is = nil;
         rbSize = READ_BUFFER_SIZE;
         size = INITIAL_BUFFER_SIZE;
@@ -65,7 +64,6 @@ static NSInteger INITIAL_BUFFER_SIZE = 1024;
 {
 	self = [super init];
 	if ( self != nil ) {
-        int p1 = n;  // init from ANTLRStringStream val
         is = r;
         rbSize = aSize;
         size = aReadChunkSize;

@@ -68,7 +68,7 @@ extern NSInteger debug;
     return rwIndex;
 }
     
-- (NSString *)toString
+- (NSString *)description
 {
     NSString *opName = [self className];
     int $index = [self indexOf:'$' inString:opName];
@@ -148,7 +148,7 @@ extern NSInteger debug;
         return lastIndex+1;
 }
 
-- (NSString *)toString
+- (NSString *)description
 {
     return [NSString stringWithFormat:@"<ANTLRReplaceOp@ %d..%d :>%@\n", rwIndex, lastIndex, text];
 }
@@ -171,7 +171,7 @@ extern NSInteger debug;
     return self;
 }
      
-- (NSString *)toString
+- (NSString *)description
 {
     return [NSString stringWithFormat:@"<DeleteOp@ %d..%d\n",  rwIndex, lastIndex];
 }
@@ -439,24 +439,24 @@ extern NSInteger debug;
     return [NSString stringWithString:buf];
 }
 
-- (NSString *)toString
+- (NSString *)description
 {
     [super fill];
-    return [self toStringFromStart:MIN_TOKEN_INDEX ToEnd:[tokens count]-1];
+    return [self descriptionFromStart:MIN_TOKEN_INDEX ToEnd:[tokens count]-1];
 }
 
-- (NSString *)toString:(NSString *)programName
+- (NSString *)description:(NSString *)programName
 {
     [super fill];
-    return [self toString:programName FromStart:MIN_TOKEN_INDEX ToEnd:[[programs objectAtIndex:MIN_TOKEN_INDEX] count]-1];
+    return [self description:programName FromStart:MIN_TOKEN_INDEX ToEnd:[[programs objectAtIndex:MIN_TOKEN_INDEX] count]-1];
 }
 
-- (NSString *)toStringFromStart:(NSInteger)start ToEnd:(NSInteger)end
+- (NSString *)descriptionFromStart:(NSInteger)start ToEnd:(NSInteger)end
 {
-    return [self toString:DEFAULT_PROGRAM_NAME FromStart:start ToEnd:end];
+    return [self description:DEFAULT_PROGRAM_NAME FromStart:start ToEnd:end];
 }
 
-- (NSString *)toString:(NSString *)programName FromStart:(NSInteger)start ToEnd:(NSInteger)end
+- (NSString *)description:(NSString *)programName FromStart:(NSInteger)start ToEnd:(NSInteger)end
 {
     HashMap *rewrites = (HashMap *)[programs getName:programName];
     
@@ -650,9 +650,9 @@ extern NSInteger debug;
     NSString *x = @"";
     NSString *y = @"";
     if ( a != nil )
-        x = [a toString];
+        x = [a description];
     if ( b != nil )
-        y = [b toString];
+        y = [b description];
     return [NSString stringWithFormat:@"%@%@",x, y];
 }
 

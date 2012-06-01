@@ -61,7 +61,7 @@
     return(self);
 }
 
-- (NSString *)toString
+- (NSString *)description
 {
     return [NSString stringWithFormat:@"MismatchedNotSetException( %d != %@ )", [self unexpectedType], expecting];
 }

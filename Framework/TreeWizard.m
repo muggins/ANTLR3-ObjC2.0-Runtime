@@ -127,13 +127,13 @@
     [super dealloc];
 }
 
-- (NSString *)toString
+- (NSString *)description
 {
     if ( label != nil ) {
-        return [NSString stringWithFormat:@"\% %@ : %@", label, [super toString]];
+        return [NSString stringWithFormat:@"\% %@ : %@", label, [super description]];
     }
     else {
-        return [super toString];				
+        return [super description];				
     }
 }
 

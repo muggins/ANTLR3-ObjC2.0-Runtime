@@ -63,7 +63,7 @@
     
 - (NSString *)text
 {
-    return [self toString];
+    return [self description];
 }
     
 - (NSInteger)getTokenStartIndex
@@ -96,15 +96,10 @@
     return [payload description];
 }
     
-- (NSString *)toString
-{
-    return [self description];
-}
-    
 /** Emit a token and all hidden nodes before.  EOF node holds all
  *  hidden tokens after last real token.
  */
-- (NSString *)toStringWithHiddenTokens
+- (NSString *)descriptionWithHiddenTokens
 {
     NSMutableString *buf = [NSMutableString stringWithCapacity:25];
     if ( hiddenTokens!=nil ) {
@@ -113,7 +108,7 @@
             [buf appendString:[hidden text]];
         }
     }
-    NSString *nodeText = [self toString];
+    NSString *nodeText = [self description];
     if ( ![nodeText isEqualTo:@"<EOF>"] )
         [buf appendString:nodeText];
     return buf;
@@ -125,19 +120,19 @@
 - (NSString *)toInputString
 {
     NSMutableString *buf = [NSMutableString stringWithCapacity:25];
-    [self _toStringLeaves:buf];
+    [self _descriptionLeaves:buf];
     return buf;
 }
     
-- (void)_toStringLeaves:(NSMutableString *)buf
+- (void)_descriptionLeaves:(NSMutableString *)buf
 {
     if ( [payload isKindOfClass:[CommonToken class]] ) { // leaf node token?
-        [buf appendString:[self toStringWithHiddenTokens]];
+        [buf appendString:[self descriptionWithHiddenTokens]];
         return;
     }
     for (int i = 0; children!=nil && i < [children count]; i++) {
         ParseTree *t = (ParseTree *) [children objectAtIndex:i];
-        [t _toStringLeaves:buf];
+        [t _descriptionLeaves:buf];
     }
 }
     

@@ -158,8 +158,8 @@
 {
     BOOL treeChanged = true;
     while ( treeChanged ) {
-        TreeRewriter *u = [self applyOnce:t Rule:whichRule];
-        treeChanged = !(t == u);
+        id u = [self applyOnce:t Rule:whichRule];
+        treeChanged = ![t isEqual:u];
         t = u;
     }
     return t;

@@ -29,6 +29,7 @@
 #import "TokenStream.h"
 #import "TreeNodeStream.h"
 #import "BufferedTokenStream.h"
+#import "CharStream.h"
 
 @implementation RecognitionException
 
@@ -68,62 +69,50 @@
 {
 	self = [super initWithName:NSStringFromClass([self class]) reason:aReason userInfo:nil];
 	if ( self != nil ) {
-		[self setStream:anInputStream];
-		index = input.index;
-		
-		Class inputClass = [input class];
-		if ([inputClass conformsToProtocol:@protocol(TokenStream)]) {
-			[self setToken:[(id<TokenStream>)input LT:1]];
-			line = token.line;
-			charPositionInLine = token.charPositionInLine;
-		} else if ([inputClass conformsToProtocol:@protocol(CharStream)]) {
-			c = (unichar)[input LA:1];
-			line = ((id<CharStream>)input).getLine;
-			charPositionInLine = ((id<CharStream>)input).getCharPositionInLine;
-		} else if ([inputClass conformsToProtocol:@protocol(TreeNodeStream)]) {
-			[self setNode:[(id<TreeNodeStream>)input LT:1]];
-			line = [node line];
-			charPositionInLine = [node charPositionInLine];
-		} else {
-			c = (unichar)[input LA:1];
-		}
-	}
-	return self;
-}
-
-- (id) initWithStream:(id<IntStream>)anInputStream
-{
-	self = [super initWithName:NSStringFromClass([self class]) reason:@"Runtime Exception" userInfo:nil];
-	if ( self != nil ) {
         self.input = anInputStream;
         self.index = input.index;
         if ( [anInputStream isKindOfClass:[BufferedTokenStream class]] ) {
             self.token = [(id<TokenStream>)anInputStream LT:1];
             self.line = [token line];
             self.charPositionInLine = [token charPositionInLine];
-           if ( [input conformsToProtocol:objc_getProtocol("TreeNodeStream")] ) {
-               [self extractInformationFromTreeNodeStream:anInputStream];
-           }
-           else if ( [[anInputStream class] instancesRespondToSelector:@selector(LA1:)] ) {
-               c = [anInputStream LA:1];
-               if ( [[anInputStream class] instancesRespondToSelector:@selector(getLine)] )
-                   line = [anInputStream getLine];
-               if ( [[anInputStream class] instancesRespondToSelector:@selector(getCharPositionInLine)] )
-                   charPositionInLine = [anInputStream getCharPositionInLine];
-           }
-           else {
-               c = [anInputStream LA:1];
-           }
+            if ( [input conformsToProtocol:@protocol(TreeNodeStream)] ) {
+                [self extractInformationFromTreeNodeStream:anInputStream];
+            }
+            else {
+                c = [anInputStream LA:1];
+            }
+        } else {
+            if ( [input conformsToProtocol:@protocol(CharStream)] ) {
+                id<CharStream>aCharStream = (id<CharStream>)anInputStream;
+                self.line = [aCharStream getLine];
+                self.charPositionInLine = [aCharStream getCharPositionInLine];
+            }
+            else {
+                NSLog( @"I don't know how to deal with %@\n", [((NSObject *)anInputStream) className] );
+/*
+                if ( [[anInputStream class] instancesRespondToSelector:@selector(getLine)] )
+                    self.line = (NSInteger) [anInputStream getLine];
+                else if ( [[anInputStream class] instancesRespondToSelector:@selector(line)] )
+                    self.line = (NSInteger) [anInputStream line];
+                if ( [[anInputStream class] instancesRespondToSelector:@selector(getCharPositionInLine)] )
+                    self.charPositionInLine = (NSInteger) [anInputStream getCharPositionInLine];
+                else if ( [[anInputStream class] instancesRespondToSelector:@selector(charPositionInLine)] )
+                    self.line = (NSInteger) [anInputStream charPositionInLine];
+ */
+            }
         }
 	}
 	return self;
 }
 
+- (id) initWithStream:(id<IntStream>)anInputStream
+{
+	return [self initWithStream:anInputStream reason:@"Runtime Exception"];
+}
+
 - (id) initWithName:(NSString *)aName reason:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo
 {
 	self = [super initWithName:aName reason:aReason userInfo:aUserInfo];
-	if ( self != nil ) {
-    }
     return self;
 }
 

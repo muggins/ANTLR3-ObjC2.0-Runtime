@@ -55,9 +55,9 @@
 - (id)initWithLen:(NSInteger)cnt;
 - (void)dealloc;
 // Instance Methods
-- (NSInteger)count;
-- (NSInteger)length;
-- (NSInteger)size;
+- (NSUInteger)count;
+- (NSUInteger)length;
+- (NSUInteger)size;
 /* clear -- reinitialize the maplist array */
 - (void) clear;
 /* form hash value for string s */

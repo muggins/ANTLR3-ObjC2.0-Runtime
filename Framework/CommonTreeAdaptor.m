@@ -56,7 +56,7 @@
 {
     if ( t==nil )
         return nil;
-    return [CommonTree newTree:t];
+    return [CommonTree newTreeWithTree:t];
 }
 
 /** Tell me how to create a token for use with imaginary token nodes.

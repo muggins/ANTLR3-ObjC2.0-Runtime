@@ -106,8 +106,6 @@
 
 - (id<Tree>) dupNode;
 
-- (NSString *) toString;
-
 #pragma mark Copying
 - (id) copyWithZone:(NSZone *)aZone;	// the children themselves are not copied here!
 - (id) deepCopy;					// performs a deepCopyWithZone: with the default zone
@@ -122,8 +120,8 @@
 - (void) setCharPositionInLine:(NSUInteger)pos;
 
 #pragma mark Informational
-- (NSString *) treeDescription;
 - (NSString *) description;
+- (NSString *) descriptionTree;
 
 @end
 

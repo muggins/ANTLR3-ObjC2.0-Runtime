@@ -58,7 +58,7 @@ RecognitionException *trappedException;
 
 - (NSInteger)type;
 - (NSString *)text;
-- (NSString *)toString;
+- (NSString *)description;
 
 @property (retain) id<IntStream> input;
 @property (retain) id<Token> startToken;

@@ -52,8 +52,8 @@
 - (id<Token>)nextElement;
 - (BOOL)isEOF:(id<Token>) aToken;
 - (id<TokenSource>)getTokenSource;
-- (NSString *)toStringFromStart:(NSInteger)aStart ToEnd:(NSInteger)aStop;
-- (NSString *)toStringFromToken:(id<Token>)aStart ToEnd:(id<Token>)aStop;
+- (NSString *)descriptionFromStart:(NSInteger)aStart ToEnd:(NSInteger)aStop;
+- (NSString *)descriptionFromToken:(id<Token>)aStart ToEnd:(id<Token>)aStop;
 - (NSInteger)LA:(NSInteger)anIdx;
 - (id<Token>)objectAtIndex:(NSInteger)anIdx;
 - (NSString *)getSourceName;

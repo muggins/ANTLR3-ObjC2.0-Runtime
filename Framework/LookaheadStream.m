@@ -89,7 +89,7 @@
         // if so, it's an opportunity to start filling at index 0 again
         [self clear]; // size goes to 0, but retains memory
     }
-    [obj release];
+//    [obj release];
     return obj;
 }
 
@@ -114,11 +114,11 @@
 	for (NSInteger i = 1; i <= n; i++) {
 		obj = [self nextElement];
 		if ( obj == eof ) {
-			[data addObject:self.eof];
+			[self addObject:self.eof];
 			eofElementIndex = [data count] - 1;
 		}
 		else {
-			[data addObject:obj];
+			[self addObject:obj];
 		}
 	}
 }
@@ -130,6 +130,7 @@
 
 -(id) LT:(NSInteger) k
 {
+    id tok;
 	if (k == 0) {
 		return nil;
 	}
@@ -140,7 +141,8 @@
 		return self.eof;
 	}
 	[self sync:k];
-	return [self objectAtIndex:(k - 1)];
+	tok = [self objectAtIndex:(k - 1)];
+    return tok;
 }
 
 -(id) LB:(NSInteger) k

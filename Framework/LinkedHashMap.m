@@ -118,9 +118,9 @@ extern float const DEFAULT_LOAD_FACTOR;
 - (void) remove
 {
     if (lastReturned == nil)
-        @throw [[IllegalStateException newException] autorelease];
+        @throw [IllegalStateException newException];
     if (lhm.modCount != expectedModCount)
-        @throw [[ConcurrentModificationException newException:@"Unexpected modCount"] autorelease];
+        @throw [ConcurrentModificationException newException:@"Unexpected modCount"];
     [lhm remove:(NSString *)(lastReturned.key)];
     lastReturned = nil;
     expectedModCount = lhm.modCount;
@@ -129,9 +129,9 @@ extern float const DEFAULT_LOAD_FACTOR;
 - (LHMEntry *) nextEntry
 {
     if (lhm.modCount != expectedModCount)
-        @throw [[ConcurrentModificationException newException:@"Unexpected modCount"] autorelease];
+        @throw [ConcurrentModificationException newException:@"Unexpected modCount"];
     if (nextEntry == lhm.header)
-        @throw [[[NoSuchElementException alloc] init] autorelease];
+        @throw [[NoSuchElementException alloc] init];
     LHMEntry * e = lastReturned = nextEntry;
     nextEntry = e.after;
     return e;

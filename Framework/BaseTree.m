@@ -61,19 +61,22 @@ static id<BaseTree> invalidNode = nil;
 	return invalidNode;
 }
 
+/*
 + newTree
 {
     return [[BaseTree alloc] init];
 }
-
+ */
 /** Create a new node from an existing node does nothing for BaseTree
  *  as there are no fields other than the children list, which cannot
  *  be copied as the children are not considered part of this node. 
  */
+/*
 + newTree:(id<BaseTree>) node
 {
-    return [[BaseTree alloc] initWith:(id<BaseTree>) node];
+    return [[[node class] alloc] initWith:(id<BaseTree>) node];
 }
+ */
 
 - (id) init
 {
@@ -502,7 +505,12 @@ static id<BaseTree> invalidNode = nil;
     return theCopy;
 }
      
-- (NSString *) treeDescription
+- (NSString *) description
+{
+    return nil;
+}
+
+- (NSString *) descriptionTree
 {
     if ( children == nil || [children count] == 0 ) {
         return [self description];
@@ -510,7 +518,7 @@ static id<BaseTree> invalidNode = nil;
     NSMutableString *buf = [NSMutableString stringWithCapacity:[children count]];
     if ( ![self isNil] ) {
         [buf appendString:@"("];
-        [buf appendString:[self toString]];
+        [buf appendString:[self description]];
         [buf appendString:@" "];
     }
     for (int i = 0; children != nil && i < [children count]; i++) {
@@ -518,29 +526,12 @@ static id<BaseTree> invalidNode = nil;
         if ( i > 0 ) {
             [buf appendString:@" "];
         }
-        [buf appendString:[(id<BaseTree>)t toStringTree]];
+        [buf appendString:[(id<BaseTree>)t descriptionTree]];
     }
     if ( ![self isNil] ) {
         [buf appendString:@")"];
     }
     return buf;
-}
-
-/** Print out a whole tree not just a node */
-- (NSString *) toStringTree
-{
-    return [self treeDescription];
-}
-
-- (NSString *) description
-{
-    return nil;
-}
-
-/** Override to say how a node (not a tree) should look as text */
-- (NSString *) toString
-{
-    return nil;
 }
 
 @synthesize children;

@@ -51,7 +51,6 @@
 
 - (void)setCharPositionInLine:(NSInteger)pos;
 
-
 // The index of the character relative to the beginning of the line 0..n-1
 - (NSInteger)getCharPositionInLine;
 

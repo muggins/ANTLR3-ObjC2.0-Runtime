@@ -167,9 +167,9 @@
 	return [input size];
 }
 
-- (NSString *) toStringFromToken:(id)startNode ToToken:(id)stopNode
+- (NSString *) descriptionFromToken:(id)startNode ToToken:(id)stopNode
 {
-    return [input toStringFromToken:(id<Token>)startNode ToToken:(id<Token>)stopNode];
+    return [input descriptionFromToken:(id<Token>)startNode ToToken:(id<Token>)stopNode];
 }
 
 @end

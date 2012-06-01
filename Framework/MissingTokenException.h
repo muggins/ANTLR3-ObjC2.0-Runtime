@@ -46,7 +46,7 @@
 
 - (NSInteger) getMissingType;
 
-- (NSString *)toString;
+- (NSString *)description;
 
 @property (retain) id<Token> inserted;
 @end

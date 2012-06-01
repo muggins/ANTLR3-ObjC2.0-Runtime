@@ -138,7 +138,7 @@
         if ( ttype != LexerTokenTypeID ) {
             return nil;
         }
-        label = [tokenizer toString];
+        label = [tokenizer description];
         ttype = [tokenizer nextToken];
         if ( ttype != LexerTokenTypeCOLON ) {
             return nil;
@@ -161,7 +161,7 @@
     if ( ttype != LexerTokenTypeID ) {
         return nil;
     }
-    NSString *tokenName = [tokenizer toString];
+    NSString *tokenName = [tokenizer description];
     ttype = [tokenizer nextToken];
     if ( [tokenName isEqualToString:@"nil"] ) {
         return [adaptor emptyNode];
@@ -170,7 +170,7 @@
     // check for arg
     NSString *arg = nil;
     if ( ttype == LexerTokenTypeARG ) {
-        arg = [tokenizer toString];
+        arg = [tokenizer description];
         text = arg;
         ttype = [tokenizer nextToken];
     }

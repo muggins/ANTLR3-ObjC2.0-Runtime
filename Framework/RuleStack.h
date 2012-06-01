@@ -52,8 +52,8 @@
 - (id) copyWithZone:(NSZone *)aZone;
 /* clear -- reinitialize the maplist array */
 
-- (NSInteger)count;
-- (NSInteger)size;
+- (NSUInteger)count;
+- (NSUInteger)size;
 
 - (HashRule *) pop;
 

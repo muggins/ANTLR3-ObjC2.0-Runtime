@@ -83,7 +83,7 @@ typedef enum {
 // the index of this Token into the TokenStream
 - (NSInteger) getTokenIndex;
 - (void) setTokenIndex: (NSInteger) aTokenIndex;
-- (NSString *)toString;
+- (NSString *)description;
 
 @end
 

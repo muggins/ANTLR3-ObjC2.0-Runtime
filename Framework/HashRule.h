@@ -50,9 +50,9 @@
 - (id)initWithLen:(NSInteger)aBuffSize;
 - (void)dealloc;
 
-- (NSInteger)count;
-- (NSInteger)length;
-- (NSInteger)size;
+- (NSUInteger)count;
+- (NSUInteger)length;
+- (NSUInteger)size;
 
 // Instance Methods
 - (void)deleteHashRule:(RuleMemo *)np;

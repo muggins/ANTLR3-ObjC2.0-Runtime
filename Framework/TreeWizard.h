@@ -75,7 +75,7 @@
 + (CommonTree *)newTreePattern:(id<Token>)payload;
 
 - (id) initWithToken:(id<Token>)payload;
-- (NSString *)toString;
+- (NSString *)description;
 @end
 
 @interface ANTLRWildcardTreePattern : TreePattern {

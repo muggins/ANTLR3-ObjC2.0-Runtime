@@ -255,14 +255,14 @@
 }
 
 #ifdef DONTUSENOMO
-- (NSString *) treeDescription
+- (NSString *) descriptionTree
 {
 	if (children) {
 		NSMutableString *desc = [NSMutableString stringWithString:@"(^"];
 		[desc appendString:[self description]];
 		unsigned int childIdx;
 		for (childIdx = 0; childIdx < [children count]; childIdx++) {
-			[desc appendFormat:@"%@", [[children objectAtIndex:childIdx] treeDescription]];
+			[desc appendFormat:@"%@", [[children objectAtIndex:childIdx] descriptionTree]];
 		}
 		[desc appendString:@")"];
 		return desc;
@@ -329,11 +329,6 @@
         return nil;
     }
     return token.text;
-}
-
-- (NSString *) toString
-{
-    return [self description];
 }
 
 @synthesize token;

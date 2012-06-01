@@ -81,7 +81,7 @@ BOOL error;
 - (void) dealloc;
 - (NSInteger) nextToken;
 - (void) consume;
-- (NSString *)toString;
+- (NSString *)description;
 
 - (NSMutableData *)getSval;
 - (void) setSval:(NSMutableData *)aSval;

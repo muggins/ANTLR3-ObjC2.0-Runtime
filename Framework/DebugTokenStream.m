@@ -183,22 +183,17 @@
 
 - (NSString *) description
 {
-    return [input toString];
+    return [input description];
 }
 
-- (NSString *) toString
+- (NSString *) descriptionFromStart:(NSInteger)startIndex ToEnd:(NSInteger)stopIndex
 {
-    return [input toString];
+    return [input descriptionFromStart:startIndex ToEnd:stopIndex];
 }
 
-- (NSString *) toStringFromStart:(NSInteger)startIndex ToEnd:(NSInteger)stopIndex
+- (NSString *) descriptionFromToken:(CommonToken *)startToken ToToken:(CommonToken *)stopToken
 {
-    return [input toStringFromStart:startIndex ToEnd:stopIndex];
-}
-
-- (NSString *) toStringFromToken:(CommonToken *)startToken ToToken:(CommonToken *)stopToken
-{
-    return [input toStringFromStart:startToken.startIndex ToEnd:stopToken.stopIndex];
+    return [input descriptionFromStart:startToken.startIndex ToEnd:stopToken.stopIndex];
 }
 
 @end

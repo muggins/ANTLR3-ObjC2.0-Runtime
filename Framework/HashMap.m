@@ -1543,7 +1543,8 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
         HMEntry *e = [it next];
         NSString *key = e.key;
         id value = e.value;
-        [sb appendFormat:@"%@=%@", (key == self ? @"[self Map]" : key), (value == self ? @"[self Map]" : value)];
+        [sb appendFormat:@"%@=%@", (((id)key == (id)self) ? @"[self Map]" : key),
+                                   (((id)value == (id)self) ? @"[self Map]" : value)];
         if ( ![it hasNext] ) {
             [sb appendString:@"}"];
             return sb;

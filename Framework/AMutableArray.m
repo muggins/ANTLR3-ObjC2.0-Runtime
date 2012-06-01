@@ -273,14 +273,11 @@
     for (idx = 0; idx < cnt; idx++ ) {
         tmp = [self objectAtIndex:idx];
         [str appendString:((tmp == nil) ? @"nil" : [tmp description])];
+        if ( idx < (cnt-1) )
+            [str appendString:@", "];
     }
     [str appendString:@"]"];
     return str;
-}
-
-- (NSString *) toString
-{
-    return [self description];
 }
 
 - (void) ensureCapacity:(NSInteger) index

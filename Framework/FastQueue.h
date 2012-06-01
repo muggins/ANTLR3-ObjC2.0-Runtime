@@ -58,7 +58,6 @@
 - (id) head;
 - (id) objectAtIndex:(NSInteger) i;
 - (void) clear;
-- (NSString *) toString;
 - (NSString *) description;
 
 @end

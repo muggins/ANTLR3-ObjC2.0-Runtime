@@ -85,7 +85,7 @@
  *  null or "" too, but users should not access $ruleLabel.text in
  *  an action of course in that case.
  */
-- (NSString *) toStringFromNode:(id)startNode ToNode:(id)stopNode;
+- (NSString *) descriptionFromNode:(id)startNode ToNode:(id)stopNode;
 
 /** Replace from start to stop child index of parent with t, which might
  *  be a list.  Number of children may be different

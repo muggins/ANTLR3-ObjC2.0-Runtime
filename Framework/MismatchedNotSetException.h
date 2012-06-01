@@ -46,6 +46,6 @@
 - (id) init;
 - (id) initWithStream:(id<IntStream>)anInput Follow:(NSString *)expecting;
 
-- (NSString *)toString;
+- (NSString *)description;
 
 @end

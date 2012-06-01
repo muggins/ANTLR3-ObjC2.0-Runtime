@@ -41,14 +41,14 @@
     copy.hash  = hash;
     copy.key   = key;
     copy.value = value;
-    //    return [[[HTEntry allocWithZone:zone] init:hash key:key value:value next:(next == nil ? nil : (HTEntry *)[next copyWithZone])] autorelease];
+    //    return [[HTEntry allocWithZone:zone] init:hash key:key value:value next:(next == nil ? nil : (HTEntry *)[next copyWithZone])];
     return copy;
 }
 
 - (void) setValue:(id)aValue
 {
     if (aValue == nil)
-        @throw [[[NullPointerException alloc] init] autorelease];
+        @throw [[NullPointerException alloc] init];
     //    id oldValue = value;
     value = aValue;
     //    return oldValue;

@@ -88,6 +88,5 @@
 
 - (void) ensureCapacity:(NSUInteger) index;
 - (NSString *) description;
-- (NSString *) toString;
 
 @end

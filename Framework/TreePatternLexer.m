@@ -162,7 +162,7 @@
     }
 }
 
-- (NSString *)toString
+- (NSString *)description
 {
     char buf[100];
 

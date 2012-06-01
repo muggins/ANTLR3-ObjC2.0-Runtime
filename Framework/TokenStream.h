@@ -42,13 +42,13 @@
 
 - (id) getTokenSource;
 
-- (NSString *) toString;
+- (NSString *) description;
 /** Return the text of all tokens from start to stop, inclusive.
  *  If the stream does not buffer all the tokens then it can just
  *  return "" or null;  Users should not access $ruleLabel.text in
  *  an action of course in that case.
  */
-- (NSString *)toStringFromStart:(NSInteger)startIdx ToEnd:(NSInteger)stopIdx;
+- (NSString *)descriptionFromStart:(NSInteger)startIdx ToEnd:(NSInteger)stopIdx;
 
 /** Because the user is not required to use a token with an index stored
  *  in it, we must provide a means for two token objects themselves to
@@ -56,7 +56,7 @@
  *  to the other toString(int,int).  This is also parallel with
  *  the TreeNodeStream.toString(Object,Object).
  */
-- (NSString *) toStringFromToken:(id<Token>)startToken ToToken:(id<Token>)stopToken;
+- (NSString *) descriptionFromToken:(id<Token>)startToken ToToken:(id<Token>)stopToken;
 
 
 @end

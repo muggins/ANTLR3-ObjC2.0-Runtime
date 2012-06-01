@@ -113,10 +113,10 @@
         if ( stopToken.type == TokenTypeEOF ) {
             j = [(id<TokenStream>)input size];
         }
-        badText = [(id<TokenStream>)input toStringFromStart:i ToEnd:j];
+        badText = [(id<TokenStream>)input descriptionFromStart:i ToEnd:j];
     }
     else if ( [startToken isKindOfClass:[self class]] ) {
-        badText = [(id<TreeNodeStream>)input toStringFromNode:startToken ToNode:stopToken];
+        badText = [(id<TreeNodeStream>)input descriptionFromNode:startToken ToNode:stopToken];
     }
     else {
         // people should subclass if they alter the tree type so this
@@ -126,7 +126,7 @@
     return badText;
 }
 
-- (NSString *)toString
+- (NSString *)description
 {
     NSString *aString;
     if ( [trappedException isKindOfClass:[MissingTokenException class]] ) {

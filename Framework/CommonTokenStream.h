@@ -87,9 +87,9 @@
 - (void) rewind:(NSInteger)marker;
 - (void) seek:(NSInteger)index;
 
-- (NSString *) toString;
-- (NSString *) toStringFromStart:(NSInteger)startIndex ToEnd:(NSInteger)stopIndex;
-- (NSString *) toStringFromToken:(id<Token>)startToken ToToken:(id<Token>)stopToken;
+- (NSString *) description;
+- (NSString *) descriptionFromStart:(NSInteger)startIndex ToEnd:(NSInteger)stopIndex;
+- (NSString *) descriptionFromToken:(id<Token>)startToken ToToken:(id<Token>)stopToken;
 
 #endif
 

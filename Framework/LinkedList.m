@@ -70,7 +70,7 @@
 {
     [self checkForComodification];
     if (![self hasNext])
-        @throw [[[NoSuchElementException alloc] init] autorelease];
+        @throw [[NoSuchElementException alloc] init];
     lastReturned = next;
     next = next.next;
     nextIndex++;
@@ -86,7 +86,7 @@
 {
     [self checkForComodification];
     if (![self hasPrevious])
-        @throw [[[NoSuchElementException alloc] init] autorelease];
+        @throw [[NoSuchElementException alloc] init];
     lastReturned = next = (next == nil) ? ll.last : next.prev;
     nextIndex--;
     return lastReturned.item;
@@ -106,7 +106,7 @@
 {
     [self checkForComodification];
     if (lastReturned == nil)
-        @throw [[[IllegalStateException alloc] init] autorelease];
+        @throw [[IllegalStateException alloc] init];
     LLNode *lastNext = lastReturned.next;
     [ll unlink:lastReturned];
     if (next == lastReturned)
@@ -120,7 +120,7 @@
 - (void) set:(id)e
 {
     if (lastReturned == nil)
-        @throw [[[IllegalStateException alloc] init] autorelease];
+        @throw [[IllegalStateException alloc] init];
     [self checkForComodification];
     lastReturned.item = e;
 }
@@ -140,7 +140,7 @@
 - (void) checkForComodification
 {
     if (ll.modCount != expectedModCount)
-        @throw [[[ConcurrentModificationException alloc] init] autorelease];
+        @throw [[ConcurrentModificationException alloc] init];
 }
 
 - (void) dealloc
@@ -254,7 +254,7 @@
 - (void) linkFirst:(id)e
 {
     LLNode *f = first;
-    LLNode *newNode = [[LLNode newNode:nil element:e next:f] autorelease];
+    LLNode *newNode = [LLNode newNode:nil element:e next:f];
     first = newNode;
     if (f == nil)
         last = newNode;
@@ -271,7 +271,7 @@
 - (void) linkLast:(id)e
 {
     LLNode *l = last;
-    LLNode *newNode = [[LLNode newNode:l element:e next:nil] autorelease];
+    LLNode *newNode = [LLNode newNode:l element:e next:nil];
     last = newNode;
     if (l == nil)
         first = newNode;
@@ -288,7 +288,7 @@
 - (void) linkBefore:(id)e succ:(LLNode *)succ
 {
     LLNode *pred = succ.prev;
-    LLNode *newNode = [[LLNode newNode:pred element:e next:succ] autorelease];
+    LLNode *newNode = [LLNode newNode:pred element:e next:succ];
     succ.prev = newNode;
     if (pred == nil)
         first = newNode;
@@ -378,7 +378,7 @@
 {
     LLNode *f = first;
     if (f == nil)
-        @throw [[[NoSuchElementException alloc] init] autorelease];
+        @throw [[NoSuchElementException alloc] init];
     return f.item;
 }
 
@@ -393,7 +393,7 @@
 {
     LLNode *l = last;
     if (l == nil)
-        @throw [[[NoSuchElementException alloc] init] autorelease];
+        @throw [[NoSuchElementException alloc] init];
     return l.item;
 }
 
@@ -408,7 +408,7 @@
 {
     LLNode *f = first;
     if (f == nil)
-        @throw [[[NoSuchElementException alloc] init] autorelease];
+        @throw [[NoSuchElementException alloc] init];
     return [self unlinkFirst:f];
 }
 
@@ -423,7 +423,7 @@
 {
     LLNode *l = last;
     if (l == nil)
-        @throw [[[NoSuchElementException alloc] init] autorelease];
+        @throw [[NoSuchElementException alloc] init];
     return [self unlinkLast:l];
 }
 
@@ -584,7 +584,7 @@
     
     for (id o in a) {
         id e = (id)o;
-        LLNode *newNode = [[LLNode newNode:pred element:e next:nil] autorelease];
+        LLNode *newNode = [LLNode newNode:pred element:e next:nil];
         if (pred == nil)
             first = newNode;
         else
@@ -726,13 +726,13 @@
 - (void) checkElementIndex:(NSInteger)index
 {
     if (![self isElementIndex:index])
-        @throw [[IndexOutOfBoundsException newException:[self outOfBoundsMsg:index]] autorelease];
+        @throw [IndexOutOfBoundsException newException:[self outOfBoundsMsg:index]];
 }
 
 - (void) checkPositionIndex:(NSInteger)index
 {
     if (![self isPositionIndex:index])
-        @throw [[IndexOutOfBoundsException newException:[self outOfBoundsMsg:index]] autorelease];
+        @throw [IndexOutOfBoundsException newException:[self outOfBoundsMsg:index]];
 }
 
 
@@ -1091,7 +1091,7 @@
 - (ListIterator *) listIterator:(NSInteger)index
 {
     [self checkPositionIndex:index];
-    return [[ListIterator newIterator:self withIndex:index] autorelease];
+    return [ListIterator newIterator:self withIndex:index];
 }
 
 
@@ -1100,7 +1100,7 @@
  */
 - (NSEnumerator *) descendingIterator
 {
-    return [[[DescendingIterator alloc] init] autorelease];
+    return [[DescendingIterator alloc] init];
 }
 
 /*
@@ -1111,7 +1111,7 @@
         return (LinkedList *)[super copyWithZone:zone];
     }
     @catch (CloneNotSupportedException * e) {
-        @throw [[[NSException exceptionWithName:@"InternalException" reason:@"Attempted to Clone non-cloneable List" userInfo:nil] autorelease];
+        @throw [[NSException exceptionWithName:@"InternalException" reason:@"Attempted to Clone non-cloneable List" userInfo:nil];
     }
 }
 */

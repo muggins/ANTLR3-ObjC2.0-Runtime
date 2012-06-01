@@ -40,7 +40,6 @@
 - (ArrayIterator *) objectEnumerator;
 - (void) ensureCapacity:(NSInteger) index;
 - (NSString *) description;
-- (NSString *) toString;
 
 @property (assign) NSInteger BuffSize;
 @property (assign, getter=count, setter=setCount:) NSInteger count;

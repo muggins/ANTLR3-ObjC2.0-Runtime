@@ -32,8 +32,8 @@
 
 + (id<BaseTree>) INVALID_NODE;
 
-+ (id<BaseTree>) newTree;
-+ (id<BaseTree>) newTree:(id<BaseTree>)node;
+//+ (id<BaseTree>) newTree;
+//+ (id<BaseTree>) newTree:(id<BaseTree>)node;
 
 - (id<BaseTree>) init;
 - (id<BaseTree>) initWith:(id<BaseTree>)node;
@@ -89,11 +89,8 @@
 
 
 #pragma mark Informational
-- (NSString *) treeDescription;
 - (NSString *) description;
-
-- (NSString *) toString;
-- (NSString *) toStringTree;
+- (NSString *) descriptionTree;
 
 @property (retain) AMutableArray *children;
 @property (retain) NSException *anException;
@@ -107,8 +104,8 @@
 }
 
 + (id<BaseTree>) INVALID_NODE;
-+ (id<BaseTree>) newTree;
-+ (id<BaseTree>) newTree:(id<BaseTree>)node;
+//+ (id<BaseTree>) newTree;
+//+ (id<BaseTree>) newTree:(id<BaseTree>)node;
          
 - (id<BaseTree>) init;
 - (id<BaseTree>) initWith:(id<BaseTree>)node;
@@ -165,10 +162,8 @@
 - (NSUInteger)charPositionInLine;
 - (void) setCharPositionInLine:(NSUInteger)pos;
 
-- (NSString *) treeDescription;
 - (NSString *) description;
-- (NSString *) toString;
-- (NSString *) toStringTree;
+- (NSString *) descriptionTree;
 
 @property (retain) AMutableArray *children;
 @property (retain) NSException *anException;

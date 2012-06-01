@@ -96,19 +96,19 @@
 
 - (NSString *)getSourceName;
 
-- (NSString *)toString;
+- (NSString *)description;
 
 // accessors to the raw data of this stream
 
-@property (retain) NSString *data;
+@property (retain, getter=getData, setter=setData:) NSString *data;
 @property (assign) NSInteger index;
 @property (assign) NSInteger n;
-@property (assign) NSUInteger line;
-@property (assign) NSUInteger charPositionInLine;
+@property (assign, getter=getLine, setter=setLine:) NSUInteger line;
+@property (assign, getter=getCharPositionInLine, setter=setCharPositionInLine:) NSUInteger charPositionInLine;
 @property (assign) NSInteger markDepth;
-@property (retain) PtrBuffer *markers;
+@property (retain, getter=getMarkers, setter=setMarkers:) PtrBuffer *markers;
 @property (assign) NSInteger lastMarker;
 @property (retain) NSString *name;
-@property (retain) CharStreamState *charState;
+@property (retain, getter=getCharState, setter=setCharState:) CharStreamState *charState;
 
 @end

@@ -60,7 +60,7 @@ NSString *text;
  */
 - (NSInteger) execute:(NSString *)buf;
 
-- (NSString *)toString;
+- (NSString *)description;
 - (NSInteger) indexOf:(char)aChar inString:(NSString *)aString;
 @end
 
@@ -85,7 +85,7 @@ NSString *text;
 - (id) initWithIndex:(NSInteger)from ToIndex:(NSInteger)to Text:(NSString *)theText;
 
 - (NSInteger) execute:(NSString *)buf;
-- (NSString *)toString;
+- (NSString *)description;
 
 @end
 
@@ -95,7 +95,7 @@ NSString *text;
 
 - (id) initWithIndex:(NSInteger)from ToIndex:(NSInteger)to;
 
-- (NSString *)toString;
+- (NSString *)description;
 
 @end
 
@@ -156,10 +156,10 @@ HashMap *lastRewriteTokenIndexes;
 - (HashMap *) initializeProgram:(NSString *)name;
 - (NSString *)toOriginalString;
 - (NSString *)toOriginalString:(NSInteger)start End:(NSInteger)end;
-- (NSString *)toString;
-- (NSString *)toString:(NSString *)programName;
-- (NSString *)toStringFromStart:(NSInteger)start ToEnd:(NSInteger)end;
-- (NSString *)toString:(NSString *)programName FromStart:(NSInteger)start ToEnd:(NSInteger)end;
+- (NSString *)description;
+- (NSString *)description:(NSString *)programName;
+- (NSString *)descriptionFromStart:(NSInteger)start ToEnd:(NSInteger)end;
+- (NSString *)description:(NSString *)programName FromStart:(NSInteger)start ToEnd:(NSInteger)end;
 - (HashMap *)reduceToSingleOperationPerIndex:(HashMap *)rewrites;
 - (HashMap *)getKindOfOps:(HashMap *)rewrites KindOfClass:(Class)kind;
 - (HashMap *)getKindOfOps:(HashMap *)rewrites KindOfClass:(Class)kind Index:(NSInteger)before;

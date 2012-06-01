@@ -68,7 +68,7 @@
     return expecting;
 }
 
-- (NSString *)toString
+- (NSString *)description
 {
     if ( inserted != nil && token != nil ) {
         return [NSString stringWithFormat:@"MissingTokenException(inserted %@ at %@)", inserted, token.text];

@@ -126,7 +126,6 @@
 - (id) copyWithZone:(NSZone *)theZone;
 
 - (NSString *) description;
-- (NSString *) toString;
 
 @property (retain, getter = text, setter = setText:) NSString *text;
 @property (assign) NSInteger type;

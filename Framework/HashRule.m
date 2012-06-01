@@ -91,7 +91,7 @@
     [super dealloc];
 }
 
-- (NSInteger)count
+- (NSUInteger)count
 {
     NSInteger aCnt = 0;
     
@@ -103,12 +103,12 @@
     return aCnt;
 }
                           
-- (NSInteger) length
+- (NSUInteger) length
 {
     return BuffSize;
 }
 
-- (NSInteger) size
+- (NSUInteger) size
 {
     NSInteger aSize = 0;
     

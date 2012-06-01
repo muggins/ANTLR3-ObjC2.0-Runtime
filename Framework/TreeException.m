@@ -79,7 +79,7 @@
 
 - (NSString *) description
 {
-	 return [NSMutableString stringWithFormat:@"%@ old root: <%@> new root: <%@>", [super description], [oldRoot treeDescription], [newRoot treeDescription]];
+	 return [NSMutableString stringWithFormat:@"%@ old root: <%@> new root: <%@>", [super description], [oldRoot descriptionTree], [newRoot descriptionTree]];
 }
 
 @end

@@ -145,9 +145,9 @@
 - (NSEnumerator *) objectEnumerator;
 - (void) replaceChildren:(id)parent From:(NSInteger)startChildIndex To:(NSInteger)stopChildIndex With:(id) t;
 
-- (NSString *) toTokenTypeString;
-- (NSString *) toTokenString:(NSInteger)aStart ToEnd:(NSInteger)aStop;
-- (NSString *) toStringFromNode:(id)aStart ToNode:(id)aStop;
+- (NSString *) description;
+- (NSString *) description:(NSInteger)aStart ToEnd:(NSInteger)aStop;
+- (NSString *) descriptionFromNode:(id)aStart ToNode:(id)aStop;
 
 // getters and setters
 - (AMutableArray *) getNodes;

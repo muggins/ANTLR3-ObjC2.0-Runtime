@@ -79,7 +79,7 @@ extern NSInteger debug;
     return [super copyWithZone:aZone];
 }
 
-- (NSInteger)count
+- (NSUInteger)count
 {
     RuleMemo *anElement;
     NSInteger aCnt = 0;
@@ -90,7 +90,7 @@ extern NSInteger debug;
     return aCnt;
 }
 
-- (NSInteger)size
+- (NSUInteger)size
 {
     RuleMemo *anElement;
     NSInteger aSize = 0;

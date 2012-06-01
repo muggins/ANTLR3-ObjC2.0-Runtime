@@ -338,16 +338,16 @@ extern NSInteger debug;
 }
 
 /** Grab *all* tokens from stream and return string */
-- (NSString *) toString
+- (NSString *) description
 {
     if ( index == -1 ) {
         [self setup];
     }
     [self fill];
-    return [self toStringFromStart:0 ToEnd:[tokens count]-1];
+    return [self descriptionFromStart:0 ToEnd:[tokens count]-1];
 }
 
-- (NSString *) toStringFromStart:(NSInteger)startIdx ToEnd:(NSInteger)stopIdx
+- (NSString *) descriptionFromStart:(NSInteger)startIdx ToEnd:(NSInteger)stopIdx
 {
     if ( startIdx < 0 || stopIdx < 0 )
         return nil;
@@ -366,10 +366,10 @@ extern NSInteger debug;
     return buf;
 }
 
-- (NSString *) toStringFromToken:(id<Token>)startToken ToToken:(id<Token>)stopToken
+- (NSString *) descriptionFromToken:(id<Token>)startToken ToToken:(id<Token>)stopToken
 {
     if ( startToken != nil && stopToken != nil ) {
-        return [self toStringFromStart:[startToken getTokenIndex] ToEnd:[stopToken getTokenIndex]];
+        return [self descriptionFromStart:[startToken getTokenIndex] ToEnd:[stopToken getTokenIndex]];
     }
     return nil;
 }

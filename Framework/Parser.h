@@ -45,10 +45,10 @@
 - (void) reset;
 
 - (id) getCurrentInputSymbol:(id<TokenStream>)anInput;
-- (CommonToken *)getMissingSymbol:(id<TokenStream>)input
-                             Exception:(RecognitionException *)e
-                                 TType:(NSInteger)expectedTokenType
-                                BitSet:(ANTLRBitSet *)follow;
+- (CommonToken *)getMissingSymbol:(id<TokenStream>)anInput
+                        Exception:(RecognitionException *)e
+                        TokenType:(NSInteger)expectedTokenType
+                           Follow:(ANTLRBitSet *)follow;
 - (void) setTokenStream:(id<TokenStream>)anInput;
 - (id<TokenStream>)getTokenStream;
 - (NSString *)getSourceName;

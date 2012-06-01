@@ -104,6 +104,7 @@
 - (NSUInteger) getUniqueID:(id)aNode;
 
 - (id) create:(id<Token>)payload;
+- (id) createToken:(NSInteger)tokenType Text:(NSString *)text;
 - (id) createTree:(NSInteger)tokenType FromToken:(id<Token>)fromToken;
 - (id) createTree:(NSInteger)tokenType FromToken:(id<Token>)fromToken Text:(NSString *)text;
 - (id) createTree:(NSInteger)tokenType Text:(NSString *)text;

@@ -65,7 +65,7 @@
     return token;
 }
     
-- (NSString *)toString
+- (NSString *)description
 {
     NSString *exp1 = [NSString stringWithFormat:@", expected %d", expecting];
     if ( expecting == TokenTypeInvalid ) {

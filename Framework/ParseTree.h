@@ -54,10 +54,9 @@
 - (NSInteger)getTokenStopIndex;
 - (void)setTokenStopIndex:(NSInteger)index;
 - (NSString *)description;
-- (NSString *)toString;
-- (NSString *)toStringWithHiddenTokens;
+- (NSString *)descriptionWithHiddenTokens;
 - (NSString *)toInputString;
-- (void)_toStringLeaves:(NSMutableString *)buf;
+- (void)_descriptionLeaves:(NSMutableString *)buf;
 
 @property (retain) id<Token> payload;
 @property (retain) AMutableArray *hiddenTokens;

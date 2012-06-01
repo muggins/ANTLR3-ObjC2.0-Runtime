@@ -41,7 +41,7 @@
 - (id) init;
 - (id) initWithStream:(id<IntStream>)anInput And:(NSInteger)expected;
 - (id<Token>)getUnexpectedToken;
-- (NSString *)toString;
+- (NSString *)description;
                      
     
 @end
