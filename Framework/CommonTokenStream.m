@@ -225,9 +225,10 @@
     return channelOverride;
 }
 
+/*  // not needed -- synthesized
 - (void)setChannelOverride:(AMutableDictionary *)anOverride
 {
     channelOverride = anOverride;
 }
-
+*/
 @end

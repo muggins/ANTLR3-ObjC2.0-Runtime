@@ -169,6 +169,7 @@
 	return token == nil;
 }
 
+/*  // not needed -- synthesized
 - (CommonToken *) getToken
 {
 	return token;
@@ -182,6 +183,7 @@
 		token = aToken;
 	}
 }
+*/
 
 - (CommonTree *) dupNode
 {
@@ -297,11 +299,20 @@
     }
 }
 
+// conflicts with synthesized getter but needed to override method
+// in BaseTree
 - (NSInteger) getChildIndex
 {
     return childIndex;
 }
 
+// conflicts with synthesized setter but needed to override method
+// in BaseTree
+- (void) setChildIndex:(NSInteger) anIndex
+{
+    childIndex = anIndex;
+}
+ 
 - (CommonTree *) getParent
 {
     return parent;
@@ -310,11 +321,6 @@
 - (void) setParent:(CommonTree *) t
 {
     parent = t;
-}
-
-- (void) setChildIndex:(NSInteger) anIndex
-{
-    childIndex = anIndex;
 }
 
 - (NSString *) description

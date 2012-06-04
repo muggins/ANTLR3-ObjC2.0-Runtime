@@ -135,7 +135,7 @@
 
 @property(nonatomic, retain) LLNode *first;
 @property(nonatomic, retain) LLNode *last;
-@property(assign) NSInteger count;
+@property(assign, getter=getCount, setter=setCount:) NSInteger count;
 @property(assign) NSInteger modCount;
 
 + (LinkedList *)newLinkedList;

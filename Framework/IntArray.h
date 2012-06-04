@@ -65,7 +65,7 @@
 - (void) ensureCapacity:(NSUInteger) anIndex;
 
 @property (assign) NSUInteger BuffSize;
-@property (assign) NSUInteger count;
+@property (assign, getter=getCount, setter=setCount:) NSUInteger count;
 @property (assign) NSInteger idx;
 @property (retain) NSMutableData *buffer;
 @property (assign) NSInteger *intBuffer;

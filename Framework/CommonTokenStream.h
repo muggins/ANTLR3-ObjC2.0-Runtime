@@ -63,14 +63,14 @@
 
 - (NSInteger) getNumberOfOnChannelTokens;
 
-// - (id<TokenSource>) getTokenSource;
+// - (id<TokenSource>) getTokenSource; // not needed -- synthesized
 - (void) setTokenSource: (id<TokenSource>) aTokenSource;
 
 - (NSUInteger)channel;
 - (void)setChannel:(NSUInteger)aChannel;
 
 - (AMutableDictionary *)channelOverride;
-- (void)setChannelOverride:(AMutableDictionary *)anOverride;
+//- (void)setChannelOverride:(AMutableDictionary *)anOverride; // not needed -- synthesized
 
 - (id) copyWithZone:(NSZone *)aZone;
 

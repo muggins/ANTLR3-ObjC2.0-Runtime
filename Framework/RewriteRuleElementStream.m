@@ -126,6 +126,7 @@
     dirty = YES;
 }
 
+/*// not needed -- synthesized
 - (id<TreeAdaptor>) getTreeAdaptor
 {
     return treeAdaptor;
@@ -139,6 +140,7 @@
         [treeAdaptor retain];
     }
 }
+*/
 
 - (void) addElement: (id)anElement
 {

@@ -296,10 +296,12 @@
 	return backtracking;
 }
 
+/* // not needed -- synthesized
 - (void) setBacktracking:(NSInteger) value
 {
 	backtracking = value;
 }
+*/
 
 - (void) increaseBacktracking
 {

@@ -243,7 +243,7 @@ static CommonToken *INVALID_TOKEN;
     return copy;
 }
 
-
+/* not needed -- synthesized
 //---------------------------------------------------------- 
 //  charPositionInLine 
 //---------------------------------------------------------- 
@@ -269,6 +269,7 @@ static CommonToken *INVALID_TOKEN;
 {
     line = aLine;
 }
+*/
 
 //---------------------------------------------------------- 
 //  text 

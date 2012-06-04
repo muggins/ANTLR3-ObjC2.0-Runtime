@@ -53,8 +53,8 @@
 
 - (BOOL) isNil;
 
-- (CommonToken *) getToken;
-- (void) setToken:(CommonToken *)aToken;
+//- (CommonToken *) getToken;
+//- (void) setToken:(CommonToken *)aToken;
 - (CommonToken *) dupNode;
 - (NSInteger)type;
 - (NSString *)text;
@@ -62,8 +62,8 @@
 - (void) setLine:(NSUInteger)aLine;
 - (NSUInteger)charPositionInLine;
 - (void) setCharPositionInLine:(NSUInteger)pos;
-- (CommonTree *) getParent;
-- (void) setParent:(CommonTree *) t;
+//- (CommonTree *) getParent;
+//- (void) setParent:(CommonTree *) t;
 
 - (NSString *) description;
 #ifdef DONTUSENOMO

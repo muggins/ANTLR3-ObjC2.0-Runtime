@@ -266,7 +266,7 @@
 - (id<Token>) getToken:(CommonTree *) t
 {
     if ( [t isKindOfClass:[CommonTree class]] ) {
-        return [t getToken];
+        return t.token;
     }
     return nil; // no idea what to do
 }

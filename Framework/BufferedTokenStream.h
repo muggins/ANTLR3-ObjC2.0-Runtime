@@ -88,7 +88,7 @@ NSInteger range; // how deep have we gone?
 - (void) setup;
 - (id<TokenSource>) getTokenSource;
 - (void) setTokenSource:(id<TokenSource>) aTokenSource;
-- (AMutableArray *)getTokens;
+//- (AMutableArray *)getTokens; // not needed -- synthesized
 - (NSString *) getSourceName;
 - (AMutableArray *)getTokensFrom:(NSInteger)startIndex To:(NSInteger)stopIndex;
 - (AMutableArray *)getTokensFrom:(NSInteger)startIndex To:(NSInteger)stopIndex With:(ANTLRBitSet *)types;

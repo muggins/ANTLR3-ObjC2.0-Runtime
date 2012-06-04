@@ -152,7 +152,7 @@
     LinkedHashMap *lhm;
 }
 
-@property (retain) LHMEntry *nextEntry;
+@property (retain, getter=getNextEntry, setter=setNextEntry:) LHMEntry *nextEntry;
 @property (retain) LHMEntry *lastReturned;
 @property (retain) LinkedHashMap *lhm;
 

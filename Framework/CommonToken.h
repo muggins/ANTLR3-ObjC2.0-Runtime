@@ -82,6 +82,7 @@
 - (NSString *)text;
 - (void) setText:(NSString *)aText;
 
+/* Not needed -- synthesized
 //---------------------------------------------------------- 
 //  charPositionInLine 
 //---------------------------------------------------------- 
@@ -93,6 +94,7 @@
 //---------------------------------------------------------- 
 - (NSUInteger) getLine;
 - (void) setLine:(NSUInteger)aLine;
+*/
 
 //---------------------------------------------------------- 
 //  type 
@@ -129,8 +131,8 @@
 
 @property (retain, getter = text, setter = setText:) NSString *text;
 @property (assign) NSInteger type;
-@property (assign, getter = line, setter = setLine:) NSUInteger line;
-@property (assign, getter=charPositionInLine, setter = setCharPositionInLine:) NSUInteger charPositionInLine;
+@property (assign) NSUInteger line;
+@property (assign) NSUInteger charPositionInLine;
 @property (assign) NSUInteger channel;
 @property (assign) NSInteger index;
 @property (assign, getter=getStart, setter=setStart:) NSInteger startIndex;

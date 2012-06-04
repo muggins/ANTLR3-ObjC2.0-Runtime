@@ -778,10 +778,10 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
     
     htmp = *map;
     if ( (*map)->fNext != nil ) {
-        *map = (HashMap *)htmp->fNext;
+        *map = (HashMap *)htmp.fNext;
         for( idx = 0; idx < Capacity; idx++ ) {
-            if ( htmp->ptrBuffer[idx] == nil ||
-                htmp->ptrBuffer[idx] == (*map)->ptrBuffer[idx] ) {
+            if ( htmp.ptrBuffer[idx] == nil ||
+                htmp.ptrBuffer[idx] == (*map).ptrBuffer[idx] ) {
                 break;
             }
             tmp = htmp->ptrBuffer[idx];
@@ -860,7 +860,7 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
 #endif
 -(HashMap *)findscope:(NSInteger)scope
 {
-    if ( self->Scope == scope ) {
+    if ( self.Scope == scope ) {
         return( self );
     }
     else if ( fNext ) {
@@ -991,6 +991,7 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
     }
 }
 
+/*
 -(NSInteger)getScope
 {
     return( Scope );
@@ -1000,6 +1001,7 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
 {
     Scope = i;
 }
+*/
 
 - (MapElement *)getTType:(NSString *)name
 {

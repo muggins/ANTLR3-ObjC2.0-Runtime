@@ -45,8 +45,8 @@
 + (TreeVisitorAction *)newTreeVisitorAction;
 - (id) init;
 
-- (void)setPreAction:(SEL)anAction;
-- (void)setPostAction:(SEL)anAction;
+//- (void)setPreAction:(SEL)anAction;
+//- (void)setPostAction:(SEL)anAction;
 
 /** Execute an action before visiting children of t.  Return t or
  *  a rewritten t.  It is up to the visitor to decide what to do

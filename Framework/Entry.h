@@ -13,7 +13,7 @@
 }
 
 @property(nonatomic, retain) HTEntry  *next;
-@property(assign)           NSInteger  hash;
+@property(assign, getter=getHash, setter=setHash:) NSInteger  hash;
 @property(nonatomic, retain) NSString *key;
 @property(nonatomic, retain)        id value;
 

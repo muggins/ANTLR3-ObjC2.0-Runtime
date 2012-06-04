@@ -230,12 +230,12 @@
 @property (retain, getter=getBuffer, setter=setBuffer:) NSMutableData *buffer;
 @property (assign, getter=getPtrBuffer, setter=setPtrBuffer:) MapElement **ptrBuffer;
 @property (assign) NSInteger threshold;
-@property (assign) float loadFactor;
+@property (assign, getter=getLoadFactor, setter=setLoadFactor:) float loadFactor;
 @property (assign) NSInteger modCount;
-@property (retain) HMEntrySet *entrySet;
+@property (retain, getter=getEntrySet, setter=setEntrySet:) HMEntrySet *entrySet;
 @property (nonatomic, readonly) BOOL empty;
-@property (retain) HMKeySet *keySet;
-@property (retain) Values *values;
+@property (retain, getter=getKeySet, setter=setKeySet:) HMKeySet *keySet;
+@property (retain, getter=getValues, setter=setValues:) Values *values;
 
 // Contruction/Destruction
 + (id) newHashMap;

@@ -281,10 +281,12 @@ extern NSInteger debug;
     index = -1;
 }
 
+/*  Not needed -- synthesized
 - (AMutableArray *)getTokens
 {
     return tokens;
 }
+ */
 
 - (AMutableArray *)getTokensFrom:(NSInteger) startIndex To:(NSInteger) stopIndex
 {

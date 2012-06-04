@@ -41,7 +41,7 @@
 
 @property (retain) AMutableArray *data;
 @property (assign) NSUInteger p;
-@property (assign) NSUInteger range;
+@property (assign, getter=getRange, setter=setRange:) NSUInteger range;
 
 + (id) newFastQueue;
 

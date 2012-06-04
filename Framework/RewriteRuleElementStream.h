@@ -45,7 +45,7 @@
 @property (assign) id singleElement;
 @property (assign) AMutableArray *elements;
 @property (assign) NSString *elementDescription;
-@property (retain) id<TreeAdaptor> treeAdaptor;
+@property (retain, getter=getTreeAdaptor, setter=setTreeAdaptor:) id<TreeAdaptor> treeAdaptor;
 
 + (RewriteRuleElementStream*) newRewriteRuleElementStream:(id<TreeAdaptor>)aTreeAdaptor
                                                         description:(NSString *)anElementDescription;

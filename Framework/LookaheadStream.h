@@ -71,7 +71,7 @@
 - (void) setEofElementIndex:(NSInteger) anInt;
 - (NSInteger) getLastMarker;
 - (void) setLastMarker:(NSInteger) anInt;
-- (NSInteger) getMarkDepth;
-- (void) setMarkDepth:(NSInteger) anInt;
+//- (NSInteger) getMarkDepth;
+//- (void) setMarkDepth:(NSInteger) anInt;
 
 @end

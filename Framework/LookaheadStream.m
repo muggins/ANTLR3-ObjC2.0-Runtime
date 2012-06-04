@@ -218,6 +218,7 @@
     lastMarker = anInt;
 }
 
+/*
 - (NSInteger) getMarkDepthlastMarker
 {
     return markDepth;
@@ -227,5 +228,5 @@
 {
     markDepth = anInt;
 }
-
+*/
 @end
