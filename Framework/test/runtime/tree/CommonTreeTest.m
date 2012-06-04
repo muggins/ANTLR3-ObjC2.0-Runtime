@@ -6,13 +6,13 @@
 //  Copyright 2010 Ian Michell. All rights reserved.
 //
 
-#import "BaseTree.h"
+#import <ANTLR/BaseTree.h>
 #import "CommonTreeTest.h"
-#import "ANTLRStringStream.h"
-#import "CommonTree.h"
-#import "CommonToken.h"
-#import "ANTLRError.h"
-#import "RuntimeException.h"
+#import <ANTLR/ANTLRStringStream.h>
+#import <ANTLR/CommonTree.h>
+#import <ANTLR/CommonToken.h>
+#import <ANTLR/ANTLRError.h>
+#import <ANTLR/RuntimeException.h>
 
 @implementation CommonTreeTest
 
@@ -29,7 +29,7 @@
 	CommonTree *tree = [CommonTree newTree];
 	STAssertNotNil(tree, @"Tree was nil");
     if (tree != nil)
-        STAssertEquals([tree type], (NSInteger)TokenTypeInvalid, @"Tree should have an invalid token type, because it has no token");
+        STAssertEquals(tree.type, (NSInteger)TokenTypeInvalid, @"Tree should have an invalid token type, because it has no token");
     // [tree release];
     return;
 }
@@ -223,7 +223,7 @@
 	}
 	@catch (NSException *e) 
 	{
-		STAssertTrue([[e name] isEqualToString:@"ANTLRIllegalArgumentException"], @"Got wrong kind of exception! %@", [e name]);
+		STAssertTrue([[e name] isEqualToString:@"IllegalArgumentException"], @"Got wrong kind of exception! %@", [e name]);
 		//[parent release];
 		return;
 	}
@@ -394,7 +394,7 @@
 	}
 	@catch (NSException * e) 
 	{
-		STAssertTrue([[e name] isEqualToString:@"ANTLRIllegalStateException"], @"Exception was not an ANTLRIllegalStateException but was %@", [e name]);
+		STAssertTrue([[e name] isEqualToString:@"IllegalStateException"], @"Exception was not an IllegalStateException but was %@", [e name]);
 		passed = YES;
 	}
 	if (!passed)
@@ -439,14 +439,14 @@
 	CommonTree *tree = [CommonTree newTreeWithToken:token];
 	
 	// Description for tree
-	NSString *treeDesc = [tree treeDescription];
+	NSString *treeDesc = [tree descriptionTree];
     STAssertNotNil(treeDesc, @"Tree description should not be nil");
     STAssertTrue([treeDesc isEqualToString:@"||"], @"Tree description was not || but rather %@", treeDesc);
 	
 	CommonTree *parent = [CommonTree newTree];
-	STAssertTrue([[parent treeDescription] isEqualToString:@"nil"], @"Tree description was not nil was %@", [parent treeDescription]);
+	STAssertTrue([[parent descriptionTree] isEqualToString:@"nil"], @"Tree description was not nil was %@", [parent descriptionTree]);
 	[parent addChild:tree];
-	treeDesc = [parent treeDescription];
+	treeDesc = [parent descriptionTree];
 	STAssertTrue([treeDesc isEqualToString:@"||"], @"Tree description was not || but was: %@", treeDesc);
 	
 	// Test non empty parent
@@ -454,7 +454,7 @@
 	down.token.text = @"<DOWN>";
 	
 	[tree addChild:down];
-	treeDesc = [parent treeDescription];
+	treeDesc = [parent descriptionTree];
 	STAssertTrue([treeDesc isEqualToString:@"(|| <DOWN>)"], @"Tree description was wrong expected (|| <DOWN>) but got: %@", treeDesc);
     return;
 }
@@ -472,7 +472,7 @@
 	}
 	@catch (NSException *ex)
 	{
-		STAssertTrue([[ex name] isEqualToString:@"ANTLRIllegalArgumentException"], @"Expected an illegal argument exception... Got instead: %@", [ex name]);
+		STAssertTrue([[ex name] isEqualToString:@"IllegalArgumentException"], @"Expected an illegal argument exception... Got instead: %@", [ex name]);
 		return;
 	}
 	STFail(@"Exception was not thrown when I tried to replace a child on a parent with no children");

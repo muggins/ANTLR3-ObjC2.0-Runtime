@@ -1,5 +1,5 @@
 //
-//  CommonErrorNodeTest.h
+//  ANTLRCommonErrorNodeTest.h
 //  ANTLR
 //
 //  Created by Ian Michell on 10/06/2010.
@@ -9,7 +9,7 @@
 #import <SenTestingKit/SenTestingKit.h>
 
 
-@interface CommonErrorNodeTest : SenTestCase {
+@interface ANTLRCommonErrorNodeTest : SenTestCase {
 
 }
 

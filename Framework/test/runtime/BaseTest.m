@@ -4,7 +4,7 @@
 
 + (id)newStreamVacuum:(InputStream *)in
 {
-        return [[StreamVacuum alloc] initWithIn:in];
+    return [[StreamVacuum alloc] initWithIn:in];
 }
 
 - (id) initWithIn:(InputStream *)in
@@ -165,14 +165,14 @@ const NSString *CLASSPATH = [System getProperty:@"java.class.path"] + ([SUREFIRE
         compiler = jikes;
         classpathOption = @"-bootclasspath";
     }
-    NSArray * args = [NSArray arrayWithObjects:compiler,
+    NSArray *args = [NSArray arrayWithObjects:compiler,
             @"-d",
             tmpdir,
             classpathOption,
-            [tmpdir stringByAppendingFormat:@"%@%@/%@", pathSep CLASSPATH, fileName],
+            [tmpdir stringByAppendingFormat:@"%@%@/%@", pathSep, CLASSPATH, fileName],
             nil];
     NSString * cmdLine = [compiler stringByAppendingString:@" -d %@ %@ %@%@%@ %@", tmpdir, classpathOption, tmpdir, pathSep, CLASSPATH, fileName];
-    File * outputDir = [[[File alloc] init:tmpdir] autorelease];
+    File *outputDir = [[[File alloc] init:tmpdir] autorelease];
 
     @try {
         Process *process = [[Runtime runtime] exec:args param1:nil param2:outputDir];
