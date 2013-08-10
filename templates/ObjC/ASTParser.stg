@@ -40,7 +40,7 @@
 @rule.setErrorReturnValue() ::= <<
 /* ASTParser rule.setErrorReturnValue */
 retval.tree = (<ASTLabelType> *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
-<! System.out.println("<ruleName> returns "+((CommonTree)retval.tree).toStringTree()); !>
+// NSLog(@"<ruleName> returns %@", [((<ASTLabelType; null="CommonTree"> *)retval.tree) descriptionTree]);
 >>
 
 // TOKEN AST STUFF
@@ -175,7 +175,7 @@ wildcard(token,label,elementIndex,terminalOptions) ::= <<
 /* ASTParser wildcard */
 <super.wildcard(...)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
-    [treeAdaptor addChild:[[treeAdaptor create:<label>] retain] toTree:root_0];
+    [treeAdaptor addChild:[treeAdaptor create:<label>] toTree:root_0];
 <if(backtracking)>}<endif>
 >>
 
@@ -185,7 +185,7 @@ wildcardRuleRoot(token,label,elementIndex,terminalOptions) ::= <<
 /* ASTParser wildcardRuleRoot */
 <super.wildcard(...)>
 <if(backtracking)>if ( <actions.(actionScope).synpredgate> ) {<endif>
-    <label>_tree = [[treeAdaptor create:<label>] retain]
+    <label>_tree = [treeAdaptor create:<label>]
     root_0 = (<ASTLabelType> *)[treeAdaptor becomeRoot:<label>_tree old:root_0];
 <if(backtracking)>}<endif>
 >>
@@ -195,7 +195,7 @@ createNodeFromToken(label,terminalOptions) ::= <<
 <if(terminalOptions.node)>
 [<terminalOptions.node> new<terminalOptions.node>:<label>] <! new MethodNode(IDLabel) !>
 <else>
-(<ASTLabelType> *)[[treeAdaptor create:<label>] retain]
+(<ASTLabelType> *)[treeAdaptor create:<label>]
 <endif>
 >>
 

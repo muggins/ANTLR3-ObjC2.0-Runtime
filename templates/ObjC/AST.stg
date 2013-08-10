@@ -61,7 +61,7 @@ NSArray *ruleNames;
 @genericParser.init() ::= <<
 /* AST genericParser.init */
 <@super.init()>
-[self setTreeAdaptor:[[CommonTreeAdaptor newTreeAdaptor] retain]];
+[self setTreeAdaptor:[<ASTLabelType; null="CommonTree">Adaptor newTreeAdaptor]];
 >>
 
 @genericParser.dealloc() ::= <<
@@ -146,17 +146,13 @@ parserMethods() ::= <<
 
 - (void) setTree:(<ASTLabelType> *)aTree
 {
-    if (tree != aTree) {
-        if (tree != nil) [tree release];
-        if (aTree != nil) [aTree retain];
-        tree = aTree;
-    }
+    tree = aTree;
 }
 
 - (void) dealloc
 {
     self.tree = nil;
-    [super dealloc];
+    // [super dealloc];
 }
 
 >>
@@ -175,17 +171,17 @@ ruleLabelDefs() ::= <<
   ruleDescriptor.wildcardTreeListLabels]:{it | <ASTLabelType> *<it.label.text>_tree=nil;}; separator="\n">
 <ruleDescriptor.tokenListLabels:{it | <ASTLabelType> *<it.label.text>_tree = nil;}; separator="\n">
 <ruleDescriptor.allTokenRefsInAltsWithRewrites:{it | RewriteRuleTokenStream *stream_<it> =
-    [[RewriteRule<rewriteElementType>Stream newRewriteRule<rewriteElementType>Stream:treeAdaptor
-                                                     description:@"token <it>"] retain];}; separator="\n">
+    [RewriteRule<rewriteElementType>Stream newRewriteRule<rewriteElementType>Stream:treeAdaptor
+                                                     description:@"token <it>"];}; separator="\n">
 <ruleDescriptor.allRuleRefsInAltsWithRewrites:{it | RewriteRuleSubtreeStream *stream_<it> =
-    [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
-                                                        description:@"rule <it>"] retain];}; separator="\n">
+    [RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
+                                                        description:@"rule <it>"];}; separator="\n">
 >>
 
 ruleCleanUp() ::= <<
 /* AST ruleCleanUp */
 <super.ruleCleanUp()>
-<[ruleDescriptor.allTokenRefsInAltsWithRewrites,ruleDescriptor.allRuleRefsInAltsWithRewrites]:{it | [stream_<it> release];}; separator="\n">
+<[ruleDescriptor.allTokenRefsInAltsWithRewrites,ruleDescriptor.allRuleRefsInAltsWithRewrites]:{it | stream_<it> = nil;}; separator="\n">
 <!
 <if(ruleDescriptor.hasMultipleReturnValues)>
 <if(backtracking)>if ( state.backtracking == 0 ) {<\n>
@@ -197,16 +193,16 @@ ruleCleanUp() ::= <<
 <if(backtracking)>}<\n>
 <endif>
 <endif>
-[root_0 release];
+root_0 = nil;
 !>
 >>
 
 rewriteCodeLabelsCleanUp() ::= <<
 /* AST rewriteCodeLabelsCleanUp */
- <referencedTokenLabels:{it | [stream_<it> release];}; separator="\n">
- <referencedTokenListLabels:{it | [stream_<it> release];}; separator="\n">
- <referencedRuleLabels:{it | [stream_<it> release];}; separator="\n">
- <referencedRuleListLabels:{it | [stream_<it> release];}; separator="\n">
+ <referencedTokenLabels:{it | stream_<it> = nil;}; separator="\n">
+ <referencedTokenListLabels:{it | stream_<it> = nil;}; separator="\n">
+ <referencedRuleLabels:{it | stream_<it> = nil;}; separator="\n">
+ <referencedRuleListLabels:{it | stream_<it> = nil;}; separator="\n">
 >>
 
 /** When doing auto AST construction, we must define some variables;
@@ -218,7 +214,7 @@ rewriteCodeLabelsCleanUp() ::= <<
 <if(autoAST)>
 <if(outerAlt)>
 <if(!rewriteMode)>
-root_0 = (<ASTLabelType> *)[[[treeAdaptor class] newEmptyTree] retain];<\n>
+root_0 = (<ASTLabelType> *)[[treeAdaptor class] newEmptyTree];<\n>
 <endif>
 <endif>
 <endif>
@@ -311,7 +307,7 @@ if ( <actions.(actionScope).synpredgate> ) {<\n>
 <endif>
 <prevRuleRootRef()>.tree = root_0;<\n>
 <rewriteCodeLabels()>
-root_0 = (<ASTLabelType> *)[[[treeAdaptor class] newEmptyTree] retain];<\n>
+root_0 = (<ASTLabelType> *)[[treeAdaptor class] newEmptyTree];<\n>
 <alts:rewriteAlt(); separator="else ">
 <! if tree parser and rewrite=true !>
 <if(TREE_PARSER)>
@@ -339,32 +335,32 @@ root_0 = (<ASTLabelType> *)[[[treeAdaptor class] newEmptyTree] retain];<\n>
 rewriteCodeLabels() ::= <<
 <referencedTokenLabels
     :{it | RewriteRule<rewriteElementType>Stream *stream_<it> =
-    [[RewriteRule<rewriteElementType>Stream newRewriteRule<rewriteElementType>Stream:treeAdaptor description:@"token <it>" element:<it>] retain];};
+    [RewriteRule<rewriteElementType>Stream newRewriteRule<rewriteElementType>Stream:treeAdaptor description:@"token <it>" element:<it>];};
     separator="\n"
 >
 <referencedTokenListLabels:{it | RewriteRule<rewriteElementType>Stream *stream_<it> =
-    [[RewriteRule<rewriteElementType>Stream newRewriteRule<rewriteElementType>Stream:treeAdaptor
-        description:@"token <it>" elements:list_<it>] retain];};
+    [RewriteRule<rewriteElementType>Stream newRewriteRule<rewriteElementType>Stream:treeAdaptor
+        description:@"token <it>" elements:list_<it>];};
     separator="\n"
 >
 <referencedWildcardLabels:{it | RewriteRuleSubtreeStream stream_<it> =
-    [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
-        description:"wildcard <it>" element:<it>] retain];};
+    [RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
+        description:"wildcard <it>" element:<it>];};
     separator="\n"
 >
 <referencedWildcardListLabels:{it | RewriteRuleSubtreeStream stream_<it> =
-    [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
-        descriptor:"wildcard <it>" elements:list_<it>] retain];};
+    [RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
+        descriptor:"wildcard <it>" elements:list_<it>];};
     separator="\n"
 >
 <referencedRuleLabels:{it | RewriteRuleSubtreeStream *stream_<it> =
-    [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
-        description:@"token <it>" element:<it>!=nil?[<it> getTree]:nil] retain];};
+    [RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
+        description:@"token <it>" element:<it>!=nil?[<it> getTree]:nil];};
     separator="\n"
 >
 <referencedRuleListLabels:{it | RewriteRuleSubtreeStream *stream_<it> =
-    [[RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
-        description:@"token <it>" elements:list_<it>] retain];};
+    [RewriteRuleSubtreeStream newRewriteRuleSubtreeStream:treeAdaptor
+        description:@"token <it>" elements:list_<it>];};
     separator="\n"
 >
 >>
@@ -435,7 +431,7 @@ rewriteEmptyAlt() ::= "root_0 = nil;"
 rewriteTree(root,children,description,enclosingTreeLevel,treeLevel) ::= <<
 // <fileName>:<description>
 {
-    <ASTLabelType> *root_<treeLevel> = (<ASTLabelType> *)[[[treeAdaptor class] newEmptyTree] retain];
+    <ASTLabelType> *root_<treeLevel> = (<ASTLabelType> *)[[treeAdaptor class] newEmptyTree];
     <root:rewriteElement()>
     <children:rewriteElement()>
     [treeAdaptor addChild:root_<treeLevel> toTree:root_<enclosingTreeLevel>];
@@ -534,30 +530,31 @@ rewriteRuleListLabelRefRoot(label) ::= <<
 root_<treeLevel> = (<ASTLabelType> *)[treeAdaptor becomeRoot:[stream_<label> nextNode] old:root_<treeLevel>];<\n>
 >>
 
-rewriteWildcardLabelRef(label) ::= <<
+rewriteWildcardLabelRef(label) ::= <%
 [treeAdaptor addChild:[stream_<label> nextTree] toTree:root_<treeLevel>];<\n>
->>
+%>
 
-createImaginaryNode(tokenType,terminalOptions,args) ::= <<
+createImaginaryNode(tokenType,terminalOptions,args) ::= <%
 <if(terminalOptions.node)>
     [<terminalOptions.node> new<terminalOptions.node>:<tokenType> <if(args)>, <args; separator=", "><endif>]
 <else>
+    <! [treeAdaptor createTree:<tokenType> Text:<if(args)><first(args)><else>@"<tokenType>"<endif>] !>
     <if(args)>
-        [[treeAdaptor createTree:<tokenType> <if(first(args))>FromToken:<first(args)><endif> <if(first(rest(args)))>Text:<first(rest(args))><else>Text:@"<tokenType>"<endif>] retain]
+        [treeAdaptor createTree:<tokenType> <if(first(args))>FromToken:<first(args)><endif> <if(first(rest(args)))>Text:<first(rest(args))><else>Text:@"<tokenType>"<endif>]
     <else>
-        [[treeAdaptor createTree:<tokenType> Text:@"<tokenType>"] retain]
+        [treeAdaptor createTree:<tokenType> Text:@"<tokenType>"]
     <endif>
 <endif>
->>
+%>
 
-createRewriteNodeFromElement(token,terminalOptions,args) ::= <<
+createRewriteNodeFromElement(token,terminalOptions,args) ::= <%
 <if(terminalOptions.node)>
     [<terminalOptions.node> new<terminalOptions.node>:[stream_<token> nextToken]<if(args)>, <args; separator=", "><endif>]
 <else>
     <if(args)> <! must create new node from old !>
-        [[treeAdaptor createTree:<token> Text:<first(rest(args))> <args; separator=", ">] retain]
+        [treeAdaptor createTree:<token> Text:<first(rest(args))> <args; separator=", ">]
     <else>
         [stream_<token> nextNode]
     <endif>
 <endif>
->>
+%>

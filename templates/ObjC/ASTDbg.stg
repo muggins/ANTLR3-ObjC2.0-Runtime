@@ -68,13 +68,13 @@ try {
 >>
 
 @ctorForRootGrammar.finally() ::= <<
-CommonTreeAdaptor *adap = [CommonTreeAdaptor newTreeAdaptor];
+<ASTLabelType; null="CommonTree">Adaptor *adap = [<ASTLabelType; null="CommonTree">Adaptor newTreeAdaptor];
 [self setTreeAdaptor:adap];
 [proxy setTreeAdaptor:adap];
 >>
 
 @ctorForProfilingRootGrammar.finally() ::=<<
-CommonTreeAdaptor *adap = [CommonTreeAdaptor newTreeAdaptor];
+<ASTLabelType; null="CommonTree">Adaptor *adap = [<ASTLabelType; null="CommonTree">Adaptor newTreeAdaptor];
 [self setTreeAdaptor:adap];
 [proxy setTreeAdaptor:adap];
 >>
@@ -83,7 +83,7 @@ CommonTreeAdaptor *adap = [CommonTreeAdaptor newTreeAdaptor];
 
 @ctorForPredefinedListener.finally() ::=<<
 <if(grammar.grammarIsRoot)> <! don't create new adaptor for delegates !>
-CommonTreeAdaptor *adap = [CommonTreeAdaptor newTreeAdaptor];
+<ASTLabelType; null="CommonTree">Adaptor *adap = [<ASTLabelType; null="CommonTree">Adaptor newTreeAdaptor];
 [self setTreeAdaptor:adap];<\n>
 <endif>
 >>

@@ -29,6 +29,12 @@
  *  If debugging, then you'll also get STDbg.stg loaded.
  */
 
+@outputFile.imports() ::= <<
+<@super.imports()>
+import <ST4/ST4.h>;
+import <ANTLR/ANTLR.h>;
+>>
+
 @returnScopeInterface.memVars() ::= <<
 <@super.memVars()>
 /* ST returnInterface.memVars */
@@ -45,7 +51,6 @@ ST *st;
 <@super.methodsDecl()>
 /* ST AST returnScopeInterface.methodsDecl */
 - (id) getTemplate;
-- (NSString *) toString;
 - (NSString *) description;
 >>
 
@@ -70,8 +75,7 @@ ST *st;
 <@super.methods()>
 /* ST returnScope.methods */
 - (id) getTemplate { return st; }
-- (NSString *) toString { return st==nil?nil:[st toString]; }
-- (NSString *) description { [self toString]; }
+- (NSString *) description { return st!=nil?[st description]:nil; }
 >>
 
 @returnScopeImplementation() ::= <<
@@ -91,77 +95,67 @@ ST *st;
 @genericParserHeaderFile.memVars() ::= <<
 <@super.memVars()>
 /* ST genericParserHeaderFile.memVars -- empty now */
-STGroup *templateLib; /* ST -- really a part of STAttrMap */
+STGroup *group; /* ST -- really a part of STAttrMap */
 >>
 
 @genericParserHeaderFile.properties() ::= <<
 <@super.properties()>
 /* ST genericParser.properties */
-@property (retain, getter=getTemplateLib, setter=setTemplateLib:) STGroup *templateLib;
+@property (retain, getter=getGroup, setter=setGroup:) STGroup *group;
 >>
 
 @genericParserHeaderFile.methodsDecl() ::= <<
 <@super.methodsDecl()>
 /* ST genericParser.methodsDecl */
 - init;
-- (STGroup *) getTemplateLib;
-- (void) setTemplateLib:(STGroup *)aTemplateLib;
+- (STGroup *) getGroup;
+- (void) setGroup:(STGroup *)aGroup;
 @end
 >>
 
 @genericParser.synthesize() ::= <<
 <@super.synthesize()>
 /* ST genericParserImplementation.synthesize */
-@synthesize templateLib;
+@synthesize group;
+>>
+
+/* additional init code for ST support */
+@genericParser.init() ::= <<
+/* ST genericParser.init */
+<@super.init()>
+    group = STGroup.defaultGroup;
 >>
 
 @genericParser.methods() ::= <<
 <@super.methods()>
 /* ST genericParser.methods */
 
-- (STGroup *)getTemplateLib
+- (STGroup *)getGroup
 {
-    return templateLib;
+    return group;
 }
 
-- (void) setTemplateLib:(STGroup *)aTemplateLib
+- (void) setGroup:(STGroup *)aGroup
 {
-    templateLib = aTemplateLib;
+    group = aGroup;
 }
 
 >>
 
 @genericParser.members() ::= <<
+/* ST genericParser.members */
 <@super.members()>
-STGroup *templateLib = [STGroup  newSTGroup:@"<name>Templates"];
 
-- (STGroup *) getTemplateLib
+- (STGroup *) getGroup
 {
-  return templateLib;
-}
-
-- (void) setTemplateLib:(STGroup *) templateLib
-{
-  this.templateLib = templateLib;
+    return group;
 }
 
-/** allows convenient multi-value initialization:
- *  "new STAttrMap().put(...).put(...)"
- */
-/* REPLACE THIS STATIC CLASS
-static class STAttrMap extends HashMap {
-- (STAttrMap *) setObject:(id)aValue forKey:(NS*)String attrName
+- (void) setGroup:(STGroup *) aGroup
 {
-    [super setObject:value forKey:attrName];
-    return self;
+    self.group = aGroup;
 }
-- (STAttrMap *) setObjectWithInt:(NSInteger)value forKey:(NSString *)attrName
-{
-    [super setObject:[NSNumber numberWithInteger:value] forKey:attrName];
-    return self;
-  }
-}
-*/
+
 >>
 
 @STAttrMap() ::= <<
@@ -173,19 +167,19 @@ static class STAttrMap extends HashMap {
 
 @STAttrMap.interface() ::= <<
 /* -------- ST start STAttrMap.interface ------------ */
-@interface STAttrMap : HashMap {
+@interface STAttrMap : LinkedHashMap {
 /*    <@STAttrMap.memVars()> */
-    STGroup *templateLib;
+    STGroup *group;
 }
 
 /*    <@STAttrMap.properties()> */
-@property (retain, getter=getTemplateLib, setter=setTemplateLib:) STGroup *templateLib;
+@property (retain, getter=getGroup, setter=setGroup:) STGroup *group;
 /* <@STAttrMap.methodsDecl()> */
 - (id) init;
-- (STAttrMap *) setObject:(id)value forKey:(NSString *)attrName;
-- (STAttrMap *) setObjectWithInt:(NSInteger)value forKey:(NSString *)attrName;
-- (void) setTemplateLib:(STGroup *)aTemplateLib;
-- (STGroup *) getTemplateLib;
+- (STAttrMap *) put:(NSString *)attrName value:(id)value;
+- (STAttrMap *) putWithInt:(NSString *)attrName value:(NSInteger)value;
+- (void) setGroup:(STGroup *)aGroup;
+- (STGroup *) getGroup;
 @end
 /* -------- ST end STAttrMap.interface ------------ */
 >>
@@ -196,7 +190,7 @@ static class STAttrMap extends HashMap {
  *  "new STAttrMap().put(...).put(...)"
  */
 @implementation STAttrMap
-@synthesize templateLib;
+@synthesize group;
 
 <@STAttrMap.methods()>
 @end
@@ -205,23 +199,23 @@ static class STAttrMap extends HashMap {
 
 @STAttrMap.memVars() ::= <<
 /* -------- ST start STAttrMap.memVars ------------ */
-    STGroup *templateLib;
+    STGroup *group;
 /* -------- ST end STAttrMap.memVars ------------ */
 >>
 
 @STAttrMap.properties() ::= <<
 /* -------- ST start STAttrMap.properties ------------ */
-@property (retain, getter=getTemplateLib, setter=setTemplateLib:) STGroup *templateLib;
+@property (retain, getter=getGroup, setter=setGroup:) STGroup *group;
 /* -------- ST end STAttrMap.properties ------------ */
 >>
 
 @STAttrMap.methodsDecl() ::= <<
 /* -------- ST start STAttrMap.methodsDecl ------------ */
 - (id) init;
-- (STAttrMap *) setObject:(id)value forKey:(NSString *)attrName;
-- (STAttrMap *) setObjectWithInt:(NSInteger)value forKey:(NSString *)attrName;
-- (void) setTemplateLib:(STGroup *)aTemplateLib;
-- (STGroup *) getTemplateLib;
+- (STAttrMap *) put:(NSString *)attrName value:(id)value;
+- (STAttrMap *) putWithInt:(NSString *)attrName value:(NSInteger)value;
+- (void) setGroup:(STGroup *)aGroup;
+- (STGroup *) getGroup;
 /* -------- ST end STAttrMap.methodsDecl ------------ */
 >>
 
@@ -231,30 +225,30 @@ static class STAttrMap extends HashMap {
 {
     self = [super initWithLen:16];
     if ( self != nil ) {
-        templateLib = [STGroup newSTGroup:"<name>Templates"];
+        group = [STGroup newSTGroup:"<name>Templates"];
     }
     return self;
 }
 
-- (STAttrMap *) setObject:(id)aValue forKey:(NSString *)aAttrName
+- (STAttrMap *) put:(NSString *)aAttrName value:(id)aValue
 {
-    [super setObject:aValue forKey:aAttrName];
+    [super put:aAttrName value:aValue];
     return self;
 }
 
-- (STAttrMap *) setObjectWithInt:(NSInteger)aValue forKey:(NSString *)aAttrName
+- (STAttrMap *) putWithInt:(NSString *)aAttrName forKey:(NSInteger)aValue
 {
-    [super setObject:[NSNumber numberWithInteger:aValue] forKey:aAttrName];
+    [super put:aAttrName value:[ACNumber numberWithInteger:aValue]];
     return self;
 }
-- (void) setTemplateLib:(STGroup *)aTemplateLib
+- (void) setGroup:(STGroup *)aGroup
 {
-    templateLib = aTemplateLib;
+    group = aGroup;
 }
 
-- (STGroup *)getTemplateLib
+- (STGroup *)getGroup
 {
-    return templateLib;
+    return group;
 }
 /* -------- ST end STAttrMap.methods ------------ */
 >>
@@ -268,14 +262,13 @@ ruleRefAndListLabel(rule,label,elementIndex,args,scope) ::= <<
 
 rewriteTemplate(alts) ::= <<
 /* -------- ST start rewriteTemplate ------------ */
-// TEMPLATE REWRITE
 <if(backtracking)>
 if ( <actions.(actionScope).synpredgate> ) {
     <alts:rewriteTemplateAlt(); separator="else ">
     <if(rewriteMode)><replaceTextInLine()><endif>
 }
 <else>
-<alts:rewriteTemplateAlt(); separator="else ">
+<alts:rewriteTemplateAlt(alts); separator="else ">
 <if(rewriteMode)><replaceTextInLine()><endif>
 <endif>
 /* -------- ST end rewriteTemplate ------------ */
@@ -297,24 +290,24 @@ replaceTextInLine() ::= <<
 /* -------- ST end replaceTextInLine ------------ */
 >>
 
-rewriteTemplateAlt() ::= <<
-/* -------- ST start rewriteTemplateAlt ------------ */
-/* ST <it.description> */
-<if(it.pred)>
-if (<it.pred>) {
-    retval.st = <it.alt>;
+rewriteTemplateAlt(alt) ::= <%
+<! /* -------- ST start rewriteTemplateAlt ------------ */<\n> !>
+/* ST <alt.description> */<\n>
+<if(alt.pred)>
+if (<alt.pred>) {<\n>
+    retval.st = <alt.alt>;<\n>
 }<\n>
 <else>
-{
-    retval.st = <it.alt>;
+{<\n>
+    retval.st = <alt.alt>;<\n>
 }<\n>
 <endif>
-/* -------- ST end rewriteTemplateAlt ------------ */
->>
+<! /* -------- ST end rewriteTemplateAlt ------------ */<\n> !>
+%>
 
-rewriteEmptyTemplate(alts) ::= <<
+rewriteEmptyTemplate(alts) ::= <%
 nil;
->>
+%>
 
 /** Invoke a template with a set of attribute name/value pairs.
  *  Set the value of the rule's template *after* having set
@@ -322,50 +315,50 @@ nil;
  *  an attribute to build a bigger template; you get a self-embedded
  *  template.
  */
-rewriteExternalTemplate(name,args) ::= <<
-/* -------- ST start rewriteExternalTemplate ------------ */
-[templateLib getInstanceOf:@"<name>"
-<if(args)>[[STAttrMap newSTAttrMap] <args:{a | setObject:<a.value> forKey:@"<a.name>"]}><endif>]
-/* -------- ST end rewriteExternalTemplate ------------ */
->>
+rewriteExternalTemplate(name,args) ::= <%
+<! /* -------- ST start rewriteExternalTemplate ------------ */'\n' !>
+<if(args)><args:{a | [}><endif>
+[group getInstanceOf:@"<name>"
+<if(args)>] <args:{a | add:@"<a.name>" value:<a.value>] }><else>]<endif>
+<! /* -------- ST end rewriteExternalTemplate ------------ */'\n' !>
+%>
 
 /** expr is a string expression that says what template to load */
-rewriteIndirectTemplate(expr,args) ::= <<
-/* -------- ST start rewriteIndirectTemplate ------------ */
-[templateLib getInstanceOf:<expr>
-<if(args)> [[STAttrMap newSTAttrMap]<args:{a | setObject:<a.value> forKey:@"<a.name>"]}>]
-<else>]<endif>
-/* -------- ST end rewriteIndirectTemplate ------------ */
->>
+rewriteIndirectTemplate(expr,args) ::= <%
+<! /* -------- ST start rewriteIndirectTemplate ------------ */'\n' !>
+<if(args)> <args:{a | [}><endif>
+[group getInstanceOf:<expr>
+<if(args)>] <args:{a | add:@"<a.name>" value:<a.value>] }><else>]<endif>
+<! /* -------- ST end rewriteIndirectTemplate ------------ */'\n' !>
+%>
 
 /** Invoke an inline template with a set of attribute name/value pairs */
-rewriteInlineTemplate(args, template) ::= <<
-/* -------- ST start rewriteInlineTemplate ------------ */
-STGroup *templateLib;
-templateLib.templates = [STAttrMap newSTAttrMap];
-<if(args)> [templateLib.templates <args:{a | setObject:<a.value> forKey:@"<a.name>"];}><endif>
-[ST newST:templateLib template:@"<template>"];
-/* -------- ST end rewriteInlineTemplate ------------ */
->>
+rewriteInlineTemplate(args, template) ::= <%
+<! /* -------- ST start rewriteInlineTemplate ------------ */ !>
+<if(args)><args:{a | [}><endif>
+[ST newST:group template:@"<template>"
+<if(args)>] <args:{a | add:@"<a.name>" value:<a.value>] }><else>]<endif>
+<! /* -------- ST end rewriteInlineTemplate ------------ */ !>
+%>
 
 /** plain -> {foo} action */
-rewriteAction(action) ::= <<
-/* -------- ST start rewriteAction ------------ */
+rewriteAction(action) ::= <%
+<! /* -------- ST start rewriteAction ------------ */ !>
 <action>
-/* -------- ST end rewriteAction ------------ */
->>
+<! /* -------- ST end rewriteAction ------------ */ !>
+%>
 
 /** An action has %st.attrName=expr; or %{st}.attrName=expr; */
-actionSetAttribute(st,attrName,expr) ::= <<
-/* -------- ST start actionSetAttribute ------------ */
-[[ST attributes] setObject:<expr> forKey:@"<attrName>"];
+actionSetAttribute(st,attrName,expr) ::= <%
+<! /* -------- ST start actionSetAttribute ------------ */ !>
+[<st> add:@"<attrName>" value:<expr>];<\n>
 <![<st> setAttribute:<expr> name:@"<attrName>"];!>
-/* -------- ST end actionSetAttribute ------------ */
->>
+<! /* -------- ST end actionSetAttribute ------------ */ !>
+%>
 
 /** Translate %{stringExpr} */
-actionStringConstructor(stringExpr) ::= <<
-/* -------- ST start actionStringConstructor ------------ */
+actionStringConstructor(stringExpr) ::= <%
+<! /* -------- ST start actionStringConstructor ------------ */ !>
 [ST newSTWithTemplate:<stringExpr>]
-/* -------- ST end actionStringConstructor ------------ */
->>
+<! /* -------- ST end actionStringConstructor ------------ */ !>
+%>

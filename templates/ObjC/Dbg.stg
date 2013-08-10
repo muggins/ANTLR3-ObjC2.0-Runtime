@@ -99,7 +99,7 @@ ruleNames = [NSArray arrayWithObjects:<rules:{rST | @"<rST.ruleName>"}; separato
 >>
 
 @genericParser.dealloc() ::= <<
-[ruleNames release];<\n>
+ruleNames = nil;<\n>
 >>
 
 @genericParser.methods() ::= <<

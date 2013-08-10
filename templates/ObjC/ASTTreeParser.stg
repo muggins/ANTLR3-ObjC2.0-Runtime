@@ -61,17 +61,13 @@
 
 - (void) setTree:(<ASTLabelType> *)aTree
 {
-    if (tree != aTree) {
-        if (tree != nil) [tree release];
-        if (aTree != nil) [aTree retain];
-        tree = aTree;
-    }
+    tree = aTree;
 }
 
 - (void) dealloc
 {
     [self setTree:nil];
-    [super dealloc];
+    // [super dealloc];
 }
 
 @synthesize tree;
@@ -114,7 +110,7 @@ _last = (<ASTLabelType> *)[input LT:1];
 <ASTLabelType> *_save_last_<treeLevel> = _last;
 <ASTLabelType> *_first_<treeLevel> = nil;
 <if(!rewriteMode)>
-<ASTLabelType> *root_<treeLevel> = [[[treeAdaptor class] newEmptyTree] retain];
+<ASTLabelType> *root_<treeLevel> = [[treeAdaptor class] newEmptyTree];
 <endif>
 <root:element()>
 <if(rewriteMode)>
