@@ -48,8 +48,6 @@ typedef enum {
     __strong AMutableDictionary *dict;  /* The dictionary that this node belongs to */
     __strong ACBTree *lnode;            /* pointer to left node            */
     __strong ACBTree *rnode;            /* pointer to right node           */
-    __strong ACBKey  **keys;            /* pointer to keys                 */
-    __strong ACBTree **btNodes;         /* pointers to btNodes             */
     __strong ACBKey  *keyArray[BTNODESIZE];
     __strong ACBTree *btNodeArray[BTNODESIZE];
     NSInteger lnodeid;                  /* nodeid of left node             */
@@ -66,8 +64,6 @@ typedef enum {
 @property (retain) AMutableDictionary *dict;
 @property (retain) ACBTree  *lnode;
 @property (retain) ACBTree  *rnode;
-@property (assign) ACBKey   **keys;
-@property (assign) ACBTree  **btNodes;
 @property (assign) NSInteger lnodeid;
 @property (assign) NSInteger rnodeid;
 @property (assign) NSInteger nodeid;
@@ -78,23 +74,27 @@ typedef enum {
 @property (assign) NSInteger keylen;
 @property (assign) NSInteger kidx;
 
-+ (ACBTree *) newNodeWithDictionary:(AMutableDictionary *)theDict;
++ (__strong ACBTree *) newNodeWithDictionary:(__strong AMutableDictionary *)theDict;
 
-- (id)initWithDictionary:(AMutableDictionary *)theDict;
+- (__strong id)initWithDictionary:(__strong AMutableDictionary *)theDict;
 - (void)dealloc;
 
-- (ACBTree *)createnode:(ACBKey *)kp0;
-- (ACBTree *)deletekey:(NSString *)dkey;
-- (ACBTree *)insertkey:(ACBKey *)ikp value:(id)value;
-- (ACBKey *)internaldelete:(ACBKey *)dkp;
-- (ACBTree *) internalinsert:(ACBKey *)key value:(id)value split:(NSInteger *)h;
-- (ACBTree *) insert:(ACBKey *)key value:(id)value index:(NSInteger)hi split:(NSInteger *)h;
-- (NSInteger)delfrmnode:(ACBKey *)ikp;
-- (NSInteger)insinnode:(ACBKey *)key value:(id)value;
+- (__strong ACBKey *) getKey:(NSInteger)idx;
+- (void) setKey:(NSInteger)idx with:(ACBKey *)k;
+- (__strong ACBTree *) getNode:(NSInteger)idx;
+- (void) setNode:(NSInteger)idx with:(ACBTree *)t;
+- (__strong ACBTree *)createnode:(__strong ACBKey *)kp0;
+- (__strong ACBTree *)deletekey:(NSString *)dkey;
+- (__strong ACBTree *)insertkey:(__strong ACBKey *)ikp value:(__strong id)value;
+- (__strong ACBKey *)internaldelete:(__strong ACBKey *)dkp;
+- (__strong ACBTree *) internalinsert:(ACBKey *)key value:(__strong id)value split:(NSInteger *)h;
+- (__strong ACBTree *) insert:(__strong ACBKey *)key value:(__strong id)value index:(NSInteger)hi split:(NSInteger *)h;
+- (NSInteger)delfrmnode:(__strong ACBKey *)ikp;
+- (NSInteger)insinnode:(__strong ACBKey *)key value:(id)value;
 - (void)mergenode:(NSInteger)i;
-- (ACBTree *)splitnode:(NSInteger)idx;
-- (ACBTree *)search:(id)key;
-- (NSInteger)searchnode:(id)key match:(BOOL)match;
+- (__strong ACBTree *)splitnode:(NSInteger)idx;
+- (__strong ACBTree *)search:(__strong id)key;
+- (NSInteger)searchnode:(__strong id)key match:(BOOL)match;
 - (void)borrowleft:(NSInteger)i;
 - (void)borrowright:(NSInteger)i;
 - (void)rotateleft:(NSInteger)j;

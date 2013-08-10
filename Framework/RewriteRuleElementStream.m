@@ -103,7 +103,7 @@
         dirty = NO;
         singleElement = nil;
         isSingleElement = NO;
-        elements = [[AMutableArray arrayWithArray:theElements] retain];
+        elements = [AMutableArray arrayWithArray:theElements];
     }
     return self;
 }
@@ -113,11 +113,10 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in RewriteRuleElementStream" );
 #endif
-    if ( singleElement && isSingleElement ) [singleElement release];
-    else if ( elements && !isSingleElement ) [elements release];
-    [self setDescription:nil];
-    [self setTreeAdaptor:nil];
-    [super dealloc];
+    if ( singleElement && isSingleElement ) singleElement = nil;
+    else if ( elements && !isSingleElement ) elements = nil;
+    elementDescription = nil;
+    treeAdaptor = nil;
 }
 
 - (void)reset
@@ -134,11 +133,7 @@
 
 - (void) setTreeAdaptor:(id<TreeAdaptor>)aTreeAdaptor
 {
-    if (treeAdaptor != aTreeAdaptor) {
-        if ( treeAdaptor ) [treeAdaptor release];
-        treeAdaptor = aTreeAdaptor;
-        [treeAdaptor retain];
-    }
+    treeAdaptor = aTreeAdaptor;
 }
 */
 
@@ -152,11 +147,10 @@
         }
     if (singleElement == nil) {
         singleElement = anElement;
-        singleElement = [anElement retain];
         return;
     }
     isSingleElement = NO;
-    elements = [[AMutableArray arrayWithCapacity:5] retain];
+    elements = [AMutableArray arrayWithCapacity:5];
     [elements addObject:singleElement];
     singleElement = nil;  // balance previous retain in initializer/addElement
     [elements addObject:anElement];
@@ -172,11 +166,10 @@
         }
     if (singleElement == nil) {
         singleElement = anElement;
-        singleElement = [anElement retain];
         return;
     }
     isSingleElement = NO;
-    elements = [[AMutableArray arrayWithCapacity:5] retain];
+    elements = [AMutableArray arrayWithCapacity:5];
     [elements addObject:singleElement];
     singleElement = nil;  // balance previous retain in initializer/addElement
     [elements addObject:anElement];
@@ -250,11 +243,7 @@
 
 - (void) setDescription:(NSString *) description
 {
-    if ( description != nil && description != elementDescription ) {
-        if (elementDescription != nil) [elementDescription release];
-        elementDescription = [NSString stringWithString:description];
-        [elementDescription retain];
-    }
+    elementDescription = [NSString stringWithString:description];
 }
 
 @end

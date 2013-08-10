@@ -47,7 +47,6 @@
 - (void) dealloc
 {
 	[self setExpecting:nil];
-	[super dealloc];
 }
 
 - (NSString *) description
@@ -68,11 +67,7 @@
 
 - (void) setExpecting: (NSString *) anExpectedSet
 {
-    if ( expecting != anExpectedSet ) {
-        if ( expecting ) [expecting release];
-        [anExpectedSet retain];
-        expecting = anExpectedSet;
-    }
+    expecting = anExpectedSet;
 }
 
 

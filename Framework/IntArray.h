@@ -37,7 +37,7 @@
     NSUInteger count;
     NSInteger idx;
     NSMutableData *buffer;
-    __strong NSInteger *intBuffer;
+    NSInteger *intBuffer;
     BOOL SPARSE;
 }
 

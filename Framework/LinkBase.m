@@ -69,9 +69,11 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in LinkBase" );
 #endif
-	if (fNext) [fNext release];
-	if (fPrev) [fPrev release];
-	[super dealloc];
+    if ( fNext != nil ) fNext.fPrev = fPrev;
+    if ( fPrev != nil ) fPrev.fNext = fNext;
+    fNext = nil;
+    fPrev = nil;
+    //	[super dealloc];
 }
 
 - (id) copyWithZone:(NSZone *)aZone

@@ -54,8 +54,7 @@ static NSString *NEXT_TOKEN_RULE_NAME;
 
 + (void) initialize
 {
-    NEXT_TOKEN_RULE_NAME = [NSString stringWithString:@"nextToken"];
-    [NEXT_TOKEN_RULE_NAME retain];
+    NEXT_TOKEN_RULE_NAME = @"nextToken";
 }
 
 + (BaseRecognizer *) newBaseRecognizer
@@ -80,32 +79,22 @@ static NSString *NEXT_TOKEN_RULE_NAME;
 
 + (void)setTokenNames:(AMutableArray *)theTokNams
 {
-    if ( _tokenNames != theTokNams ) {
-        if ( _tokenNames ) [_tokenNames release];
-        [theTokNams retain];
-    }
     _tokenNames = theTokNams;
 }
 
 + (void)setGrammarFileName:(NSString *)aFileName
 {
-    if ( _grammarFileName != aFileName ) {
-        if ( _grammarFileName ) [_grammarFileName release];
-        [aFileName retain];
-    }
-    [_grammarFileName retain];
+    _grammarFileName = aFileName;
 }
 
 - (id) init
 {
 	if ((self = [super init]) != nil) {
         if (state == nil) {
-            state = [[RecognizerSharedState newRecognizerSharedState] retain];
+            state = [RecognizerSharedState newRecognizerSharedState];
         }
         tokenNames = _tokenNames;
-        if ( tokenNames ) [tokenNames retain];
         grammarFileName = _grammarFileName;
-        if ( grammarFileName ) [grammarFileName retain];
         state._fsp = -1;
         state.errorRecovery = NO;		// are we recovering?
         state.lastErrorIndex = -1;
@@ -121,12 +110,10 @@ static NSString *NEXT_TOKEN_RULE_NAME;
 {
 	if ((self = [super init]) != nil) {
         if (state == nil) {
-            state = [[RecognizerSharedState newRecognizerSharedStateWithRuleLen:aLen] retain];
+            state = [RecognizerSharedState newRecognizerSharedStateWithRuleLen:aLen];
         }
         tokenNames = _tokenNames;
-        if ( tokenNames ) [tokenNames retain];
         grammarFileName = _grammarFileName;
-        if ( grammarFileName ) [grammarFileName retain];
         state._fsp = -1;
         state.errorRecovery = NO;		// are we recovering?
         state.lastErrorIndex = -1;
@@ -145,11 +132,8 @@ static NSString *NEXT_TOKEN_RULE_NAME;
         if (state == nil) {
             state = [RecognizerSharedState newRecognizerSharedState];
         }
-        [state retain];
         tokenNames = _tokenNames;
-        if ( tokenNames ) [tokenNames retain];
         grammarFileName = _grammarFileName;
-        if ( grammarFileName ) [grammarFileName retain];
         state._fsp = -1;
         state.errorRecovery = NO;		// are we recovering?
         state.lastErrorIndex = -1;
@@ -166,10 +150,9 @@ static NSString *NEXT_TOKEN_RULE_NAME;
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in BaseRecognizer" );
 #endif
-	if ( grammarFileName ) [grammarFileName release];
-	if ( tokenNames ) [tokenNames release];
-	if ( state ) [state release];
-	[super dealloc];
+	if ( grammarFileName ) grammarFileName= nil;
+	if ( tokenNames ) tokenNames = nil;
+	if ( state ) state = nil;
 }
 
 // reset the recognizer to the initial state. does not touch the token source!
@@ -213,9 +196,7 @@ static NSString *NEXT_TOKEN_RULE_NAME;
 - (void) setState:(RecognizerSharedState *) theState
 {
 	if (state != theState) {
-		if ( state ) [state release];
 		state = theState;
-		[state retain];
 	}
 }
 
@@ -451,7 +432,7 @@ static NSString *NEXT_TOKEN_RULE_NAME;
 /** What is the error header, normally line/character position information? */
 - (NSString *)getErrorHeader:(RecognitionException *)e
 {
-    return [NSString stringWithFormat:@"line %d:%d", e.line, e.charPositionInLine];
+    return [NSString stringWithFormat:@"line %ld:%ld", e.line, e.charPositionInLine];
 }
 
 /** How should a token be displayed in an error message? The default
@@ -470,7 +451,7 @@ static NSString *NEXT_TOKEN_RULE_NAME;
             s = @"<EOF>";
         }
         else {
-            s = [NSString stringWithFormat:@"<%@>", t.type];
+            s = [NSString stringWithFormat:@"<%ld>", t.type];
         }
     }
     s = [s stringByReplacingOccurrencesOfString:@"\n" withString:@"\\\\n"];
@@ -678,8 +659,8 @@ static NSString *NEXT_TOKEN_RULE_NAME;
 - (ANTLRBitSet *)combineFollows:(BOOL) exact
 {
     NSInteger top = state._fsp;
-    ANTLRBitSet *followSet = [[ANTLRBitSet newBitSet] retain];
-    for (int i = top; i >= 0; i--) {
+    ANTLRBitSet *followSet = [ANTLRBitSet newBitSet];
+    for (NSInteger i = top; i >= 0; i--) {
         ANTLRBitSet *localFollowSet = (ANTLRBitSet *)[state.following objectAtIndex:i];
         /*
          System.out.println("local follow depth "+i+"="+
@@ -826,7 +807,7 @@ static NSString *NEXT_TOKEN_RULE_NAME;
 -(void) consumeUntilTType:(id<IntStream>)anInput TokenType:(NSInteger)tokenType
 {
     //System.out.println("consumeUntil "+tokenType);
-    int ttype = [anInput LA:1];
+    NSInteger ttype = [anInput LA:1];
     while (ttype != TokenTypeEOF && ttype != tokenType) {
         [anInput consume];
         ttype = [anInput LA:1];
@@ -837,7 +818,7 @@ static NSString *NEXT_TOKEN_RULE_NAME;
 -(void) consumeUntilFollow:(id<IntStream>)anInput Follow:(ANTLRBitSet *)set
 {
     //System.out.println("consumeUntil("+set.toString(getTokenNames())+")");
-    int ttype = [anInput LA:1];
+    NSInteger ttype = [anInput LA:1];
     while (ttype != TokenTypeEOF && ![set member:ttype] ) {
         //System.out.println("consume during recover LA(1)="+getTokenNames()[input.LA(1)]);
         [anInput consume];
@@ -853,7 +834,6 @@ static NSString *NEXT_TOKEN_RULE_NAME;
         //        System.arraycopy(state.following, 0, f, 0, state.following.length);
         //        state.following = f;
         [state.following addObject:fset];
-        [fset retain];
         state._fsp++;
     }
     else {
@@ -886,7 +866,7 @@ static NSString *NEXT_TOKEN_RULE_NAME;
  */
 - (AMutableArray *)getRuleInvocationStack
 {
-    NSString *parserClassName = [[self className] retain];
+    NSString *parserClassName = [self className];
     return [self getRuleInvocationStack:[RecognitionException newException] Recognizer:parserClassName];
 }
 
@@ -901,9 +881,9 @@ static NSString *NEXT_TOKEN_RULE_NAME;
                                 Recognizer:(NSString *)recognizerClassName
 {
     // char *name;
-    AMutableArray *rules = [[AMutableArray arrayWithCapacity:20] retain];
+    AMutableArray *rules = [AMutableArray arrayWithCapacity:20];
     NSArray *stack = [e callStackSymbols];
-    int i = 0;
+    NSInteger i = 0;
     for (i = [stack count]-1; i >= 0; i--) {
         NSString *t = [stack objectAtIndex:i];
         // NSLog(@"stack %d = %@\n", i, t);
@@ -939,7 +919,7 @@ static NSString *NEXT_TOKEN_RULE_NAME;
               [rules addObject:[t getMethodName]];
     }
 #endif
-    [stack release];
+    stack = nil;
     return rules;
 }
 
@@ -1034,11 +1014,11 @@ static NSString *NEXT_TOKEN_RULE_NAME;
         return NO;
     }
     if ( aStopIndex == ANTLR_MEMO_RULE_FAILED ) {
-        if (debug) NSLog(@"rule %d will never succeed\n", ruleIndex);
+        if (debug) NSLog(@"rule %ld will never succeed\n", ruleIndex);
         state.failed = YES;
     }
     else {
-        if (debug) NSLog(@"seen rule %d before; skipping ahead to %d failed = %@\n", ruleIndex, aStopIndex+1, state.failed?@"YES":@"NO");
+        if (debug) NSLog(@"seen rule %ld before; skipping ahead to %ld failed = %@\n", ruleIndex, aStopIndex+1, state.failed?@"YES":@"NO");
         [anInput seek:(aStopIndex+1)]; // jump to one past stop token
     }
     return YES;
@@ -1061,7 +1041,7 @@ static NSString *NEXT_TOKEN_RULE_NAME;
         return;
     }
     if ( ruleIndex >= [aRuleStack length] ) {
-        if (debug) NSLog(@"!!!!!!!!! memo size is %d, but rule index is %d", [state.ruleMemo length], ruleIndex);
+        if (debug) NSLog(@"!!!!!!!!! memo size is %ld, but rule index is %ld", [state.ruleMemo length], ruleIndex);
         return;
     }
     if ( [aRuleStack objectAtIndex:ruleIndex] != nil ) {
@@ -1117,7 +1097,7 @@ static NSString *NEXT_TOKEN_RULE_NAME;
     state.backtracking++;
     // input = state.token.input;
     input = self.input;
-    int start = [input mark];
+    NSInteger start = [input mark];
     @try {
         [self performSelector:synpredFragment];
     }

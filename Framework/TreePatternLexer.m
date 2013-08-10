@@ -52,11 +52,10 @@
         p = -1;
         n = 0;
         error = NO;
-        sval = [[NSMutableData dataWithLength:1000] retain];
+        sval = [NSMutableData dataWithLength:1000];
         data = [sval mutableBytes];
         pattern = @"";
         n = [pattern length];
-        if ( pattern ) [pattern retain];
         [self consume];
     }
     return self;
@@ -68,9 +67,9 @@
         p = -1;
         n = 0;
         error = NO;
-        sval = [[NSMutableData dataWithLength:1000] retain];
+        sval = [NSMutableData dataWithLength:1000];
         data = [sval mutableBytes];
-        pattern = [aPattern retain];
+        pattern = aPattern;
         n = [pattern length];
         [self consume];
     }
@@ -82,9 +81,9 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in TreePatternLexer" );
 #endif
-	if ( pattern ) [pattern release];
-	if ( sval ) [sval release];
-	[super dealloc];
+    pattern = nil;
+    sval = nil;
+    //	[super dealloc];
 }
 
 - (NSInteger) nextToken
@@ -181,10 +180,6 @@
 
 - (void)setSval:(NSMutableData *)aSval
 {
-    if ( sval != aSval ) {
-        if ( sval ) [sval release];
-        [aSval retain];
-    }
     sval = aSval;
 }
 

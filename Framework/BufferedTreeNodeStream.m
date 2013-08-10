@@ -112,11 +112,11 @@ extern NSInteger debug;
 		uniqueNavigationNodes = NO;
         root = [[CommonTree alloc] init];
         //		tokens = tree;
-        adaptor = [[[CommonTreeAdaptor alloc] init] retain];
-        nodes = [[AMutableArray arrayWithCapacity:DEFAULT_INITIAL_BUFFER_SIZE] retain];
-        down = [[adaptor createTree:TokenTypeDOWN Text:@"DOWN"] retain];
-        up = [[adaptor createTree:TokenTypeUP Text:@"UP"] retain];
-        eof = [[adaptor createTree:TokenTypeEOF Text:@"EOF"] retain];
+        adaptor = [[CommonTreeAdaptor alloc] init];
+        nodes = [AMutableArray arrayWithCapacity:DEFAULT_INITIAL_BUFFER_SIZE];
+        down = [adaptor createTree:TokenTypeDOWN Text:@"DOWN"];
+        up = [adaptor createTree:TokenTypeUP Text:@"UP"];
+        eof = [adaptor createTree:TokenTypeEOF Text:@"EOF"];
     }
 	return self;
 }
@@ -129,11 +129,11 @@ extern NSInteger debug;
 		uniqueNavigationNodes = NO;
         root = aTree;
         //		tokens = aTree;
-        adaptor = [[[CommonTreeAdaptor alloc] init] retain];
-        nodes = [[AMutableArray arrayWithCapacity:DEFAULT_INITIAL_BUFFER_SIZE] retain];
-        down = [[adaptor createTree:TokenTypeDOWN Text:@"DOWN"] retain];
-        up = [[adaptor createTree:TokenTypeUP Text:@"UP"] retain];
-        eof = [[adaptor createTree:TokenTypeEOF Text:@"EOF"] retain];
+        adaptor = [[CommonTreeAdaptor alloc] init];
+        nodes = [AMutableArray arrayWithCapacity:DEFAULT_INITIAL_BUFFER_SIZE];
+        down = [adaptor createTree:TokenTypeDOWN Text:@"DOWN"];
+        up = [adaptor createTree:TokenTypeUP Text:@"UP"];
+        eof = [adaptor createTree:TokenTypeEOF Text:@"EOF"];
     }
 	return self;
 }
@@ -146,11 +146,11 @@ extern NSInteger debug;
 		uniqueNavigationNodes = NO;
         root = aTree;
         //		tokens = aTree;
-        adaptor = [anAdaptor retain];
-        nodes = [[AMutableArray arrayWithCapacity:DEFAULT_INITIAL_BUFFER_SIZE] retain];
-        down = [[adaptor createTree:TokenTypeDOWN Text:@"DOWN"] retain];
-        up = [[adaptor createTree:TokenTypeUP Text:@"UP"] retain];
-        eof = [[adaptor createTree:TokenTypeEOF Text:@"EOF"] retain];
+        adaptor = anAdaptor;
+        nodes = [AMutableArray arrayWithCapacity:DEFAULT_INITIAL_BUFFER_SIZE];
+        down = [adaptor createTree:TokenTypeDOWN Text:@"DOWN"];
+        up = [adaptor createTree:TokenTypeUP Text:@"UP"];
+        eof = [adaptor createTree:TokenTypeEOF Text:@"EOF"];
     }
 	return self;
 }
@@ -166,11 +166,11 @@ extern NSInteger debug;
 		uniqueNavigationNodes = NO;
         root = aTree;
         //		tokens = aTree;
-        adaptor = [anAdaptor retain];
-        nodes = [[AMutableArray arrayWithCapacity:bufferSize] retain];
-        down = [[adaptor createTree:TokenTypeDOWN Text:@"DOWN"] retain];
-        up = [[adaptor createTree:TokenTypeUP Text:@"UP"] retain];
-        eof = [[adaptor createTree:TokenTypeEOF Text:@"EOF"] retain];
+        adaptor = anAdaptor;
+        nodes = [AMutableArray arrayWithCapacity:bufferSize];
+        down = [adaptor createTree:TokenTypeDOWN Text:@"DOWN"];
+        up = [adaptor createTree:TokenTypeUP Text:@"UP"];
+        eof = [adaptor createTree:TokenTypeEOF Text:@"EOF"];
 	}
 	return self;
 }
@@ -180,13 +180,12 @@ extern NSInteger debug;
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in BufferedTreeNodeStream" );
 #endif
-    if ( adaptor ) [adaptor release];
-    if ( nodes ) [nodes release];
-    if ( root ) [root release];
-    if ( down ) [down release];
-    if ( up ) [up release];
-    if ( eof ) [eof release];
-	[super dealloc];
+    adaptor = nil;
+    nodes = nil;
+    root = nil;
+    down = nil;
+    up = nil;
+    eof = nil;
 }
 
 - (id) copyWithZone:(NSZone *)aZone
@@ -342,12 +341,12 @@ extern NSInteger debug;
     tokens = newtokens;
 }
 
-- (id<TreeAdaptor>)getTreeAdaptor
+- (CommonTreeAdaptor *)getTreeAdaptor
 {
     return adaptor;
 }
 
-- (void) setTreeAdaptor:(id<TreeAdaptor>)anAdaptor
+- (void) setTreeAdaptor:(CommonTreeAdaptor *)anAdaptor
 {
     adaptor = anAdaptor;
 }
@@ -469,7 +468,7 @@ extern NSInteger debug;
 	NSMutableString *buf = [NSMutableString stringWithCapacity:10];
 	for (NSUInteger i= 0; i < [nodes count]; i++) {
 		CommonTree * aTree = (CommonTree *)[self get:i];
-		[buf appendFormat:@" %d", [adaptor getType:aTree]];
+		[buf appendFormat:@" %ld", [adaptor getType:aTree]];
 	}
 	return buf;
 }
@@ -482,7 +481,7 @@ extern NSInteger debug;
 	NSMutableString *buf = [NSMutableString stringWithCapacity:10];
 	for (NSUInteger i = aStart; i < [nodes count] && i <= aStop; i++) {
 		CommonTree * t = (CommonTree *)[self get:i];
-		[buf appendFormat:@" %d", [adaptor getType:t]];
+		[buf appendFormat:@" %ld", [adaptor getType:t]];
 	}
 	return buf;
 }
@@ -523,7 +522,7 @@ extern NSInteger debug;
 	while (aTree != aStop) {
 		NSString *text = [adaptor getText:aTree];
 		if (text == nil) {
-			text = [NSString stringWithFormat:@" %d", [adaptor getType:aTree]];
+			text = [NSString stringWithFormat:@" %ld", [adaptor getType:aTree]];
 		}
 		[buf appendString:text];
 		i++;
@@ -531,7 +530,7 @@ extern NSInteger debug;
 	}
 	NSString *text = [adaptor getText:aStop];
 	if (text == nil) {
-		text = [NSString stringWithFormat:@" %d", [adaptor getType:aStop]];
+		text = [NSString stringWithFormat:@" %ld", [adaptor getType:aStop]];
 	}
 	[buf appendString:text];
 	return buf;

@@ -91,15 +91,15 @@ static NSInteger INITIAL_BUFFER_SIZE = 1024;
     }
 #pragma mark fix these NSLog calls
     @try {
-        int numRead=0;
+        NSInteger numRead=0;
         numRead = [is read:buf maxLength:aReadChunkSize];
         retData = [NSMutableData dataWithCapacity:numRead];
         [retData appendBytes:(const void *)buf length:numRead];
-        NSLog( @"read %d chars; p was %d is now %d", n, p1, (p1+numRead) );
+        NSLog( @"read %ld chars; p was %ld is now %ld", n, p1, (p1+numRead) );
         p1 += numRead;
         n = p1;
         data = [[NSString alloc] initWithData:retData encoding:NSASCIIStringEncoding];
-        NSLog( @"n=%d\n", n );
+        NSLog( @"n=%ld\n", n );
     }
     @finally {
         [self close];
@@ -117,20 +117,29 @@ static NSInteger INITIAL_BUFFER_SIZE = 1024;
     [is open];
 }
 
+// An NSStream delegate callback that's called when events happen on our TCP stream.
 - (void)stream:(NSStream *)stream handleEvent:(NSStreamEvent)eventCode
 {
+    assert([NSThread isMainThread]);
+    
+    //    assert(stream == self.inputStream);
+#pragma unused(stream)
     NSMutableData *myData = nil;
     ACNumber *bytesRead = [ACNumber numberWithInteger:0];
     uint8_t buf[1024];
     switch(eventCode) {
+        case NSStreamEventOpenCompleted: {
+                // do nothing
+            }
+            break;
         case NSStreamEventHasBytesAvailable:
         {
             if(!myData) {
-                myData = [[NSMutableData data] retain];
+                myData = [NSMutableData data];
             }
-            unsigned int len = 0;
+            NSUInteger len = 0;
             len = [(NSInputStream *)stream read:buf maxLength:1024];
-            if(len) {
+            if (len) {
                 [myData appendBytes:(const void *)buf length:len];
                 // bytesRead is an instance variable of type ACNumber.
                 bytesRead = [ACNumber numberWithInteger:[bytesRead integerValue]+len];
@@ -140,16 +149,78 @@ static NSInteger INITIAL_BUFFER_SIZE = 1024;
             }
             break;
         }
+        case NSStreamEventNone:
+            break;
+        case NSStreamEventHasSpaceAvailable:
+        {
+#ifdef DONTUSEYET
+            uint8_t *readBytes = (uint8_t *)[myData mutableBytes];
+            readBytes += byteIndex; // instance variable to move pointer
+            int data_len = [myData length];
+            unsigned int len = ((data_len - byteIndex >= 1024) ?
+                                1024 : (data_len-byteIndex));
+            uint8_t buf[len];
+            (void)memcpy(buf, readBytes, len);
+            len = [stream write:(const uint8_t *)buf maxLength:len];
+            byteIndex += len;
+#endif
+            break;
+        }
+/*        {
+            if (stream == oStream) {
+                NSString * str = [NSString stringWithFormat:
+                                  @"GET / HTTP/1.0\r\n\r\n"];
+                const uint8_t * rawstring =
+                (const uint8_t *)[str UTF8String];
+                [oStream write:rawstring maxLength:strlen(rawstring)];
+                [oStream close];
+            }
+
+            break;
+        }
+ */
+        case NSStreamEventErrorOccurred:
+        {
+            NSError *theError = [stream streamError];
+            NSAlert *theAlert = [[NSAlert alloc] init]; // modal delegate releases
+            [theAlert setMessageText:@"Error reading stream!"];
+            [theAlert setInformativeText:[NSString stringWithFormat:@"Error %li: %@",
+                                          (long)[theError code], [theError localizedDescription]]];
+            [theAlert addButtonWithTitle:@"OK"];
+            [theAlert beginSheetModalForWindow:[NSApp mainWindow]
+                                 modalDelegate:self
+                                didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+                                   contextInfo:nil];
+            [stream close];
+            // [stream release];
+            break;
+        }
         case NSStreamEventEndEncountered:
         {
             [stream close];
             [stream removeFromRunLoop:[NSRunLoop currentRunLoop]
                               forMode:NSDefaultRunLoopMode];
-            [stream release];
+            // [stream release];
             stream = nil; // stream is ivar, so reinit it
             break;
         }
-        // continued
+            /*        {
+             NSData *newData = [oStream propertyForKey:
+             NSStreamDataWrittenToMemoryStreamKey];
+             if (!newData) {
+             NSLog(@"No data written to memory!");
+             } else {
+             [self processData:newData];
+             }
+             [stream close];
+             [stream removeFromRunLoop:[NSRunLoop currentRunLoop]
+             forMode:NSDefaultRunLoopMode];
+             [stream release];
+             oStream = nil; // oStream is instance variable
+             break;
+             } */
+            // continued
+            break;
     }
 }
 

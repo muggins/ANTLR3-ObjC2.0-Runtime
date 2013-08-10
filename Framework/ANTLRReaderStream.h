@@ -7,20 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 #import "ANTLRStringStream.h"
 
 @interface ANTLRReaderStream : ANTLRStringStream {
-    NSInputStream *is;
+    __strong NSInputStream *is;
     NSInteger size;
     NSInteger rbSize;
-    //NSData *data; /* ANTLRStringStream has NSString *data */
     NSInteger p1;
 }
 
 @property (retain) NSInputStream *is;
 @property (assign) NSInteger size;
 @property (assign) NSInteger rbSize;
-//@property (retain) NSData *data;
 
 + (NSInteger) READ_BUFFER_SIZE;
 + (NSInteger) INITIAL_BUFFER_SIZE;

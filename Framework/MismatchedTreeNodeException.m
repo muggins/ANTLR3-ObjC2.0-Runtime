@@ -47,7 +47,7 @@
 - (NSString *) description
 {
 	NSMutableString *desc = (NSMutableString *)[super description];
-	[desc appendFormat:@" expected:%d got:%d", expecting, [self unexpectedType]];
+	[desc appendFormat:@" expected:%ld got:%ld", expecting, [self unexpectedType]];
 	return desc;
 }
 

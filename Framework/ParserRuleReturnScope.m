@@ -36,7 +36,6 @@
 {
     [self setStart:nil];
     [self setStop:nil];
-    [super dealloc];
 }
 
 - (id<Token>) getStart
@@ -46,11 +45,7 @@
 
 - (void) setStart: (id<Token>) aStart
 {
-    if (start != aStart) {
-        [aStart retain];
-        if ( start ) [start release];
-        start = aStart;
-    }
+    start = aStart;
 }
 
 - (id<Token>) getStop
@@ -60,11 +55,7 @@
 
 - (void) setStop: (id<Token>) aStop
 {
-    if (stopToken != aStop) {
-        [aStop retain];
-        if ( stopToken ) [stopToken release];
-        stopToken = aStop;
-    }
+    stopToken = aStop;
 }
 
 // create a copy, including the text if available

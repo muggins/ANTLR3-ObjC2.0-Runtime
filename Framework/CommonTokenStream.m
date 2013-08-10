@@ -53,7 +53,7 @@
 - (id) init
 {
 	if ((self = [super init]) != nil) {
-		channelOverride = [[AMutableDictionary dictionaryWithCapacity:100] retain];
+		channelOverride = [AMutableDictionary dictionaryWithCapacity:100];
 		channel = TokenChannelDefault;
 	}
 	return self;
@@ -62,7 +62,7 @@
 - (id) initWithTokenSource:(id<TokenSource>)theTokenSource
 {
 	if ((self = [super initWithTokenSource:theTokenSource]) != nil) {
-		channelOverride = [[AMutableDictionary dictionaryWithCapacity:100] retain];
+		channelOverride = [AMutableDictionary dictionaryWithCapacity:100];
 		channel = TokenChannelDefault;
 	}
 	return self;
@@ -71,7 +71,7 @@
 - (id) initWithTokenSource:(id<TokenSource>)theTokenSource Channel:(NSUInteger)aChannel
 {
 	if ((self = [super initWithTokenSource:theTokenSource]) != nil) {
-		channelOverride = [[AMutableDictionary dictionaryWithCapacity:100] retain];
+		channelOverride = [AMutableDictionary dictionaryWithCapacity:100];
 		channel = aChannel;
 	}
 	return self;
@@ -82,10 +82,9 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in CommonTokenStream" );
 #endif
-	if ( channelOverride ) [channelOverride release];
-	if ( tokens ) [tokens release];
+	channelOverride = nil;
+	tokens = nil;
 	[self setTokenSource:nil];
-	[super dealloc];
 }
 
 /** Always leave index on an on-channel token. */
@@ -107,8 +106,8 @@
 	if ( k == 0 || (index-k) < 0 ) {
 		return nil;
 	}
-	int i = index;
-	int n = 1;
+	NSInteger i = index;
+	NSInteger n = 1;
     // find k good tokens looking backwards
 	while ( n <= k ) {
 		i = [self skipOffTokenChannelsReverse:i-1];
@@ -125,8 +124,8 @@
 	if ( index == -1 ) [self setup];
 	if ( k == 0 ) return nil;
 	if ( k < 0 ) return [self LB:-k];
-	int i = index;
-	int n = 1;
+	NSInteger i = index;
+	NSInteger n = 1;
 	while ( n < k ) {
 		i = [self skipOffTokenChannels:i+1];
 		n++;

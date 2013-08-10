@@ -34,7 +34,7 @@
 
 @interface FastQueue : NSObject <NSCopying>
 {
-    __strong AMutableArray *data;
+    AMutableArray *data;
     NSUInteger p;
     NSUInteger range;
 }

@@ -57,7 +57,7 @@
         BuffSize  = (ANTLR_INT_ARRAY_INITIAL_SIZE * (sizeof(NSInteger)/sizeof(id)));
         count = 0;
         idx = -1;
-        buffer = [[NSMutableData dataWithLength:(NSUInteger)BuffSize * sizeof(id)] retain];
+        buffer = [NSMutableData dataWithLength:(NSUInteger)BuffSize * sizeof(id)];
         intBuffer = (NSInteger *)[buffer mutableBytes];
         SPARSE = NO;
     }
@@ -71,7 +71,7 @@
         BuffSize  = (ANTLR_INT_ARRAY_INITIAL_SIZE * (sizeof(NSInteger)/sizeof(id)));
         count = 0;
         idx = -1;
-        buffer = [[NSMutableData dataWithLength:(NSUInteger)BuffSize * sizeof(id)] retain];
+        buffer = [NSMutableData dataWithLength:(NSUInteger)BuffSize * sizeof(id)];
         intBuffer = (NSInteger *)[buffer mutableBytes];
         SPARSE = NO;
     }
@@ -83,8 +83,7 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in IntArray" );
 #endif
-    if ( buffer ) [buffer release];
-    [super dealloc];
+    buffer = nil;
 }
 
 - (id)copyWithZone:(NSZone *)aZone
@@ -123,7 +122,7 @@
 - (NSInteger)pop
 {
     if ( idx < 0 ) {
-        @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"Nothing to pop, count = %d", count]];
+        @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"Nothing to pop, count = %ld", count]];
     }
     NSInteger value = (NSInteger) intBuffer[idx--];
     count--;
@@ -138,10 +137,10 @@
 - (NSInteger)integerAtIndex:(NSUInteger) anIndex
 {
     if ( SPARSE==NO  && anIndex > idx ) {
-        @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"Index %d must be less than count %d", anIndex, count]];
+        @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"Index %ld must be less than count %ld", anIndex, count]];
     }
     else if ( SPARSE == YES && anIndex >= BuffSize ) {
-        @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"Index %d must be less than BuffSize %d", anIndex, BuffSize]];
+        @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"Index %ld must be less than BuffSize %ld", anIndex, BuffSize]];
     }
     return intBuffer[anIndex];
 }
@@ -155,10 +154,10 @@
 - (NSInteger)removeIntegerAtIndex:(NSUInteger) anIndex
 {
     if ( SPARSE==NO && anIndex > idx ) {
-        @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"Index %d must be less than count %d", anIndex, count]];
+        @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"Index %ld must be less than count %ld", anIndex, count]];
         return (NSInteger)-1;
     } else if ( SPARSE==YES && anIndex >= BuffSize ) {
-        @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"Index %d must be less than BuffSize %d", anIndex, BuffSize]];
+        @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"Index %ld must be less than BuffSize %ld", anIndex, BuffSize]];
     }
     count--;
     return intBuffer[anIndex];
@@ -167,10 +166,10 @@
 - (void)replaceInteger:(NSInteger)aValue AtIndex:(NSUInteger)anIndex
 {
     if ( SPARSE == NO && anIndex > idx ) {
-        @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"Index %d must be less than count %d", anIndex, count]];
+        @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"Index %ld must be less than count %ld", anIndex, count]];
     }
     else if ( SPARSE == YES && anIndex >= BuffSize ) {
-        @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"Index %d must be less than BuffSize %d", anIndex, BuffSize]];
+        @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"Index %ld must be less than BuffSize %ld", anIndex, BuffSize]];
     }
     intBuffer[anIndex] = aValue;
 }

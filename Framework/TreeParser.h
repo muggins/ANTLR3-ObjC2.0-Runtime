@@ -55,9 +55,9 @@
 - (id) getCurrentInputSymbol:(id<IntStream>) anInput;
 
 - (id) getMissingSymbol:(id<IntStream>)input
-              Exception:(RecognitionException *) e
-              TokenType:(NSInteger) expectedTokenType
-                 Follow:(ANTLRBitSet *)follow;
+        Exception:(RecognitionException *) e
+        TokenType:(NSInteger) expectedTokenType
+        Follow:(ANTLRBitSet *)follow;
 
 /** Match '.' in tree parser has special meaning.  Skip node or
  *  entire tree if node has children.  If children, scan until

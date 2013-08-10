@@ -145,6 +145,7 @@ public class TreeFilter extends TreeParser {
 #import "TreeFilter.h"
 
 @class TreeFilter;
+@class TreeVisitorActionFiltered;
 
 @implementation fptr
 

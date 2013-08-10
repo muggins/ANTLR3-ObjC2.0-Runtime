@@ -57,8 +57,8 @@
 // Instance Methods
 - (void)deleteHashRule:(RuleMemo *)np;
 - (void)delete_chain:(RuleMemo *)np;
-- (RuleMemo **)getPtrBuffer;
-- (void)setPtrBuffer:(RuleMemo **)np;
+- (__strong RuleMemo **)getPtrBuffer;
+- (void)setPtrBuffer:(__strong RuleMemo **)np;
 - (ACNumber *)getRuleMemoStopIndex:(NSInteger)aStartIndex;
 - (void)putRuleMemoAtStartIndex:(NSInteger)aStartIndex StopIndex:(NSInteger)aStopIndex;
 - (NSInteger)getMode;

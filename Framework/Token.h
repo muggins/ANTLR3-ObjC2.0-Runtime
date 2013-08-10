@@ -27,10 +27,6 @@
 
 #import <Foundation/Foundation.h>
 
-#ifndef DEBUG_DEALLOC
-#define DEBUG_DEALLOC
-#endif
-
 typedef enum {
     TokenTypeEOF = -1,
     TokenTypeInvalid,

@@ -57,7 +57,7 @@
 @property (assign) NSInteger syntaxErrors;
 @property (assign, getter=getBacktracking, setter=setBacktracking:) NSInteger backtracking;
 @property (retain, getter=getRuleMemo, setter=setRuleMemo:) RuleStack *ruleMemo;
-@property (copy, getter=getToken, setter=setToken:) id<Token> token;
+@property (retain, getter=getToken, setter=setToken:) id<Token> token;
 @property (getter=type,setter=setType:) NSUInteger type;
 @property (getter=channel,setter=setChannel:) NSUInteger channel;
 @property (getter=getTokenStartLine,setter=setTokenStartLine:) NSUInteger tokenStartLine;

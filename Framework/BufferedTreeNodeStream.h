@@ -88,7 +88,7 @@
 @property (retain) AMutableArray *nodes;
 @property (retain) id root;
 @property (retain, getter=getTokenStream, setter=setTokenStream:) id<TokenStream> tokens;
-@property (retain, getter=getAdaptor, setter=setAdaptor:) CommonTreeAdaptor *adaptor;
+@property (retain, getter=getTreeAdaptor, setter=setTreeAdaptor:) CommonTreeAdaptor *adaptor;
 @property (assign, getter=getUniqueNavigationNodes, setter=setUniqueNavigationNodes:) BOOL uniqueNavigationNodes;
 @property (assign) NSInteger index;
 @property (assign, getter=getLastMarker, setter=setLastMarker:) NSInteger lastMarker;
@@ -123,8 +123,8 @@
 
 - (id<TokenStream>) getTokenStream;
 - (void) setTokenStream:(id<TokenStream>) tokens;
-- (id<TreeAdaptor>) getTreeAdaptor;
-- (void) setTreeAdaptor:(id<TreeAdaptor>) anAdaptor;
+- (CommonTreeAdaptor *) getTreeAdaptor;
+- (void) setTreeAdaptor:(CommonTreeAdaptor *) anAdaptor;
 
 - (BOOL)getUniqueNavigationNodes;
 - (void) setUniqueNavigationNodes:(BOOL)aVal;

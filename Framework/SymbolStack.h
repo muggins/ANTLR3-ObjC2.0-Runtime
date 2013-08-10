@@ -53,8 +53,8 @@
 }
 
 // Contruction/Destruction
-+(SymbolStack *)newSymbolStack;
-+(SymbolStack *)newSymbolStackWithLen:(NSInteger)cnt;
++(__strong SymbolStack *)newSymbolStack;
++(__strong SymbolStack *)newSymbolStackWithLen:(NSInteger)cnt;
 -(id)init;
 -(id)initWithLen:(NSInteger)cnt;
 -(void)dealloc;
@@ -63,13 +63,13 @@
 - (id) copyWithZone:(NSZone *)aZone;
 /* clear -- reinitialize the maplist array */
 
--(SymbolsScope *)getHashMapEntry:(NSInteger)idx;
+-(__strong SymbolsScope *)getHashMapEntry:(NSInteger)idx;
 
--(SymbolsScope **)getHashMap;
+-(__strong SymbolsScope **)getHashMap;
 
--(SymbolsScope *) pop;
+-(__strong SymbolsScope *) pop;
 
-- (void) insertObject:(SymbolsScope *)aScope atIndex:(NSInteger)idx;
-- (SymbolsScope *)objectAtIndex:(NSInteger)idx;
+- (void) insertObject:(__strong SymbolsScope *)aScope atIndex:(NSInteger)idx;
+- (__strong SymbolsScope *)objectAtIndex:(NSInteger)idx;
 
 @end

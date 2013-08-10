@@ -44,7 +44,7 @@
     NSInteger lastHash;
 }
 
-//@property (copy) Map *fNext;
+//@property (retain) Map *fNext;
 @property (getter=getLastHash, setter=setLastHash:) NSInteger lastHash;
 
 // Contruction/Destruction

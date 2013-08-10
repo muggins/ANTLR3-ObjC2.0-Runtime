@@ -48,7 +48,7 @@
 {
 	self = [super init];
 	if ( self != nil ) {
-        eof = [[CommonToken eofToken] retain];
+        eof = [CommonToken eofToken];
 		eofElementIndex = UNITIALIZED_EOF_ELEMENT_INDEX;
 		markDepth = 0;
         index = 0;
@@ -58,9 +58,9 @@
 
 -(id) initWithEOF:(id)obj
 {
-	if ((self = [super init]) != nil) {
+    self = [super init];
+	if (self  != nil) {
 		self.eof = obj;
-        if ( self.eof ) [self.eof retain];
 	}
 	return self;
 }

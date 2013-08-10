@@ -59,9 +59,7 @@
 - (id) initWithStartIndex:(ACNumber *)aStartIndex StopIndex:(ACNumber *)aStopIndex
 {
     if ((self = [super init]) != nil ) {
-        [aStartIndex retain];
         startIndex = aStartIndex;
-        [aStopIndex retain];
         stopIndex = aStopIndex;
     }
     return (self);
@@ -134,10 +132,6 @@
 
 - (void)setStartIndex:(ACNumber *)aStartIndex
 {
-    if ( aStartIndex != startIndex ) {
-        if ( startIndex ) [startIndex release];
-        [aStartIndex retain];
-    }
     startIndex = aStartIndex;
 }
 
@@ -148,10 +142,6 @@
 
 - (void)setStopIndex:(ACNumber *)aStopIndex
 {
-    if ( aStopIndex != stopIndex ) {
-        if ( stopIndex ) [stopIndex release];
-        [aStopIndex retain];
-    }
     stopIndex = aStopIndex;
 }
 

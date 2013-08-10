@@ -34,7 +34,7 @@
 #import "ACNumber.h"
 
 @interface BaseMapElement : LinkBase {
-    ACNumber *index;
+    __strong ACNumber *index;
 }
 
 @property (retain) ACNumber *index;

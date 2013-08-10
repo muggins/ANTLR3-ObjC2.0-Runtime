@@ -29,8 +29,8 @@
 #import "IntStream.h"
 
 @interface NoViableAltException : RecognitionException {
-	int decisionNumber;
-	int stateNumber;
+	NSInteger decisionNumber;
+	NSInteger stateNumber;
 }
 
 + (NoViableAltException *) newException:(NSInteger)theDecisionNumber state:(NSInteger)theStateNumber stream:(id<IntStream>)theStream;

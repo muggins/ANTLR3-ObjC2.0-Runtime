@@ -45,6 +45,11 @@
     return [[CommonTree alloc] init];
 }
 
++ (id) newEmptyTree
+{
+    return [[CommonTree alloc] init];
+}
+
 + (CommonTree *)newTreeWithTree:(CommonTree *)aTree
 {
     return [[CommonTree alloc] initWithTreeNode:aTree];
@@ -83,7 +88,6 @@
 	self = (CommonTree *)[super init];
 	if ( self != nil ) {
 		token = aNode.token;
-        if ( token ) [token retain];
 		startIndex = aNode.startIndex;
 		stopIndex = aNode.stopIndex;
         parent = nil;
@@ -97,7 +101,6 @@
 	self = (CommonTree *)[super init];
 	if ( self != nil ) {
 		token = aToken;
-        if ( token ) [token retain];
 		startIndex = -1;
 		stopIndex = -1;
         parent = nil;
@@ -110,10 +113,8 @@
 {
 	self = (CommonTree *)[super init];
 	if ( self != nil ) {
-		token = [[CommonToken newToken:aTokenType] retain];
-//		startIndex = token.startIndex;
+		token = [CommonToken newToken:aTokenType];
 		startIndex = -1;
-//		stopIndex = token.stopIndex;
 		stopIndex = -1;
         parent = nil;
         childIndex = -1;
@@ -125,10 +126,8 @@
 {
 	self = (CommonTree *)[super init];
 	if ( self != nil ) {
-		token = [[CommonToken newToken:aTokenType Text:theText] retain];
-//		startIndex = token.startIndex;
+		token = [CommonToken newToken:aTokenType Text:theText];
 		startIndex = -1;
-//		stopIndex = token.stopIndex;
 		stopIndex = -1;
         parent = nil;
         childIndex = -1;
@@ -139,14 +138,11 @@
 - (void) dealloc
 {
     if ( token ) {
-        [token release];
         token = nil;
     }
     if ( parent ) {
-        [parent release];
         parent = nil;
     }
-	[super dealloc];
 }
 
 - (id) copyWithZone:(NSZone *)aZone
@@ -177,11 +173,7 @@
 
 - (void) setToken:(CommonToken *) aToken
 {
-	if ( token != aToken ) {
-		if ( token ) [token release];
-		[aToken retain];
-		token = aToken;
-	}
+	token = aToken;
 }
 */
 

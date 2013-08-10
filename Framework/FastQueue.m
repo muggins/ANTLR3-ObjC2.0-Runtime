@@ -49,7 +49,7 @@
 {
 	self = [super init];
 	if ( self != nil ) {
-		data = [[AMutableArray arrayWithCapacity:100] retain];
+		data = [AMutableArray arrayWithCapacity:100];
 		p = 0;
 		range = -1;
 	}
@@ -61,8 +61,7 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in FastQueue" );
 #endif
-	if ( data ) [data release];
-	[super dealloc];
+	data = nil;
 }
 
 - (id) copyWithZone:(NSZone *)aZone
@@ -103,7 +102,7 @@
 
 - (void) addObject:(id) obj
 {
-    [data addObject:[obj retain]];
+    [data addObject:obj];
 }
 
 - (NSUInteger) count
@@ -132,10 +131,10 @@
 
     absIndex = p + i;
 	if ( absIndex >= [data count] ) {
-		@throw [NoSuchElementException newException:[NSString stringWithFormat:@"queue index %d > last index %d", absIndex, [data count]-1]];
+		@throw [NoSuchElementException newException:[NSString stringWithFormat:@"queue index %ld > last index %ld", absIndex, [data count]-1]];
 	}
 	if ( absIndex < 0 ) {
-	    @throw [NoSuchElementException newException:[NSString stringWithFormat:@"queue index %d < 0", absIndex]];
+	    @throw [NoSuchElementException newException:[NSString stringWithFormat:@"queue index %ld < 0", absIndex]];
 	}
 	if ( absIndex > range ) range = absIndex;
 	return [data objectAtIndex:absIndex];

@@ -28,9 +28,8 @@ extern float const DEFAULT_LOAD_FACTOR;
 
 - (void) dealloc
 {
-    [before release];
-    [after release];
-    [super dealloc];
+    before = nil;
+    after = nil;
 }
 
 /**
@@ -48,10 +47,10 @@ extern float const DEFAULT_LOAD_FACTOR;
  */
 - (void) addBefore:(LHMEntry *)existingEntry
 {
-    after = [existingEntry retain];
-    before = [existingEntry.before retain];
-    before.after = [self retain];
-    after.before = [self retain];
+    after = existingEntry;
+    before = existingEntry.before;
+    before.after = self;
+    after.before = self;
 }
 
 
@@ -139,9 +138,8 @@ extern float const DEFAULT_LOAD_FACTOR;
 
 - (void) dealloc
 {
-    [nextEntry release];
-    [lastReturned release];
-    [super dealloc];
+    nextEntry = nil;
+    lastReturned = nil;
 }
 
 @end
@@ -260,7 +258,7 @@ extern float const DEFAULT_LOAD_FACTOR;
     self = [super init:anInitialCapacity loadFactor:aLoadFactor];
     if ( self ) {
         accessOrder = anAccessOrder;
-        header = [[[LHMEntry alloc] init:-1 key:nil value:nil next:nil] retain];
+        header = [[LHMEntry alloc] init:-1 key:nil value:nil next:nil];
         header.before = header.after = header;
     }
     return self;
@@ -271,7 +269,7 @@ extern float const DEFAULT_LOAD_FACTOR;
     self = [super init:anInitialCapacity loadFactor:aLoadFactor];
     if ( self ) {
         accessOrder = NO;
-        header = [[[LHMEntry alloc] init:-1 key:nil value:nil next:nil] retain];
+        header = [[LHMEntry alloc] init:-1 key:nil value:nil next:nil];
         header.before = header.after = header;
     }
     return self;
@@ -289,7 +287,7 @@ extern float const DEFAULT_LOAD_FACTOR;
     self = [super init:initialCapacity loadFactor:DEFAULT_LOAD_FACTOR];
     if ( self ) {
         accessOrder = NO;
-        header = [[[LHMEntry alloc] init:-1 key:nil value:nil next:nil] retain];
+        header = [[LHMEntry alloc] init:-1 key:nil value:nil next:nil];
         header.before = header.after = header;
     }
     return self;
@@ -309,7 +307,7 @@ extern float const DEFAULT_LOAD_FACTOR;
     self = [super initWithM:m];
     if ( self ) {
         accessOrder = NO;
-        header = [[[LHMEntry alloc] init:-1 key:nil value:nil next:nil] retain];
+        header = [[LHMEntry alloc] init:-1 key:nil value:nil next:nil];
         header.before = header.after = header;
     }
     return self;
@@ -324,7 +322,7 @@ extern float const DEFAULT_LOAD_FACTOR;
     self = [super init];
     if ( self ) {
         accessOrder = NO;
-        header = [[[LHMEntry alloc] init:-1 key:nil value:nil next:nil] retain];
+        header = [[LHMEntry alloc] init:-1 key:nil value:nil next:nil];
         header.before = header.after = header;
     }
     return self;
@@ -411,8 +409,7 @@ extern float const DEFAULT_LOAD_FACTOR;
 }
 
 - (void) dealloc {
-    [header release];
-    [super dealloc];
+    header = nil;
 }
 
 - (LHMEntryIterator *) newEntryIterator
@@ -445,7 +442,7 @@ extern float const DEFAULT_LOAD_FACTOR;
     }
     else {
         if (count >= threshold)
-            [self resize:2 * [buffer length]];
+            [self resize:2 * BuffSize];
     }
 }
 
@@ -457,7 +454,7 @@ extern float const DEFAULT_LOAD_FACTOR;
 - (void) createEntry:(NSInteger)aHash key:(NSString *)aKey value:(id)aValue bucketIndex:(NSInteger)bucketIndex
 {
     LHMEntry *old = (LHMEntry *)ptrBuffer[bucketIndex];
-    LHMEntry *e = [[[LHMEntry alloc] init:aHash key:aKey value:aValue next:old] retain];
+    LHMEntry *e = [[LHMEntry alloc] init:aHash key:aKey value:aValue next:old];
     ptrBuffer[bucketIndex] = (id)e;
     [e addBefore:header];
     count++;

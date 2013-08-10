@@ -186,7 +186,7 @@
     NSLog( @"called dealloc in ANTLRBitSet" );
 #endif
 	CFRelease(bitVector);
-	[super dealloc];
+    //	[super dealloc];
 }
 
 	// operations
@@ -287,7 +287,7 @@
 			if (haveInsertedBit) {
 				[descString appendString:@","];
 			}
-			[descString appendFormat:@"%d", currBit];
+			[descString appendFormat:@"%ld", currBit];
 			haveInsertedBit = YES;
 		}
 	}

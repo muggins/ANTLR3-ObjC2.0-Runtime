@@ -54,7 +54,7 @@ extern NSInteger debug;
 	if ((self = [super init]) != nil)
 	{
         tokenSource = nil;
-        tokens = [[AMutableArray arrayWithCapacity:1000] retain];
+        tokens = [AMutableArray arrayWithCapacity:1000];
         index = -1;
         range = -1;
 	}
@@ -65,8 +65,8 @@ extern NSInteger debug;
 {
 	if ((self = [super init]) != nil)
 	{
-        tokenSource = [aSource retain];
-        tokens = [[AMutableArray arrayWithCapacity:1000] retain];
+        tokenSource = aSource;
+        tokens = [AMutableArray arrayWithCapacity:1000];
         index = -1;
         range = -1;
 	}
@@ -92,9 +92,11 @@ extern NSInteger debug;
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in BufferedTokenStream" );
 #endif
-    if ( tokens ) [tokens release];
-    if ( tokenSource ) [tokenSource release];
-	[super dealloc];
+    tokens = nil;
+    tokenSource = nil;
+    // if ( tokens ) [tokens release];
+    // if ( tokenSource ) [tokenSource release];
+	// [super dealloc];
 }
 
 - (NSUInteger)line
@@ -185,7 +187,7 @@ extern NSInteger debug;
 {
     // how many more elements we need?
     NSInteger n = (i - [tokens count]) + 1;
-    if (debug > 1) NSLog(@"[self sync:%d] needs %d\n", i, n);
+    if (debug > 1) NSLog(@"[self sync:%ld] needs %ld\n", i, n);
     if ( n > 0 )
         [self fetch:n];
 }
@@ -196,7 +198,7 @@ extern NSInteger debug;
     for (NSInteger i=1; i <= n; i++) {
         id<Token> t = [tokenSource nextToken];
         [t setTokenIndex:[tokens count]];
-        if (debug > 1) NSLog(@"adding %@ at index %d\n", [t text], [tokens count]);
+        if (debug > 1) NSLog(@"adding %@ at index %ld\n", [t text], [tokens count]);
         [tokens addObject:t];
         if ( t.type == TokenTypeEOF )
             break;
@@ -206,7 +208,7 @@ extern NSInteger debug;
 - (id<Token>) getToken:(NSInteger) i
 {
     if ( i < 0 || i >= [tokens count] ) {
-        @throw [NoSuchElementException newException:[NSString stringWithFormat:@"token index %d out of range 0..%d", i, [tokens count]-1]];
+        @throw [NoSuchElementException newException:[NSString stringWithFormat:@"token index %ld out of range 0..%ld", i, [tokens count]-1]];
     }
     return [tokens objectAtIndex:i];
 }

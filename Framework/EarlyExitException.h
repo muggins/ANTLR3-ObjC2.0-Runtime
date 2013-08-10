@@ -28,12 +28,12 @@
 #import "RecognitionException.h"
 
 @interface EarlyExitException : RecognitionException {
-	int decisionNumber;
+	NSInteger decisionNumber;
 }
 
 + (EarlyExitException *) newException:(id<IntStream>)anInputStream decisionNumber:(NSInteger)aDecisionNumber;
 - (id) initWithStream:(id<IntStream>)anInputStream decisionNumber:(NSInteger) aDecisionNumber;
 
-@property int decisionNumber;
+@property NSInteger decisionNumber;
 @end
 

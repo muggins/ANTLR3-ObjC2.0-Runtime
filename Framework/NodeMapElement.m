@@ -65,10 +65,6 @@ static NSInteger _aUniqueID;
 {
     self = [super initWithAnIndex:anIndex];
     if ( self ) {
-        if ( aNode != node ) {
-            if ( node ) [node release];
-            [aNode retain];
-        }
         node = aNode;
     }
     return (self);
@@ -90,10 +86,6 @@ static NSInteger _aUniqueID;
 
 - (void)setNode:(id<BaseTree>)aNode
 {
-    if ( aNode != node ) {
-        if ( node ) [node release];
-        [aNode retain];
-    }
     node = aNode;
 }
 

@@ -73,7 +73,7 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in BaseStack" );
 #endif
-	[super dealloc];
+    //	[super dealloc];
 }
 
 - (id) copyWithZone:(NSZone *)aZone
@@ -111,8 +111,8 @@
             tmp = (LinkBase *)ptrBuffer[idx];
             while ( tmp ) {
                 rtmp = tmp;
-                tmp = [tmp getfNext];
-                [rtmp release];
+                tmp = [rtmp getfNext];
+                //                [rtmp release];
             }
         }
     }

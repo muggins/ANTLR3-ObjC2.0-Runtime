@@ -33,6 +33,8 @@
 #import "TreeAdaptor.h"
 #import "TreeVisitorAction.h"
 
+@class TreeVisitorAction;
+
 @interface TreeVisitor : NSObject {
    id<TreeAdaptor> adaptor;
 }

@@ -86,7 +86,7 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in SymbolStack" );
 #endif
-	[super dealloc];
+    //	[super dealloc];
 }
 
 - (id) copyWithZone:(NSZone *)aZone
@@ -94,31 +94,27 @@
     return [super copyWithZone:aZone];
 }
 
--(SymbolsScope *)getHashMapEntry:(NSInteger)idx
+-(__strong SymbolsScope *)getHashMapEntry:(NSInteger)idx
 {
 	return( (SymbolsScope *)[super objectAtIndex:idx] );
 }
 
--(SymbolsScope **)getHashMap
+-(__strong SymbolsScope **)getHashMap
 {
 	return( (SymbolsScope **)ptrBuffer );
 }
 
--(SymbolsScope *) pop
+-(__strong SymbolsScope *) pop
 {
     return (SymbolsScope *)[super pop];
 }
 
-- (void) insertObject:(SymbolsScope *)aRule atIndex:(NSInteger)idx
+- (void) insertObject:(__strong SymbolsScope *)aRule atIndex:(NSInteger)idx
 {
-    if ( aRule != ptrBuffer[idx] ) {
-        if ( ptrBuffer[idx] ) [ptrBuffer[idx] release];
-        [aRule retain];
-    }
     ptrBuffer[idx] = aRule;
 }
 
-- (SymbolsScope *)objectAtIndex:(NSInteger)idx
+- (__strong SymbolsScope *)objectAtIndex:(NSInteger)idx
 {
     return (SymbolsScope *)[super objectAtIndex:idx];
 }

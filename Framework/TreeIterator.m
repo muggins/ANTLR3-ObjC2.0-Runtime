@@ -50,10 +50,10 @@
     self = [super init];
     if ( self != nil ) {
         firstTime = YES;
-        nodes = [[FastQueue newFastQueue] retain];
-        down = [[adaptor createTree:TokenTypeDOWN Text:@"DOWN"] retain];
-        up = [[adaptor createTree:TokenTypeUP Text:@"UP"] retain];
-        eof = [[adaptor createTree:TokenTypeEOF Text:@"EOF"] retain];
+        nodes = [FastQueue newFastQueue];
+        down = [adaptor createTree:TokenTypeDOWN Text:@"DOWN"];
+        up = [adaptor createTree:TokenTypeUP Text:@"UP"];
+        eof = [adaptor createTree:TokenTypeEOF Text:@"EOF"];
         tree = eof;
         root = eof;
     }
@@ -65,13 +65,13 @@
     self = [super init];
     if ( self != nil ) {
         firstTime = YES;
-        adaptor = [[CommonTreeAdaptor newTreeAdaptor] retain];
-        tree = [t retain];
+        adaptor = [CommonTreeAdaptor newTreeAdaptor];
+        tree = t;
         root = t;
-        nodes = [[FastQueue newFastQueue] retain];
-        down = [[adaptor createTree:TokenTypeDOWN Text:@"DOWN"] retain];
-        up = [[adaptor createTree:TokenTypeUP Text:@"UP"] retain];
-        eof = [[adaptor createTree:TokenTypeEOF Text:@"EOF"] retain];
+        nodes = [FastQueue newFastQueue];
+        down = [adaptor createTree:TokenTypeDOWN Text:@"DOWN"];
+        up = [adaptor createTree:TokenTypeUP Text:@"UP"];
+        eof = [adaptor createTree:TokenTypeEOF Text:@"EOF"];
     }
     return self;
 }
@@ -81,13 +81,13 @@
     self = [super init];
     if ( self != nil ) {
         firstTime = YES;
-        adaptor = [a retain];
-        tree = [t retain];
+        adaptor = a;
+        tree = t;
         root = t;
-        nodes = [[FastQueue newFastQueue] retain];
-        down = [[adaptor createTree:TokenTypeDOWN Text:@"DOWN"] retain];
-        up = [[adaptor createTree:TokenTypeUP Text:@"UP"] retain];
-        eof = [[adaptor createTree:TokenTypeEOF Text:@"EOF"] retain];
+        nodes = [FastQueue newFastQueue];
+        down = [adaptor createTree:TokenTypeDOWN Text:@"DOWN"];
+        up = [adaptor createTree:TokenTypeUP Text:@"UP"];
+        eof = [adaptor createTree:TokenTypeEOF Text:@"EOF"];
     }
     return self;
 }
@@ -97,14 +97,13 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in TreeIterator" );
 #endif
-    if ( adaptor ) [adaptor release];
-    if ( nodes ) [nodes release];
-    if ( tree && tree != eof ) [tree release];
-    if ( root && root != eof && root != tree ) [root release];
-    if ( down ) [down release];    
-    if ( up ) [up release];    
-    if ( eof ) [eof release];    
-    [super dealloc];
+    adaptor = nil;
+    nodes = nil;
+    if ( tree && tree != eof ) tree = nil;
+    if ( root && root != eof && root != tree ) root = nil;
+    down = nil;;    
+    up = nil;;    
+    eof = nil;;    
 }
 
 - (void)reset

@@ -124,8 +124,8 @@
 
 @interface LHMEntry : HMEntry
 {
-    LHMEntry *before;
-    LHMEntry *after;
+    __strong LHMEntry *before;
+    __strong LHMEntry *after;
     BOOL accessOrder;
 }
 
@@ -147,9 +147,9 @@
 
 @interface LinkedHashIterator : HashIterator
 {
-    LHMEntry *nextEntry;
-    LHMEntry *lastReturned;
-    LinkedHashMap *lhm;
+    __strong LHMEntry *nextEntry;
+    __strong LHMEntry *lastReturned;
+    __strong LinkedHashMap *lhm;
 }
 
 @property (retain, getter=getNextEntry, setter=setNextEntry:) LHMEntry *nextEntry;
@@ -201,7 +201,7 @@
     /**
      * The head of the doubly linked list.
      */
-    LHMEntry *header;
+    __strong LHMEntry *header;
     /**
      * The iteration ordering method for this linked hash map: <tt>true</tt>
      * for access-order, <tt>false</tt> for insertion-order.

@@ -14,15 +14,22 @@
 @interface AMutableArray : NSMutableArray {
     NSInteger BuffSize;
     NSInteger count;
-    __strong NSMutableData *buffer;
+    //    NSMutableData *buffer;
     __strong id *ptrBuffer;
 }
 
+@property (assign) NSInteger BuffSize;
+@property (assign, getter=count, setter=setCount:) NSInteger count;
+// @property (retain) NSMutableData *buffer;
+@property (assign) __strong id *ptrBuffer;
+
 + (id) newArray;
 + (id) arrayWithCapacity:(NSInteger)size;
++ (id) arrayWithArray:(NSArray *)array;
 
 - (id) init;
 - (id) initWithCapacity:(NSInteger)size;
+- (id) initWithArray:(NSArray *)array;
 - (id) copyWithZone:(NSZone *)aZone;
 
 - (void) addObject:(id)anObject;
@@ -40,10 +47,5 @@
 - (ArrayIterator *) objectEnumerator;
 - (void) ensureCapacity:(NSInteger) index;
 - (NSString *) description;
-
-@property (assign) NSInteger BuffSize;
-@property (assign, getter=count, setter=setCount:) NSInteger count;
-@property (retain) NSMutableData *buffer;
-@property (assign) id *ptrBuffer;
 
 @end

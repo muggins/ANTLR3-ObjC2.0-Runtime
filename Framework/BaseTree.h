@@ -52,6 +52,7 @@
 //- (void) removeAllChildren;
 
 - (void) setChild:(NSInteger) i With:(id<BaseTree>)t;
+- (void) insertChild:(NSInteger) i With:(id<BaseTree>)t;
 - (id) deleteChild:(NSInteger) i;
 - (AMutableArray *) createChildrenList;
 - (void) replaceChildrenFrom:(NSInteger)startChildIndex To:(NSInteger)stopChildIndex With:(id) t;

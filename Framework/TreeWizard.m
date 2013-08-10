@@ -46,11 +46,8 @@
     if ((self = [super init]) != nil) {
         action = anAction;
         actor = anActor;
-        if ( actor ) [actor retain];
         object1 = anObject1;
-        if ( object1 ) [object1 retain];
         object2 = anObject2;
-        if ( object2 ) [object2 retain];
     }
     return self;
 }
@@ -60,10 +57,9 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in ANTLRVisitor" );
 #endif
-    if ( actor ) [actor release];
-    if ( object1 ) [object1 release];
-    if ( object2 ) [object2 release];
-    [super dealloc];
+    actor = nil;
+    object1 = nil;
+    object2 = nil;
 }
 
 - (void) visit:(CommonTree *)t Parent:(CommonTree *)parent ChildIndex:(NSInteger)childIndex Map:(Map *)labels
@@ -107,7 +103,7 @@
 
 + (CommonTree *)newTreePattern:(id<Token>)payload
 {
-    return (CommonTree *)[[TreePattern alloc] initWithToken:payload];
+    return [[TreePattern alloc] initWithToken:payload];
 }
 
 - (id) initWithToken:(id<Token>)payload
@@ -115,7 +111,7 @@
     self = [super initWithToken:payload];
     if ( self != nil ) {
     }
-    return (CommonTree *)self;
+    return self;
 }
 
 - (void) dealloc
@@ -123,8 +119,7 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in TreePattern" );
 #endif
-    if ( label ) [label release];
-    [super dealloc];
+    label = nil;
 }
 
 - (NSString *)description
@@ -233,7 +228,6 @@
 {
     if ((self = [super init]) != nil) {
         adaptor = anAdaptor;
-        if ( adaptor ) [adaptor retain];
     }
     return self;
 }
@@ -242,7 +236,6 @@
 {
     if ((self = [super init]) != nil) {
         adaptor = anAdaptor;
-        if ( adaptor ) [adaptor retain];
         tokenNameToTypeMap = aTokenNameToTypeMap;
    }
     return self;
@@ -254,7 +247,7 @@
 #pragma warning Fix initWithTokenNames.
         // adaptor = anAdaptor;
         //tokenNameToTypeMap = aTokenNameToTypeMap;
-        tokenNameToTypeMap = [[self computeTokenTypes:theTokNams] retain];
+        tokenNameToTypeMap = [self computeTokenTypes:theTokNams];
     }
     return self;
 }
@@ -263,9 +256,8 @@
 {
     if ((self = [super init]) != nil) {
         adaptor = anAdaptor;
-        if ( adaptor ) [adaptor retain];
         // tokenNameToTypeMap = aTokenNameToTypeMap;
-        tokenNameToTypeMap = [[self computeTokenTypes:theTokNams] retain];
+        tokenNameToTypeMap = [self computeTokenTypes:theTokNams];
     }
     return self;
 }
@@ -275,9 +267,9 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in TreePatternTreeAdaptor" );
 #endif
-    if ( adaptor ) [adaptor release];
-    if ( tokenNameToTypeMap ) [tokenNameToTypeMap release];
-    [super dealloc];
+    adaptor = nil;
+    tokenNameToTypeMap = nil;
+    // [super dealloc];
 }
 
 /** Compute a Map<String, Integer> that is an inverted index of
@@ -337,8 +329,8 @@
         [m putNode:ttype Node:elements];
     }
     [elements addObject:t];
-    int n = [adaptor getChildCount:t];
-    for (int i=0; i<n; i++) {
+    NSInteger n = [adaptor getChildCount:t];
+    for (NSInteger i=0; i<n; i++) {
         CommonTree * child = [adaptor getChild:t At:i];
         [self _index:child Map:m];
     }
@@ -378,7 +370,7 @@
     {
         return nil;
     }
-    int rootTokenType = [tpattern type];
+    NSInteger rootTokenType = [tpattern type];
 #ifdef DONTUSENOMO
     visit(t, rootTokenType, new TreeWizard.ContextVisitor() {
         public void visit(Object t, Object parent, int childIndex, Map labels) {
@@ -426,8 +418,8 @@
     if ( [adaptor getType:t] == ttype ) {
         [visitor visit:t Parent:parent ChildIndex:childIndex Map:nil];
     }
-    int n = [adaptor getChildCount:t];
-    for (int i=0; i<n; i++) {
+    NSInteger n = [adaptor getChildCount:t];
+    for (NSInteger i=0; i<n; i++) {
         CommonTree * child = [adaptor getChild:t At:i];
         [self _visit:child Parent:t ChildIndex:i Type:ttype Visitor:visitor];
     }
@@ -453,7 +445,7 @@
         return;
     }
     MapElement *labels = [Map newMap]; // reused for each _parse
-    int rootTokenType = [tpattern type];
+    NSInteger rootTokenType = [tpattern type];
 #pragma warning This is another one of those screwy nested constructs that I have to figure out
 #ifdef DONTUSENOMO
     visit(t, rootTokenType, new TreeWizard.ContextVisitor() {
@@ -543,12 +535,12 @@
         [labels putName:tpattern.label Node:t1];
     }
     // check children
-    int n1 = [adaptor getChildCount:t1];
-    int n2 = [tpattern getChildCount];
+    NSInteger n1 = [adaptor getChildCount:t1];
+    NSInteger n2 = [tpattern getChildCount];
     if ( n1 != n2 ) {
         return NO;
     }
-    for (int i=0; i<n1; i++) {
+    for (NSInteger i=0; i<n1; i++) {
         CommonTree * child1 = [adaptor getChild:t1 At:i];
         CommonTree *child2 = (CommonTree *)[tpattern getChild:i];
         if ( ![self _parse:child1 Pattern:child2 Map:labels] ) {

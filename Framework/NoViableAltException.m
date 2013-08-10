@@ -49,7 +49,7 @@
 - (NSString *) description
 {
 	NSMutableString *desc = (NSMutableString *)[super description];
-	[desc appendFormat:@" decision:%d state:%d", decisionNumber, stateNumber];
+	[desc appendFormat:@" decision:%ld state:%ld", decisionNumber, stateNumber];
 	return desc;
 }
 

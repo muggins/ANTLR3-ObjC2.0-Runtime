@@ -92,8 +92,6 @@ static id<BaseTree> invalidNode = nil;
 {
     self = [super init];
     if ( self != nil ) {
-        // children = [[AMutableArray arrayWithCapacity:5] retain];
-        // [children addObject:node];
         [self addChild:node];
         return self;
     }
@@ -103,15 +101,14 @@ static id<BaseTree> invalidNode = nil;
 - (void) dealloc
 {
 #ifdef DEBUG_DEALLOC
-    NSLog( @"called dealloc in BaseTree %x", (NSInteger)self );
+    NSLog( @"called dealloc in BaseTree %lx", (NSInteger)self );
 #endif
 	if ( children ) {
 #ifdef DEBUG_DEALLOC
         NSLog( @"called dealloc children in BaseTree" );
 #endif
-        [children release];
+        children = nil;
     }
-	[super dealloc];
 }
 
 - (id<BaseTree>) getChild:(NSUInteger)i
@@ -132,10 +129,6 @@ static id<BaseTree> invalidNode = nil;
 
 - (void) setChildren:(AMutableArray *)anArray
 {
-    if ( children != anArray ) {
-        if ( children ) [children release];
-        if ( anArray ) [anArray retain];
-    }
     children = anArray;
 }
 
@@ -181,7 +174,7 @@ static id<BaseTree> invalidNode = nil;
         // just add all of childTree's children to this
         if ( childTree.children != nil ) {
             if ( children != nil ) { // must copy, this has children already
-                int n = [childTree.children count];
+                NSInteger n = [childTree.children count];
                 for ( int i = 0; i < n; i++) {
                     id<BaseTree> c = (id<BaseTree>)[childTree.children objectAtIndex:i];
                     [children addObject:c];
@@ -200,7 +193,7 @@ static id<BaseTree> invalidNode = nil;
     }
     else { // child is not nil (don't care about children)
         if ( children == nil ) {
-            children = [[AMutableArray arrayWithCapacity:5] retain]; // create children list on demand
+            children = [AMutableArray arrayWithCapacity:5]; // create children list on demand
         }
         [children addObject:t];
         [childTree setParent:(id<BaseTree>)self];
@@ -227,7 +220,7 @@ static id<BaseTree> invalidNode = nil;
         @throw [IllegalArgumentException newException:@"BaseTree Can't set single child to a list"];        
     }
     if ( children == nil ) {
-        children = [[AMutableArray arrayWithCapacity:5] retain];
+        children = [AMutableArray arrayWithCapacity:5];
     }
     if ([children count] > i ) {
         [children replaceObjectAtIndex:i withObject:t];
@@ -237,6 +230,20 @@ static id<BaseTree> invalidNode = nil;
     }
     [t setParent:(id<BaseTree>)self];
     [t setChildIndex:i];
+}
+
+- (void) insertChild:(NSInteger) i With:(id<BaseTree>)t
+{
+    if ( i < 0 || i >= [self getChildCount] ) {
+        @throw [IndexOutOfBoundsException newException:[NSString stringWithFormat:@"%ld out of range", i]];        
+    }
+    if (children == nil) {
+        children = [self createChildrenList];
+    }
+    [children insertObject:t atIndex:i];
+    // walk others to increment their child indexes
+    // set index, parent of this one too
+    [self freshenParentAndChildIndexes:i];
 }
 
 - (id) deleteChild:(NSUInteger) idx
@@ -266,8 +273,8 @@ static id<BaseTree> invalidNode = nil;
     if ( children == nil ) {
         @throw [IllegalArgumentException newException:@"BaseTree Invalid Indexes; no children in list"];        
     }
-    int replacingHowMany = stopChildIndex - startChildIndex + 1;
-    int replacingWithHowMany;
+    NSInteger replacingHowMany = stopChildIndex - startChildIndex + 1;
+    NSInteger replacingWithHowMany;
     id<BaseTree> newTree = (id<BaseTree>) t;
     AMutableArray *newChildren = nil;
     // normalize to a list of children to add: newChildren
@@ -279,12 +286,12 @@ static id<BaseTree> invalidNode = nil;
         [newChildren addObject:newTree];
     }
     replacingWithHowMany = [newChildren count];
-    int numNewChildren = [newChildren count];
-    int delta = replacingHowMany - replacingWithHowMany;
+    NSInteger numNewChildren = [newChildren count];
+    NSInteger delta = replacingHowMany - replacingWithHowMany;
     // if same number of nodes, do direct replace
     if ( delta == 0 ) {
         int j = 0; // index into new children
-        for (int i=startChildIndex; i <= stopChildIndex; i++) {
+        for (NSInteger i=startChildIndex; i <= stopChildIndex; i++) {
             id<BaseTree> child = (id<BaseTree>)[newChildren objectAtIndex:j];
             [children replaceObjectAtIndex:i withObject:(id)child];
             [child setParent:(id<BaseTree>)self];
@@ -294,11 +301,11 @@ static id<BaseTree> invalidNode = nil;
     }
     else if ( delta > 0 ) { // fewer new nodes than there were
                             // set children and then delete extra
-        for (int j = 0; j < numNewChildren; j++) {
+        for (NSInteger j = 0; j < numNewChildren; j++) {
             [children replaceObjectAtIndex:startChildIndex+j withObject:[newChildren objectAtIndex:j]];
         }
-        int indexToDelete = startChildIndex+numNewChildren;
-        for (int c=indexToDelete; c<=stopChildIndex; c++) {
+        NSInteger indexToDelete = startChildIndex+numNewChildren;
+        for (NSInteger c=indexToDelete; c<=stopChildIndex; c++) {
             // delete same index, shifting everybody down each time
             [children removeObjectAtIndex:indexToDelete];
         }
@@ -306,11 +313,11 @@ static id<BaseTree> invalidNode = nil;
     }
     else { // more new nodes than were there before
            // fill in as many children as we can (replacingHowMany) w/o moving data
-        for (int j=0; j<replacingHowMany; j++) {
+        for (NSInteger j=0; j<replacingHowMany; j++) {
             [children replaceObjectAtIndex:startChildIndex+j withObject:[newChildren objectAtIndex:j]];
         }
         //        int numToInsert = replacingWithHowMany-replacingHowMany;
-        for (int j=replacingHowMany; j<replacingWithHowMany; j++) {
+        for (NSInteger j=replacingHowMany; j<replacingWithHowMany; j++) {
             [children insertObject:[newChildren objectAtIndex:j] atIndex:startChildIndex+j];
         }
         [self freshenParentAndChildIndexes:startChildIndex];
@@ -337,8 +344,8 @@ static id<BaseTree> invalidNode = nil;
                
 - (void) freshenParentAndChildIndexes:(NSInteger) offset
 {
-    int n = [self getChildCount];
-    for (int i = offset; i < n; i++) {
+    NSInteger n = [self getChildCount];
+    for (NSInteger i = offset; i < n; i++) {
         id<BaseTree> child = (id<BaseTree>)[self getChild:i];
         [child setChildIndex:i];
         [child setParent:(id<BaseTree>)self];
@@ -353,13 +360,13 @@ static id<BaseTree> invalidNode = nil;
 - (void) sanityCheckParentAndChildIndexes:(id<BaseTree>)aParent At:(NSInteger) i
 {
     if ( aParent != [self getParent] ) {
-        @throw [IllegalStateException newException:[NSString stringWithFormat:@"parents don't match; expected %s found %s", aParent, [self getParent]]];
+        @throw [IllegalStateException newException:[NSString stringWithFormat:@"parents don't match; expected %@ found %@", aParent, [self getParent]]];
     }
     if ( i != [self getChildIndex] ) {
-        @throw [IllegalStateException newException:[NSString stringWithFormat:@"child indexes don't match; expected %d found %d", i, [self getChildIndex]]];
+        @throw [IllegalStateException newException:[NSString stringWithFormat:@"child indexes don't match; expected %ld found %ld", i, [self getChildIndex]]];
     }
-    int n = [self getChildCount];
-    for (int c = 0; c < n; c++) {
+    NSInteger n = [self getChildCount];
+    for (NSInteger c = 0; c < n; c++) {
         id<BaseTree> child = (id<BaseTree>)[self getChild:c];
         [child sanityCheckParentAndChildIndexes:(id<BaseTree>)self At:c];
     }
@@ -496,12 +503,12 @@ static id<BaseTree> invalidNode = nil;
         
     if ( [theCopy.children count] )
         [theCopy.children removeAllObjects];
-    AMutableArray *childrenCopy = theCopy.children;
+//    AMutableArray *childrenCopy = theCopy.children;
     for (id loopItem in children) {
         id<BaseTree> childCopy = [loopItem deepCopyWithZone:aZone];
         [theCopy addChild:childCopy];
     }
-    if ( childrenCopy ) [childrenCopy release];
+//    if ( childrenCopy ) [childrenCopy release];
     return theCopy;
 }
      
@@ -521,7 +528,7 @@ static id<BaseTree> invalidNode = nil;
         [buf appendString:[self description]];
         [buf appendString:@" "];
     }
-    for (int i = 0; children != nil && i < [children count]; i++) {
+    for (NSInteger i = 0; children != nil && i < [children count]; i++) {
         id<BaseTree> t = (id<BaseTree>)[children objectAtIndex:i];
         if ( i > 0 ) {
             [buf appendString:@" "];

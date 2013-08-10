@@ -37,19 +37,19 @@
 - (void) setToken:(id<Token>) theToken;
 
 - (NSUInteger) getTokenType;
-- (void) setTokenType:(unsigned int) theTokenType;
+- (void) setTokenType:(NSUInteger) theTokenType;
 
 - (NSUInteger) channel;
-- (void) setChannel:(unsigned int) theChannel;
+- (void) setChannel:(NSUInteger) theChannel;
 
 - (NSUInteger) getTokenStartLine;
-- (void) setTokenStartLine:(unsigned int) theTokenStartLine;
+- (void) setTokenStartLine:(NSUInteger) theTokenStartLine;
 
 - (NSUInteger) getTokenCharPositionInLine;
-- (void) setTokenCharPositionInLine:(unsigned int) theCharPosition;
+- (void) setTokenCharPositionInLine:(NSUInteger) theCharPosition;
 
 - (NSInteger) getTokenStartCharIndex;
-- (void) setTokenStartCharIndex:(int) theTokenStartCharIndex;
+- (void) setTokenStartCharIndex:(NSInteger) theTokenStartCharIndex;
 
 - (NSString *) text;
 - (void) setText:(NSString *) theText;

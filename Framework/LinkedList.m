@@ -27,10 +27,9 @@
 
 - (void) dealloc
 {
-    [item release];
-    [next release];
-    [prev release];
-    [super dealloc];
+    item = nil;
+    next = nil;
+    prev = nil;
 }
 
 @end
@@ -145,9 +144,8 @@
 
 - (void) dealloc
 {
-    [lastReturned release];
-    [next release];
-    [super dealloc];
+    lastReturned = nil;
+    next = nil;
 }
 
 @end
@@ -185,7 +183,6 @@
 
 - (void) dealloc
 {
-    [super dealloc];
 }
 
 @end
@@ -243,9 +240,8 @@
 
 - (void) dealloc
 {
-    [first release];
-    [last release];
-    [super dealloc];
+    first = nil;
+    last = nil;
 }
 
 /**
@@ -720,7 +716,7 @@
  */
 - (NSString *) outOfBoundsMsg:(NSInteger)index
 {
-    return [NSString stringWithFormat:@"Index: %d, Size: %d", index, count];
+    return [NSString stringWithFormat:@"Index: %ld, Size: %ld", index, count];
 }
 
 - (void) checkElementIndex:(NSInteger)index

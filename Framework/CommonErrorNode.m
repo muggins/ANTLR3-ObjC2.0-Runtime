@@ -71,13 +71,9 @@
             aStopToken = aStartToken;
         }
         input = anInput;
-        if ( input ) [input retain];
         startToken = aStartToken;
-        if ( startToken ) [startToken retain];
         stopToken = aStopToken;
-        if ( stopToken ) [stopToken retain];
         trappedException = e;
-        if ( trappedException ) [trappedException retain];
     }
     return self;
 }
@@ -87,11 +83,10 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in CommonErrorNode" );
 #endif
-    if ( input ) [input release];
-    if ( startToken ) [startToken release];
-    if ( stopToken ) [stopToken release];
-    if ( trappedException ) [trappedException release];
-	[super dealloc];
+    input = nil;
+    startToken = nil;
+    stopToken = nil;
+    trappedException = nil;
 }
 
 - (BOOL) isNil
@@ -108,8 +103,8 @@
 {
     NSString *badText = nil;
     if ( [startToken isKindOfClass:[self class]] ) {
-        int i = [(id<Token>)startToken getTokenIndex];
-        int j = [(id<Token>)stopToken getTokenIndex];
+        NSInteger i = [(id<Token>)startToken getTokenIndex];
+        NSInteger j = [(id<Token>)stopToken getTokenIndex];
         if ( stopToken.type == TokenTypeEOF ) {
             j = [(id<TokenStream>)input size];
         }
@@ -130,7 +125,7 @@
 {
     NSString *aString;
     if ( [trappedException isKindOfClass:[MissingTokenException class]] ) {
-        aString = [NSString stringWithFormat:@"<missing type: %@ >",
+        aString = [NSString stringWithFormat:@"<missing type: %ld >",
         [(MissingTokenException *)trappedException getMissingType]];
         return aString;
     }

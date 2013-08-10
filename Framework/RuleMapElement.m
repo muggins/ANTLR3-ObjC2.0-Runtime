@@ -72,7 +72,6 @@
 - (id) initWithAnIndex:(ACNumber *)aNumber RuleNum:(ACNumber *)aRuleNum
 {
     if ((self = [super initWithAnIndex:aNumber]) != nil ) {
-        [aRuleNum retain];
         ruleNum = aRuleNum;
     }
     return (self);
@@ -94,10 +93,6 @@
 
 - (void)setRuleNum:(id)aRuleNum
 {
-    if ( aRuleNum != ruleNum ) {
-        if ( ruleNum ) [ruleNum release];
-        [aRuleNum retain];
-    }
     ruleNum = aRuleNum;
 }
 

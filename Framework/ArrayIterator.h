@@ -54,6 +54,11 @@
     
 }
 
+@property (retain) id peekObj;
+@property (assign, getter=count, setter=setCount:) NSInteger count;
+@property (assign) NSInteger index;
+@property (retain) NSArray *anArray;
+
 + (ArrayIterator *) newIterator:(NSArray *)array;
 + (ArrayIterator *) newIteratorForDictKey:(NSDictionary *)dict;
 + (ArrayIterator *) newIteratorForDictObj:(NSDictionary *)dict;
@@ -69,10 +74,5 @@
 - (NSInteger) count;
 - (void) setCount:(NSInteger)cnt;
 - (void) dealloc;
-
-@property (retain) id peekObj;
-@property (assign, getter=count, setter=setCount:) NSInteger count;
-@property (assign) NSInteger index;
-@property (retain) NSArray *anArray;
 
 @end

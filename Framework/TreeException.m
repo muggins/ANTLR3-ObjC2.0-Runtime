@@ -56,25 +56,16 @@
 #endif
 	[self setOldRoot:nil];
 	[self setNewRoot:nil];
-	[super dealloc];
 }
 
 - (void) setNewRoot:(id<BaseTree>)aTree
 {
-	if (newRoot != aTree) {
-		[aTree retain];
-		if ( newRoot ) [newRoot release];
-		newRoot = aTree;
-	}
+	newRoot = aTree;
 }
 
 - (void) setOldRoot:(id<BaseTree>)aTree
 {
-	if (oldRoot != aTree) {
-		[aTree retain];
-		if ( oldRoot ) [oldRoot release];
-		oldRoot = aTree;
-	}
+	oldRoot = aTree;
 }
 
 - (NSString *) description

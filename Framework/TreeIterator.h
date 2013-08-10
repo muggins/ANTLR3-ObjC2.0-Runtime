@@ -38,24 +38,24 @@
 @interface TreeIterator : NSObject 
 {
 	BOOL firstTime;
-	__strong id<TreeAdaptor> adaptor;
-	__strong id<BaseTree> root;
-	__strong id<BaseTree> tree;
+	id<TreeAdaptor> adaptor;
+	id<BaseTree> root;
+	id<BaseTree> tree;
 	
-	__strong FastQueue *nodes;
-	__strong id<BaseTree> up;
-	__strong id<BaseTree> down;
-	__strong id<BaseTree> eof;
+	FastQueue *nodes;
+	id<BaseTree> up;
+	id<BaseTree> down;
+	id<BaseTree> eof;
 }
 
 @property BOOL firstTime;
-@property(retain) id<TreeAdaptor> adaptor;
-@property(retain) id<BaseTree> root;
-@property(retain) id<BaseTree> tree;
-@property(retain) FastQueue *nodes;
-@property(retain, readwrite) id<BaseTree> up;
-@property(retain, readwrite) id<BaseTree> down;
-@property(retain, readwrite) id<BaseTree> eof;
+@property (retain) id<TreeAdaptor> adaptor;
+@property (retain) id<BaseTree> root;
+@property (retain) id<BaseTree> tree;
+@property (retain) FastQueue *nodes;
+@property (retain, readwrite) id<BaseTree> up;
+@property (retain, readwrite) id<BaseTree> down;
+@property (retain, readwrite) id<BaseTree> eof;
 
 + newANTRLTreeIterator;
 + (TreeIterator *) newANTRLTreeIteratorWithAdaptor:(CommonTreeAdaptor *)adaptor

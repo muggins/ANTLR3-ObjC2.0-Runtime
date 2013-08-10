@@ -51,8 +51,8 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in TreeRuleReturnScope" );
 #endif
-	if ( start ) [start release];
-	[super dealloc];
+	start = nil;
+	// [super dealloc];
 }
 
 - (CommonTree *)getStart
@@ -62,10 +62,6 @@
 
 - (void)setStart:(CommonTree *)aStart
 {
-    if ( start != aStart ) {
-        if ( start ) [start release];
-        [aStart retain];
-    }
     start = aStart;
 }	
 

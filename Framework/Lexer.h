@@ -58,6 +58,7 @@
 - (id<Token>)getToken;
 - (void) setToken: (id<Token>) aToken;
 - (id<Token>) nextToken;
+- (id<Token>) getEOFToken;
 - (void) mTokens;		// abstract, defined in generated sources
 - (void) skip;
 - (id<CharStream>) input;

@@ -63,7 +63,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"MismatchedNotSetException( %d != %@ )", [self unexpectedType], expecting];
+    return [NSString stringWithFormat:@"MismatchedNotSetException( %ld != %@ )", [self unexpectedType], expecting];
 }
 
 @end

@@ -34,6 +34,9 @@
 
 @implementation TreeVisitorAction
 
+@synthesize preAction;
+@synthesize postAction;
+
 + (TreeVisitorAction *)newTreeVisitorAction
 {
     return [[TreeVisitorAction alloc] init];
@@ -88,12 +91,14 @@
     return nil;
 }
 
-@synthesize preAction;
-@synthesize postAction;
-
 @end
 
 @implementation TreeVisitorActionFiltered
+
+@synthesize aTFilter;
+@synthesize TDRule;
+@synthesize BURule;
+
 
 + (TreeVisitorAction *)newTreeVisitorActionFiltered:(TreeFilter *)aFilter
                                               RuleD:(fptr *)aTDRule
@@ -134,10 +139,6 @@
     [aTFilter applyOnce:t rule:(fptr *)BURule];
     return t;
 }
-
-
-
-@synthesize aTFilter;
 
 @end
 

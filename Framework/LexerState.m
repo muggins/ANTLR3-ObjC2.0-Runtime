@@ -56,7 +56,7 @@
 #endif
 	[self setText:nil];
 	[self setToken:nil];
-	[super dealloc];
+    //	[super dealloc];
 }
 
 - (id<Token>) getToken
@@ -66,10 +66,7 @@
 
 - (void) setToken:(id<Token>) theToken
 {
-	if (theToken != token) {
-		if ( token ) [token release];
-		token = [theToken retain];
-	}
+	token = theToken;
 }
 
 
@@ -103,22 +100,22 @@
 	tokenStartLine = theTokenStartLine;
 }
 
-- (unsigned int) getTokenCharPositionInLine
+- (NSUInteger) getTokenCharPositionInLine
 {
 	return tokenStartCharPositionInLine;
 }
 
-- (void) setTokenCharPositionInLine:(unsigned int) theCharPosition
+- (void) setTokenCharPositionInLine:(NSUInteger) theCharPosition
 {
 	tokenStartCharPositionInLine = theCharPosition;
 }
 
-- (int) getTokenStartCharIndex
+- (NSInteger) getTokenStartCharIndex
 {
 	return tokenStartCharIndex;
 }
 
-- (void) setTokenStartCharIndex:(int) theTokenStartCharIndex
+- (void) setTokenStartCharIndex:(NSInteger) theTokenStartCharIndex
 {
 	tokenStartCharIndex = theTokenStartCharIndex;
 }
@@ -130,10 +127,7 @@
 
 - (void) setText:(NSString *) theText
 {
-	if (text != theText) {
-		if ( text ) [text release];
-		text = [theText retain];
-	}
+	text = theText;
 }
 
 @end

@@ -62,8 +62,7 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in TreeParser" );
 #endif
-	if ( input ) [input release];
-	[super dealloc];
+	input = nil;
 }
 
 - (void) reset
@@ -106,7 +105,7 @@
               TokenType:(NSInteger)expectedTokenType
                  Follow:(ANTLRBitSet *)follow
 {
-    NSString *tokenText =[NSString stringWithFormat:@"<missing %@ %d>", [self getTokenNames], expectedTokenType];
+    NSString *tokenText =[NSString stringWithFormat:@"<missing %@ %ld>", [self getTokenNames], expectedTokenType];
     id<TreeAdaptor> anAdaptor = (id<TreeAdaptor>)[((id<TreeNodeStream>)e.input) getTreeAdaptor];
     return [anAdaptor createToken:expectedTokenType Text:tokenText];
 //    return [CommonToken newToken:expectedTokenType Text:tokenText];
@@ -127,8 +126,8 @@
     }
     // current node is a subtree, skip to corresponding UP.
     // must count nesting level to get right UP
-    int level=0;
-    int tokenType = [((id<TreeAdaptor>)[input getTreeAdaptor]) getType:look];
+    NSInteger level=0;
+    NSInteger tokenType = [((id<TreeAdaptor>)[input getTreeAdaptor]) getType:look];
     while ( tokenType != TokenTypeEOF && !( tokenType == TokenTypeUP && level == 0) ) {
         [input consume];
         look = [input LT:1];
@@ -158,7 +157,7 @@
  */
 - (NSString *)getErrorHeader:(RecognitionException *)e
 {
-     return [NSString stringWithFormat:@"%@: node after line %d:%d",
+     return [NSString stringWithFormat:@"%@: node after line %ld:%ld",
             [self getGrammarFileName], e.line, e.charPositionInLine];
 }
 

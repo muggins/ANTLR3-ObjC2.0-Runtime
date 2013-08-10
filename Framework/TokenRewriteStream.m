@@ -71,9 +71,9 @@ extern NSInteger debug;
 - (NSString *)description
 {
     NSString *opName = [self className];
-    int $index = [self indexOf:'$' inString:opName];
+    NSInteger $index = [self indexOf:'$' inString:opName];
     opName = [opName substringWithRange:NSMakeRange($index+1, [opName length])];
-    return [NSString stringWithFormat:@"<%@%d:\"%@\">", opName, rwIndex, opName];			
+    return [NSString stringWithFormat:@"<%@%ld:\"%@\">", opName, rwIndex, opName];			
 }
 
 - (NSInteger) indexOf:(char)aChar inString:(NSString *)aString
@@ -150,7 +150,7 @@ extern NSInteger debug;
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<ANTLRReplaceOp@ %d..%d :>%@\n", rwIndex, lastIndex, text];
+    return [NSString stringWithFormat:@"<ANTLRReplaceOp@ %ld..%ld :>%@\n", rwIndex, lastIndex, text];
 }
 
 @end
@@ -173,7 +173,7 @@ extern NSInteger debug;
      
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<DeleteOp@ %d..%d\n",  rwIndex, lastIndex];
+    return [NSString stringWithFormat:@"<DeleteOp@ %ld..%ld\n",  rwIndex, lastIndex];
 }
 
 @end
@@ -348,7 +348,7 @@ extern NSInteger debug;
 - (void) replaceProgNam:(NSString *)programName FromIndex:(NSInteger)from ToIndex:(NSInteger)to Text:(NSString *)theText
 {
     if ( from > to || from < 0 || to < 0 || to >= [tokens count] ) {
-        @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"replace: range invalid: %d..%d size=%d\n", from, to, [tokens count]]];
+        @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"replace: range invalid: %ld..%ld size=%ld\n", from, to, [tokens count]]];
     }
     RewriteOperation *op = [ANTLRReplaceOp newANTLRReplaceOp:from ToIndex:to Text:theText];
     HashMap *rewrites = (HashMap *)[lastRewriteTokenIndexes getName:programName];
@@ -432,7 +432,7 @@ extern NSInteger debug;
 - (NSString *)toOriginalString:(NSInteger)start End:(NSInteger)end
 {
     NSMutableString *buf = [NSMutableString stringWithCapacity:100];
-    for (int i = start; i >= MIN_TOKEN_INDEX && i <= end && i< [tokens count]; i++) {
+    for (NSInteger i = start; i >= MIN_TOKEN_INDEX && i <= end && i< [tokens count]; i++) {
         if ( [((CommonToken *)[lastRewriteTokenIndexes objectAtIndex:i]) type] != TokenTypeEOF )
             [buf appendString:[[tokens objectAtIndex:i] text]];
     }
@@ -474,7 +474,7 @@ extern NSInteger debug;
     HashMap *indexToOp = [self reduceToSingleOperationPerIndex:rewrites];
     
     // Walk buffer, executing instructions and emitting tokens
-    int i = start;
+    NSInteger i = start;
     while ( i <= end && i < [tokens count] ) {
         RewriteOperation *op = (RewriteOperation *)[indexToOp objectAtIndex:i];
         [indexToOp setObject:nil atIndex:i]; // remove so any left have rwIndex size-1
@@ -497,7 +497,7 @@ extern NSInteger debug;
     if ( end == [tokens count]-1 ) {
         // Scan any remaining operations after last token
         // should be included (they will be inserts).
-        int i2 = 0;
+        NSInteger i2 = 0;
         while ( i2 < [indexToOp count] - 1 ) {
             RewriteOperation *op = [indexToOp objectAtIndex:i2];
             if ( op.rwIndex >= [tokens count]-1 ) {
@@ -558,7 +558,7 @@ extern NSInteger debug;
     //System.out.println("rewrites="+rewrites);
     if (debug > 1) NSLog(@"rewrites=%@\n", [rewrites getName:DEFAULT_PROGRAM_NAME]);
     // WALK REPLACES
-    for (int i = 0; i < [rewrites count]; i++) {
+    for (NSInteger i = 0; i < [rewrites count]; i++) {
         RewriteOperation *op = (RewriteOperation *)[rewrites objectAtIndex:i];
         if ( op==nil )
             continue;
@@ -568,7 +568,7 @@ extern NSInteger debug;
         // Wipe prior inserts within range
         //List inserts = getKindOfOps(rewrites, ANTLRInsertBeforeOp.class, i);
         HashMap *inserts = [self getKindOfOps:rewrites KindOfClass:[ANTLRInsertBeforeOp class] Index:i];
-        for (int j = 0; j < [inserts size]; j++) {
+        for (NSInteger j = 0; j < [inserts size]; j++) {
             ANTLRInsertBeforeOp *iop = (ANTLRInsertBeforeOp *)[inserts objectAtIndex:j];
             if ( iop.rwIndex >= rop.rwIndex && iop.rwIndex <= rop.lastIndex ) {
                 // delete insert as it's a no-op.
@@ -577,7 +577,7 @@ extern NSInteger debug;
         }
         // Drop any prior replaces contained within
         HashMap *prevReplaces = [self getKindOfOps:rewrites KindOfClass:[ANTLRReplaceOp class] Index:i];
-        for (int j = 0; j < [prevReplaces count]; j++) {
+        for (NSInteger j = 0; j < [prevReplaces count]; j++) {
             ANTLRReplaceOp *prevRop = (ANTLRReplaceOp *) [prevReplaces objectAtIndex:j];
             if ( prevRop.rwIndex>=rop.rwIndex && prevRop.lastIndex <= rop.lastIndex ) {
                 // delete replace as it's a no-op.
@@ -595,7 +595,7 @@ extern NSInteger debug;
     }
     
     // WALK INSERTS
-    for (int i = 0; i < [rewrites count]; i++) {
+    for (NSInteger i = 0; i < [rewrites count]; i++) {
         RewriteOperation *op = (RewriteOperation *)[rewrites objectAtIndex:i];
         if ( op == nil )
             continue;
@@ -604,7 +604,7 @@ extern NSInteger debug;
         ANTLRInsertBeforeOp *iop = (ANTLRInsertBeforeOp *)[rewrites objectAtIndex:i];
         // combine current insert with prior if any at same rwIndex
         HashMap *prevInserts = (HashMap *)[self getKindOfOps:rewrites KindOfClass:[ANTLRInsertBeforeOp class] Index:i];
-        for (int j = 0; j < [prevInserts count]; j++) {
+        for (NSInteger j = 0; j < [prevInserts count]; j++) {
             ANTLRInsertBeforeOp *prevIop = (ANTLRInsertBeforeOp *) [prevInserts objectAtIndex:j];
             if ( prevIop.rwIndex == iop.rwIndex ) { // combine objects
                                                 // convert to strings...we're in process of toString'ing
@@ -616,7 +616,7 @@ extern NSInteger debug;
         }
         // look for replaces where iop.rwIndex is in range; error
         HashMap *prevReplaces = (HashMap *)[self getKindOfOps:rewrites KindOfClass:[ANTLRReplaceOp class] Index:i];
-        for (int j = 0; j < [prevReplaces count]; j++) {
+        for (NSInteger j = 0; j < [prevReplaces count]; j++) {
             ANTLRReplaceOp *rop = (ANTLRReplaceOp *) [prevReplaces objectAtIndex:j];
             if ( iop.rwIndex == rop.rwIndex ) {
                 rop.text = [self catOpText:iop.text PrevText:rop.text];
@@ -624,13 +624,13 @@ extern NSInteger debug;
                 continue;
             }
             if ( iop.rwIndex >= rop.rwIndex && iop.rwIndex <= rop.lastIndex ) {
-                @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"insert op %d within boundaries of previous %d", iop, rop]];
+                @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"insert op %llu within boundaries of previous %llu", (unsigned long long)iop, (unsigned long long)rop]];
             }
         }
     }
     // System.out.println("rewrites after="+rewrites);
     HashMap *m = [HashMap newHashMapWithLen:15];
-    for (int i = 0; i < [rewrites count]; i++) {
+    for (NSInteger i = 0; i < [rewrites count]; i++) {
         RewriteOperation *op = (RewriteOperation *)[rewrites objectAtIndex:i];
         if ( op == nil )
             continue; // ignore deleted ops
@@ -641,7 +641,7 @@ extern NSInteger debug;
         [m setObject:op atIndex:op.rwIndex];
     }
     //System.out.println("rwIndex to op: "+m);
-    if (debug > 1) NSLog(@"rwIndex to  op %d\n", (NSInteger)m);
+    if (debug > 1) NSLog(@"rwIndex to  op %ld\n", (NSInteger)m);
     return m;
 }
 
@@ -665,7 +665,7 @@ extern NSInteger debug;
 - (HashMap *)getKindOfOps:(HashMap *)rewrites KindOfClass:(Class)kind Index:(NSInteger)before
 {
     HashMap *ops = [HashMap newHashMapWithLen:15];
-    for (int i = 0; i < before && i < [rewrites count]; i++) {
+    for (NSInteger i = 0; i < before && i < [rewrites count]; i++) {
         RewriteOperation *op = (RewriteOperation *)[rewrites objectAtIndex:i];
         if ( op == nil )
             continue; // ignore deleted
@@ -683,7 +683,7 @@ extern NSInteger debug;
 - (NSMutableString *)toDebugStringFromStart:(NSInteger)start ToEnd:(NSInteger)end
 {
     NSMutableString *buf = [NSMutableString stringWithCapacity:100];
-    for (int i = start; i >= MIN_TOKEN_INDEX && i <= end && i < [tokens count]; i++) {
+    for (NSInteger i = start; i >= MIN_TOKEN_INDEX && i <= end && i < [tokens count]; i++) {
         [buf appendString:[[tokens objectAtIndex:i] text]];
     }
     return [NSString stringWithString:buf];

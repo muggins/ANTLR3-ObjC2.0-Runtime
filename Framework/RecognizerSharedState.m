@@ -50,24 +50,24 @@
 
 + (RecognizerSharedState *) newRecognizerSharedState
 {
-    return [[[RecognizerSharedState alloc] init] retain];
+    return [[RecognizerSharedState alloc] init];
 }
 
 + (RecognizerSharedState *) newRecognizerSharedStateWithRuleLen:(NSInteger)aLen
 {
-    return [[[RecognizerSharedState alloc] initWithRuleLen:aLen] retain];
+    return [[RecognizerSharedState alloc] initWithRuleLen:aLen];
 }
 
 + (RecognizerSharedState *) newRecognizerSharedState:(RecognizerSharedState *)aState
 {
-    return [[[RecognizerSharedState alloc] initWithState:aState] retain];
+    return [[RecognizerSharedState alloc] initWithState:aState];
 }
 
 - (id) init
 {
     HashRule *aHashRule;
 	if ((self = [super init]) != nil ) {
-        following = [[AMutableArray arrayWithCapacity:10] retain];
+        following = [AMutableArray arrayWithCapacity:10];
         _fsp = -1;
         errorRecovery = NO;			// are we recovering?
         lastErrorIndex = -1;
@@ -77,9 +77,9 @@
         tokenStartCharIndex = -1;
         tokenStartLine = 0;
         int cnt = 200;
-		ruleMemo = [[RuleStack newRuleStack:cnt] retain];
+		ruleMemo = [RuleStack newRuleStack:cnt];
         for (int i = 0; i < cnt; i++ ) {
-            aHashRule = [[HashRule newHashRuleWithLen:17] retain];
+            aHashRule = [HashRule newHashRuleWithLen:17];
             [ruleMemo addObject:aHashRule];
         }
 #ifdef DONTUSEYET
@@ -98,7 +98,7 @@
 {
     HashRule *aHashRule;
 	if ((self = [super init]) != nil ) {
-        following = [[AMutableArray arrayWithCapacity:10] retain];
+        following = [AMutableArray arrayWithCapacity:10];
         _fsp = -1;
         errorRecovery = NO;			// are we recovering?
         lastErrorIndex = -1;
@@ -107,9 +107,9 @@
         backtracking = 0;			// the level of backtracking
         tokenStartCharIndex = -1;
         tokenStartLine = 0;
-		ruleMemo = [[RuleStack newRuleStack:aLen] retain];
+		ruleMemo = [RuleStack newRuleStack:aLen];
         for (int i = 0; i < aLen; i++ ) {
-            aHashRule = [[HashRule newHashRuleWithLen:17] retain];
+            aHashRule = [HashRule newHashRuleWithLen:17];
             [ruleMemo addObject:aHashRule];
         }
 #ifdef DONTUSEYET
@@ -138,19 +138,19 @@
     syntaxErrors = aState.syntaxErrors;
     backtracking = aState.backtracking;
     if ( aState.ruleMemo == nil ) {
-        int cnt = 200;
-        ruleMemo = [[RuleStack newRuleStack:cnt] retain];
+        NSInteger cnt = 200;
+        ruleMemo = [RuleStack newRuleStack:cnt];
         for (int i = 0; i < cnt; i++ ) {
-            aHashRule = [[HashRule newHashRuleWithLen:17] retain];
+            aHashRule = [HashRule newHashRuleWithLen:17];
             [ruleMemo addObject:aHashRule];
         }
     }
     else {
         ruleMemo = aState.ruleMemo;
         if ( [ruleMemo count] == 0 ) {
-            int cnt = [ruleMemo length];
-            for (int i = 0; i < cnt; i++ ) {
-                [ruleMemo addObject:[[HashRule newHashRuleWithLen:17] retain]];
+            NSInteger cnt = [ruleMemo length];
+            for (NSInteger i = 0; i < cnt; i++ ) {
+                [ruleMemo addObject:[HashRule newHashRuleWithLen:17]];
             }
         }
         else {
@@ -172,10 +172,9 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in RecognizerSharedState" );
 #endif
-    if ( token ) [token release];
-	if ( following ) [following release];
-	if ( ruleMemo ) [ruleMemo release];
-	[super dealloc];
+    token = nil;
+	following = nil;
+	ruleMemo = nil;
 }
 
 // token stuff
@@ -188,11 +187,7 @@
 
 - (void) setToken: (id<Token>) aToken
 {
-    if (token != aToken) {
-        [aToken retain];
-        if ( token ) [token release];
-        token = aToken;
-    }
+    token = aToken;
 }
 
 - (NSUInteger)channel
@@ -248,10 +243,6 @@
 
 - (void)setFollowing:(AMutableArray *)aFollow
 {
-    if ( following != aFollow ) {
-        if ( following ) [following release];
-        [aFollow retain];
-    }
     following = aFollow;
 }
 
@@ -262,10 +253,6 @@
 
 - (void)setRuleMemo:(RuleStack *)aRuleMemo
 {
-    if ( ruleMemo != aRuleMemo ) {
-        if ( ruleMemo ) [ruleMemo release];
-        [aRuleMemo retain];
-    }
     ruleMemo = aRuleMemo;
 }
 

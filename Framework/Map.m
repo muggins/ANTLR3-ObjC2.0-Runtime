@@ -88,11 +88,11 @@
             while ( tmp ) {
                 rtmp = tmp;
                 tmp = (MapElement *)tmp.fNext;
-                [rtmp release];
+                //                [rtmp release];
             }
         }
     }
-	[super dealloc];
+    //	[super dealloc];
 }
 
 -(void)deleteMap:(MapElement *)np
@@ -106,7 +106,7 @@
             while ( tmp ) {
                 rtmp = tmp;
                 tmp = [tmp getfNext];
-                [rtmp release];
+                //                [rtmp release];
             }
         }
     }
@@ -122,7 +122,7 @@
         while ( tmp ) {
             rtmp = tmp;
             tmp = [tmp getfNext];
-            [rtmp dealloc];
+            //            [rtmp dealloc];
         }
         ptrBuffer[idx] = nil;
     }
@@ -228,7 +228,6 @@
     if ( np == nil ) {
         [sym setFNext:ptrBuffer[ lastHash ]];
         ptrBuffer[ lastHash ] = sym;
-        [sym retain];
         return( ptrBuffer[ lastHash ] );
     }
     return( nil );            /*   not found      */
@@ -255,7 +254,7 @@
     for ( tmp = self->ptrBuffer[idx], np = self->ptrBuffer[idx]; np != nil; np = [np getfNext] ) {
         if ( [s isEqualToString:[np getName]] ) {
             tmp = [np getfNext];             /* get the next link  */
-            [np release];
+            //            [np release];
             return( SUCCESS );            /* report SUCCESS     */
         }
         tmp = [np getfNext];              //  BAD!!!!!!
@@ -267,7 +266,7 @@
 {
     if ( [np getfNext] != nil )
 		[self delete_chain:[np getfNext]];
-	[np release];
+    //	[np release];
 }
 
 #ifdef DONTUSEYET
@@ -340,7 +339,6 @@
     if ( np == nil ) {
         [np1 setFNext:self->ptrBuffer[ self->lastHash ]];
         self->ptrBuffer[ self->lastHash ] = np1;
-        [np1 retain];
     }
     else {
         // ptrBuffer[idx] = np;

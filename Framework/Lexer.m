@@ -24,7 +24,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 // THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#import <ANTLR/ANTLR.h>
+#import <ANTLR/antlr.h>
 #import "Lexer.h"
 
 @implementation Lexer
@@ -37,7 +37,7 @@
 {
     self = [super initWithState:[[RecognizerSharedState alloc] init]];
     if ( self != nil ) {
-        input = [anInput retain];
+        input = anInput;
         if (state.token != nil)
             [((CommonToken *)state.token) setInput:anInput];
         ruleNestingLevel = 0;
@@ -49,7 +49,7 @@
 {
     self = [super initWithState:aState];
     if ( self != nil ) {
-        input = [anInput retain];
+        input = anInput;
         if (state.token != nil)
             [((CommonToken *)state.token) setInput:anInput];
         ruleNestingLevel = 0;
@@ -59,8 +59,7 @@
 
 - (void) dealloc
 {
-    if ( input ) [input release];
-    [super dealloc];
+    input = nil;
 }
 
 - (id) copyWithZone:(NSZone *)aZone
@@ -104,10 +103,7 @@
 
 - (void) setToken: (id<Token>) aToken
 {
-    if (state.token != aToken) {
-        [aToken retain];
-        state.token = aToken;
-    }
+    state.token = aToken;
 }
 
 
@@ -124,14 +120,7 @@
         
         // [self setText:[self text]];
         if ([input LA:1] == CharStreamEOF) {
-            CommonToken *eof = [CommonToken newToken:input
-                                                          Type:TokenTypeEOF
-                                                       Channel:CommonToken.DEFAULT_CHANNEL
-                                                         Start:input.index
-                                                          Stop:input.index];
-            [eof setLine:input.getLine];
-            [eof setCharPositionInLine:input.getCharPositionInLine];
-            return eof;
+            return [self getEOFToken];
         }
         @try {
             [self mTokens];
@@ -159,6 +148,21 @@
     }
 }
 
+/** Returns the EOF token (default), if you need
+ *  to return a custom token instead override this method.
+ */
+- (id<Token>) getEOFToken
+{
+    CommonToken *eof = [CommonToken newToken:input
+                                        Type:TokenTypeEOF
+                                     Channel:CommonToken.DEFAULT_CHANNEL
+                                       Start:input.index
+                                        Stop:input.index];
+    [eof setLine:input.getLine];
+    [eof setCharPositionInLine:input.getCharPositionInLine];
+    return eof;
+}
+
 - (void) mTokens
 {   // abstract, defined in generated source as a starting point for matching
     [self doesNotRecognizeSelector:_cmd];
@@ -176,13 +180,9 @@
 
 - (void) setInput:(id<CharStream>) anInput
 {
-    if ( anInput != input ) {
-        if ( input ) [input release];
-    }
     input = nil;
     [self reset];
     input = anInput;
-    [input retain];
 }
 
 /** Currently does not support multiple emits per nextToken invocation
@@ -214,9 +214,7 @@
     aToken.text = [self text];
     [aToken setCharPositionInLine:state.tokenStartCharPositionInLine];
     [aToken setLine:state.tokenStartLine];
-    [aToken retain];
     [self emit:aToken];
-    // [aToken release];
 }
 
 // matching
@@ -224,8 +222,8 @@
 - (void) matchString:(NSString *)aString
 {
     unichar c;
-    unsigned int i = 0;
-    unsigned int stringLength = [aString length];
+    NSUInteger i = 0;
+    NSUInteger stringLength = [aString length];
     while ( i < stringLength ) {
         c = [input LA:1];
         if ( c != [aString characterAtIndex:i] ) {
@@ -352,7 +350,7 @@
         // for development, can add "decision=<<"+nvae.grammarDecisionDescription+">>"
         // and "(decision="+nvae.decisionNumber+") and
         // "state "+nvae.stateNumber
-        msg = [NSString stringWithFormat:@"no viable alternative decision:%d state:%d at character \"%@\"",
+        msg = [NSString stringWithFormat:@"no viable alternative decision:%ld state:%ld at character \"%@\"",
                nvae.decisionNumber, nvae.stateNumber, [self getCharErrorDisplay:(nvae.c)]];
     }
     else if ( [e isKindOfClass:[EarlyExitException class]] ) {
@@ -424,13 +422,13 @@
 
 - (void)traceIn:(NSString *)ruleName Index:(NSInteger)ruleIndex
 {
-    NSString *inputSymbol = [NSString stringWithFormat:@"%c line=%d:%d\n", [input LT:1], input.getLine, input.getCharPositionInLine];
+    NSString *inputSymbol = [NSString stringWithFormat:@"%c line=%ld:%ld\n", (char) [input LT:1], input.getLine, input.getCharPositionInLine];
     [super traceIn:ruleName Index:ruleIndex Object:inputSymbol];
 }
 
 - (void)traceOut:(NSString *)ruleName Index:(NSInteger)ruleIndex
 {
-    NSString *inputSymbol = [NSString stringWithFormat:@"%c line=%d:%d\n", [input LT:1], input.getLine, input.getCharPositionInLine];
+    NSString *inputSymbol = [NSString stringWithFormat:@"%c line=%ld:%ld\n", (char) [input LT:1], input.getLine, input.getCharPositionInLine];
     [super traceOut:ruleName Index:ruleIndex Object:inputSymbol];
 }
 

@@ -89,17 +89,17 @@
         if ( fh==nil ) {
             return;
         }
-        int numRead=0;
-        int p1 = 0;
+        NSInteger numRead=0;
+        NSInteger p1 = 0;
         retData = [fh readDataToEndOfFile];
         numRead = [retData length];
 #pragma mark fix these NSLog calls
-        NSLog( @"read %d chars; p was %d is now %d", n, p1, (p1+numRead) );
+        NSLog( @"read %ld chars; p was %ld is now %ld", n, p1, (p1+numRead) );
         p1 += numRead;
         n = p1;
         data = [[NSString alloc] initWithData:retData encoding:NSASCIIStringEncoding];
 #pragma mark fix these NSLog calls
-        NSLog( @"n=%d", n );
+        NSLog( @"n=%ld", n );
     }
     @finally {
         [fh closeFile];

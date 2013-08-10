@@ -56,7 +56,6 @@
 {
     if ((self = [super init]) != nil) {
         tokenSource = aTokenSource;
-        if ( tokenSource ) [tokenSource retain];
         tokenIndex = 0;
         channel = TokenChannelDefault;
     }

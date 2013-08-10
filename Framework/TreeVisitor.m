@@ -48,7 +48,7 @@
 - (id)init
 {
     if ((self = [super init]) != nil) {
-        adaptor = [[CommonTreeAdaptor newTreeAdaptor] retain];
+        adaptor = [CommonTreeAdaptor newTreeAdaptor];
     }
     return self;
 }
@@ -56,7 +56,7 @@
 - (id)initWithAdaptor:(id<TreeAdaptor>)anAdaptor
 {
     if ((self = [super init]) != nil) {
-        adaptor = [anAdaptor retain];
+        adaptor = anAdaptor;
     }
     return self;
 }
@@ -66,8 +66,7 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in TreeVisitor" );
 #endif
-    if ( adaptor ) [adaptor release];
-    [super dealloc];
+    adaptor = nil;
 }
 
 /** Visit every node in tree t and trigger an action for each node

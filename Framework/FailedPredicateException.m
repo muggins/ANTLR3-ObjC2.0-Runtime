@@ -53,7 +53,7 @@
 #endif
 	[self setPredicate:nil];
 	[self setRuleName:nil];
-	[super dealloc];
+    //	[super dealloc];
 }
 
 - (NSString *) description
@@ -71,11 +71,7 @@
 
 - (void) setPredicate:(NSString *)thePredicate
 {
-	if (thePredicate != predicate) {
-		[thePredicate retain];
-		if ( predicate ) [predicate release];
-		predicate = thePredicate;
-	}
+	predicate = thePredicate;
 }
 
 - (NSString *) getRuleName
@@ -85,11 +81,7 @@
 
 - (void) setRuleName:(NSString *)theRuleName
 {
-	if (theRuleName != ruleName) {
-		[theRuleName retain];
-		if ( ruleName ) [ruleName release];
-		ruleName = theRuleName;
-	}
+	ruleName = theRuleName;
 }
 #endif
 

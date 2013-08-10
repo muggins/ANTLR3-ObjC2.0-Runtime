@@ -61,12 +61,11 @@ static NSInteger RECNUM = 0;
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in ACBKey" );
 #endif
-    [super dealloc];
 }
 
 - (NSString *) description
 {
-    return [NSString stringWithFormat:@"len =%02d\nrecnum=%04d\nkey=%@\n", [key length], recnum, key];
+    return [NSString stringWithFormat:@"len =%02ld\nrecnum=%04ld\nkey=%@\n", [key length], recnum, key];
 }
 
 @end
@@ -76,8 +75,6 @@ static NSInteger RECNUM = 0;
 @synthesize dict;
 @synthesize lnode;
 @synthesize rnode;
-@synthesize keys;
-@synthesize btNodes;
 @synthesize lnodeid;
 @synthesize rnodeid;
 @synthesize nodeid;
@@ -100,8 +97,8 @@ static NSInteger RECNUM = 0;
         // Initialization code here.
         dict = theDict;
         nodeid = theDict.nxt_nodeid++;
-        keys = keyArray;
-        btNodes = btNodeArray;
+//        keys = keyArray;
+//        btNodes = btNodeArray;
         if ( nodeid == 0 ) {
             numkeys = 0;
         }
@@ -115,26 +112,62 @@ static NSInteger RECNUM = 0;
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in ACBTree" );
 #endif
-    [super dealloc];
+    for (int i = 0; i < BTNODESIZE; i++) {
+        btNodeArray[i] = nil;
+    }
+    // [self release];
+    // [super dealloc];
+}
+
+- (ACBKey *)getKey:(NSInteger)idx
+{
+    if (idx >= 0 && idx < BTNODESIZE) {
+        return keyArray[idx];
+    }
+    return nil;
+}
+
+- (void)setKey:(NSInteger)idx with:(ACBKey *)k
+{
+    if (idx >= 0 && idx < BTNODESIZE) {
+        keyArray[idx] = k;
+    }
+    return;
+}
+
+- (ACBTree *)getNode:(NSInteger)idx
+{
+    if (idx >= 0 && idx < BTNODESIZE) {
+        return btNodeArray[idx];
+    }
+    return nil;
+}
+
+- (void)setNode:(NSInteger)idx with:(ACBTree *)t
+{
+    if (idx >= 0 && idx < BTNODESIZE) {
+        btNodeArray[idx] = t;
+    }
+    return;
 }
 
 - (ACBTree *)createnode:(ACBKey *)kp
 {
-    ACBTree *tmp;
+    ACBTree *t;
     
-    tmp = [ACBTree newNodeWithDictionary:dict];
-    tmp.nodeType = nodeType;
-    tmp.lnode = self;
-    tmp.rnode = self.rnode;
-    self.rnode = tmp;
-    //tmp.btNodes[0] = self;
-    //tmp.keys[0] = kp;
-    tmp.updtd = YES;
-    tmp.numrecs = ((nodeType == LEAF)?1:numrecs);
+    t = [ACBTree newNodeWithDictionary:dict];
+    t.nodeType = nodeType;
+    t.lnode = self;
+    t.rnode = self.rnode;
+    self.rnode = t;
+    //[t setNode:0 with:self];
+    //[t setKey:0 with:kp];
+    t.updtd = YES;
+    t.numrecs = ((nodeType == LEAF)?1:numrecs);
     updtd = YES;
-    tmp.numkeys = 1;
-    [tmp retain];
-    return(tmp);
+    t.numkeys = 1;
+    // [t retain];
+    return(t);
 }
 
 - (ACBTree *)deletekey:(NSString *)dkey
@@ -153,7 +186,7 @@ static NSInteger RECNUM = 0;
         @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"Don't understand this key:\"%@\"", dkey]];
     sNode = [self search:dkp.key];
     if ( sNode == nil || [sNode searchnode:dkp.key match:YES] == FAILURE ) {
-        if ( mustRelease ) [dkp release];
+        // if ( mustRelease ) [dkp release];
         return(self);
     }
     told = dict.root;
@@ -161,7 +194,7 @@ static NSInteger RECNUM = 0;
     
     /*  check for shrink at the root  */
     if ( numkeys == 1 && nodeType != LEAF ) {
-        told = btNodes[0];
+        told = btNodeArray[0];
         told.nodeid = 1;
         told.updtd = YES;
         dict.root = told;
@@ -169,7 +202,7 @@ static NSInteger RECNUM = 0;
 #ifdef DONTUSENOMO
     if (debug == 'd') [self printtree];
 #endif
-    if ( mustRelease ) [dkp release];
+    // if ( mustRelease ) [dkp release];
     return(told);
 }
 
@@ -187,13 +220,14 @@ static NSInteger RECNUM = 0;
     q = [self internalinsert:kp value:value split:&h];
     /*  check for growth at the root  */
     if ( q != nil ) {
-        tnew = [[ACBTree newNodeWithDictionary:dict] retain];
+        tnew = [ACBTree newNodeWithDictionary:dict];
+        // tnew = [[ACBTree newNodeWithDictionary:dict] retain];
         tnew.nodeType = BTNODE;
         nodeNum = tnew.nodeid;
         tnew.nodeid = 0;
         self.nodeid = nodeNum;
-        [tnew insert:self.keys[numkeys-1] value:self index:0 split:&h];
-        [tnew insert:q.keys[q.numkeys-1] value:q index:1 split:&h];
+        [tnew insert:keyArray[numkeys-1] value:self index:0 split:&h];
+        [tnew insert:[q getKey:q.numkeys-1] value:q index:1 split:&h];
         tnew.numrecs = self.numrecs + q.numrecs;
         tnew.lnodeid = self.nodeid;
         tnew.rnodeid = self.rnodeid;
@@ -202,7 +236,7 @@ static NSInteger RECNUM = 0;
         tnew.rnode = self.rnode;
         self.rnode = tnew;
         /* affected by nodeid swap */
-        // newnode.lnodeid = tnew.btNodes[0].nodeid;
+        // newnode.lnodeid = [tnew getNode:0].nodeid;
     }
     //dict.root = t;
     //l.reccnt++;
@@ -220,7 +254,7 @@ static NSInteger RECNUM = 0;
         return nil;
     while (t != nil) {
         for (i = 0; i < t.numkeys; i++) {
-            ret = [t.keys[i].key compare:kstr];
+            ret = [((ACBKey *)[t getKey:i]).key compare:kstr];
             if ( ret >= 0 ) {
                 if ( t.nodeType == LEAF ) {
                     if ( ret == 0 ) return (t);    /* node containing keyentry found */
@@ -232,7 +266,7 @@ static NSInteger RECNUM = 0;
             }
         }
         srchlvl++;
-        if ( t.nodeType == BTNODE ) t = t.btNodes[i];
+        if ( t.nodeType == BTNODE ) t = [t getNode:i];
         else {
             t = nil;
         }
@@ -253,7 +287,7 @@ static NSInteger RECNUM = 0;
 {
     NSInteger i, ret;
     for ( i = 0; i < numkeys; i++ ) {
-        ret = [keys[i].key compare:kstr];
+        ret = [keyArray[i].key compare:kstr];
         if ( ret >= 0 ) {         /* key node found */
             if ( ret == 0 && match == NO ) {
                 return FAILURE;
@@ -274,7 +308,7 @@ static NSInteger RECNUM = 0;
 {
     NSInteger i, nkey;
     __strong ACBKey *del = nil;
-    ACBTree *tsb;
+    ACBTree *t;
     NSInteger srchlvl = 0;
     
     /* find deletion branch */
@@ -282,11 +316,11 @@ static NSInteger RECNUM = 0;
         srchlvl++;
         /* search for end of tree */
         i = [self searchnode:dkp.key match:NO];
-        del = [btNodes[i] internaldelete:dkp];
+        del = [btNodeArray[i] internaldelete:dkp];
         srchlvl--;
         /* if not LEAF propagate back high key    */
-        tsb = btNodes[i];
-        nkey = tsb.numkeys - 1;
+        t = btNodeArray[i];
+        nkey = t.numkeys - 1;
     }
     /***  the bottom of the tree has been reached       ***/
     else {                   /* set up deletion ptrs      */
@@ -304,17 +338,17 @@ static NSInteger RECNUM = 0;
     /***       indicate deletion to be done            ***/
     if ( del != nil ) {
         /*** the key in "del" has to be deleted from in present node ***/
-        if ( btNodes[i].numkeys >= BTHNODESIZE+1 ) {
+        if ( btNodeArray[i].numkeys >= BTHNODESIZE+1 ) {
             /* node does not need balancing */
             del = nil;
-            self.keys[i] = tsb.keys[nkey];
+            keyArray[i] = [t getKey:nkey];
         }
         else {                         /* node requires balancing */
             if ( i == 0 ) {
                 [self rotateright:0];
-                self.btNodes[0] = tsb;
+                btNodeArray[0] = t;
             } else if ( i < numkeys-1 ) {     /* look to the right first */
-                if ( self.btNodes[i+1].numkeys > BTHNODESIZE+1 ) {  /* carry from right */
+                if ( btNodeArray[i+1].numkeys > BTHNODESIZE+1 ) {  /* carry from right */
                     [self borrowright:i];
                 }
                 else {           /* merge present node with right node */
@@ -323,17 +357,17 @@ static NSInteger RECNUM = 0;
             }
             else {                      /* look to the left */
                 if ( i > 0 ) {          /* carry or merge with left node */
-                    if ( self.btNodes[i-1].numkeys > BTHNODESIZE+1 ) { /* carry from left */
+                    if ( btNodeArray[i-1].numkeys > BTHNODESIZE+1 ) { /* carry from left */
                         [self borrowleft:i];
                     }
                     else { /*** merge present node with left node ***/
                         i--;
                         [self mergenode:i];
-                        tsb = self.btNodes[i];
+                        t = btNodeArray[i];
                     }
                 }
             }
-        self.keys[i] = tsb.keys[nkey];
+        keyArray[i] = [t getKey:nkey];
         }
     }
     numrecs--;
@@ -350,10 +384,10 @@ static NSInteger RECNUM = 0;
 {
     /* search key ins on node t^; h = false  */
     NSInteger i, ret;
-    ACBTree *q, *tmp;
+    ACBTree *q, *t;
     
     for (i = 0; i < numkeys; i++) {
-        ret = [keys[i].key compare:kp.key];
+        ret = [keyArray[i].key compare:kp.key];
         if ( ret >= 0 ) {
             if ( nodeType == LEAF && ret == 0 ) return (self);    /* node containing keyentry found */
             break;
@@ -364,18 +398,18 @@ static NSInteger RECNUM = 0;
     }
     else  { /* nodeType == BTNODE */
         /*  key is not on this node  */
-        q = [self.btNodes[i] internalinsert:kp value:value split:h];
+        q = [btNodeArray[i] internalinsert:kp value:value split:h];
         if ( *h ) {
             [self insert:kp value:q index:i split:h];
         }
         else {
             self.numrecs++;
         }
-        tmp = self.btNodes[numkeys-1];
-        keys[numkeys-1] = tmp.keys[tmp.numkeys-1];
+        t = btNodeArray[numkeys-1];
+        keyArray[numkeys-1] = [t getKey:t.numkeys-1];
         if ( i != numkeys-1 ) {
-            tmp = self.btNodes[i];
-            keys[i] = tmp.keys[tmp.numkeys-1];
+            t = btNodeArray[i];
+            keyArray[i] = [t getKey:t.numkeys-1];
         }
         updtd = YES;
     } /* search */
@@ -383,7 +417,7 @@ static NSInteger RECNUM = 0;
 }
 
 /** Do the actual insertion or split and insert
- *  insert key to the right of t.keys[hi] 
+ *  insert key to the right of [t getKey:hi] 
  */
 - (ACBTree *) insert:(ACBKey *)kp value:(id)value index:(NSInteger)hi split:(NSInteger *)h
 {
@@ -392,8 +426,8 @@ static NSInteger RECNUM = 0;
     if ( numkeys < BTNODESIZE ) {
         *h = NO;
         [self rotateright:hi];
-        keys[hi] = kp;
-        btNodes[hi] = value;
+        keyArray[hi] = kp;
+        btNodeArray[hi] = value;
         numrecs++;
         numkeys++;
         updtd = YES;
@@ -404,8 +438,8 @@ static NSInteger RECNUM = 0;
         b = [self splitnode:hi];
         if ( hi <= BTHNODESIZE ) {              /* insert key in left page */
             [self rotateright:hi];
-            keys[hi] = kp;
-            btNodes[hi] = value;
+            keyArray[hi] = kp;
+            btNodeArray[hi] = value;
             numrecs++;
             numkeys++;
         }
@@ -413,8 +447,8 @@ static NSInteger RECNUM = 0;
             hi -= BTHNODESIZE;
             if ( b.rnode == nil ) hi--;
             [b rotateright:hi];
-            b.keys[hi] = kp;
-            b.btNodes[hi] = value;
+            [b setKey:hi with:kp];
+            [b setNode:hi with:value];
             b.numrecs++;
             b.numkeys++;
         }
@@ -429,14 +463,14 @@ static NSInteger RECNUM = 0;
     ACBTree *t0, *t1;
     NSInteger nkey;
     
-    t0 = btNodes[i];
-    t1 = btNodes[i-1];
+    t0 = btNodeArray[i];
+    t1 = btNodeArray[i-1];
     nkey = t1.numkeys-1;
-    [t0 insinnode:t1.keys[nkey] value:t1.btNodes[nkey]];
-    [t1 delfrmnode:t1.keys[nkey]];
+    [t0 insinnode:[t1 getKey:nkey] value:[t1 getNode:nkey]];
+    [t1 delfrmnode:[t1 getKey:nkey]];
     nkey--;
-    keys[i-1] = t1.keys[nkey];
-    keys[i-1].recnum = t1.nodeid;
+    keyArray[i-1] = [t1 getKey:nkey];
+    keyArray[i-1].recnum = t1.nodeid;
 }
 
 - (void)borrowright:(NSInteger)i
@@ -444,13 +478,13 @@ static NSInteger RECNUM = 0;
     ACBTree *t0, *t1;
     NSInteger nkey;
     
-    t0 = btNodes[i];
-    t1 = btNodes[i+1];
-    [t0 insinnode:t1.keys[0] value:t1.btNodes[0]];
-    [t1 delfrmnode:t1.keys[0]];
+    t0 = btNodeArray[i];
+    t1 = btNodeArray[i+1];
+    [t0 insinnode:[t1 getKey:0] value:[t1 getNode:0]];
+    [t1 delfrmnode:[t1 getKey:0]];
     nkey = t0.numkeys - 1;
-    keys[i] = t0.keys[nkey];
-    keys[i].recnum = t0.nodeid;
+    keyArray[i] = [t0 getKey:nkey];
+    keyArray[i].recnum = t0.nodeid;
 }
 
 - (NSInteger)delfrmnode:(ACBKey *)ikp
@@ -464,14 +498,14 @@ static NSInteger RECNUM = 0;
     ACBKey *k0 = nil;
     ACBTree *n0 = nil;
     if ( self.nodeType == LEAF ) {
-        k0 = self.keys[j];
-        n0 = self.btNodes[j];
+        k0 = keyArray[j];
+        n0 = btNodeArray[j];
     }
     [self rotateleft:j];
     self.numkeys--;
-    numrecs -= ((self.nodeType == LEAF)?1:btNodes[j].numrecs);
-    if ( k0 ) [k0 release];
-    if ( n0 ) [n0 release];
+    numrecs -= ((self.nodeType == LEAF)?1:btNodeArray[j].numrecs);
+    // if ( k0 ) [k0 release];
+    // if ( n0 ) [n0 release];
     updtd = TRUE;
     return(SUCCESS);
 }
@@ -482,14 +516,14 @@ static NSInteger RECNUM = 0;
     
     j = [self searchnode:ikp.key match:NO];
     [self rotateright:j];
-    keys[j] = ikp;
-    btNodes[j] = value;
+    keyArray[j] = ikp;
+    btNodeArray[j] = value;
     numkeys++;
     if ( nodeType == LEAF ) {
         numrecs++;
     }
     else {
-        numrecs += btNodes[j].numrecs;
+        numrecs += btNodeArray[j].numrecs;
     }
     updtd = TRUE;
     return(j);
@@ -500,13 +534,13 @@ static NSInteger RECNUM = 0;
     ACBTree *t0, *t1, *tr;
     NSInteger j, k, nkeys;
     
-    t0 = btNodes[i];
-    t1 = btNodes[i+1];
+    t0 = btNodeArray[i];
+    t1 = btNodeArray[i+1];
     /*** move keys and pointers from
      t1 node to t0 node           ***/
     for (j=t0.numkeys, k=0; j < BTNODESIZE && k < t1.numkeys; j++, k++) {
-        t0.keys[j] = t1.keys[k];
-        t0.btNodes[j] = t1.btNodes[k];
+        [t0 setKey:j with:[t1 getKey:k]];
+         [t0 setNode:j with:[t1 getNode:k]];
         t0.numkeys++;
     }
     t0.numrecs += t1.numrecs;
@@ -514,12 +548,12 @@ static NSInteger RECNUM = 0;
     t0.rnodeid = t1.rnodeid;
     t0.updtd = YES;
     nkeys = t0.numkeys - 1;
-    keys[i] = t0.keys[nkeys]; /* update key to point to new high key */
+    keyArray[i] = [t0 getKey:nkeys]; /* update key to point to new high key */
     [self rotateleft:i+1]; /* copy over the keys and nodes */
     
     t1.nodeType = -1;
     if (t1.rnodeid != 0xffff && i < numkeys - 2) {
-        tr = btNodes[i+1];
+        tr = btNodeArray[i+1];
         tr.lnodeid = t0.nodeid;
         tr.lnode = t0;
         tr.updtd = YES;
@@ -545,12 +579,12 @@ static NSInteger RECNUM = 0;
     /*** move keys and pointers ***/
     NSInteger i = 0;
     for (j = k; j < BTNODESIZE; j++, i++ ) {
-        t1.keys[i] = keys[j];
-        t1.btNodes[i] = btNodes[j];
-        t1.numrecs += ((nodeType == LEAF) ? 1 : btNodes[j].numrecs);
-        numrecs     -= ((nodeType == LEAF) ? 1 : btNodes[j].numrecs);
-        keys[j] = nil;
-        btNodes[j] = nil;
+        [t1 setKey:i with:keyArray[j]];
+        [t1 setNode:i with:btNodeArray[j]];
+        t1.numrecs += ((nodeType == LEAF) ? 1 : btNodeArray[j].numrecs);
+        numrecs     -= ((nodeType == LEAF) ? 1 : btNodeArray[j].numrecs);
+        keyArray[j] = nil;
+        btNodeArray[j] = nil;
     }
     t1.numkeys  = BTNODESIZE-k;
     self.numkeys = k;
@@ -562,7 +596,7 @@ freetree(l, t)
 FIDB *l;
 ACBTree *t;
 {
-    ACBTree *tmp;
+    ACBTree *t;
     NSInteger i;
     
     if (dict.root == nil) return(SUCCESS);
@@ -571,20 +605,20 @@ ACBTree *t;
     }
     else srchlvl++;
     for (i = 0; i < t.numkeys; i++) {
-        tmp = t.btNodes[i];
-        if (tmp != nil) {
-            if (tmp.nodeType == LEAF) {
-                free(tmp);    /* free the leaf */
-                if (tmp == l.rrnode) {
+        t = [t getNode:i];
+        if (t != nil) {
+            if (t.nodeType == LEAF) {
+                free(t);    /* free the leaf */
+                if (t == l.rrnode) {
                     l.rrnode = nil;
                 }
-                t.btNodes[i] = nil;
+                [t setNode:i with:nil];
                 l.chknode.nods_inuse--;
                 /*              putpage(l, l.chknode, 0);
                  */
             }
             else {
-                freetree(l, tmp); /* continue up the tree */
+                freetree(l, t); /* continue up the tree */
                 srchlvl--;        /* decrement the srchlvl on return */
             }
         }
@@ -617,15 +651,15 @@ ACBTree *t;
     else srchlvl++;
     for (j = 0; j < t.numkeys; j++) {
         checknode(l, t, j);
-        if ( t.btNodes[j] != nil ) [self printtree:t.btNodes[j]];
+        if ( [t getNode:j] != nil ) [self printtree:[t getNode:j]];
     }
     NSLog(@"Nodeid = %d, nodeType = %s, numkeys = %d, numrecs = %d\n",
           t.nodeid, (t.nodeType == BTNODE)?@"NODE":@"LEAF", t.numkeys, t.numrecs);
     NSLog(@"Left nodeid = %d, Right nodeid = %d\n", t.lnodeid, t.rnodeid);
     for (i = 0; i < t.numkeys; i++) {
-        NSLog(@"     t.keys[%d] recnum = %d, keyval = %@",
-              i, t.keys[i].recnum, t.keys[i]);
-        str = t.keys[i].kstr;
+        NSLog(@"     [t getKey:%d] recnum = %d, keyval = %@",
+              i, [t getKey:i].recnum, [t getKey:i]);
+        str = [t getKey:i].kstr;
         pdate = (NSUInteger *) (str + 6);
         ptime = (NSUInteger *) (str + 8);
         NSLog(@" date = %04.4x,  time = %04.4x\n",
@@ -638,7 +672,7 @@ ACBTree *t;
     NSInteger i;
     if (t.nodeType != LEAF) {
         for (i = 0; i < t.numkeys; i++) {
-            if ( t.btNodes[i] != nil ) puttree(l, t.btNodes[i]);
+            if ( [t getNode:i] != nil ) puttree(l, [t getNode:i]);
         }
     }
     if ( t.updtd ) {
@@ -656,8 +690,8 @@ ACBTree *t;
 - (void)rotateleft:(NSInteger)j
 {
     while ( j+1 < numkeys ) {
-        keys[j] = keys[j+1];
-        btNodes[j] = btNodes[j+1];
+        keyArray[j] = keyArray[j+1];
+        btNodeArray[j] = btNodeArray[j+1];
         j++;
     }
 }
@@ -670,11 +704,11 @@ ACBTree *t;
     NSInteger k;
     
     for ( k = numkeys; k > j; k-- ) {
-        keys[k] = keys[k-1];
-        btNodes[k] = btNodes[k-1];
+        keyArray[k] = keyArray[k-1];
+        btNodeArray[k] = btNodeArray[k-1];
     }
-    keys[j] = nil;
-    btNodes[j] = nil;
+    keyArray[j] = nil;
+    btNodeArray[j] = nil;
 }
 
 - (NSInteger) keyWalkLeaves
@@ -687,16 +721,17 @@ ACBTree *t;
         return 0; // maybe I need to throw an exception here
     }
     t = self;
-    self.dict.data = [[NSMutableData dataWithLength:(numkeys * sizeof(id))] retain];
-    self.dict.ptrBuffer = [self.dict.data mutableBytes];
+    // self.dict.data = [NSMutableData dataWithLength:(numkeys * sizeof(id))];
+    // self.dict.ptrBuffer = [self.dict.data mutableBytes];
+    self.dict.ptrBuffer = (__strong id *)calloc(sizeof(id), numkeys);
     while ( t != nil && t.nodeType != LEAF ) {
-        t = t.btNodes[0];
+        t = [t getNode:0];
     }
     do {
         keycnt = t.numkeys;
         for ( i = 0; i < keycnt; i++ ) {
-            if ( t.btNodes[i] != nil ) {
-                dict.ptrBuffer[idx++] = (id) t.keys[i].key;
+            if ( [t getNode:i] != nil ) {
+                dict.ptrBuffer[idx++] = (id) [t getKey:i].key;
             }
         }
         t = t.rnode;
@@ -714,16 +749,17 @@ ACBTree *t;
         return 0; // maybe I need to throw an exception here
     }
     t = self;
-    self.dict.data = [[NSMutableData dataWithLength:(numrecs * sizeof(id))] retain];
-    self.dict.ptrBuffer = [self.dict.data mutableBytes];
+    // self.dict.data = [NSMutableData dataWithLength:(numrecs * sizeof(id))];
+    // self.dict.ptrBuffer = [self.dict.data mutableBytes];
+    self.dict.ptrBuffer = (__strong id *)calloc(sizeof(id), numrecs);
     while ( t != nil && t.nodeType != LEAF ) {
-        t = t.btNodes[0];
+        t = [t getNode:0];
     }
     do {
         keycnt = t.numkeys;
         for ( i = 0; i < keycnt; i++ ) {
-            if ( t.btNodes[i] != nil ) {
-                dict.ptrBuffer[idx++] = (id) t.btNodes[i];
+            if ( [t getNode:i] != nil ) {
+                dict.ptrBuffer[idx++] = (id) [t getNode:i];
             }
         }
         t = t.rnode;
@@ -736,10 +772,10 @@ ACBTree *t;
     NSMutableString *str = [NSMutableString stringWithCapacity:16];
     NSInteger i;
     for (i = 0; i < numkeys; i++ ) {
-        [str appendString:[NSString stringWithFormat:@"key[%d]=%@", i, [keys[i] description]]];
+        [str appendString:[NSString stringWithFormat:@"keyArray[%ld]=%@", i, [keyArray[i] description]]];
     }
     for (i = 0; i < numkeys; i++ ) {
-        [str appendString:[NSString stringWithFormat:@"btnodes[%d]=%@\n", i, [btNodes[i] description]]];
+        [str appendString:[NSString stringWithFormat:@"btNodeArray[%ld]=%@\n", i, [btNodeArray[i] description]]];
     }
     return str;
 }

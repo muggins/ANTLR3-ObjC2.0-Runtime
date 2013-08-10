@@ -31,10 +31,6 @@
 
 #import <Foundation/Foundation.h>
 
-#ifndef DEBUG_DEALLOC
-#define DEBUG_DEALLOC
-#endif
-
 @protocol LinkList <NSObject>
 
 + (id<LinkList>)newLinkBase;

@@ -9,12 +9,12 @@
 @synthesize key;
 @synthesize value;
 
-+ (id) newEntry:(int)aHash key:(NSString *)aKey value:(id)aValue next:(HTEntry *)aNext
++ (id) newEntry:(NSInteger)aHash key:(NSString *)aKey value:(id)aValue next:(HTEntry *)aNext
 {
     return [[HTEntry alloc] init:aHash key:aKey value:aValue next:aNext];
 }
 
-- (id) init:(int)aHash key:(NSString *)aKey value:(id)aValue next:(HTEntry *)aNext
+- (id) init:(NSInteger)aHash key:(NSString *)aKey value:(id)aValue next:(HTEntry *)aNext
 {
     if ( (self = [super init]) != nil) {
         next  = aNext;
@@ -27,10 +27,10 @@
 
 - (void) dealloc
 {
-    [next release];
-    [key release];
-    [value release];
-    [super dealloc];
+    next = nil;
+    key = nil;
+    value = nil;
+    //    [super dealloc];
 }
 
 
@@ -64,7 +64,7 @@
     return (key == nil ? e.key == nil : [key isEqualTo:e.key]) && (value == nil ? e.value == nil : [value isEqualTo:e.value]);
 }
 
-- (int) hash
+- (NSInteger) hash
 {
     return hash ^ (value == nil ? 0 : [value hash]);
 }
@@ -100,10 +100,10 @@
 
 - (void) dealloc
 {
-    [item release];
-    [next release];
-    [prev release];
-    [super dealloc];
+    item = nil;
+    next = nil;
+    prev = nil;
+    // [super dealloc];
 }
 
 @end

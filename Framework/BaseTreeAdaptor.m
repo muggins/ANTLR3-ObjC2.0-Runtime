@@ -35,9 +35,9 @@
 @synthesize treeToUniqueIDMap;
 @synthesize uniqueNodeID;
 
-+ (id<Tree>) newEmptyTree
++ (id) newEmptyTree
 {
-    return [[CommonTree alloc] init];
+    return [[BaseTreeAdaptor alloc] init];
 }
 
 - (id) init

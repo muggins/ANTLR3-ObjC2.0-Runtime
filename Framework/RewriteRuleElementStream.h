@@ -33,18 +33,18 @@
     BOOL dirty;        ///< indicates whether the stream should return copies of its elements, set to true after a call to -reset
     BOOL isSingleElement;
     id singleElement;
-    __strong AMutableArray *elements;
+    AMutableArray *elements;
     
-    __strong NSString *elementDescription;
-    __strong id<TreeAdaptor> treeAdaptor;
+    NSString *elementDescription;
+    id<TreeAdaptor> treeAdaptor;
 }
 
 @property (assign) NSInteger cursor;
 @property (assign) BOOL dirty;
 @property (assign) BOOL isSingleElement;
-@property (assign) id singleElement;
-@property (assign) AMutableArray *elements;
-@property (assign) NSString *elementDescription;
+@property (retain) id singleElement;
+@property (retain) AMutableArray *elements;
+@property (retain) NSString *elementDescription;
 @property (retain, getter=getTreeAdaptor, setter=setTreeAdaptor:) id<TreeAdaptor> treeAdaptor;
 
 + (RewriteRuleElementStream*) newRewriteRuleElementStream:(id<TreeAdaptor>)aTreeAdaptor

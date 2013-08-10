@@ -111,8 +111,8 @@
 {
     if ( aTree == nil )
         return;
-    int startTokIdx = 0;
-    int stopTokIdx = 0;
+    NSInteger startTokIdx = 0;
+    NSInteger stopTokIdx = 0;
     if ( startToken != nil )
         startTokIdx = [startToken getTokenIndex];
     if ( stopToken != nil )

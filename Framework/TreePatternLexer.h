@@ -46,23 +46,23 @@ typedef enum {
 
 @interface TreePatternLexer : NSObject {
 
-/** The tree pattern to lex like "(A B C)" */
-NSString *pattern;
+    /** The tree pattern to lex like "(A B C)" */
+    NSString *pattern;
     
-/** Index into input string */
-NSInteger p;
+    /** Index into input string */
+    NSInteger p;
     
-/** Current char */
-NSInteger c;
+    /** Current char */
+    NSInteger c;
     
-/** How long is the pattern in char? */
-NSInteger n;
+    /** How long is the pattern in char? */
+    NSInteger n;
     
-/** Set when token type is ID or ARG (name mimics Java's StreamTokenizer) */
-NSMutableData *sval;
-__strong char *data;
+    /** Set when token type is ID or ARG (name mimics Java's StreamTokenizer) */
+    NSMutableData *sval;
+    char *data;
     
-BOOL error;
+    BOOL error;
 
 }
 

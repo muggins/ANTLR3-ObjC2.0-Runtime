@@ -77,8 +77,8 @@
 {
     self = [super init];
     if ( self != nil ) {
-        index = [[ACNumber numberWithInteger: aTType] retain];
-        name  = [[NSString stringWithString:aName] retain];
+        index = [ACNumber numberWithInteger: aTType];
+        name  = [NSString stringWithString:aName];
     }
     return self;
 }
@@ -88,7 +88,6 @@
     self = [super initWithAnIndex:[ACNumber numberWithInteger:aTType]];
     if ( self != nil ) {
         node  = aNode;
-        if ( node ) [node retain];
     }
     return self;
 }
@@ -97,9 +96,8 @@
 {
     self = [super init];
     if ( self != nil ) {
-        name  = [[NSString stringWithString:aName] retain];
+        name  = [NSString stringWithString:aName];
         node = aNode;
-        if ( node ) [node retain];
     }
     return self;
 }
@@ -109,7 +107,6 @@
     self = [super initWithAnIndex:anIndex];
     if ( self != nil ) {
         node = aNode;
-        if ( node ) [node retain];
     }
     return self;
 }
@@ -119,9 +116,8 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in MapElement" );
 #endif
-    if ( name ) [name release];
-    if ( node ) [node release];
-    [super dealloc];
+    name = nil;
+    node = nil;
 }
 
 - (id) copyWithZone:(NSZone *)aZone
@@ -158,10 +154,6 @@
 
 - (void)setName:(NSString *)aName
 {
-    if ( aName != name ) {
-        if ( name ) [name release];
-        [aName retain];
-    }
     name = aName;
 }
 
@@ -171,10 +163,7 @@
 }
 
 - (void)setNode:(id)aNode
-{   if ( aNode != node ) {
-        if ( node ) [node release];
-        [aNode retain];
-    }
+{
     node = aNode;
 }
 
@@ -182,12 +171,12 @@
 {
     index = ((MapElement *)aNode).index;
     if (((MapElement *)aNode).name) {
-        name = [((MapElement *)aNode).name retain];
+        name = ((MapElement *)aNode).name;
         node = nil;
     }
     if (((MapElement *)aNode).node) {
         name = nil;
-        node = [((MapElement *)aNode).node retain];
+        node = ((MapElement *)aNode).node;
     }
 }
 
@@ -195,12 +184,12 @@
 {
     index = ((MapElement *)aNode).index;
     if (((MapElement *)aNode).name) {
-        name = [((MapElement *)aNode).name retain];
+        name = ((MapElement *)aNode).name;
         node = nil;
     }
     if (((MapElement *)aNode).node) {
         name = nil;
-        node = [((MapElement *)aNode).node retain];
+        node = ((MapElement *)aNode).node;
     }
 }
 

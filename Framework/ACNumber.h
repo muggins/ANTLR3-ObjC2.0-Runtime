@@ -33,14 +33,14 @@
 + (ACNumber *)numberWithChar:(char)aChar;
 + (ACNumber *)numberWithFloat:(float)aFloat;
 + (ACNumber *)numberWithDouble:(double)aDouble;
-+ (ACNumber *)numberWithInt:(int)anInt;
++ (ACNumber *)numberWithInt:(NSInteger)anInt;
 + (ACNumber *)numberWithInteger:(NSInteger)anInt;
 
 - (id)initWithBool:(BOOL)aBool;
 - (id)initWithChar:(char)aChar;
 - (id)initWithDouble:(double)aDouble;
 - (id)initWithFloat:(float)aFloat;
-- (id)initWithInt:(int)anInt;
+- (id)initWithInt:(NSInteger)anInt;
 - (id)initWithInteger:(NSInteger)anInt;
 
 - (id)initWithCoder:(NSCoder *)decoder;

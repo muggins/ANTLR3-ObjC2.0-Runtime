@@ -15,25 +15,23 @@
 
 @interface AMutableDictionary : NSMutableDictionary {
 
-    __strong ACBTree  *root;
+    __strong ACBTree *root;
     NSInteger nodes_av;
     NSInteger nodes_inuse;
     NSInteger nxt_nodeid;
     NSUInteger count;
-    __strong NSMutableData *data;
-    __strong id       *ptrBuffer;
+    __strong id *ptrBuffer;
 }
 
-@property (retain) ACBTree  *root;
+@property (retain) ACBTree *root;
 @property (assign) NSInteger nodes_av;
 @property (assign) NSInteger nodes_inuse;
 @property (assign) NSInteger nxt_nodeid;
 @property (assign, readonly, getter=count) NSUInteger count;
-@property (assign) NSMutableData *data;
-@property (assign) id       *ptrBuffer;
+@property (assign) __strong id *ptrBuffer;
 
-+ (AMutableDictionary *) newDictionary;
-+ (AMutableDictionary *) dictionaryWithCapacity;
++ (__strong AMutableDictionary *) newDictionary;
++ (__strong AMutableDictionary *) dictionaryWithCapacity;
 
 - (id) init;
 - (id) initWithCapacity:(NSUInteger)numItems;

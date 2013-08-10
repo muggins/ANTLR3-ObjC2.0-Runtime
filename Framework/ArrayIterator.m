@@ -63,7 +63,7 @@
                                                reason:[NSString stringWithFormat:@"ArrayIterator expecting NSArray class but got %@", [array className]]
                                              userInfo:nil];
         }
-        anArray = [array retain];
+        anArray = array;
 #ifdef DONTUSENOMO
         for (int i = 0; i < [array count]; i++) {
             [anArray addObject:[array objectAtIndex:i]];
@@ -86,7 +86,7 @@
                                            reason:[NSString stringWithFormat:@"ArrayIterator expecting NSDictionary class but got %@", [dict className]]
                                          userInfo:nil];
         }
-        anArray = [[[dict keyEnumerator] allObjects] retain];
+        anArray = [[dict keyEnumerator] allObjects];
         peekObj = nil;
         count = [anArray count];
         index = 0;
@@ -103,7 +103,7 @@
                                            reason:[NSString stringWithFormat:@"ArrayIterator expecting NSDictionary class but got %@", [dict className]]
                                          userInfo:nil];
         }
-        anArray = [[[dict objectEnumerator] allObjects] retain];
+        anArray = [[dict objectEnumerator] allObjects];
         peekObj = nil;
         count = [anArray count];
         index = 0;
@@ -116,8 +116,8 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in ArrayIterator" );
 #endif
-    if ( anArray ) [anArray release];
-    [super dealloc];
+    //    if ( anArray ) [anArray release];
+    //    [super dealloc];
 }
 
 - (BOOL) hasNext
@@ -142,7 +142,7 @@
     if ( anArray ) {
         obj = [anArray objectAtIndex:index++];
         if ( index >= count ) {
-            [anArray release];
+            //            [anArray release];
             anArray = nil;
             index = 0;
             count = 0;
@@ -159,7 +159,7 @@
         [theArray addObject:peekObj];
         peekObj = nil;
     }
-    for (int i = index; i < count; i++) {
+    for (NSInteger i = index; i < count; i++) {
         [theArray addObject:[anArray objectAtIndex:i]];
     }
     return [NSArray arrayWithArray:(NSArray *)theArray];

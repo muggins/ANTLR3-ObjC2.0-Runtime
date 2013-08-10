@@ -84,11 +84,11 @@
                     tmp = (RuleMemo *)tmp.fNext;
                 else
                     tmp = nil;
-                [rtmp release];
+                // [rtmp release];
             }
         }
     }
-    [super dealloc];
+    // [super dealloc];
 }
 
 - (NSUInteger)count
@@ -135,7 +135,7 @@
                     tmp = (RuleMemo *)tmp.fNext;
                 else
                     tmp = nil;
-                [rtmp release];
+                // [rtmp release];
             }
         }
     }
@@ -145,15 +145,15 @@
 {
     if ( np.fNext != nil )
         [self delete_chain:np.fNext];
-    [np release];
+    //    [np release];
 }
 
--(RuleMemo **)getPtrBuffer
+-(__strong RuleMemo **)getPtrBuffer
 {
     return( ptrBuffer );
 }
 
--(void)setPtrBuffer:(RuleMemo **)np
+-(void)setPtrBuffer:(__strong RuleMemo **)np
 {
     ptrBuffer = np;
 }
@@ -179,7 +179,6 @@
     anIndex = (aStartIndex >= BuffSize) ? aStartIndex %= BuffSize : aStartIndex;
     if ( ptrBuffer[anIndex] == nil ) {
         ptrBuffer[anIndex] = aRule;
-        [aRule retain];
     }
     else {
         do {
@@ -203,14 +202,12 @@
     if ( aRule == nil ) {
         aRule = [RuleMemo newRuleMemoWithStartIndex:[ACNumber numberWithInteger:aStartIndex]
                                                     StopIndex:[ACNumber numberWithInteger:aStopIndex]];
-        [aRule retain];
         ptrBuffer[anIndex] = aRule;
     }
     else {
         aMatchIndex = [aRule.startIndex integerValue];
         if ( aStartIndex > aMatchIndex ) {
             if ( aRule != ptrBuffer[anIndex] ) {
-                [aRule retain];
             }
             aRule.fNext = ptrBuffer[anIndex];
             ptrBuffer[anIndex] = aRule;
@@ -221,7 +218,6 @@
             if ( aStartIndex > aMatchIndex ) {
                 newRule = [RuleMemo newRuleMemoWithStartIndex:[ACNumber numberWithInteger:aStartIndex]
                                                               StopIndex:[ACNumber numberWithInteger:aStopIndex]];
-                [newRule retain];
                 newRule.fNext = aRule.fNext;
                 aRule.fNext = newRule;
                 return;
@@ -260,10 +256,6 @@
     NSInteger Index;
     
     Index = ( anIndex >= BuffSize ) ? anIndex % BuffSize : anIndex;
-    if (aRule != ptrBuffer[Index]) {
-        if ( ptrBuffer[Index] ) [ptrBuffer[Index] release];
-        [aRule retain];
-    }
     ptrBuffer[Index] = aRule;
 }
 

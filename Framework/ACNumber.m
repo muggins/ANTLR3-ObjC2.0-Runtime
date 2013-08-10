@@ -31,7 +31,7 @@
     return [[ACNumber alloc] initWithDouble:aDouble];
 }
 
-+ (ACNumber *)numberWithInt:(int)anInt
++ (ACNumber *)numberWithInt:(NSInteger)anInt
 {
     return [[ACNumber alloc] initWithInt:anInt];
 }
@@ -119,7 +119,7 @@
     return self;
 }
 
-- (id)initWithInt:(int)anInt
+- (id)initWithInt:(NSInteger)anInt
 {
     self = [super init];
     if ( self != nil ) {
@@ -130,7 +130,7 @@
         fInt = YES;
         fNSInt = NO;
         u.i = (NSInteger) anInt;
-        strcpy( type_ar, "int" );
+        strcpy( type_ar, "NSInteger" );
         type = type_ar;
     }
     return self;
@@ -169,7 +169,7 @@
 
 - (void)dealloc
 {
-    [super dealloc];
+    //    [super dealloc];
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder
@@ -264,19 +264,19 @@
     return (float)0.0;
 }
 
-- (int)intValue
+- (NSInteger)intValue
 {
     if (fInt)
-        return (int)u.i;
+        return (NSInteger)u.i;
     else if ( fChar )
-        return (int) u.c;
+        return (NSInteger) u.c;
     else if ( fDouble )
-        return (int) u.d;
+        return (NSInteger) u.d;
     else if ( fFloat )
-        return (int) u.f;
+        return (NSInteger) u.f;
     else if ( fNSInt )
-        return (int) u.i;
-    return (int)0;
+        return (NSInteger) u.i;
+    return (NSInteger)0;
 }
 
 - (NSInteger)integerValue
@@ -322,8 +322,8 @@
             double *dp = (double *) val;
             return (*dp == u.d) ? YES : NO;
         } else if ( fInt ) {
-            int *ip = (int *) val;
-            return (*ip == (int) u.i) ? YES : NO;
+            NSInteger *ip = (NSInteger *) val;
+            return (*ip == (NSInteger) u.i) ? YES : NO;
         } else if ( fNSInt ) {
             NSInteger *np = (NSInteger *) val;
             return (*np == u.i) ? YES : NO;
@@ -349,8 +349,8 @@
         double *dp = (double *) buffer;
         *dp = u.d;
     } else if ( fInt ) {
-        int *ip = (int *) buffer;
-        *ip = (int) u.i;
+        NSInteger *ip = (NSInteger *) buffer;
+        *ip = (NSInteger) u.i;
     } else if ( fNSInt ) {
         NSInteger *np = (NSInteger *) buffer;
         *np = u.i;
@@ -377,9 +377,9 @@
     if (fBOOL)
         return [NSNumber numberWithBool:u.b]; 
     else if (fChar)
-        return [NSNumber numberWithInt:u.c];
+        return [NSNumber numberWithInt:(int)u.c];
     else if (fInt)
-        return [NSNumber numberWithInt:u.i];
+        return [NSNumber numberWithInteger:u.i];
     else if (fNSInt)
         return [NSNumber numberWithInteger:u.i];
     else if (fDouble)
@@ -400,7 +400,7 @@
     else if (fChar)
         return [NSString stringWithFormat:fmt, u.c];
     else if (fInt)
-        return [NSString stringWithFormat:fmt, (int)u.i];
+        return [NSString stringWithFormat:fmt, (NSInteger)u.i];
     else if (fNSInt)
         return [NSString stringWithFormat:fmt, u.i];
     else if (fDouble)
@@ -415,11 +415,11 @@
     else if (fChar)
         return [[NSString alloc] initWithFormat:@"%c" locale:aLocale, u.c];
     else if (fInt)
-        return [[NSString alloc] initWithFormat:@"%i" locale:aLocale, (int)u.i];
+        return [[NSString alloc] initWithFormat:@"%li" locale:aLocale, (NSInteger)u.i];
     else if (fNSInt)
-        return [[NSString alloc] initWithFormat:@"%Li" locale:aLocale, u.i];
+        return [[NSString alloc] initWithFormat:@"%li" locale:aLocale, u.i];
     else if (fFloat)
-        return [[NSString alloc] initWithFormat:@"%0.7g" locale:aLocale, (int)u.f];
+        return [[NSString alloc] initWithFormat:@"%0.7ld" locale:aLocale, (long)u.f];
     else if (fDouble)
         return [[NSString alloc] initWithFormat:@"%0.16g" locale:aLocale, u.d];
     return @"ACNumber not valid";

@@ -111,9 +111,6 @@
 
 #pragma mark Content
 
-- (id)dupNode:(id)aNode;
-- (id)dupTree:(id)aTree;
-
 - (NSInteger) getType:(id)aNode;
 - (void) setType:(id)aNode Type:(NSInteger)tokenType;
 

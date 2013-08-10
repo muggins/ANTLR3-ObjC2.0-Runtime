@@ -38,7 +38,7 @@
 // This is fast, so there is no need to reinvent the wheel just yet.
 
 @interface ANTLRBitSet : NSObject < NSMutableCopying > {
-	__strong CFMutableBitVectorRef bitVector;
+	CFMutableBitVectorRef bitVector;
 }
 
 #pragma mark Class Methods
@@ -63,7 +63,7 @@
 - (ANTLRBitSet *) initWithType:(TokenType)type;
 - (ANTLRBitSet *) initWithNBits:(NSUInteger)nbits;
 - (ANTLRBitSet *) initWithBitVector:(CFMutableBitVectorRef)theBitVector;
-- (ANTLRBitSet *) initWithBits:(const unsigned long long const*)theBits Count:(NSUInteger)theCount;
+- (ANTLRBitSet *) initWithBits:(const unsigned long long *)theBits Count:(NSUInteger)theCount;
 - (ANTLRBitSet *) initWithArrayOfBits:(NSArray *)theArray;
 
 #pragma mark Operations

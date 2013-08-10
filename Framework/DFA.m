@@ -39,7 +39,6 @@ NSInteger debug = 0;
 {
 	if ((self = [super init]) != nil) {
 		recognizer = theRecognizer;
-        [recognizer retain];
         debug = 0;
 	}
 	return self;
@@ -50,24 +49,24 @@ NSInteger debug = 0;
 - (NSInteger) predict:(id<IntStream>)input
 {
     if ( debug > 2 ) {
-        NSLog(@"Enter DFA.predict for decision %d", decisionNumber);
+        NSLog(@"Enter DFA.predict for decision %ld", decisionNumber);
     }
-	int aMark = [input mark];
-	int s = 0;
+	NSInteger aMark = [input mark];
+	NSInteger s = 0;
 	@try {
 		while (YES) {
 			if ( debug > 2 )
-                NSLog(@"DFA %d state %d LA(1)='%c'(%x)", decisionNumber, s, (unichar)[input LA:1], [input LA:1]);
+                NSLog(@"DFA %ld state %ld LA(1)='%c'(%lx)", decisionNumber, s, (unichar)[input LA:1], [input LA:1]);
 			NSInteger specialState = special[s];
 			if (specialState >= 0) {
 				// this state is special in that it has some code associated with it. we cannot do this in a pure DFA so
 				// we signal the caller accordingly.
 				if ( debug > 2 ) {
-                    NSLog(@"DFA %d state %d is special state %d", decisionNumber, s, specialState);
+                    NSLog(@"DFA %ld state %ld is special state %ld", decisionNumber, s, specialState);
                 }
 				s = [self specialStateTransition:specialState Stream:input];
                 if ( debug > 2 ) {
-                    NSLog(@"DFA %d returns from special state %d to %d", decisionNumber, specialState, s);
+                    NSLog(@"DFA %ld returns from special state %ld to %ld", decisionNumber, specialState, s);
                 }
                 if (s == -1 ) {
                     [self noViableAlt:s Stream:input];
@@ -77,14 +76,14 @@ NSInteger debug = 0;
 				continue;
 			}
 			if (accept[s] >= 1) {  // if this is an accepting state return the prediction
-				if ( debug > 2 ) NSLog(@"accept; predict %d from state %d", accept[s], s);
+				if ( debug > 2 ) NSLog(@"accept; predict %ld from state %ld", accept[s], s);
 				return accept[s];
 			}
 			// based on the lookahead lookup the next transition, consume and do transition
 			// or signal that we have no viable alternative
 			NSInteger c = [input LA:1];
 			if ( (unichar)c >= min[s] && (unichar)c <= max[s]) {
-				int snext = transition[s][c-min[s]];
+				NSInteger snext = transition[s][c-min[s]];
 				if (snext < 0) {
                     // was in range but not a normal transition
                     // must check EOT, which is like the else clause.
@@ -116,17 +115,17 @@ NSInteger debug = 0;
 				continue;
 			}
 			if ( c == TokenTypeEOF && eof[s] >= 0) {  // we are at EOF and may even accept the input.
-				if ( debug > 2 ) NSLog(@"accept via EOF; predict %d from %d", accept[eof[s]], eof[s]);
+				if ( debug > 2 ) NSLog(@"accept via EOF; predict %ld from %ld", accept[eof[s]], eof[s]);
 				return accept[eof[s]];
 			}
 			if ( debug > 2 ) {
                 NSLog(@"no viable alt!\n");
-                NSLog(@"min[%d] = %d\n", s, min[s]);
-                NSLog(@"max[%d] = %d\n", s, min[s]);
-                NSLog(@"eot[%d] = %d\n", s, min[s]);
-                NSLog(@"eof[%d] = %d\n", s, min[s]);
+                NSLog(@"min[%ld] = %d\n", s, min[s]);
+                NSLog(@"max[%ld] = %d\n", s, min[s]);
+                NSLog(@"eot[%ld] = %d\n", s, min[s]);
+                NSLog(@"eof[%ld] = %d\n", s, min[s]);
                 for (NSInteger p = 0; p < self.len; p++) {
-                    NSLog(@"%d ", transition[s][p]);
+                    NSLog(@"%ld ", transition[s][p]);
                 }
                 NSLog(@"\n");
             }
@@ -185,17 +184,17 @@ NSInteger debug = 0;
 - (NSInteger *) unpackEncodedString:(NSString *)encodedString
 {
     // walk first to find how big it is.
-    int size = 0;
-    for (int i=0; i < [encodedString length]; i+=2) {
+    NSInteger size = 0;
+    for (NSInteger i=0; i < [encodedString length]; i+=2) {
         size += [encodedString characterAtIndex:i];
     }
-    __strong NSInteger *data = (NSInteger *)calloc(size, sizeof(NSInteger));
-    int di = 0;
-    for (int i=0; i < [encodedString length]; i+=2) {
+    NSInteger *data = (NSInteger *)calloc(size, sizeof(NSInteger));
+    NSInteger di = 0;
+    for (NSInteger i=0; i < [encodedString length]; i+=2) {
         char n = [encodedString characterAtIndex:i];
         char v = [encodedString characterAtIndex:i+1];
         // add v n times to data
-        for (int j = 0; j < n; j++) {
+        for (NSInteger j = 0; j < n; j++) {
             data[di++] = v;
         }
     }
@@ -206,17 +205,17 @@ NSInteger debug = 0;
 - (short *) unpackEncodedStringToUnsignedChars:(NSString *)encodedString
 {
     // walk first to find how big it is.
-    int size = 0;
-    for (int i=0; i < [encodedString length]; i+=2) {
+    NSInteger size = 0;
+    for (NSInteger i=0; i < [encodedString length]; i+=2) {
         size += [encodedString characterAtIndex:i];
     }
-    __strong short *data = (short *)calloc(size, sizeof(short));
-    int di = 0;
-    for (int i=0; i < [encodedString length]; i+=2) {
+    short *data = (short *)calloc(size, sizeof(short));
+    NSInteger di = 0;
+    for (NSInteger i=0; i < [encodedString length]; i+=2) {
         char n = [encodedString characterAtIndex:i];
         char v = [encodedString characterAtIndex:i+1];
         // add v n times to data
-        for (int j = 0; j < n; j++) {
+        for (NSInteger j = 0; j < n; j++) {
             data[di++] = v;
         }
     }
@@ -240,10 +239,6 @@ NSInteger debug = 0;
 
 - (void)setRecognizer:(BaseRecognizer *)aRecognizer
 {
-    if ( recognizer != aRecognizer ) {
-        if ( recognizer ) [recognizer release];
-        [aRecognizer retain];
-    }
     recognizer = aRecognizer;
 }
 

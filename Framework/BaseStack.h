@@ -43,7 +43,7 @@
     NSInteger LastHash;
 }
 
-//@property (copy) RuleStack *fNext;
+//@property (retain) RuleStack *fNext;
 @property (getter=getLastHash, setter=setLastHash:) NSInteger LastHash;
 
 // Contruction/Destruction

@@ -53,9 +53,6 @@ static CommonToken *INVALID_TOKEN;
     EOF_TOKEN = [CommonToken newToken:TokenTypeEOF Text:@"EOF"];
     SKIP_TOKEN = [CommonToken newToken:TokenTypeInvalid Text:@"Skip"];
     INVALID_TOKEN = [CommonToken newToken:TokenTypeInvalid Text:@"Invalid"];
-    [EOF_TOKEN retain];
-    [SKIP_TOKEN retain];
-    [INVALID_TOKEN retain];
 }
 
 + (CommonToken *)INVALID_TOKEN
@@ -83,14 +80,14 @@ static CommonToken *INVALID_TOKEN;
     return [[CommonToken alloc] initWithInput:(id<CharStream>)anInput Type:(NSInteger)aTType Channel:(NSInteger)aChannel Start:(NSInteger)aStart Stop:(NSInteger)aStop];
 }
 
-+ (CommonToken *) newToken:(TokenType)tokenType
++ (CommonToken *) newToken:(NSInteger)tokenType
 {
     return( [[CommonToken alloc] initWithType:tokenType] );
 }
 
 + (CommonToken *) newToken:(NSInteger)tokenType Text:(NSString *)tokenText
 {
-    return( [[CommonToken alloc] initWithType:tokenType Text:tokenText] );
+    return( [[CommonToken alloc] initWithType:(NSInteger)tokenType Text:tokenText] );
 }
 
 + (CommonToken *) newTokenWithToken:(CommonToken *)fromToken
@@ -102,7 +99,7 @@ static CommonToken *INVALID_TOKEN;
 + (id<Token>) eofToken
 {
     if (EOF_TOKEN == nil) {
-        EOF_TOKEN = [[CommonToken newToken:TokenTypeEOF Text:@"EOF"] retain];
+        EOF_TOKEN = [CommonToken newToken:TokenTypeEOF Text:@"EOF"];
     }
     return EOF_TOKEN;
 }
@@ -111,7 +108,7 @@ static CommonToken *INVALID_TOKEN;
 + (id<Token>) skipToken
 {
     if (SKIP_TOKEN == nil) {
-        SKIP_TOKEN = [[CommonToken newToken:TokenTypeInvalid Text:@"Skip"] retain];
+        SKIP_TOKEN = [CommonToken newToken:TokenTypeInvalid Text:@"Skip"];
     }
     return SKIP_TOKEN;
 }
@@ -120,7 +117,7 @@ static CommonToken *INVALID_TOKEN;
 + (id<Token>) invalidToken
 {
     if (INVALID_TOKEN == nil) {
-        INVALID_TOKEN = [[CommonToken newToken:TokenTypeInvalid Text:@"Invalid"] retain];
+        INVALID_TOKEN = [CommonToken newToken:TokenTypeInvalid Text:@"Invalid"];
     }
     return SKIP_TOKEN;
 }
@@ -153,7 +150,6 @@ static CommonToken *INVALID_TOKEN;
 {
     if ((self = [super init]) != nil) {
         input = anInput;
-        if ( input ) [input retain];
         type = aTType;
         channel = aChannel;
         startIndex = aStart;
@@ -169,7 +165,6 @@ static CommonToken *INVALID_TOKEN;
             NSRange r = NSMakeRange(startIndex, (stopIndex-startIndex)+1);
             text = [input substringWithRange:r];
         }
-        if ( text ) [text retain];
     }
     return self;
 }
@@ -178,14 +173,12 @@ static CommonToken *INVALID_TOKEN;
 {
     if ((self = [super init]) != nil) {
         text = [NSString stringWithString:oldToken.text];
-        if ( text ) [text retain];
         type = oldToken.type;
         line = oldToken.line;
         index = oldToken.index;
         charPositionInLine = oldToken.charPositionInLine;
         channel = oldToken.channel;
         input = oldToken.input;
-        if ( input ) [input retain];
         if ( [oldToken isKindOfClass:[CommonToken class]] ) {
             startIndex = oldToken.startIndex;
             stopIndex = oldToken.stopIndex;
@@ -194,7 +187,7 @@ static CommonToken *INVALID_TOKEN;
     return self;
 }
 
-- (id) initWithType:(TokenType)aTType
+- (id) initWithType:(NSInteger)aTType
 {
     if ((self = [super init]) != nil) {
         self.type = aTType;
@@ -203,12 +196,11 @@ static CommonToken *INVALID_TOKEN;
     return self;
 }
 
-- (id) initWithType:(TokenType)aTType Text:(NSString *)tokenText
+- (id) initWithType:(NSInteger)aTType Text:(NSString *)tokenText
 {
     if ((self = [super init]) != nil) {
         self.type = aTType;
         self.text = [NSString stringWithString:tokenText];
-        if ( text ) [text retain];
         index = -1;
     }
     return self;
@@ -219,9 +211,8 @@ static CommonToken *INVALID_TOKEN;
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in CommonToken" );
 #endif
-    if ( input ) [input release];
-    if ( text ) [text release];
-    [super dealloc];
+    input = nil;
+    text = nil;
 }
 
 // create a copy, including the text if available
@@ -282,7 +273,7 @@ static CommonToken *INVALID_TOKEN;
     if (input == nil) {
         return nil;
     }
-    int n = [input size];
+    NSInteger n = [input size];
     if ( startIndex < n && stopIndex < n) {
         return [input substringWithRange:NSMakeRange(startIndex, (stopIndex-startIndex)+1)];
     }
@@ -293,11 +284,7 @@ static CommonToken *INVALID_TOKEN;
 
 - (void) setText:(NSString *)aText
 {
-    if (text != aText) {
-        if ( text ) [text release];
-        text = aText;
-        [text retain];
-    }
+    text = aText;
 }
 
 
@@ -338,10 +325,6 @@ static CommonToken *INVALID_TOKEN;
 
 - (void) setInput: (id<CharStream>) anInput
 {
-    if (input != anInput) {
-        if ( input ) [input release];
-        [anInput retain];
-    }
     input = anInput;
 }
 
@@ -394,7 +377,7 @@ static CommonToken *INVALID_TOKEN;
 
     channelStr = @"";
     if ( channel > 0 ) {
-        channelStr = [NSString stringWithFormat:@",channel=%d\n", channel];
+        channelStr = [NSString stringWithFormat:@",channel=%ld\n", channel];
     }
     if ([self text] != nil) {
         txtString = [NSMutableString stringWithString:[self text]];
@@ -404,7 +387,7 @@ static CommonToken *INVALID_TOKEN;
     } else {
         txtString = [NSMutableString stringWithString:@"<no text>"];
     }
-    return [NSString stringWithFormat:@"[@%d, %d:%d='%@',<%d>%@,%d:%d]", index, startIndex, stopIndex, txtString, type, channelStr, line, charPositionInLine];
+    return [NSString stringWithFormat:@"[@%ld, %ld:%ld='%@',<%ld>%@,%ld:%ld]", index, startIndex, stopIndex, txtString, type, channelStr, line, charPositionInLine];
 }
 
 @end

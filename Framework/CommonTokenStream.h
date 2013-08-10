@@ -35,7 +35,7 @@
 
 @interface CommonTokenStream : BufferedTokenStream < TokenStream >
 {
-	__strong AMutableDictionary *channelOverride;
+	AMutableDictionary *channelOverride;
 	NSUInteger channel;
 }
 

@@ -58,7 +58,6 @@
 {
     if ((self = [super init]) != nil ) {
         index = aNumber;
-        if ( index ) [index retain];
     }
     return (self);
 }
@@ -68,8 +67,8 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in BaseMapElement" );
 #endif
-    if ( index ) [index release];
-    [super dealloc];
+    //    if ( index ) [index release];
+    //    [super dealloc];
 }
 
 - (id) copyWithZone:(NSZone *)aZone

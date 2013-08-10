@@ -82,15 +82,13 @@
 
     if ((self = [super initWithStream:anInput]) != nil) {
         showTransformations = NO;
-        state = [[RecognizerSharedState newRecognizerSharedState] retain];
+        state = [RecognizerSharedState newRecognizerSharedState];
         originalAdaptor = [input getTreeAdaptor];
-        if ( originalAdaptor ) [originalAdaptor retain];
         originalTokenStream = [input getTokenStream];        
-        if ( originalTokenStream ) [originalTokenStream retain];
         aRuleSel = @selector(topdown);
-        topdown_fptr = [ANTLRfptr newANTLRfptrWithRule:(SEL)aRuleSel withObject:self];
+        topdown_fptr = [ANTLRfptr newANTLRfptrWithRule:aRuleSel withObject:self];
         aRuleSel = @selector(bottomup);
-        bottomup_ftpr = [ANTLRfptr newANTLRfptrWithRule:(SEL)aRuleSel withObject:self];        
+        bottomup_ftpr = [ANTLRfptr newANTLRfptrWithRule:aRuleSel withObject:self];        
     }
     return self;
 }
@@ -102,15 +100,12 @@
     if ((self = [super initWithStream:anInput]) != nil) {
         showTransformations = NO;
         state = aState;
-        if ( state ) [state retain];
         originalAdaptor = [input getTreeAdaptor];
-        if ( originalAdaptor ) [originalAdaptor retain];
         originalTokenStream = [input getTokenStream];        
-        if ( originalTokenStream ) [originalTokenStream retain];
         aRuleSel = @selector(topdown);
-        topdown_fptr = [ANTLRfptr newANTLRfptrWithRule:(SEL)aRuleSel withObject:self];
+        topdown_fptr = [ANTLRfptr newANTLRfptrWithRule:aRuleSel withObject:self];
         aRuleSel = @selector(bottomup);
-        bottomup_ftpr = [ANTLRfptr newANTLRfptrWithRule:(SEL)aRuleSel withObject:self];        
+        bottomup_ftpr = [ANTLRfptr newANTLRfptrWithRule:aRuleSel withObject:self];
     }
     return self;
 }
@@ -120,10 +115,9 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in TreeRewriter" );
 #endif
-	if ( state ) [state release];
-	if ( originalAdaptor ) [originalAdaptor release];
-	if ( originalTokenStream ) [originalTokenStream release];
-	[super dealloc];
+	state = nil;
+	originalAdaptor = nil;
+	originalTokenStream = nil;
 }
 
 - (id) applyOnce:(CommonTree *)t Rule:(ANTLRfptr *)whichRule
@@ -232,14 +226,14 @@ public Object downup(Object t, boolean showTransformations) {
 - (id) topdown
 // @throws RecognitionException
 {
-    @throw [RecognitionException newException:@"TopDown exception"];
+    @throw [RecognitionException newException]; // @"TopDown exception"
     return nil;
 }
 
 - (id) bottomup
 //@throws RecognitionException
 {
-    @throw [RecognitionException newException:@"BottomUp exception"];
+    @throw [RecognitionException newException]; // @"BottomUp exception"
     return nil;
 }
 

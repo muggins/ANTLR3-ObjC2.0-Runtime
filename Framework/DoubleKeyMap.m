@@ -6,7 +6,7 @@
 {
     self = [super init];
     if ( self  != nil ) {
-        data = [[AMutableDictionary dictionaryWithCapacity:30] retain];
+        data = [AMutableDictionary dictionaryWithCapacity:30];
     }
     return self;
 }
@@ -93,8 +93,8 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in CommonToken" );
 #endif
-    [data release];
-    [super dealloc];
+    data = nil;
+    //    [super dealloc];
 }
 
 @synthesize data;

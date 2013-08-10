@@ -21,8 +21,8 @@
     // TStringPool *fPool;
 }
 
-//@property (copy) PtrStack *fNext;
-//@property (copy) TStringPool *fPool;
+//@property (retain) PtrStack *fNext;
+//@property (retain) TStringPool *fPool;
 
 // Contruction/Destruction
 + (PtrStack *)newPtrStack;

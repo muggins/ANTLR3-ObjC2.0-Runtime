@@ -39,7 +39,7 @@
 	const NSInteger *special;
 	const NSInteger **transition;
 	
-	__strong BaseRecognizer *recognizer;
+	BaseRecognizer *recognizer;
 	NSInteger decisionNumber;
     NSInteger len;
 }

@@ -29,10 +29,10 @@
 #import "BaseTree.h"
 
 @interface CommonTree : BaseTree <Tree> {
-	__strong CommonToken *token;
+	CommonToken *token;
 	NSInteger startIndex;
 	NSInteger stopIndex;
-    __strong CommonTree *parent;
+    CommonTree *parent;
     NSInteger childIndex;
 }
 
@@ -62,8 +62,10 @@
 - (void) setLine:(NSUInteger)aLine;
 - (NSUInteger)charPositionInLine;
 - (void) setCharPositionInLine:(NSUInteger)pos;
-//- (CommonTree *) getParent;
-//- (void) setParent:(CommonTree *) t;
+- (NSInteger) getChildIndex;
+- (void) setChildIndex:(NSInteger) anIndex;
+- (CommonTree *) getParent;
+- (void) setParent:(CommonTree *) t;
 
 - (NSString *) description;
 #ifdef DONTUSENOMO
@@ -86,7 +88,7 @@
 @property (retain) CommonToken *token;
 @property (assign) NSInteger startIndex;
 @property (assign) NSInteger stopIndex;
-@property (retain) CommonTree *parent;
-@property (assign) NSInteger childIndex;
+@property (retain, getter=getParent, setter=setParent:) CommonTree *parent;
+@property (assign, getter=getChildIndex, setter=setChildIndex:) NSInteger childIndex;
 
 @end

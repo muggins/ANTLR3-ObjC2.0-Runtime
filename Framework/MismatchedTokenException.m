@@ -89,7 +89,7 @@
 {
 	NSMutableString *desc = (NSMutableString *)[super description];
 	if (isTokenType) {
-		[desc appendFormat:@" expected:%d got:%d", expecting, [self unexpectedType]];
+		[desc appendFormat:@" expected:%ld got:%ld", expecting, [self unexpectedType]];
 	} else {
 		[desc appendFormat:@" expected:%C got:%c", self.c, (unichar)expectingChar];
 	}

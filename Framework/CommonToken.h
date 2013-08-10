@@ -44,12 +44,12 @@
 	NSInteger startIndex;
 	NSInteger stopIndex;
 	// the actual input stream this token was found in
-	__strong id<CharStream> input;
+	id<CharStream> input;
 }
 
 + (void) initialize;
 + (NSInteger) DEFAULT_CHANNEL;
-+ (id<Token>)INVALID_TOKEN;
++ (id<Token>) INVALID_TOKEN;
 + (NSInteger) INVALID_TOKEN_TYPE;
 + (id<Token>) newToken;
 + (id<Token>) newToken:(id<CharStream>)anInput
@@ -57,7 +57,7 @@
                     Channel:(NSInteger)aChannel
                       Start:(NSInteger)aStart
                        Stop:(NSInteger)aStop;
-+ (id<Token>) newToken:(TokenType)aType;
++ (id<Token>) newToken:(NSInteger)aType;
 + (id<Token>) newToken:(NSInteger)tokenType Text:(NSString *)tokenText;
 + (id<Token>) newTokenWithToken:(CommonToken *)fromToken;
 + (id<Token>) eofToken;
@@ -73,8 +73,8 @@
                                Start:(NSInteger)theStart
                                 Stop:(NSInteger)theStop;
 - (id) initWithToken:(id<Token>)aToken;
-- (id) initWithType:(TokenType)aType;
-- (id) initWithType:(TokenType)aTType Text:(NSString *)tokenText;
+- (id) initWithType:(NSInteger)aType;
+- (id) initWithType:(NSInteger)aTType Text:(NSString *)tokenText;
 
 //---------------------------------------------------------- 
 //  text 

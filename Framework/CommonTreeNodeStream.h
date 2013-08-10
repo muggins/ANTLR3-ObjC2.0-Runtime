@@ -57,10 +57,6 @@ BOOL hasNilRoot;
 /** Tracks tree depth.  Level=0 means we're at root node level. */
 NSInteger level;
 }
-@property (retain, getter=getRoot, setter=setRoot:) CommonTree *root;
-@property (retain, getter=getTokens,setter=setTokens:) id<TokenStream> tokens;
-@property (retain, getter=getTreeAdaptor, setter=setTreeAdaptor:) CommonTreeAdaptor *adaptor;
-@property (assign, getter=getLevel, setter=setLevel:) NSInteger level;
 
 + (CommonTreeNodeStream *) newCommonTreeNodeStream:(CommonTree *)theTree;
 + (CommonTreeNodeStream *) newCommonTreeNodeStream:(id<TreeAdaptor>)anAdaptor Tree:(CommonTree *)theTree;
@@ -114,7 +110,11 @@ NSInteger level;
 /** For debugging; destructive: moves tree iterator to end. */
 - (NSString *) description;
 
+@property (retain, getter=getRoot, setter=setRoot:) CommonTree *root;
+@property (retain, getter=getTokens,setter=setTokens:) id<TokenStream> tokens;
+@property (retain, getter=getTreeAdaptor, setter=setTreeAdaptor:) CommonTreeAdaptor *adaptor;
 @property (retain) TreeIterator *it;
 @property (retain) IntArray *calls;
 @property BOOL hasNilRoot;
+@property (assign, getter=getLevel, setter=setLevel:) NSInteger level;
 @end
