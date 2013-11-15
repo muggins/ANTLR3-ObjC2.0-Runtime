@@ -22,7 +22,7 @@
     CFIndex expected = 3;
 	
     STAssertEquals(actual, expected, @"There should be three bits set in bitvector. But I have %d", actual);
-	[bitSet release];
+	// [bitSet release];
 }
 
 -(void) testWithBitArray
@@ -44,7 +44,7 @@
 	CFIndex actual = (CFIndex)[bitSet numBits];
 	CFIndex expected = 4;
 	STAssertEquals(actual, expected, @"There should be four bits set in bitvector. But I have %d", actual);
-	[bitSet release];
+	// [bitSet release];
 }
 
 -(void) testAdd
@@ -57,7 +57,7 @@
 	CFIndex actual = (CFIndex)[bitSet numBits];
 	CFIndex expected = 3;
 	STAssertEquals(actual, expected, @"There should be three bits set in bitvector. But I have %d", actual);
-	[bitSet release];
+	// [bitSet release];
 }
 
 -(void) testRemove
@@ -82,7 +82,7 @@
 	ANTLRBitSet *copy = [bitSet mutableCopyWithZone:nil];
 	CFIndex actual = (CFIndex)[copy numBits];
 	STAssertEquals(actual, (CFIndex)[bitSet numBits], @"There should be three bits set in bitvector. But I have %d", [copy numBits]);
-	[bitSet release];
+	// [bitSet release];
 }
 
 -(void) testOr
@@ -113,8 +113,8 @@
 	expected = 3;
     NSLog( @"%@\n", [followSet description] );
 	STAssertEquals(actual, expected, @"There should be three bits set in bitvector. But I have %d", actual);
-	[bitSet release];
-	[followSet release];
+	// [bitSet release];
+	// [followSet release];
 }
 
 -(void) testDescription

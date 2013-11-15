@@ -17,7 +17,6 @@
 	[intArray addInteger:1];
 	STAssertTrue([intArray count] == 1, @"Int array should be of size 1");
 	STAssertTrue([intArray integerAtIndex:0] == 1, @"First item in int array should be 1");
-	[intArray release];
 }
 
 -(void) testPushPop
@@ -28,9 +27,8 @@
 		[intArray push:i + 1];
 	}
 	NSInteger popped = [intArray pop];
-	NSLog(@"Popped value: %d", popped);
+	NSLog(@"Popped value: %ld", popped);
 	STAssertTrue(popped == 10, @"Pop should pull the last element out, which should be 10 was: %d", popped);
-	[intArray release];
 }
 
 -(void) testClearAndAdd
@@ -41,7 +39,6 @@
 	STAssertTrue([intArray integerAtIndex:0] == 1, @"First item in int array should be 1");
 	[intArray reset];
 	STAssertTrue([intArray count] == 0, @"Array size should be 0");
-	[intArray release];
 }
 
 @end

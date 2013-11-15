@@ -47,6 +47,16 @@
 	id<CharStream> input;
 }
 
+@property (retain, getter = text, setter = setText:) NSString *text;
+@property (assign) NSInteger type;
+@property (assign) NSUInteger line;
+@property (assign) NSUInteger charPositionInLine;
+@property (assign) NSUInteger channel;
+@property (assign) NSInteger index;
+@property (assign, getter=getStart, setter=setStart:) NSInteger startIndex;
+@property (assign, getter=getStop, setter=setStop:) NSInteger stopIndex;
+@property (retain) id<CharStream> input;
+
 + (void) initialize;
 + (NSInteger) DEFAULT_CHANNEL;
 + (id<Token>) INVALID_TOKEN;
@@ -128,15 +138,5 @@
 - (id) copyWithZone:(NSZone *)theZone;
 
 - (NSString *) description;
-
-@property (retain, getter = text, setter = setText:) NSString *text;
-@property (assign) NSInteger type;
-@property (assign) NSUInteger line;
-@property (assign) NSUInteger charPositionInLine;
-@property (assign) NSUInteger channel;
-@property (assign) NSInteger index;
-@property (assign, getter=getStart, setter=setStart:) NSInteger startIndex;
-@property (assign, getter=getStop, setter=setStop:) NSInteger stopIndex;
-@property (retain) id<CharStream> input;
 
 @end

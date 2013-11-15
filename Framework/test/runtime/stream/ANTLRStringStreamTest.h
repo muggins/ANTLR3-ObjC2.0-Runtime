@@ -13,12 +13,12 @@
 
 }
 
--(void) testInitWithInput;
--(void) testConsumeAndReset;
--(void) testConsumeWithNewLine;
--(void) testSeek;
--(void) testSeekMarkAndRewind;
--(void) testLAEOF;
--(void) testLTEOF; // same as LA
+-(void) test01InitWithInput;
+-(void) test02ConsumeAndReset;
+-(void) test03ConsumeWithNewLine;
+-(void) test04Seek;
+-(void) test05SeekMarkAndRewind;
+-(void) test06LAEOF;
+-(void) test07LTEOF; // same as LA
 
 @end

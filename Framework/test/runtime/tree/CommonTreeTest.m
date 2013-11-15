@@ -45,8 +45,8 @@
     if (tree != nil)
         STAssertNotNil(tree.token, @"Tree with token was nil");
     if (tree != nil && tree.token != nil) {
-        STAssertEquals((NSUInteger) tree.token.line, (NSUInteger)1, [NSString stringWithFormat:@"Tree should be at line 1, but was at %d", tree.token.line] );
-        STAssertEquals((NSUInteger) tree.token.charPositionInLine, (NSUInteger)4, [NSString stringWithFormat:@"Char position should be 1, but was at %d", tree.token.charPositionInLine]);
+        STAssertEquals((NSUInteger) tree.token.line, (NSUInteger)1, [NSString stringWithFormat:@"Tree should be at line 1, but was at %ld", tree.token.line] );
+        STAssertEquals((NSUInteger) tree.token.charPositionInLine, (NSUInteger)4, [NSString stringWithFormat:@"Char position should be 1, but was at %ld", tree.token.charPositionInLine]);
         STAssertNotNil(((CommonToken *)tree.token).text, @"Tree with token with text was nil");
     }
     if (tree != nil && tree.token != nil && tree.token.text != nil)
@@ -283,7 +283,7 @@
 	
 	STAssertEquals((NSInteger)[parent getChildCount], (NSInteger)1, @"There were either no children or more than 1: %d", [parent getChildCount]);
 	
-	CommonTree *child = [parent getChild:0];
+	CommonTree *child = (CommonTree *)[parent getChild:0];
 	STAssertNotNil(child, @"Child at index 0 should not be nil");
 	STAssertEquals(child, tree, @"Child and Original tree were not the same");
 	//[parent release];
@@ -307,7 +307,7 @@
 	STAssertTrue([parent getChild:0] == tree, @"Trees don't match");
 	[parent setChild:0 With:tree];
 	
-	CommonTree *child = [parent getChild:0];
+	CommonTree *child = (CommonTree *)[parent getChild:0];
 	STAssertTrue([parent getChildCount] == 1, @"There were either no children or more than 1: %d", [parent getChildCount]);
 	STAssertNotNil(child, @"Child at index 0 should not be nil");
 	STAssertEquals(child, tree, @"Child and Original tree were not the same");
@@ -333,7 +333,7 @@
 	[down addChild:tree];
 	STAssertTrue([tree hasAncestor:TokenTypeUP], @"Should have an ancestor of type TokenTypeUP");
 	
-	CommonTree *ancestor = [tree getAncestor:TokenTypeUP];
+	CommonTree *ancestor = (CommonTree *)[tree getAncestor:TokenTypeUP];
 	STAssertNotNil(ancestor, @"Ancestor should not be nil");
 	STAssertEquals(ancestor, parent, @"Acenstors do not match");
 	//[parent release];

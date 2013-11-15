@@ -9,7 +9,7 @@
 #import <SenTestingKit/SenTestingKit.h>
 
 
-@interface ANTLRCommonErrorNodeTest : SenTestCase {
+@interface CommonErrorNodeTest : SenTestCase {
 
 }
 
